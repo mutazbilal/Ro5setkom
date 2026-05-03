@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Application Submitted";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/forgotpassword.css" asp-append-version="true" />
+}
+
+<main class="forgot-wrapper" aria-label="Mentor application submitted">
+    <article class="auth-card forgot-card" style="text-align:center;" aria-live="polite">
+        <div class="auth-checkmark" aria-hidden="true">
+            <i class="fa-solid fa-hourglass-half"></i>
+        </div>
+
+        <h1 class="auth-card__title" style="margin-bottom:10px;">Application Submitted</h1>
+
+        <p class="auth-card__subtitle">
+            Your mentor application has been submitted and is currently under review.
+        </p>
+        <p class="auth-card__subtitle">
+            You will receive an email notification once an administrator has reviewed your application.
+        </p>
+
+        <a asp-controller="Home" asp-action="Index"
+           class="auth-btn"
+           style="display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;text-decoration:none;">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            Return to Home
+        </a>
+    </article>
+</main>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true" />
+	</xsd:schema>
+
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+	</resheader>
+
+	<data name="Dashboard_Title" xml:space="preserve"><value>My Dashboard</value></data>
+	<data name="Dashboard_Progress" xml:space="preserve"><value>Overall Progress</value></data>
+	<data name="Dashboard_NextMilestone" xml:space="preserve"><value>Next milestone</value></data>
+	<data name="Dashboard_MockExam" xml:space="preserve"><value>Mock Exam</value></data>
+	<data name="Dashboard_StartMockExam" xml:space="preserve"><value>Start Mock Exam</value></data>
+	<data name="Dashboard_RetakeMockExam" xml:space="preserve"><value>Retake Mock Exam</value></data>
+	<data name="Modules_Title" xml:space="preserve"><value>Learning Modules</value></data>
+	<data name="Modules_Locked" xml:space="preserve"><value>Locked</value></data>
+	<data name="Modules_Start" xml:space="preserve"><value>Start Module</value></data>
+	<data name="Modules_Continue" xml:space="preserve"><value>Continue</value></data>
+	<data name="Modules_Review" xml:space="preserve"><value>Review</value></data>
+	<data name="Modules_Complete" xml:space="preserve"><value>Mark as Complete</value></data>
+	<data name="Quiz_TakeQuiz" xml:space="preserve"><value>Take Quiz</value></data>
+	<data name="Quiz_RetakeQuiz" xml:space="preserve"><value>Retake Quiz</value></data>
+	<data name="Quiz_Submit" xml:space="preserve"><value>Submit Quiz</value></data>
+	<data name="Quiz_Passed" xml:space="preserve"><value>Passed!</value></data>
+	<data name="Quiz_Failed" xml:space="preserve"><value>Not Passed Yet</value></data>
+	<data name="Quiz_Score" xml:space="preserve"><value>Score</value></data>
+	<data name="Quiz_Correct" xml:space="preserve"><value>Correct</value></data>
+	<data name="Quiz_Incorrect" xml:space="preserve"><value>Incorrect</value></data>
+	<data name="Status_NotStarted" xml:space="preserve"><value>Not Started</value></data>
+	<data name="Status_InProgress" xml:space="preserve"><value>In Progress</value></data>
+	<data name="Status_Completed" xml:space="preserve"><value>Completed</value></data>
+	<data name="Modules_Title" xml:space="preserve"><value>Learning Modules</value></data>
+	<data name="Modules_Theoretical" xml:space="preserve"><value>Theoretical Modules</value></data>
+	<data name="Modules_Practical" xml:space="preserve"><value>Practical Modules</value></data>
+	<data name="Modules_NoneTheoretical" xml:space="preserve"><value>No theoretical modules available.</value></data>
+	<data name="Modules_NonePractical" xml:space="preserve"><value>No practical modules available yet.</value></data>
+	<data name="Nav_Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+	<data name="MockExam_Title" xml:space="preserve"><value>Mock Exam</value></data>
+	<data name="MockExam_Start" xml:space="preserve"><value>Take Mock Exam</value></data>
+	<data name="MockExam_Retake" xml:space="preserve"><value>Retake</value></data>
+	<data name="MockExam_Completed" xml:space="preserve"><value>Completed ✓ — you can retake anytime.</value></data>
+	<data name="MockExam_UnlockMessage" xml:space="preserve"><value>All theoretical modules complete! Take the mock exam to unlock theory booking.</value></data>
+	<data name="Module_Locked" xml:space="preserve"><value>Locked</value></data>
+	<data name="Module_LockedTooltip" xml:space="preserve"><value>Locked</value></data>
+	<data name="Module_CompletedTooltip" xml:space="preserve"><value>Completed</value></data>
+
+	<data name="Module_Theory" xml:space="preserve"><value>Theory</value></data>
+	<data name="Module_Practical" xml:space="preserve"><value>Practical</value></data>
+
+	<data name="Module_Start" xml:space="preserve"><value>Start Module</value></data>
+	<data name="Module_Continue" xml:space="preserve"><value>Continue</value></data>
+	<data name="Module_Review" xml:space="preserve"><value>Review</value></data>
+
+	<data name="Status_NotStarted" xml:space="preserve"><value>Not Started</value></data>
+	<data name="Status_InProgress" xml:space="preserve"><value>In Progress</value></data>
+	<data name="Status_Completed" xml:space="preserve"><value>Completed</value></data>
+
+	<data name="Quiz_Label" xml:space="preserve"><value>Quiz</value></data>
+	<data name="Quiz_PassedShort" xml:space="preserve"><value>Passed ✓</value></data>
+	<data name="Quiz_NotPassedShort" xml:space="preserve"><value>Not passed</value></data>
+</root>

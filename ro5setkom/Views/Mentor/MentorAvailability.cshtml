@@ -1,0 +1,18 @@
+﻿@using ro5setkom.ViewModels.Mentor
+@model List<MentorAvailabilityViewModel>
+
+<table class="table">
+    @foreach (var slot in Model)
+    {
+        <tr>
+            <td>@slot.DayOfWeek</td>
+            <td>@slot.StartTime - @slot.EndTime</td>
+            <td>
+                @if (slot.IsActive)
+                {
+                    <span class="badge bg-success">Active</span>
+                }
+            </td>
+        </tr>
+    }
+</table>
