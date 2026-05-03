@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<main style="min-height:100vh;display:grid;place-items:center;padding:24px;"
+      aria-label="Access denied">
+    <article class="auth-card" style="max-width:460px;text-align:center;">
+        <div style="font-size:3rem;color:var(--color-secondary);margin-bottom:14px;" aria-hidden="true">
+            <i class="fa-solid fa-lock"></i>
+        </div>
+
+        <h1 class="auth-card__title" style="margin-bottom:10px;">Access Denied</h1>
+        <p class="auth-card__subtitle">
+            You are signed in but do not have permission to view that page.
+            Return to your dashboard or log out and sign in with the correct account.
+        </p>
+
+        <div style="display:grid;gap:10px;margin-top:20px;">
+            @if (User.IsInRole("admin"))
+            {
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
+                   class="auth-btn"
+                   style="display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;">
+                    <i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Go to Dashboard
+                </a>
+            }
+            else if (User.IsInRole("mentor"))
+            {
+                <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
+                   class="auth-btn"
+                   style="display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;">
+                    <i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Go to Dashboard
+                </a>
+            }
+            else
+            {
+                <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
+                   class="auth-btn"
+                   style="display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;">
+                    <i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Go to Dashboard
+                </a>
+            }
+
+            @* Logout must be POST — never a plain link *@
+            <form asp-controller="Auth" asp-action="Logout" method="post">
+                <button type="submit" class="auth-btn-ghost"
+                        style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Log Out
+                </button>
+            </form>
+        </div>
+    </article>
+</main>
