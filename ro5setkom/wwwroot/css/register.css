@@ -1,0 +1,237 @@
+.register-card { max-width: 680px; }
+
+.register-step { display: none; }
+.register-step.is-active { display: block; animation: fadeUp .45s ease both; }
+
+.register-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #eef2f8;
+    padding: 6px;
+    border-radius: 99px;
+    margin-bottom: 14px;
+}
+
+.register-toggle__btn {
+    border: 1px solid transparent;
+    background: transparent;
+    color: #334155;
+    min-height: 46px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.register-toggle__btn.is-active {
+    color: #fff;
+    background: var(--color-primary);
+}
+
+.register-toggle__btn:hover {
+    border-color: var(--color-accent-gold);
+}
+
+.register-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.register-locked .auth-input {
+    background: #F0F2F5;
+    color: #475569;
+    padding-right: 46px;
+}
+
+.register-lock {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-12%);
+    color: var(--color-accent-gold);
+}
+
+.register-prefix {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    min-height: 34px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: #edf2ff;
+    color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.register-with-prefix .auth-input {
+    padding-left: 74px;
+}
+
+.register-license-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 14px;
+}
+
+.register-license-card {
+    border: 1px solid #b9cae2;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.register-license-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent-gold);
+}
+
+.register-license-card.is-selected {
+    color: #fff;
+    border-color: transparent;
+    background: linear-gradient(130deg, #1A3A6B, #29579a);
+}
+
+.register-license-card__icon {
+    font-size: 1.45rem;
+    margin-bottom: 8px;
+}
+
+.register-license-card__title {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.register-license-card__desc {
+    font-size: .9rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.register-license-card.is-selected .register-license-card__desc { color: #dbeafe; }
+
+.register-license-card__badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-accent-gold);
+    color: #fff;
+    display: none;
+    place-items: center;
+    font-size: .8rem;
+}
+
+.register-license-card.is-selected .register-license-card__badge { display: grid; }
+
+.register-dropzone {
+    border: 2px dashed var(--color-accent-gold);
+    border-radius: 14px;
+    min-height: 132px;
+    padding: 16px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #475569;
+    background: #fffdf8;
+    transition: var(--transition);
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.register-dropzone:hover,
+.register-dropzone.is-dragover {
+    background: #fff7e6;
+    border-color: #d4b560;
+}
+
+.register-dropzone input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.register-dropzone__icon {
+    font-size: 1.6rem;
+    color: var(--color-primary);
+}
+
+.register-dropzone__meta {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background: #f8fafc;
+    padding: 8px 10px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: .88rem;
+}
+
+.register-dropzone__meta.is-visible { display: flex; }
+
+.register-dropzone__remove {
+    border: 0;
+    background: transparent;
+    color: var(--color-error);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.register-scroll-box {
+    border: 1px solid #dbe3ef;
+    border-radius: 12px;
+    padding: 12px;
+    max-height: 250px;
+    overflow: auto;
+    line-height: 1.6;
+    font-size: .94rem;
+    margin-bottom: 12px;
+}
+
+.register-scroll-box::-webkit-scrollbar { width: 10px; }
+.register-scroll-box::-webkit-scrollbar-track { background: #e8eef7; border-radius: 40px; }
+.register-scroll-box::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-primary), #446ba3);
+    border-radius: 40px;
+}
+
+.register-lookup {
+    display: none;
+    padding: 12px;
+    text-align: center;
+}
+
+.register-lookup.is-visible { display: block; }
+
+.register-error-card {
+    display: none;
+    border-left: 4px solid var(--color-error);
+    background: #fff1f2;
+    color: #7f1d1d;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.register-error-card.is-visible {
+    display: block;
+    animation: shake .32s ease;
+}
+
+@media (max-width: 991px) {
+    .register-license-grid {
+        grid-template-columns: 1fr;
+    }
+}

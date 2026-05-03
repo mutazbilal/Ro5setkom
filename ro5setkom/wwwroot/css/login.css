@@ -1,0 +1,33 @@
+.login-brand__road {
+    opacity: .9;
+}
+
+.login-form__lockout {
+    margin-top: 8px;
+    font-size: .9rem;
+    color: #9a3412;
+    background: #fff7ed;
+    border-left: 4px solid var(--color-secondary);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: none;
+}
+
+.login-form__lockout.is-visible { display: block; }
+
+.login-form__actions {
+    display: grid;
+    gap: 10px;
+}
+
+.login-register-link {
+    text-align: center;
+    color: var(--color-muted);
+}
+
+.login-register-link a {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.login-register-link a:hover { color: var(--color-accent-gold); }

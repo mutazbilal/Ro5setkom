@@ -1,0 +1,77 @@
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<div class="landing-body">
+
+<main class="landing-page" aria-label="Landing page">
+    <section class="landing-hero">
+        <div class="landing-hero__content">
+            <p class="landing-badge">Official Training &amp; Licensing Journey</p>
+            <h1>Your Road to a Driving License Starts Here</h1>
+            <p class="landing-subtitle">
+                A modern, secure gateway for trainees and mentors with guided onboarding,
+                identity verification, and exam-ready learning.
+            </p>
+
+            <div class="landing-cta-row">
+                <a asp-controller="Auth" asp-action="Login" class="auth-btn landing-cta">
+                    Login to Continue
+                </a>
+                <a asp-controller="Registration" asp-action="Trainee" class="auth-btn-ghost landing-cta-ghost">
+                    New User? Register
+                </a>
+            </div>
+
+            <div class="landing-pills" aria-label="Platform highlights">
+                <span><i class="fa-solid fa-id-card" aria-hidden="true"></i> Government Verification</span>
+                <span><i class="fa-solid fa-user-check" aria-hidden="true"></i> Certified Mentors</span>
+                <span><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Smart Scheduling</span>
+            </div>
+        </div>
+
+        <div class="landing-hero__panel" aria-hidden="true">
+            <div class="landing-floating landing-floating--circle"></div>
+            <div class="landing-floating landing-floating--hex"></div>
+            <div class="landing-floating landing-floating--diamond"></div>
+
+            <div class="landing-glass-card">
+                <h3><i class="fa-solid fa-road" aria-hidden="true"></i> Roadmap to License</h3>
+                <ul>
+                    <li><span>1</span> Verify your identity securely</li>
+                    <li><span>2</span> Complete profile and legal consents</li>
+                    <li><span>3</span> Choose training track and schedule</li>
+                    <li><span>4</span> Track progress to final exam</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-features" id="features" aria-label="Platform features">
+        <article class="landing-feature-card reveal-on-scroll">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            <h3>Learning Modules</h3>
+            <p>Theory and practical preparation content, tailored by license type.</p>
+        </article>
+        <article class="landing-feature-card reveal-on-scroll">
+            <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
+            <h3>Mentor Matching</h3>
+            <p>Find, compare, and book verified mentors that fit your schedule.</p>
+        </article>
+        <article class="landing-feature-card reveal-on-scroll">
+            <i class="fa-solid fa-shield" aria-hidden="true"></i>
+            <h3>Secure Access</h3>
+            <p>Protected workflows with identity checks and trusted account controls.</p>
+        </article>
+    </section>
+</main>
+
+</div>
+
+@section Scripts {
+    <script src="~/js/index.js" asp-append-version="true"></script>
+}
