@@ -13,8 +13,6 @@ public partial class Quiz
 
     public int? LicenseTypeId { get; set; }
 
-    public string Title { get; set; } = null!;
-
     public int PassingScore { get; set; }
 
     public virtual LicenseType? LicenseType { get; set; }
@@ -24,4 +22,6 @@ public partial class Quiz
     public virtual ICollection<QuizAttempt> QuizAttempts { get; set; } = new List<QuizAttempt>();
 
     public virtual ICollection<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+
+    public virtual ICollection<QuizTranslation> QuizTranslations { get; set; } = new List<QuizTranslation>();
 }

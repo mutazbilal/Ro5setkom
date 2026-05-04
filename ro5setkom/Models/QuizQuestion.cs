@@ -9,9 +9,9 @@ public partial class QuizQuestion
 
     public int QuizId { get; set; }
 
-    public string QuestionText { get; set; } = null!;
-
     public virtual ICollection<QuestionOption> QuestionOptions { get; set; } = new List<QuestionOption>();
+
+    public virtual ICollection<QuestionTranslation> QuestionTranslations { get; set; } = new List<QuestionTranslation>();
 
     public virtual Quiz Quiz { get; set; } = null!;
 }

@@ -32,8 +32,7 @@ public class ModulesController : Controller
         }
 
         var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-        bool isEnglish = culture == "en";
-        var result = await _modules.GetModulesAsync(userId, licenseId.Value, isEnglish);
+        var result = await _modules.GetModulesAsync(userId, licenseId.Value, culture);
 
         if (!result.Succeeded)
         {
@@ -54,12 +53,11 @@ public class ModulesController : Controller
             return RedirectToAction("Index", "Dashboard");
 
         var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-        bool isEnglish = culture == "en";
 
         // Auto-start the module when viewed
         await _modules.StartModuleAsync(userId, licenseId.Value, id);
 
-        var result = await _modules.GetModuleDetailAsync(userId, licenseId.Value, id, isEnglish);
+        var result = await _modules.GetModuleDetailAsync(userId, licenseId.Value, id, culture);
 
         if (!result.Succeeded)
         {
@@ -90,7 +88,8 @@ public class ModulesController : Controller
     private async Task<int?> GetActiveLicenseIdAsync(int traineeId)
     {
         // Reuse dashboard service to avoid duplicate DB logic
-        var result = await _dashboard.GetDashboardAsync(traineeId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _dashboard.GetDashboardAsync(traineeId, culture);
         return result.Succeeded ? result.Data?.TraineeLicenseId : null;
     }
 }

@@ -106,21 +106,21 @@ public interface ILicenseService
 
 public interface ITraineeDashboardService
 {
-    Task<ServiceResult<TraineeDashboardViewModel>> GetDashboardAsync(int traineeId);
+    Task<ServiceResult<TraineeDashboardViewModel>> GetDashboardAsync(int traineeId, string culture);
 }
 
 public interface IModuleService
 {
-    Task<ServiceResult<ModuleListViewModel>> GetModulesAsync(int traineeId, int traineeLicenseId, bool isEnglish);
-    Task<ServiceResult<ModuleDetailViewModel>> GetModuleDetailAsync(int traineeId, int traineeLicenseId, int moduleId, bool isEnglish);
+    Task<ServiceResult<ModuleListViewModel>> GetModulesAsync(int traineeId, int traineeLicenseId, string culture);
+    Task<ServiceResult<ModuleDetailViewModel>> GetModuleDetailAsync(int traineeId, int traineeLicenseId, int moduleId, string culture);
     Task<ServiceResult> StartModuleAsync(int traineeId, int traineeLicenseId, int moduleId);
     Task<ServiceResult> CompleteModuleAsync(int traineeId, int traineeLicenseId, int moduleId);
 }
 public interface IQuizService
 {
-    Task<ServiceResult<QuizViewModel>> GetModuleQuizAsync(int traineeId, int traineeLicenseId, int moduleId);
-    Task<ServiceResult<QuizResultViewModel>> SubmitModuleQuizAsync(int traineeId, int traineeLicenseId, SubmitQuizViewModel model);
-    Task<ServiceResult<QuizViewModel>> GetMockExamAsync(int traineeId, int traineeLicenseId);
-    Task<ServiceResult<QuizResultViewModel>> SubmitMockExamAsync(int traineeId, int traineeLicenseId, SubmitQuizViewModel model);
+    Task<ServiceResult<QuizViewModel>> GetModuleQuizAsync(int traineeId, int traineeLicenseId, int moduleId, string culture);
+    Task<ServiceResult<QuizResultViewModel>> SubmitModuleQuizAsync(int traineeId, int traineeLicenseId, SubmitQuizViewModel model, string culture);
+    Task<ServiceResult<QuizViewModel>> GetMockExamAsync(int traineeId, int traineeLicenseId, string culture);
+    Task<ServiceResult<QuizResultViewModel>> SubmitMockExamAsync(int traineeId, int traineeLicenseId, SubmitQuizViewModel model, string culture);
 }
 

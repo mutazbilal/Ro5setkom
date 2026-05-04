@@ -136,8 +136,11 @@ namespace TestRo5setkom
             db.LicenseTypes.Add(new LicenseType
             {
                 LicenseTypeId = 1,
-                LicenseName = "Test",
-                Description = "Test License"
+                LicenseName = "private_manual",
+                DisplayNameEn = "Private Car (Manual)",
+                DisplayNameAr = "سيارة خاصة (يدوي)",
+                DescriptionEn = "Private car with manual transmission",
+                DescriptionAr = "سيارة خاصة ذات ناقل حركة يدوي"
             });
 
             // ─────────────────────────────────────────
@@ -243,7 +246,11 @@ namespace TestRo5setkom
             db.LicenseTypes.Add(new LicenseType
             {
                 LicenseTypeId = 1,
-                LicenseName = "Test",
+                LicenseName = "private_manual",
+                DisplayNameEn = "Private Car (Manual)",
+                DisplayNameAr = "سيارة خاصة (يدوي)",
+                DescriptionEn = "Private car with manual transmission",
+                DescriptionAr = "سيارة خاصة ذات ناقل حركة يدوي"
             });
 
             await db.SaveChangesAsync();
@@ -297,7 +304,11 @@ namespace TestRo5setkom
             db.LicenseTypes.Add(new LicenseType
             {
                 LicenseTypeId = 1,
-                LicenseName = "Test"
+                LicenseName = "private_manual",
+                DisplayNameEn = "Private Car (Manual)",
+                DisplayNameAr = "سيارة خاصة (يدوي)",
+                DescriptionEn = "Private car with manual transmission",
+                DescriptionAr = "سيارة خاصة ذات ناقل حركة يدوي"
             });
 
             await db.SaveChangesAsync();

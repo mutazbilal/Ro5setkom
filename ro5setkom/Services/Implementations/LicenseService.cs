@@ -21,7 +21,7 @@ namespace ro5setkom.Services.Implementations
             => await _db.LicenseTypes
                 .AsNoTracking()
                 .OrderBy(l => l.LicenseName)
-                .Select(l => new LicenseTypeOption(l.LicenseTypeId, l.LicenseName, l.Description))
+                .Select(l => new LicenseTypeOption(l.LicenseTypeId, l.DisplayNameEn, l.DescriptionEn))
                 .ToListAsync();
     }
 }

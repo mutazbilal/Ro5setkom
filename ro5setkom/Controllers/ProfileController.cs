@@ -7,6 +7,7 @@ using ro5setkom.Services.Implementations;
 using ro5setkom.Services.Interfaces;
 using ro5setkom.Utils;
 using ro5setkom.ViewModels.Profile;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace ro5setkom.Controllers
@@ -131,6 +132,7 @@ namespace ro5setkom.Controllers
         [Authorize (Roles = "trainee")]
         public async Task<IActionResult> ChangeLicense()
         {
+            var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             var licenseTypes = await _licenseService.GetLicenseTypesAsync();
             var model = new ChangeLicenseViewModel
             {

@@ -177,7 +177,7 @@
                         License Type
                     </label>
                     <select asp-for="LicenseTypeId"
-                            asp-items="@(new SelectList(Model.AvailableLicenseTypes, "Id", "Name"))"
+                            asp-items="@(new SelectList(Model.AvailableLicenseTypes ?? new List<LicenseTypeOption>(), "Id", "Name"))"
                             class="auth-input auth-select"
                             aria-required="true">
                         <option value="">-- Select License Type --</option>

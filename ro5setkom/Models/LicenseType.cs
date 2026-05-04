@@ -9,7 +9,13 @@ public partial class LicenseType
 
     public string LicenseName { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public string DisplayNameEn { get; set; } = null!;
+
+    public string DisplayNameAr { get; set; } = null!;
+
+    public string? DescriptionEn { get; set; }
+
+    public string? DescriptionAr { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 

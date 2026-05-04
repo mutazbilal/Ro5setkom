@@ -15,9 +15,10 @@ public class TraineeDashboardService : ITraineeDashboardService
         _context = context;
     }
 
-    public async Task<ServiceResult<TraineeDashboardViewModel>> GetDashboardAsync(int traineeId)
+    public async Task<ServiceResult<TraineeDashboardViewModel>> GetDashboardAsync(
+        int traineeId, string culture)
     {
-        // 1. Get active license
+        // 1. Active license
         var license = await _context.TraineeLicenses
             .Include(tl => tl.LicenseType)
             .FirstOrDefaultAsync(tl => tl.TraineeId == traineeId && tl.IsActive);
@@ -25,27 +26,44 @@ public class TraineeDashboardService : ITraineeDashboardService
         if (license == null)
             return ServiceResult<TraineeDashboardViewModel>.Failure("No active license found.");
 
-        // 2. Get all modules for this license type, ordered
+        // 2. Modules — project translated title directly, no extra round-trips
         var modules = await _context.LearningModules
             .Where(m => m.LicenseTypeId == license.LicenseTypeId)
             .OrderBy(m => m.Phase)
             .ThenBy(m => m.OrderIndex)
+            .Select(m => new
+            {
+                m.ModuleId,
+                m.Phase,
+                m.OrderIndex,
+                m.PrerequisiteModuleId,
+                Title = m.ModuleTranslations
+                    .Where(t => t.LanguageCode == culture)
+                    .Select(t => t.Title)
+                    .FirstOrDefault()
+                    ?? m.ModuleTranslations
+                        .Where(t => t.LanguageCode == "en")
+                        .Select(t => t.Title)
+                        .FirstOrDefault()
+                    ?? string.Empty
+            })
             .ToListAsync();
 
-        // 3. Get trainee's progress for this license
+        // 3. Progress records for this license
         var progressRecords = await _context.TraineeModuleProgresses
-            .Where(p => p.TraineeId == traineeId && p.TraineeLicenseId == license.TraineeLicenseId)
+            .Where(p => p.TraineeId == traineeId
+                     && p.TraineeLicenseId == license.TraineeLicenseId)
             .ToDictionaryAsync(p => p.ModuleId);
 
-        // 4. Get all quiz info for modules in one query
+        // 4. Quiz info per module
         var moduleIds = modules.Select(m => m.ModuleId).ToList();
         var quizByModule = await _context.Quizzes
             .Where(q => q.ModuleId.HasValue
-                 && moduleIds.Contains(q.ModuleId.Value)
-                 && q.IsMockExam != true)
+                     && moduleIds.Contains(q.ModuleId.Value)
+                     && q.IsMockExam != true)
             .ToDictionaryAsync(q => q.ModuleId!.Value);
 
-        // 5. Get passed quiz attempts
+        // 5. Passed quiz attempts
         var quizIds = quizByModule.Values.Select(q => q.QuizId).ToList();
         var passedQuizIds = await _context.QuizAttempts
             .Where(a => a.TraineeId == traineeId
@@ -93,7 +111,8 @@ public class TraineeDashboardService : ITraineeDashboardService
 
         // 7. Mock exam status
         var mockQuiz = await _context.Quizzes
-            .FirstOrDefaultAsync(q => q.IsMockExam == true && q.LicenseTypeId == license.LicenseTypeId);
+            .FirstOrDefaultAsync(q => q.IsMockExam == true
+                                   && q.LicenseTypeId == license.LicenseTypeId);
 
         bool allTheoreticalCompleted = items
             .Where(i => i.Phase == "theoretical")
@@ -114,10 +133,13 @@ public class TraineeDashboardService : ITraineeDashboardService
         // 8. Overall progress %
         int totalModules = items.Count;
         int completedModules = items.Count(i => i.Status == "completed");
-        int overallPct = totalModules == 0 ? 0 : (int)Math.Round((double)completedModules / totalModules * 100);
+        int overallPct = totalModules == 0
+            ? 0
+            : (int)Math.Round((double)completedModules / totalModules * 100);
 
         // 9. Next milestone
-        string nextMilestone = DetermineNextMilestone(items, isMockExamAvailable, mockExamCompleted, license.Stage);
+        string nextMilestone = DetermineNextMilestone(
+            items, isMockExamAvailable, mockExamCompleted, license.Stage, culture);
 
         var vm = new TraineeDashboardViewModel
         {
@@ -140,22 +162,28 @@ public class TraineeDashboardService : ITraineeDashboardService
         List<ModuleProgressItem> items,
         bool isMockAvailable,
         bool mockCompleted,
-        string stage)
+        string stage,
+        string culture)
     {
-        // First incomplete theoretical module
+        // Milestone strings — extend this to a translation dictionary if you
+        // add i18n for UI strings later. For now culture-switches the labels.
+        bool isArabic = culture == "ar";
+
         var nextTheory = items
             .Where(i => i.Phase == "theoretical" && i.Status != "completed" && !i.IsLocked)
             .OrderBy(i => i.OrderIndex)
             .FirstOrDefault();
 
         if (nextTheory != null)
-            return $"Complete module: {nextTheory.Title}";
+            return isArabic
+                ? $"أكمل الوحدة: {nextTheory.Title}"
+                : $"Complete module: {nextTheory.Title}";
 
         if (isMockAvailable && !mockCompleted)
-            return "Take the mock exam";
+            return isArabic ? "اجتز الاختبار التجريبي" : "Take the mock exam";
 
         if (mockCompleted && stage is "mock_exam_completed" or "theoretical_prep")
-            return "Book your theory exam";
+            return isArabic ? "احجز اختبار النظري" : "Book your theory exam";
 
         var nextPractical = items
             .Where(i => i.Phase == "practical" && i.Status != "completed" && !i.IsLocked)
@@ -163,8 +191,12 @@ public class TraineeDashboardService : ITraineeDashboardService
             .FirstOrDefault();
 
         if (nextPractical != null)
-            return $"Complete practical module: {nextPractical.Title}";
+            return isArabic
+                ? $"أكمل الوحدة العملية: {nextPractical.Title}"
+                : $"Complete practical module: {nextPractical.Title}";
 
-        return stage == "completed" ? "License journey complete!" : "Check your exam appointments";
+        return stage == "completed"
+            ? (isArabic ? "رحلة الرخصة اكتملت!" : "License journey complete!")
+            : (isArabic ? "تحقق من مواعيد اختباراتك" : "Check your exam appointments");
     }
 }

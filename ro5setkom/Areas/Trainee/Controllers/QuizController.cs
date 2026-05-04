@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ro5setkom.Areas.Trainee.ViewModels.Quiz;
 using ro5setkom.Services.Interfaces;
 using ro5setkom.Utils;
+using System.Globalization;
 
 namespace ro5setkom.Areas.Trainee.Controllers;
 
@@ -25,8 +26,9 @@ public class QuizController : Controller
         var userId = User.GetUserId().Value;
         var licenseId = await GetActiveLicenseIdAsync(userId);
         if (licenseId == null) return RedirectToAction("Index", "Dashboard");
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-        var result = await _quizService.GetModuleQuizAsync(userId, licenseId.Value, moduleId);
+        var result = await _quizService.GetModuleQuizAsync(userId, licenseId.Value, moduleId, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -48,8 +50,9 @@ public class QuizController : Controller
             TempData["Error"] = "Please answer all questions.";
             return RedirectToAction("Take", new { moduleId = model.ModuleId });
         }
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-        var result = await _quizService.SubmitModuleQuizAsync(userId, model.TraineeLicenseId, model);
+        var result = await _quizService.SubmitModuleQuizAsync(userId, model.TraineeLicenseId, model, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -66,7 +69,8 @@ public class QuizController : Controller
         var licenseId = await GetActiveLicenseIdAsync(userId);
         if (licenseId == null) return RedirectToAction("Index", "Dashboard");
 
-        var result = await _quizService.GetMockExamAsync(userId, licenseId.Value);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _quizService.GetMockExamAsync(userId, licenseId.Value, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -82,8 +86,9 @@ public class QuizController : Controller
     public async Task<IActionResult> SubmitMockExam(SubmitQuizViewModel model)
     {
         var userId = User.GetUserId().Value;
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-        var result = await _quizService.SubmitMockExamAsync(userId, model.TraineeLicenseId, model);
+        var result = await _quizService.SubmitMockExamAsync(userId, model.TraineeLicenseId, model, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -96,7 +101,8 @@ public class QuizController : Controller
     // ─── helper ───────────────────────────────────────────────────────────
     private async Task<int?> GetActiveLicenseIdAsync(int traineeId)
     {
-        var result = await _dashboard.GetDashboardAsync(traineeId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _dashboard.GetDashboardAsync(traineeId, culture);
         return result.Succeeded ? result.Data?.TraineeLicenseId : null;
     }
 }

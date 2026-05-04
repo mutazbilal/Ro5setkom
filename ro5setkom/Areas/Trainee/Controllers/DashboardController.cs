@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ro5setkom.Services.Interfaces;
 using ro5setkom.Utils;
+using System.Globalization;
 
 namespace ro5setkom.Areas.Trainee.Controllers;
 
@@ -19,7 +20,8 @@ public class DashboardController : Controller
     public async Task<IActionResult> Index()
     {
         var userId = User.GetUserId().Value;
-        var result = await _dashboard.GetDashboardAsync(userId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _dashboard.GetDashboardAsync(userId, culture);
 
         if (!result.Succeeded)
         {

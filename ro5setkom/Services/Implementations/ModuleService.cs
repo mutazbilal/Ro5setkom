@@ -22,7 +22,7 @@ public class ModuleService : IModuleService
     // GET MODULES LIST
     // ─────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<ModuleListViewModel>> GetModulesAsync(
-        int traineeId, int traineeLicenseId, bool isEnglish)
+        int traineeId, int traineeLicenseId, string culture)
     {
         var license = await _context.TraineeLicenses
             .Include(tl => tl.LicenseType)
@@ -37,6 +37,7 @@ public class ModuleService : IModuleService
             .Where(m => m.LicenseTypeId == license.LicenseTypeId)
             .OrderBy(m => m.Phase)
             .ThenBy(m => m.OrderIndex)
+            .Include(mt => mt.ModuleTranslations.Where(mt => mt.LanguageCode == culture))
             .ToListAsync();
 
         var progressMap = await _context.TraineeModuleProgresses
@@ -79,12 +80,14 @@ public class ModuleService : IModuleService
             }
 
             statusMap[m.ModuleId] = status;
+            var translation = m.ModuleTranslations
+                .FirstOrDefault(mt => mt.LanguageCode == culture);
 
             cards.Add(new ModuleCardViewModel
             {
                 ModuleId = m.ModuleId,
-                Title = m.Title,
-                Description = m.Description ?? string.Empty,
+                Title = translation.Title,
+                Description = translation.Description,
                 Phase = m.Phase,
                 Status = status,
                 OrderIndex = m.OrderIndex,
@@ -113,7 +116,7 @@ public class ModuleService : IModuleService
         var vm = new ModuleListViewModel
         {
             TraineeLicenseId = traineeLicenseId,
-            LicenseTypeName = license.LicenseType.LicenseName,
+            LicenseTypeName = license.LicenseType.DisplayNameEn,
             IsMockExamAvailable = allTheoreticalDone && mockQuiz != null,
             IsMockExamCompleted = mockCompleted,
             TheoreticalModules = cards.Where(c => c.Phase == "theoretical").ToList(),
@@ -127,7 +130,7 @@ public class ModuleService : IModuleService
     // GET MODULE DETAIL
     // ─────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<ModuleDetailViewModel>> GetModuleDetailAsync(
-        int traineeId, int traineeLicenseId, int moduleId, bool isEnglish)
+    int traineeId, int traineeLicenseId, int moduleId, string culture)
     {
         var license = await _context.TraineeLicenses
             .FirstOrDefaultAsync(tl => tl.TraineeLicenseId == traineeLicenseId
@@ -137,9 +140,18 @@ public class ModuleService : IModuleService
         if (license == null)
             return ServiceResult<ModuleDetailViewModel>.Failure("License not found.");
 
+        // Pull module + its translation in one query
         var module = await _context.LearningModules
-            .Include(m => m.ModuleContents)
-            .FirstOrDefaultAsync(m => m.ModuleId == moduleId && m.LicenseTypeId == license.LicenseTypeId);
+            .Where(m => m.ModuleId == moduleId && m.LicenseTypeId == license.LicenseTypeId)
+            .Select(m => new
+            {
+                m.ModuleId,
+                m.Phase,
+                m.PrerequisiteModuleId,
+                Translation = m.ModuleTranslations
+                    .FirstOrDefault(t => t.LanguageCode == culture)
+            })
+            .FirstOrDefaultAsync();
 
         if (module == null)
             return ServiceResult<ModuleDetailViewModel>.Failure("Module not found.");
@@ -148,71 +160,77 @@ public class ModuleService : IModuleService
         bool isLocked = false;
         if (module.PrerequisiteModuleId.HasValue)
         {
-            var prereqProg = await _context.TraineeModuleProgresses
-                .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                       && p.ModuleId == module.PrerequisiteModuleId.Value
-                                       && p.TraineeLicenseId == traineeLicenseId);
-            isLocked = prereqProg?.Status != "completed";
+            var prereqStatus = await _context.TraineeModuleProgresses
+                .Where(p => p.TraineeId == traineeId
+                         && p.ModuleId == module.PrerequisiteModuleId.Value
+                         && p.TraineeLicenseId == traineeLicenseId)
+                .Select(p => p.Status)
+                .FirstOrDefaultAsync();
+
+            isLocked = prereqStatus != "completed";
         }
 
         if (isLocked)
             return ServiceResult<ModuleDetailViewModel>.Failure("Module is locked. Complete the prerequisite first.");
 
         // Progress
-        var progress = await _context.TraineeModuleProgresses
-            .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                   && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+        var status = await _context.TraineeModuleProgresses
+            .Where(p => p.TraineeId == traineeId
+                     && p.ModuleId == moduleId
+                     && p.TraineeLicenseId == traineeLicenseId)
+            .Select(p => p.Status)
+            .FirstOrDefaultAsync() ?? "not_started";
 
-        var status = progress?.Status ?? "not_started";
-
-        // Quiz
-        var quiz = await _context.Quizzes
-            .FirstOrDefaultAsync(q => q.ModuleId == moduleId && q.IsMockExam == false);
-
-        int? lastScore = null;
-        bool quizPassed = false;
-        if (quiz != null)
-        {
-            var lastAttempt = await _context.QuizAttempts
-                .Where(a => a.QuizId == quiz.QuizId
-                         && a.TraineeId == traineeId
-                         && a.TraineeLicenseId == traineeLicenseId)
-                .OrderByDescending(a => a.AttemptDate)
-                .FirstOrDefaultAsync();
-
-            lastScore = lastAttempt?.Score;
-            quizPassed = await _context.QuizAttempts
-                .AnyAsync(a => a.QuizId == quiz.QuizId
-                            && a.TraineeId == traineeId
-                            && a.TraineeLicenseId == traineeLicenseId
-                            && a.Passed == true);
-        }
-
-        // Filter contents by language
-        var contents = module.ModuleContents
-            .Where(c => c.LanguageEnglish == isEnglish)
+        // Contents — join to translation table, filter by culture
+        var contents = await _context.ModuleContents
+            .Where(c => c.ModuleId == moduleId)
             .Select(c => new ModuleContentViewModel
             {
                 ContentId = c.ContentId,
                 ContentType = c.ContentType,
                 VideoUrl = c.VideoUrl,
-                TextContent = c.TextContent
+                TextContent = c.ModuleContentTranslations
+                    .Where(t => t.LanguageCode == culture)
+                    .Select(t => t.TextContent)
+                    .FirstOrDefault()
             })
-            .ToList();
-        foreach (var c in contents)
+            .ToListAsync();
+
+        foreach (var c in contents.Where(c => c.ContentType == "text"
+                                           && !string.IsNullOrEmpty(c.TextContent)))
         {
-            if (c.ContentType == "text" && !string.IsNullOrEmpty(c.TextContent))
-            {
-                c.TextContent = Markdown.ToHtml(c.TextContent);
-            }
+            c.TextContent = Markdown.ToHtml(c.TextContent);
         }
+
+        // Quiz
+        var quiz = await _context.Quizzes
+            .Where(q => q.ModuleId == moduleId && q.IsMockExam == false)
+            .Select(q => new { q.QuizId, q.PassingScore })
+            .FirstOrDefaultAsync();
+
+        int? lastScore = null;
+        bool quizPassed = false;
+        if (quiz != null)
+        {
+            var attempts = _context.QuizAttempts
+                .Where(a => a.QuizId == quiz.QuizId
+                         && a.TraineeId == traineeId
+                         && a.TraineeLicenseId == traineeLicenseId);
+
+            lastScore = await attempts
+                .OrderByDescending(a => a.AttemptDate)
+                .Select(a => (int?)a.Score)
+                .FirstOrDefaultAsync();
+
+            quizPassed = await attempts.AnyAsync(a => a.Passed == true);
+        }
+
         var vm = new ModuleDetailViewModel
         {
             ModuleId = module.ModuleId,
             TraineeLicenseId = traineeLicenseId,
-            Title = module.Title,
-            Description = module.Description ?? string.Empty,
+            Title = module.Translation?.Title ?? string.Empty,
+            Description = module.Translation?.Description ?? string.Empty,
             Phase = module.Phase,
             Status = status,
             IsLocked = isLocked,
@@ -297,6 +315,7 @@ public class ModuleService : IModuleService
 
         progress.Status = "completed";
         progress.CompletedAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync(); // added this line
 
         await UpdateLicenseProgressAsync(traineeId, traineeLicenseId);
         await _context.SaveChangesAsync();

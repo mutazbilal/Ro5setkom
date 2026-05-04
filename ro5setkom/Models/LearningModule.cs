@@ -9,10 +9,6 @@ public partial class LearningModule
 
     public int LicenseTypeId { get; set; }
 
-    public string Title { get; set; } = null!;
-
-    public string? Description { get; set; }
-
     public string Phase { get; set; } = null!;
 
     public int OrderIndex { get; set; }
@@ -26,6 +22,8 @@ public partial class LearningModule
     public virtual ICollection<ModuleContent> ModuleContents { get; set; } = new List<ModuleContent>();
 
     public virtual ICollection<ModuleRecommendation> ModuleRecommendations { get; set; } = new List<ModuleRecommendation>();
+
+    public virtual ICollection<ModuleTranslation> ModuleTranslations { get; set; } = new List<ModuleTranslation>();
 
     public virtual LearningModule? PrerequisiteModule { get; set; }
 
