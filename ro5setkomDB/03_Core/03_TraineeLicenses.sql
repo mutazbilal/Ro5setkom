@@ -23,6 +23,6 @@ CREATE TABLE Core.TraineeLicenses (
     is_active           BIT          NOT NULL DEFAULT 1,
     created_at          DATETIME2    DEFAULT GETDATE(),
     updated_at          DATETIME2    DEFAULT GETDATE(),
-    UNIQUE (trainee_id, license_type_id)
+    UNIQUE (trainee_id, license_type_id),
     FOREIGN KEY (license_type_id)   REFERENCES Lookup.LicenseTypes(license_type_id)
 );

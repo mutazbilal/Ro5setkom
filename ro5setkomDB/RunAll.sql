@@ -165,6 +165,21 @@ GO
 :r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\13_ModuleContents.sql"
 GO
 
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\14_ModuleTranslations.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\15_ModuleContentsTranslation.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\16_QuizTranslations.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\17_QuestionTranslations.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\18_OptionTranslations.sql"
+GO
+
 -- ============================================
 -- 11. MESSAGING
 -- ============================================
@@ -257,49 +272,22 @@ GO
 :r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\02_LicenseTypes.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\03_LearningModulesBase.sql"
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\03_seed_modules.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\04_ModuleContentsBase.sql"
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\04_seed_all_quizzes_questions_options.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\05_ModuleContentTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\05_GovCitizens.sql"
 GO
 
-SET IDENTITY_INSERT Learning.QuestionOptions OFF;
-SET IDENTITY_INSERT Learning.QuizQuestions OFF;
-SET IDENTITY_INSERT Learning.Quizzes ON;
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\06_QuizzesEN.sql"
-SET IDENTITY_INSERT Learning.Quizzes OFF;
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\06_GovLicenseRecords.sql"
 GO
 
-SET IDENTITY_INSERT Learning.QuestionOptions OFF;
-SET IDENTITY_INSERT Learning.Quizzes OFF;
-SET IDENTITY_INSERT Learning.QuizQuestions ON;
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\07_QuizQuestionsEN.sql"
-SET IDENTITY_INSERT Learning.QuizQuestions OFF;
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\07_GovExamCenters.sql"
 GO
 
-SET IDENTITY_INSERT Learning.Quizzes OFF;
-SET IDENTITY_INSERT Learning.QuizQuestions OFF;
-SET IDENTITY_INSERT Learning.QuestionOptions ON;
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\08_QuizQuestionOptionsEN.sql"
-SET IDENTITY_INSERT Learning.QuestionOptions OFF;
-GO
-
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\09_GovCitizens.sql"
-GO
-
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\10_GovLicenseRecords.sql"
-GO
-
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\11_GovExamCenters.sql"
-GO
-
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\12_TraingingCenters.sql"
-GO
-
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\13_ModuleTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\08_TrainingCenters.sql"
 GO
 
 -- ============================================

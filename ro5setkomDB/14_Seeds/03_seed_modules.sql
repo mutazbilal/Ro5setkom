@@ -1,12 +1,119 @@
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Introduction to Driving Responsibilities
+-- =============================================
+-- Auto-generated seed file — modules
+-- =============================================
+
+-- LearningModules (base)
+SET IDENTITY_INSERT Learning.LearningModules ON;
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (1, 1, 'theoretical', 1, NULL);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (2, 1, 'theoretical', 2, 1);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (3, 1, 'theoretical', 3, 2);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (4, 1, 'theoretical', 4, NULL);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (5, 1, 'theoretical', 5, 4);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (6, 1, 'theoretical', 6, NULL);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (7, 1, 'theoretical', 7, 6);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (8, 1, 'theoretical', 8, 7);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (9, 1, 'theoretical', 9, 8);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (10, 1, 'theoretical', 10, 9);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (11, 1, 'theoretical', 11, 10);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (12, 1, 'theoretical', 12, 11);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (13, 1, 'theoretical', 13, 12);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (14, 1, 'theoretical', 14, 11);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (15, 1, 'theoretical', 15, 13);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (16, 1, 'theoretical', 16, 1);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (17, 1, 'theoretical', 17, 16);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (18, 1, 'theoretical', 18, 17);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (19, 1, 'theoretical', 19, 18);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (20, 1, 'theoretical', 20, NULL);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (21, 1, 'theoretical', 21, 20);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (22, 1, 'theoretical', 22, 17);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (23, 1, 'theoretical', 23, 22);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (24, 1, 'theoretical', 24, 23);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (25, 1, 'theoretical', 25, 24);
+SET IDENTITY_INSERT Learning.LearningModules OFF;
+
+-- ModuleTranslations
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (1, 'en', N'Introduction to Driving Responsibilities', N'Overview of driver responsibilities, legal requirements, and basic road safety principles');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (1, 'ar', N'مقدمة لمسؤوليات القيادة', N'نظرة عامة على مسؤوليات السائق والمتطلبات القانونية والمبادئ الأساسية للسلامة على الطرق');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (2, 'en', N'Jordanian License Categories and Requirements', N'Explanation of Jordanian license categories, age requirements, and application documents');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (2, 'ar', N'فئات الرخصة الأردنية ومتطلباتها', N'شرح فئات الرخصة الأردنية ومتطلبات العمر ووثائق التقديم');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (3, 'en', N'Medical and Theoretical Examination Process', N'Steps to obtain a license: medical exam, theoretical test, and practical test');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (3, 'ar', N'عملية الفحص الطبي والنظري', N'خطوات الحصول على الترخيص: الفحص الطبي، والاختبار النظري، والاختبار العملي');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (4, 'en', N'Road Lines and Markings – Part 1 (Mandatory Lines)', N'Understanding solid lines, stop lines, yield lines, and their legal meanings');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (4, 'ar', N'خطوط الطرق وعلاماتها – الجزء الأول (الخطوط الإلزامية)', N'فهم الخطوط الصلبة وخطوط التوقف وخطوط العائد ومعانيها القانونية');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (5, 'en', N'Road Lines and Markings – Part 2 (Warning Lines and Symbols)', N'Broken lines, pedestrian crossings, bike lanes, arrows, words, and numbers');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (5, 'ar', N'خطوط وعلامات الطريق – الجزء الثاني (الخطوط والرموز التحذيرية)', N'الخطوط المتقطعة ومعابر المشاة وممرات الدراجات والسهام والكلمات والأرقام');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (6, 'en', N'Traffic Signs – Warning Signs (Part 1)', N'Warning signs: shape, colors, and meaning of common hazard signs');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (6, 'ar', N'إشارات المرور – العلامات التحذيرية (الجزء الأول)', N'العلامات التحذيرية: الشكل والألوان ومعنى علامات الخطر الشائعة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (7, 'en', N'Traffic Signs – Warning Signs (Part 2)', N'Slippery road, falling rocks, tunnel, railway crossing, roundabout, priority signs');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (7, 'ar', N'إشارات المرور – العلامات التحذيرية (الجزء الثاني)', N'طريق زلق، صخور متساقطة، نفق، معبر للسكك الحديدية، دوار، علامات الأولوية');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (8, 'en', N'Traffic Signs – Priority Signs', N'Yield, stop, main road, and oncoming traffic priority signs');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (8, 'ar', N'إشارات المرور – إشارات الأولوية', N'العائد، والتوقف، والطريق الرئيسي، وعلامات أولوية المرور القادمة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (9, 'en', N'Traffic Signs – Prohibition Signs', N'No entry, no motor vehicles, no turn, weight and size restrictions');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (9, 'ar', N'إشارات المرور – لافتات المنع', N'ممنوع الدخول، ممنوع المركبات، لا يوجد قيود على الدوران والوزن والحجم');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (10, 'en', N'Traffic Signs – Mandatory (Command) and Informational Signs', N'Mandatory direction signs and informational guide signs');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (10, 'ar', N'العلامات المرورية – اللوحات الإلزامية (الأمرية) والإعلامية', N'علامات الاتجاه الإلزامية والعلامات الإرشادية الإعلامية');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (11, 'en', N'Right-of-Way Rules at Intersections', N'General priority rules: right-hand rule, main road, roundabout, T-junction, emergency vehicles');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (11, 'ar', N'قواعد حق الطريق عند التقاطعات', N'قواعد الأولوية العامة: قاعدة اليمين، الطريق الرئيسي، الدوار، تقاطع T، مركبات الطوارئ');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (12, 'en', N'Lane Discipline and Turning Rules', N'Keep right, lane selection, signaling, and proper turning procedures');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (12, 'ar', N'انضباط المسار وقواعد الانعطاف', N'الحفاظ على اليمين واختيار المسار والإشارة وإجراءات الانعطاف الصحيحة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (13, 'en', N'Overtaking Rules and Prohibitions', N'Safe overtaking procedure, prohibited overtaking situations, and responsibilities of both drivers');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (13, 'ar', N'قواعد التجاوز والمحظورات', N'إجراءات التجاوز الآمنة، وحالات التجاوز المحظورة، ومسؤوليات كلا السائقين');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (14, 'en', N'Speed Limits in Jordan', N'Maximum and minimum speed limits for different road types and vehicle categories');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (14, 'ar', N'حدود السرعة في الأردن', N'حدود السرعة القصوى والدنيا لمختلف أنواع الطرق وفئات المركبات');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (15, 'en', N'Stopping, Parking, and Overtaking in Special Cases', N'Legal definitions of stopping vs. parking, prohibited locations, parallel parking, and emergency stopping');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (15, 'ar', N'التوقف والوقوف والتجاوز في الحالات الخاصة', N'التعريفات القانونية للتوقف مقابل الوقوف، والأماكن المحظورة، والوقوف الموازي، والتوقف في حالات الطوارئ');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (16, 'en', N'Alcohol, Drugs, and Medications', N'Effects of alcohol, drugs, and certain medications on driving ability and legal consequences');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (16, 'ar', N'الكحول والمخدرات والأدوية', N'آثار الكحول والمخدرات وبعض الأدوية على القدرة على القيادة والعواقب القانونية');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (17, 'en', N'Driver Fatigue and Concentration', N'How tiredness affects driving, signs of fatigue, and concentration techniques');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (17, 'ar', N'تعب السائق وتركيزه', N'كيف يؤثر التعب على القيادة، وعلامات التعب، وأساليب التركيز');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (18, 'en', N'Difficult Driving Conditions', N'Night, fog, rain, snow, ice, strong wind, and dust storms');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (18, 'ar', N'ظروف القيادة الصعبة', N'الليل والضباب والمطر والثلج والجليد والرياح القوية والعواصف الترابية');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (19, 'en', N'hicle Safety Equipment – Seatbelts, Airbags, and Headrests', N'Purpose and correct use of seatbelts, airbags, and headrests');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (19, 'ar', N'معدات السلامة hicle – أحزمة الأمان، والوسائد الهوائية، ومساند الرأس', N'الغرض والاستخدام الصحيح لأحزمة الأمان والوسائد الهوائية ومساند الرأس');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (20, 'en', N'First Aid Basics – Fractures', N'Types of fractures, signs, and first aid procedures for closed and open fractures');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (20, 'ar', N'أساسيات الإسعافات الأولية – الكسور', N'أنواع الكسور وعلاماتها وإجراءات الإسعافات الأولية للكسور المغلقة والمفتوحة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (21, 'en', N'First Aid Basics – Burns and Bleeding', N'Degrees of burns, first aid for each, and how to control bleeding');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (21, 'ar', N'أساسيات الإسعافات الأولية – الحروق والنزيف', N'درجات الحروق والإسعافات الأولية لكل منها وكيفية السيطرة على النزيف');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (22, 'en', N'Following Distance – Two-Second and Three-Second Rule', N'Safe following distance calculation in dry and wet conditions');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (22, 'ar', N'المسافة التالية – قاعدة الثانيتين والثلاث ثواني', N'حساب المسافة الآمنة في الظروف الجافة والرطبة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (23, 'en', N'Accident Procedures and Breakdown Handling', N'What to do after an accident, reporting requirements, and emergency breakdown steps');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (23, 'ar', N'إجراءات الحوادث والتعامل مع الأعطال', N'ما يجب فعله بعد وقوع الحادث، ومتطلبات الإبلاغ، وخطوات الأعطال الطارئة');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (24, 'en', N'Traffic Violations and Penalties (Major Offenses)', N'Serious traffic violations and corresponding legal penalties');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (24, 'ar', N'المخالفات المرورية والعقوبات (المخالفات الكبرى)', N'المخالفات المرورية الجسيمة والعقوبات القانونية المقابلة لها');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (25, 'en', N'Traffic Violations – Speeding and Points System', N'Speed violation fines and how the points system works');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (25, 'ar', N'المخالفات المرورية – نظام السرعة والنقاط', N'غرامات مخالفات السرعة وكيفية عمل نظام النقاط');
+
+-- ModuleContents (base)
+SET IDENTITY_INSERT Learning.ModuleContents ON;
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (1, 1, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (2, 2, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (3, 3, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (4, 4, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (5, 5, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (6, 6, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (7, 7, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (8, 8, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (9, 9, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (10, 10, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (11, 11, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (12, 12, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (13, 13, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (14, 14, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (15, 15, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (16, 16, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (17, 17, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (18, 18, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (19, 19, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (20, 20, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (21, 21, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (22, 22, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (23, 23, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (24, 24, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (25, 25, 'text', NULL);
+SET IDENTITY_INSERT Learning.ModuleContents OFF;
+
+-- ModuleContentTranslations
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (1, 'en', N'# Introduction to Driving Responsibilities
 
 ## Legal and Personal Responsibilities
 - No person may drive any vehicle in Jordan without a valid, lawful driving license authorizing them to drive that specific vehicle category.
@@ -29,18 +136,8 @@ VALUES (
 
 ## Consequences of Violations
 - Violations lead to fines, imprisonment, license suspension, or impoundment of the vehicle.
-- Repeated violations result in a points system that can revoke your license.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# مقدمة لمسؤوليات القيادة
+- Repeated violations result in a points system that can revoke your license.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (1, 'ar', N'# مقدمة لمسؤوليات القيادة
 
 ## المسؤوليات القانونية والشخصية
 - لا يجوز لأي شخص قيادة أي مركبة في الأردن دون الحصول على رخصة قيادة قانونية سارية المفعول تخوله قيادة تلك الفئة المحددة من المركبات.
@@ -63,18 +160,8 @@ VALUES (
 
 ##عواقب المخالفات
 - المخالفات تؤدي إلى غرامات أو حبس أو إيقاف الترخيص أو حجز المركبة.
-- تؤدي الانتهاكات المتكررة إلى نظام النقاط الذي يمكنه إلغاء الترخيص الخاص بك.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Jordanian License Categories and Requirements
+- تؤدي الانتهاكات المتكررة إلى نظام النقاط الذي يمكنه إلغاء الترخيص الخاص بك.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (2, 'en', N'# Jordanian License Categories and Requirements
 
 ## License Categories (Feras)
 
@@ -103,18 +190,8 @@ VALUES (
 
 ## Renewal and Replacement
 - Renewal requires the same documents plus the expired license.
-- Replacement for lost/damaged requires a special form, photos, ID, and damaged license (if any).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# فئات ومتطلبات الترخيص الأردني
+- Replacement for lost/damaged requires a special form, photos, ID, and damaged license (if any).');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (2, 'ar', N'# فئات ومتطلبات الترخيص الأردني
 
 ## فئات الترخيص (فراس)
 
@@ -143,18 +220,8 @@ VALUES (
 
 ## التجديد والاستبدال
 - التجديد يتطلب نفس المستندات بالإضافة إلى الرخصة المنتهية.
-- استبدال المفقود أو التالف يتطلب تقديم نموذج خاص وصور وبطاقة هوية ورخصة تالف (إن وجدت).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Medical and Theoretical Examination Process
+- استبدال المفقود أو التالف يتطلب تقديم نموذج خاص وصور وبطاقة هوية ورخصة تالف (إن وجدت).');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (3, 'en', N'# Medical and Theoretical Examination Process
 
 ## Step 1: Medical Examination
 - Tests vision, limb health, and general conditions affecting driving.
@@ -185,18 +252,8 @@ VALUES (
 - You may practice at a training center in the meantime.
 
 ## If Your Driving Poses a Danger
-- The examiner may stop the test immediately.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'#عملية الفحص الطبي والنظري
+- The examiner may stop the test immediately.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (3, 'ar', N'#عملية الفحص الطبي والنظري
 
 ## الخطوة الأولى: الفحص الطبي
 - اختبارات الرؤية وصحة الأطراف والحالات العامة المؤثرة على القيادة.
@@ -227,18 +284,8 @@ VALUES (
 - يمكنك التدرب في أحد مراكز التدريب في هذه الأثناء.
 
 ## إذا كانت قيادتك تشكل خطرًا
-- يجوز للفاحص إيقاف الاختبار فوراً.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Road Lines and Markings – Part 1 (Mandatory Lines)
+- يجوز للفاحص إيقاف الاختبار فوراً.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (4, 'en', N'# Road Lines and Markings – Part 1 (Mandatory Lines)
 
 Road markings are painted lines, buttons, or reflective markers on the road surface to guide, warn, or inform drivers.
 
@@ -276,18 +323,8 @@ Road markings are painted lines, buttons, or reflective markers on the road surf
 
 ## Important Rule
 If the solid line is on your side of the center, you **cannot** overtake.
-If the broken line is on your side, you may overtake with caution.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# خطوط الطرق وعلاماتها – الجزء الأول (الخطوط الإلزامية)
+If the broken line is on your side, you may overtake with caution.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (4, 'ar', N'# خطوط الطرق وعلاماتها – الجزء الأول (الخطوط الإلزامية)
 
 علامات الطريق هي خطوط مرسومة أو أزرار أو علامات عاكسة على سطح الطريق لتوجيه السائقين أو تحذيرهم أو إعلامهم.
 
@@ -325,18 +362,8 @@ VALUES (
 
 ## قاعدة مهمة
 إذا كان الخط المتصل على جانبك من المركز، فلا يمكنك **التجاوز**.
-إذا كان الخط المتقطع من جانبك، فيمكنك التجاوز بحذر.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Road Lines and Markings – Part 2 (Warning Lines and Symbols)
+إذا كان الخط المتقطع من جانبك، فيمكنك التجاوز بحذر.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (5, 'en', N'# Road Lines and Markings – Part 2 (Warning Lines and Symbols)
 
 ## Warning Lines (Broken Longitudinal Lines)
 
@@ -369,18 +396,8 @@ VALUES (
   - Straight + left
 
 ## Example
-At an intersection, arrows on the road tell you which lane to choose for your intended direction. Using the wrong lane is a violation.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# خطوط وعلامات الطريق – الجزء الثاني (الخطوط والرموز التحذيرية)
+At an intersection, arrows on the road tell you which lane to choose for your intended direction. Using the wrong lane is a violation.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (5, 'ar', N'# خطوط وعلامات الطريق – الجزء الثاني (الخطوط والرموز التحذيرية)
 
 ## الخطوط التحذيرية (الخطوط الطولية المتكسرة)
 
@@ -413,18 +430,8 @@ VALUES (
   - مستقيم + يسار
 
 ## مثال
-عند التقاطع، تخبرك الأسهم الموجودة على الطريق بالمسار الذي يجب عليك اختياره للاتجاه المقصود. استخدام المسار الخطأ يعد انتهاكًا.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Signs – Warning Signs (Part 1)
+عند التقاطع، تخبرك الأسهم الموجودة على الطريق بالمسار الذي يجب عليك اختياره للاتجاه المقصود. استخدام المسار الخطأ يعد انتهاكًا.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (6, 'en', N'# Traffic Signs – Warning Signs (Part 1)
 
 ## General Shape and Colors
 - **Shape:** Equilateral triangle (point up)
@@ -453,18 +460,8 @@ VALUES (
 
 ## Work Zone Signs
 - Men working on road ahead.
-- Reduce speed, choose correct lane, give priority if required.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إشارات المرور – العلامات التحذيرية (الجزء الأول)
+- Reduce speed, choose correct lane, give priority if required.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (6, 'ar', N'# إشارات المرور – العلامات التحذيرية (الجزء الأول)
 
 ## الشكل والألوان العامة
 - **الشكل:** مثلث متساوي الأضلاع (نقطة للأعلى)
@@ -493,18 +490,8 @@ VALUES (
 
 ## لافتات منطقة العمل
 - رجال يعملون على الطريق أمامهم.
-- خفف السرعة، اختر المسار الصحيح، أعط الأولوية إذا لزم الأمر.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Signs – Warning Signs (Part 2)
+- خفف السرعة، اختر المسار الصحيح، أعط الأولوية إذا لزم الأمر.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (7, 'en', N'# Traffic Signs – Warning Signs (Part 2)
 
 | Sign | Meaning |
 |------|---------|
@@ -524,18 +511,8 @@ VALUES (
 | Stop sign ahead | Prepare to stop completely |
 | Yield sign ahead | Prepare to give priority |
 
-These signs always require **reducing speed** and **increasing attention**.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إشارات المرور – العلامات التحذيرية (الجزء الثاني)
+These signs always require **reducing speed** and **increasing attention**.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (7, 'ar', N'# إشارات المرور – العلامات التحذيرية (الجزء الثاني)
 
 | التوقيع | معنى |
 |------|---------|
@@ -555,18 +532,8 @@ VALUES (
 | علامة التوقف للأمام | الاستعداد للتوقف تماما |
 | علامة العائد قدما | الاستعداد لإعطاء الأولوية |
 
-تتطلب هذه العلامات دائمًا **تقليل السرعة** و **زيادة الانتباه**.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Signs – Priority Signs
+تتطلب هذه العلامات دائمًا **تقليل السرعة** و **زيادة الانتباه**.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (8, 'en', N'# Traffic Signs – Priority Signs
 
 ## Shape and Colors
 - Part of regulatory signs (priority section)
@@ -601,18 +568,8 @@ VALUES (
 ## Priority Over Oncoming Traffic
 - Blue square with two arrows (white arrow pointing down, red arrow up).
 - **You** have priority.
-- Oncoming vehicles must stop for you.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إشارات المرور – علامات الأولوية
+- Oncoming vehicles must stop for you.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (8, 'ar', N'# إشارات المرور – علامات الأولوية
 
 ## الشكل والألوان
 - جزء من العلامات التنظيمية (قسم الأولوية)
@@ -647,18 +604,8 @@ VALUES (
 ## الأولوية على حركة المرور القادمة
 - مربع أزرق به سهمان (سهم أبيض يشير إلى الأسفل، وسهم أحمر إلى الأعلى).
 - **أنت** لديك الأولوية.
-- يجب أن تتوقف المركبات القادمة لك.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Signs – Prohibition Signs
+- يجب أن تتوقف المركبات القادمة لك.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (9, 'en', N'# Traffic Signs – Prohibition Signs
 
 ## Shape and Colors
 - Shape: Round
@@ -690,18 +637,8 @@ VALUES (
 | No horn | Horn prohibited (hospitals, schools, religious places) |
 | No stopping | Stopping prohibited |
 | No parking | Parking prohibited |
-| Customs stop | Must stop at customs checkpoint |'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إشارات المرور – علامات المنع
+| Customs stop | Must stop at customs checkpoint |');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (9, 'ar', N'# إشارات المرور – علامات المنع
 
 ## الشكل والألوان
 - الشكل: دائري
@@ -733,18 +670,8 @@ VALUES (
 | لا قرن | القرن محظور (المستشفيات والمدارس والأماكن الدينية) |
 | لا توقف | الوقف محظور |
 | لا يوجد موقف سيارات | وقوف السيارات محظور |
-| توقف الجمارك | يجب التوقف عند نقطة التفتيش الجمركي |'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Signs – Mandatory and Informational Signs
+| توقف الجمارك | يجب التوقف عند نقطة التفتيش الجمركي |');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (10, 'en', N'# Traffic Signs – Mandatory and Informational Signs
 
 ## Mandatory (Command) Signs
 - Shape: Round or blue circle with white symbol.
@@ -781,18 +708,8 @@ Examples:
 ## Informational Signs Help You
 - Find your destination
 - Choose correct lane in advance
-- Locate services safely without distraction'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# العلامات المرورية – العلامات الإلزامية والإعلامية
+- Locate services safely without distraction');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (10, 'ar', N'# العلامات المرورية – العلامات الإلزامية والإعلامية
 
 ## علامات (الأمر) الإلزامية
 - الشكل: دائرة مستديرة أو زرقاء ورمزها أبيض.
@@ -829,18 +746,8 @@ VALUES (
 ## لافتات إعلامية تساعدك
 - ابحث عن وجهتك
 - اختر المسار الصحيح مقدما
-- تحديد موقع الخدمات بشكل آمن دون تشتيت الانتباه'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Right-of-Way Rules at Intersections
+- تحديد موقع الخدمات بشكل آمن دون تشتيت الانتباه');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (11, 'en', N'# Right-of-Way Rules at Intersections
 
 ## General Approach
 - Reduce speed when approaching any intersection.
@@ -883,18 +790,8 @@ VALUES (
 - Pedestrian groups (students, scouts, military, funeral, organized marches) have priority.
 
 ## Golden Rule
-**Priority is given, not taken.**'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# قواعد حق الطريق عند التقاطعات
+**Priority is given, not taken.**');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (11, 'ar', N'# قواعد حق الطريق عند التقاطعات
 
 ## النهج العام
 - تخفيف السرعة عند الاقتراب من أي تقاطع.
@@ -937,18 +834,8 @@ VALUES (
 - مجموعات المشاة (الطلبة، الكشافة، العسكريين، الجنائز، المسيرات المنظمة) لها الأولوية.
 
 ## القاعدة الذهبية
-**الأولوية تعطى ولا تؤخذ**'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Lane Discipline and Turning Rules
+**الأولوية تعطى ولا تؤخذ**');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (12, 'en', N'# Lane Discipline and Turning Rules
 
 ## Keep Right Rule
 - Always keep to the right side of the road.
@@ -985,18 +872,8 @@ VALUES (
 - Signal before changing lanes.
 - Check mirrors and blind spot.
 - Do not change lanes suddenly.
-- Do not cross solid lines.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# انضباط المسار وقواعد الانعطاف
+- Do not cross solid lines.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (12, 'ar', N'# انضباط المسار وقواعد الانعطاف
 
 ## حافظ على القاعدة الصحيحة
 - التزم دائمًا بالجانب الأيمن من الطريق.
@@ -1033,18 +910,8 @@ VALUES (
 - الإشارة قبل تغيير المسار.
 - فحص المرايا والنقطة العمياء.
 - لا تغير المسار فجأة.
-- عدم تجاوز الخطوط الصلبة.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Overtaking Rules and Prohibitions
+- عدم تجاوز الخطوط الصلبة.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (13, 'en', N'# Overtaking Rules and Prohibitions
 
 ## General
 Overtaking is passing a moving or stationary obstacle on the road.
@@ -1089,18 +956,8 @@ Overtaking is passing a moving or stationary obstacle on the road.
 
 ## Side Winds Effect
 - Strong natural wind or wind from other large vehicles can push small cars.
-- Keep both hands on the steering wheel and maintain direction.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'#قواعد ومحظورات التجاوز
+- Keep both hands on the steering wheel and maintain direction.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (13, 'ar', N'#قواعد ومحظورات التجاوز
 
 ## عام
 التجاوز هو تجاوز عائق متحرك أو ثابت على الطريق.
@@ -1145,18 +1002,8 @@ VALUES (
 
 ## تأثير الرياح الجانبية
 - الرياح الطبيعية القوية أو الرياح القادمة من المركبات الكبيرة الأخرى يمكن أن تدفع السيارات الصغيرة.
-- ضع كلتا يديك على عجلة القيادة وحافظ على الاتجاه.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Speed Limits in Jordan
+- ضع كلتا يديك على عجلة القيادة وحافظ على الاتجاه.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (14, 'en', N'# Speed Limits in Jordan
 
 ## General Speed Limit Rules
 - Do not exceed the maximum posted speed.
@@ -1205,18 +1052,8 @@ VALUES (
 ## Exceeding Speed Limits – Penalties (Summary)
 - Exceeding by more than 50 km/h: Jail (2 weeks–3 months) or fine (100 JD), plus license impound.
 - Exceeding by 31–50 km/h: Fine 30 JD
-- Exceeding by 11–30 km/h: Fine 20 JD'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'#حدود السرعة في الأردن
+- Exceeding by 11–30 km/h: Fine 20 JD');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (14, 'ar', N'#حدود السرعة في الأردن
 
 ## قواعد الحد الأقصى للسرعة العامة
 - لا تتجاوز السرعة القصوى المعلنة.
@@ -1265,18 +1102,8 @@ VALUES (
 ## تجاوز حدود السرعة – العقوبات (ملخص)
 - تجاوز السرعة أكثر من 50 كم/ساعة: الحبس (من أسبوعين إلى 3 أشهر) أو الغرامة (100 دينار) وحجز الرخصة.
 - تجاوز السرعة من 31 إلى 50 كم/ساعة غرامة 30 دينار
-- التجاوز بسرعة 11-30 كم/ساعة: غرامة 20 دينار'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Stopping, Parking, and Emergency Stoppage
+- التجاوز بسرعة 11-30 كم/ساعة: غرامة 20 دينار');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (15, 'en', N'# Stopping, Parking, and Emergency Stoppage
 
 ## Definitions
 - **Stopping (Tawaqquf):** Temporarily stopping for traffic reasons, boarding/alighting, or loading/unloading.
@@ -1315,18 +1142,8 @@ VALUES (
 
 ## Vehicles Prohibited from Overnight Stay Inside Residential Areas
 - Vehicles over 7.5 tons gross weight (trucks, heavy buses)
-- Agricultural and construction vehicles on main streets'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# التوقف والوقوف والتوقف في حالات الطوارئ
+- Agricultural and construction vehicles on main streets');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (15, 'ar', N'# التوقف والوقوف والتوقف في حالات الطوارئ
 
 ## التعاريف
 - **التوقف:** التوقف مؤقتاً لأسباب مرورية، أو الصعود والنزول، أو التحميل والتفريغ.
@@ -1365,18 +1182,8 @@ VALUES (
 
 ## المركبات المحظورة المبيت داخل المناطق السكنية
 - المركبات التي يزيد وزنها الإجمالي عن 7.5 طن (الشاحنات والحافلات الثقيلة)
-- مركبات زراعية وإنشائية على الشوارع الرئيسية'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Alcohol, Drugs, and Medications
+- مركبات زراعية وإنشائية على الشوارع الرئيسية');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (16, 'en', N'# Alcohol, Drugs, and Medications
 
 ## Alcohol and Driving
 - Driving under the influence of alcohol is a serious crime.
@@ -1410,18 +1217,8 @@ Many over-the-counter and prescription medications can affect your ability to dr
 
 ## Legal Note
 - The law considers any driver found with alcohol in their system while driving as a serious violator.
-- Refusing a breathalyzer or blood test may lead to arrest.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'#الكحول والمخدرات والأدوية
+- Refusing a breathalyzer or blood test may lead to arrest.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (16, 'ar', N'#الكحول والمخدرات والأدوية
 
 ## الكحول والقيادة
 - القيادة تحت تأثير الكحول جريمة خطيرة.
@@ -1455,18 +1252,8 @@ VALUES (
 
 ## ملاحظة قانونية
 - يعتبر القانون أي سائق يتم العثور عليه وفي نظامه الكحول أثناء القيادة مخالفًا خطيرًا.
-- رفض اختبار الكحول أو فحص الدم قد يؤدي إلى الاعتقال.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Driver Fatigue and Concentration
+- رفض اختبار الكحول أو فحص الدم قد يؤدي إلى الاعتقال.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (17, 'en', N'# Driver Fatigue and Concentration
 
 ## Why Fatigue Is Dangerous
 - Fatigue reduces reaction time similar to alcohol.
@@ -1511,18 +1298,8 @@ VALUES (
 - Heat can cause headache, nausea, anxiety, fatigue.
 - Use sunglasses and sunshades.
 - Monitor engine temperature and AC.
-- Reduce speed and increase following distance.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# تعب السائق والتركيز
+- Reduce speed and increase following distance.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (17, 'ar', N'# تعب السائق والتركيز
 
 ## لماذا يعتبر الإرهاق خطيرًا؟
 - التعب يقلل من زمن رد الفعل المماثل للكحول.
@@ -1567,18 +1344,8 @@ VALUES (
 - الحرارة يمكن أن تسبب الصداع والغثيان والقلق والتعب.
 - استخدام النظارات الشمسية والمظلات.
 - مراقبة درجة حرارة المحرك وتكييف الهواء.
-- تقليل السرعة وزيادة مسافة التتبع.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Difficult Driving Conditions
+- تقليل السرعة وزيادة مسافة التتبع.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (18, 'en', N'# Difficult Driving Conditions
 
 ## Night Driving
 - Accident rate doubles at night, increases 6x if speed over 110 km/h.
@@ -1631,18 +1398,8 @@ VALUES (
 - Shift to neutral.
 - Release brakes to allow wheels to rotate.
 - Pump brakes gently (do not lock wheels).
-- Steer desired direction.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# ظروف القيادة الصعبة
+- Steer desired direction.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (18, 'ar', N'# ظروف القيادة الصعبة
 
 ## القيادة الليلية
 - يتضاعف معدل الحوادث ليلاً، ويزيد 6 مرات إذا كانت السرعة أكثر من 110 كم/ساعة.
@@ -1695,18 +1452,8 @@ VALUES (
 - التحول إلى الحياد.
 - حرر الفرامل للسماح للعجلات بالدوران.
 - ضخ الفرامل برفق (لا تقفل العجلات).
-- توجيه الاتجاه المطلوب.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Vehicle Safety Equipment – Seatbelts, Airbags, Headrests
+- توجيه الاتجاه المطلوب.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (19, 'en', N'# Vehicle Safety Equipment – Seatbelts, Airbags, Headrests
 
 ## Seatbelt Rules
 - Seatbelts are mandatory for the driver and all front-seat passengers.
@@ -1738,18 +1485,8 @@ VALUES (
 
 ## Emergency Triangle
 - Must be placed 100 meters before the vehicle on rural roads, 50 meters on urban roads.
-- Reflective and visible from distance.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# معدات سلامة المركبات – أحزمة الأمان، الوسائد الهوائية، مساند الرأس
+- Reflective and visible from distance.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (19, 'ar', N'# معدات سلامة المركبات – أحزمة الأمان، الوسائد الهوائية، مساند الرأس
 
 ## قواعد حزام الأمان
 - حزام الأمان إلزامي للسائق وجميع ركاب المقعد الأمامي.
@@ -1781,18 +1518,8 @@ VALUES (
 
 ##مثلث الطوارئ
 - يجب وضعه على مسافة 100 متر قبل المركبة على الطرق الريفية، و50 متراً على الطرق الحضرية.
-- عاكسة ومرئية من مسافة بعيدة.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# First Aid Basics – Fractures
+- عاكسة ومرئية من مسافة بعيدة.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (20, 'en', N'# First Aid Basics – Fractures
 
 ## Common Causes
 - Car accidents, falls, sports injuries.
@@ -1831,18 +1558,8 @@ VALUES (
 ## Neck and Back Fractures
 - **Do not** let the person move their neck or back.
 - **Do not** move them.
-- Call emergency services immediately.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# أساسيات الإسعافات الأولية – الكسور
+- Call emergency services immediately.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (20, 'ar', N'# أساسيات الإسعافات الأولية – الكسور
 
 ## الأسباب الشائعة
 - حوادث السيارات، السقوط، الإصابات الرياضية.
@@ -1881,18 +1598,8 @@ VALUES (
 ## كسور الرقبة والظهر
 - **لا** تدع الشخص يحرك رقبته أو ظهره.
 - **لا** تحركهم.
-- اتصل بخدمات الطوارئ على الفور.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# First Aid Basics – Burns and Bleeding
+- اتصل بخدمات الطوارئ على الفور.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (21, 'en', N'# First Aid Basics – Burns and Bleeding
 
 ## Burn Degrees
 
@@ -1936,18 +1643,8 @@ VALUES (
 - If bleeding continues, add more gauze (do not remove first layer).
 - Elevate the injured limb if no fracture.
 - If severe, apply a tourniquet only if trained (last resort).
-- Call emergency services.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# أساسيات الإسعافات الأولية – الحروق والنزيف
+- Call emergency services.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (21, 'ar', N'# أساسيات الإسعافات الأولية – الحروق والنزيف
 
 ## درجات الحروق
 
@@ -1991,18 +1688,8 @@ VALUES (
 - إذا استمر النزيف، أضف المزيد من الشاش (لا تقم بإزالة الطبقة الأولى).
 - رفع الطرف المصاب في حالة عدم وجود كسر.
 - إذا كانت الحالة شديدة، استخدم العاصبة فقط في حالة التدريب (الملاذ الأخير).
-- الاتصال بخدمات الطوارئ.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Following Distance – Two-Second and Three-Second Rule
+- الاتصال بخدمات الطوارئ.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (22, 'en', N'# Following Distance – Two-Second and Three-Second Rule
 
 ## Why Following Distance Matters
 - Your vehicle needs time and space to stop safely.
@@ -2033,18 +1720,8 @@ VALUES (
 - At 45 km/h, a small car needs a distance longer than six times its length to stop fully.
 
 ## Practical Tip
-When stopped behind another vehicle, you should be able to see its rear tires touching the road. That leaves enough space to maneuver around if needed.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# مسافة التتبع – قاعدة الثانيتين والثلاث ثواني
+When stopped behind another vehicle, you should be able to see its rear tires touching the road. That leaves enough space to maneuver around if needed.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (22, 'ar', N'# مسافة التتبع – قاعدة الثانيتين والثلاث ثواني
 
 ## لماذا تعتبر المسافة التالية مهمة؟
 - تحتاج سيارتك إلى الوقت والمساحة للتوقف بأمان.
@@ -2075,18 +1752,8 @@ VALUES (
 - بسرعة 45 كم/ساعة، تحتاج السيارة الصغيرة إلى مسافة أطول من ستة أضعاف طولها لتتوقف بشكل كامل.
 
 ## نصيحة عملية
-عند التوقف خلف مركبة أخرى، يجب أن تكون قادرًا على رؤية إطاراتها الخلفية وهي تلامس الطريق. وهذا يترك مساحة كافية للمناورة إذا لزم الأمر.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Accident Procedures and Breakdown Handling
+عند التوقف خلف مركبة أخرى، يجب أن تكون قادرًا على رؤية إطاراتها الخلفية وهي تلامس الطريق. وهذا يترك مساحة كافية للمناورة إذا لزم الأمر.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (23, 'en', N'# Accident Procedures and Breakdown Handling
 
 ## After an Accident
 - Stop immediately (leaving the scene is a crime).
@@ -2116,18 +1783,8 @@ VALUES (
 - Stay inside your vehicle.
 - Turn on hazard lights.
 - Ask others for help or place a help sign on the window.
-- Use mobile phone to call for assistance.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إجراءات الحوادث والتعامل مع الأعطال
+- Use mobile phone to call for assistance.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (23, 'ar', N'# إجراءات الحوادث والتعامل مع الأعطال
 
 ## بعد وقوع حادث
 - توقف فوراً (مغادرة المكان جريمة).
@@ -2157,18 +1814,8 @@ VALUES (
 - البقاء داخل سيارتك.
 - تشغيل أضواء الخطر.
 - اطلب المساعدة من الآخرين أو ضع علامة مساعدة على النافذة.
-- استخدم الهاتف المحمول لطلب المساعدة.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Violations and Penalties (Major Offenses)
+- استخدم الهاتف المحمول لطلب المساعدة.');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (24, 'en', N'# Traffic Violations and Penalties (Major Offenses)
 
 ## Causing Death or Permanent Disability
 - Imprisonment: 3 months to 3 years
@@ -2223,18 +1870,8 @@ VALUES (
 - Same penalty
 
 ### Driving at night without lights
-- Same penalty'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# المخالفات المرورية والعقوبات (المخالفات الكبرى)
+- Same penalty');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (24, 'ar', N'# المخالفات المرورية والعقوبات (المخالفات الكبرى)
 
 ##التسبب في الوفاة أو الإعاقة الدائمة
 - السجن: من 3 أشهر إلى 3 سنوات
@@ -2289,18 +1926,8 @@ VALUES (
 - نفس العقوبة
 
 ### القيادة ليلاً بدون أضواء
-- نفس العقوبة'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Traffic Violations – Speeding and Points System
+- نفس العقوبة');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (25, 'en', N'# Traffic Violations – Speeding and Points System
 
 ## Speeding Fines
 - Exceeding limit by more than 50 km/h: Jail 2 weeks–3 months or fine 100 JD (plus license impound)
@@ -2341,18 +1968,8 @@ VALUES (
 
 ## Important Rules
 - If multiple violations at same time, only the highest-point violation is counted.
-- Points apply on violation date unless accident-related (then after final court ruling).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# المخالفات المرورية – نظام السرعة والنقاط
+- Points apply on violation date unless accident-related (then after final court ruling).');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) VALUES (25, 'ar', N'# المخالفات المرورية – نظام السرعة والنقاط
 
 ## غرامات السرعة
 - تجاوز الحد المسموح به بأكثر من 50 كم/ساعة: الحبس من أسبوعين إلى 3 أشهر أو غرامة 100 دينار أردني (بالإضافة إلى حجز الترخيص)
@@ -2393,579 +2010,4 @@ VALUES (
 
 ## قواعد مهمة
 - في حالة وجود مخالفات متعددة في نفس الوقت، يتم احتساب المخالفة ذات أعلى نقطة فقط.
-- تطبق النقاط في تاريخ المخالفة ما لم تكن متعلقة بحادث (ثم بعد صدور الحكم النهائي من المحكمة).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Practical Driving Basics (Automatic Transmission)
-
-## Pre-Drive Checklist
-- Adjust seat so you can reach pedals comfortably.
-- Adjust all mirrors (interior, left, right).
-- Fasten seatbelt.
-- Check that gear selector is in P (Park) or N (Neutral).
-
-## Starting the Engine
-- Press brake pedal firmly.
-- Turn key or push start button.
-- Keep foot on brake.
-
-## Selecting Gears
-- **P (Park):** Starting/stopping engine, parked.
-- **R (Reverse):** Backing up – only after full stop.
-- **N (Neutral):** Engine runs but no drive to wheels.
-- **D (Drive):** Normal forward driving – transmission shifts automatically.
-- Some vehicles have D3, 2, 1 or L for hills/engine braking.
-
-## Moving Off
-- With foot on brake, move selector to D.
-- Release parking brake (handbrake).
-- Check mirrors and blind spot.
-- Signal if needed (pull out from curb).
-- Release brake gently, press accelerator smoothly.
-
-## Stopping
-- Remove foot from accelerator.
-- Apply brake pedal smoothly.
-- Keep foot on brake when stopped (especially at lights or stop lines).
-- For longer stops, shift to P and apply parking brake.
-
-## Hill Starts (Automatic)
-- Hold foot on brake.
-- Move to D.
-- Release parking brake and brake pedal, then accelerate smoothly.
-- Automatic vehicles rarely roll back, but on steep hills use handbrake assistance.
-
-## Key Reminders
-- No clutch pedal.
-- Do not shift into P or R while moving.
-- Use right foot for both brake and accelerator (left foot rest).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# أساسيات القيادة العملية (ناقل الحركة الأوتوماتيكي)
-
-## قائمة التحقق قبل القيادة
-- اضبط المقعد حتى تتمكن من الوصول إلى الدواسات بشكل مريح.
-- ضبط جميع المرايا (الداخلية، اليسرى، اليمنى).
-- ربط حزام الأمان.
-- تأكد من أن محدد التروس في وضع P (وقوف) أو N (محايد).
-
-## تشغيل المحرك
-- اضغط على دواسة الفرامل بقوة.
-- تشغيل المفتاح أو الضغط على زر التشغيل.
-- إبقاء القدم على الفرامل.
-
-## اختيار التروس
-- **P (وقوف):** تشغيل/إيقاف المحرك، متوقف.
-- **R (عكسي):** الرجوع للخلف - فقط بعد التوقف الكامل.
-- **N (محايد):** يعمل المحرك ولكن لا يوجد دفع للعجلات.
-- **D (القيادة):** القيادة العادية للأمام - يقوم ناقل الحركة بالتبديل تلقائيًا.
-- تحتوي بعض المركبات على D3 أو 2 أو 1 أو L لكبح التلال/المحرك.
-
-## التحرك
-- مع وضع القدم على الفرامل، حرك المحدد إلى D.
-- حرر فرامل الانتظار (فرامل اليد).
-- فحص المرايا والنقطة العمياء.
-- إشارة إذا لزم الأمر (اسحب من الرصيف).
-- حرر الفرامل بلطف، ثم اضغط على دواسة الوقود بسلاسة.
-
-## توقف
-- إزالة القدم من دواسة الوقود.
-- استخدم دواسة الفرامل بسلاسة.
-- إبقاء القدم على الفرامل عند التوقف (خاصة عند الأضواء أو خطوط التوقف).
-- للتوقف لفترة أطول، انتقل إلى الوضع P واستخدم فرامل الانتظار.
-
-## بداية التلال (تلقائي)
-- ثبت القدم على الفرامل.
-- انتقل إلى د.
-- حرر فرامل الانتظار ودواسة الفرامل، ثم قم بزيادة السرعة بسلاسة.
-- نادرًا ما ترجع السيارات الأوتوماتيكية إلى الخلف، ولكن على التلال شديدة الانحدار، استخدم مساعدة فرملة اليد.
-
-## تذكيرات رئيسية
-- عدم وجود دواسة القابض.
-- لا تتحول إلى P أو R أثناء التحرك.
-- استخدم القدم اليمنى للفرامل ودواسة الوقود (مسند القدم اليسرى).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Practical Driving Basics (Manual Transmission)
-
-## Pre-Drive
-- Adjust seat, mirrors, seatbelt.
-- Check gear lever is in neutral.
-- Press clutch pedal fully before starting engine.
-
-## Starting Engine
-- Neutral gear.
-- Clutch pressed.
-- Turn key.
-
-## Clutch and Gears
-- Left foot operates clutch only.
-- Right foot operates brake and accelerator.
-- Gear pattern: Typically 1–2–3–4–5 (R) (check vehicle).
-
-## Moving Off (Level Ground)
-1. Clutch fully down.
-2. Shift into 1st gear.
-3. Release handbrake.
-4. Slowly lift clutch until biting point (engine sound changes, vehicle vibrates slightly).
-5. Add a little accelerator (about 1000–1500 rpm).
-6. Continue releasing clutch smoothly while adding more gas.
-
-## Shifting Up
-- Accelerate to appropriate speed:
-    - 1→2: ~10–20 km/h
-    - 2→3: ~30–40 km/h
-    - 3→4: ~50–60 km/h
-    - 4→5: ~70+ km/h
-- Procedure: Release accelerator, clutch down, shift, clutch up gradually, accelerate.
-
-## Shifting Down
-- Release accelerator, clutch down, shift to lower gear, clutch up gradually.
-- Use when slowing down or climbing steep hills.
-
-## Stopping
-- Release accelerator.
-- Brake gently.
-- Clutch down just before vehicle fully stops (to avoid stalling).
-- Shift to neutral.
-- Apply handbrake.
-
-## Hill Start (Manual)
-1. Clutch down, 1st gear, handbrake on.
-2. Hold handbrake button pressed.
-3. Find biting point (clutch up slightly, engine drops sound).
-4. Add a little accelerator.
-5. Release handbrake while keeping clutch at biting point.
-6. Slowly release clutch more, press accelerator more.
-
-## Common Mistakes to Avoid
-- Riding the clutch (foot resting on pedal while driving).
-- Shifting without clutch fully down.
-- Downshifting at too high speed (engine over-rev).
-- Stalling by releasing clutch too fast without gas.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# أساسيات القيادة العملية (ناقل الحركة اليدوي)
-
-## ما قبل القيادة
-- ضبط المقعد، المرايا، حزام الأمان.
-- تأكد من أن ذراع ناقل الحركة في الوضع المحايد.
-- اضغط على دواسة القابض بالكامل قبل تشغيل المحرك.
-
-## محرك البداية
-- العتاد المحايد.
-- تم الضغط على القابض .
-- تشغيل المفتاح.
-
-## القابض والتروس
-- القدم اليسرى تعمل على تشغيل القابض فقط.
-- القدم اليمنى تشغل الفرامل ودواسة الوقود.
-- نمط التروس: عادةً 1–2–3–4–5 (R) (فحص السيارة).
-
-## التحرك بعيدًا (مستوى الأرض)
-1. القابض لأسفل بالكامل.
-2. انتقل إلى السرعة الأولى.
-3. حرر فرملة اليد.
-4. ارفع القابض ببطء حتى نقطة العض (يتغير صوت المحرك، وتهتز السيارة قليلاً).
-5. أضف القليل من المسرع (حوالي 1000-1500 دورة في الدقيقة).
-6. استمر في تحرير القابض بسلاسة مع إضافة المزيد من الغاز.
-
-## التحول لأعلى
-- الإسراع إلى السرعة المناسبة:
-    - 1→2: ~10–20 كم/ساعة
-    - 2→3: ~30-40 كم/ساعة
-    - 3→4: ~50-60 كم/ساعة
-    - 4→5: ~70+ كم/ساعة
-- الإجراء: حرر دواسة الوقود، ثم حرك القابض لأسفل، ثم قم بالتبديل، ثم حرك القابض لأعلى تدريجيًا، ثم قم بالتسريع.
-
-## التحول للأسفل
-- حرر دواسة الوقود، ثم حرك القابض لأسفل، ثم انتقل إلى ترس أقل، ثم حرك القابض لأعلى تدريجيًا.
-- يُستخدم عند إبطاء السرعة أو تسلق التلال شديدة الانحدار.
-
-## توقف
-- الافراج عن مسرع.
-- الفرامل بلطف.
-- قم بخفض القابض قبل توقف السيارة بالكامل (لتجنب التوقف).
-- التحول إلى الحياد.
-- تطبيق فرملة اليد.
-
-## بداية التلال (يدوي)
-1. القابض لأسفل، الترس الأول، تشغيل فرملة اليد.
-2. اضغط باستمرار على زر فرملة اليد.
-3. ابحث عن نقطة العض (ارفع القابض قليلاً، سيصدر صوت المحرك).
-4. أضف القليل من المسرع.
-5. حرر فرملة اليد مع إبقاء القابض عند نقطة العض.
-6. حرر القابض ببطء أكثر، واضغط على دواسة الوقود أكثر.
-
-## الأخطاء الشائعة التي يجب تجنبها
-- ركوب الكلتش (وضع القدم على الدواسة أثناء القيادة).
-- التحول دون القابض لأسفل بالكامل.
-- النقل إلى سرعة أقل بسرعة عالية جدًا (زيادة سرعة المحرك).
-- المماطلة عن طريق تحرير القابض بسرعة كبيرة بدون غاز.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Motorcycle Preparation and Protective Gear
-
-## Importance of Proper Gear
-- In a crash, proper clothing and helmet greatly reduce severe injuries.
-- Helmet is mandatory by Jordanian traffic law for both rider and passenger.
-
-## Helmet
-- Must meet approved safety standards.
-- Full-face helmet offers best protection.
-- Never ride without a helmet.
-
-## Eye Protection
-- Use a shatter-resistant face shield or goggles.
-- Protects from wind, dust, insects, rain, and small debris from other vehicles.
-
-## Clothing
-- **Jacket:** Heavy, padded, or leather – protects arms and torso.
-- **Pants:** Thick material, not regular jeans.
-- **Gloves:** Prevent blisters and protect hands in a fall.
-- **Boots:** Over the ankle, with oil-resistant soles.
-
-## Pre-Ride Inspection (T-CLOCS)
-
-### T – Tires and Wheels
-- Check tire pressure and tread depth.
-- Check wheels for damage; ensure bolts are tight.
-
-### C – Controls
-- Clutch and brake levers move freely.
-- Throttle moves smoothly and returns automatically.
-- Cables not frayed or loose.
-
-### L – Lights and Electrical
-- Headlights (high/low), taillight, turn signals, brake light all working.
-- Horn works.
-
-### O – Oil and Fluids
-- Check engine oil, brake fluid, coolant (if liquid-cooled).
-
-### C – Chassis
-- Check chain/sprockets for tension and lubrication.
-- Check suspension and frame for cracks or leaks.
-
-### S – Stands
-- Sidestand and centerstand not bent or loose.
-
-## Being a Responsible Rider
-- Never ride under influence.
-- Stay focused – no phone use.
-- Ride defensively – assume others do not see you.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# إعداد الدراجات النارية ومعدات الحماية
-
-## أهمية العتاد المناسب
-- في حالة وقوع حادث، فإن الملابس والخوذة المناسبة تقلل بشكل كبير من الإصابات الخطيرة.
-- الخوذة إلزامية بموجب قانون المرور الأردني لكل من الراكب والراكب.
-
-## خوذة
-- يجب أن تستوفي معايير السلامة المعتمدة.
-- توفر الخوذة كاملة الوجه أفضل حماية.
-- لا تركب أبداً بدون خوذة.
-
-## حماية العين
-- استخدم درعًا للوجه أو نظارات واقية مقاومة للكسر.
-- يحمي من الرياح والغبار والحشرات والمطر والحطام الصغير من المركبات الأخرى.
-
-## ملابس
-- **السترة:** ثقيلة أو مبطنة أو جلدية - تحمي الذراعين والجذع.
-- **البنطلون:** خامة سميكة وليس الجينز العادي.
-- **القفازات:** تمنع ظهور البثور وتحمي اليدين في حالة السقوط.
-- **الأحذية:** فوق الكاحل، بنعل مقاوم للزيت.
-
-## التفتيش قبل الركوب (T-CLOCS)
-
-### T – الإطارات والعجلات
-- فحص ضغط الإطارات وعمق المداس.
-- فحص العجلات بحثًا عن أي ضرر؛ تأكد من أن البراغي ضيقة.
-
-### ج – الضوابط
-- تتحرك أذرع القابض والفرامل بحرية.
-- يتحرك الخانق بسلاسة ويعود تلقائيًا.
-- الكابلات غير مهترئة أو فضفاضة.
-
-### إل – الأضواء والكهرباء
-- المصابيح الأمامية (عالية/منخفضة)، الضوء الخلفي، إشارات الانعطاف، ضوء الفرامل كلها تعمل.
-- يعمل القرن.
-
-### O – الزيوت والسوائل
-- فحص زيت المحرك، سائل الفرامل، سائل التبريد (إذا كان مبرداً بالسائل).
-
-### ج – الهيكل
-- التحقق من السلسلة/العجلات المسننة للتأكد من التوتر والتشحيم.
-- التحقق من نظام التعليق والإطار للتأكد من عدم وجود شقوق أو تسربات.
-
-### S – المدرجات
-- الحامل الجانبي والمركز الأوسط غير منحنيين أو مفكوكين.
-
-## أن تكون راكبًا مسؤولًا
-- لا تركب أبداً تحت تأثير الكحول.
-- حافظ على تركيزك - لا تستخدم الهاتف.
-- قم بالقيادة بطريقة دفاعية - افترض أن الآخرين لا يرونك.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Motorcycle Lane Positioning and Visibility
-
-## Lane Positioning Basics
-- You have the right to the full lane – take it.
-- Do not ride alongside cars in the same lane; they may not see you.
-
-## Three Lane Positions (Imaginary)
-- **Left third:** Best for left turns, passing, or when oncoming traffic is light.
-- **Center:** Avoid center of lane (oil, debris, bumps). Use right or left third instead.
-- **Right third:** Best for right turns, or when rain collects in center ruts.
-
-## General Rule
-- Choose the position that:
-  - Makes you most visible to other drivers.
-  - Gives you an escape route.
-  - Avoids blind spots.
-
-## Being Visible
-- Ride where drivers ahead can see you in their mirrors.
-- Avoid lingering in blind spots (especially large trucks).
-- Make eye contact with drivers at intersections when possible.
-
-## Merging and Joining Traffic
-- At highway entries, signal early.
-- Adjust speed to match traffic flow.
-- Leave extra space when merging – cars may not see you.
-
-## Riding Next to Other Vehicles
-- Never ride side-by-side with another vehicle in the same lane.
-- If possible, avoid riding directly next to trucks or buses.
-- Speed up or drop back to create space.
-
-## Blind Spots (No-Zones) of Trucks
-- Directly behind the truck
-- Directly in front (within 10 meters)
-- On left side slightly behind the cab
-- On right side (largest blind spot)
-
-## Best Practice
-- Own your lane.
-- Be predictable.
-- Keep a safe following distance (minimum 2 seconds, more in wet/gravel).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# تحديد المواقع ورؤية حارة الدراجات النارية
-
-## أساسيات تحديد موقع المسار
-- لديك الحق في الحصول على المسار الكامل – خذه.
-- لا تركب بجانب السيارات في نفس المسار؛ قد لا يرونك.
-
-## ثلاثة أوضاع للمسارات (خيالية)
-- **الثلث الأيسر:** الأفضل للانعطاف إلى اليسار أو المرور أو عندما تكون حركة المرور القادمة خفيفة.
-- **المركز:** تجنب وسط المسار (الزيت، الحطام، المطبات). استخدم الثلث الأيمن أو الأيسر بدلاً من ذلك.
-- **الثلث الأيمن:** الأفضل عند المنعطفات اليمنى، أو عندما يتجمع المطر في الأخاديد المركزية.
-
-## القاعدة العامة
-- اختر الموقف الذي:
-  - يجعلك أكثر وضوحا للسائقين الآخرين.
-  - يمنحك طريق الهروب.
-  - يتجنب البقع العمياء.
-
-## أن تكون مرئية
-- قم بالقيادة حيث يستطيع السائقون أمامك رؤيتك في مراياهم.
-- تجنب البقاء في المناطق العمياء (خاصة الشاحنات الكبيرة).
-- تواصل بصريًا مع السائقين عند التقاطعات عندما يكون ذلك ممكنًا.
-
-## دمج حركة المرور والانضمام إليها
-- عند مداخل الطريق السريع، قم بالإشارة مبكرًا.
-- ضبط السرعة لتتناسب مع تدفق حركة المرور.
-- اترك مساحة إضافية عند الدمج - فقد لا تراك السيارات.
-
-## الركوب بجانب المركبات الأخرى
-- لا تركب أبدًا جنبًا إلى جنب مع مركبة أخرى في نفس المسار.
-- إن أمكن، تجنب الركوب مباشرة بجوار الشاحنات أو الحافلات.
-- تسريع أو التراجع لتوفير مساحة.
-
-## النقاط العمياء (المناطق المحظورة) للشاحنات
-- خلف الشاحنة مباشرة
-- أمامك مباشرة (في حدود 10 أمتار)
-- على الجانب الأيسر خلف الكابينة قليلاً
-- على الجانب الأيمن (أكبر نقطة عمياء)
-
-## أفضل الممارسات
-- تملك المسار الخاص بك.
-- كن متوقعا.
-- حافظ على مسافة تتبع آمنة (ثانيتين على الأقل، وأكثر في الأراضي الرطبة/الحصى).'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),  -- assumes sequential execution
-    'en',
-    N'# Motorcycle Emergency Braking and Swerving
-
-## Emergency Braking
-- Use both brakes (front and rear) simultaneously.
-- Apply front brake progressively and firmly – not grabbing.
-- If the front wheel locks, release immediately and reapply smoothly.
-- Rear brake: apply firmly; if it locks on rough surface, keep it locked until stopped.
-
-## Stopping in a Curve
-- Straighten the motorcycle first if possible.
-- Brake while upright, then lean again.
-
-## Swerving (Quick Direction Change)
-- Used when braking alone won’t prevent a crash.
-- Apply light pressure to handlebar in direction you want to go.
-- Push right → go right. Push left → go left.
-- Keep knees and elbows relaxed.
-- Do not brake while swerving (brake first or after evading).
-
-## Practice
-- In safe parking lot, practice swerving between cones.
-- Learn to look where you want to go, not at the obstacle.
-
-## Obstacles to Avoid Swerving
-- Broken pavement
-- Potholes
-- Fallen cargo
-- Sudden stopped vehicle
-
-## Cornering Technique
-- Slow down before the curve (braking done).
-- Look through the turn.
-- Lean smoothly.
-- Roll on throttle gradually through curve – never sudden throttle or brake.
-
-## Cornering in Hazardous Surfaces
-- Sand, gravel, wet leaves, ice – reduce speed before curve.
-- Do not lean aggressively.
-- Keep bike as upright as possible.
-
-## Night and Low Visibility
-- Reduce speed.
-- Increase following distance.
-- Use high beam when alone, low beam when following or oncoming.
-- Wear reflective gear.'
-);
-
-INSERT INTO Learning.ModuleContentTranslations (
-    content_id,
-    language_code,
-    text_content
-)
-VALUES (
-    SCOPE_IDENTITY(),
-    'ar',
-    N'# فرملة الطوارئ للدراجات النارية والانحراف
-
-## الكبح في حالات الطوارئ
-- استخدم المكابح (الأمامية والخلفية) في وقت واحد.
-- استخدم المكابح الأمامية بشكل تدريجي وثابت - دون الإمساك بها.
-- إذا تم قفل العجلة الأمامية، فحررها على الفور وأعد وضعها بسلاسة.
-- الفرامل الخلفية: تطبق بقوة؛ إذا تم قفله على سطح خشن، فاحتفظ به مغلقًا حتى يتوقف.
-
-## التوقف في منحنى
-- قم بتسوية الدراجة النارية أولاً إن أمكن.
-- اضغط على الفرامل بينما تكون في وضع مستقيم، ثم انحنِ مرة أخرى.
-
-## الانحراف (تغيير الاتجاه السريع)
-- يُستخدم عندما لا يؤدي استخدام المكابح بمفرده إلى منع وقوع حادث.
-- مارس ضغطًا خفيفًا على المقود في الاتجاه الذي تريد الذهاب إليه.
-- ادفع لليمين ← اذهب لليمين. ادفع لليسار ← اتجه يسارًا.
-- حافظ على استرخاء الركبتين والمرفقين.
-- لا تستخدم المكابح أثناء الانحراف (استخدم المكابح أولاً أو بعد التهرب).
-
-## الممارسة
-- في ساحة انتظار السيارات الآمنة، تدرب على الانحراف بين المخاريط.
-- تعلم أن تنظر إلى المكان الذي تريد الذهاب إليه، وليس إلى العائق.
-
-## معوقات تجنب الانحراف
-- الرصيف المكسور
-- الحفر
-- البضائع الساقطة
-- توقف السيارة بشكل مفاجئ
-
-## تقنية المنعطفات
-- خفف السرعة قبل المنعطف (تم الكبح).
-- انظر من خلال المنعطف.
-- العجاف بسلاسة.
-- قم بتشغيل دواسة الوقود تدريجيًا عبر المنعطف - لا تستخدم دواسة الوقود أو الفرامل بشكل مفاجئ أبدًا.
-
-## الانعطاف في الأسطح الخطرة
-- الرمل والحصى والأوراق المبللة والجليد - خفف السرعة قبل المنعطف.
-- لا تميل بقوة.
-- حافظ على الدراجة في وضع مستقيم قدر الإمكان.
-
-## ليلا وتدني مدى الرؤية
-- تقليل السرعة.
-- زيادة المسافة التالية.
-- استخدم الضوء العالي عندما تكون بمفردك، والضوء المنخفض عند المتابعة أو الاقتراب.
-- ارتداء معدات عاكسة.'
-);
+- تطبق النقاط في تاريخ المخالفة ما لم تكن متعلقة بحادث (ثم بعد صدور الحكم النهائي من المحكمة).');
