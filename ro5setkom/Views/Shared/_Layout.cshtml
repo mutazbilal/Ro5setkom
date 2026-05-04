@@ -1,5 +1,14 @@
+@using System.Globalization
+
+@using System.Globalization
+@{
+    var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var dir = culture == "ar" ? "rtl" : "ltr";
+}
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="@culture" dir="@dir">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

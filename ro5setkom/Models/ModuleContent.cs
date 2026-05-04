@@ -13,9 +13,7 @@ public partial class ModuleContent
 
     public string? VideoUrl { get; set; }
 
-    public string? TextContent { get; set; }
-
-    public bool LanguageEnglish { get; set; }
-
     public virtual LearningModule Module { get; set; } = null!;
+
+    public virtual ICollection<ModuleContentTranslation> ModuleContentTranslations { get; set; } = new List<ModuleContentTranslation>();
 }

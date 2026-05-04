@@ -290,6 +290,9 @@ GO
 :r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\08_TrainingCenters.sql"
 GO
 
+:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\09_Users.sql"
+GO
+
 -- ============================================
 -- DONE
 -- ============================================

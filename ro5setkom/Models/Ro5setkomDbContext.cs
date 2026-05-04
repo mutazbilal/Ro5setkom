@@ -59,19 +59,29 @@ public partial class Ro5setkomDbContext : DbContext
 
     public virtual DbSet<ModuleContent> ModuleContents { get; set; }
 
+    public virtual DbSet<ModuleContentTranslation> ModuleContentTranslations { get; set; }
+
     public virtual DbSet<ModuleRecommendation> ModuleRecommendations { get; set; }
+
+    public virtual DbSet<ModuleTranslation> ModuleTranslations { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
     public virtual DbSet<NotificationPreference> NotificationPreferences { get; set; }
 
+    public virtual DbSet<OptionTranslation> OptionTranslations { get; set; }
+
     public virtual DbSet<QuestionOption> QuestionOptions { get; set; }
+
+    public virtual DbSet<QuestionTranslation> QuestionTranslations { get; set; }
 
     public virtual DbSet<Quiz> Quizzes { get; set; }
 
     public virtual DbSet<QuizAttempt> QuizAttempts { get; set; }
 
     public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
+
+    public virtual DbSet<QuizTranslation> QuizTranslations { get; set; }
 
     public virtual DbSet<Rating> Ratings { get; set; }
 
@@ -94,18 +104,22 @@ public partial class Ro5setkomDbContext : DbContext
     public virtual DbSet<UserConsent> UserConsents { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=ro5setkomDB;Trusted_Connection=True;TrustServerCertificate=True;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=.;Database=ro5setkomDB;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.AdminId).HasName("PK__Admins__43AA4141E7440504");
+            entity.HasKey(e => e.AdminId).HasName("PK__Admins__43AA4141C74142AD");
 
             entity.ToTable("Admins", "Roles");
 
-            entity.HasIndex(e => e.BadgeNumber, "UQ__Admins__3E4D103E54BD4E08").IsUnique();
+            entity.HasIndex(e => e.BadgeNumber, "UQ__Admins__3E4D103E637D91DF").IsUnique();
 
             entity.Property(e => e.AdminId)
                 .ValueGeneratedNever()
@@ -120,12 +134,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.AdminNavigation).WithOne(p => p.Admin)
                 .HasForeignKey<Admin>(d => d.AdminId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Admins__admin_id__778AC167");
+                .HasConstraintName("FK__Admins__admin_id__797309D9");
         });
 
         modelBuilder.Entity<AichatMessage>(entity =>
         {
-            entity.HasKey(e => e.MessageId).HasName("PK__AIChatMe__0BBF6EE6A730DCC3");
+            entity.HasKey(e => e.MessageId).HasName("PK__AIChatMe__0BBF6EE62B2494EC");
 
             entity.ToTable("AIChatMessages", "AI");
 
@@ -142,12 +156,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Session).WithMany(p => p.AichatMessages)
                 .HasForeignKey(d => d.SessionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AIChatMes__sessi__078C1F06");
+                .HasConstraintName("FK__AIChatMes__sessi__1C873BEC");
         });
 
         modelBuilder.Entity<AichatSession>(entity =>
         {
-            entity.HasKey(e => e.SessionId).HasName("PK__AIChatSe__69B13FDC1A55ACF1");
+            entity.HasKey(e => e.SessionId).HasName("PK__AIChatSe__69B13FDC93E1DEBE");
 
             entity.ToTable("AIChatSessions", "AI");
 
@@ -161,12 +175,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.AichatSessions)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AIChatSes__user___02C769E9");
+                .HasConstraintName("FK__AIChatSes__user___17C286CF");
         });
 
         modelBuilder.Entity<AuditLog>(entity =>
         {
-            entity.HasKey(e => e.LogId).HasName("PK__AuditLog__9E2397E0ADC14EE2");
+            entity.HasKey(e => e.LogId).HasName("PK__AuditLog__9E2397E04EE5B4E5");
 
             entity.ToTable("AuditLogs", "Security");
 
@@ -188,16 +202,16 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.AuditLogs)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AuditLogs__user___1F63A897");
+                .HasConstraintName("FK__AuditLogs__user___345EC57D");
         });
 
         modelBuilder.Entity<BlockedDate>(entity =>
         {
-            entity.HasKey(e => e.BlockedDateId).HasName("PK__BlockedD__9F5620D7AD079119");
+            entity.HasKey(e => e.BlockedDateId).HasName("PK__BlockedD__9F5620D7D27BC88F");
 
             entity.ToTable("BlockedDates", "Scheduling");
 
-            entity.HasIndex(e => e.BlockedDate1, "UQ__BlockedD__D739C54F94B3C1A7").IsUnique();
+            entity.HasIndex(e => e.BlockedDate1, "UQ__BlockedD__D739C54F880AAB04").IsUnique();
 
             entity.Property(e => e.BlockedDateId).HasColumnName("blocked_date_id");
             entity.Property(e => e.BlockedBy).HasColumnName("blocked_by");
@@ -212,16 +226,16 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.BlockedByNavigation).WithMany(p => p.BlockedDates)
                 .HasForeignKey(d => d.BlockedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BlockedDa__block__1332DBDC");
+                .HasConstraintName("FK__BlockedDa__block__151B244E");
         });
 
         modelBuilder.Entity<Booking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__5DE3A5B115D06B0B");
+            entity.HasKey(e => e.BookingId).HasName("PK__Bookings__5DE3A5B1A689B40C");
 
             entity.ToTable("Bookings", "Scheduling");
 
-            entity.HasIndex(e => e.TraineeLicenseId, "UQ__Bookings__5F54669934271EDF").IsUnique();
+            entity.HasIndex(e => e.TraineeLicenseId, "UQ__Bookings__5F5466990056DB3C").IsUnique();
 
             entity.HasIndex(e => e.MentorId, "idx_bookings_mentor_id");
 
@@ -252,31 +266,31 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.LicenseType).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.LicenseTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__licens__1EA48E88");
+                .HasConstraintName("FK__Bookings__licens__208CD6FA");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__mentor__1DB06A4F");
+                .HasConstraintName("FK__Bookings__mentor__1F98B2C1");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.Bookings)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__traine__1CBC4616");
+                .HasConstraintName("FK__Bookings__traine__1EA48E88");
 
             entity.HasOne(d => d.TraineeLicense).WithOne(p => p.Booking)
                 .HasForeignKey<Booking>(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Bookings__traine__1F98B2C1");
+                .HasConstraintName("FK__Bookings__traine__2180FB33");
         });
 
         modelBuilder.Entity<CompletionCertificate>(entity =>
         {
-            entity.HasKey(e => e.CertificateId).HasName("PK__Completi__E2256D310480B69B");
+            entity.HasKey(e => e.CertificateId).HasName("PK__Completi__E2256D3178BE5834");
 
             entity.ToTable("CompletionCertificates", "Learning");
 
-            entity.HasIndex(e => e.TraineeLicenseId, "UQ__Completi__5F5466990BE5B359").IsUnique();
+            entity.HasIndex(e => e.TraineeLicenseId, "UQ__Completi__5F54669994647F8C").IsUnique();
 
             entity.Property(e => e.CertificateId).HasColumnName("certificate_id");
             entity.Property(e => e.CertificatePath)
@@ -292,26 +306,26 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Mentor).WithMany(p => p.CompletionCertificates)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Completio__mento__5BAD9CC8");
+                .HasConstraintName("FK__Completio__mento__5D95E53A");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.CompletionCertificates)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Completio__train__5AB9788F");
+                .HasConstraintName("FK__Completio__train__5CA1C101");
 
             entity.HasOne(d => d.TraineeLicense).WithOne(p => p.CompletionCertificate)
                 .HasForeignKey<CompletionCertificate>(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Completio__train__5CA1C101");
+                .HasConstraintName("FK__Completio__train__5E8A0973");
         });
 
         modelBuilder.Entity<Conversation>(entity =>
         {
-            entity.HasKey(e => e.ConversationId).HasName("PK__Conversa__311E7E9A51D5706B");
+            entity.HasKey(e => e.ConversationId).HasName("PK__Conversa__311E7E9A3B078F81");
 
             entity.ToTable("Conversations", "Messaging");
 
-            entity.HasIndex(e => e.BookingId, "UQ__Conversa__5DE3A5B00EFE66FB").IsUnique();
+            entity.HasIndex(e => e.BookingId, "UQ__Conversa__5DE3A5B09AD416AF").IsUnique();
 
             entity.Property(e => e.ConversationId).HasColumnName("conversation_id");
             entity.Property(e => e.BookingId).HasColumnName("booking_id");
@@ -324,22 +338,22 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Booking).WithOne(p => p.Conversation)
                 .HasForeignKey<Conversation>(d => d.BookingId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Conversat__booki__73852659");
+                .HasConstraintName("FK__Conversat__booki__0880433F");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.Conversations)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Conversat__mento__72910220");
+                .HasConstraintName("FK__Conversat__mento__078C1F06");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.Conversations)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Conversat__train__719CDDE7");
+                .HasConstraintName("FK__Conversat__train__0697FACD");
         });
 
         modelBuilder.Entity<ConversationAttachment>(entity =>
         {
-            entity.HasKey(e => e.AttachmentId).HasName("PK__Conversa__B74DF4E24FE246A6");
+            entity.HasKey(e => e.AttachmentId).HasName("PK__Conversa__B74DF4E290E394CA");
 
             entity.ToTable("ConversationAttachments", "Messaging");
 
@@ -362,23 +376,23 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.Conversation).WithMany(p => p.ConversationAttachments)
                 .HasForeignKey(d => d.ConversationId)
-                .HasConstraintName("FK__Conversat__conve__7E02B4CC");
+                .HasConstraintName("FK__Conversat__conve__12FDD1B2");
 
             entity.HasOne(d => d.UploadedByNavigation).WithMany(p => p.ConversationAttachments)
                 .HasForeignKey(d => d.UploadedBy)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Conversat__uploa__7EF6D905");
+                .HasConstraintName("FK__Conversat__uploa__13F1F5EB");
         });
 
         modelBuilder.Entity<ExamAppointment>(entity =>
         {
-            entity.HasKey(e => e.ExamAppointmentId).HasName("PK__ExamAppo__3AFEDC7457EF78CB");
+            entity.HasKey(e => e.ExamAppointmentId).HasName("PK__ExamAppo__3AFEDC7419243874");
 
             entity.ToTable("ExamAppointments", "Scheduling");
 
-            entity.HasIndex(e => new { e.TraineeId, e.OfficialExamId }, "UQ__ExamAppo__5D00D9F0CD9C0924").IsUnique();
+            entity.HasIndex(e => new { e.TraineeId, e.OfficialExamId }, "UQ__ExamAppo__5D00D9F0E0307A9E").IsUnique();
 
-            entity.HasIndex(e => e.TraineeLicenseId, "UQ__ExamAppo__5F546699D58061C1").IsUnique();
+            entity.HasIndex(e => e.TraineeLicenseId, "UQ__ExamAppo__5F546699F63624E4").IsUnique();
 
             entity.HasIndex(e => e.TraineeId, "idx_examappointments_trainee_id");
 
@@ -400,22 +414,22 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.OfficialExam).WithMany(p => p.ExamAppointments)
                 .HasForeignKey(d => d.OfficialExamId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__offic__29221CFB");
+                .HasConstraintName("FK__ExamAppoi__offic__2B0A656D");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.ExamAppointments)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__train__282DF8C2");
+                .HasConstraintName("FK__ExamAppoi__train__2A164134");
 
             entity.HasOne(d => d.TraineeLicense).WithOne(p => p.ExamAppointment)
                 .HasForeignKey<ExamAppointment>(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__train__2A164134");
+                .HasConstraintName("FK__ExamAppoi__train__2BFE89A6");
         });
 
         modelBuilder.Entity<GovCitizen>(entity =>
         {
-            entity.HasKey(e => e.NationalId).HasName("PK__GovCitiz__9560E95C9F97E48A");
+            entity.HasKey(e => e.NationalId).HasName("PK__GovCitiz__9560E95C6E0BD007");
 
             entity.ToTable("GovCitizens", "Gov");
 
@@ -460,7 +474,7 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<GovExamCenter>(entity =>
         {
-            entity.HasKey(e => e.CenterId).HasName("PK__GovExamC__290A288772E0A05A");
+            entity.HasKey(e => e.CenterId).HasName("PK__GovExamC__290A2887A2EB1F10");
 
             entity.ToTable("GovExamCenters", "Gov");
 
@@ -493,11 +507,11 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<GovExamResult>(entity =>
         {
-            entity.HasKey(e => e.ResultId).HasName("PK__GovExamR__AFB3C3166DE53C88");
+            entity.HasKey(e => e.ResultId).HasName("PK__GovExamR__AFB3C316303358C7");
 
             entity.ToTable("GovExamResults", "Gov");
 
-            entity.HasIndex(e => new { e.OfficialExamId, e.NationalId }, "UQ__GovExamR__72767A0735A2582A").IsUnique();
+            entity.HasIndex(e => new { e.OfficialExamId, e.NationalId }, "UQ__GovExamR__72767A0707D4E239").IsUnique();
 
             entity.Property(e => e.ResultId).HasColumnName("result_id");
             entity.Property(e => e.NationalId)
@@ -519,12 +533,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.National).WithMany(p => p.GovExamResults)
                 .HasForeignKey(d => d.NationalId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovExamRe__natio__59063A47");
+                .HasConstraintName("FK__GovExamRe__natio__59FA5E80");
 
             entity.HasOne(d => d.OfficialExam).WithMany(p => p.GovExamResults)
                 .HasForeignKey(d => d.OfficialExamId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovExamRe__offic__5812160E");
+                .HasConstraintName("FK__GovExamRe__offic__59063A47");
 
             entity.HasOne(d => d.RecordedByNavigation).WithMany(p => p.GovExamResults)
                 .HasForeignKey(d => d.RecordedBy)
@@ -533,7 +547,7 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<GovLicenseRecord>(entity =>
         {
-            entity.HasKey(e => e.RecordId).HasName("PK__GovLicen__BFCFB4DDC449F7D8");
+            entity.HasKey(e => e.RecordId).HasName("PK__GovLicen__BFCFB4DDC0F267D6");
 
             entity.ToTable("GovLicenseRecords", "Gov");
 
@@ -551,17 +565,17 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.LicenseType).WithMany(p => p.GovLicenseRecords)
                 .HasForeignKey(d => d.LicenseTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovLicens__licen__47DBAE45");
+                .HasConstraintName("FK__GovLicens__licen__48CFD27E");
 
             entity.HasOne(d => d.National).WithMany(p => p.GovLicenseRecords)
                 .HasForeignKey(d => d.NationalId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovLicens__natio__46E78A0C");
+                .HasConstraintName("FK__GovLicens__natio__47DBAE45");
         });
 
         modelBuilder.Entity<GovOfficialExam>(entity =>
         {
-            entity.HasKey(e => e.OfficialExamId).HasName("PK__GovOffic__AB207493BEFB3D53");
+            entity.HasKey(e => e.OfficialExamId).HasName("PK__GovOffic__AB207493A38DD141");
 
             entity.ToTable("GovOfficialExams", "Gov");
 
@@ -589,7 +603,7 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Center).WithMany(p => p.GovOfficialExams)
                 .HasForeignKey(d => d.CenterId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovOffici__cente__5165187F");
+                .HasConstraintName("FK__GovOffici__cente__52593CB8");
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.GovOfficialExams)
                 .HasForeignKey(d => d.CreatedBy)
@@ -598,51 +612,56 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.LicenseType).WithMany(p => p.GovOfficialExams)
                 .HasForeignKey(d => d.LicenseTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GovOffici__licen__52593CB8");
+                .HasConstraintName("FK__GovOffici__licen__534D60F1");
         });
 
         modelBuilder.Entity<LearningModule>(entity =>
         {
-            entity.HasKey(e => e.ModuleId).HasName("PK__Learning__1A2D06537FF71281");
+            entity.HasKey(e => e.ModuleId).HasName("PK__Learning__1A2D0653453BB230");
 
             entity.ToTable("LearningModules", "Learning");
 
-            entity.HasIndex(e => new { e.LicenseTypeId, e.OrderIndex, e.Phase }, "UQ__Learning__2F46B0C28BF0A652").IsUnique();
+            entity.HasIndex(e => new { e.LicenseTypeId, e.OrderIndex, e.Phase }, "UQ__Learning__2F46B0C2512378A6").IsUnique();
 
             entity.Property(e => e.ModuleId).HasColumnName("module_id");
-            entity.Property(e => e.Description)
-                .HasMaxLength(500)
-                .HasColumnName("description");
             entity.Property(e => e.LicenseTypeId).HasColumnName("license_type_id");
             entity.Property(e => e.OrderIndex).HasColumnName("order_index");
             entity.Property(e => e.Phase)
                 .HasMaxLength(20)
                 .HasColumnName("phase");
             entity.Property(e => e.PrerequisiteModuleId).HasColumnName("prerequisite_module_id");
-            entity.Property(e => e.Title)
-                .HasMaxLength(255)
-                .HasColumnName("title");
 
             entity.HasOne(d => d.LicenseType).WithMany(p => p.LearningModules)
                 .HasForeignKey(d => d.LicenseTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LearningM__licen__2EDAF651");
+                .HasConstraintName("FK__LearningM__licen__30C33EC3");
 
             entity.HasOne(d => d.PrerequisiteModule).WithMany(p => p.InversePrerequisiteModule)
                 .HasForeignKey(d => d.PrerequisiteModuleId)
-                .HasConstraintName("FK__LearningM__prere__2FCF1A8A");
+                .HasConstraintName("FK__LearningM__prere__31B762FC");
         });
 
         modelBuilder.Entity<LicenseType>(entity =>
         {
-            entity.HasKey(e => e.LicenseTypeId).HasName("PK__LicenseT__8130CC24D9781DB5");
+            entity.HasKey(e => e.LicenseTypeId).HasName("PK__LicenseT__8130CC24883EF095");
 
             entity.ToTable("LicenseTypes", "Lookup");
 
+            entity.HasIndex(e => e.LicenseName, "UQ__LicenseT__E40D75A8733A0DB8").IsUnique();
+
             entity.Property(e => e.LicenseTypeId).HasColumnName("license_type_id");
-            entity.Property(e => e.Description)
+            entity.Property(e => e.DescriptionAr)
                 .HasMaxLength(255)
-                .HasColumnName("description");
+                .HasColumnName("description_ar");
+            entity.Property(e => e.DescriptionEn)
+                .HasMaxLength(255)
+                .HasColumnName("description_en");
+            entity.Property(e => e.DisplayNameAr)
+                .HasMaxLength(100)
+                .HasColumnName("display_name_ar");
+            entity.Property(e => e.DisplayNameEn)
+                .HasMaxLength(100)
+                .HasColumnName("display_name_en");
             entity.Property(e => e.LicenseName)
                 .HasMaxLength(50)
                 .HasColumnName("license_name");
@@ -650,7 +669,7 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<Mentor>(entity =>
         {
-            entity.HasKey(e => e.MentorId).HasName("PK__Mentors__E5D27EF325FB41D9");
+            entity.HasKey(e => e.MentorId).HasName("PK__Mentors__E5D27EF3C79F08C4");
 
             entity.ToTable("Mentors", "Roles");
 
@@ -679,12 +698,12 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.LicenseType).WithMany(p => p.Mentors)
                 .HasForeignKey(d => d.LicenseTypeId)
-                .HasConstraintName("FK__Mentors__license__01142BA1");
+                .HasConstraintName("FK__Mentors__license__02FC7413");
 
             entity.HasOne(d => d.MentorNavigation).WithOne(p => p.Mentor)
                 .HasForeignKey<Mentor>(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Mentors__mentor___00200768");
+                .HasConstraintName("FK__Mentors__mentor___02084FDA");
 
             entity.HasOne(d => d.TrainingCenter).WithMany(p => p.Mentors)
                 .HasForeignKey(d => d.TrainingCenterId)
@@ -693,7 +712,7 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<MentorApplication>(entity =>
         {
-            entity.HasKey(e => e.ApplicationId).HasName("PK__MentorAp__3BCBDCF250B8B849");
+            entity.HasKey(e => e.ApplicationId).HasName("PK__MentorAp__3BCBDCF276D3B206");
 
             entity.ToTable("MentorApplications", "Mentor");
 
@@ -722,16 +741,16 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Mentor).WithMany(p => p.MentorApplications)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__MentorApp__mento__0D7A0286");
+                .HasConstraintName("FK__MentorApp__mento__0F624AF8");
 
             entity.HasOne(d => d.ReviewedByNavigation).WithMany(p => p.MentorApplications)
                 .HasForeignKey(d => d.ReviewedBy)
-                .HasConstraintName("FK__MentorApp__revie__0E6E26BF");
+                .HasConstraintName("FK__MentorApp__revie__10566F31");
         });
 
         modelBuilder.Entity<MentorAvailability>(entity =>
         {
-            entity.HasKey(e => e.AvailabilityId).HasName("PK__MentorAv__86E3A801EEAAC7C4");
+            entity.HasKey(e => e.AvailabilityId).HasName("PK__MentorAv__86E3A8014C9C4F09");
 
             entity.ToTable("MentorAvailability", "Mentor");
 
@@ -749,12 +768,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Mentor).WithMany(p => p.MentorAvailabilities)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__MentorAva__mento__06CD04F7");
+                .HasConstraintName("FK__MentorAva__mento__08B54D69");
         });
 
         modelBuilder.Entity<Message>(entity =>
         {
-            entity.HasKey(e => e.MessageId).HasName("PK__Messages__0BBF6EE6D317E3B1");
+            entity.HasKey(e => e.MessageId).HasName("PK__Messages__0BBF6EE633F55E4E");
 
             entity.ToTable("Messages", "Messaging");
 
@@ -773,17 +792,17 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.Conversation).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.ConversationId)
-                .HasConstraintName("FK__Messages__conver__7849DB76");
+                .HasConstraintName("FK__Messages__conver__0D44F85C");
 
             entity.HasOne(d => d.Sender).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.SenderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Messages__sender__793DFFAF");
+                .HasConstraintName("FK__Messages__sender__0E391C95");
         });
 
         modelBuilder.Entity<ModuleContent>(entity =>
         {
-            entity.HasKey(e => e.ContentId).HasName("PK__ModuleCo__655FE510B0A85832");
+            entity.HasKey(e => e.ContentId).HasName("PK__ModuleCo__655FE51001A46DD4");
 
             entity.ToTable("ModuleContents", "Learning");
 
@@ -791,9 +810,7 @@ public partial class Ro5setkomDbContext : DbContext
             entity.Property(e => e.ContentType)
                 .HasMaxLength(20)
                 .HasColumnName("content_type");
-            entity.Property(e => e.LanguageEnglish).HasColumnName("language_english");
             entity.Property(e => e.ModuleId).HasColumnName("module_id");
-            entity.Property(e => e.TextContent).HasColumnName("text_content");
             entity.Property(e => e.VideoUrl)
                 .HasMaxLength(500)
                 .HasColumnName("video_url");
@@ -801,12 +818,33 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Module).WithMany(p => p.ModuleContents)
                 .HasForeignKey(d => d.ModuleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ModuleCon__modul__6CD828CA");
+                .HasConstraintName("FK__ModuleCon__modul__6EC0713C");
+        });
+
+        modelBuilder.Entity<ModuleContentTranslation>(entity =>
+        {
+            entity.HasKey(e => e.ContentTranslationId).HasName("PK__ModuleCo__18D39B85B4E54599");
+
+            entity.ToTable("ModuleContentTranslations", "Learning");
+
+            entity.HasIndex(e => new { e.ContentId, e.LanguageCode }, "UQ__ModuleCo__DF32DFEC96652983").IsUnique();
+
+            entity.Property(e => e.ContentTranslationId).HasColumnName("content_translation_id");
+            entity.Property(e => e.ContentId).HasColumnName("content_id");
+            entity.Property(e => e.LanguageCode)
+                .HasMaxLength(5)
+                .HasColumnName("language_code");
+            entity.Property(e => e.TextContent).HasColumnName("text_content");
+
+            entity.HasOne(d => d.Content).WithMany(p => p.ModuleContentTranslations)
+                .HasForeignKey(d => d.ContentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ModuleCon__conte__76619304");
         });
 
         modelBuilder.Entity<ModuleRecommendation>(entity =>
         {
-            entity.HasKey(e => e.RecommendationId).HasName("PK__ModuleRe__BCB11F4F47E1845B");
+            entity.HasKey(e => e.RecommendationId).HasName("PK__ModuleRe__BCB11F4F0904C0C1");
 
             entity.ToTable("ModuleRecommendations", "Learning");
 
@@ -824,22 +862,48 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Mentor).WithMany(p => p.ModuleRecommendations)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ModuleRec__mento__3B40CD36");
+                .HasConstraintName("FK__ModuleRec__mento__3D2915A8");
 
             entity.HasOne(d => d.Module).WithMany(p => p.ModuleRecommendations)
                 .HasForeignKey(d => d.ModuleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ModuleRec__modul__3D2915A8");
+                .HasConstraintName("FK__ModuleRec__modul__3F115E1A");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.ModuleRecommendations)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ModuleRec__train__3C34F16F");
+                .HasConstraintName("FK__ModuleRec__train__3E1D39E1");
+        });
+
+        modelBuilder.Entity<ModuleTranslation>(entity =>
+        {
+            entity.HasKey(e => e.ModuleTranslationId).HasName("PK__ModuleTr__8A4649CE94BD74E0");
+
+            entity.ToTable("ModuleTranslations", "Learning");
+
+            entity.HasIndex(e => new { e.ModuleId, e.LanguageCode }, "UQ__ModuleTr__A0403CAF21632222").IsUnique();
+
+            entity.Property(e => e.ModuleTranslationId).HasColumnName("module_translation_id");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .HasColumnName("description");
+            entity.Property(e => e.LanguageCode)
+                .HasMaxLength(5)
+                .HasColumnName("language_code");
+            entity.Property(e => e.ModuleId).HasColumnName("module_id");
+            entity.Property(e => e.Title)
+                .HasMaxLength(255)
+                .HasColumnName("title");
+
+            entity.HasOne(d => d.Module).WithMany(p => p.ModuleTranslations)
+                .HasForeignKey(d => d.ModuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ModuleTra__modul__72910220");
         });
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__E059842F8598663D");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__E059842F206ACBBF");
 
             entity.ToTable("Notifications", "Notifications");
 
@@ -864,12 +928,12 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Notifications)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Notificat__user___0F2D40CE");
+                .HasConstraintName("FK__Notificat__user___24285DB4");
         });
 
         modelBuilder.Entity<NotificationPreference>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Notifica__B9BE370FFE7F9DC7");
+            entity.HasKey(e => e.UserId).HasName("PK__Notifica__B9BE370F57821849");
 
             entity.ToTable("NotificationPreferences", "Notifications");
 
@@ -889,31 +953,74 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.User).WithOne(p => p.NotificationPreference)
                 .HasForeignKey<NotificationPreference>(d => d.UserId)
-                .HasConstraintName("FK__Notificat__user___15DA3E5D");
+                .HasConstraintName("FK__Notificat__user___2AD55B43");
+        });
+
+        modelBuilder.Entity<OptionTranslation>(entity =>
+        {
+            entity.HasKey(e => e.OptionTranslationId).HasName("PK__OptionTr__EAEFDD489579BB98");
+
+            entity.ToTable("OptionTranslations", "Learning");
+
+            entity.HasIndex(e => new { e.OptionId, e.LanguageCode }, "UQ__OptionTr__4E87F4E7D5DA27B8").IsUnique();
+
+            entity.Property(e => e.OptionTranslationId).HasColumnName("option_translation_id");
+            entity.Property(e => e.LanguageCode)
+                .HasMaxLength(5)
+                .HasColumnName("language_code");
+            entity.Property(e => e.OptionId).HasColumnName("option_id");
+            entity.Property(e => e.OptionText)
+                .HasMaxLength(500)
+                .HasColumnName("option_text");
+
+            entity.HasOne(d => d.Option).WithMany(p => p.OptionTranslations)
+                .HasForeignKey(d => d.OptionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OptionTra__optio__01D345B0");
         });
 
         modelBuilder.Entity<QuestionOption>(entity =>
         {
-            entity.HasKey(e => e.OptionId).HasName("PK__Question__F4EACE1BB6F81BA3");
+            entity.HasKey(e => e.OptionId).HasName("PK__Question__F4EACE1B6C74D393");
 
             entity.ToTable("QuestionOptions", "Learning");
 
             entity.Property(e => e.OptionId).HasColumnName("option_id");
             entity.Property(e => e.IsCorrect).HasColumnName("is_correct");
-            entity.Property(e => e.OptionText)
-                .HasMaxLength(500)
-                .HasColumnName("option_text");
             entity.Property(e => e.QuestionId).HasColumnName("question_id");
 
             entity.HasOne(d => d.Question).WithMany(p => p.QuestionOptions)
                 .HasForeignKey(d => d.QuestionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__QuestionO__quest__489AC854");
+                .HasConstraintName("FK__QuestionO__quest__4A8310C6");
+        });
+
+        modelBuilder.Entity<QuestionTranslation>(entity =>
+        {
+            entity.HasKey(e => e.QuestionTranslationId).HasName("PK__Question__CA97197082A40657");
+
+            entity.ToTable("QuestionTranslations", "Learning");
+
+            entity.HasIndex(e => new { e.QuestionId, e.LanguageCode }, "UQ__Question__94AF2FB5FF1568ED").IsUnique();
+
+            entity.Property(e => e.QuestionTranslationId).HasColumnName("question_translation_id");
+            entity.Property(e => e.LanguageCode)
+                .HasMaxLength(5)
+                .HasColumnName("language_code");
+            entity.Property(e => e.QuestionId).HasColumnName("question_id");
+            entity.Property(e => e.QuestionText)
+                .HasMaxLength(1000)
+                .HasColumnName("question_text");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.QuestionTranslations)
+                .HasForeignKey(d => d.QuestionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__QuestionT__quest__7E02B4CC");
         });
 
         modelBuilder.Entity<Quiz>(entity =>
         {
-            entity.HasKey(e => e.QuizId).HasName("PK__Quizzes__2D7053ECEBB1E3CA");
+            entity.HasKey(e => e.QuizId).HasName("PK__Quizzes__2D7053EC47F20F80");
 
             entity.ToTable("Quizzes", "Learning");
 
@@ -924,22 +1031,19 @@ public partial class Ro5setkomDbContext : DbContext
             entity.Property(e => e.LicenseTypeId).HasColumnName("license_type_id");
             entity.Property(e => e.ModuleId).HasColumnName("module_id");
             entity.Property(e => e.PassingScore).HasColumnName("passing_score");
-            entity.Property(e => e.Title)
-                .HasMaxLength(255)
-                .HasColumnName("title");
 
             entity.HasOne(d => d.LicenseType).WithMany(p => p.Quizzes)
                 .HasForeignKey(d => d.LicenseTypeId)
-                .HasConstraintName("FK__Quizzes__license__41EDCAC5");
+                .HasConstraintName("FK__Quizzes__license__43D61337");
 
             entity.HasOne(d => d.Module).WithMany(p => p.Quizzes)
                 .HasForeignKey(d => d.ModuleId)
-                .HasConstraintName("FK__Quizzes__module___40F9A68C");
+                .HasConstraintName("FK__Quizzes__module___42E1EEFE");
         });
 
         modelBuilder.Entity<QuizAttempt>(entity =>
         {
-            entity.HasKey(e => e.AttemptId).HasName("PK__QuizAtte__5621F949D42B05AC");
+            entity.HasKey(e => e.AttemptId).HasName("PK__QuizAtte__5621F9492267D8E9");
 
             entity.ToTable("QuizAttempts", "Learning");
 
@@ -956,46 +1060,66 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Quiz).WithMany(p => p.QuizAttempts)
                 .HasForeignKey(d => d.QuizId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__QuizAttem__quiz___4C6B5938");
+                .HasConstraintName("FK__QuizAttem__quiz___4E53A1AA");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.QuizAttempts)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__QuizAttem__train__4D5F7D71");
+                .HasConstraintName("FK__QuizAttem__train__4F47C5E3");
 
             entity.HasOne(d => d.TraineeLicense).WithMany(p => p.QuizAttempts)
                 .HasForeignKey(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__QuizAttem__train__4E53A1AA");
+                .HasConstraintName("FK__QuizAttem__train__503BEA1C");
         });
 
         modelBuilder.Entity<QuizQuestion>(entity =>
         {
-            entity.HasKey(e => e.QuestionId).HasName("PK__QuizQues__2EC215496298F7C7");
+            entity.HasKey(e => e.QuestionId).HasName("PK__QuizQues__2EC2154941F60F73");
 
             entity.ToTable("QuizQuestions", "Learning");
 
             entity.HasIndex(e => e.QuizId, "idx_quizquestions_quiz_id");
 
             entity.Property(e => e.QuestionId).HasColumnName("question_id");
-            entity.Property(e => e.QuestionText)
-                .HasMaxLength(1000)
-                .HasColumnName("question_text");
             entity.Property(e => e.QuizId).HasColumnName("quiz_id");
 
             entity.HasOne(d => d.Quiz).WithMany(p => p.QuizQuestions)
                 .HasForeignKey(d => d.QuizId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__QuizQuest__quiz___44CA3770");
+                .HasConstraintName("FK__QuizQuest__quiz___46B27FE2");
+        });
+
+        modelBuilder.Entity<QuizTranslation>(entity =>
+        {
+            entity.HasKey(e => e.QuizTranslationId).HasName("PK__QuizTran__7B8247C6E47C5312");
+
+            entity.ToTable("QuizTranslations", "Learning");
+
+            entity.HasIndex(e => new { e.QuizId, e.LanguageCode }, "UQ__QuizTran__971D6910BE4EC2B4").IsUnique();
+
+            entity.Property(e => e.QuizTranslationId).HasColumnName("quiz_translation_id");
+            entity.Property(e => e.LanguageCode)
+                .HasMaxLength(5)
+                .HasColumnName("language_code");
+            entity.Property(e => e.QuizId).HasColumnName("quiz_id");
+            entity.Property(e => e.Title)
+                .HasMaxLength(255)
+                .HasColumnName("title");
+
+            entity.HasOne(d => d.Quiz).WithMany(p => p.QuizTranslations)
+                .HasForeignKey(d => d.QuizId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__QuizTrans__quiz___7A3223E8");
         });
 
         modelBuilder.Entity<Rating>(entity =>
         {
-            entity.HasKey(e => e.RatingId).HasName("PK__Ratings__D35B278BF1DDAC72");
+            entity.HasKey(e => e.RatingId).HasName("PK__Ratings__D35B278B193D60B7");
 
             entity.ToTable("Ratings", "Learning");
 
-            entity.HasIndex(e => e.BookingId, "UQ__Ratings__5DE3A5B0B923DD1D").IsUnique();
+            entity.HasIndex(e => e.BookingId, "UQ__Ratings__5DE3A5B07E36CC5E").IsUnique();
 
             entity.Property(e => e.RatingId).HasColumnName("rating_id");
             entity.Property(e => e.BookingId).HasColumnName("booking_id");
@@ -1014,22 +1138,22 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Booking).WithOne(p => p.Rating)
                 .HasForeignKey<Rating>(d => d.BookingId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ratings__booking__55F4C372");
+                .HasConstraintName("FK__Ratings__booking__57DD0BE4");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ratings__mentor___55009F39");
+                .HasConstraintName("FK__Ratings__mentor___56E8E7AB");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ratings__trainee__540C7B00");
+                .HasConstraintName("FK__Ratings__trainee__55F4C372");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__760965CC424FEB59");
+            entity.HasKey(e => e.RoleId).HasName("PK__Roles__760965CCDA7C863C");
 
             entity.ToTable("Roles", "Lookup");
 
@@ -1041,9 +1165,9 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<SecurityPasswordResetToken>(entity =>
         {
-            entity.HasKey(e => e.TokenId).HasName("PK__Security__CB3C9E17FD15C2FD");
+            entity.HasKey(e => e.TokenId).HasName("PK__Security__CB3C9E177E245494");
 
-            entity.HasIndex(e => e.Token, "UQ__Security__CA90DA7A0A28E886").IsUnique();
+            entity.HasIndex(e => e.Token, "UQ__Security__CA90DA7A6823F16D").IsUnique();
 
             entity.Property(e => e.TokenId).HasColumnName("token_id");
             entity.Property(e => e.CreatedAt)
@@ -1061,16 +1185,16 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.SecurityPasswordResetTokens)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SecurityP__user___1B9317B3");
+                .HasConstraintName("FK__SecurityP__user___308E3499");
         });
 
         modelBuilder.Entity<SessionFeedback>(entity =>
         {
-            entity.HasKey(e => e.FeedbackId).HasName("PK__SessionF__7A6B2B8CBF67CDBC");
+            entity.HasKey(e => e.FeedbackId).HasName("PK__SessionF__7A6B2B8C7546D2A4");
 
             entity.ToTable("SessionFeedback", "Learning");
 
-            entity.HasIndex(e => e.BookingId, "UQ__SessionF__5DE3A5B03842998E").IsUnique();
+            entity.HasIndex(e => e.BookingId, "UQ__SessionF__5DE3A5B093942D4B").IsUnique();
 
             entity.Property(e => e.FeedbackId).HasColumnName("feedback_id");
             entity.Property(e => e.BookingId).HasColumnName("booking_id");
@@ -1084,22 +1208,22 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Booking).WithOne(p => p.SessionFeedback)
                 .HasForeignKey<SessionFeedback>(d => d.BookingId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SessionFe__booki__6166761E");
+                .HasConstraintName("FK__SessionFe__booki__634EBE90");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.SessionFeedbacks)
                 .HasForeignKey(d => d.MentorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SessionFe__mento__634EBE90");
+                .HasConstraintName("FK__SessionFe__mento__65370702");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.SessionFeedbacks)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SessionFe__train__625A9A57");
+                .HasConstraintName("FK__SessionFe__train__6442E2C9");
         });
 
         modelBuilder.Entity<Trainee>(entity =>
         {
-            entity.HasKey(e => e.TraineeId).HasName("PK__Trainees__77B2DEB8A7490367");
+            entity.HasKey(e => e.TraineeId).HasName("PK__Trainees__77B2DEB85D1DAD42");
 
             entity.ToTable("Trainees", "Roles");
 
@@ -1114,11 +1238,11 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.LicenseType).WithMany(p => p.Trainees)
                 .HasForeignKey(d => d.LicenseTypeId)
-                .HasConstraintName("FK__Trainees__licens__7C4F7684");
+                .HasConstraintName("FK__Trainees__licens__7E37BEF6");
 
             entity.HasOne(d => d.TraineeNavigation).WithOne(p => p.Trainee)
                 .HasForeignKey<Trainee>(d => d.TraineeId)
-                .HasConstraintName("FK__Trainees__traine__7B5B524B");
+                .HasConstraintName("FK__Trainees__traine__7D439ABD");
 
             entity.HasOne(d => d.TrainingCenter).WithMany(p => p.Trainees)
                 .HasForeignKey(d => d.TrainingCenterId)
@@ -1127,9 +1251,11 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<TraineeLicense>(entity =>
         {
-            entity.HasKey(e => e.TraineeLicenseId).HasName("PK__TraineeL__5F546698E6B5DE2B");
+            entity.HasKey(e => e.TraineeLicenseId).HasName("PK__TraineeL__5F546698F541C5BA");
 
             entity.ToTable("TraineeLicenses", "Core");
+
+            entity.HasIndex(e => new { e.TraineeId, e.LicenseTypeId }, "UQ__TraineeL__2FA1D27B6B42A8A9").IsUnique();
 
             entity.Property(e => e.TraineeLicenseId).HasColumnName("trainee_license_id");
             entity.Property(e => e.CreatedAt)
@@ -1153,7 +1279,7 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.LicenseType).WithMany(p => p.TraineeLicenses)
                 .HasForeignKey(d => d.LicenseTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TraineeLi__licen__73BA3083");
+                .HasConstraintName("FK__TraineeLi__licen__75A278F5");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.TraineeLicenses)
                 .HasForeignKey(d => d.MentorId)
@@ -1167,11 +1293,11 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<TraineeModuleProgress>(entity =>
         {
-            entity.HasKey(e => e.ProgressId).HasName("PK__TraineeM__49B3D8C1A16F5F56");
+            entity.HasKey(e => e.ProgressId).HasName("PK__TraineeM__49B3D8C14B4A4BEA");
 
             entity.ToTable("TraineeModuleProgress", "Learning");
 
-            entity.HasIndex(e => new { e.TraineeId, e.ModuleId, e.TraineeLicenseId }, "UQ__TraineeM__CF4F5ABA437F6C0F").IsUnique();
+            entity.HasIndex(e => new { e.TraineeId, e.ModuleId, e.TraineeLicenseId }, "UQ__TraineeM__CF4F5ABAF2AA1061").IsUnique();
 
             entity.Property(e => e.ProgressId).HasColumnName("progress_id");
             entity.Property(e => e.CompletedAt).HasColumnName("completed_at");
@@ -1187,28 +1313,28 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.Module).WithMany(p => p.TraineeModuleProgresses)
                 .HasForeignKey(d => d.ModuleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TraineeMo__modul__367C1819");
+                .HasConstraintName("FK__TraineeMo__modul__3864608B");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.TraineeModuleProgresses)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TraineeMo__train__3587F3E0");
+                .HasConstraintName("FK__TraineeMo__train__37703C52");
 
             entity.HasOne(d => d.TraineeLicense).WithMany(p => p.TraineeModuleProgresses)
                 .HasForeignKey(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TraineeMo__train__37703C52");
+                .HasConstraintName("FK__TraineeMo__train__395884C4");
         });
 
         modelBuilder.Entity<TrainingCenter>(entity =>
         {
-            entity.HasKey(e => e.CenterId).HasName("PK__Training__290A288726179E6B");
+            entity.HasKey(e => e.CenterId).HasName("PK__Training__290A288733F27B13");
 
             entity.ToTable("TrainingCenters", "Learning");
 
-            entity.HasIndex(e => e.Email, "UQ__Training__AB6E61642E951E19").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Training__AB6E616425985FB6").IsUnique();
 
-            entity.HasIndex(e => e.LicenseNumber, "UQ__Training__D482A003430E15EB").IsUnique();
+            entity.HasIndex(e => e.LicenseNumber, "UQ__Training__D482A0039698A6B9").IsUnique();
 
             entity.Property(e => e.CenterId).HasColumnName("center_id");
             entity.Property(e => e.AddressLine1)
@@ -1248,13 +1374,13 @@ public partial class Ro5setkomDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370F647F2872");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370FD7F546F1");
 
             entity.ToTable("Users", "Core");
 
-            entity.HasIndex(e => e.NationalId, "UQ__Users__9560E95DB8E1E6B5").IsUnique();
+            entity.HasIndex(e => e.NationalId, "UQ__Users__9560E95D0FE162BF").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61643926D14B").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61645D0F402E").IsUnique();
 
             entity.HasIndex(e => e.Email, "idx_users_email");
 
@@ -1319,17 +1445,17 @@ public partial class Ro5setkomDbContext : DbContext
             entity.HasOne(d => d.National).WithOne(p => p.User)
                 .HasForeignKey<User>(d => d.NationalId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__national___6477ECF3");
+                .HasConstraintName("FK__Users__national___656C112C");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__role_id__6383C8BA");
+                .HasConstraintName("FK__Users__role_id__6477ECF3");
         });
 
         modelBuilder.Entity<UserConsent>(entity =>
         {
-            entity.HasKey(e => e.ConsentId).HasName("PK__UserCons__E6C2B6783ABC5F6B");
+            entity.HasKey(e => e.ConsentId).HasName("PK__UserCons__E6C2B6785EB8F01B");
 
             entity.ToTable("UserConsents", "Core");
 
@@ -1350,7 +1476,7 @@ public partial class Ro5setkomDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.UserConsents)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__UserConse__user___6A30C649");
+                .HasConstraintName("FK__UserConse__user___6B24EA82");
         });
 
         OnModelCreatingPartial(modelBuilder);
