@@ -1,13 +1,130 @@
 ﻿@using ro5setkom.ViewModels.Profile
 @model ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
 
-<h2>Profile</h2>
+    // Pull first letters from first/last name for the avatar
+    string firstInitial = !string.IsNullOrWhiteSpace(Model.FirstName)
+        ? Model.FirstName.Trim()[..1].ToUpper()
+        : "";
+    string lastInitial  = !string.IsNullOrWhiteSpace(Model.LastName)
+        ? Model.LastName.Trim()[..1].ToUpper()
+        : "";
+    string initials = $"{firstInitial}{lastInitial}";
+    if (string.IsNullOrEmpty(initials)) { initials = "?"; }
 
-<div class="card p-3">
-    <p><b>Name:</b> @Model.FirstName @Model.LastName</p>
-    <p><b>Email:</b> @Model.Email</p>
-    <p><b>Phone:</b> @Model.PhoneNumber</p>
-    <p><b>National ID:</b> @Model.NationalId</p>
+    string fullName = $"{Model.FirstName} {Model.LastName}".Trim();
+    if (string.IsNullOrEmpty(fullName)) { fullName = "Trainee"; }
+}
 
-    <a class="btn btn-primary" href="/Profile/Edit">Edit Profile</a>
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile/profile.css" />
+}
+
+<div class="profile-page">
+    <div class="profile-page__inner">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Profile Hero ============ -->
+        <section class="profile-hero" aria-labelledby="profile-page-title">
+            <div class="profile-hero__main">
+                <div class="profile-avatar" aria-hidden="true">
+                    <span class="profile-avatar__initials">@initials</span>
+                </div>
+                <div class="profile-hero__intro">
+                    <span class="profile-hero__eyebrow">Account</span>
+                    <h1 id="profile-page-title" class="profile-hero__title">@fullName</h1>
+                    <div class="profile-hero__meta">
+                        <span class="chip chip--soft">
+                            <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                            <span>National ID · @Model.NationalId</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-hero__cta">
+                <a asp-controller="Profile"
+                   asp-action="Edit"
+                   class="btn-action btn-action--gradient">
+                    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                    <span>Edit Profile</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Contact Details ============ -->
+        <section class="profile-card" aria-labelledby="profile-contact-title">
+            <header class="profile-card__header">
+                <span class="profile-card__icon" aria-hidden="true">
+                    <i class="fa-solid fa-address-card"></i>
+                </span>
+                <div class="profile-card__headings">
+                    <p class="profile-card__eyebrow">Contact Details</p>
+                    <h2 id="profile-contact-title" class="profile-card__title">How we reach you</h2>
+                </div>
+            </header>
+
+            <div class="profile-card__body">
+                <dl class="info-grid">
+                    <div class="info-grid__item">
+                        <dt class="info-grid__label">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <span>Email Address</span>
+                        </dt>
+                        <dd class="info-grid__value">@Model.Email</dd>
+                    </div>
+
+                    <div class="info-grid__item">
+                        <dt class="info-grid__label">
+                            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                            <span>Phone Number</span>
+                        </dt>
+                        <dd class="info-grid__value">@Model.PhoneNumber</dd>
+                    </div>
+
+                    <div class="info-grid__item">
+                        <dt class="info-grid__label">
+                            <i class="fa-solid fa-user" aria-hidden="true"></i>
+                            <span>Full Name</span>
+                        </dt>
+                        <dd class="info-grid__value">@fullName</dd>
+                    </div>
+
+                    <div class="info-grid__item info-grid__item--locked">
+                        <dt class="info-grid__label">
+                            <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                            <span>National ID</span>
+                            <span class="info-grid__badge">
+                                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                                Government record
+                            </span>
+                        </dt>
+                        <dd class="info-grid__value">@Model.NationalId</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+    </div>
 </div>

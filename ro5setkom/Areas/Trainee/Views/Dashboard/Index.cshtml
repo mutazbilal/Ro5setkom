@@ -2,197 +2,253 @@
 @model TraineeDashboardViewModel
 @{
     ViewData["Title"] = "My Dashboard";
-    bool isRtl = !string.IsNullOrEmpty(Context.User.FindFirst("language")?.Value)
-                 && Context.User.FindFirst("language")!.Value == "ar";
+    var langClaim = Context.User.FindFirst("language")?.Value;
+    var isRtl = !string.IsNullOrEmpty(langClaim) && langClaim == "ar";
+    var dirAttr = isRtl ? "rtl" : "ltr";
 }
 
-<div class="container py-4" dir="@(isRtl ? "rtl" : "ltr")">
+@section Styles {
+    <link rel="stylesheet" href="~/css/areas/trainee/dashboard.css" />
+}
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show">
-            @TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+<div class="trainee-dashboard" dir="@dirAttr">
+    <div class="trainee-dashboard__inner">
 
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2 class="fw-bold mb-0">My License Journey</h2>
-            <p class="text-muted mb-0">
-                <span class="badge bg-primary text-uppercase">@Model.LicenseTypeName</span>
-                &nbsp;&middot;&nbsp;
-                <span class="badge bg-secondary text-uppercase">@Model.Stage.Replace("_", " ")</span>
-            </p>
-        </div>
-        <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
-               class="btn btn-outline-primary">
-            <i class="bi bi-book"></i> View Modules
-        </a>
-    </div>
-
-    <!-- Overall progress bar -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <div class="d-flex justify-content-between mb-1">
-                <span class="fw-semibold">Overall Progress</span>
-                <span class="fw-bold text-primary">@Model.OverallProgressPercentage%</span>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="progress" style="height: 12px;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                     role="progressbar"
-                     style="width: @Model.OverallProgressPercentage%"
-                     aria-valuenow="@Model.OverallProgressPercentage"
-                     aria-valuemin="0" aria-valuemax="100">
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Hero ============ -->
+        <section class="dashboard-hero" aria-labelledby="dashboard-title">
+            <div class="dashboard-hero__intro">
+                <span class="dashboard-hero__eyebrow">Trainee Dashboard</span>
+                <h1 id="dashboard-title" class="dashboard-hero__title">My License Journey</h1>
+                <div class="dashboard-hero__meta">
+                    <span class="chip chip--primary" aria-label="License type">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        @Model.LicenseTypeName
+                    </span>
+                    <span class="chip chip--soft" aria-label="Current stage">
+                        <i class="fa-solid fa-route" aria-hidden="true"></i>
+                        @Model.Stage.Replace("_", " ")
+                    </span>
                 </div>
             </div>
-            <p class="text-muted small mt-2 mb-0">
-                <i class="bi bi-flag-fill text-warning"></i>
-                <strong>Next:</strong> @Model.NextMilestone
-            </p>
-        </div>
-    </div>
 
-    <div class="row g-4">
-        <!-- Theoretical Modules -->
-        <div class="col-md-6">
-            <div class="card h-100 shadow-sm">
-                <div class="card-header bg-info text-white fw-semibold">
-                    <i class="bi bi-journal-text"></i> Theoretical Preparation
+            <div class="dashboard-hero__cta">
+                <a asp-area="Trainee"
+                   asp-controller="Modules"
+                   asp-action="Index"
+                   class="btn-action btn-action--outline">
+                    <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                    <span>View Modules</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Overall Progress ============ -->
+        <section class="progress-card" aria-labelledby="progress-card-label">
+            <div class="progress-card__head">
+                <div>
+                    <span id="progress-card-label" class="progress-card__label">Overall Progress</span>
+                    <p class="progress-card__sublabel">Your full journey from theory to licensed driver</p>
                 </div>
-                <ul class="list-group list-group-flush">
+                <div class="progress-card__percent" aria-hidden="true">
+                    <span class="progress-card__percent-num">@Model.OverallProgressPercentage</span><span class="progress-card__percent-sym">%</span>
+                </div>
+            </div>
+
+            <div class="progress-card__bar"
+                 role="progressbar"
+                 aria-valuenow="@Model.OverallProgressPercentage"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="Overall completion">
+                <div class="progress-card__bar-fill" style="--progress-value: @(Model.OverallProgressPercentage)%"></div>
+            </div>
+
+            <div class="progress-card__next">
+                <span class="progress-card__next-icon" aria-hidden="true">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                </span>
+                <span class="progress-card__next-text">
+                    <span class="progress-card__next-label">Next milestone</span>
+                    <span class="progress-card__next-value">@Model.NextMilestone</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- ============ Tracks ============ -->
+        <div class="tracks-grid">
+
+            <!-- Theoretical -->
+            <section class="track-card track-card--theory" aria-labelledby="track-theory-title">
+                <header class="track-card__header">
+                    <span class="track-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-book"></i>
+                    </span>
+                    <div class="track-card__headings">
+                        <p class="track-card__eyebrow">Track 01</p>
+                        <h2 id="track-theory-title" class="track-card__title">Theoretical Preparation</h2>
+                    </div>
+                    <span class="track-card__count" aria-label="Modules in this track">
+                        @Model.TheoreticalModules.Count()
+                    </span>
+                </header>
+
+                <ul class="module-list">
                     @foreach (var m in Model.TheoreticalModules)
                     {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>
-                                @if (m.IsLocked)
-                                {
-                                    <i class="bi bi-lock-fill text-secondary me-1"></i>
-                                }
-                                else if (m.Status == "completed")
-                                {
-                                    <i class="bi bi-check-circle-fill text-success me-1"></i>
-                                }
-                                else if (m.Status == "in_progress")
-                                {
-                                    <i class="bi bi-play-circle-fill text-primary me-1"></i>
-                                }
-                                else
-                                {
-                                    <i class="bi bi-circle text-muted me-1"></i>
-                                }
-                                @m.Title
-                            </span>
-                            @{
-                                var badgeClass = m.Status switch
-                                {
-                                    "completed" => "bg-success",
-                                    "in_progress" => "bg-primary",
-                                    _ => "bg-secondary"
-                                };
-                            }
-                            <span class="badge @badgeClass">@m.Status.Replace("_", " ")</span>
+                        var statusKey = m.IsLocked ? "locked" : m.Status;
+                        var (iconClass, modifier, label) = statusKey switch
+                        {
+                            "completed"   => ("fa-solid fa-circle-check", "completed",   "completed"),
+                            "in_progress" => ("fa-solid fa-circle-play",  "in-progress", "in progress"),
+                            "locked"      => ("fa-solid fa-lock",         "locked",      "locked"),
+                            _             => ("fa-regular fa-circle",    "pending",     m.Status?.Replace("_", " ") ?? "pending")
+                        };
+                        <li class="module-item module-item--@modifier">
+                            <div class="module-item__main">
+                                <span class="module-item__status-icon module-item__status-icon--@modifier" aria-hidden="true">
+                                    <i class="@iconClass"></i>
+                                </span>
+                                <span class="module-item__title">@m.Title</span>
+                            </div>
+                            <span class="status-pill status-pill--@modifier">@label</span>
                         </li>
                     }
                     @if (!Model.TheoreticalModules.Any())
                     {
-                        <li class="list-group-item text-muted">No theoretical modules found.</li>
+                        <li class="module-list__empty">
+                            <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                            <span>No theoretical modules found yet.</span>
+                        </li>
                     }
                 </ul>
-            </div>
-        </div>
+            </section>
 
-        <!-- Practical Modules -->
-        <div class="col-md-6">
-            <div class="card h-100 shadow-sm">
-                <div class="card-header bg-warning fw-semibold">
-                    <i class="bi bi-car-front-fill"></i> Practical Preparation
-                </div>
-                <ul class="list-group list-group-flush">
+            <!-- Practical -->
+            <section class="track-card track-card--practical" aria-labelledby="track-practical-title">
+                <header class="track-card__header">
+                    <span class="track-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-car-side"></i>
+                    </span>
+                    <div class="track-card__headings">
+                        <p class="track-card__eyebrow">Track 02</p>
+                        <h2 id="track-practical-title" class="track-card__title">Practical Preparation</h2>
+                    </div>
+                    <span class="track-card__count" aria-label="Modules in this track">
+                        @Model.PracticalModules.Count()
+                    </span>
+                </header>
+
+                <ul class="module-list">
                     @foreach (var m in Model.PracticalModules)
                     {
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>
-                                @if (m.IsLocked)
-                                {
-                                    <i class="bi bi-lock-fill text-secondary me-1"></i>
-                                }
-                                else if (m.Status == "completed")
-                                {
-                                    <i class="bi bi-check-circle-fill text-success me-1"></i>
-                                }
-                                else if (m.Status == "in_progress")
-                                {
-                                    <i class="bi bi-play-circle-fill text-primary me-1"></i>
-                                }
-                                else
-                                {
-                                    <i class="bi bi-circle text-muted me-1"></i>
-                                }
-                                @m.Title
-                            </span>
-                            @{
-                                var bc = m.Status switch
-                                {
-                                    "completed" => "bg-success",
-                                    "in_progress" => "bg-primary",
-                                    _ => "bg-secondary"
-                                };
-                            }
-                            <span class="badge @bc">@m.Status.Replace("_", " ")</span>
+                        var statusKey = m.IsLocked ? "locked" : m.Status;
+                        var (iconClass, modifier, label) = statusKey switch
+                        {
+                            "completed"   => ("fa-solid fa-circle-check", "completed",   "completed"),
+                            "in_progress" => ("fa-solid fa-circle-play",  "in-progress", "in progress"),
+                            "locked"      => ("fa-solid fa-lock",         "locked",      "locked"),
+                            _             => ("fa-regular fa-circle",    "pending",     m.Status?.Replace("_", " ") ?? "pending")
+                        };
+                        <li class="module-item module-item--@modifier">
+                            <div class="module-item__main">
+                                <span class="module-item__status-icon module-item__status-icon--@modifier" aria-hidden="true">
+                                    <i class="@iconClass"></i>
+                                </span>
+                                <span class="module-item__title">@m.Title</span>
+                            </div>
+                            <span class="status-pill status-pill--@modifier">@label</span>
                         </li>
                     }
                     @if (!Model.PracticalModules.Any())
                     {
-                        <li class="list-group-item text-muted">No practical modules yet.</li>
+                        <li class="module-list__empty">
+                            <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                            <span>No practical modules yet.</span>
+                        </li>
                     }
                 </ul>
-            </div>
+            </section>
         </div>
-    </div>
 
-    <!-- Mock Exam Card -->
-    <div class="card shadow-sm mt-4">
-        <div class="card-body d-flex justify-content-between align-items-center">
-            <div>
-                <h5 class="mb-1">
-                    <i class="bi bi-clipboard2-check-fill text-danger"></i> Mock Exam
-                </h5>
-                <p class="mb-0 text-muted small">
-                    @if (Model.IsMockExamCompleted)
-                    {
-                        <span class="text-success fw-semibold">✓ Completed — you may now book the theory test</span>
-                    }
-                    else if (Model.IsMockExamAvailable)
-                    {
-                        <span>Ready! Complete to unlock your theory exam booking.</span>
-                    }
-                    else
-                    {
-                        <span>Available after all theoretical modules are completed.</span>
-                    }
-                </p>
+        <!-- ============ Mock Exam ============ -->
+        <section class="mock-exam @(Model.IsMockExamCompleted ? "mock-exam--completed" : Model.IsMockExamAvailable ? "mock-exam--ready" : "mock-exam--locked")"
+                 aria-labelledby="mock-exam-title">
+            <div class="mock-exam__decor" aria-hidden="true"></div>
+
+            <div class="mock-exam__main">
+                <span class="mock-exam__icon" aria-hidden="true">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </span>
+                <div class="mock-exam__text">
+                    <p class="mock-exam__eyebrow">Final Checkpoint</p>
+                    <h2 id="mock-exam-title" class="mock-exam__title">Mock Exam</h2>
+                    <p class="mock-exam__caption">
+                        @if (Model.IsMockExamCompleted)
+                        {
+                            <i class="fa-solid fa-circle-check mock-exam__caption-icon" aria-hidden="true"></i>
+                            <span>Completed &mdash; you may now book the theory test.</span>
+                        }
+                        else if (Model.IsMockExamAvailable)
+                        {
+                            <i class="fa-solid fa-bolt mock-exam__caption-icon" aria-hidden="true"></i>
+                            <span>Ready! Complete this exam to unlock your theory test booking.</span>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-lock mock-exam__caption-icon" aria-hidden="true"></i>
+                            <span>Unlocks once all theoretical modules are completed.</span>
+                        }
+                    </p>
+                </div>
             </div>
-            @if (Model.IsMockExamAvailable)
-            {
-                <a asp-area="Trainee" asp-controller="Quiz" asp-action="MockExam"
-                       class="btn @(Model.IsMockExamCompleted ? "btn-outline-success" : "btn-danger")">
-                    @(Model.IsMockExamCompleted ? "Retake Mock Exam" : "Start Mock Exam")
-                </a>
-            }
-            else
-            {
-                <button class="btn btn-secondary" disabled>Locked</button>
-            }
-        </div>
-    </div>
 
+            <div class="mock-exam__action">
+                @if (Model.IsMockExamAvailable)
+                {
+                    <a asp-area="Trainee"
+                       asp-controller="Quiz"
+                       asp-action="MockExam"
+                       class="btn-action @(Model.IsMockExamCompleted ? "btn-action--ghost-success" : "btn-action--gradient")">
+                        <i class="fa-solid @(Model.IsMockExamCompleted ? "fa-rotate-right" : "fa-play")" aria-hidden="true"></i>
+                        <span>@(Model.IsMockExamCompleted ? "Retake Mock Exam" : "Start Mock Exam")</span>
+                    </a>
+                }
+                else
+                {
+                    <button type="button" class="btn-action btn-action--locked" disabled aria-disabled="true">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <span>Locked</span>
+                    </button>
+                }
+            </div>
+        </section>
+
+    </div>
 </div>

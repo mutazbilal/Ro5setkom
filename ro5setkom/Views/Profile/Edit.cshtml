@@ -1,103 +1,210 @@
 ﻿@using ro5setkom.ViewModels.Profile
 @model EditProfileViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
 
-<form asp-action="Edit" method="post">
-    @Html.AntiForgeryToken()
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile/profile.css" />
+}
 
-    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+<div class="profile-page">
+    <div class="profile-page__inner">
 
-    <!-- 🔒 READ-ONLY GOV DATA -->
-    <div class="card mb-4">
-        <div class="card-header">Personal Information</div>
-        <div class="card-body">
-            <div class="row mb-2">
-                <div class="col">
-                    <label class="form-label">First Name</label>
-                    <input class="form-control" value="@Model.FirstName" readonly />
-                </div>
-                <div class="col">
-                    <label class="form-label">Last Name</label>
-                    <input class="form-control" value="@Model.LastName" readonly />
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Hero ============ -->
+        <section class="profile-hero profile-hero--compact" aria-labelledby="edit-page-title">
+            <div class="profile-hero__main">
+                <span class="profile-hero__badge" aria-hidden="true">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </span>
+                <div class="profile-hero__intro">
+                    <span class="profile-hero__eyebrow">Account</span>
+                    <h1 id="edit-page-title" class="profile-hero__title">Edit Profile</h1>
+                    <p class="profile-hero__description">
+                        Update your contact information and address. Government-issued details are read-only.
+                    </p>
                 </div>
             </div>
 
-            <div class="row mb-2">
-                <div class="col">
-                    <label class="form-label">Date of Birth</label>
-                    <input class="form-control" value="@Model.DateOfBirth" readonly />
-                </div>
-                <div class="col">
-                    <label class="form-label">Gender</label>
-                    <input class="form-control" value="@Model.Gender" readonly />
-                </div>
+            <div class="profile-hero__cta">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Back to Profile</span>
+                </a>
             </div>
+        </section>
 
-            <div class="mb-2">
-                <label class="form-label">National ID</label>
-                <input class="form-control" value="@Model.NationalId" readonly />
+        <form asp-action="Edit" method="post" class="profile-form" novalidate>
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert dashboard-alert dashboard-alert--error" role="alert"></div>
+
+            <!-- ============ Personal (locked) ============ -->
+            <section class="profile-card" aria-labelledby="edit-personal-title">
+                <header class="profile-card__header profile-card__header--locked">
+                    <span class="profile-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </span>
+                    <div class="profile-card__headings">
+                        <p class="profile-card__eyebrow">Section 01</p>
+                        <h2 id="edit-personal-title" class="profile-card__title">Personal Information</h2>
+                    </div>
+                    <span class="profile-card__lock-badge" aria-hidden="true">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Read-only</span>
+                    </span>
+                </header>
+
+                <div class="profile-card__body">
+                    <div class="profile-card__notice">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span>The following details are sourced from government records and cannot be modified.</span>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label asp-for="FirstName" class="form-field__label">First Name</label>
+                            <input asp-for="FirstName" class="form-input form-input--readonly" readonly />
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="LastName" class="form-field__label">Last Name</label>
+                            <input asp-for="LastName" class="form-input form-input--readonly" readonly />
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="DateOfBirth" class="form-field__label">Date of Birth</label>
+                            <input asp-for="DateOfBirth" class="form-input form-input--readonly" readonly />
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="Gender" class="form-field__label">Gender</label>
+                            <input asp-for="Gender" class="form-input form-input--readonly" readonly />
+                        </div>
+
+                        <div class="form-field form-field--full">
+                            <label asp-for="NationalId" class="form-field__label">National ID</label>
+                            <input asp-for="NationalId" class="form-input form-input--readonly" readonly />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ Contact (editable) ============ -->
+            <section class="profile-card" aria-labelledby="edit-contact-title">
+                <header class="profile-card__header">
+                    <span class="profile-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-address-card"></i>
+                    </span>
+                    <div class="profile-card__headings">
+                        <p class="profile-card__eyebrow">Section 02</p>
+                        <h2 id="edit-contact-title" class="profile-card__title">Contact Information</h2>
+                    </div>
+                </header>
+
+                <div class="profile-card__body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label asp-for="Email" class="form-field__label"></label>
+                            <input asp-for="Email" class="form-input" autocomplete="email" />
+                            <span asp-validation-for="Email" class="text-danger form-field__error"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="PhoneNumber" class="form-field__label"></label>
+                            <input asp-for="PhoneNumber" class="form-input" autocomplete="tel" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger form-field__error"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ Address (editable) ============ -->
+            <section class="profile-card" aria-labelledby="edit-address-title">
+                <header class="profile-card__header">
+                    <span class="profile-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    <div class="profile-card__headings">
+                        <p class="profile-card__eyebrow">Section 03</p>
+                        <h2 id="edit-address-title" class="profile-card__title">Address</h2>
+                    </div>
+                </header>
+
+                <div class="profile-card__body">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label asp-for="Province" class="form-field__label"></label>
+                            <input asp-for="Province" class="form-input" autocomplete="address-level1" />
+                            <span asp-validation-for="Province" class="text-danger form-field__error"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="City" class="form-field__label"></label>
+                            <input asp-for="City" class="form-input" autocomplete="address-level2" />
+                            <span asp-validation-for="City" class="text-danger form-field__error"></span>
+                        </div>
+
+                        <div class="form-field form-field--full">
+                            <label asp-for="AddressLine1" class="form-field__label"></label>
+                            <input asp-for="AddressLine1" class="form-input" autocomplete="address-line1" />
+                            <span asp-validation-for="AddressLine1" class="text-danger form-field__error"></span>
+                        </div>
+
+                        <div class="form-field form-field--full">
+                            <label asp-for="AddressLine2" class="form-field__label"></label>
+                            <input asp-for="AddressLine2" class="form-input" autocomplete="address-line2" />
+                            <span asp-validation-for="AddressLine2" class="text-danger form-field__error"></span>
+                        </div>
+
+                        <div class="form-field">
+                            <label asp-for="PostalCode" class="form-field__label"></label>
+                            <input asp-for="PostalCode" class="form-input" autocomplete="postal-code" />
+                            <span asp-validation-for="PostalCode" class="text-danger form-field__error"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ Submit bar ============ -->
+            <div class="profile-form__actions">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <span>Cancel</span>
+                </a>
+                <button type="submit" class="btn-action btn-action--success">
+                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                    <span>Save Changes</span>
+                </button>
             </div>
-        </div>
+        </form>
+
     </div>
-
-    <!-- ✏️ EDITABLE FIELDS -->
-    <div class="card mb-4">
-        <div class="card-header">Contact Information</div>
-        <div class="card-body">
-
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="PhoneNumber" class="form-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 📍 ADDRESS -->
-    <div class="card mb-4">
-        <div class="card-header">Address</div>
-        <div class="card-body">
-
-            <div class="mb-3">
-                <label asp-for="Province" class="form-label"></label>
-                <input asp-for="Province" class="form-control" />
-                <span asp-validation-for="Province" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="City" class="form-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="AddressLine1" class="form-label"></label>
-                <input asp-for="AddressLine1" class="form-control" />
-                <span asp-validation-for="AddressLine1" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="AddressLine2" class="form-label"></label>
-                <input asp-for="AddressLine2" class="form-control" />
-                <span asp-validation-for="AddressLine2" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="PostalCode" class="form-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
-            </div>
-
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success">Save Changes</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
