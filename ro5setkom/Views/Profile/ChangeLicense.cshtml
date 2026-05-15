@@ -1,33 +1,140 @@
 ﻿@using ro5setkom.ViewModels.Profile
 @model ChangeLicenseViewModel
+@{
+    ViewData["Title"] = "Change License";
+}
 
-<h2>Change License</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile/profile.css" />
+}
 
-<form method="post">
-    @Html.AntiForgeryToken()
-    <div class="auth-field">
-        <label asp-for="NewLicenseTypeId"
-               style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-            License Type
-        </label>
-        <select asp-for="NewLicenseTypeId"
-                asp-items="@(new SelectList(Model.AvailableLicenseTypes, "Id", "Name"))"
-                class="auth-input auth-select"
-                aria-required="true">
-            <option value="">-- Select License Type --</option>
-        </select>
-        <span asp-validation-for="NewLicenseTypeId" class="text-danger"></span>
+<div class="profile-page">
+    <div class="profile-page__inner">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Hero ============ -->
+        <section class="profile-hero profile-hero--compact profile-hero--danger" aria-labelledby="change-license-title">
+            <div class="profile-hero__main">
+                <span class="profile-hero__badge profile-hero__badge--danger" aria-hidden="true">
+                    <i class="fa-solid fa-id-card-clip"></i>
+                </span>
+                <div class="profile-hero__intro">
+                    <span class="profile-hero__eyebrow profile-hero__eyebrow--danger">Account Management</span>
+                    <h1 id="change-license-title" class="profile-hero__title">Change License Type</h1>
+                    <p class="profile-hero__description">
+                        Switch the license category you're training for. This is a major change with consequences.
+                    </p>
+                </div>
+            </div>
+
+            <div class="profile-hero__cta">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Back to Profile</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Warning callout ============ -->
+        <aside class="callout callout--warning" role="note">
+            <span class="callout__icon" aria-hidden="true">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </span>
+            <div class="callout__body">
+                <p class="callout__title">Heads up — this is a major change</p>
+                <p class="callout__text">
+                    Changing your license type will <strong>cancel any future bookings</strong> tied to your current
+                    license and reset module progress that doesn't carry over to the new category. This action
+                    cannot be undone from this page.
+                </p>
+            </div>
+        </aside>
+
+        <!-- ============ Form ============ -->
+        <form asp-action="ChangeLicense" method="post" class="profile-form">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert dashboard-alert dashboard-alert--error" role="alert"></div>
+
+            <section class="profile-card" aria-labelledby="change-license-card-title">
+                <header class="profile-card__header">
+                    <span class="profile-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-id-card-clip"></i>
+                    </span>
+                    <div class="profile-card__headings">
+                        <p class="profile-card__eyebrow">License Selection</p>
+                        <h2 id="change-license-card-title" class="profile-card__title">Pick your new license</h2>
+                    </div>
+                </header>
+
+                <div class="profile-card__body">
+                    <div class="form-field form-field--full">
+                        <label asp-for="NewLicenseTypeId" class="form-field__label form-field__label--required">
+                            New License Type
+                        </label>
+                        <select asp-for="NewLicenseTypeId"
+                                asp-items="@(new SelectList(Model.AvailableLicenseTypes, "Id", "Name"))"
+                                class="form-select"
+                                aria-required="true">
+                            <option value="">-- Select License Type --</option>
+                        </select>
+                        <span asp-validation-for="NewLicenseTypeId" class="text-danger form-field__error"></span>
+                    </div>
+
+                    <label class="form-confirm" for="ConfirmChange">
+                        <input asp-for="ConfirmChange"
+                               id="ConfirmChange"
+                               type="checkbox"
+                               class="form-confirm__input"
+                               aria-required="true" />
+                        <span class="form-confirm__box" aria-hidden="true"></span>
+                        <span class="form-confirm__label">
+                            <strong>I understand</strong> that changing my license will cancel future bookings
+                            and reset incompatible module progress.
+                        </span>
+                    </label>
+                    <span asp-validation-for="ConfirmChange" class="text-danger form-field__error"></span>
+                </div>
+            </section>
+
+            <div class="profile-form__actions">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <span>Cancel</span>
+                </a>
+                <button type="submit" class="btn-action btn-action--danger">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                    <span>Change License</span>
+                </button>
+            </div>
+        </form>
+
     </div>
+</div>
 
-    <div class="form-check mb-3">
-        <input asp-for="ConfirmChange" class="form-check-input" />
-        <label asp-for="ConfirmChange" class="form-check-label">
-            I understand that changing my license will cancel future bookings.
-        </label>
-        <span asp-validation-for="ConfirmChange" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-danger">
-        Change License
-    </button>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

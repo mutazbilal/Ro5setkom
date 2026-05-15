@@ -1,0 +1,267 @@
+/* ============================================================
+   register-role-select.css
+   Styles for the role selection step (SelectRole.cshtml).
+   Supplements register.css — relies on the same CSS variables
+   and shared auth-* / register-* primitives.
+   ============================================================ */
+
+/* ---------- Card layout overrides ---------- */
+.role-select-card {
+    max-width: 760px;
+}
+
+.role-select-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* ---------- Grid of role cards ---------- */
+.role-select-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 22px;
+}
+
+@media (max-width: 720px) {
+    .role-select-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+/* ---------- Individual role card ---------- */
+.role-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 22px 22px 70px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(26, 58, 107, 0.12);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 280ms cubic-bezier(.2, .8, .2, 1), box-shadow 280ms cubic-bezier(.2, .8, .2, 1), border-color 280ms ease, background 280ms ease;
+    isolation: isolate;
+}
+
+    /* gradient sheen accent on top edge */
+    .role-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1A3A6B, #F26522, #C9A84C);
+        opacity: 0;
+        transition: opacity 280ms ease;
+    }
+
+    /* soft radial accent that brightens on hover */
+    .role-card::after {
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        right: -80px;
+        bottom: -80px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(242, 101, 34, 0.10), transparent 70%);
+        opacity: 0;
+        transition: opacity 360ms ease;
+        z-index: -1;
+    }
+
+    .role-card:hover,
+    .role-card:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px -16px rgba(26, 58, 107, 0.30);
+        border-color: rgba(242, 101, 34, 0.45);
+        background: rgba(255, 255, 255, 0.92);
+        outline: none;
+    }
+
+        .role-card:hover::before,
+        .role-card:focus-visible::before {
+            opacity: 1;
+        }
+
+        .role-card:hover::after,
+        .role-card:focus-visible::after {
+            opacity: 1;
+        }
+
+    .role-card:focus-visible {
+        box-shadow: 0 18px 38px -16px rgba(26, 58, 107, 0.30), 0 0 0 3px rgba(242, 101, 34, 0.35);
+    }
+
+/* ---------- Badge / icon ---------- */
+.role-card__badge {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 1.5rem;
+    color: #fff;
+    background: linear-gradient(135deg, #1A3A6B, #2c5b9b);
+    box-shadow: 0 8px 18px -8px rgba(26, 58, 107, 0.55);
+    transition: transform 320ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.role-card--mentor .role-card__badge {
+    background: linear-gradient(135deg, #F26522, #C9A84C);
+    box-shadow: 0 8px 18px -8px rgba(242, 101, 34, 0.55);
+}
+
+.role-card:hover .role-card__badge,
+.role-card:focus-visible .role-card__badge {
+    transform: scale(1.06) rotate(-3deg);
+}
+
+/* ---------- Title & description ---------- */
+.role-card__title {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1A3A6B;
+    line-height: 1.2;
+}
+
+.role-card__desc {
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: #5a6b80;
+}
+
+/* ---------- Feature pills ---------- */
+.role-card__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin-top: 4px;
+}
+
+.role-card__feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background: rgba(26, 58, 107, 0.06);
+    border: 1px solid rgba(26, 58, 107, 0.10);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #1A3A6B;
+}
+
+    .role-card__feature i {
+        font-size: 0.7rem;
+        color: #F26522;
+    }
+
+.role-card--mentor .role-card__feature i {
+    color: #C9A84C;
+}
+
+/* ---------- CTA pinned to the bottom ---------- */
+.role-card__cta {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: linear-gradient(90deg, #F26522, #C9A84C);
+    transition: filter 220ms ease, letter-spacing 280ms ease;
+}
+
+    .role-card__cta i {
+        transition: transform 280ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+.role-card:hover .role-card__cta,
+.role-card:focus-visible .role-card__cta {
+    filter: brightness(1.05);
+    letter-spacing: 0.2px;
+}
+
+    .role-card:hover .role-card__cta i,
+    .role-card:focus-visible .role-card__cta i {
+        transform: translateX(4px);
+    }
+
+/* RTL: flip the arrow direction visually */
+[dir="rtl"] .role-card__cta i {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .role-card:hover .role-card__cta i,
+[dir="rtl"] .role-card:focus-visible .role-card__cta i {
+    transform: scaleX(-1) translateX(4px);
+}
+
+/* ---------- Mentor approval note ---------- */
+.role-card__note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    padding: 5px 10px;
+    background: rgba(220, 38, 38, 0.10);
+    border: 1px solid rgba(220, 38, 38, 0.40);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #b91c1c;
+    letter-spacing: 0.2px;
+}
+
+    .role-card__note i {
+        font-size: 0.72rem;
+        color: #b91c1c;
+    }
+
+/* ---------- Footer link ---------- */
+.role-select-footer {
+    text-align: center;
+    color: var(--color-muted, #5a6b80);
+    font-size: 0.92rem;
+    margin-top: 22px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .role-card,
+    .role-card__badge,
+    .role-card__cta,
+    .role-card__cta i,
+    .role-card::before,
+    .role-card::after {
+        transition: none !important;
+    }
+
+        .role-card:hover,
+        .role-card:focus-visible {
+            transform: none;
+        }
+
+            .role-card:hover .role-card__badge,
+            .role-card:focus-visible .role-card__badge {
+                transform: none;
+            }
+}

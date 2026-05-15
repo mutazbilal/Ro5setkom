@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Choose Your Role";
+    ViewData["HideAuthNav"] = true;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/register-role-select.css" asp-append-version="true" />
+}
+
+<div class="auth-mobile-header">
+    <span class="auth-mobile-header__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+    <span>ro5setkom</span>
+</div>
+
+<main class="auth-page" aria-label="Registration — choose your role">
+    <section class="auth-brand" aria-hidden="true">
+        <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+        <h1 class="auth-brand__title">Join ro5setkom</h1>
+        <p class="auth-brand__tagline">Choose how you'd like to be part of the journey.</p>
+
+        <span class="auth-floating-shape auth-floating-shape--circle"></span>
+        <span class="auth-floating-shape auth-floating-shape--hex"></span>
+        <span class="auth-floating-shape auth-floating-shape--diamond"></span>
+
+        <svg class="auth-brand__art" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Road illustration">
+            <path d="M0 90 C150 22, 275 168, 430 116 C578 67, 696 48, 800 90 L800 240 L0 240 Z"
+                  fill="rgba(22,53,96,.95)"/>
+            <path d="M100 172 C240 120, 380 158, 540 130 C625 116, 700 112, 760 122"
+                  stroke="#f5d486" stroke-width="6" stroke-dasharray="18 14" fill="none" stroke-linecap="round"/>
+            <path d="M0 130 C180 220, 250 115, 430 166 C580 202, 670 136, 800 175 L800 240 L0 240 Z"
+                  fill="rgba(255,255,255,.07)"/>
+        </svg>
+        <svg class="auth-brand__art" viewBox="0 0 1200 120" preserveAspectRatio="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,64L40,80C80,96,160,128,240,117.3C320,107,400,53,480,37.3C560,21,640,43,720,64C800,85,880,107,960,96C1040,85,1120,43,1160,21.3L1200,0L1200,120L1160,120C1120,120,1040,120,960,120C880,120,800,120,720,120C640,120,560,120,480,120C400,120,320,120,240,120C160,120,80,120,40,120L0,120Z"
+                  fill="#f5f7fa"/>
+        </svg>
+    </section>
+
+    <section class="auth-form-wrap">
+        <article class="auth-card register-card role-select-card" aria-live="polite">
+            <a asp-controller="Home" asp-action="Index"
+               class="auth-link role-select-back">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Home
+            </a>
+
+            <h2 class="auth-card__title">Choose Your Role</h2>
+            <p class="auth-card__subtitle">Step 1 of 3: Choose Role</p>
+
+            <div class="auth-stepper" aria-label="Registration progress — step 1 of 3">
+                <div class="auth-step is-active" aria-current="step"></div>
+                <div class="auth-step"></div>
+                <div class="auth-step"></div>
+            </div>
+
+            <div class="role-select-grid" role="list">
+                <a asp-controller="Registration" asp-action="Trainee"
+                   class="role-card role-card--trainee"
+                   role="listitem"
+                   aria-label="Register as a Trainee — learn to drive with a certified mentor">
+                    <span class="role-card__badge">
+                        <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+                    </span>
+                    <span class="role-card__title">Trainee</span>
+                    <span class="role-card__desc">
+                        Learn to drive with certified mentors and earn your license through a guided, structured program.
+                    </span>
+                    <span class="role-card__features" aria-hidden="true">
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Browse mentors</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Book sessions</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Track progress</span>
+                    </span>
+                    <span class="role-card__cta">
+                        Continue as Trainee
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
+                </a>
+
+                <a asp-controller="Registration" asp-action="Mentor"
+                   class="role-card role-card--mentor"
+                   role="listitem"
+                   aria-label="Register as a Mentor — teach trainees and grow your driving school">
+                    <span class="role-card__badge">
+                        <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
+                    </span>
+                    <span class="role-card__title">Mentor</span>
+                    <span class="role-card__desc">
+                        Share your expertise, train new drivers, and build your reputation on a trusted platform.
+                    </span>
+                    <span class="role-card__features" aria-hidden="true">
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Set your rates</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Manage schedule</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Reach trainees</span>
+                    </span>
+                    <span class="role-card__cta">
+                        Continue as Mentor
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
+                    <span class="role-card__note" aria-hidden="true">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Application requires admin approval
+                    </span>
+                </a>
+            </div>
+
+            <p class="role-select-footer">
+                Already have an account?
+                <a asp-controller="Auth" asp-action="Login" class="auth-link">Sign In</a>
+            </p>
+        </article>
+    </section>
+</main>

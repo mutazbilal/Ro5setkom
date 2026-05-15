@@ -68,10 +68,13 @@
         }
         else
         {
-            <a asp-controller="Auth" asp-action="Login" class="landing-link">Login</a>
-            <a asp-controller="Registration" asp-action="Trainee" class="auth-btn landing-nav__cta">
-                Create Account
-            </a>
+            @if (ViewData["HideAuthNav"] as bool? != true)
+            {
+                <a asp-controller="Auth" asp-action="Login" class="landing-link">Login</a>
+                <a asp-area="" asp-controller="Registration" asp-action="SelectRole" class="auth-btn landing-nav__cta">
+                    Create Account
+                </a>
+            }
         }
     </nav>
 </header>
