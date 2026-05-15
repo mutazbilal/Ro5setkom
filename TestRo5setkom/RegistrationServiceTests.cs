@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using ro5setkom.Models;
-using ro5setkom.Services.Implementations;
-using ro5setkom.ViewModels.Registration;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Implementations;
+using Rokhsetak.ViewModels.Registration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 

@@ -1,0 +1,112 @@
+﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking;
+@model MentorBrowseListViewModel
+@{
+    ViewData["Title"] = "Find a Mentor";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="fw-bold mb-0">Find a Mentor</h2>
+        <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+           class="btn btn-outline-secondary btn-sm">← My Bookings</a>
+    </div>
+
+    <!-- Filter bar -->
+    <form method="get" class="card shadow-sm mb-4 p-3">
+        <div class="row g-2 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold">City</label>
+                <select name="city" class="form-select form-select-sm">
+                    <option value="">All cities</option>
+                    @foreach (var c in Model.Filter.AvailableCities)
+                    {
+                        <option value="@c" selected="@(Model.Filter.City == c)">@c</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold">Min Price (JD)</label>
+                <input type="number" name="minPrice" value="@Model.Filter.MinPrice"
+                       class="form-control form-control-sm" min="0" step="0.5" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold">Max Price (JD)</label>
+                <input type="number" name="maxPrice" value="@Model.Filter.MaxPrice"
+                       class="form-control form-control-sm" min="0" step="0.5" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label small fw-semibold">Min Rating</label>
+                <select name="minRating" class="form-select form-select-sm">
+                    <option value="">Any</option>
+                    @foreach (var r in new[] { 3.0, 3.5, 4.0, 4.5 })
+                    {
+                        <option value="@r" selected="@(Model.Filter.MinRating == r)">@r ★+</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
+                    <i class="bi bi-funnel"></i> Filter
+                </button>
+                <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+                   class="btn btn-outline-secondary btn-sm">Clear</a>
+            </div>
+        </div>
+    </form>
+
+    @if (!Model.Mentors.Any())
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-person-x fs-1 d-block mb-2"></i>
+            No mentors found for your filters.
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var m in Model.Mentors)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title fw-bold mb-0">@m.FullName</h5>
+                                <span class="badge bg-light text-dark border">
+                                    @m.LicenseType.Replace("_", " ")
+                                </span>
+                            </div>
+                            <p class="text-muted small mb-2">
+                                <i class="bi bi-geo-alt"></i> @m.City
+                            </p>
+                            <div class="d-flex gap-3 mb-3">
+                                <div>
+                                    <div class="fw-bold text-warning">
+                                        @m.AverageRating.ToString("0.0") ★
+                                    </div>
+                                    <div class="text-muted small">@m.TotalRatings ratings</div>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-success">@m.CompletionRate%</div>
+                                    <div class="text-muted small">completion</div>
+                                </div>
+                                <div class="ms-auto text-end">
+                                    <div class="fw-bold text-primary fs-5">@m.PricePerSession JD</div>
+                                    <div class="text-muted small">per session</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a asp-area="Trainee" asp-controller="Booking" asp-action="Book"
+                                   asp-route-mentorId="@m.MentorId"
+                                   class="btn btn-primary w-100">
+                                <i class="bi bi-calendar-plus"></i> Book a Session
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <p class="text-muted small mt-3">@Model.Mentors.Count mentor(s) found.</p>
+    }
+</div>

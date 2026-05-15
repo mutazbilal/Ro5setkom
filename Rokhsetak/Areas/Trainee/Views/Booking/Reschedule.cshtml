@@ -1,0 +1,100 @@
+﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking
+
+@model RescheduleTraineeViewModel
+@{
+    ViewData["Title"] = "Reschedule Session";
+}
+
+<div class="container py-4" style="max-width: 560px;">
+
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-area="Trainee" asp-controller="Booking" asp-action="Index">My Bookings</a>
+            </li>
+            <li class="breadcrumb-item active">Reschedule</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-sm">
+        <div class="card-header fw-semibold bg-warning">
+            <i class="bi bi-arrow-repeat"></i> Reschedule Session
+        </div>
+        <div class="card-body">
+
+            <div class="mb-3 p-3 bg-light rounded border">
+                <p class="mb-1 small text-muted">Mentor</p>
+                <p class="mb-1 fw-semibold">@Model.MentorName</p>
+                <p class="mb-0 small">
+                    Type: <span class="badge bg-info text-dark">@Model.SessionType</span>
+                </p>
+            </div>
+
+            @if (Model.AvailableDays.Any())
+            {
+                <div class="mb-3">
+                    <p class="small fw-semibold mb-1">Mentor's Availability</p>
+                    @foreach (var day in Model.AvailableDays)
+                    {
+                        <span class="me-2 text-capitalize fw-semibold small">@day.DayOfWeek:</span>
+                        @foreach (var s in day.Slots)
+                        {
+                            <span class="badge bg-light text-dark border me-1">
+                                @s.StartTime.ToString("HH:mm") – @s.EndTime.ToString("HH:mm")
+                            </span>
+                        }
+                        <br />
+                    }
+                </div>
+            }
+
+            <form asp-area="Trainee" asp-controller="Booking"
+                  asp-action="Reschedule" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="BookingId" />
+                <input type="hidden" asp-for="MentorName" />
+                <input type="hidden" asp-for="SessionType" />
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="NewDate" class="form-label fw-semibold">New Date</label>
+                    <input asp-for="NewDate" type="date" class="form-control"
+                           min="@DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="NewDate" class="text-danger small"></span>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-6">
+                        <label asp-for="NewStartTime" class="form-label fw-semibold">Start</label>
+                        <input asp-for="NewStartTime" type="time" class="form-control" />
+                        <span asp-validation-for="NewStartTime" class="text-danger small"></span>
+                    </div>
+                    <div class="col-6">
+                        <label asp-for="NewEndTime" class="form-label fw-semibold">End</label>
+                        <input asp-for="NewEndTime" type="time" class="form-control" />
+                        <span asp-validation-for="NewEndTime" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="alert alert-info small mb-4">
+                    <i class="bi bi-info-circle"></i>
+                    The original booking will be cancelled and a new pending request created.
+                    The mentor will need to confirm the new time.
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+                       class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-warning fw-semibold">
+                        <i class="bi bi-arrow-repeat"></i> Confirm Reschedule
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

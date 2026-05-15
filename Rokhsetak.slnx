@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Rokhsetak/Rokhsetak.csproj" />
+  <Project Path="RokhsetakIntegrationTests/RokhsetakIntegrationTests.csproj" Id="b97a8a7a-af66-4da3-85db-9abcc8a213ab" />
+  <Project Path="TestRo5setkom/RokhsetakUnitTests.csproj" Id="74e54395-da42-437f-ad7f-a74e8716f3e0" />
+</Solution>

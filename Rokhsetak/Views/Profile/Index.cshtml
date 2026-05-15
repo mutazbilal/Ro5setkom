@@ -1,0 +1,13 @@
+﻿@using Rokhsetak.ViewModels.Profile
+@model ProfileViewModel
+
+<h2>Profile</h2>
+
+<div class="card p-3">
+    <p><b>Name:</b> @Model.FirstName @Model.LastName</p>
+    <p><b>Email:</b> @Model.Email</p>
+    <p><b>Phone:</b> @Model.PhoneNumber</p>
+    <p><b>National ID:</b> @Model.NationalId</p>
+
+    <a class="btn btn-primary" href="/Profile/Edit">Edit Profile</a>
+</div>

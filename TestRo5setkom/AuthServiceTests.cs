@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
-using ro5setkom.Models;
-using ro5setkom.Services.Implementations;
-using ro5setkom.ViewModels.Auth;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Implementations;
+using Rokhsetak.ViewModels.Auth;
 using BCrypt.Net;
 
 namespace TestRo5setkom

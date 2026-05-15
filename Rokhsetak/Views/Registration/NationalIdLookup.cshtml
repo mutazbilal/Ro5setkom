@@ -1,0 +1,109 @@
+@using Rokhsetak.ViewModels.Registration
+@model NationalIdLookupViewModel
+@{
+    ViewData["Title"] = Model.IsTrainee ? "Trainee Registration" : "Mentor Registration";
+    var heading = Model.IsTrainee ? "Trainee Registration" : "Mentor Registration";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+}
+
+<div class="auth-mobile-header">
+    <span class="auth-mobile-header__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+    <span>Rokhsetak</span>
+</div>
+
+<main class="auth-page" aria-label="@heading — identity verification">
+    <section class="auth-brand" aria-hidden="true">
+        <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+        <h1 class="auth-brand__title">@heading</h1>
+        <p class="auth-brand__tagline">Secure identity verification powered by government records.</p>
+
+        <span class="auth-floating-shape auth-floating-shape--circle"></span>
+        <span class="auth-floating-shape auth-floating-shape--hex"></span>
+        <span class="auth-floating-shape auth-floating-shape--diamond"></span>
+
+        <svg class="auth-brand__art" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Road illustration">
+            <path d="M0 90 C150 22, 275 168, 430 116 C578 67, 696 48, 800 90 L800 240 L0 240 Z"
+                  fill="rgba(22,53,96,.95)"/>
+            <path d="M100 172 C240 120, 380 158, 540 130 C625 116, 700 112, 760 122"
+                  stroke="#f5d486" stroke-width="6" stroke-dasharray="18 14" fill="none" stroke-linecap="round"/>
+            <path d="M0 130 C180 220, 250 115, 430 166 C580 202, 670 136, 800 175 L800 240 L0 240 Z"
+                  fill="rgba(255,255,255,.07)"/>
+        </svg>
+        <svg class="auth-brand__art" viewBox="0 0 1200 120" preserveAspectRatio="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,64L40,80C80,96,160,128,240,117.3C320,107,400,53,480,37.3C560,21,640,43,720,64C800,85,880,107,960,96C1040,85,1120,43,1160,21.3L1200,0L1200,120L1160,120C1120,120,1040,120,960,120C880,120,800,120,720,120C640,120,560,120,480,120C400,120,320,120,240,120C160,120,80,120,40,120L0,120Z"
+                  fill="#f5f7fa"/>
+        </svg>
+    </section>
+
+    <section class="auth-form-wrap">
+        <article class="auth-card register-card" aria-live="polite">
+            <a asp-controller="Home" asp-action="Index"
+               class="auth-link"
+               style="display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Home
+            </a>
+
+            <h2 class="auth-card__title">@heading</h2>
+            <p class="auth-card__subtitle">Step 1 of 2: Verify Identity</p>
+
+            <div class="auth-stepper" aria-label="Registration progress">
+                <div class="auth-step is-active"></div>
+                <div class="auth-step"></div>
+            </div>
+
+            <div asp-validation-summary="ModelOnly"
+                 class="auth-error-banner"
+                 role="alert"
+                 aria-live="assertive"></div>
+
+            <form asp-controller="Registration" asp-action="LookupNationalId" method="post"
+                  class="auth-form" novalidate>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                @* Critical — tells the controller which registration branch to take *@
+                <input asp-for="IsTrainee" type="hidden" />
+
+                <label class="auth-custom-check" for="AcceptedDataRetrievalConsent" style="margin-top:6px;">
+                    <input asp-for="AcceptedDataRetrievalConsent" type="checkbox" />
+                    <span class="auth-custom-check__box" aria-hidden="true"></span>
+                    <span>
+						I Consent to the retrieval of my national ID data for identity verification purposes only. I understand that this information will be used solely to confirm my eligibility for registration and will not be stored or shared beyond this process.
+                    </span>
+                </label>
+                <span asp-validation-for="AcceptedDataRetrievalConsent" class="text-danger"></span>
+
+                <div class="auth-field">
+                    <input asp-for="NationalId"
+                           class="auth-input"
+                           type="text"
+                           placeholder=" "
+                           maxlength="10"
+                           pattern="\d{10}"
+                           inputmode="numeric"
+                           autofocus
+                           aria-required="true"
+                           aria-describedby="nationalIdHelp" />
+                    <label asp-for="NationalId" class="auth-label">National ID</label>
+                    <span id="nationalIdHelp" class="sr-only">Enter your valid 10-digit national ID number.</span>
+                    <span asp-validation-for="NationalId" class="text-danger"></span>
+                </div>
+
+                <button class="auth-btn" type="submit">Look Up My ID</button>
+
+                <p style="text-align:center;color:var(--color-muted);font-size:.92rem;margin-top:10px;">
+                    Already have an account?
+                    <a asp-controller="Auth" asp-action="Login" class="auth-link">Sign In</a>
+                </p>
+            </form>
+        </article>
+    </section>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

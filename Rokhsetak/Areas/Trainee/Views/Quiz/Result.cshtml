@@ -1,0 +1,127 @@
+﻿@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@model QuizResultViewModel
+@{
+    ViewData["Title"] = "Quiz Result";
+}
+
+<div class="container py-4">
+
+    <!-- Result Summary -->
+    <div class="card shadow text-center mb-4
+        @(Model.Passed ? "border-success" : Model.IsMockExam ? "border-info" : "border-danger")">
+        <div class="card-body py-5">
+            @if (Model.Passed)
+            {
+                <div class="display-1 mb-2">🎉</div>
+                <h2 class="text-success fw-bold">Passed!</h2>
+            }
+            else if (Model.IsMockExam)
+            {
+                <div class="display-1 mb-2">📋</div>
+                <h2 class="text-info fw-bold">Mock Exam Completed</h2>
+                <p class="text-muted">Passing is not required — you may proceed to book your theory test.</p>
+            }
+            else
+            {
+                <div class="display-1 mb-2">📚</div>
+                <h2 class="text-danger fw-bold">Not Passed Yet</h2>
+                <p class="text-muted">Review the material and try again — unlimited attempts!</p>
+            }
+
+            <h3 class="fw-bold mt-3">
+                Score: <span class="@(Model.Passed ? "text-success" : "text-danger")">@Model.Score%</span>
+            </h3>
+            <p class="text-muted mb-0">Passing score: @Model.PassingScore%</p>
+
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <div>
+                    <span class="fs-4 fw-bold text-success">@Model.CorrectCount</span>
+                    <p class="text-muted small mb-0">Correct</p>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold text-danger">@Model.IncorrectCount</span>
+                    <p class="text-muted small mb-0">Incorrect</p>
+                </div>
+                <div>
+                    <span class="fs-4 fw-bold text-secondary">@Model.TotalQuestions</span>
+                    <p class="text-muted small mb-0">Total</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                @if (!Model.IsMockExam)
+                {
+                    <a asp-area="Trainee" asp-controller="Quiz" asp-action="Take"
+                           asp-route-moduleId="@Model.ModuleId"
+                           class="btn btn-outline-primary">
+                        Retake Quiz
+                    </a>
+                    <a asp-area="Trainee" asp-controller="Modules" asp-action="Detail"
+                           asp-route-id="@Model.ModuleId"
+                           class="btn btn-outline-secondary">
+                        Back to Module
+                    </a>
+                }
+                else
+                {
+                    <a asp-area="Trainee" asp-controller="Quiz" asp-action="MockExam"
+                           class="btn btn-outline-info">
+                        Retake Mock Exam
+                    </a>
+                }
+                <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
+                       class="btn btn-primary">
+                    Go to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question breakdown -->
+    <h5 class="fw-bold mb-3">Question Breakdown</h5>
+
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        var q = Model.Questions[i];
+        <div class="card mb-3 @(q.IsCorrect ? "border-success" : "border-danger") border-2">
+            <div class="card-header d-flex justify-content-between align-items-center
+                @(q.IsCorrect ? "bg-success bg-opacity-10" : "bg-danger bg-opacity-10")">
+                <span>
+                    <span class="badge @(q.IsCorrect ? "bg-success" : "bg-danger") me-2">@(i + 1)</span>
+                    @q.QuestionText
+                </span>
+                @if (q.IsCorrect)
+                {
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                }
+                else
+                {
+                    <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+                }
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var opt in q.Options)
+                {
+                    var (cls, icon) = (opt.IsCorrect, opt.WasSelected) switch
+                    {
+                        (true, true) => ("list-group-item-success fw-semibold", "✅"),
+                        (true, false) => ("list-group-item-success", "✅"),
+                        (false, true) => ("list-group-item-danger", "❌"),
+                        _ => ("", "")
+                    };
+                    <li class="list-group-item @cls">
+                        @icon @opt.OptionText
+                        @if (opt.WasSelected && !opt.IsCorrect)
+                        {
+                            <span class="badge bg-danger ms-2">Your answer</span>
+                        }
+                        @if (opt.IsCorrect)
+                        {
+                            <span class="badge bg-success ms-2">Correct</span>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ro5setkom.Models;
-using ro5setkom.Services.Implementations;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Implementations;
 
 namespace TestRo5setkom;
 
