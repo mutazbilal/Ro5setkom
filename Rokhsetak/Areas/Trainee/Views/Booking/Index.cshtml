@@ -1,0 +1,127 @@
+﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking
+
+@model TraineeBookingListViewModel
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<div class="container py-4">
+    
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="fw-bold mb-0">My Bookings</h2>
+        <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+               class="btn btn-primary">
+            <i class="bi bi-search"></i> Find a Mentor
+        </a>
+    </div>
+
+    @if (!Model.Bookings.Any())
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-calendar-x fs-1 d-block mb-2"></i>
+            You have no bookings yet.
+            <br />
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+               class="btn btn-outline-primary mt-3">Browse Mentors</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mentor</th>
+                        <th>Date &amp; Time</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model.Bookings)
+                    {
+                        var rowClass = b.Status switch
+                        {
+                            "pending" => "table-warning",
+                            "confirmed" => "table-light",
+                            "completed" => "table-success",
+                            "cancelled" => "table-secondary",
+                            _ => ""
+                        };
+                        <tr class="@rowClass">
+                            <td class="fw-semibold">@b.MentorName</td>
+                            <td>
+                                <div class="fw-semibold">@b.BookingDate.ToString("dd MMM yyyy")</div>
+                                <div class="text-muted small">
+                                    @b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge @(b.SessionType == "practical" ? "bg-warning text-dark" : "bg-info text-dark")">
+                                    @b.SessionType
+                                </span>
+                            </td>
+                            <td>
+                                @{
+                                    var (sc, sl) = b.Status switch
+                                    {
+                                        "pending" => ("bg-warning text-dark", "Pending"),
+                                        "confirmed" => ("bg-primary", "Confirmed"),
+                                        "completed" => ("bg-success", "Completed"),
+                                        "cancelled" => ("bg-secondary", "Cancelled"),
+                                        _ => ("bg-light text-dark", b.Status)
+                                    };
+                                }
+                                <span class="badge @sc">@sl</span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1 flex-wrap">
+                                    @if (b.CanReschedule)
+                                    {
+                                        <a asp-area="Trainee" asp-controller="Booking"
+                                               asp-action="Reschedule" asp-route-bookingId="@b.BookingId"
+                                               class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-arrow-repeat"></i> Reschedule
+                                        </a>
+                                    }
+                                    @if (b.CanCancel)
+                                    {
+                                        <form asp-area="Trainee" asp-controller="Booking"
+                                              asp-action="Cancel" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="bookingId" value="@b.BookingId" />
+                                            <button class="btn btn-outline-danger btn-sm"
+                                                    onclick="return confirm('Cancel this session?')">
+                                                <i class="bi bi-x-circle"></i> Cancel
+                                            </button>
+                                        </form>
+                                    }
+                                    @if (!b.CanCancel && !b.CanReschedule)
+                                    {
+                                        <span class="text-muted small">—</span>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

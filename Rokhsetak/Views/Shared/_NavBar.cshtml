@@ -1,0 +1,98 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/shared.css" asp-append-version="true" />
+}
+
+<header class="landing-nav">
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="landing-brand" aria-label="Home">
+        <span class="landing-brand__logo">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        </span>
+        <span>Rokhsetak</span>
+    </a>
+
+    <nav class="landing-nav__actions" aria-label="Main navigation">
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("trainee"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Dashboard" asp-action="Index">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Modules" asp-action="Index">
+                        <i class="bi bi-book"></i> Modules
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Booking" asp-action="Browse">
+                        <i class="bi bi-people"></i> Find Mentor
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Booking" asp-action="Index">
+                        <i class="bi bi-calendar-check"></i> My Bookings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Exam" asp-action="Index">
+                        <i class="bi bi-clipboard2-check"></i> Exams
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Trainee" asp-controller="Calendar" asp-action="Index">
+                        <i class="bi bi-calendar3"></i> Calendar
+                    </a>
+                </li>
+            }
+            else if (User.IsInRole("mentor"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Mentor" asp-controller="Dashboard" asp-action="Index">
+                        <i class="bi bi-person-badge"></i> Mentor Dashboard
+                    </a>
+                </li>
+            }
+            else
+            {
+                <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index" class="landing-link">Dashboard</a>
+            }
+            <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="language" value="en" />
+                <input type="hidden" name="returnUrl"
+                       value="@(Context.Request.Path + Context.Request.QueryString)" />
+
+                <button type="submit" class="btn btn-link landing-link p-0">
+                    EN
+                </button>
+            </form>
+
+            <span class="mx-1">|</span>
+
+            <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="language" value="ar" />
+                <input type="hidden" name="returnUrl"
+                       value="@(Context.Request.Path + Context.Request.QueryString)" />
+
+                <button type="submit" class="btn btn-link landing-link p-0">
+                    AR
+                </button>
+            </form>
+            <form asp-area="" asp-controller="Auth" asp-action="Logout" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="auth-btn landing-nav__cta">Log Out</button>
+            </form>
+        }
+        else
+        {
+            <a asp-controller="Auth" asp-action="Login" class="landing-link">Login</a>
+            <a asp-controller="Registration" asp-action="Trainee" class="auth-btn landing-nav__cta">
+                Create Account
+            </a>
+        }
+    </nav>
+</header>

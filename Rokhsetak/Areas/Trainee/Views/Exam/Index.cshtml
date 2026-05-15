@@ -1,0 +1,134 @@
+@using Rokhsetak.Areas.Trainee.ViewModels.Exam
+
+@model ExamAppointmentListViewModel
+@{
+    ViewData["Title"] = "My Exam Appointments";
+}
+
+<div class="container py-4">
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="fw-bold mb-0">Exam Appointments</h2>
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+                   asp-route-examType="theory"
+                   class="btn btn-outline-danger btn-sm">
+                📋 Book Theory Exam
+            </a>
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+                   asp-route-examType="medical"
+                   class="btn btn-outline-info btn-sm">
+                🏥 Book Medical Exam
+            </a>
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+                   asp-route-examType="practical"
+                   class="btn btn-outline-warning btn-sm">
+                🚗 Book Practical Exam
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Appointments.Any())
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-clipboard-x fs-1 d-block mb-2"></i>
+            No exam appointments yet. Book one when you are eligible.
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var a in Model.Appointments)
+            {
+                var (cardBorder, icon) = a.ExamType switch
+                {
+                    "theory" => ("border-danger", "📋"),
+                    "medical" => ("border-info", "🏥"),
+                    "practical" => ("border-warning", "🚗"),
+                    _ => ("", "📄")
+                };
+
+                var resultClass = a.Result switch
+                {
+                    "pass" => "text-success fw-bold",
+                    "fail" => "text-danger fw-bold",
+                    "absent" => "text-warning fw-bold",
+                    _ => "text-muted"
+                };
+
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100 @cardBorder border-2">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">
+                                @icon @a.ExamType.ToUpper() Exam
+                            </h5>
+                            <p class="mb-1">
+                                <i class="bi bi-building"></i> @a.CenterName
+                                <span class="text-muted small">— @a.City</span>
+                            </p>
+                            <p class="mb-1">
+                                <i class="bi bi-calendar-date"></i>
+                                @a.ExamDate.ToString("dd MMMM yyyy")
+                                at @a.ExamTime.ToString("HH:mm")
+                            </p>
+
+                            <div class="mt-2 mb-1">
+                                @{
+                                    var (sc, sl) = a.Status switch
+                                    {
+                                        "scheduled" => ("bg-primary", "Scheduled"),
+                                        "completed" => ("bg-success", "Completed"),
+                                        "cancelled" => ("bg-secondary", "Cancelled"),
+                                        _ => ("bg-light text-dark", a.Status)
+                                    };
+                                }
+                                <span class="badge @sc">@sl</span>
+                            </div>
+
+                            @if (a.Result != null)
+                            {
+                                <p class="mb-0 mt-2">
+                                    Result:
+                                    <span class="@resultClass text-uppercase">@a.Result</span>
+                                    @if (a.Score.HasValue)
+                                    {
+                                        <span class="text-muted small"> — Score: @a.Score</span>
+                                    }
+                                </p>
+                            }
+                        </div>
+                        @if (a.CanCancel)
+                        {
+                            <div class="card-footer bg-transparent">
+                                <form asp-area="Trainee" asp-controller="Exam"
+                                      asp-action="Cancel" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="appointmentId" value="@a.AppointmentId" />
+                                    <button class="btn btn-outline-danger btn-sm w-100"
+                                            onclick="return confirm('Cancel this exam appointment?')">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,112 @@
+﻿@model TraineeSummaryListViewModel
+@{
+    ViewData["Title"] = "Trainees Summary";
+}
+
+<div class="container py-4">
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <h2 class="fw-bold mb-0">Trainees Summary</h2>
+        <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
+               class="btn btn-outline-secondary btn-sm">
+            ← Dashboard
+        </a>
+    </div>
+
+    <!-- Search + Filter -->
+    <form method="get" class="row g-2 mb-4 align-items-end">
+        <div class="col-md-5">
+            <label class="form-label small fw-semibold">Search by name</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <input type="text" name="search" value="@Model.SearchTerm"
+                       class="form-control" placeholder="Trainee name..." />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label small fw-semibold">Filter by status</label>
+            <select name="statusFilter" class="form-select">
+                <option value="">— All statuses —</option>
+                @foreach (var s in TraineeSummaryListViewModel.AvailableStatuses)
+                {
+                    <option value="@s" selected="@(Model.StatusFilter == s)">
+                        @s.Replace("_", " ")
+                    </option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">Search</button>
+            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index"
+               class="btn btn-outline-secondary">Clear</a>
+        </div>
+    </form>
+
+    @if (!Model.Trainees.Any())
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-people fs-1 d-block mb-2"></i>
+            No trainees found matching your search.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trainee</th>
+                        <th>License</th>
+                        <th>Stage</th>
+                        <th class="text-center">Total Sessions</th>
+                        <th>Last Session</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.Trainees)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@t.FullName</td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@t.LicenseType.Replace("_", " ")</span>
+                            </td>
+                            <td>
+                                @{
+                                    var stageBadge = t.LicenseStage == "completed" ? "bg-success"
+                                        : t.LicenseStage.Contains("pending") ? "bg-warning text-dark"
+                                        : "bg-secondary";
+                                }
+                                <span class="badge @stageBadge">
+                                    @t.LicenseStage.Replace("_", " ")
+                                </span>
+                            </td>
+                            <td class="text-center fw-bold">@t.TotalSessions</td>
+                            <td class="text-muted small">
+                                @(t.LastSessionDate.HasValue
+                                    ? t.LastSessionDate.Value.ToString("dd MMM yyyy")
+                                    : "—")
+                            </td>
+                            <td>
+                                <a asp-area="Mentor" asp-controller="Trainees"
+                                       asp-action="Detail" asp-route-id="@t.TraineeId"
+                                       class="btn btn-outline-primary btn-sm">
+                                    View Details →
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p class="text-muted small">Showing @Model.Trainees.Count trainee(s).</p>
+    }
+</div>

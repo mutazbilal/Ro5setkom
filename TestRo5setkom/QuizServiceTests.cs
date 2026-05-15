@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using ro5setkom.Areas.Trainee.ViewModels.Quiz;
-using ro5setkom.Models;
-using ro5setkom.Services.Implementations;
-using ro5setkom.Services.Interfaces;
+using Rokhsetak.Areas.Trainee.ViewModels.Quiz;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Implementations;
+using Rokhsetak.Services.Interfaces;
 
 namespace TestRo5setkom;
 

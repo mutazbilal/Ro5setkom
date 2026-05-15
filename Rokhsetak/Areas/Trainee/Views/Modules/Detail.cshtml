@@ -1,0 +1,135 @@
+﻿@using Rokhsetak.Areas.Trainee.ViewModels.Modules
+@model ModuleDetailViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-4">
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-area="Trainee" asp-controller="Modules" asp-action="Index">Modules</a>
+            </li>
+            <li class="breadcrumb-item active">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <!-- Module header -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between flex-wrap gap-2">
+                <div>
+                    <h3 class="fw-bold">@Model.Title</h3>
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        <p class="text-muted">@Model.Description</p>
+                    }
+                </div>
+                <div class="d-flex gap-2 align-items-start flex-wrap">
+                    <span class="badge bg-info text-dark">
+                        @(Model.Phase == "theoretical" ? "📘 Theory" : "🚗 Practical")
+                    </span>
+                    @{
+                        var (sc, sl) = Model.Status switch
+                        {
+                            "completed" => ("bg-success", "Completed"),
+                            "in_progress" => ("bg-primary", "In Progress"),
+                            _ => ("bg-secondary", "Not Started")
+                        };
+                    }
+                    <span class="badge @sc">@sl</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    @if (Model.Contents.Any())
+    {
+        foreach (var content in Model.Contents)
+        {
+            if (content.ContentType == "video" && !string.IsNullOrWhiteSpace(content.VideoUrl))
+            {
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">📹 Video</div>
+                    <div class="card-body">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="@content.VideoUrl" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (content.ContentType == "text" && !string.IsNullOrWhiteSpace(content.TextContent))
+            {
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">📄 Reading Material</div>
+                    <div class="card-body">
+                        <div class="module-text-content">@Html.Raw(content.TextContent)</div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <div class="alert alert-info">No content available for your language preference yet.</div>
+    }
+
+    <!-- Action bar -->
+    <div class="d-flex gap-3 flex-wrap mt-4">
+        @if (Model.HasQuiz && Model.Status != "not_started")
+        {
+            <a asp-area="Trainee" asp-controller="Quiz" asp-action="Take"
+                   asp-route-moduleId="@Model.ModuleId"
+                   class="btn @(Model.QuizPassed ? "btn-outline-success" : "btn-primary")">
+                <i class="bi bi-pencil-square"></i>
+                @(Model.QuizPassed ? "Retake Quiz ✓" : "Take Quiz")
+            </a>
+
+            @if (Model.LastAttemptScore.HasValue)
+            {
+                <span class="align-self-center text-muted small">
+                    Last score: <strong>@Model.LastAttemptScore%</strong>
+                    @(Model.QuizPassed ? "— ✅ Passed" : "— ❌ Not passed")
+                </span>
+            }
+        }
+        else if (Model.CanCompleteDirectly)
+        {
+            <form asp-area="Trainee" asp-controller="Modules" asp-action="Complete" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="moduleId" value="@Model.ModuleId" />
+                <input type="hidden" name="traineeLicenseId" value="@Model.TraineeLicenseId" />
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Mark as Complete
+                </button>
+            </form>
+        }
+        else if (Model.Status == "not_started")
+        {
+            <span class="text-muted fst-italic align-self-center">Module will start when you open it.</span>
+        }
+
+        <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
+               class="btn btn-outline-secondary ms-auto">
+            ← Back to Modules
+        </a>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+@using Rokhsetak.ViewModels.Auth
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+}
+
+<div class="auth-mobile-header">
+    <span class="auth-mobile-header__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+    <span>Rokhsetak</span>
+</div>
+
+<main class="auth-page" aria-label="Login page">
+    <section class="auth-brand" aria-hidden="true">
+        <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+        <h1 class="auth-brand__title">Welcome Back</h1>
+        <p class="auth-brand__tagline">Your journey to the road starts here.</p>
+
+        <span class="auth-floating-shape auth-floating-shape--circle"></span>
+        <span class="auth-floating-shape auth-floating-shape--hex"></span>
+        <span class="auth-floating-shape auth-floating-shape--diamond"></span>
+
+        <svg class="auth-brand__art login-brand__road" viewBox="0 0 800 240"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Road illustration">
+            <defs>
+                <linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#18335f"/>
+                    <stop offset="100%" stop-color="#1f4d86"/>
+                </linearGradient>
+            </defs>
+            <path d="M0 80 C120 30, 260 150, 390 110 C530 65, 640 40, 800 85 L800 240 L0 240 Z"
+                  fill="url(#roadGrad)"/>
+            <path d="M70 169 C210 124, 355 155, 500 128 C596 111, 690 108, 760 130"
+                  stroke="#f5d486" stroke-width="6" stroke-linecap="round" stroke-dasharray="18 16" fill="none"/>
+            <path d="M0 120 C120 95, 240 200, 380 158 C515 120, 640 108, 800 138 L800 240 L0 240 Z"
+                  fill="rgba(255,255,255,.08)"/>
+            <path d="M0 150 C150 220, 250 110, 390 160 C490 195, 690 140, 800 178 L800 240 L0 240 Z"
+                  fill="rgba(255,255,255,.05)"/>
+        </svg>
+        <svg class="auth-brand__art" viewBox="0 0 1200 120" preserveAspectRatio="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,96L48,85.3C96,75,192,53,288,48C384,43,480,53,576,53.3C672,53,768,43,864,53.3C960,64,1056,96,1152,101.3L1200,107L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
+                  fill="#f5f7fa"/>
+        </svg>
+    </section>
+
+    <section class="auth-form-wrap">
+        <article class="auth-card" aria-live="polite">
+            <a asp-controller="Home" asp-action="Index"
+               class="auth-link"
+               style="display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Home
+            </a>
+
+            <h2 class="auth-card__title">Login</h2>
+            <p class="auth-card__subtitle">Access your account securely to continue your training journey.</p>
+
+            <div asp-validation-summary="ModelOnly"
+                 class="auth-error-banner"
+                 role="alert"
+                 aria-live="assertive"></div>
+
+            <form asp-controller="Auth" asp-action="Login" method="post"
+                  class="auth-form" id="loginForm" novalidate>
+
+                @if (ViewData["ReturnUrl"] != null)
+                {
+                    <input type="hidden" name="ReturnUrl" value="@ViewData["ReturnUrl"]" />
+                }
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="auth-field">
+                    <input asp-for="NationalId"
+                           class="auth-input"
+                           type="text"
+                           placeholder=" "
+                           maxlength="10"
+                           pattern="\d{10}"
+                           inputmode="numeric"
+                           autocomplete="username"
+                           aria-required="true"
+                           aria-describedby="nationalIdHelp" />
+                    <label asp-for="NationalId" class="auth-label">National ID</label>
+                    <span id="nationalIdHelp" class="sr-only">Enter your 10-digit national identification number.</span>
+                    <span asp-validation-for="NationalId" class="text-danger"></span>
+                </div>
+
+                <div class="auth-field">
+                    <input asp-for="Password"
+                           class="auth-input"
+                           type="password"
+                           placeholder=" "
+                           autocomplete="current-password"
+                           aria-required="true"
+                           aria-describedby="passwordHelp" />
+                    <label asp-for="Password" class="auth-label">Password</label>
+                    <button type="button" class="auth-password-toggle"
+                            data-password-toggle data-target="Password"
+                            aria-label="Show password">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <span id="passwordHelp" class="sr-only">Enter your account password.</span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="auth-row">
+                    <label class="auth-custom-check" for="RememberMe">
+                        <input asp-for="RememberMe" type="checkbox" />
+                        <span class="auth-custom-check__box" aria-hidden="true"></span>
+                        <span>Remember Me</span>
+                    </label>
+
+                    <a asp-controller="Auth" asp-action="ForgotPassword"
+                       class="auth-link auth-link--gold">Forgot Password?</a>
+                </div>
+
+                <div class="login-form__actions">
+                    <button id="loginSubmitBtn" class="auth-btn" type="submit">Sign In</button>
+                </div>
+
+                <div class="auth-divider">or</div>
+
+                <p class="login-register-link">
+                    Don't have an account?
+                    <a asp-controller="Registration" asp-action="Trainee">Register as Trainee</a>
+                    &nbsp;/&nbsp;
+                    <a asp-controller="Registration" asp-action="Mentor">Register as Mentor</a>
+                </p>
+            </form>
+        </article>
+    </section>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/login.js" asp-append-version="true"></script>
+}
