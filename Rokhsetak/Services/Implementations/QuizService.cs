@@ -10,10 +10,10 @@ public class QuizService : IQuizService
 {
     private const int MockExamTimeLimitMinutes = 45;
 
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
 
-    public QuizService(Ro5setkomDbContext context, INotificationService notifications)
+    public QuizService(RokhsetakDbContext context, INotificationService notifications)
     {
         _context = context;
         _notifications = notifications;

@@ -22,13 +22,13 @@ public class PasswordResetService : IPasswordResetService
 {
     private static readonly TimeSpan TokenValidity = TimeSpan.FromHours(1);
 
-    private readonly Ro5setkomDbContext _db;
+    private readonly RokhsetakDbContext _db;
     private readonly IEmailService _emailService;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ILogger<PasswordResetService> _logger;
 
     public PasswordResetService(
-        Ro5setkomDbContext db,
+        RokhsetakDbContext db,
         IEmailService emailService,
         IHttpContextAccessor httpContextAccessor,
         ILogger<PasswordResetService> logger)

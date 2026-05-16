@@ -8,15 +8,15 @@ namespace TestRo5setkom;
 [TestClass]
 public class MentorDashboardServiceTests
 {
-    private Ro5setkomDbContext CreateContext()
+    private RokhsetakDbContext CreateContext()
     {
-        var opts = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+        var opts = new DbContextOptionsBuilder<RokhsetakDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
-        return new Ro5setkomDbContext(opts);
+        return new RokhsetakDbContext(opts);
     }
 
-    private static void SeedMentor(Ro5setkomDbContext ctx, int mentorId = 1)
+    private static void SeedMentor(RokhsetakDbContext ctx, int mentorId = 1)
     {
         ctx.Users.Add(new User
         {

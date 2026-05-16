@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 CREATE TABLE Core.UserConsents (
     consent_id    INT PRIMARY KEY IDENTITY(1,1),

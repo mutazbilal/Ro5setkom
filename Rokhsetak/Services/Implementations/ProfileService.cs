@@ -8,10 +8,10 @@
 
     public class ProfileService : IProfileService
     {
-        private readonly Ro5setkomDbContext _context;
+        private readonly RokhsetakDbContext _context;
         private readonly INotificationService _notificationService;
 
-        public ProfileService(Ro5setkomDbContext context, INotificationService notificationService)
+        public ProfileService(RokhsetakDbContext context, INotificationService notificationService)
         {
             _context = context;
             _notificationService = notificationService;

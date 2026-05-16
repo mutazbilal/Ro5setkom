@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
 
 CREATE TABLE Notifications.NotificationPreferences (
     user_id INT PRIMARY KEY,

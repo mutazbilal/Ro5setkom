@@ -21,7 +21,7 @@ public sealed class RokhsetakWebApplicationFactory : WebApplicationFactory<Progr
     /// Optional hook executed once when the factory's services are first built.
     /// Use it from a test to insert fixture-specific entities.
     /// </summary>
-    public Action<Ro5setkomDbContext>? SeedAction { get; set; }
+    public Action<RokhsetakDbContext>? SeedAction { get; set; }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -30,9 +30,9 @@ public sealed class RokhsetakWebApplicationFactory : WebApplicationFactory<Progr
         builder.ConfigureTestServices(services =>
         {
             // ── 1. Replace SQL Server with EF Core InMemory ──────────────────
-            RemoveDbContextRegistrations<Ro5setkomDbContext>(services);
+            RemoveDbContextRegistrations<RokhsetakDbContext>(services);
 
-            services.AddDbContext<Ro5setkomDbContext>(opt =>
+            services.AddDbContext<RokhsetakDbContext>(opt =>
                 opt.UseInMemoryDatabase(_dbName));
 
             // ── 2. Replace authentication: Test is now the default scheme ───
@@ -66,7 +66,7 @@ public sealed class RokhsetakWebApplicationFactory : WebApplicationFactory<Progr
             // ── 4. Seed base reference data + caller-supplied fixture ────────
             var sp = services.BuildServiceProvider();
             using var scope = sp.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<Ro5setkomDbContext>();
+            var db = scope.ServiceProvider.GetRequiredService<RokhsetakDbContext>();
             db.Database.EnsureCreated();
             DatabaseSeeder.SeedReferenceData(db);
             SeedAction?.Invoke(db);

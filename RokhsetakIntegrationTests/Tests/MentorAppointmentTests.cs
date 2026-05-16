@@ -16,7 +16,7 @@ public sealed class MentorAppointmentTests : IntegrationTestBase
     private const int LicenseId = 3001;
     private const int BookingId = 4001;
 
-    protected override void SeedFixture(Ro5setkomDbContext db)
+    protected override void SeedFixture(RokhsetakDbContext db)
     {
         db.GovCitizens.AddRange(
             DatabaseSeeder.NewCitizen("1000000001", "Mentor", "A"),

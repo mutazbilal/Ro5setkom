@@ -8,17 +8,14 @@
 -- ============================================
 
 
-USE master;
-GO
-
 -- ============================================
 -- DROP DATABASE IF EXISTS
 -- ============================================
-IF DB_ID('ro5setkomDB') IS NOT NULL
+IF DB_ID('RokhsetakDB') IS NOT NULL
 BEGIN
     PRINT 'Dropping existing database...';
-    ALTER DATABASE ro5setkomDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE ro5setkomDB;
+    ALTER DATABASE RokhsetakDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE RokhsetakDB;
 END
 GO
 
@@ -26,17 +23,16 @@ GO
 -- 1. CREATE DATABASE
 -- ============================================
 PRINT 'Creating Database...';
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\00_Database\01_CreateDatabase.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\00_Database\01_CreateDatabase.sql"
 GO
 
-USE ro5setkomDB;
-GO
+
 
 -- ============================================
 -- 2. CREATE SCHEMAS
 -- ============================================
 PRINT 'Creating Schemas...';
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\00_Database\02_CreateSchemas.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\00_Database\02_CreateSchemas.sql"
 GO
 
 -- ============================================
@@ -44,10 +40,10 @@ GO
 -- ============================================
 PRINT 'Running Lookups...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\01_Lookups\01_Roles.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\01_Roles.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\01_Lookups\02_LicenseTypes.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\02_LicenseTypes.sql"
 GO
 
 -- ============================================
@@ -55,19 +51,19 @@ GO
 -- ============================================
 PRINT 'Running Government Module...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\02_Government\01_GovCitizens.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\02_Government\01_GovCitizens.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\02_Government\02_GovExamCenters.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\02_Government\02_GovExamCenters.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\02_Government\03_GovLicenseRecords.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\02_Government\03_GovLicenseRecords.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\02_Government\04_GovOfficialExams.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\02_Government\04_GovOfficialExams.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\02_Government\05_GovExamResults.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\02_Government\05_GovExamResults.sql"
 GO
 
 -- ============================================
@@ -75,13 +71,13 @@ GO
 -- ============================================
 PRINT 'Running Core Module...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\03_Core\01_Users.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\03_Core\01_Users.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\03_Core\02_UserConsents.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\03_Core\02_UserConsents.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\03_Core\03_TraineeLicenses.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\03_Core\03_TraineeLicenses.sql"
 GO
 
 -- ============================================
@@ -89,13 +85,13 @@ GO
 -- ============================================
 PRINT 'Running Role Profiles...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\04_RoleProfiles\01_Admins.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\04_RoleProfiles\01_Admins.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\04_RoleProfiles\02_Trainees.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\04_RoleProfiles\02_Trainees.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\04_RoleProfiles\03_Mentors.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\04_RoleProfiles\03_Mentors.sql"
 GO
 
 -- ============================================
@@ -103,10 +99,10 @@ GO
 -- ============================================
 PRINT 'Running Mentor Extensions...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\06_Mentor\02_MentorAvailability.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\06_Mentor\02_MentorAvailability.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\06_Mentor\03_MentorApplications.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\06_Mentor\03_MentorApplications.sql"
 GO
 
 -- ============================================
@@ -114,13 +110,13 @@ GO
 -- ============================================
 PRINT 'Running Scheduling...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\08_Scheduling\01_BlockedDates.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\08_Scheduling\01_BlockedDates.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\08_Scheduling\02_Bookings.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\08_Scheduling\02_Bookings.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\08_Scheduling\03_ExamAppointments.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\08_Scheduling\03_ExamAppointments.sql"
 GO
 
 
@@ -129,55 +125,55 @@ GO
 -- ============================================
 PRINT 'Running Learning System...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\01_LearningModules.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\01_LearningModules.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\02_TraineeModuleProgress.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\02_TraineeModuleProgress.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\03_ModuleRecommendations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\03_ModuleRecommendations.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\04_Quizzes.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\04_Quizzes.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\05_QuizQuestions.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\05_QuizQuestions.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\06_QuestionOptions.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\06_QuestionOptions.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\07_QuizAttempts.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\07_QuizAttempts.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\09_Ratings.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\09_Ratings.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\10_CompletionCertificates.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\10_CompletionCertificates.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\11_SessionFeedback.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\11_SessionFeedback.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\12_TrainingCenters.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\12_TrainingCenters.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\13_ModuleContents.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\13_ModuleContents.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\14_ModuleTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\14_ModuleTranslations.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\15_ModuleContentsTranslation.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\15_ModuleContentsTranslation.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\16_QuizTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\16_QuizTranslations.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\17_QuestionTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\17_QuestionTranslations.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\07_Learning\18_OptionTranslations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\18_OptionTranslations.sql"
 GO
 
 -- ============================================
@@ -185,13 +181,13 @@ GO
 -- ============================================
 PRINT 'Running Messaging...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\09_Messaging\01_Conversations.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\09_Messaging\01_Conversations.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\09_Messaging\02_Messages.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\09_Messaging\02_Messages.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\09_Messaging\03_ConversationAttachments.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\09_Messaging\03_ConversationAttachments.sql"
 GO
 
 -- ============================================
@@ -199,10 +195,10 @@ GO
 -- ============================================
 PRINT 'Running AI Module...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\10_AI\01_AIChatSessions.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\10_AI\01_AIChatSessions.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\10_AI\02_AIChatMessages.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\10_AI\02_AIChatMessages.sql"
 GO
 
 -- ============================================
@@ -210,10 +206,10 @@ GO
 -- ============================================
 PRINT 'Running Notifications...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\11_Notifications\01_Notifications.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\11_Notifications\01_Notifications.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\11_Notifications\02_NotificationPreferences.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\11_Notifications\02_NotificationPreferences.sql"
 GO
 
 -- ============================================
@@ -221,10 +217,10 @@ GO
 -- ============================================
 PRINT 'Running Security...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\12_Security\01_PasswordResetTokens.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\12_Security\01_PasswordResetTokens.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\12_Security\02_AuditLogs.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\12_Security\02_AuditLogs.sql"
 GO
 
 -- ============================================
@@ -232,7 +228,7 @@ GO
 -- ============================================
 PRINT 'Creating Indexes...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\13_Indexes\01_Indexes.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\13_Indexes\01_Indexes.sql"
 GO
 
 -- ============================================
@@ -240,25 +236,25 @@ GO
 -- ============================================
 PRINT 'Applying FK Patches...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\01_GovOfficialExams_AdminFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\01_GovOfficialExams_AdminFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\02_GovExamResults_AdminFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\02_GovExamResults_AdminFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\03_Trainees_TrainingCenterFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\03_Trainees_TrainingCenterFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\04_Mentors_TrainingCenterFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\04_Mentors_TrainingCenterFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\05_Mentors_MentorApplicationsFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\05_Mentors_MentorApplicationsFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\06_TraineeLicenses_TraineesFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\06_TraineeLicenses_TraineesFK.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\05_FK_Patches\07_TraineeLicenses_MentorsFK.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\05_FK_Patches\07_TraineeLicenses_MentorsFK.sql"
 GO
 
 -- ============================================
@@ -266,31 +262,31 @@ GO
 -- ============================================
 PRINT 'Seeding Data...';
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\01_Roles.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\01_Roles.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\02_LicenseTypes.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\02_LicenseTypes.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\03_seed_modules.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\03_seed_modules.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\04_seed_all_quizzes_questions_options.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\04_seed_all_quizzes_questions_options.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\05_GovCitizens.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\05_GovCitizens.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\06_GovLicenseRecords.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\06_GovLicenseRecords.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\07_GovExamCenters.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\07_GovExamCenters.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\08_TrainingCenters.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\08_TrainingCenters.sql"
 GO
 
-:r "C:\Users\Lenovo\source\repos\ro5setkom\ro5setkomDB\14_Seeds\09_Users.sql"
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\09_Users.sql"
 GO
 
 -- ============================================

@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 
 -- Master citizen registry — source of truth for identity data

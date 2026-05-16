@@ -15,7 +15,7 @@ public sealed class TraineeModuleProgressionTests : IntegrationTestBase
     private const int LicenseId = 7001;
     private const int ModuleId = 8001;
 
-    protected override void SeedFixture(Ro5setkomDbContext db)
+    protected override void SeedFixture(RokhsetakDbContext db)
     {
         db.GovCitizens.AddRange(
             DatabaseSeeder.NewCitizen("3000000001", "Trainee", "Y"),

@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
 
 CREATE TABLE Learning.Quizzes (
     quiz_id          INT PRIMARY KEY IDENTITY(1,1),

@@ -10,17 +10,17 @@ namespace TestRo5setkom;
 [TestClass]
 public class ModuleServiceTests
 {
-    private Ro5setkomDbContext CreateContext()
+    private RokhsetakDbContext CreateContext()
     {
-        var opts = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+        var opts = new DbContextOptionsBuilder<RokhsetakDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
-        return new Ro5setkomDbContext(opts);
+        return new RokhsetakDbContext(opts);
     }
 
     private static Mock<INotificationService> MockNotif() => new();
 
-    private static void SeedLicense(Ro5setkomDbContext ctx, int traineeId = 1, int licenseId = 1)
+    private static void SeedLicense(RokhsetakDbContext ctx, int traineeId = 1, int licenseId = 1)
     {
         ctx.LicenseTypes.Add(new LicenseType
         {
@@ -44,7 +44,7 @@ public class ModuleServiceTests
     }
 
     // Adds a module + EN/AR translations in one call
-    private static void AddModule(Ro5setkomDbContext ctx,
+    private static void AddModule(RokhsetakDbContext ctx,
         int moduleId, int licenseTypeId, string phase, int orderIndex,
         int? prerequisiteModuleId = null,
         string titleEn = "Module", string titleAr = "وحدة")
@@ -64,7 +64,7 @@ public class ModuleServiceTests
     }
 
     // Adds a quiz + EN/AR translations in one call
-    private static void AddQuiz(Ro5setkomDbContext ctx,
+    private static void AddQuiz(RokhsetakDbContext ctx,
         int quizId, int? moduleId, bool isMockExam, int? licenseTypeId = null,
         int passingScore = 70,
         string titleEn = "Quiz", string titleAr = "اختبار")

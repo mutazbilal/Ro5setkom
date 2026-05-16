@@ -15,16 +15,16 @@ namespace TestRo5setkom
         // ─────────────────────────────────────────
         // DB FACTORY
         // ─────────────────────────────────────────
-        private Ro5setkomDbContext GetDbContext()
+        private RokhsetakDbContext GetDbContext()
         {
-            var options = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+            var options = new DbContextOptionsBuilder<RokhsetakDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
-            return new Ro5setkomDbContext(options);
+            return new RokhsetakDbContext(options);
         }
 
-        private AuthService CreateService(Ro5setkomDbContext db)
+        private AuthService CreateService(RokhsetakDbContext db)
         {
             return new AuthService(
                 db,

@@ -8,9 +8,9 @@ namespace Rokhsetak.Services.Implementations;
 
 public class CalendarService : ICalendarService
 {
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
 
-    public CalendarService(Ro5setkomDbContext context)
+    public CalendarService(RokhsetakDbContext context)
     {
         _context = context;
     }

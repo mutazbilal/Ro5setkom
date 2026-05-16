@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
 
 CREATE TABLE Scheduling.BlockedDates (
     blocked_date_id  INT PRIMARY KEY IDENTITY(1,1),

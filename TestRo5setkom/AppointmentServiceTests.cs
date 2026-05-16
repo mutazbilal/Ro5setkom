@@ -12,19 +12,19 @@ namespace TestRo5setkom;
 [TestClass]
 public class AppointmentServiceTests
 {
-    private Ro5setkomDbContext CreateContext()
+    private RokhsetakDbContext CreateContext()
     {
-        var opts = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+        var opts = new DbContextOptionsBuilder<RokhsetakDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .ConfigureWarnings(w =>
                     w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
-        return new Ro5setkomDbContext(opts);
+        return new RokhsetakDbContext(opts);
     }
 
     private static Mock<INotificationService> MockNotif() => new();
 
-    private static void SeedFull(Ro5setkomDbContext ctx,
+    private static void SeedFull(RokhsetakDbContext ctx,
         string bookingStatus = "pending",
         DateOnly? bookingDate = null,
         TimeOnly? startTime = null,

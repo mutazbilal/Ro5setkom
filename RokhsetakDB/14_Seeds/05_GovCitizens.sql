@@ -1,6 +1,3 @@
-USE ro5setkomDB;
-GO
-
 INSERT INTO Gov.GovCitizens (
     national_id,
     first_name,

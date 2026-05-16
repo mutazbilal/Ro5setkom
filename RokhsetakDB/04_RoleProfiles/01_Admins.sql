@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 CREATE TABLE Roles.Admins (
     admin_id     INT PRIMARY KEY,

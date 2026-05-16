@@ -29,10 +29,10 @@ public class AuthService : IAuthService
     // For production: move this to IDistributedCache or a dedicated DB table.
     private static readonly ConcurrentDictionary<string, FailedAttemptRecord> _failedAttempts = new();
 
-    private readonly Ro5setkomDbContext _db;
+    private readonly RokhsetakDbContext _db;
     private readonly ILogger<AuthService> _logger;
 
-    public AuthService(Ro5setkomDbContext db, ILogger<AuthService> logger)
+    public AuthService(RokhsetakDbContext db, ILogger<AuthService> logger)
     {
         _db = db;
         _logger = logger;

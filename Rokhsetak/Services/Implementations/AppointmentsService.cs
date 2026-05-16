@@ -9,10 +9,10 @@ namespace Rokhsetak.Services.Implementations;
 
 public class AppointmentService : IAppointmentService
 {
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
 
-    public AppointmentService(Ro5setkomDbContext context, INotificationService notifications)
+    public AppointmentService(RokhsetakDbContext context, INotificationService notifications)
     {
         _context = context;
         _notifications = notifications;

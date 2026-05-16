@@ -11,17 +11,17 @@ namespace Rokhsetak.Tests;
 [TestClass]
 public class ExamAppointmentServiceTests
 {
-    private Ro5setkomDbContext CreateContext()
+    private RokhsetakDbContext CreateContext()
     {
-        var opts = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+        var opts = new DbContextOptionsBuilder<RokhsetakDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
-        return new Ro5setkomDbContext(opts);
+        return new RokhsetakDbContext(opts);
     }
 
     private static Mock<INotificationService> MockNotif() => new();
 
-    private static void SeedBase(Ro5setkomDbContext ctx,
+    private static void SeedBase(RokhsetakDbContext ctx,
         string stage = "mock_exam_completed")
     {
         ctx.LicenseTypes.Add(new LicenseType { LicenseTypeId = 1, LicenseName = "private_manual" });

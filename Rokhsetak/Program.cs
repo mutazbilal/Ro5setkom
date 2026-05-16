@@ -9,7 +9,7 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<Ro5setkomDbContext>(options =>
+builder.Services.AddDbContext<RokhsetakDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddLocalization(opts => opts.ResourcesPath = "Resources");
