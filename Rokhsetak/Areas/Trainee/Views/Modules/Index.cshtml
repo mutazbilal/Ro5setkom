@@ -7,78 +7,152 @@
     ViewData["Title"] = L["Modules_Title"];
 }
 
-<div class="container py-4">
+@section Styles {
+    <link rel="stylesheet" href="~/css/areas/trainee/modules.css" />
+}
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
-               class="btn btn-outline-secondary btn-sm">
-            @L["Nav_Dashboard"]
-        </a>
-    </div>
-
-    <!-- Theoretical -->
-    <h5 class="text-info fw-semibold mb-3">
-        <i class="bi bi-journal-text"></i> @L["Modules_Theoretical"]
-    </h5>
-
-    <div class="row g-3 mb-5">
-        @foreach (var m in Model.TheoreticalModules)
+<div class="modules-page">
+    <div class="modules-page__inner">
+        @if (TempData["Error"] != null)
         {
-            <div class="col-md-4">
-                @await Html.PartialAsync("_ModuleCard", m)
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
         }
 
-        @if (!Model.TheoreticalModules.Any())
-        {
-            <p class="text-muted">@L["Modules_NoneTheoretical"]</p>
-        }
-    </div>
-
-    <!-- Mock Exam -->
-    @if (Model.IsMockExamAvailable)
-    {
-        <div class="alert @(Model.IsMockExamCompleted ? "alert-success" : "alert-warning") d-flex justify-content-between align-items-center mb-4">
-            <span>
-                <strong>@L["MockExam_Title"]:</strong>
-                @(Model.IsMockExamCompleted
-                    ? L["MockExam_Completed"]
-                    : L["MockExam_UnlockMessage"])
-            </span>
-
-            <a asp-area="Trainee" asp-controller="Quiz" asp-action="MockExam"
-                   class="btn btn-sm @(Model.IsMockExamCompleted ? "btn-outline-success" : "btn-warning")">
-                @(Model.IsMockExamCompleted
-                    ? L["MockExam_Retake"]
-                    : L["MockExam_Start"])
-            </a>
-        </div>
-    }
-
-    <!-- Practical -->
-    <h5 class="text-warning fw-semibold mb-3">
-        <i class="bi bi-car-front-fill"></i> @L["Modules_Practical"]
-    </h5>
-
-    <div class="row g-3">
-        @foreach (var m in Model.PracticalModules)
-        {
-            <div class="col-md-4">
-                @await Html.PartialAsync("_ModuleCard", m)
+        <!-- ============ Page Hero ============ -->
+        <section class="modules-hero" aria-labelledby="modules-page-title">
+            <div class="modules-hero__intro">
+                <span class="modules-hero__eyebrow">@L["Modules_Title"]</span>
+                <h1 id="modules-page-title" class="modules-hero__title">@L["Modules_Title"]</h1>
+                <div class="modules-hero__meta">
+                    <span class="chip chip--primary" aria-label="License type">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        @Model.LicenseTypeName
+                    </span>
+                </div>
             </div>
+
+            <div class="modules-hero__cta">
+                <a asp-area="Trainee"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="btn-action btn-action--outline">
+                    <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                    <span>@L["Nav_Dashboard"]</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Theoretical ============ -->
+        <section class="modules-section modules-section--theory" aria-labelledby="modules-section-theory-title">
+            <header class="modules-section__header">
+                <span class="modules-section__icon" aria-hidden="true">
+                    <i class="fa-solid fa-book"></i>
+                </span>
+                <div class="modules-section__headings">
+                    <p class="modules-section__eyebrow">Track 01</p>
+                    <h2 id="modules-section-theory-title" class="modules-section__title">
+                        @L["Modules_Theoretical"]
+                    </h2>
+                </div>
+                <span class="modules-section__count" aria-label="Total modules">
+                    @Model.TheoreticalModules.Count()
+                </span>
+            </header>
+
+            @if (Model.TheoreticalModules.Any())
+            {
+                <div class="modules-grid">
+                    @foreach (var m in Model.TheoreticalModules)
+                    {
+                        @await Html.PartialAsync("_ModuleCard", m)
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="modules-empty">
+                    <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                    <p>@L["Modules_NoneTheoretical"]</p>
+                </div>
+            }
+        </section>
+
+        <!-- ============ Mock Exam Gate ============ -->
+        @if (Model.IsMockExamAvailable)
+        {
+            <section class="mock-exam-callout @(Model.IsMockExamCompleted ? "mock-exam-callout--completed" : "mock-exam-callout--ready")"
+                     aria-labelledby="modules-mock-title">
+                <div class="mock-exam-callout__main">
+                    <span class="mock-exam-callout__icon" aria-hidden="true">
+                        <i class="fa-solid @(Model.IsMockExamCompleted ? "fa-circle-check" : "fa-clipboard-check")"></i>
+                    </span>
+                    <div class="mock-exam-callout__text">
+                        <p class="mock-exam-callout__eyebrow">@L["MockExam_Title"]</p>
+                        <h3 id="modules-mock-title" class="mock-exam-callout__title">
+                            @(Model.IsMockExamCompleted
+                                ? L["MockExam_Completed"]
+                                : L["MockExam_UnlockMessage"])
+                        </h3>
+                    </div>
+                </div>
+
+                <a asp-area="Trainee"
+                   asp-controller="Quiz"
+                   asp-action="MockExam"
+                   class="btn-action @(Model.IsMockExamCompleted ? "btn-action--ghost-success" : "btn-action--gradient")">
+                    <i class="fa-solid @(Model.IsMockExamCompleted ? "fa-rotate-right" : "fa-play")" aria-hidden="true"></i>
+                    <span>
+                        @(Model.IsMockExamCompleted
+                            ? L["MockExam_Retake"]
+                            : L["MockExam_Start"])
+                    </span>
+                </a>
+            </section>
         }
 
-        @if (!Model.PracticalModules.Any())
-        {
-            <p class="text-muted">@L["Modules_NonePractical"]</p>
-        }
+        <!-- ============ Practical ============ -->
+        <section class="modules-section modules-section--practical" aria-labelledby="modules-section-practical-title">
+            <header class="modules-section__header">
+                <span class="modules-section__icon" aria-hidden="true">
+                    <i class="fa-solid fa-car-side"></i>
+                </span>
+                <div class="modules-section__headings">
+                    <p class="modules-section__eyebrow">Track 02</p>
+                    <h2 id="modules-section-practical-title" class="modules-section__title">
+                        @L["Modules_Practical"]
+                    </h2>
+                </div>
+                <span class="modules-section__count" aria-label="Total modules">
+                    @Model.PracticalModules.Count()
+                </span>
+            </header>
+
+            @if (Model.PracticalModules.Any())
+            {
+                <div class="modules-grid">
+                    @foreach (var m in Model.PracticalModules)
+                    {
+                        @await Html.PartialAsync("_ModuleCard", m)
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="modules-empty">
+                    <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+                    <p>@L["Modules_NonePractical"]</p>
+                </div>
+            }
+        </section>
+
     </div>
 </div>

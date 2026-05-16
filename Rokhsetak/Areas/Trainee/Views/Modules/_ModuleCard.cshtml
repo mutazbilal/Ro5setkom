@@ -3,88 +3,109 @@
 @inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResourceMarker> L
 
 @{
-    var borderClass = Model.Status switch
+    // Resolve a single status key (locked overrides Status)
+    var statusKey = Model.IsLocked ? "locked" : Model.Status;
+
+    var (cardModifier, statusIcon, statusLabel) = statusKey switch
     {
-        "completed" => "border-success",
-        "in_progress" => "border-primary",
-        _ => Model.IsLocked ? "border-secondary" : "border-light"
+        "completed"   => ("completed",   "fa-circle-check",     L["Status_Completed"]),
+        "in_progress" => ("in-progress", "fa-circle-play",      L["Status_InProgress"]),
+        "locked"      => ("locked",      "fa-lock",             ""),
+        _             => ("not-started", "",                    L["Status_NotStarted"])
     };
+
+    var (phaseIcon, phaseLabel) = Model.Phase == "theoretical"
+        ? ("fa-book",    L["Module_Theory"])
+        : ("fa-car-side", L["Module_Practical"]);
+
+    string ctaLabel = Model.Status == "not_started"
+        ? L["Module_Start"].Value
+        : Model.Status == "in_progress"
+            ? L["Module_Continue"].Value
+            : L["Module_Review"].Value;
+
+    string ctaIcon = Model.Status == "not_started"
+        ? "fa-play"
+        : Model.Status == "in_progress"
+            ? "fa-forward"
+            : "fa-rotate-right";
 }
 
-<div class="card h-100 shadow-sm @borderClass border-2">
-    <div class="card-body">
+<article class="module-card module-card--@cardModifier">
+    <span class="module-card__accent" aria-hidden="true"></span>
 
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <h6 class="card-title fw-bold mb-0">@Model.Title</h6>
+    <div class="module-card__body">
+        <header class="module-card__head">
+            <h3 class="module-card__title">@Model.Title</h3>
 
             @if (Model.IsLocked)
             {
-                <i class="bi bi-lock-fill text-secondary fs-5"
-                   title="@L["Module_LockedTooltip"]"></i>
+                <span class="module-card__corner-icon module-card__corner-icon--locked"
+                      title="@L["Module_LockedTooltip"]"
+                      aria-label="@L["Module_LockedTooltip"]">
+                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                </span>
             }
             else if (Model.Status == "completed")
             {
-                <i class="bi bi-check-circle-fill text-success fs-5"
-                   title="@L["Module_CompletedTooltip"]"></i>
+                <span class="module-card__corner-icon module-card__corner-icon--completed"
+                      title="@L["Module_CompletedTooltip"]"
+                      aria-label="@L["Module_CompletedTooltip"]">
+                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                </span>
             }
-        </div>
+        </header>
 
         @if (!string.IsNullOrWhiteSpace(Model.Description))
         {
-            <p class="card-text text-muted small">@Model.Description</p>
+            <p class="module-card__description">@Model.Description</p>
         }
 
-        <div class="d-flex gap-2 flex-wrap mb-3">
-
-            <span class="badge bg-light text-dark border">
-                @(Model.Phase == "theoretical"
-                    ? $"📘 {L["Module_Theory"]}"
-                    : $"🚗 {L["Module_Practical"]}")
+        <div class="module-card__badges">
+            <span class="chip chip--ghost">
+                <i class="fa-solid @phaseIcon" aria-hidden="true"></i>
+                @phaseLabel
             </span>
 
-            @{
-                var statusBadge = Model.Status switch
+            <span class="status-pill status-pill--@cardModifier">
+                @if (!string.IsNullOrEmpty(statusIcon))
                 {
-                    "completed" => ("bg-success", L["Status_Completed"]),
-                    "in_progress" => ("bg-primary", L["Status_InProgress"]),
-                    _ => ("bg-secondary", L["Status_NotStarted"])
-                };
-            }
-
-            <span class="badge @statusBadge.Item1">@statusBadge.Item2</span>
+                    <i class="fa-solid @statusIcon" aria-hidden="true"></i>
+                }
+                @(string.IsNullOrEmpty(statusLabel) ? L["Module_Locked"].Value : statusLabel)
+            </span>
 
             @if (Model.HasQuiz)
             {
-                <span class="badge @(Model.QuizPassed ? "bg-success" : "bg-warning text-dark")">
-                    @L["Quiz_Label"]:
-                    @(Model.QuizPassed? L["Quiz_PassedShort"] : L["Quiz_NotPassedShort"])
+                <span class="quiz-badge @(Model.QuizPassed ? "quiz-badge--passed" : "quiz-badge--pending")">
+                    <i class="fa-solid @(Model.QuizPassed ? "fa-award" : "fa-pen-to-square")" aria-hidden="true"></i>
+                    <span class="quiz-badge__label">@L["Quiz_Label"]</span>
+                    <span class="quiz-badge__verdict">
+                        @(Model.QuizPassed ? L["Quiz_PassedShort"] : L["Quiz_NotPassedShort"])
+                    </span>
                 </span>
             }
-
         </div>
     </div>
 
-    <div class="card-footer bg-transparent">
-
+    <footer class="module-card__footer">
         @if (Model.IsLocked)
         {
-            <button class="btn btn-secondary btn-sm w-100" disabled>
-                <i class="bi bi-lock"></i> @L["Module_Locked"]
+            <button type="button" class="btn-action btn-action--locked btn-action--block" disabled aria-disabled="true">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <span>@L["Module_Locked"]</span>
             </button>
         }
         else
         {
-            <a asp-area="Trainee" asp-controller="Modules" asp-action="Detail"
-                   asp-route-id="@Model.ModuleId"
-                   class="btn btn-outline-primary btn-sm w-100">
-
-                @(Model.Status == "not_started"
-                    ? L["Module_Start"]
-                    : Model.Status == "in_progress"
-                        ? L["Module_Continue"]
-                        : L["Module_Review"])
+            <a asp-area="Trainee"
+               asp-controller="Modules"
+               asp-action="Detail"
+               asp-route-id="@Model.ModuleId"
+               class="btn-action @(Model.Status == "completed" ? "btn-action--ghost-success" : Model.Status == "in_progress" ? "btn-action--outline" : "btn-action--gradient") btn-action--block">
+                <i class="fa-solid @ctaIcon" aria-hidden="true"></i>
+                <span>@ctaLabel</span>
             </a>
         }
-
-    </div>
-</div>
+    </footer>
+</article>

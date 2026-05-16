@@ -42,18 +42,19 @@
 
     <section class="auth-form-wrap">
         <article class="auth-card register-card" aria-live="polite">
-            <a asp-controller="Home" asp-action="Index"
+            <a asp-controller="Registration" asp-action="SelectRole"
                class="auth-link"
                style="display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                Back to Home
+                Back to role selection
             </a>
 
             <h2 class="auth-card__title">@heading</h2>
-            <p class="auth-card__subtitle">Step 1 of 2: Verify Identity</p>
+            <p class="auth-card__subtitle">Step 2 of 3: Verify Identity</p>
 
-            <div class="auth-stepper" aria-label="Registration progress">
-                <div class="auth-step is-active"></div>
+            <div class="auth-stepper" aria-label="Registration progress — step 2 of 3">
+                <div class="auth-step is-complete"></div>
+                <div class="auth-step is-active" aria-current="step"></div>
                 <div class="auth-step"></div>
             </div>
 
@@ -64,7 +65,6 @@
 
             <form asp-controller="Registration" asp-action="LookupNationalId" method="post"
                   class="auth-form" novalidate>
-                <div asp-validation-summary="All" class="text-danger"></div>
                 @* Critical — tells the controller which registration branch to take *@
                 <input asp-for="IsTrainee" type="hidden" />
 
