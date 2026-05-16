@@ -68,11 +68,10 @@
             if (slot == null)
                 return ServiceResult.Failure("Slot not found.");
 
-            // 🔐 Ownership check
             if (slot.MentorId != mentorId)
                 return ServiceResult.Failure("Unauthorized.");
 
-            // 🔁 Overlap check (excluding current slot)
+            // Overlap check (excluding current slot)
             var hasOverlap = await _context.MentorAvailabilities
                 .AnyAsync(a =>
                     a.MentorId == mentorId &&
@@ -104,7 +103,7 @@
             if (slot == null)
                 return ServiceResult.Failure("Slot not found.");
 
-            // 🔐 Ownership check
+            // Ownership check
             if (slot.MentorId != mentorId)
                 return ServiceResult.Failure("Unauthorized.");
 
