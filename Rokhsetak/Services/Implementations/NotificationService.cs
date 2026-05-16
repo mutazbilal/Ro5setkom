@@ -5,9 +5,9 @@ namespace Rokhsetak.Services.Implementations
 {
     public class NotificationService : INotificationService
     {
-        private readonly Ro5setkomDbContext _context;
+        private readonly RokhsetakDbContext _context;
 
-        public NotificationService(Ro5setkomDbContext context)
+        public NotificationService(RokhsetakDbContext context)
         {
             _context = context;
         }

@@ -7,9 +7,9 @@ namespace Rokhsetak.Services.Implementations
 {
     public class LicenseService : ILicenseService
     {
-        private readonly Ro5setkomDbContext _db;
+        private readonly RokhsetakDbContext _db;
 
-        public LicenseService(Ro5setkomDbContext context)
+        public LicenseService(RokhsetakDbContext context)
         {
             _db = context;
         }

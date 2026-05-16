@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 -- Official exam results recorded by admins
 CREATE TABLE Gov.GovExamResults (

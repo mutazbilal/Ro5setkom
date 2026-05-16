@@ -12,7 +12,7 @@ public sealed class AuthenticationFlowTests : IntegrationTestBase
     private const string NationalId = "9000000001";
     private const string Password = "StrongP@ssw0rd";
 
-    protected override void SeedFixture(Ro5setkomDbContext db)
+    protected override void SeedFixture(RokhsetakDbContext db)
     {
         db.GovCitizens.Add(DatabaseSeeder.NewCitizen(NationalId));
         db.Users.Add(DatabaseSeeder.NewUser(

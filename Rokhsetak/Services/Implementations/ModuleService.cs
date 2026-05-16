@@ -9,10 +9,10 @@ namespace Rokhsetak.Services.Implementations;
 
 public class ModuleService : IModuleService
 {
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
 
-    public ModuleService(Ro5setkomDbContext context, INotificationService notifications)
+    public ModuleService(RokhsetakDbContext context, INotificationService notifications)
     {
         _context = context;
         _notifications = notifications;

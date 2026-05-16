@@ -8,15 +8,15 @@ namespace TestRo5setkom;
 [TestClass]
 public class TraineeDashboardServiceTests
 {
-    private Ro5setkomDbContext CreateContext()
+    private RokhsetakDbContext CreateContext()
     {
-        var options = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+        var options = new DbContextOptionsBuilder<RokhsetakDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
-        return new Ro5setkomDbContext(options);
+        return new RokhsetakDbContext(options);
     }
 
-    private static void SeedBase(Ro5setkomDbContext ctx,
+    private static void SeedBase(RokhsetakDbContext ctx,
         int traineeId = 1, int licenseTypeId = 1)
     {
         ctx.LicenseTypes.Add(new LicenseType
@@ -44,7 +44,7 @@ public class TraineeDashboardServiceTests
     }
 
     // Adds a module + its EN/AR translations in one call
-    private static void AddModule(Ro5setkomDbContext ctx,
+    private static void AddModule(RokhsetakDbContext ctx,
         int moduleId, int licenseTypeId, string phase, int orderIndex,
         int? prerequisiteModuleId = null,
         string titleEn = "Module", string titleAr = "وحدة")
@@ -77,7 +77,7 @@ public class TraineeDashboardServiceTests
     }
 
     // Adds a quiz + its EN/AR translations in one call
-    private static void AddQuiz(Ro5setkomDbContext ctx,
+    private static void AddQuiz(RokhsetakDbContext ctx,
         int quizId, bool isMockExam, int? licenseTypeId, int? moduleId,
         int passingScore = 70,
         string titleEn = "Quiz", string titleAr = "اختبار")

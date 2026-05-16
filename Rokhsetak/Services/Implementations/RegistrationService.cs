@@ -29,12 +29,12 @@ public class RegistrationService : IRegistrationService
 
     private const long MaxCertFileSizeBytes = 5 * 1024 * 1024; // 5 MB
 
-    private readonly Ro5setkomDbContext _db;
+    private readonly RokhsetakDbContext _db;
     private readonly IWebHostEnvironment _env;
     private readonly ILogger<RegistrationService> _logger;
 
     public RegistrationService(
-        Ro5setkomDbContext db,
+        RokhsetakDbContext db,
         IWebHostEnvironment env,
         ILogger<RegistrationService> logger)
     {

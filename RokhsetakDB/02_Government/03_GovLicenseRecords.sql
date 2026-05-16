@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 -- Licenses a citizen already holds (pre-existing, before using the platform)
 CREATE TABLE Gov.GovLicenseRecords (

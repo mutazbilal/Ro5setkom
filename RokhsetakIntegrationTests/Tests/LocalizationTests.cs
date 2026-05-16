@@ -17,7 +17,7 @@ public sealed class LocalizationTests : IntegrationTestBase
     private const string EnglishTitle = "Road Signs in English";
     private const string ArabicTitle = "إشارات الطريق";
 
-    protected override void SeedFixture(Ro5setkomDbContext db)
+    protected override void SeedFixture(RokhsetakDbContext db)
     {
         db.GovCitizens.AddRange(
             DatabaseSeeder.NewCitizen("5000000001"),

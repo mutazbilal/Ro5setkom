@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 -- Trainees book slots from available entries here
 CREATE TABLE Gov.GovOfficialExams (

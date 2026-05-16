@@ -15,15 +15,15 @@ namespace TestRo5setkom
     [TestClass]
     public class RegistrationServiceTests
     {
-        private Ro5setkomDbContext GetDbContext()
+        private RokhsetakDbContext GetDbContext()
         {
-            var options = new DbContextOptionsBuilder<Ro5setkomDbContext>()
+            var options = new DbContextOptionsBuilder<RokhsetakDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .ConfigureWarnings(w =>
                     w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
-            return new Ro5setkomDbContext(options);
+            return new RokhsetakDbContext(options);
         }
 
         [TestMethod]

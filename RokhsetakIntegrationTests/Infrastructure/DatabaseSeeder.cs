@@ -12,7 +12,7 @@ internal static class DatabaseSeeder
 
     public const int LicenseTypeBId = 1;
 
-    public static void SeedReferenceData(Ro5setkomDbContext db)
+    public static void SeedReferenceData(RokhsetakDbContext db)
     {
         if (!db.Roles.Any())
         {

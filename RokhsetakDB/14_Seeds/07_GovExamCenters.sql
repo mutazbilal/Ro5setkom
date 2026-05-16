@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
 
 INSERT INTO Gov.GovExamCenters (
     name,

@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
  
 CREATE TABLE Lookup.LicenseTypes (
     license_type_id  INT PRIMARY KEY IDENTITY(1,1),

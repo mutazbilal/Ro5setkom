@@ -8,9 +8,9 @@ namespace Rokhsetak.Services.Implementations;
 
 public class TraineeDashboardService : ITraineeDashboardService
 {
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
 
-    public TraineeDashboardService(Ro5setkomDbContext context)
+    public TraineeDashboardService(RokhsetakDbContext context)
     {
         _context = context;
     }

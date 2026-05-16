@@ -1,5 +1,4 @@
-﻿USE ro5setkomDB;
-GO
+﻿
 
 -- ============================================
 -- FK PATCH: TraineeLicenses → Trainees

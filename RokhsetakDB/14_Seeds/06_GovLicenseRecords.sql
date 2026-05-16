@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-GO
+
 
 INSERT INTO Gov.GovLicenseRecords (
     national_id,

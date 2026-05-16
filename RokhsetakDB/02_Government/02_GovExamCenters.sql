@@ -1,5 +1,4 @@
-USE ro5setkomDB;
-go
+
 
 -- Official exam centers where theory, medical, and practical tests are held
 CREATE TABLE Gov.GovExamCenters (

@@ -8,9 +8,9 @@
 
     public class MentorAvailabilityService : IMentorAvailabilityService
     {
-        private readonly Ro5setkomDbContext _context;
+        private readonly RokhsetakDbContext _context;
 
-        public MentorAvailabilityService(Ro5setkomDbContext context)
+        public MentorAvailabilityService(RokhsetakDbContext context)
         {
             _context = context;
         }

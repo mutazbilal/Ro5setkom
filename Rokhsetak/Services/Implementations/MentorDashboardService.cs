@@ -8,9 +8,9 @@ namespace Rokhsetak.Services.Implementations;
 
 public class MentorDashboardService : IMentorDashboardService
 {
-    private readonly Ro5setkomDbContext _context;
+    private readonly RokhsetakDbContext _context;
 
-    public MentorDashboardService(Ro5setkomDbContext context)
+    public MentorDashboardService(RokhsetakDbContext context)
     {
         _context = context;
     }

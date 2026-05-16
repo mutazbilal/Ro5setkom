@@ -36,7 +36,7 @@ public abstract class IntegrationTestBase
     }
 
     /// <summary>Override in derived test classes to seed entities for the fixture.</summary>
-    protected virtual void SeedFixture(Ro5setkomDbContext db) { }
+    protected virtual void SeedFixture(RokhsetakDbContext db) { }
 
     // ── Authentication helpers ──────────────────────────────────────────────
     protected void AuthenticateAs(int userId, string role, string nationalId = "1234567890")
@@ -78,17 +78,17 @@ public abstract class IntegrationTestBase
     }
 
     // ── Direct DB access for post-condition assertions ──────────────────────
-    protected async Task<T> WithDbAsync<T>(Func<Ro5setkomDbContext, Task<T>> action)
+    protected async Task<T> WithDbAsync<T>(Func<RokhsetakDbContext, Task<T>> action)
     {
         using var scope = Factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<Ro5setkomDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<RokhsetakDbContext>();
         return await action(db);
     }
 
-    protected async Task WithDbAsync(Func<Ro5setkomDbContext, Task> action)
+    protected async Task WithDbAsync(Func<RokhsetakDbContext, Task> action)
     {
         using var scope = Factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<Ro5setkomDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<RokhsetakDbContext>();
         await action(db);
     }
 }
