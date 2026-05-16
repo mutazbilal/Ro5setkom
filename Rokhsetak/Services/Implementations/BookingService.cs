@@ -228,9 +228,6 @@ namespace Rokhsetak.Services.Implementations
             if (model.StartTime >= model.EndTime)
                 return ServiceResult.Failure("Start time must be before end time.");
 
-            if (model.BookingDate <= DateOnly.FromDateTime(DateTime.UtcNow))
-                return ServiceResult.Failure("Booking date must be in the future.");
-
             if (model.SessionType is not ("theoretical" or "practical"))
                 return ServiceResult.Failure("Invalid session type.");
 

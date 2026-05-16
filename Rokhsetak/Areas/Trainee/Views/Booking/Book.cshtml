@@ -52,7 +52,7 @@
                             @foreach (var slot in day.Slots)
                             {
                                 <span class="badge bg-light text-dark border me-1 mb-1">
-                                    @slot.StartTime.ToString("HH:mm") – @slot.EndTime.ToString("HH:mm")
+                                    @slot.StartTime.ToString("hh:mm tt") – @slot.EndTime.ToString("hh:mm tt")
                                 </span>
                             }
                         </div>
@@ -92,7 +92,7 @@
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Date</label>
                     <input type="date" name="BookingDate" class="form-control" required
-                           min="@DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd")" />
+                           min="@DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd")" />
                 </div>
 
                 <div class="row g-3 mb-4">
