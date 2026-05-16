@@ -2,134 +2,208 @@
 @model ModuleDetailViewModel
 @{
     ViewData["Title"] = Model.Title;
+
+    var (phaseIcon, phaseLabel) = Model.Phase == "theoretical"
+        ? ("fa-book", "Theory")
+        : ("fa-car-side", "Practical");
+
+    var (statusModifier, statusLabel) = Model.Status switch
+    {
+        "completed"   => ("completed",   "Completed"),
+        "in_progress" => ("in-progress", "In Progress"),
+        _             => ("not-started", "Not Started")
+    };
 }
 
-<div class="container py-4">
+@section Styles {
+    <link rel="stylesheet" href="~/css/areas/trainee/modules.css" />
+}
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show">
-            @TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+<div class="module-detail">
+    <div class="module-detail__inner">
 
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Trainee" asp-controller="Modules" asp-action="Index">Modules</a>
-            </li>
-            <li class="breadcrumb-item active">@Model.Title</li>
-        </ol>
-    </nav>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
 
-    <!-- Module header -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <div class="d-flex justify-content-between flex-wrap gap-2">
-                <div>
-                    <h3 class="fw-bold">@Model.Title</h3>
+        <!-- ============ Breadcrumb ============ -->
+        <nav class="module-breadcrumb" aria-label="breadcrumb">
+            <ol class="module-breadcrumb__list">
+                <li class="module-breadcrumb__item">
+                    <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
+                       class="module-breadcrumb__link">
+                        <i class="fa-solid fa-folder" aria-hidden="true"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                <li class="module-breadcrumb__sep" aria-hidden="true">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li class="module-breadcrumb__item module-breadcrumb__item--active" aria-current="page">
+                    @Model.Title
+                </li>
+            </ol>
+        </nav>
+
+        <!-- ============ Module Hero ============ -->
+        <section class="module-hero module-hero--@statusModifier" aria-labelledby="module-title">
+            <div class="module-hero__main">
+                <div class="module-hero__intro">
+                    <p class="module-hero__eyebrow">
+                        <i class="fa-solid @phaseIcon" aria-hidden="true"></i>
+                        @phaseLabel
+                    </p>
+                    <h1 id="module-title" class="module-hero__title">@Model.Title</h1>
                     @if (!string.IsNullOrWhiteSpace(Model.Description))
                     {
-                        <p class="text-muted">@Model.Description</p>
+                        <p class="module-hero__description">@Model.Description</p>
                     }
                 </div>
-                <div class="d-flex gap-2 align-items-start flex-wrap">
-                    <span class="badge bg-info text-dark">
-                        @(Model.Phase == "theoretical" ? "📘 Theory" : "🚗 Practical")
+
+                <div class="module-hero__meta">
+                    <span class="chip chip--soft">
+                        <i class="fa-solid @phaseIcon" aria-hidden="true"></i>
+                        @phaseLabel
                     </span>
-                    @{
-                        var (sc, sl) = Model.Status switch
-                        {
-                            "completed" => ("bg-success", "Completed"),
-                            "in_progress" => ("bg-primary", "In Progress"),
-                            _ => ("bg-secondary", "Not Started")
-                        };
-                    }
-                    <span class="badge @sc">@sl</span>
+                    <span class="status-pill status-pill--@statusModifier">@statusLabel</span>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Content -->
-    @if (Model.Contents.Any())
-    {
-        foreach (var content in Model.Contents)
+        <!-- ============ Content Blocks ============ -->
+        @if (Model.Contents.Any())
         {
-            if (content.ContentType == "video" && !string.IsNullOrWhiteSpace(content.VideoUrl))
-            {
-                <div class="card shadow-sm mb-3">
-                    <div class="card-header">📹 Video</div>
-                    <div class="card-body">
-                        <div class="ratio ratio-16x9">
-                            <iframe src="@content.VideoUrl" allowfullscreen></iframe>
+            <div class="module-content">
+                @foreach (var content in Model.Contents)
+                {
+                    if (content.ContentType == "video" && !string.IsNullOrWhiteSpace(content.VideoUrl))
+                    {
+                        <article class="content-block content-block--video">
+                            <header class="content-block__header">
+                                <span class="content-block__icon" aria-hidden="true">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </span>
+                                <h2 class="content-block__title">Video Lesson</h2>
+                            </header>
+                            <div class="content-block__body content-block__body--media">
+                                <div class="content-block__video">
+                                    <iframe src="@content.VideoUrl"
+                                            allowfullscreen
+                                            loading="lazy"
+                                            title="Module video"></iframe>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                    else if (content.ContentType == "text" && !string.IsNullOrWhiteSpace(content.TextContent))
+                    {
+                        <article class="content-block content-block--text">
+                            <header class="content-block__header">
+                                <span class="content-block__icon" aria-hidden="true">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </span>
+                                <h2 class="content-block__title">Reading Material</h2>
+                            </header>
+                            <div class="content-block__body">
+                                <div class="content-block__prose">
+                                    @Html.Raw(content.TextContent)
+                                </div>
+                            </div>
+                        </article>
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div class="module-content-empty">
+                <i class="fa-regular fa-file" aria-hidden="true"></i>
+                <p>No content available for your language preference yet.</p>
+            </div>
+        }
+
+        <!-- ============ Action Bar ============ -->
+        <section class="module-actions" aria-label="Module actions">
+            <div class="module-actions__primary">
+                @if (Model.HasQuiz && Model.Status != "not_started")
+                {
+                    <a asp-area="Trainee"
+                       asp-controller="Quiz"
+                       asp-action="Take"
+                       asp-route-moduleId="@Model.ModuleId"
+                       class="btn-action @(Model.QuizPassed ? "btn-action--ghost-success" : "btn-action--gradient")">
+                        <i class="fa-solid @(Model.QuizPassed ? "fa-rotate-right" : "fa-pen-to-square")" aria-hidden="true"></i>
+                        <span>@(Model.QuizPassed ? "Retake Quiz" : "Take Quiz")</span>
+                    </a>
+
+                    @if (Model.LastAttemptScore.HasValue)
+                    {
+                        <div class="quiz-score @(Model.QuizPassed ? "quiz-score--passed" : "quiz-score--failed")">
+                            <span class="quiz-score__label">Last score</span>
+                            <span class="quiz-score__value">@Model.LastAttemptScore<small>%</small></span>
+                            <span class="quiz-score__verdict">
+                                <i class="fa-solid @(Model.QuizPassed ? "fa-circle-check" : "fa-circle-xmark")" aria-hidden="true"></i>
+                                @(Model.QuizPassed ? "Passed" : "Not passed")
+                            </span>
                         </div>
-                    </div>
-                </div>
-            }
-            else if (content.ContentType == "text" && !string.IsNullOrWhiteSpace(content.TextContent))
-            {
-                <div class="card shadow-sm mb-3">
-                    <div class="card-header">📄 Reading Material</div>
-                    <div class="card-body">
-                        <div class="module-text-content">@Html.Raw(content.TextContent)</div>
-                    </div>
-                </div>
-            }
-        }
-    }
-    else
-    {
-        <div class="alert alert-info">No content available for your language preference yet.</div>
-    }
+                    }
+                }
+                else if (Model.CanCompleteDirectly)
+                {
+                    <form asp-area="Trainee"
+                          asp-controller="Modules"
+                          asp-action="Complete"
+                          method="post"
+                          class="module-actions__form">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="moduleId" value="@Model.ModuleId" />
+                        <input type="hidden" name="traineeLicenseId" value="@Model.TraineeLicenseId" />
+                        <button type="submit" class="btn-action btn-action--success">
+                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                            <span>Mark as Complete</span>
+                        </button>
+                    </form>
+                }
+                else if (Model.Status == "not_started")
+                {
+                    <p class="module-actions__hint">
+                        <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                        <span>This module will start when you open it.</span>
+                    </p>
+                }
+            </div>
 
-    <!-- Action bar -->
-    <div class="d-flex gap-3 flex-wrap mt-4">
-        @if (Model.HasQuiz && Model.Status != "not_started")
-        {
-            <a asp-area="Trainee" asp-controller="Quiz" asp-action="Take"
-                   asp-route-moduleId="@Model.ModuleId"
-                   class="btn @(Model.QuizPassed ? "btn-outline-success" : "btn-primary")">
-                <i class="bi bi-pencil-square"></i>
-                @(Model.QuizPassed ? "Retake Quiz ✓" : "Take Quiz")
+            <a asp-area="Trainee"
+               asp-controller="Modules"
+               asp-action="Index"
+               class="btn-action btn-action--ghost">
+                <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                <span>Back to Modules</span>
             </a>
+        </section>
 
-            @if (Model.LastAttemptScore.HasValue)
-            {
-                <span class="align-self-center text-muted small">
-                    Last score: <strong>@Model.LastAttemptScore%</strong>
-                    @(Model.QuizPassed ? "— ✅ Passed" : "— ❌ Not passed")
-                </span>
-            }
-        }
-        else if (Model.CanCompleteDirectly)
-        {
-            <form asp-area="Trainee" asp-controller="Modules" asp-action="Complete" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="moduleId" value="@Model.ModuleId" />
-                <input type="hidden" name="traineeLicenseId" value="@Model.TraineeLicenseId" />
-                <button type="submit" class="btn btn-success">
-                    <i class="bi bi-check-circle"></i> Mark as Complete
-                </button>
-            </form>
-        }
-        else if (Model.Status == "not_started")
-        {
-            <span class="text-muted fst-italic align-self-center">Module will start when you open it.</span>
-        }
-
-        <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
-               class="btn btn-outline-secondary ms-auto">
-            ← Back to Modules
-        </a>
     </div>
 </div>

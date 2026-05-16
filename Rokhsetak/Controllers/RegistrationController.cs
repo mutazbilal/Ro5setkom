@@ -40,6 +40,7 @@ public class RegistrationController : Controller
     {
         return View();
     }
+  
     // ─────────────────────────────────────────────────────────────────────────
     // US-001 – Trainee Registration Entry
     // ─────────────────────────────────────────────────────────────────────────
@@ -114,6 +115,8 @@ public class RegistrationController : Controller
             return View("CompleteMentor", vm);
         }
     }
+    [HttpGet]
+   public IActionResult SelectRole() => View();
 
     // ─────────────────────────────────────────────────────────────────────────
     // US-001 – Complete Trainee Registration

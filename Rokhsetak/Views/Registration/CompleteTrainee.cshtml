@@ -42,11 +42,12 @@
     <section class="auth-form-wrap">
         <article class="auth-card register-card" aria-live="polite">
             <h2 class="auth-card__title">Trainee Registration</h2>
-            <p class="auth-card__subtitle">Step 2 of 2: Complete Your Profile</p>
+            <p class="auth-card__subtitle">Step 3 of 3: Complete Your Profile</p>
 
-            <div class="auth-stepper" aria-label="Registration progress">
+            <div class="auth-stepper" aria-label="Registration progress — step 3 of 3">
                 <div class="auth-step is-complete"></div>
-                <div class="auth-step is-active"></div>
+                <div class="auth-step is-complete"></div>
+                <div class="auth-step is-active" aria-current="step"></div>
             </div>
 
             <div asp-validation-summary="ModelOnly" 
@@ -57,7 +58,6 @@
             <form asp-controller="Registration" asp-action="CompleteTrainee" method="post"
                   enctype="multipart/form-data"
                   class="auth-form" novalidate>
-                <div asp-validation-summary="All" class="text-danger"></div>
                 @* ── Section A: Locked government fields ── *@
                 <div class="auth-info-banner is-visible" role="note" style="margin-bottom:12px;">
                     <i class="fa-solid fa-lock" aria-hidden="true"></i>

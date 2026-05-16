@@ -1,21 +1,140 @@
 ﻿@using Rokhsetak.ViewModels.Profile
 @model LanguagePreferenceViewModel
+@{
+    ViewData["Title"] = "Language Preference";
+}
 
-<h2>Language Preference</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile/profile.css" />
+}
 
-<form method="post" asp-action="ChangeLanguage">
-    @Html.AntiForgeryToken()
+<div class="profile-page">
+    <div class="profile-page__inner">
 
-    <div class="mb-3">
-        <label class="form-label">Select Language</label>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
 
-        <select asp-for="Language" class="form-control">
-            <option value="ar">Arabic</option>
-            <option value="en">English</option>
-        </select>
+        <!-- ============ Hero ============ -->
+        <section class="profile-hero profile-hero--compact" aria-labelledby="lang-page-title">
+            <div class="profile-hero__main">
+                <span class="profile-hero__badge" aria-hidden="true">
+                    <i class="fa-solid fa-language"></i>
+                </span>
+                <div class="profile-hero__intro">
+                    <span class="profile-hero__eyebrow">Preferences</span>
+                    <h1 id="lang-page-title" class="profile-hero__title">Language Preference</h1>
+                    <p class="profile-hero__description">
+                        Choose the language used throughout your dashboard, modules, and notifications.
+                    </p>
+                </div>
+            </div>
+
+            <div class="profile-hero__cta">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Back to Profile</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Language picker ============ -->
+        <form asp-action="ChangeLanguage" method="post" class="profile-form">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="alert dashboard-alert dashboard-alert--error" role="alert"></div>
+
+            <section class="profile-card" aria-labelledby="lang-options-title">
+                <header class="profile-card__header">
+                    <span class="profile-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+                    <div class="profile-card__headings">
+                        <p class="profile-card__eyebrow">Interface Language</p>
+                        <h2 id="lang-options-title" class="profile-card__title">Select your language</h2>
+                    </div>
+                </header>
+
+                <div class="profile-card__body">
+                    <fieldset class="lang-options" aria-labelledby="lang-options-title">
+                        <legend class="visually-hidden">Language</legend>
+
+                        <label class="lang-option" for="Language_ar">
+                            <input type="radio"
+                                   asp-for="Language"
+                                   id="Language_ar"
+                                   value="ar"
+                                   class="lang-option__input" />
+                            <span class="lang-option__card">
+                                <span class="lang-option__abbr" aria-hidden="true">AR</span>
+                                <span class="lang-option__text">
+                                    <span class="lang-option__name">Arabic</span>
+                                    <span class="lang-option__native" lang="ar" dir="rtl">العربية</span>
+                                </span>
+                                <span class="lang-option__check" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                            </span>
+                        </label>
+
+                        <label class="lang-option" for="Language_en">
+                            <input type="radio"
+                                   asp-for="Language"
+                                   id="Language_en"
+                                   value="en"
+                                   class="lang-option__input" />
+                            <span class="lang-option__card">
+                                <span class="lang-option__abbr" aria-hidden="true">EN</span>
+                                <span class="lang-option__text">
+                                    <span class="lang-option__name">English</span>
+                                    <span class="lang-option__native">English</span>
+                                </span>
+                                <span class="lang-option__check" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                            </span>
+                        </label>
+                    </fieldset>
+
+                    <span asp-validation-for="Language" class="text-danger form-field__error"></span>
+                </div>
+            </section>
+
+            <div class="profile-form__actions">
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <span>Cancel</span>
+                </a>
+                <button type="submit" class="btn-action btn-action--gradient">
+                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                    <span>Save Preference</span>
+                </button>
+            </div>
+        </form>
+
     </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">
-        Save
-    </button>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
