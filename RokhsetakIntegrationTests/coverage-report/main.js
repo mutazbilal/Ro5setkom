@@ -295,14 +295,26 @@ var assemblies = [
       { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Appointments_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Appointments_Index.html", "cl": 31, "ucl": 20, "cal": 51, "tl": 158, "cb": 31, "tb": 64, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Appointments_Reschedule", "rp": "Rokhsetak_Areas_Mentor_Views_Appointments_Reschedule.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 85, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Availability_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Availability_Index.html", "cl": 0, "ucl": 48, "cal": 48, "tl": 243, "cb": 0, "tb": 40, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Dashboard_Index.html", "cl": 0, "ucl": 57, "cal": 57, "tl": 271, "cb": 0, "tb": 60, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Dashboard_Index.html", "cl": 0, "ucl": 57, "cal": 57, "tl": 275, "cb": 0, "tb": 60, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Dashboard_Index.html", "cl": 0, "ucl": 57, "cal": 57, "tl": 275, "cb": 0, "tb": 62, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Trainees_Detail", "rp": "Rokhsetak_Areas_Mentor_Views_Trainees_Detail.html", "cl": 0, "ucl": 27, "cal": 27, "tl": 143, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Trainees_Index", "rp": "Rokhsetak_Areas_Mentor_Views_Trainees_Index.html", "cl": 0, "ucl": 18, "cal": 18, "tl": 112, "cb": 0, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views__ViewStart", "rp": "Rokhsetak_Areas_Trainee_Views__ViewStart.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 3, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Dashboard_Index.html", "cl": 29, "ucl": 39, "cal": 68, "tl": 198, "cb": 21, "tb": 50, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules__ModuleCard", "rp": "Rokhsetak_Areas_Trainee_Views_Modules__ModuleCard.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 90, "cb": 0, "tb": 30, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Detail", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Detail.html", "cl": 15, "ucl": 27, "cal": 42, "tl": 135, "cb": 17, "tb": 48, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Index.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 84, "cb": 0, "tb": 22, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Book", "rp": "Rokhsetak_Areas_Trainee_Views_Booking_Book.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 129, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Browse", "rp": "Rokhsetak_Areas_Trainee_Views_Booking_Browse.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 112, "cb": 0, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Booking_Index.html", "cl": 0, "ucl": 40, "cal": 40, "tl": 127, "cb": 0, "tb": 44, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Reschedule", "rp": "Rokhsetak_Areas_Trainee_Views_Booking_Reschedule.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 100, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Calendar_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Calendar_Index.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 71, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Dashboard_Index.html", "cl": 29, "ucl": 39, "cal": 68, "tl": 254, "cb": 21, "tb": 50, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Dashboard_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Dashboard_Index.html", "cl": 26, "ucl": 25, "cal": 51, "tl": 254, "cb": 24, "tb": 58, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Exam_Book", "rp": "Rokhsetak_Areas_Trainee_Views_Exam_Book.html", "cl": 0, "ucl": 16, "cal": 16, "tl": 93, "cb": 0, "tb": 20, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Exam_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Exam_Index.html", "cl": 0, "ucl": 45, "cal": 45, "tl": 134, "cb": 0, "tb": 46, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules__ModuleCard", "rp": "Rokhsetak_Areas_Trainee_Views_Modules__ModuleCard.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 111, "cb": 0, "tb": 30, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules__ModuleCard", "rp": "Rokhsetak_Areas_Trainee_Views_Modules__ModuleCard.html", "cl": 0, "ucl": 41, "cal": 41, "tl": 111, "cb": 0, "tb": 46, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Detail", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Detail.html", "cl": 15, "ucl": 27, "cal": 42, "tl": 209, "cb": 17, "tb": 48, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Detail", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Detail.html", "cl": 18, "ucl": 27, "cal": 45, "tl": 209, "cb": 17, "tb": 52, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Index.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 158, "cb": 0, "tb": 22, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Index", "rp": "Rokhsetak_Areas_Trainee_Views_Modules_Index.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 158, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Quiz_MockExam", "rp": "Rokhsetak_Areas_Trainee_Views_Quiz_MockExam.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 119, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Quiz_Result", "rp": "Rokhsetak_Areas_Trainee_Views_Quiz_Result.html", "cl": 0, "ucl": 39, "cal": 39, "tl": 127, "cb": 0, "tb": 48, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Quiz_Take", "rp": "Rokhsetak_Areas_Trainee_Views_Quiz_Take.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 84, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -312,16 +324,23 @@ var assemblies = [
       { "name": "AspNetCoreGeneratedDocument.Views_auth_ForgotPasswordConfirmation", "rp": "Rokhsetak_Views_auth_ForgotPasswordConfirmation.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 28, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_auth_Login", "rp": "Rokhsetak_Views_auth_Login.html", "cl": 2, "ucl": 2, "cal": 4, "tl": 140, "cb": 27, "tb": 30, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_auth_ResetPassword", "rp": "Rokhsetak_Views_auth_ResetPassword.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 66, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Views_Home_Index", "rp": "Rokhsetak_Views_Home_Index.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 77, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Home_Index", "rp": "Rokhsetak_Views_Home_Index.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 233, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Home_Privacy", "rp": "Rokhsetak_Views_Home_Privacy.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 6, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Profile_ChangeLicense", "rp": "Rokhsetak_Views_Profile_ChangeLicense.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 140, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Profile_Edit", "rp": "Rokhsetak_Views_Profile_Edit.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 209, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Profile_Index", "rp": "Rokhsetak_Views_Profile_Index.html", "cl": 0, "ucl": 17, "cal": 17, "tl": 130, "cb": 0, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Profile_LanguagePreference", "rp": "Rokhsetak_Views_Profile_LanguagePreference.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 140, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Registration_CompleteMentor", "rp": "Rokhsetak_Views_Registration_CompleteMentor.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 266, "cb": 0, "tb": 126, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Registration_CompleteTrainee", "rp": "Rokhsetak_Views_Registration_CompleteTrainee.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 210, "cb": 0, "tb": 108, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Registration_MentorPending", "rp": "Rokhsetak_Views_Registration_MentorPending.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 31, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Registration_NationalIdLookup", "rp": "Rokhsetak_Views_Registration_NationalIdLookup.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 109, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Registration_NationalIdLookup", "rp": "Rokhsetak_Views_Registration_NationalIdLookup.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 109, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Registration_SelectRole", "rp": "Rokhsetak_Views_Registration_SelectRole.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 115, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Shared__Layout", "rp": "Rokhsetak_Views_Shared__Layout.html", "cl": 4, "ucl": 4, "cal": 8, "tl": 55, "cb": 11, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AspNetCoreGeneratedDocument.Views_Shared__NavBar", "rp": "Rokhsetak_Views_Shared__NavBar.html", "cl": 11, "ucl": 2, "cal": 13, "tl": 77, "cb": 24, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Shared__NavBar", "rp": "Rokhsetak_Views_Shared__NavBar.html", "cl": 11, "ucl": 2, "cal": 13, "tl": 101, "cb": 24, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AspNetCoreGeneratedDocument.Views_Shared__NavBar", "rp": "Rokhsetak_Views_Shared__NavBar.html", "cl": 14, "ucl": 2, "cal": 16, "tl": 101, "cb": 34, "tb": 38, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AspNetCoreGeneratedDocument.Views_Shared_Error", "rp": "Rokhsetak_Views_Shared_Error.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 26, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Program", "rp": "Rokhsetak_Program.html", "cl": 73, "ucl": 0, "cal": 73, "tl": 115, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "Rokhsetak_Program.html", "cl": 90, "ucl": 0, "cal": 90, "tl": 120, "cb": 4, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Mentor.Controllers.AppointmentsController", "rp": "Rokhsetak_AppointmentsController.html", "cl": 17, "ucl": 79, "cal": 96, "tl": 169, "cb": 3, "tb": 32, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Mentor.Controllers.AvailabilityController", "rp": "Rokhsetak_AvailabilityController.html", "cl": 0, "ucl": 44, "cal": 44, "tl": 104, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Mentor.Controllers.DashboardController", "rp": "Rokhsetak_DashboardController.html", "cl": 0, "ucl": 13, "cal": 13, "tl": 32, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -346,11 +365,30 @@ var assemblies = [
       { "name": "Rokhsetak.Areas.Mentor.Views.Appointments.RescheduleModel", "rp": "Rokhsetak_RescheduleModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Mentor.Views.Trainees.DetailModel", "rp": "Rokhsetak_DetailModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Mentor.Views.Trainees.TraineesModel", "rp": "Rokhsetak_TraineesModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Controllers.BookingController", "rp": "Rokhsetak_BookingController.html", "cl": 0, "ucl": 83, "cal": 83, "tl": 152, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Controllers.CalendarController", "rp": "Rokhsetak_CalendarController.html", "cl": 0, "ucl": 18, "cal": 18, "tl": 40, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Controllers.DashboardController", "rp": "Rokhsetak_DashboardController.2.html", "cl": 11, "ucl": 3, "cal": 14, "tl": 34, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Controllers.ExamController", "rp": "Rokhsetak_ExamController.html", "cl": 0, "ucl": 40, "cal": 40, "tl": 96, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Controllers.ModulesController", "rp": "Rokhsetak_ModulesController.html", "cl": 20, "ucl": 27, "cal": 47, "tl": 95, "cb": 4, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Controllers.QuizController", "rp": "Rokhsetak_QuizController.html", "cl": 0, "ucl": 58, "cal": 58, "tl": 108, "cb": 0, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.AvailableDayViewModel", "rp": "Rokhsetak_AvailableDayViewModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.BookSessionViewModel", "rp": "Rokhsetak_BookSessionViewModel.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.MentorBookingViewModel", "rp": "Rokhsetak_MentorBookingViewModel.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.MentorBrowseCardViewModel", "rp": "Rokhsetak_MentorBrowseCardViewModel.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.MentorBrowseFilterViewModel", "rp": "Rokhsetak_MentorBrowseFilterViewModel.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.MentorBrowseListViewModel", "rp": "Rokhsetak_MentorBrowseListViewModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 29, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.RescheduleTraineeViewModel", "rp": "Rokhsetak_RescheduleTraineeViewModel.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.SlotViewModel", "rp": "Rokhsetak_SlotViewModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 31, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.TraineeBookingItemViewModel", "rp": "Rokhsetak_TraineeBookingItemViewModel.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Booking.TraineeBookingListViewModel", "rp": "Rokhsetak_TraineeBookingListViewModel.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Calendar.CalendarEventViewModel", "rp": "Rokhsetak_CalendarEventViewModel.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Dashboard.ModuleProgressItem", "rp": "Rokhsetak_ModuleProgressItem.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 30, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Dashboard.TraineeDashboardViewModel", "rp": "Rokhsetak_TraineeDashboardViewModel.html", "cl": 10, "ucl": 0, "cal": 10, "tl": 30, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Exam.BookExamViewModel", "rp": "Rokhsetak_BookExamViewModel.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 15, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Exam.ExamAppointmentItemViewModel", "rp": "Rokhsetak_ExamAppointmentItemViewModel.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Exam.ExamAppointmentListViewModel", "rp": "Rokhsetak_ExamAppointmentListViewModel.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Exam.ExamBookingViewModel", "rp": "Rokhsetak_ExamBookingViewModel.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.ViewModels.Exam.ExamSlotViewModel", "rp": "Rokhsetak_ExamSlotViewModel.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Modules.ModuleCardViewModel", "rp": "Rokhsetak_ModuleCardViewModel.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 26, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Modules.ModuleContentViewModel", "rp": "Rokhsetak_ModuleContentViewModel.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Modules.ModuleDetailViewModel", "rp": "Rokhsetak_ModuleDetailViewModel.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -362,10 +400,13 @@ var assemblies = [
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Quiz.QuizResultViewModel", "rp": "Rokhsetak_QuizResultViewModel.html", "cl": 0, "ucl": 12, "cal": 12, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Quiz.QuizViewModel", "rp": "Rokhsetak_QuizViewModel.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 28, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.ViewModels.Quiz.SubmitQuizViewModel", "rp": "Rokhsetak_SubmitQuizViewModel.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 20, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Rokhsetak.Areas.Trainee.Views.Dashboard.IndexModel", "rp": "Rokhsetak_IndexModel.2.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Views.Booking.IndexModel", "rp": "Rokhsetak_IndexModel.2.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Views.Booking.RescheduleModel", "rp": "Rokhsetak_RescheduleModel.2.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Views.Calendar.IndexModel", "rp": "Rokhsetak_IndexModel.3.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Views.Dashboard.IndexModel", "rp": "Rokhsetak_IndexModel.4.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Views.Modules._ModuleCardModel", "rp": "Rokhsetak__ModuleCardModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Views.Modules.DetailModel", "rp": "Rokhsetak_DetailModel.2.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Rokhsetak.Areas.Trainee.Views.Modules.IndexModel", "rp": "Rokhsetak_IndexModel.3.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Areas.Trainee.Views.Modules.IndexModel", "rp": "Rokhsetak_IndexModel.5.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Views.Quiz.MockExamModel", "rp": "Rokhsetak_MockExamModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Views.Quiz.ResultModel", "rp": "Rokhsetak_ResultModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Areas.Trainee.Views.Quiz.TakeModel", "rp": "Rokhsetak_TakeModel.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -373,7 +414,7 @@ var assemblies = [
       { "name": "Rokhsetak.Controllers.AuthController", "rp": "Rokhsetak_AuthController.html", "cl": 67, "ucl": 45, "cal": 112, "tl": 222, "cb": 15, "tb": 36, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Controllers.HomeController", "rp": "Rokhsetak_HomeController.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 25, "cb": 0, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Controllers.ProfileController", "rp": "Rokhsetak_ProfileController.html", "cl": 0, "ucl": 92, "cal": 92, "tl": 167, "cb": 0, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Rokhsetak.Controllers.RegistrationController", "rp": "Rokhsetak_RegistrationController.html", "cl": 0, "ucl": 98, "cal": 98, "tl": 187, "cb": 0, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Controllers.RegistrationController", "rp": "Rokhsetak_RegistrationController.html", "cl": 0, "ucl": 124, "cal": 124, "tl": 190, "cb": 0, "tb": 36, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.Admin", "rp": "Rokhsetak_Admin.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.AichatMessage", "rp": "Rokhsetak_AichatMessage.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.AichatSession", "rp": "Rokhsetak_AichatSession.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -409,7 +450,7 @@ var assemblies = [
       { "name": "Rokhsetak.Models.QuizQuestion", "rp": "Rokhsetak_QuizQuestion.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.QuizTranslation", "rp": "Rokhsetak_QuizTranslation.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.Rating", "rp": "Rokhsetak_Rating.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Rokhsetak.Models.RokhsetakDbContext", "rp": "Rokhsetak_Ro5setkomDbContext.html", "cl": 1372, "ucl": 6, "cal": 1378, "tl": 1485, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Models.RokhsetakDbContext", "rp": "Rokhsetak_RokhsetakDbContext.html", "cl": 1418, "ucl": 6, "cal": 1424, "tl": 1486, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.Role", "rp": "Rokhsetak_Role.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.SecurityPasswordResetToken", "rp": "Rokhsetak_SecurityPasswordResetToken.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Models.SessionFeedback", "rp": "Rokhsetak_SessionFeedback.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 25, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -426,10 +467,13 @@ var assemblies = [
       { "name": "Rokhsetak.Services.Common.ServiceResult\u003CT\u003E", "rp": "Rokhsetak_ServiceResult_1.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 67, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.AppointmentService", "rp": "Rokhsetak_AppointmentService.html", "cl": 67, "ucl": 259, "cal": 326, "tl": 454, "cb": 6, "tb": 82, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.AuthService", "rp": "Rokhsetak_AuthService.html", "cl": 52, "ucl": 21, "cal": 73, "tl": 139, "cb": 7, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Services.Implementations.BookingService", "rp": "Rokhsetak_BookingService.html", "cl": 0, "ucl": 429, "cal": 429, "tl": 600, "cb": 0, "tb": 116, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Services.Implementations.CalendarService", "rp": "Rokhsetak_CalendarService.html", "cl": 0, "ucl": 89, "cal": 89, "tl": 116, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.EmailService", "rp": "Rokhsetak_EmailService.html", "cl": 0, "ucl": 76, "cal": 76, "tl": 128, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.EmailSettings", "rp": "Rokhsetak_EmailSettings.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 128, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Services.Implementations.ExamAppointmentService", "rp": "Rokhsetak_ExamAppointmentService.html", "cl": 0, "ucl": 317, "cal": 317, "tl": 463, "cb": 0, "tb": 150, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.LicenseService", "rp": "Rokhsetak_LicenseService.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Rokhsetak.Services.Implementations.MentorAvailabilityService", "rp": "Rokhsetak_MentorAvailabilityService.html", "cl": 0, "ucl": 83, "cal": 83, "tl": 134, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Services.Implementations.MentorAvailabilityService", "rp": "Rokhsetak_MentorAvailabilityService.html", "cl": 0, "ucl": 94, "cal": 94, "tl": 133, "cb": 0, "tb": 24, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.MentorDashboardService", "rp": "Rokhsetak_MentorDashboardService.html", "cl": 0, "ucl": 121, "cal": 121, "tl": 176, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.ModuleService", "rp": "Rokhsetak_ModuleService.html", "cl": 99, "ucl": 148, "cal": 247, "tl": 347, "cb": 18, "tb": 60, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.NotificationService", "rp": "Rokhsetak_NotificationService.html", "cl": 4, "ucl": 12, "cal": 16, "tl": 30, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -437,6 +481,7 @@ var assemblies = [
       { "name": "Rokhsetak.Services.Implementations.ProfileService", "rp": "Rokhsetak_ProfileService.html", "cl": 0, "ucl": 102, "cal": 102, "tl": 148, "cb": 0, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.QuizService", "rp": "Rokhsetak_QuizService.html", "cl": 0, "ucl": 248, "cal": 248, "tl": 367, "cb": 0, "tb": 65, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.RegistrationService", "rp": "Rokhsetak_RegistrationService.html", "cl": 0, "ucl": 216, "cal": 216, "tl": 353, "cb": 0, "tb": 38, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Rokhsetak.Services.Implementations.StringExtensions", "rp": "Rokhsetak_StringExtensions.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 463, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Services.Implementations.TraineeDashboardService", "rp": "Rokhsetak_TraineeDashboardService.html", "cl": 107, "ucl": 26, "cal": 133, "tl": 202, "cb": 16, "tb": 56, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Utils.ClaimsPrincipalExtensions", "rp": "Rokhsetak_ClaimsPrincipalExtensions.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 13, "cb": 2, "tb": 4, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Rokhsetak.Utils.Validation.MustBeTrueAttribute", "rp": "Rokhsetak_MustBeTrueAttribute.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 11, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
@@ -468,14 +513,20 @@ var riskHotspots = [
   {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Registration_CompleteMentor", "reportPath": "Rokhsetak_Views_Registration_CompleteMentor.html", "methodName": "\u003CExecuteAsync()", "methodShortName": "\u003CExecuteAsync()", "fileIndex": 0, "line": 130,
     "metrics": [
-      { "value": 15006, "exceeded": true },
-      { "value": 122, "exceeded": true },
+      { "value": 14520, "exceeded": true },
+      { "value": 120, "exceeded": true },
     ]},
   {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Registration_CompleteTrainee", "reportPath": "Rokhsetak_Views_Registration_CompleteTrainee.html", "methodName": "\u003CExecuteAsync()", "methodShortName": "\u003CExecuteAsync()", "fileIndex": 0, "line": 121,
     "metrics": [
-      { "value": 10920, "exceeded": true },
-      { "value": 104, "exceeded": true },
+      { "value": 10506, "exceeded": true },
+      { "value": 102, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Dashboard_Index", "reportPath": "Rokhsetak_Areas_Mentor_Views_Dashboard_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 3,
+    "metrics": [
+      { "value": 3660, "exceeded": true },
+      { "value": 60, "exceeded": true },
     ]},
   {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Dashboard_Index", "reportPath": "Rokhsetak_Areas_Mentor_Views_Dashboard_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 3,
@@ -490,6 +541,30 @@ var riskHotspots = [
       { "value": 48, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Exam_Index", "reportPath": "Rokhsetak_Areas_Trainee_Views_Exam_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 5,
+    "metrics": [
+      { "value": 2162, "exceeded": true },
+      { "value": 46, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules__ModuleCard", "reportPath": "Rokhsetak_Areas_Trainee_Views_Modules__ModuleCard.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 7,
+    "metrics": [
+      { "value": 2162, "exceeded": true },
+      { "value": 46, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "StagePriority(System.String)", "methodShortName": "StagePriority(...)", "fileIndex": 0, "line": 442,
+    "metrics": [
+      { "value": 2162, "exceeded": true },
+      { "value": 46, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Index", "reportPath": "Rokhsetak_Areas_Trainee_Views_Booking_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 5,
+    "metrics": [
+      { "value": 1980, "exceeded": true },
+      { "value": 44, "exceeded": true },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules__ModuleCard", "reportPath": "Rokhsetak_Areas_Trainee_Views_Modules__ModuleCard.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 6,
     "metrics": [
       { "value": 930, "exceeded": true },
@@ -502,13 +577,31 @@ var riskHotspots = [
       { "value": 28, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "CheckEligibilityAsync()", "methodShortName": "CheckEligibilityAsync()", "fileIndex": 0, "line": 336,
+    "metrics": [
+      { "value": 702, "exceeded": true },
+      { "value": 26, "exceeded": true },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Detail", "reportPath": "Rokhsetak_Areas_Trainee_Views_Modules_Detail.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
     "metrics": [
       { "value": 660, "exceeded": true },
       { "value": 48, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Detail", "reportPath": "Rokhsetak_Areas_Trainee_Views_Modules_Detail.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 636, "exceeded": true },
+      { "value": 52, "exceeded": true },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Trainees_Detail", "reportPath": "Rokhsetak_Areas_Mentor_Views_Trainees_Detail.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 3,
+    "metrics": [
+      { "value": 600, "exceeded": true },
+      { "value": 24, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Modules_Index", "reportPath": "Rokhsetak_Areas_Trainee_Views_Modules_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 7,
     "metrics": [
       { "value": 600, "exceeded": true },
       { "value": 24, "exceeded": true },
@@ -526,13 +619,49 @@ var riskHotspots = [
       { "value": 22, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "BookSessionAsync()", "methodShortName": "BookSessionAsync()", "fileIndex": 0, "line": 227,
+    "metrics": [
+      { "value": 506, "exceeded": true },
+      { "value": 22, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "RescheduleSessionAsync()", "methodShortName": "RescheduleSessionAsync()", "fileIndex": 0, "line": 423,
+    "metrics": [
+      { "value": 506, "exceeded": true },
+      { "value": 22, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Dashboard_Index", "reportPath": "Rokhsetak_Areas_Trainee_Views_Dashboard_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 454, "exceeded": true },
+      { "value": 58, "exceeded": true },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Mentor_Views_Trainees_Index", "reportPath": "Rokhsetak_Areas_Mentor_Views_Trainees_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 3,
     "metrics": [
       { "value": 420, "exceeded": true },
       { "value": 20, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Exam_Book", "reportPath": "Rokhsetak_Areas_Trainee_Views_Exam_Book.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 420, "exceeded": true },
+      { "value": 20, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "BookExamAsync()", "methodShortName": "BookExamAsync()", "fileIndex": 0, "line": 96,
+    "metrics": [
+      { "value": 420, "exceeded": true },
+      { "value": 20, "exceeded": true },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.AppointmentService", "reportPath": "Rokhsetak_AppointmentService.html", "methodName": "RescheduleAsync()", "methodShortName": "RescheduleAsync()", "fileIndex": 0, "line": 154,
+    "metrics": [
+      { "value": 342, "exceeded": true },
+      { "value": 18, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "CancelExamAppointmentAsync()", "methodShortName": "CancelExamAppointmentAsync()", "fileIndex": 0, "line": 274,
     "metrics": [
       { "value": 342, "exceeded": true },
       { "value": 18, "exceeded": true },
@@ -556,7 +685,43 @@ var riskHotspots = [
       { "value": 64, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "GetMentorBookingPageAsync()", "methodShortName": "GetMentorBookingPageAsync()", "fileIndex": 0, "line": 139,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.CalendarService", "reportPath": "Rokhsetak_CalendarService.html", "methodName": "GetCalendarEventsAsync()", "methodShortName": "GetCalendarEventsAsync()", "fileIndex": 0, "line": 19,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "ApplyExamResultEffectsAsync()", "methodShortName": "ApplyExamResultEffectsAsync()", "fileIndex": 0, "line": 417,
+    "metrics": [
+      { "value": 272, "exceeded": true },
+      { "value": 16, "exceeded": true },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Browse", "reportPath": "Rokhsetak_Areas_Trainee_Views_Booking_Browse.html", "methodName": "\u003CExecuteAsync()", "methodShortName": "\u003CExecuteAsync()", "fileIndex": 0, "line": 22,
+    "metrics": [
+      { "value": 210, "exceeded": true },
+      { "value": 14, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Profile_Index", "reportPath": "Rokhsetak_Views_Profile_Index.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 210, "exceeded": true },
+      { "value": 14, "exceeded": false },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.AppointmentService", "reportPath": "Rokhsetak_AppointmentService.html", "methodName": "GetTraineeDetailAsync()", "methodShortName": "GetTraineeDetailAsync()", "fileIndex": 0, "line": 381,
+    "metrics": [
+      { "value": 210, "exceeded": true },
+      { "value": 14, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "GetReschedulePageAsync()", "methodShortName": "GetReschedulePageAsync()", "fileIndex": 0, "line": 366,
     "metrics": [
       { "value": 210, "exceeded": true },
       { "value": 14, "exceeded": false },
@@ -580,7 +745,19 @@ var riskHotspots = [
       { "value": 24, "exceeded": true },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Browse", "reportPath": "Rokhsetak_Areas_Trainee_Views_Booking_Browse.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 156, "exceeded": true },
+      { "value": 12, "exceeded": false },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_auth_AccessDenied", "reportPath": "Rokhsetak_Views_auth_AccessDenied.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 2,
+    "metrics": [
+      { "value": 156, "exceeded": true },
+      { "value": 12, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.ExamAppointmentService", "reportPath": "Rokhsetak_ExamAppointmentService.html", "methodName": "GetAvailableExamsAsync()", "methodShortName": "GetAvailableExamsAsync()", "fileIndex": 0, "line": 25,
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
@@ -598,7 +775,37 @@ var riskHotspots = [
       { "value": 11, "exceeded": false },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Book", "reportPath": "Rokhsetak_Areas_Trainee_Views_Booking_Book.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Areas_Trainee_Views_Booking_Reschedule", "reportPath": "Rokhsetak_Areas_Trainee_Views_Booking_Reschedule.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 5,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Registration_NationalIdLookup", "reportPath": "Rokhsetak_Views_Registration_NationalIdLookup.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Registration_NationalIdLookup", "reportPath": "Rokhsetak_Views_Registration_NationalIdLookup.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "BrowseMentorsAsync()", "methodShortName": "BrowseMentorsAsync()", "fileIndex": 0, "line": 26,
+    "metrics": [
+      { "value": 110, "exceeded": true },
+      { "value": 10, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "CancelSessionAsync()", "methodShortName": "CancelSessionAsync()", "fileIndex": 0, "line": 332,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
@@ -634,6 +841,30 @@ var riskHotspots = [
       { "value": 8, "exceeded": false },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Profile_ChangeLicense", "reportPath": "Rokhsetak_Views_Profile_ChangeLicense.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Profile_Edit", "reportPath": "Rokhsetak_Views_Profile_Edit.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Profile_LanguagePreference", "reportPath": "Rokhsetak_Views_Profile_LanguagePreference.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 4,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Registration_SelectRole", "reportPath": "Rokhsetak_Views_Registration_SelectRole.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 2,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Areas.Mentor.Controllers.AppointmentsController", "reportPath": "Rokhsetak_AppointmentsController.html", "methodName": "Feedback()", "methodShortName": "Feedback()", "fileIndex": 0, "line": 120,
     "metrics": [
       { "value": 72, "exceeded": true },
@@ -647,6 +878,12 @@ var riskHotspots = [
     ]},
   {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.AppointmentService", "reportPath": "Rokhsetak_AppointmentService.html", "methodName": "MarkAsDoneAsync()", "methodShortName": "MarkAsDoneAsync()", "fileIndex": 0, "line": 119,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Services.Implementations.BookingService", "reportPath": "Rokhsetak_BookingService.html", "methodName": "ComputeCompletionRatesAsync()", "methodShortName": "ComputeCompletionRatesAsync()", "fileIndex": 0, "line": 570,
     "metrics": [
       { "value": 72, "exceeded": true },
       { "value": 8, "exceeded": false },
@@ -700,6 +937,18 @@ var riskHotspots = [
       { "value": 6, "exceeded": false },
     ]},
   {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Areas.Trainee.Controllers.BookingController", "reportPath": "Rokhsetak_BookingController.html", "methodName": "Book()", "methodShortName": "Book()", "fileIndex": 0, "line": 80,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Areas.Trainee.Controllers.BookingController", "reportPath": "Rokhsetak_BookingController.html", "methodName": "Reschedule()", "methodShortName": "Reschedule()", "fileIndex": 0, "line": 136,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Controllers.ProfileController", "reportPath": "Rokhsetak_ProfileController.html", "methodName": "ChangeLanguage()", "methodShortName": "ChangeLanguage()", "fileIndex": 0, "line": 112,
     "metrics": [
       { "value": 42, "exceeded": true },
@@ -725,6 +974,12 @@ var riskHotspots = [
     ]},
   {
     "assembly": "Rokhsetak", "class": "Rokhsetak.Controllers.RegistrationController", "reportPath": "Rokhsetak_RegistrationController.html", "methodName": "LookupNationalId()", "methodShortName": "LookupNationalId()", "fileIndex": 0, "line": 63,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "Rokhsetak.Controllers.RegistrationController", "reportPath": "Rokhsetak_RegistrationController.html", "methodName": "LookupNationalId()", "methodShortName": "LookupNationalId()", "fileIndex": 0, "line": 64,
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
@@ -782,6 +1037,12 @@ var riskHotspots = [
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Shared__NavBar", "reportPath": "Rokhsetak_Views_Shared__NavBar.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 14,
+    "metrics": [
+      { "value": 41, "exceeded": true },
+      { "value": 38, "exceeded": true },
     ]},
   {
     "assembly": "Rokhsetak", "class": "AspNetCoreGeneratedDocument.Views_Shared__NavBar", "reportPath": "Rokhsetak_Views_Shared__NavBar.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 14,
