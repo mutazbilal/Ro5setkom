@@ -231,6 +231,10 @@ namespace Rokhsetak.Services.Implementations
             if (model.SessionType is not ("theoretical" or "practical"))
                 return ServiceResult.Failure("Invalid session type.");
 
+            if (model.BookingDate < DateOnly.FromDateTime(DateTime.UtcNow))
+            {
+                return ServiceResult.Failure("Session Must be in the future");
+            }
             await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
