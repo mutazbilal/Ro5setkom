@@ -113,7 +113,28 @@
                                             </button>
                                         </form>
                                     }
-                                    @if (!b.CanCancel && !b.CanReschedule)
+                                    @if (b.CanSeeFeedback)
+                                    {
+                                        <button type="button"
+                                                class="btn btn-outline-primary btn-sm feedback-btn"
+                                                data-feedback="@b.Feedback"
+                                                data-mentor="@b.MentorName">
+                                            <i class="bi bi-chat-left-text"></i> See Feedback
+                                        </button>
+                                    }
+                                    @if (b.CanRate)
+                                    {
+                                        <button type="button"
+                                                class="btn btn-outline-warning btn-sm rate-btn"
+                                                data-booking-id="@b.BookingId"
+                                                data-mentor="@b.MentorName">
+                                            <i class="bi bi-star"></i> Rate Session
+                                        </button>
+                                    }
+                                    @if (!b.CanCancel
+                                        && !b.CanReschedule
+                                        && !b.CanRate
+                                        && !b.CanSeeFeedback)
                                     {
                                         <span class="text-muted small">—</span>
                                     }
@@ -126,3 +147,180 @@
         </div>
     }
 </div>
+<div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Mentor Feedback
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <h6 id="feedbackMentorName"></h6>
+
+                <div class="border rounded p-3 bg-light"
+                     id="feedbackText">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ratingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form asp-area="Trainee"
+                  asp-controller="Booking"
+                  asp-action="Rate"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Rate Session
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="hidden"
+                           id="ratingBookingId"
+                           name="BookingId" />
+
+                    <h6 id="ratingMentorName"></h6>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Rating
+                        </label>
+
+                        <select class="form-select"
+                                name="Score"
+                                required>
+                            <option value="">Choose rating</option>
+                            <option value="1">1 - Very Poor</option>
+                            <option value="2">2 - Poor</option>
+                            <option value="3">3 - Average</option>
+                            <option value="4">4 - Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Review (Optional)
+                        </label>
+
+                        <textarea class="form-control"
+                                  name="Review"
+                                  rows="4">
+                        </textarea>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-warning">
+                        Submit Rating
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // =========================
+        // Feedback Modal
+        // =========================
+
+        const feedbackModal =
+            new bootstrap.Modal(
+                document.getElementById('feedbackModal'));
+
+        const feedbackText =
+            document.getElementById('feedbackText');
+
+        const feedbackMentorName =
+            document.getElementById('feedbackMentorName');
+
+        document.querySelectorAll('.feedback-btn')
+            .forEach(btn => {
+
+                btn.addEventListener('click', function () {
+
+                    feedbackText.innerText =
+                        this.dataset.feedback || "No feedback available.";
+
+                    feedbackMentorName.innerText =
+                        "Mentor: " + this.dataset.mentor;
+
+                    feedbackModal.show();
+
+                });
+
+            });
+
+        // =========================
+        // Rating Modal
+        // =========================
+
+        const ratingModal =
+            new bootstrap.Modal(
+                document.getElementById('ratingModal'));
+
+        const ratingBookingId =
+            document.getElementById('ratingBookingId');
+
+        const ratingMentorName =
+            document.getElementById('ratingMentorName');
+
+        document.querySelectorAll('.rate-btn')
+            .forEach(btn => {
+
+                btn.addEventListener('click', function () {
+
+                    ratingBookingId.value =
+                        this.dataset.bookingId;
+
+                    ratingMentorName.innerText =
+                        "Mentor: " + this.dataset.mentor;
+
+                    ratingModal.show();
+
+                });
+
+            });
+
+    });
+
+</script>

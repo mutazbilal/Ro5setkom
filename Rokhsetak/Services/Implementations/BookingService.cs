@@ -3,6 +3,7 @@ using Rokhsetak.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Rokhsetak.Services.Implementations
@@ -526,46 +527,6 @@ namespace Rokhsetak.Services.Implementations
         public async Task<ServiceResult<TraineeBookingListViewModel>> GetMyBookingsAsync(int traineeId)
         {
             var now = DateTime.UtcNow;
-
-            var bookings = await (
-                from b in _context.Bookings
-                join u in _context.Users on b.MentorId equals u.UserId
-                where b.TraineeId == traineeId
-                orderby b.BookingDate descending, b.StartTime descending
-                select new
-                {
-                    b.BookingId,
-                    b.MentorId,
-                    b.BookingDate,
-                    b.StartTime,
-                    b.EndTime,
-                    b.SessionType,
-                    b.Status,
-                    MentorName = u.FirstName + " " + u.LastName
-                }
-            ).ToListAsync();
-
-            var items = bookings.Select(b =>
-            {
-                var sessionStart = b.BookingDate.ToDateTime(b.StartTime);
-                bool canAct = sessionStart > now.AddHours(24)
-                           && b.Status is "pending" or "confirmed";
-
-                return new TraineeBookingItemViewModel
-                {
-                    BookingId = b.BookingId,
-                    MentorId = b.MentorId,
-                    MentorName = b.MentorName,
-                    BookingDate = b.BookingDate,
-                    StartTime = b.StartTime,
-                    EndTime = b.EndTime,
-                    SessionType = b.SessionType ?? string.Empty,
-                    Status = b.Status,
-                    CanCancel = canAct,
-                    CanReschedule = canAct
-                };
-            }).ToList();
-
             var mentorUser = await _context.TraineeLicenses
                 .Where(tl => tl.TraineeId == traineeId)
                 .Join(
@@ -580,6 +541,58 @@ namespace Rokhsetak.Services.Implementations
                 )
                 .FirstOrDefaultAsync();
 
+            var bookings = await _context.Bookings
+                .AsNoTracking()
+                .Where(b => b.TraineeId == traineeId)
+                .OrderByDescending(b => b.BookingDate)
+                .ThenByDescending(b => b.StartTime)
+                .Select(b => new
+                {
+                    b.BookingId,
+                    b.MentorId,
+                    b.BookingDate,
+                    b.StartTime,
+                    b.EndTime,
+                    b.SessionType,
+                    b.Status,
+
+                    MentorName = mentorUser.FullName,
+
+                    MentorNotes = b.SessionFeedback != null
+                        ? b.SessionFeedback.MentorNotes
+                        : null,
+
+                    Score = b.Rating != null
+                        ? b.Rating.Score
+                        : null
+                })
+                .ToListAsync();
+
+            var items = bookings.Select(b =>
+            {
+                var sessionStart = b.BookingDate.ToDateTime(b.StartTime);
+                bool canAct = sessionStart > now.AddHours(24)
+                           && b.Status is "pending" or "confirmed";
+                bool canSeeFeedback = b.MentorNotes != null;
+                bool canRate = b.Score == null && sessionStart <= now && b.Status == "completed";
+                return new TraineeBookingItemViewModel
+                {
+                    BookingId = b.BookingId,
+                    MentorId = b.MentorId,
+                    MentorName = b.MentorName,
+                    BookingDate = b.BookingDate,
+                    StartTime = b.StartTime,
+                    EndTime = b.EndTime,
+                    SessionType = b.SessionType ?? string.Empty,
+                    Status = b.Status,
+                    CanCancel = canAct,
+                    CanReschedule = canAct,
+                    CanSeeFeedback = canSeeFeedback,
+                    CanRate = canRate,
+                    Feedback = b.MentorNotes
+                };
+            }).ToList();
+
             return ServiceResult<TraineeBookingListViewModel>.Success(
                 new TraineeBookingListViewModel
                 {
@@ -587,6 +600,36 @@ namespace Rokhsetak.Services.Implementations
                     PrimaryMentorId = mentorUser?.UserId,
                     PrimaryMentorName = mentorUser?.FullName
                 });
+        }
+        public async Task<ServiceResult> RateSessionAsync(int traineeId, int bookingId, decimal score, string review)
+        {
+            var booking = await _context.Bookings
+                .Where(b => b.BookingId == bookingId)
+                .FirstOrDefaultAsync();
+
+            if (booking == null)
+                return ServiceResult.Failure("Booking not found.");
+
+            if (booking.Status is not "completed")
+                return ServiceResult.Failure("Only completed booking can be rated");
+
+            var rating = new Rating
+            {
+                TraineeId = traineeId,
+                MentorId = booking.MentorId,
+                BookingId = bookingId,
+                Score = score,
+                ReviewText = review != null
+                                ? review
+                                : null,
+
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Add(rating);
+            _context.SaveChanges();
+
+            return ServiceResult.Success();
         }
 
         // ─────────────────────────────────────────────────────────────────────────

@@ -154,7 +154,8 @@
                                     }
                                     @if (!item.CanConfirm && !item.CanReschedule
                                          && !item.CanMarkDone && !item.CanFeedback
-                                         && !item.FeedbackGiven)
+                                         && !item.FeedbackGiven
+                                         && !item.CanCancel)
                                     {
                                         <span class="text-muted small">—</span>
                                     }

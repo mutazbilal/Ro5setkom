@@ -19,4 +19,7 @@ public class TraineeBookingItemViewModel
     public string Status { get; set; } = string.Empty;
     public bool CanCancel { get; set; }
     public bool CanReschedule { get; set; }
+    public bool CanSeeFeedback { get; set; } 
+    public bool CanRate { get; set; }
+    public string? Feedback { get; set; }
 }
