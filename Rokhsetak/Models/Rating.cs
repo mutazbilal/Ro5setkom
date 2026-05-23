@@ -13,7 +13,7 @@ public partial class Rating
 
     public int BookingId { get; set; }
 
-    public decimal Score { get; set; }
+    public decimal? Score { get; set; }
 
     public string? ReviewText { get; set; }
 

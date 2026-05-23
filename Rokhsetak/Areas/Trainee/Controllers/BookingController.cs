@@ -149,4 +149,16 @@ public class BookingController : Controller
         TempData["Success"] = "Session rescheduled successfully.";
         return RedirectToAction("Index");
     }
+    // POST /Trainee/Booking/RateSession
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Rate(RateSessionDto dto)
+    {
+        if (!ModelState.IsValid)
+            return RedirectToAction("Index");
+
+        var userId = User.GetUserId().Value;
+        var result = await _bookings.RateSessionAsync(userId, dto.BookingId, dto.Score, review: dto.Review != null? dto.Review : null);
+        return RedirectToAction("Index");
+    }
 }
