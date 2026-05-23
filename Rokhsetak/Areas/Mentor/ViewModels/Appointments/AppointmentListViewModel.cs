@@ -22,6 +22,7 @@ public class AppointmentItemViewModel
     public bool CanConfirm { get; set; }
     public bool CanReschedule { get; set; }
     public bool CanMarkDone { get; set; }
+    public bool CanCancel { get; set; }
     public bool CanFeedback { get; set; }
     public bool FeedbackGiven { get; set; }
 }

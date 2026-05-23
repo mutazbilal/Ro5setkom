@@ -97,11 +97,30 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent">
-                            <a asp-area="Trainee" asp-controller="Booking" asp-action="Book"
+
+                            @if (Model.ActiveMentorId.HasValue &&
+                           Model.ActiveMentorId != m.MentorId)
+                            {
+                                <button type="button"
+                                        class="btn btn-warning w-100 mentor-switch-btn"
+                                        data-book-url="@Url.Action("Book", "Booking", new { area = "Trainee", mentorId = m.MentorId })"
+                                        data-mentor-name="@m.FullName">
+                                    <i class="bi bi-exclamation-triangle"></i>
+									fuck
+                                </button>
+                            }
+                            else
+                            {
+                                <a asp-area="Trainee"
+                                   asp-controller="Booking"
+                                   asp-action="Book"
                                    asp-route-mentorId="@m.MentorId"
                                    class="btn btn-primary w-100">
-                                <i class="bi bi-calendar-plus"></i> Book a Session
-                            </a>
+                                    <i class="bi bi-calendar-plus"></i>
+                                    Book a Session
+                                </a>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -110,3 +129,77 @@
         <p class="text-muted small mt-3">@Model.Mentors.Count mentor(s) found.</p>
     }
 </div>
+<div class="modal fade" id="mentorSwitchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    Change Primary Mentor?
+                </h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    You are about to book a session with a new mentor.
+                </p>
+
+                <ul class="mb-3">
+                    <li>All future bookings with your current mentor will be cancelled.</li>
+                    <li>If the new mentor approves your booking request, they will become your new primary mentor.</li>
+                    <li>Future bookings will automatically be associated with the new mentor.</li>
+                </ul>
+
+                <p class="fw-semibold mb-0">
+                    Are you sure you want to continue?
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-outline-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <a id="confirmMentorSwitchBtn"
+                   href="#"
+                   class="btn btn-warning">
+                    Yes, Continue
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const modalElement = document.getElementById('mentorSwitchModal');
+            const modal = new bootstrap.Modal(modalElement);
+
+            const confirmBtn = document.getElementById('confirmMentorSwitchBtn');
+
+            document.querySelectorAll('.mentor-switch-btn')
+                .forEach(btn => {
+
+                    btn.addEventListener('click', function () {
+
+                        const bookUrl = this.dataset.bookUrl;
+
+                        confirmBtn.href = bookUrl;
+
+                        modal.show();
+                    });
+
+                });
+
+        });
+    </script>
+}

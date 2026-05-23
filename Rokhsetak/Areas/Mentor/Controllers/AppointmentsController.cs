@@ -60,6 +60,20 @@ public class AppointmentsController : Controller
         return RedirectToAction("Index");
     }
 
+    // POST /Mentor/Appointments/Cancel
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Cancel(int bookingId)
+    {
+        var mentorId = User.GetUserId().Value;
+        var result = await _appointments.Cancel(mentorId, bookingId);
+
+        TempData[result.Succeeded ? "Success" : "Error"] =
+            result.Succeeded ? "Session cancelled." : result.Error;
+
+        return RedirectToAction("Index");
+    }
+
     // GET /Mentor/Appointments/Reschedule?bookingId=5
     public async Task<IActionResult> Reschedule(int bookingId)
     {

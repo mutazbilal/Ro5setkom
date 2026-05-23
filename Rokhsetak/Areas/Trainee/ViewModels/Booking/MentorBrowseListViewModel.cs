@@ -4,6 +4,7 @@ public class MentorBrowseListViewModel
 {
     public List<MentorBrowseCardViewModel> Mentors { get; set; } = new();
     public MentorBrowseFilterViewModel Filter { get; set; } = new();
+    public int? ActiveMentorId { get; set; }
 }
 
 public class MentorBrowseCardViewModel

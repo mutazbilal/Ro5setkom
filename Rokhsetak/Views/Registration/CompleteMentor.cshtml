@@ -196,6 +196,20 @@
                 </div>
 
                 <div class="auth-field">
+                    <label asp-for="TrainingCenterId"
+                           style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
+                        Your official training center
+                    </label>
+                    <select asp-for="TrainingCenterId"
+                            asp-items="@(new SelectList(Model.AvailableTrainingCenters, "Id", "Name"))"
+                            class="auth-input auth-select"
+                            aria-required="true">
+                        <option value="">-- Select Training Center --</option>
+                    </select>
+                    <span asp-validation-for="TrainingCenterId" class="text-danger"></span>
+                </div>
+
+                <div class="auth-field">
                     <input asp-for="VehicleType" class="auth-input" type="text" placeholder=" " />
                     <label asp-for="VehicleType" class="auth-label">Vehicle Type (optional)</label>
                     <span asp-validation-for="VehicleType" class="text-danger"></span>

@@ -122,10 +122,17 @@ namespace Rokhsetak.Services.Implementations
 
             filter.AvailableCities = availableCities;
 
+            var activeMentorId = await _context.TraineeLicenses
+                .Where(tl => tl.TraineeId == traineeId)
+                .Include(m => m.Mentor)
+                .Select(m => m.MentorId)
+                .FirstOrDefaultAsync();
+
             var vm = new MentorBrowseListViewModel
             {
                 Mentors = cards.OrderByDescending(c => c.AverageRating).ToList(),
-                Filter = filter
+                Filter = filter,
+                ActiveMentorId = activeMentorId
             };
 
             return ServiceResult<MentorBrowseListViewModel>.Success(vm);
@@ -559,8 +566,27 @@ namespace Rokhsetak.Services.Implementations
                 };
             }).ToList();
 
+            var mentorUser = await _context.TraineeLicenses
+                .Where(tl => tl.TraineeId == traineeId)
+                .Join(
+                    _context.Users,
+                    tl => tl.MentorId,
+                    u => u.UserId,
+                    (tl, u) => new
+                    {
+                        u.UserId,
+                        FullName = u.FirstName + " " + u.LastName
+                    }
+                )
+                .FirstOrDefaultAsync();
+
             return ServiceResult<TraineeBookingListViewModel>.Success(
-                new TraineeBookingListViewModel { Bookings = items });
+                new TraineeBookingListViewModel
+                {
+                    Bookings = items,
+                    PrimaryMentorId = mentorUser?.UserId,
+                    PrimaryMentorName = mentorUser?.FullName
+                });
         }
 
         // ─────────────────────────────────────────────────────────────────────────

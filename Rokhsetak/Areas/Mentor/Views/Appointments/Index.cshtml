@@ -126,6 +126,17 @@
                                             </button>
                                         </form>
                                     }
+                                    @if (item.CanCancel)
+                                    {
+                                        <form asp-area="Mentor" asp-controller="Appointments"
+                                              asp-action="Cancel" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="bookingId" value="@item.BookingId" />
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="bi bi-check2-circle"></i> Cancel
+                                            </button>
+                                        </form>
+                                    }
                                     @if (item.CanFeedback)
                                     {
                                         <a asp-area="Mentor" asp-controller="Appointments"
