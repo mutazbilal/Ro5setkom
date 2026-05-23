@@ -143,6 +143,10 @@ public class MentorRegistrationViewModel
     [Display(Name = "License Type You Teach")]
     public int LicenseTypeId { get; set; }
 
+    [Required(ErrorMessage = "Please select your training center.")]
+    [Display(Name = "Your Officail Training Center")]
+    public int TrainingCenterId { get; set; }
+
     [Display(Name = "Vehicle Type")]
     [StringLength(100)]
     public string? VehicleType { get; set; }
@@ -161,7 +165,9 @@ public class MentorRegistrationViewModel
 
     // ─── UI ────────────────────────────────────────────────────────────────
     public List<LicenseTypeOption> AvailableLicenseTypes { get; set; } = new();
+    public List<TrainingCenterOption> AvailableTrainingCenters { get; set; } = new();
 }
 
 // Lightweight option for dropdowns
 public record LicenseTypeOption(int Id, string Name, string? Description);
+public record TrainingCenterOption(int Id, string Name);

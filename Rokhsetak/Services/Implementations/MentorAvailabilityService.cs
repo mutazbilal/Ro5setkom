@@ -42,6 +42,10 @@
             {
                 return ServiceResult.Failure("End time cannot be later than 7 PM");
             }
+            if (model.StartTime < new TimeOnly(6, 0))
+            {
+                return ServiceResult.Failure("Start Time cannot be earlier than 6 AM");
+            }
             var slot = new MentorAvailability
             {
                 MentorId = mentorId,
@@ -107,8 +111,7 @@
             if (slot.MentorId != mentorId)
                 return ServiceResult.Failure("Unauthorized.");
 
-            slot.IsActive = false;
-
+            _context.Remove(slot);
             await _context.SaveChangesAsync();
             return ServiceResult.Success();
         }

@@ -23,5 +23,12 @@ namespace Rokhsetak.Services.Implementations
                 .OrderBy(l => l.LicenseName)
                 .Select(l => new LicenseTypeOption(l.LicenseTypeId, l.DisplayNameEn, l.DescriptionEn))
                 .ToListAsync();
+
+        public async Task<List<TrainingCenterOption>> GetTrainingCentersAsync()
+        {
+            return await _db.TrainingCenters
+                .Select(tc => new TrainingCenterOption(tc.CenterId, tc.Name))
+                .ToListAsync();
+        }
     }
 }

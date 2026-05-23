@@ -3,15 +3,13 @@
 @{
     ViewData["Title"] = "My Dashboard";
     var langClaim = Context.User.FindFirst("language")?.Value;
-    var isRtl = !string.IsNullOrEmpty(langClaim) && langClaim == "ar";
-    var dirAttr = isRtl ? "rtl" : "ltr";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/dashboard.css" />
 }
 
-<div class="trainee-dashboard" dir="@dirAttr">
+<div class="trainee-dashboard">
     <div class="trainee-dashboard__inner">
 
         @if (TempData["Error"] != null)

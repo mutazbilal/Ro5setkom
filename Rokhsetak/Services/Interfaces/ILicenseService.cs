@@ -8,5 +8,6 @@ namespace Rokhsetak.Services.Interfaces
         /// Returns all active license types for populating dropdowns.
         /// </summary>
         Task<List<LicenseTypeOption>> GetLicenseTypesAsync();
+        Task<List<TrainingCenterOption>> GetTrainingCentersAsync();
     }
 }

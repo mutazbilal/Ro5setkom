@@ -3,6 +3,8 @@
 public class TraineeBookingListViewModel
 {
     public List<TraineeBookingItemViewModel> Bookings { get; set; } = new();
+    public int? PrimaryMentorId { get; set; }
+    public string? PrimaryMentorName { get; set; }
 }
 
 public class TraineeBookingItemViewModel

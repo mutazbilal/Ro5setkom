@@ -256,7 +256,8 @@ public class RegistrationService : IRegistrationService
                 LicenseTypeId = model.LicenseTypeId,
                 VehicleType = model.VehicleType,
                 PricePerSession = model.PricePerSession,
-                City = model.City
+                City = model.City,
+                TrainingCenterId = model.TrainingCenterId
             };
 
             _db.Mentors.Add(mentor);

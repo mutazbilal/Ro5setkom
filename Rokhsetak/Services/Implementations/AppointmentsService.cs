@@ -56,7 +56,7 @@ public class AppointmentService : IAppointmentService
             bool isPast = endDt <= now;
             bool canFeedback = i.Status == "completed" && !feedbackIds.Contains(i.BookingId);
             bool feedbackGiven = i.Status == "completed" && feedbackIds.Contains(i.BookingId);
-
+            bool cancancel = i.Status == "pending" || i.Status == "confirmed" && !isPast;
             return new AppointmentItemViewModel
             {
                 BookingId = i.BookingId,
@@ -72,6 +72,7 @@ public class AppointmentService : IAppointmentService
                 CanConfirm = i.Status == "pending",
                 CanReschedule = i.Status == "pending",
                 CanMarkDone = i.Status == "confirmed" && isPast,
+                CanCancel = cancancel,
                 CanFeedback = canFeedback,
                 FeedbackGiven = feedbackGiven
             };
@@ -100,6 +101,15 @@ public class AppointmentService : IAppointmentService
 
         booking.Status = "confirmed";
         booking.UpdatedAt = DateTime.UtcNow;
+
+        //update trainee license mentor id
+        var tl = await _context.TraineeLicenses
+            .FirstOrDefaultAsync(tl => tl.TraineeId == booking.TraineeId);
+        if (tl.MentorId != mentorId)
+        {
+            tl.MentorId = mentorId;
+            tl.UpdatedAt = DateTime.UtcNow;
+        }
 
         await _context.SaveChangesAsync();
 
@@ -143,6 +153,38 @@ public class AppointmentService : IAppointmentService
             "Session Completed",
             $"Your session on {booking.BookingDate:dd MMM yyyy} has been marked as completed.",
             "feedback");
+
+        return ServiceResult.Success();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // CANCEL
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult> Cancel(int mentorId, int bookingId)
+    {
+        var booking = await _context.Bookings
+            .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+
+        if (booking == null)
+            return ServiceResult.Failure("Booking not found.");
+
+        if (booking.MentorId != mentorId)
+            return ServiceResult.Failure("Unauthorized.");
+
+        if (booking.Status != "confirmed" && booking.Status != "pending")
+            return ServiceResult.Failure("Only confirmed or pending bookings can be cancelled.");
+
+
+        booking.Status = "cancelled";
+        booking.UpdatedAt = DateTime.UtcNow;
+
+        await _context.SaveChangesAsync();
+
+        await _notifications.CreateAsync(
+            booking.TraineeId,
+            "Session cancelled",
+            $"Your session on {booking.BookingDate:dd MMM yyyy} has been cancelled.",
+            "booking");
 
         return ServiceResult.Success();
     }

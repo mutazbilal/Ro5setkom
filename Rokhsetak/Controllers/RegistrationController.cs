@@ -76,6 +76,7 @@ public class RegistrationController : Controller
 
         var citizen          = result.Data!;
         var licenseTypes     = await _licenseService.GetLicenseTypesAsync();
+        var trainingCenters = await _licenseService.GetTrainingCentersAsync();
 
         if (model.IsTrainee)
         {
@@ -91,7 +92,7 @@ public class RegistrationController : Controller
                 AddressLine1 = citizen.AddressLine1,
                 AddressLine2 = citizen.AddressLine2,
                 PostalCode   = citizen.PostalCode,
-                AvailableLicenseTypes = licenseTypes
+                AvailableLicenseTypes = licenseTypes,
             };
             _logger.LogInformation("National ID {NationalId} found for trainee registration. Prepopulating form.", model.NationalId);
             return View("CompleteTrainee", vm);
@@ -110,7 +111,8 @@ public class RegistrationController : Controller
                 AddressLine1 = citizen.AddressLine1,
                 AddressLine2 = citizen.AddressLine2,
                 PostalCode   = citizen.PostalCode,
-                AvailableLicenseTypes = licenseTypes
+                AvailableLicenseTypes = licenseTypes,
+                AvailableTrainingCenters = trainingCenters
             };
             return View("CompleteMentor", vm);
         }
