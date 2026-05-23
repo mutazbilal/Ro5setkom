@@ -946,3 +946,226 @@
     .track-card { transition: none; }
     .btn-action { transition: none; }
 }
+
+/* ============================================================
+   ADDITIONS
+   ----
+   Layered on top of the original file:
+     • Staggered entrance for the inner column                     (motion)
+     • Decorative ambient blob behind the dashboard                (atmosphere)
+     • Per-track progress strip between header and module list     (flair)
+     • Up-next emphasis on the first non-completed shown module    (flair)
+     • Pulsing CTA when the mock exam is ready                     (E touch)
+   All new rules respect prefers-reduced-motion.
+   ============================================================ */
+
+/* ---- Page-level decorative accents (layered onto existing background) ---- */
+.trainee-dashboard {
+    position: relative;
+    isolation: isolate;
+}
+
+.trainee-dashboard::before,
+.trainee-dashboard::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(40px);
+    opacity: 0.55;
+}
+
+.trainee-dashboard::before {
+    top: 12%;
+    inset-inline-end: -120px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(242, 101, 34, 0.18), transparent 70%);
+    animation: td-drift-a 18s ease-in-out infinite alternate;
+}
+
+.trainee-dashboard::after {
+    bottom: 18%;
+    inset-inline-start: -140px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.15), transparent 70%);
+    animation: td-drift-b 22s ease-in-out infinite alternate;
+}
+
+@keyframes td-drift-a {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(-30px, 40px); }
+}
+
+@keyframes td-drift-b {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(40px, -30px); }
+}
+
+/* ---- Staggered entrance for the dashboard column ---- */
+.trainee-dashboard__inner > * {
+    animation: td-fade-up 600ms var(--td-ease) both;
+}
+
+.trainee-dashboard__inner > *:nth-child(1) { animation-delay:   0ms; }
+.trainee-dashboard__inner > *:nth-child(2) { animation-delay:  80ms; }
+.trainee-dashboard__inner > *:nth-child(3) { animation-delay: 160ms; }
+.trainee-dashboard__inner > *:nth-child(4) { animation-delay: 240ms; }
+.trainee-dashboard__inner > *:nth-child(5) { animation-delay: 320ms; }
+.trainee-dashboard__inner > *:nth-child(6) { animation-delay: 400ms; }
+
+@keyframes td-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Per-track progress strip ---- */
+.track-card__progress {
+    padding: 0.95rem 1.5rem 1.05rem;
+    background: linear-gradient(180deg, var(--td-primary-soft), transparent);
+    border-bottom: 1px solid var(--td-primary-line);
+}
+
+.track-card--practical .track-card__progress {
+    background: linear-gradient(180deg, rgba(242, 101, 34, 0.07), transparent);
+    border-bottom-color: rgba(242, 101, 34, 0.15);
+}
+
+.track-card__progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.track-card__progress-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--td-muted);
+}
+
+.track-card__progress-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--td-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+
+.track-card--practical .track-card__progress-value {
+    color: var(--td-accent-orange);
+}
+
+.track-card__progress-bar {
+    position: relative;
+    height: 6px;
+    background: rgba(26, 58, 107, 0.10);
+    border-radius: var(--td-radius-pill);
+    overflow: hidden;
+}
+
+.track-card__progress-fill {
+    height: 100%;
+    width: var(--track-progress, 0%);
+    border-radius: var(--td-radius-pill);
+    background: linear-gradient(90deg, var(--td-primary) 0%, #2C5191 100%);
+    transition: width 1100ms var(--td-ease);
+    box-shadow: 0 0 8px rgba(26, 58, 107, 0.30);
+}
+
+.track-card--practical .track-card__progress-fill {
+    background: linear-gradient(90deg, var(--td-accent-orange) 0%, var(--td-accent-gold) 100%);
+    box-shadow: 0 0 8px rgba(242, 101, 34, 0.35);
+}
+
+/* ---- "Up next" emphasis on the active module ---- */
+.module-item--up-next {
+    position: relative;
+    background: linear-gradient(90deg, rgba(242, 101, 34, 0.07), transparent 65%);
+}
+
+[dir="rtl"] .module-item--up-next {
+    background: linear-gradient(-90deg, rgba(242, 101, 34, 0.07), transparent 65%);
+}
+
+.module-item--up-next::before {
+    content: '';
+    position: absolute;
+    inset-block: 10px;
+    inset-inline-start: 0;
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--td-accent-orange), var(--td-accent-gold));
+}
+
+.module-item--up-next .module-item__title {
+    font-weight: 600;
+    color: var(--td-primary);
+}
+
+.module-item--up-next .module-item__status-icon {
+    box-shadow: 0 0 0 0 rgba(242, 101, 34, 0.45);
+    animation: td-up-next-pulse 2.4s ease-out infinite;
+}
+
+@keyframes td-up-next-pulse {
+    0%   { box-shadow: 0 0 0 0   rgba(242, 101, 34, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(242, 101, 34, 0);    }
+    100% { box-shadow: 0 0 0 0   rgba(242, 101, 34, 0);    }
+}
+
+.module-item--up-next .module-item__title::after {
+    content: '\f061'; /* fa-arrow-right */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-inline-start: 0.55rem;
+    font-size: 0.72rem;
+    color: var(--td-accent-orange);
+    opacity: 0.85;
+    vertical-align: 0.06em;
+}
+
+[dir="rtl"] .module-item--up-next .module-item__title::after {
+    content: '\f060'; /* fa-arrow-left (mirrored in RTL) */
+}
+
+/* "Up next" status pill — sits alongside the existing status pills */
+.status-pill--up-next {
+    background: linear-gradient(135deg, var(--td-accent-orange) 0%, var(--td-accent-gold) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 6px 14px -8px rgba(242, 101, 34, 0.6);
+}
+
+/* ---- Mock exam: pulse the CTA when ready ---- */
+.mock-exam--ready .btn-action--gradient {
+    animation: td-cta-pulse 2.4s ease-out infinite;
+}
+
+@keyframes td-cta-pulse {
+    0%   { box-shadow: 0 12px 24px -10px rgba(242, 101, 34, 0.55), 0 0 0 0  rgba(242, 101, 34, 0.45); }
+    70%  { box-shadow: 0 12px 24px -10px rgba(242, 101, 34, 0.55), 0 0 0 14px rgba(242, 101, 34, 0); }
+    100% { box-shadow: 0 12px 24px -10px rgba(242, 101, 34, 0.55), 0 0 0 0  rgba(242, 101, 34, 0); }
+}
+
+/* ---- Respect motion preferences for every new animation ---- */
+@media (prefers-reduced-motion: reduce) {
+    .trainee-dashboard::before,
+    .trainee-dashboard::after,
+    .trainee-dashboard__inner > *,
+    .module-item--up-next .module-item__status-icon,
+    .mock-exam--ready .btn-action--gradient {
+        animation: none !important;
+    }
+    .trainee-dashboard__inner > * {
+        opacity: 1;
+        transform: none;
+    }
+}

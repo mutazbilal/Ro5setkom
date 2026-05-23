@@ -1,129 +1,182 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking;
+@using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @model MentorBookingViewModel
 @{
     ViewData["Title"] = $"Book with {Model.MentorName}";
 }
 
-<div class="container py-4" style="max-width: 680px;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/booking-shared.css" />
+}
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+<div class="booking-page">
+    <div class="booking-page__inner booking-page__inner--narrow">
 
-    <!-- Mentor profile -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body d-flex justify-content-between flex-wrap gap-3">
-            <div>
-                <h4 class="fw-bold mb-1">@Model.MentorName</h4>
-                <p class="text-muted mb-1"><i class="bi bi-geo-alt"></i> @Model.City</p>
-                <span class="badge bg-light text-dark border me-2">
-                    @Model.LicenseType.Replace("_", " ")
-                </span>
-                <span class="text-warning fw-semibold">
-                    @Model.AverageRating.ToString("0.0") ★
-                    <span class="text-muted fw-normal small">(@Model.TotalRatings)</span>
-                </span>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert--error" role="alert">
+                <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Error"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="text-end">
-                <div class="fs-4 fw-bold text-primary">@Model.PricePerSession JD</div>
-                <div class="text-muted small">per session</div>
-                <div class="text-success small">@Model.CompletionRate% completion rate</div>
-            </div>
-        </div>
-    </div>
+        }
 
-    <!-- Availability -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header fw-semibold">
-            <i class="bi bi-clock text-success"></i> Available Slots
-        </div>
-        <div class="card-body">
-            @if (Model.AvailableDays.Any())
-            {
-                <div class="row g-2">
-                    @foreach (var day in Model.AvailableDays)
-                    {
-                        <div class="col-md-4 mb-2">
-                            <div class="fw-semibold text-capitalize mb-1">@day.DayOfWeek</div>
-                            @foreach (var slot in day.Slots)
-                            {
-                                <span class="badge bg-light text-dark border me-1 mb-1">
-                                    @slot.StartTime.ToString("hh:mm tt") – @slot.EndTime.ToString("hh:mm tt")
-                                </span>
-                            }
+        <!-- Mentor profile -->
+        <section class="booking-card">
+            <div class="booking-card__body">
+                <div class="mentor-summary">
+                    <div class="mentor-summary__main">
+                        <h2 class="mentor-summary__name">@Model.MentorName</h2>
+                        <p class="mentor-summary__location">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            @Model.City
+                        </p>
+                        <div class="mentor-summary__meta">
+                            <span class="tag">@Model.LicenseType.Replace("_", " ")</span>
+                            <span class="mentor-summary__rating">
+                                @Model.AverageRating.ToString("0.0") ★
+                                <span class="mentor-summary__rating-count">(@Model.TotalRatings)</span>
+                            </span>
                         </div>
-                    }
-                </div>
-            }
-            else
-            {
-                <p class="text-muted">No availability slots set by this mentor yet.</p>
-            }
-        </div>
-    </div>
-
-    <!-- Booking form -->
-    <div class="card shadow-sm">
-        <div class="card-header fw-semibold">
-            <i class="bi bi-calendar-plus text-primary"></i> Book a Session
-        </div>
-        <div class="card-body">
-            <form asp-area="Trainee" asp-controller="Booking" asp-action="Book" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="MentorId" value="@Model.MentorId" />
-                <input type="hidden" name="TraineeLicenseId" value="@Model.TraineeLicenseId" />
-                <input type="hidden" name="LicenseTypeId" value="@Model.LicenseTypeId" />
-
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Session Type</label>
-                    <select name="SessionType" class="form-select" required>
-                        <option value="">— Select —</option>
-                        <option value="theoretical">📘 Theoretical</option>
-                        <option value="practical">🚗 Practical</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Date</label>
-                    <input type="date" name="BookingDate" class="form-control" required
-                           min="@DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd")" />
-                </div>
-
-                <div class="row g-3 mb-4">
-                    <div class="col-6">
-                        <label class="form-label fw-semibold">Start Time</label>
-                        <input type="time" name="StartTime" class="form-control" required />
                     </div>
-                    <div class="col-6">
-                        <label class="form-label fw-semibold">End Time</label>
-                        <input type="time" name="EndTime" class="form-control" required />
+
+                    <div class="mentor-summary__price-block">
+                        <div class="mentor-summary__price">@Model.PricePerSession JD</div>
+                        <div class="mentor-summary__price-unit">per session</div>
+                        <div class="mentor-summary__completion">@Model.CompletionRate% completion rate</div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="alert alert-light border small mb-4">
-                    <i class="bi bi-info-circle"></i>
-                    Select a time within the mentor's available slots above.
-                    The booking will be <strong>pending</strong> until the mentor confirms it.
-                </div>
+        <!-- Availability -->
+        <section class="booking-card">
+            <div class="booking-card__header">
+                <span class="booking-card__header-icon">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                </span>
+                Available Slots
+            </div>
+            <div class="booking-card__body">
+                @if (Model.AvailableDays.Any())
+                {
+                    <div class="day-slots">
+                        @foreach (var day in Model.AvailableDays)
+                        {
+                            <div class="day-slots__day">
+                                <p class="day-slots__name">@day.DayOfWeek</p>
+                                <div class="day-slots__chips">
+                                    @foreach (var slot in day.Slots)
+                                    {
+                                        <span class="slot-chip">
+                                            @slot.StartTime.ToString("hh:mm tt") – @slot.EndTime.ToString("hh:mm tt")
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="empty-state__text empty-state__text--inline">
+                        No availability slots set by this mentor yet.
+                    </p>
+                }
+            </div>
+        </section>
 
-                <div class="d-flex justify-content-between">
-                    <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-                       class="btn btn-outline-secondary">← Back</a>
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-calendar-check"></i> Request Booking
-                    </button>
-                </div>
-            </form>
-        </div>
+        <!-- Booking form -->
+        <section class="booking-card">
+            <div class="booking-card__header">
+                <span class="booking-card__header-icon">
+                    <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
+                </span>
+                Book a Session
+            </div>
+            <div class="booking-card__body">
+                <form asp-area="Trainee" asp-controller="Booking" asp-action="Book" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <input asp-for="MentorId" type="hidden" />
+                    <input asp-for="TraineeLicenseId" type="hidden" />
+                    <input asp-for="LicenseTypeId" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly" class="alert alert--error"></div>
+
+                    <div class="form-field">
+                        <label asp-for="SessionType" class="form-field__label">Session Type</label>
+                        <select asp-for="SessionType"
+                                class="form-field__select"
+                                aria-required="true"
+                                required>
+                            <option value="">— Select —</option>
+                            <option value="theoretical">Theoretical</option>
+                            <option value="practical">Practical</option>
+                        </select>
+                        <span asp-validation-for="SessionType" class="form-field__error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="BookingDate" class="form-field__label">Date</label>
+                        <input asp-for="BookingDate"
+                               type="date"
+                               class="form-field__input"
+                               min="@DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd")"
+                               aria-required="true"
+                               required />
+                        <span asp-validation-for="BookingDate" class="form-field__error"></span>
+                    </div>
+
+                    <div class="form-row form-row--2">
+                        <div class="form-field">
+                            <label asp-for="StartTime" class="form-field__label">Start Time</label>
+                            <input asp-for="StartTime"
+                                   type="time"
+                                   class="form-field__input"
+                                   aria-required="true"
+                                   required />
+                            <span asp-validation-for="StartTime" class="form-field__error"></span>
+                        </div>
+                        <div class="form-field">
+                            <label asp-for="EndTime" class="form-field__label">End Time</label>
+                            <input asp-for="EndTime"
+                                   type="time"
+                                   class="form-field__input"
+                                   aria-required="true"
+                                   required />
+                            <span asp-validation-for="EndTime" class="form-field__error"></span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert--soft" role="note">
+                        <i class="fa-solid fa-circle-info alert__icon" aria-hidden="true"></i>
+                        <div class="alert__body">
+                            Pick a time within the mentor's available slots above.
+                            Your booking will be <strong>pending</strong> until the mentor confirms it.
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+                           class="btn btn--secondary">
+                            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                            Back
+                        </a>
+                        <button type="submit" class="btn btn--primary">
+                            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                            Request Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
     </div>
 </div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/booking-shared.js" asp-append-version="true"></script>
 }
