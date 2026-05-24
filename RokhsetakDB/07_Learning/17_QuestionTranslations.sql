@@ -1,6 +1,3 @@
-use ro5setkomDB
-GO
-
 CREATE TABLE Learning.QuestionTranslations (
     question_translation_id INT PRIMARY KEY IDENTITY,
     question_id INT NOT NULL,

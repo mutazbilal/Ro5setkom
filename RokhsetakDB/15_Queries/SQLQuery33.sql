@@ -4,4 +4,4 @@ SELECT TOP (1000) [user_id]
       ,[is_active]
       ,[created_at]
       ,[updated_at]
-  FROM [ro5setkomDB].[Core].[Users]
+  FROM RokhsetakDB.Core.Users

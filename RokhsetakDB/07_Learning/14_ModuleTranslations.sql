@@ -1,6 +1,3 @@
-use ro5setkomDB
-GO
-
 CREATE TABLE Learning.ModuleTranslations (
     module_translation_id INT PRIMARY KEY IDENTITY,
     module_id INT NOT NULL,

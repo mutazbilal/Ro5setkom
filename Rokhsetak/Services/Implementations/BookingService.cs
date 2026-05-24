@@ -556,7 +556,7 @@ namespace Rokhsetak.Services.Implementations
                     b.SessionType,
                     b.Status,
 
-                    MentorName = mentorUser.FullName,
+                    MentorName = mentorUser != null? mentorUser.FullName: null,
 
                     MentorNotes = b.SessionFeedback != null
                         ? b.SessionFeedback.MentorNotes
