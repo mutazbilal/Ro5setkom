@@ -1,112 +1,202 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking;
+@using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @model MentorBrowseListViewModel
+
 @{
     ViewData["Title"] = "Find a Mentor";
 }
 
-<div class="container py-4">
-
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <h2 class="fw-bold mb-0">Find a Mentor</h2>
-        <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
-           class="btn btn-outline-secondary btn-sm">← My Bookings</a>
+@section Styles {
+    <link rel="stylesheet" href="~/css/booking-shared.css" />
+}
+@if (TempData["Error"] != null)
+{
+<div class="alert alert--error" role="alert">
+    <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
+    <div class="alert__body">@TempData["Error"]</div>
+    <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert--success" role="status">
+        <i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
+        <div class="alert__body">@TempData["Success"]</div>
+        <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
     </div>
 
-    <!-- Filter bar -->
-    <form method="get" class="card shadow-sm mb-4 p-3">
-        <div class="row g-2 align-items-end">
-            <div class="col-md-3">
-                <label class="form-label small fw-semibold">City</label>
-                <select name="city" class="form-select form-select-sm">
-                    <option value="">All cities</option>
-                    @foreach (var c in Model.Filter.AvailableCities)
-                    {
-                        <option value="@c" selected="@(Model.Filter.City == c)">@c</option>
-                    }
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label class="form-label small fw-semibold">Min Price (JD)</label>
-                <input type="number" name="minPrice" value="@Model.Filter.MinPrice"
-                       class="form-control form-control-sm" min="0" step="0.5" />
-            </div>
-            <div class="col-md-2">
-                <label class="form-label small fw-semibold">Max Price (JD)</label>
-                <input type="number" name="maxPrice" value="@Model.Filter.MaxPrice"
-                       class="form-control form-control-sm" min="0" step="0.5" />
-            </div>
-            <div class="col-md-2">
-                <label class="form-label small fw-semibold">Min Rating</label>
-                <select name="minRating" class="form-select form-select-sm">
-                    <option value="">Any</option>
-                    @foreach (var r in new[] { 3.0, 3.5, 4.0, 4.5 })
-                    {
-                        <option value="@r" selected="@(Model.Filter.MinRating == r)">@r ★+</option>
-                    }
-                </select>
-            </div>
-            <div class="col-md-3 d-flex gap-2">
-                <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
-                    <i class="bi bi-funnel"></i> Filter
-                </button>
-                <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-                   class="btn btn-outline-secondary btn-sm">Clear</a>
-            </div>
-        </div>
-    </form>
+    <div class="booking-header">
+        <h2 class="booking-header__title">My Bookings</h2>
+        <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+           class="btn btn--primary">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            Find a Mentor
+        </a>
+    </div>
+}
+<div class="booking-page">
+    <div class="booking-page__inner">
 
-    @if (!Model.Mentors.Any())
-    {
-        <div class="text-center py-5 text-muted">
-            <i class="bi bi-person-x fs-1 d-block mb-2"></i>
-            No mentors found for your filters.
+        <div class="booking-header">
+            <h2 class="booking-header__title">Find a Mentor</h2>
+            <a asp-area="Trainee"
+               asp-controller="Booking"
+               asp-action="Index"
+               class="btn btn--secondary btn--sm">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                My Bookings
+            </a>
         </div>
-    }
-    else
-    {
-        <div class="row g-3">
-            @foreach (var m in Model.Mentors)
-            {
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title fw-bold mb-0">@m.FullName</h5>
-                                <span class="badge bg-light text-dark border">
-                                    @m.LicenseType.Replace("_", " ")
-                                </span>
+
+        <!-- Filter bar -->
+        <form asp-area="Trainee"
+              asp-controller="Booking"
+              asp-action="Browse"
+              method="get"
+              class="filter-bar">
+
+            <div class="filter-bar__grid">
+
+                <div class="form-field">
+                    <label asp-for="Filter.City" class="form-field__label form-field__label--small">City</label>
+                    <select asp-for="Filter.City"
+                            class="form-field__select form-field__select--sm">
+                        <option value="">All cities</option>
+                        @foreach (var c in Model.Filter.AvailableCities)
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="Filter.MinPrice" class="form-field__label form-field__label--small">Min Price (JD)</label>
+                    <input asp-for="Filter.MinPrice"
+                           type="number"
+                           min="0"
+                           step="0.5"
+                           class="form-field__input form-field__input--sm" />
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="Filter.MaxPrice" class="form-field__label form-field__label--small">Max Price (JD)</label>
+                    <input asp-for="Filter.MaxPrice"
+                           type="number"
+                           min="0"
+                           step="0.5"
+                           class="form-field__input form-field__input--sm" />
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="Filter.MinRating" class="form-field__label form-field__label--small">Min Rating</label>
+                    <select asp-for="Filter.MinRating"
+                            class="form-field__select form-field__select--sm">
+                        <option value="">Any</option>
+                        @foreach (var r in new[] { 3.0, 3.5, 4.0, 4.5 })
+                        {
+                            <option value="@r">@r ★ and up</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="filter-bar__actions">
+                    <button type="submit" class="btn btn--primary btn--sm btn--block">
+                        <i class="fa-solid fa-filter"></i>
+                        Filter
+                    </button>
+
+                    <a asp-area="Trainee"
+                       asp-controller="Booking"
+                       asp-action="Browse"
+                       class="btn btn--secondary btn--sm">
+                        Clear
+                    </a>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- Results -->
+        @if (!Model.Mentors.Any())
+        {
+            <div class="empty-state">
+                <i class="fa-solid fa-user-slash empty-state__icon"></i>
+                <p class="empty-state__text">No mentors found for your filters.</p>
+                <a asp-area="Trainee"
+                   asp-controller="Booking"
+                   asp-action="Browse"
+                   class="btn btn--secondary btn--sm">
+                    Clear filters
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="mentor-grid">
+
+                @foreach (var m in Model.Mentors)
+                {
+                    <article class="mentor-card">
+
+                        <div class="mentor-card__body">
+
+                            <div class="mentor-card__top">
+                                <h3 class="mentor-card__name">@m.FullName</h3>
+                                <span class="tag">@m.LicenseType.Replace("_", " ")</span>
                             </div>
-                            <p class="text-muted small mb-2">
-                                <i class="bi bi-geo-alt"></i> @m.City
+
+                            <p class="mentor-card__city">
+                                <i class="fa-solid fa-location-dot"></i>
+                                @m.City
                             </p>
-                            <div class="d-flex gap-3 mb-3">
-                                <div>
-                                    <div class="fw-bold text-warning">
+
+                            <div class="mentor-card__stats">
+
+                                <div class="mentor-card__stat">
+                                    <div class="mentor-card__stat-value">
                                         @m.AverageRating.ToString("0.0") ★
                                     </div>
-                                    <div class="text-muted small">@m.TotalRatings ratings</div>
+                                    <div class="mentor-card__stat-label">
+                                        @m.TotalRatings ratings
+                                    </div>
                                 </div>
-                                <div>
-                                    <div class="fw-bold text-success">@m.CompletionRate%</div>
-                                    <div class="text-muted small">completion</div>
+
+                                <div class="mentor-card__stat">
+                                    <div class="mentor-card__stat-value">
+                                        @m.CompletionRate%
+                                    </div>
+                                    <div class="mentor-card__stat-label">
+                                        Completion
+                                    </div>
                                 </div>
-                                <div class="ms-auto text-end">
-                                    <div class="fw-bold text-primary fs-5">@m.PricePerSession JD</div>
-                                    <div class="text-muted small">per session</div>
+
+                                <div class="mentor-card__stat">
+                                    <div class="mentor-card__stat-value">
+                                        @m.PricePerSession JD
+                                    </div>
+                                    <div class="mentor-card__stat-label">
+                                        Per session
+                                    </div>
                                 </div>
+
                             </div>
+
                         </div>
+
                         <div class="card-footer bg-transparent">
 
                             @if (Model.ActiveMentorId.HasValue &&
-                           Model.ActiveMentorId != m.MentorId)
+                                 Model.ActiveMentorId != m.MentorId)
                             {
                                 <button type="button"
                                         class="btn btn-warning w-100 mentor-switch-btn"
                                         data-book-url="@Url.Action("Book", "Booking", new { area = "Trainee", mentorId = m.MentorId })"
                                         data-mentor-name="@m.FullName">
                                     <i class="bi bi-exclamation-triangle"></i>
-									Book a Session
+                                    Book a Session
                                 </button>
                             }
                             else
@@ -122,16 +212,25 @@
                             }
 
                         </div>
-                    </div>
-                </div>
-            }
-        </div>
-        <p class="text-muted small mt-3">@Model.Mentors.Count mentor(s) found.</p>
-    }
+
+                    </article>
+                }
+
+            </div>
+
+            <p class="text-muted small mt-3">
+                @Model.Mentors.Count mentor(s) found.
+            </p>
+        }
+
+    </div>
 </div>
+
+<!-- Mentor Switch Modal -->
 <div class="modal fade" id="mentorSwitchModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
+
             <div class="modal-header">
                 <h5 class="modal-title text-warning">
                     <i class="bi bi-exclamation-triangle-fill"></i>
@@ -139,19 +238,16 @@
                 </h5>
                 <button type="button"
                         class="btn-close"
-                        data-bs-dismiss="modal">
-                </button>
+                        data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
-                <p>
-                    You are about to book a session with a new mentor.
-                </p>
+                <p>You are about to book a session with a new mentor.</p>
 
-                <ul class="mb-3">
+                <ul>
                     <li>All future bookings with your current mentor will be cancelled.</li>
-                    <li>If the new mentor approves your booking request, they will become your new primary mentor.</li>
-                    <li>Future bookings will automatically be associated with the new mentor.</li>
+                    <li>If approved, the new mentor becomes your primary mentor.</li>
+                    <li>Future bookings will use the new mentor automatically.</li>
                 </ul>
 
                 <p class="fw-semibold mb-0">
@@ -172,33 +268,27 @@
                     Yes, Continue
                 </a>
             </div>
+
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-            const modalElement = document.getElementById('mentorSwitchModal');
-            const modal = new bootstrap.Modal(modalElement);
-
+            const modal = new bootstrap.Modal(document.getElementById('mentorSwitchModal'));
             const confirmBtn = document.getElementById('confirmMentorSwitchBtn');
 
-            document.querySelectorAll('.mentor-switch-btn')
-                .forEach(btn => {
+            document.querySelectorAll('.mentor-switch-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
 
-                    btn.addEventListener('click', function () {
+                    const bookUrl = this.dataset.bookUrl;
+                    confirmBtn.href = bookUrl;
 
-                        const bookUrl = this.dataset.bookUrl;
-
-                        confirmBtn.href = bookUrl;
-
-                        modal.show();
-                    });
-
+                    modal.show();
                 });
+            });
 
         });
     </script>

@@ -1,8 +1,49 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Dashboard
+@using Rokhsetak.Areas.Trainee.ViewModels.Dashboard
 @model TraineeDashboardViewModel
 @{
     ViewData["Title"] = "My Dashboard";
+
     var langClaim = Context.User.FindFirst("language")?.Value;
+    var isRtl     = !string.IsNullOrEmpty(langClaim) && langClaim == "ar";
+    var dirAttr   = isRtl ? "rtl" : "ltr";
+
+    // ---- Per-track derived values ----
+    // Lists are limited to 3 modules on the dashboard (canonical order).
+    // The full Count is preserved for the "x of N" stat in the header strip.
+    var theoryAll       = Model.TheoreticalModules.ToList();
+    var theoryShown     = theoryAll.Take(3).ToList();
+    var theoryCompleted = theoryAll.Count(m => m.Status == "completed");
+    var theoryTotal     = theoryAll.Count;
+    var theoryPct       = theoryTotal > 0
+                            ? (int)Math.Round(100.0 * theoryCompleted / theoryTotal)
+                            : 0;
+    var theoryUpNextIdx = theoryShown.FindIndex(m => m.Status != "completed");
+
+    var practicalAll       = Model.PracticalModules.ToList();
+    var practicalShown     = practicalAll.Take(3).ToList();
+    var practicalCompleted = practicalAll.Count(m => m.Status == "completed");
+    var practicalTotal     = practicalAll.Count;
+    var practicalPct       = practicalTotal > 0
+                                ? (int)Math.Round(100.0 * practicalCompleted / practicalTotal)
+                                : 0;
+    var practicalUpNextIdx = practicalShown.FindIndex(m => m.Status != "completed");
+}
+
+@functions {
+    /// <summary>
+    /// Picks the FA icon, BEM modifier, and human label for a module's status.
+    /// </summary>
+    (string iconClass, string modifier, string label) StatusPresentation(string status, bool isLocked)
+    {
+        var key = isLocked ? "locked" : status;
+        return key switch
+        {
+            "completed"   => ("fa-solid fa-circle-check", "completed",   "completed"),
+            "in_progress" => ("fa-solid fa-circle-play",  "in-progress", "in progress"),
+            "locked"      => ("fa-solid fa-lock",         "locked",      "locked"),
+            _             => ("fa-regular fa-circle",     "pending",     status?.Replace("_", " ") ?? "pending")
+        };
+    }
 }
 
 @section Styles {
@@ -19,7 +60,7 @@
                 <span class="dashboard-alert__message">@TempData["Error"]</span>
                 <button type="button"
                         class="dashboard-alert__close"
-                        data-bs-dismiss="alert"
+                        data-alert-dismiss
                         aria-label="Close">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
@@ -32,7 +73,7 @@
                 <span class="dashboard-alert__message">@TempData["Success"]</span>
                 <button type="button"
                         class="dashboard-alert__close"
-                        data-bs-dismiss="alert"
+                        data-alert-dismiss
                         aria-label="Close">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
@@ -113,32 +154,52 @@
                         <h2 id="track-theory-title" class="track-card__title">Theoretical Preparation</h2>
                     </div>
                     <span class="track-card__count" aria-label="Modules in this track">
-                        @Model.TheoreticalModules.Count()
+                        @theoryTotal
                     </span>
                 </header>
 
+                <div class="track-card__progress">
+                    <div class="track-card__progress-row">
+                        <span class="track-card__progress-label">
+                            @theoryCompleted of @theoryTotal complete
+                        </span>
+                        <span class="track-card__progress-value">@theoryPct%</span>
+                    </div>
+                    <div class="track-card__progress-bar"
+                         role="progressbar"
+                         aria-valuenow="@theoryPct" aria-valuemin="0" aria-valuemax="100"
+                         aria-label="Theoretical track progress">
+                        <div class="track-card__progress-fill"
+                             style="--track-progress: @(theoryPct)%"></div>
+                    </div>
+                </div>
+
                 <ul class="module-list">
-                    @foreach (var m in Model.TheoreticalModules)
+                    @for (var i = 0; i < theoryShown.Count; i++)
                     {
-                        var statusKey = m.IsLocked ? "locked" : m.Status;
-                        var (iconClass, modifier, label) = statusKey switch
-                        {
-                            "completed"   => ("fa-solid fa-circle-check", "completed",   "completed"),
-                            "in_progress" => ("fa-solid fa-circle-play",  "in-progress", "in progress"),
-                            "locked"      => ("fa-solid fa-lock",         "locked",      "locked"),
-                            _             => ("fa-regular fa-circle",    "pending",     m.Status?.Replace("_", " ") ?? "pending")
-                        };
-                        <li class="module-item module-item--@modifier">
+                        var m = theoryShown[i];
+                        var presentation = StatusPresentation(m.Status, m.IsLocked);
+                        var isUpNext = i == theoryUpNextIdx;
+                        var itemClass = $"module-item module-item--{presentation.modifier}"
+                                      + (isUpNext ? " module-item--up-next" : "");
+                        <li class="@itemClass">
                             <div class="module-item__main">
-                                <span class="module-item__status-icon module-item__status-icon--@modifier" aria-hidden="true">
-                                    <i class="@iconClass"></i>
+                                <span class="module-item__status-icon module-item__status-icon--@presentation.modifier" aria-hidden="true">
+                                    <i class="@presentation.iconClass"></i>
                                 </span>
                                 <span class="module-item__title">@m.Title</span>
                             </div>
-                            <span class="status-pill status-pill--@modifier">@label</span>
+                            @if (isUpNext)
+                            {
+                                <span class="status-pill status-pill--up-next">up next</span>
+                            }
+                            else
+                            {
+                                <span class="status-pill status-pill--@presentation.modifier">@presentation.label</span>
+                            }
                         </li>
                     }
-                    @if (!Model.TheoreticalModules.Any())
+                    @if (!theoryShown.Any())
                     {
                         <li class="module-list__empty">
                             <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
@@ -159,32 +220,52 @@
                         <h2 id="track-practical-title" class="track-card__title">Practical Preparation</h2>
                     </div>
                     <span class="track-card__count" aria-label="Modules in this track">
-                        @Model.PracticalModules.Count()
+                        @practicalTotal
                     </span>
                 </header>
 
+                <div class="track-card__progress">
+                    <div class="track-card__progress-row">
+                        <span class="track-card__progress-label">
+                            @practicalCompleted of @practicalTotal complete
+                        </span>
+                        <span class="track-card__progress-value">@practicalPct%</span>
+                    </div>
+                    <div class="track-card__progress-bar"
+                         role="progressbar"
+                         aria-valuenow="@practicalPct" aria-valuemin="0" aria-valuemax="100"
+                         aria-label="Practical track progress">
+                        <div class="track-card__progress-fill"
+                             style="--track-progress: @(practicalPct)%"></div>
+                    </div>
+                </div>
+
                 <ul class="module-list">
-                    @foreach (var m in Model.PracticalModules)
+                    @for (var i = 0; i < practicalShown.Count; i++)
                     {
-                        var statusKey = m.IsLocked ? "locked" : m.Status;
-                        var (iconClass, modifier, label) = statusKey switch
-                        {
-                            "completed"   => ("fa-solid fa-circle-check", "completed",   "completed"),
-                            "in_progress" => ("fa-solid fa-circle-play",  "in-progress", "in progress"),
-                            "locked"      => ("fa-solid fa-lock",         "locked",      "locked"),
-                            _             => ("fa-regular fa-circle",    "pending",     m.Status?.Replace("_", " ") ?? "pending")
-                        };
-                        <li class="module-item module-item--@modifier">
+                        var m = practicalShown[i];
+                        var presentation = StatusPresentation(m.Status, m.IsLocked);
+                        var isUpNext = i == practicalUpNextIdx;
+                        var itemClass = $"module-item module-item--{presentation.modifier}"
+                                      + (isUpNext ? " module-item--up-next" : "");
+                        <li class="@itemClass">
                             <div class="module-item__main">
-                                <span class="module-item__status-icon module-item__status-icon--@modifier" aria-hidden="true">
-                                    <i class="@iconClass"></i>
+                                <span class="module-item__status-icon module-item__status-icon--@presentation.modifier" aria-hidden="true">
+                                    <i class="@presentation.iconClass"></i>
                                 </span>
                                 <span class="module-item__title">@m.Title</span>
                             </div>
-                            <span class="status-pill status-pill--@modifier">@label</span>
+                            @if (isUpNext)
+                            {
+                                <span class="status-pill status-pill--up-next">up next</span>
+                            }
+                            else
+                            {
+                                <span class="status-pill status-pill--@presentation.modifier">@presentation.label</span>
+                            }
                         </li>
                     }
-                    @if (!Model.PracticalModules.Any())
+                    @if (!practicalShown.Any())
                     {
                         <li class="module-list__empty">
                             <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
@@ -250,3 +331,7 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+}
