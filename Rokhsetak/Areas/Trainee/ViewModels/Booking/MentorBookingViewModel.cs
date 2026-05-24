@@ -4,6 +4,7 @@ public class MentorBookingViewModel
 {
     public int MentorId { get; set; }
     public Models.Mentor? Mentor { get; set; }
+    public string MentorName { get; set; } = string.Empty;
     public string LicenseType { get; set; } = string.Empty;
     public double AverageRating { get; set; }
     public int TotalRatings { get; set; }
