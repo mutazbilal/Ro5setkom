@@ -30,7 +30,7 @@
                         <h2 class="mentor-summary__name">@Model.MentorName</h2>
                         <p class="mentor-summary__location">
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                            @Model.Mentor.City
+                            @Model.Mentor.City 
                         </p>
                         <div class="mentor-summary__meta">
                             <span class="tag">@Model.LicenseType.Replace("_", " ")</span>
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="mentor-summary__price-block">
-                        <div class="mentor-summary__price">@Model.PricePerSession JD</div>
+                        <div class="mentor-summary__price">@Model.Mentor.PricePerSession JD</div>
                         <div class="mentor-summary__price-unit">per session</div>
                         <div class="mentor-summary__completion">@Model.CompletionRate% completion rate</div>
                     </div>
