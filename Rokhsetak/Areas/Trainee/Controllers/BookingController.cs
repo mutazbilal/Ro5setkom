@@ -158,7 +158,7 @@ public class BookingController : Controller
             return RedirectToAction("Index");
 
         var userId = User.GetUserId().Value;
-        var result = await _bookings.RateSessionAsync(userId, dto.BookingId, dto.Score, review: dto.Review != null? dto.Review : null);
+        var result = await _bookings.RateSessionAsync(userId, dto.BookingId, dto.Score, review: dto.Review != null ? dto.Review : null);
         return RedirectToAction("Index");
     }
 }

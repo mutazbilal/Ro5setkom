@@ -1,97 +1,119 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking
-
+@using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @model RescheduleTraineeViewModel
 @{
     ViewData["Title"] = "Reschedule Session";
 }
 
-<div class="container py-4" style="max-width: 560px;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/booking-shared.css" />
+}
 
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Trainee" asp-controller="Booking" asp-action="Index">My Bookings</a>
-            </li>
-            <li class="breadcrumb-item active">Reschedule</li>
-        </ol>
-    </nav>
+<div class="booking-page">
+    <div class="booking-page__inner booking-page__inner--xnarrow">
 
-    <div class="card shadow-sm">
-        <div class="card-header fw-semibold bg-warning">
-            <i class="bi bi-arrow-repeat"></i> Reschedule Session
-        </div>
-        <div class="card-body">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+               class="breadcrumb__item">My Bookings</a>
+            <span class="breadcrumb__sep" aria-hidden="true">
+                <i class="fa-solid fa-chevron-right"></i>
+            </span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Reschedule</span>
+        </nav>
 
-            <div class="mb-3 p-3 bg-light rounded border">
-                <p class="mb-1 small text-muted">Mentor</p>
-                <p class="mb-1 fw-semibold">@Model.MentorName</p>
-                <p class="mb-0 small">
-                    Type: <span class="badge bg-info text-dark">@Model.SessionType</span>
-                </p>
+        <section class="booking-card">
+            <div class="booking-card__header booking-card__header--warning">
+                <span class="booking-card__header-icon">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                </span>
+                Reschedule Session
             </div>
+            <div class="booking-card__body">
 
-            @if (Model.AvailableDays.Any())
-            {
-                <div class="mb-3">
-                    <p class="small fw-semibold mb-1">Mentor's Availability</p>
-                    @foreach (var day in Model.AvailableDays)
-                    {
-                        <span class="me-2 text-capitalize fw-semibold small">@day.DayOfWeek:</span>
-                        @foreach (var s in day.Slots)
-                        {
-                            <span class="badge bg-light text-dark border me-1">
-                                @s.StartTime.ToString("HH:mm") – @s.EndTime.ToString("HH:mm")
-                            </span>
-                        }
-                        <br />
-                    }
-                </div>
-            }
-
-            <form asp-area="Trainee" asp-controller="Booking"
-                  asp-action="Reschedule" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" asp-for="BookingId" />
-                <input type="hidden" asp-for="MentorName" />
-                <input type="hidden" asp-for="SessionType" />
-
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                <div class="mb-3">
-                    <label asp-for="NewDate" class="form-label fw-semibold">New Date</label>
-                    <input asp-for="NewDate" type="date" class="form-control"
-                           min="@DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd")" />
-                    <span asp-validation-for="NewDate" class="text-danger small"></span>
-                </div>
-
-                <div class="row g-3 mb-4">
-                    <div class="col-6">
-                        <label asp-for="NewStartTime" class="form-label fw-semibold">Start</label>
-                        <input asp-for="NewStartTime" type="time" class="form-control" />
-                        <span asp-validation-for="NewStartTime" class="text-danger small"></span>
-                    </div>
-                    <div class="col-6">
-                        <label asp-for="NewEndTime" class="form-label fw-semibold">End</label>
-                        <input asp-for="NewEndTime" type="time" class="form-control" />
-                        <span asp-validation-for="NewEndTime" class="text-danger small"></span>
+                <div class="locked-notice">
+                    <div class="form-field__label form-field__label--small">Mentor</div>
+                    <div class="locked-notice__value">@Model.MentorName</div>
+                    <div class="locked-notice__meta">
+                        Type:
+                        <span class="type-pill @(Model.SessionType == "practical" ? "type-pill--practical" : "type-pill--theoretical")">@Model.SessionType</span>
                     </div>
                 </div>
 
-                <div class="alert alert-info small mb-4">
-                    <i class="bi bi-info-circle"></i>
-                    The original booking will be cancelled and a new pending request created.
-                    The mentor will need to confirm the new time.
-                </div>
+                @if (Model.AvailableDays.Any())
+                {
+                    <div class="form-field">
+                        <span class="form-field__label form-field__label--small">Mentor's Availability</span>
+                        <div class="day-slots day-slots--inline">
+                            @foreach (var day in Model.AvailableDays)
+                            {
+                                <div class="day-slots__day">
+                                    <span class="day-slots__name">@day.DayOfWeek:</span>
+                                    <span class="day-slots__chips">
+                                        @foreach (var s in day.Slots)
+                                        {
+                                            <span class="slot-chip">
+                                                @s.StartTime.ToString("HH:mm") – @s.EndTime.ToString("HH:mm")
+                                            </span>
+                                        }
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
 
-                <div class="d-flex justify-content-between">
-                    <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
-                       class="btn btn-outline-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-warning fw-semibold">
-                        <i class="bi bi-arrow-repeat"></i> Confirm Reschedule
-                    </button>
-                </div>
-            </form>
-        </div>
+                <form asp-area="Trainee" asp-controller="Booking"
+                      asp-action="Reschedule" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <input asp-for="BookingId" type="hidden" />
+                    <input asp-for="MentorName" type="hidden" />
+                    <input asp-for="SessionType" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly" class="alert alert--error"></div>
+
+                    <div class="form-field">
+                        <label asp-for="NewDate" class="form-field__label">New Date</label>
+                        <input asp-for="NewDate"
+                               type="date"
+                               class="form-field__input"
+                               min="@DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="NewDate" class="form-field__error"></span>
+                    </div>
+
+                    <div class="form-row form-row--2">
+                        <div class="form-field">
+                            <label asp-for="NewStartTime" class="form-field__label">Start</label>
+                            <input asp-for="NewStartTime" type="time" class="form-field__input" />
+                            <span asp-validation-for="NewStartTime" class="form-field__error"></span>
+                        </div>
+                        <div class="form-field">
+                            <label asp-for="NewEndTime" class="form-field__label">End</label>
+                            <input asp-for="NewEndTime" type="time" class="form-field__input" />
+                            <span asp-validation-for="NewEndTime" class="form-field__error"></span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert--warning-soft" role="note">
+                        <i class="fa-solid fa-triangle-exclamation alert__icon" aria-hidden="true"></i>
+                        <div class="alert__body">
+                            The original booking will be cancelled and a new pending request created.
+                            The mentor will need to confirm the new time.
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+                           class="btn btn--secondary">Cancel</a>
+                        <button type="submit" class="btn btn--warning">
+                            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                            Confirm Reschedule
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
     </div>
 </div>
 

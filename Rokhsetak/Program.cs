@@ -8,14 +8,13 @@ using System.Globalization;
 
 
 var builder = WebApplication.CreateBuilder(args);
-//var con = builder.Configuration.GetConnectionString("DefaultConnection");
-var con = "Server=tcp:rokhsetak.database.windows.net,1433;Initial Catalog=RokhsetakDB;Persist Security Info=False;User ID=CloudSAd6acbb36;Password=8GUaFmwkn9U4KmS;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-Console.WriteLine($"Using connection string: {con}");
+
+var conn = "Server=tcp:rokhsetak.database.windows.net,1433;Initial Catalog=RokhsetakDB;Persist Security Info=False;User ID=CloudSAd6acbb36;Password=8GUaFmwkn9U4KmS;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+Console.WriteLine("CONNECTION STRING = " + conn);
 builder.Services.AddDbContext<RokhsetakDbContext>(options =>
-    options.UseSqlServer(con));
+    options.UseSqlServer(conn));
 
-builder.Services.AddLocalization(opts => opts.ResourcesPath = "Resources");
-
+builder.Services.AddLocalization(opts => opts.ResourcesPath = "Resources"); 
 builder.Services.AddControllersWithViews()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization(opts =>
