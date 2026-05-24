@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using Rokhsetak.Models;
 namespace Rokhsetak.Areas.Trainee.ViewModels.Booking;
 
 public class BookSessionViewModel
