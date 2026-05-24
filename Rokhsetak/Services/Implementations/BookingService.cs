@@ -145,19 +145,14 @@ namespace Rokhsetak.Services.Implementations
                 return ServiceResult<MentorBookingViewModel>.Failure("No active license found.");
 
             var mentor = await _context.Mentors
-                .Where(m => m.MentorId == mentorId)
-                .Join(_context.Users,
-                      m => m.MentorId,
-                      u => u.UserId,
-                      (m, u) => new
-                      {
-                          m.MentorId,
-                          m.City,
-                          m.PricePerSession,
-                          m.LicenseTypeId,
-                          FullName = u.FirstName + " " + u.LastName
-                      })
-                .FirstOrDefaultAsync();
+                .Include(m => m.MentorNavigation)
+                .FirstOrDefaultAsync(m => m.MentorId == mentorId);
+            var fullName = string.Empty;
+            if (mentor != null)
+            {
+                fullName = mentor.MentorNavigation.FirstName + " " +
+                               mentor.MentorNavigation.LastName;
+            }
 
             if (mentor == null)
                 return ServiceResult<MentorBookingViewModel>.Failure("Mentor not found.");
@@ -205,10 +200,9 @@ namespace Rokhsetak.Services.Implementations
             var vm = new MentorBookingViewModel
             {
                 MentorId = mentorId,
-                MentorName = mentor.FullName,
-                City = mentor.City ?? string.Empty,
+                Mentor = mentor,
+                MentorName = fullName != string.Empty ? fullName : "Unknown",
                 LicenseType = licenseType?.LicenseName ?? string.Empty,
-                PricePerSession = mentor.PricePerSession ?? 0,
                 AverageRating = Math.Round(ratingData?.Avg ?? 0, 1),
                 TotalRatings = ratingData?.Count ?? 0,
                 CompletionRate = compRate,

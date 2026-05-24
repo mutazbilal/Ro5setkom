@@ -3,10 +3,8 @@
 public class MentorBookingViewModel
 {
     public int MentorId { get; set; }
-    public string MentorName { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
+    public Models.Mentor? Mentor { get; set; }
     public string LicenseType { get; set; } = string.Empty;
-    public decimal PricePerSession { get; set; }
     public double AverageRating { get; set; }
     public int TotalRatings { get; set; }
     public double CompletionRate { get; set; }
