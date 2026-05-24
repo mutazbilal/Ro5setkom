@@ -21,10 +21,7 @@ GO
 
 -- ============================================
 -- 1. CREATE DATABASE
--- ============================================
-PRINT 'Creating Database...';
-:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\00_Database\01_CreateDatabase.sql"
-GO
+
 
 
 

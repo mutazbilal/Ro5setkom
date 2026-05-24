@@ -1,7 +1,3 @@
-
-
-
--- Master citizen registry — source of truth for identity data
 CREATE TABLE Gov.GovCitizens (
     national_id     NVARCHAR(10)  PRIMARY KEY,
     first_name      NVARCHAR(100) NOT NULL,

@@ -1,7 +1,5 @@
-﻿USE ro5setkomDB
-GO
-SET IDENTITY_INSERT Core.Users ON;
-INSERT INTO [ro5setkomDB].[Core].[Users]
+﻿SET IDENTITY_INSERT Core.Users ON;
+INSERT INTO [RokhsetakDB].[Core].[Users]
 (
     [user_id],
     [role_id],
@@ -46,7 +44,7 @@ VALUES
     1,
     GETDATE(),
     GETDATE()
-);
+)
 SET IDENTITY_INSERT Core.Users OFF;
 
 INSERT INTO Roles.Trainees
@@ -77,7 +75,7 @@ VALUES
     1,              -- ⚠️ adjust if needed
     NULL,           -- or set a mentor if you have one
     'theoretical_prep',
-    50,             -- since you marked modules complete earlier
+    100,             -- since you marked modules complete earlier
     1
 );
 
@@ -86,9 +84,9 @@ DECLARE @TraineeLicenseId INT = 1; -- ⚠️ change this if needed
 
 DECLARE @i INT = 1;
 
-WHILE @i <= 13
+WHILE @i <= 8
 BEGIN
-    INSERT INTO [ro5setkomDB].[Learning].[TraineeModuleProgress]
+    INSERT INTO [RokhsetakDB].[Learning].[TraineeModuleProgress]
     (
         trainee_id,
         module_id,
@@ -109,3 +107,15 @@ BEGIN
 
     SET @i = @i + 1;
 END
+
+INSERT INTO [Learning].[QuizAttempts]
+    ([quiz_id], [trainee_id], [trainee_license_id], [score], [passed], [attempt_date])
+VALUES
+(1, 1, 1, 100, 1, GETDATE()),
+(2, 1, 1, 100, 1, GETDATE()),
+(3, 1, 1, 100, 1, GETDATE()),
+(4, 1, 1, 100, 1, GETDATE()),
+(5, 1, 1, 100, 1, GETDATE()),
+(6, 1, 1, 100, 1, GETDATE()),
+(7, 1, 1, 100, 1, GETDATE()),
+(8, 1, 1, 100, 1, GETDATE());

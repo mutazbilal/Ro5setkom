@@ -195,11 +195,25 @@ public class ModuleService : IModuleService
                     .FirstOrDefault()
             })
             .ToListAsync();
+        var pipeline = new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .Build();
+        var images = new Dictionary<string, string>
+        {
+            { "hi", "/images/modules/test.jpg" }
+        };
 
         foreach (var c in contents.Where(c => c.ContentType == "text"
                                            && !string.IsNullOrEmpty(c.TextContent)))
         {
-            c.TextContent = Markdown.ToHtml(c.TextContent);
+            foreach (var img in images)
+            {
+                c.TextContent = c.TextContent.Replace(
+                    $"{{{{img:{img.Key}}}}}",
+                    $"![{img.Key}]({img.Value})"
+                );
+            }
+            c.TextContent = Markdig.Markdown.ToHtml(c.TextContent, pipeline);
         }
 
         // Quiz

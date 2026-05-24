@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Learning.LearningModules (
     module_id              INT PRIMARY KEY IDENTITY(1,1),
     license_type_id        INT           NOT NULL,
