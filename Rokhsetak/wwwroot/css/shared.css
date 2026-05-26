@@ -1,26 +1,41 @@
-﻿.landing-nav {
+/* ============================================================
+   Rokhsetak — Shared layout styles
+   Top navigation, language switcher, mobile collapse.
+   No JS dependency: mobile menu uses a hidden checkbox + sibling
+   selector pattern, fully keyboard-accessible.
+   ============================================================ */
+
+/* ---------- Header shell (kept from original) ---------- */
+.landing-nav {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 50;
     min-height: 72px;
     padding: 12px 24px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(26, 58, 107, 0.12);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(26, 58, 107, 0.1);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    justify-content: flex-start;
+    gap: 16px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ---------- Brand ---------- */
 .landing-brand {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--color-primary);
+    color: var(--color-primary, #1A3A6B);
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
+    text-decoration: none;
+    flex-shrink: 0;
 }
+
+.landing-brand:hover { color: var(--color-primary, #1A3A6B); }
 
 .landing-brand__logo {
     width: 38px;
@@ -29,11 +44,335 @@
     display: grid;
     place-items: center;
     color: #fff;
-    background: radial-gradient(circle at 35% 25%, #ffe4a4, var(--color-accent-gold) 42%, #1a3a6b 92%);
+    background: radial-gradient(circle at 35% 25%, #ffe4a4, var(--color-accent-gold, #C9A84C) 42%, #1a3a6b 92%);
+    font-size: 15px;
+    box-shadow: 0 4px 12px -4px rgba(26, 58, 107, 0.3);
 }
 
+.landing-brand__name {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Right-side cluster wrapper ---------- */
+.landing-nav__cluster {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-inline-start: auto;
+    flex: 0 1 auto;
+}
+
+/* ---------- Primary nav list ---------- */
+.landing-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2px;
+}
+
+.landing-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    color: var(--color-primary, #1A3A6B);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.landing-nav__link > i {
+    font-size: 13px;
+    opacity: 0.65;
+    transition: opacity 0.2s, color 0.2s;
+}
+
+.landing-nav__link:hover {
+    background: rgba(26, 58, 107, 0.06);
+    color: var(--color-primary, #1A3A6B);
+}
+
+.landing-nav__link:hover > i { opacity: 0.95; }
+
+.landing-nav__link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.45);
+}
+
+.landing-nav__link.is-active {
+    background: rgba(26, 58, 107, 0.08);
+    color: var(--color-primary, #1A3A6B);
+    font-weight: 600;
+}
+
+.landing-nav__link.is-active > i {
+    opacity: 1;
+    color: var(--color-accent-gold, #C9A84C);
+}
+
+/* ---------- Action cluster (lang + logout, or login + CTA) ---------- */
 .landing-nav__actions {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    flex-shrink: 0;
+}
+
+.landing-nav__form { margin: 0; display: inline-flex; }
+
+/* ---------- Segmented language switcher ---------- */
+.lang-switch {
+    display: inline-flex;
+    padding: 3px;
+    background: rgba(26, 58, 107, 0.05);
+    border-radius: 999px;
+    border: 1px solid rgba(26, 58, 107, 0.08);
+}
+
+.lang-switch__form { margin: 0; display: inline-flex; }
+
+.lang-switch__btn {
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(26, 58, 107, 0.55);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 36px;
+}
+
+.lang-switch__btn:hover { color: var(--color-primary, #1A3A6B); }
+
+.lang-switch__btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.5);
+}
+
+.lang-switch__btn.is-active {
+    background: #fff;
+    color: var(--color-primary, #1A3A6B);
+    box-shadow: 0 1px 3px rgba(26, 58, 107, 0.12);
+}
+
+/* ---------- CTA buttons (gradient + ghost) ---------- */
+.landing-nav__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #F26522 0%, #C9A84C 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+    box-shadow: 0 8px 18px -8px rgba(242, 101, 34, 0.55);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.landing-nav__cta:hover {
+    background-position: 100% 50%;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -10px rgba(242, 101, 34, 0.6);
+}
+
+.landing-nav__cta:active { transform: translateY(0); }
+
+.landing-nav__cta:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.55), 0 8px 18px -8px rgba(242, 101, 34, 0.55);
+}
+
+.landing-nav__cta--ghost {
+    background: transparent;
+    color: var(--color-primary, #1A3A6B);
+    border: 1.5px solid rgba(26, 58, 107, 0.18);
+    box-shadow: none;
+}
+
+.landing-nav__cta--ghost:hover {
+    background: rgba(26, 58, 107, 0.05);
+    border-color: var(--color-primary, #1A3A6B);
+    color: var(--color-primary, #1A3A6B);
+    box-shadow: none;
+    transform: translateY(-1px);
+}
+
+/* ---------- Mobile toggle (CSS-only) ---------- */
+
+/* The checkbox holds open/closed state. Hidden from view, still focusable. */
+.landing-nav__check {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+}
+
+/* The label is what the user actually clicks/taps. */
+.landing-nav__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-primary, #1A3A6B);
+    background: rgba(26, 58, 107, 0.05);
+    border: 1px solid rgba(26, 58, 107, 0.08);
+    transition: background 0.2s, transform 0.2s;
+    margin-inline-start: auto;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+.landing-nav__toggle:hover { background: rgba(26, 58, 107, 0.1); }
+.landing-nav__toggle:active { transform: scale(0.96); }
+
+/* Forward focus ring from checkbox to label */
+.landing-nav__check:focus-visible + .landing-nav__toggle {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.5);
+}
+
+/* Bars by default, X when checked */
+.landing-nav__toggle-close { display: none; }
+.landing-nav__check:checked ~ .landing-nav__toggle .landing-nav__toggle-open  { display: none; }
+.landing-nav__check:checked ~ .landing-nav__toggle .landing-nav__toggle-close { display: inline-block; }
+
+/* ---------- Responsive: medium screens compact nav icons ---------- */
+@media (max-width: 1080px) {
+    .landing-nav__list .landing-nav__link {
+        padding: 8px 10px;
+    }
+    .landing-nav__list .landing-nav__link > span {
+        display: none;
+    }
+    .landing-nav__list .landing-nav__link > i {
+        font-size: 15px;
+        opacity: 0.85;
+    }
+}
+
+/* ---------- Responsive: mobile collapse below 768px ---------- */
+@media (max-width: 768px) {
+    .landing-nav {
+        flex-wrap: wrap;
+        padding: 10px 16px;
+    }
+
+    .landing-nav__toggle {
+        display: inline-flex;
+    }
+
+    /* Cluster becomes a full-width dropdown below the header bar */
+    .landing-nav__cluster {
+        display: none;
+        order: 99;
+        width: 100%;
+        margin-inline-start: 0;
+        margin-top: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(26, 58, 107, 0.08);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .landing-nav__check:checked ~ .landing-nav__cluster {
+        display: flex;
+        animation: rkNavSlideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Stack the link list vertically and let labels reappear */
+    .landing-nav__list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+    }
+
+    .landing-nav__list .landing-nav__link {
+        padding: 12px 14px;
+    }
+
+    .landing-nav__list .landing-nav__link > span { display: inline; }
+    .landing-nav__list .landing-nav__link > i {
+        font-size: 14px;
+        width: 18px;
+        text-align: center;
+    }
+
+    /* Actions stack into a column */
+    .landing-nav__actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .lang-switch {
+        align-self: flex-start;
+    }
+
+    .landing-nav__form,
+    .landing-nav__form .landing-nav__cta,
+    .landing-nav__actions > .landing-nav__cta {
+        width: 100%;
+    }
+
+    /* For the unauthenticated case (Login link + Create Account CTA),
+       keep things readable on small screens. */
+    .landing-nav__actions > .landing-nav__link {
+        text-align: center;
+        padding: 12px 14px;
+    }
+}
+
+@keyframes rkNavSlideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .landing-nav__cta,
+    .landing-nav__link,
+    .lang-switch__btn,
+    .landing-nav__check:checked ~ .landing-nav__cluster {
+        transition: none !important;
+        animation: none !important;
+    }
+    .landing-nav__cta:hover,
+    .landing-nav__cta--ghost:hover { transform: none; }
 }

@@ -1,6 +1,5 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @model MentorBrowseListViewModel
-
 @{
     ViewData["Title"] = "Find a Mentor";
 }
@@ -8,43 +7,43 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/booking-shared.css" />
 }
-@if (TempData["Error"] != null)
-{
-<div class="alert alert--error" role="alert">
-    <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
-    <div class="alert__body">@TempData["Error"]</div>
-    <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
-</div>
-}
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert--success" role="status">
-        <i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
-        <div class="alert__body">@TempData["Success"]</div>
-        <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-    </div>
 
-    <div class="booking-header">
-        <h2 class="booking-header__title">My Bookings</h2>
-        <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-           class="btn btn--primary">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            Find a Mentor
-        </a>
-    </div>
-}
 <div class="booking-page">
     <div class="booking-page__inner">
 
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert--error" role="alert">
+                <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Error"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert--success" role="status">
+                <i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Success"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+               class="breadcrumb__item">My Bookings</a>
+            <span class="breadcrumb__sep" aria-hidden="true">
+                <i class="fa-solid fa-chevron-right"></i>
+            </span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Find a Mentor</span>
+        </nav>
+
         <div class="booking-header">
-            <h2 class="booking-header__title">Find a Mentor</h2>
-            <a asp-area="Trainee"
-               asp-controller="Booking"
-               asp-action="Index"
+            <h2 class="booking-header__title">Find Your Mentor</h2>
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
                class="btn btn--secondary btn--sm">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                 My Bookings
@@ -78,6 +77,7 @@
                            type="number"
                            min="0"
                            step="0.5"
+                           placeholder="0"
                            class="form-field__input form-field__input--sm" />
                 </div>
 
@@ -87,6 +87,7 @@
                            type="number"
                            min="0"
                            step="0.5"
+                           placeholder="∞"
                            class="form-field__input form-field__input--sm" />
                 </div>
 
@@ -104,7 +105,7 @@
 
                 <div class="filter-bar__actions">
                     <button type="submit" class="btn btn--primary btn--sm btn--block">
-                        <i class="fa-solid fa-filter"></i>
+                        <i class="fa-solid fa-filter" aria-hidden="true"></i>
                         Filter
                     </button>
 
@@ -123,7 +124,7 @@
         @if (!Model.Mentors.Any())
         {
             <div class="empty-state">
-                <i class="fa-solid fa-user-slash empty-state__icon"></i>
+                <i class="fa-solid fa-user-slash empty-state__icon" aria-hidden="true"></i>
                 <p class="empty-state__text">No mentors found for your filters.</p>
                 <a asp-area="Trainee"
                    asp-controller="Booking"
@@ -135,28 +136,43 @@
         }
         else
         {
+            <p class="result-count" style="margin-bottom: 16px;">
+                <strong style="color: var(--color-primary);">@Model.Mentors.Count</strong>
+                mentor@(Model.Mentors.Count == 1 ? "" : "s") available
+            </p>
+
             <div class="mentor-grid">
 
                 @foreach (var m in Model.Mentors)
                 {
+                    var initials = string.IsNullOrWhiteSpace(m.FullName)
+                        ? "?"
+                        : string.Concat(m.FullName
+                            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                            .Take(2)
+                            .Select(p => char.ToUpper(p[0])));
+
                     <article class="mentor-card">
 
                         <div class="mentor-card__body">
 
-                            <div class="mentor-card__top">
-                                <h3 class="mentor-card__name">@m.FullName</h3>
-                                <span class="tag">@m.LicenseType.Replace("_", " ")</span>
+                            <div class="mentor-card__head">
+                                <div class="mentor-card__avatar" aria-hidden="true">@initials</div>
+                                <div class="mentor-card__top">
+                                    <h3 class="mentor-card__name">@m.FullName</h3>
+                                    <span class="tag">@m.LicenseType.Replace("_", " ")</span>
+                                </div>
                             </div>
 
                             <p class="mentor-card__city">
-                                <i class="fa-solid fa-location-dot"></i>
+                                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                                 @m.City
                             </p>
 
                             <div class="mentor-card__stats">
 
                                 <div class="mentor-card__stat">
-                                    <div class="mentor-card__stat-value">
+                                    <div class="mentor-card__stat-value mentor-card__stat-value--rating">
                                         @m.AverageRating.ToString("0.0") ★
                                     </div>
                                     <div class="mentor-card__stat-label">
@@ -165,7 +181,7 @@
                                 </div>
 
                                 <div class="mentor-card__stat">
-                                    <div class="mentor-card__stat-value">
+                                    <div class="mentor-card__stat-value mentor-card__stat-value--completion">
                                         @m.CompletionRate%
                                     </div>
                                     <div class="mentor-card__stat-label">
@@ -174,7 +190,7 @@
                                 </div>
 
                                 <div class="mentor-card__stat">
-                                    <div class="mentor-card__stat-value">
+                                    <div class="mentor-card__stat-value mentor-card__stat-value--price">
                                         @m.PricePerSession JD
                                     </div>
                                     <div class="mentor-card__stat-label">
@@ -186,16 +202,16 @@
 
                         </div>
 
-                        <div class="card-footer bg-transparent">
+                        <div class="mentor-card__footer">
 
                             @if (Model.ActiveMentorId.HasValue &&
                                  Model.ActiveMentorId != m.MentorId)
                             {
                                 <button type="button"
-                                        class="btn btn-warning w-100 mentor-switch-btn"
+                                        class="btn btn--warning btn--sm btn--block mentor-switch-btn"
                                         data-book-url="@Url.Action("Book", "Booking", new { area = "Trainee", mentorId = m.MentorId })"
                                         data-mentor-name="@m.FullName">
-                                    <i class="bi bi-exclamation-triangle"></i>
+                                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                                     Book a Session
                                 </button>
                             }
@@ -205,8 +221,8 @@
                                    asp-controller="Booking"
                                    asp-action="Book"
                                    asp-route-mentorId="@m.MentorId"
-                                   class="btn btn-primary w-100">
-                                    <i class="bi bi-calendar-plus"></i>
+                                   class="btn btn--primary btn--sm btn--block">
+                                    <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
                                     Book a Session
                                 </a>
                             }
@@ -217,54 +233,50 @@
                 }
 
             </div>
-
-            <p class="text-muted small mt-3">
-                @Model.Mentors.Count mentor(s) found.
-            </p>
         }
 
     </div>
 </div>
 
-<!-- Mentor Switch Modal -->
-<div class="modal fade" id="mentorSwitchModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
+<!-- =========================================================
+     Mentor Switch Modal — confirm changing primary mentor
+     ========================================================= -->
+<div id="mentorSwitchModal"
+     style="display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 20px;">
 
-            <div class="modal-header">
-                <h5 class="modal-title text-warning">
-                    <i class="bi bi-exclamation-triangle-fill"></i>
-                    Change Primary Mentor?
-                </h5>
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"></button>
-            </div>
+    <div class="booking-card" style="max-width: 500px; width: 100%; animation: card-in 0.25s ease-out;">
 
-            <div class="modal-body">
-                <p>You are about to book a session with a new mentor.</p>
+        <div class="booking-card__header booking-card__header--warning">
+            <span class="booking-card__header-icon">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+            </span>
+            Change Primary Mentor?
+        </div>
 
-                <ul>
-                    <li>All future bookings with your current mentor will be cancelled.</li>
-                    <li>If approved, the new mentor becomes your primary mentor.</li>
-                    <li>Future bookings will use the new mentor automatically.</li>
-                </ul>
+        <div class="booking-card__body">
 
-                <p class="fw-semibold mb-0">
-                    Are you sure you want to continue?
-                </p>
-            </div>
+            <p style="margin: 0 0 12px;">
+                You are about to book a session with
+                <strong id="newMentorName" style="color: var(--color-primary);"></strong>.
+                This will become your primary mentor.
+            </p>
 
-            <div class="modal-footer">
-                <button type="button"
-                        class="btn btn-outline-secondary"
-                        data-bs-dismiss="modal">
-                    Cancel
-                </button>
+            <ul style="padding-inline-start: 22px; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0 0 14px;">
+                <li>All future bookings with your current mentor will be cancelled.</li>
+                <li>If approved, the new mentor becomes your primary mentor.</li>
+                <li>Future bookings will use the new mentor automatically.</li>
+            </ul>
 
-                <a id="confirmMentorSwitchBtn"
-                   href="#"
-                   class="btn btn-warning">
+            <p style="font-weight: 600; margin: 0 0 18px;">
+                Are you sure you want to continue?
+            </p>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn--secondary" id="cancelSwitchBtn">Cancel</button>
+                <a id="confirmMentorSwitchBtn" href="#" class="btn btn--warning">
+                    <i class="fa-solid fa-check" aria-hidden="true"></i>
                     Yes, Continue
                 </a>
             </div>
@@ -275,21 +287,40 @@
 
 @section Scripts {
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    (function () {
+        'use strict';
 
-            const modal = new bootstrap.Modal(document.getElementById('mentorSwitchModal'));
-            const confirmBtn = document.getElementById('confirmMentorSwitchBtn');
-
-            document.querySelectorAll('.mentor-switch-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-
-                    const bookUrl = this.dataset.bookUrl;
-                    confirmBtn.href = bookUrl;
-
-                    modal.show();
-                });
+        // Dismissable alerts
+        document.querySelectorAll('[data-alert-dismiss]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const alert = this.closest('.alert');
+                if (alert) alert.style.display = 'none';
             });
-
         });
+
+        // Mentor switch modal
+        const modal = document.getElementById('mentorSwitchModal');
+        const confirmBtn = document.getElementById('confirmMentorSwitchBtn');
+        const newMentorName = document.getElementById('newMentorName');
+
+        function openModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
+
+        document.querySelectorAll('.mentor-switch-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                confirmBtn.href = this.dataset.bookUrl;
+                newMentorName.textContent = this.dataset.mentorName || 'this mentor';
+                openModal();
+            });
+        });
+
+        document.getElementById('cancelSwitchBtn')?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    })();
     </script>
 }
