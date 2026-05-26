@@ -12,11 +12,13 @@ public class QuizService : IQuizService
 
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
+    private readonly BlobService _blobService;
 
     public QuizService(RokhsetakDbContext context, INotificationService notifications)
     {
         _context = context;
         _notifications = notifications;
+        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -261,7 +263,7 @@ public class QuizService : IQuizService
     /// Picks the translated string for the requested culture,
     /// falling back to 'en' if unavailable.
     /// </summary>
-    private static string GetTranslated<T>(
+    public string GetTranslated<T>(
         IEnumerable<T> translations,
         string culture,
         Func<T, string> selector) where T : class
@@ -277,10 +279,29 @@ public class QuizService : IQuizService
             return prop?.GetValue(t)?.ToString() == "en";
         });
 
-        return match != null ? selector(match) : string.Empty;
+        var imageKeys = new List<string>
+        {
+            "solid-yellow-line",
+            "zebra-crossing",
+            "inverted-triangle",
+            "red-up-black-down",
+            "yellow-diamond",
+            "blue-square"
+        };
+        var res = selector(match);
+        foreach (var key in imageKeys)
+        {
+            var imgUrl = _blobService.GetImageSasUrl(key, "quizzes");
+            res = res.Replace(
+                $"{{{{img:{key}}}}}",
+                $"<img src=\"{imgUrl}\" alt=\"{key}\" style=\"max-width:20%; height:auto;\" />"
+            );
+            res = Markdig.Markdown.ToHtml(res);
+        }
+        return match != null ? res : string.Empty;
     }
 
-    private static QuizViewModel MapToQuizViewModel(
+    private QuizViewModel MapToQuizViewModel(
         Quiz quiz, int moduleId, int traineeLicenseId, bool isMockExam, string culture)
     {
         return new QuizViewModel
@@ -304,7 +325,7 @@ public class QuizService : IQuizService
         };
     }
 
-    private static (int score, bool passed, List<QuizResultQuestionViewModel> questions) GradeQuiz(
+    private (int score, bool passed, List<QuizResultQuestionViewModel> questions) GradeQuiz(
         Quiz quiz, Dictionary<int, int> answers, string culture)
     {
         var resultQuestions = new List<QuizResultQuestionViewModel>();

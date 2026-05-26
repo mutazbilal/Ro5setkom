@@ -1,0 +1,443 @@
+---
+
+## Learning Module 31 (Video)
+
+**module_id:** 31  
+**license_type_id:** 1  
+**title:** "Pre-Drive Vehicle Inspection (Automatic)"  
+**description:** "Video demonstration of checking tires, lights, fluids, mirrors, and seat adjustment before driving an automatic vehicle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 2  
+**prerequisite_module_id:** 26  
+
+---
+
+## Learning Module 32 (Video)
+
+**module_id:** 32  
+**license_type_id:** 2  
+**title:** "Pre-Drive Vehicle Inspection (Manual)"  
+**description:** "Video demonstration of checking tires, lights, fluids, mirrors, and seat adjustment before driving a manual vehicle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 2  
+**prerequisite_module_id:** 27  
+
+---
+
+## Learning Module 33 (Video)
+
+**module_id:** 33  
+**license_type_id:** 1  
+**title:** "Smooth Acceleration and Braking (Automatic)"  
+**description:** "Video showing how to use accelerator and brake pedals smoothly to avoid jerky movements in an automatic car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 3  
+**prerequisite_module_id:** 31  
+
+---
+
+## Learning Module 34 (Video)
+
+**module_id:** 34  
+**license_type_id:** 2  
+**title:** "Clutch Control and Biting Point (Manual)"  
+**description:** "Video demonstration of finding the clutch biting point, smooth takeoff, and avoiding stalling in a manual car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 3  
+**prerequisite_module_id:** 32  
+
+---
+
+## Learning Module 35 (Video)
+
+**module_id:** 35  
+**license_type_id:** 2  
+**title:** "Shifting Gears Smoothly (Manual)"  
+**description:** "Video guide on when to shift up and down, proper hand position on gear lever, and matching engine speed"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 4  
+**prerequisite_module_id:** 34  
+
+---
+
+## Learning Module 36 (Video)
+
+**module_id:** 36  
+**license_type_id:** 1  
+**title:** "Hill Start (Automatic)"  
+**description:** "Video demonstration of starting on an uphill slope without rolling back using brake and accelerator in an automatic vehicle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 4  
+**prerequisite_module_id:** 33  
+
+---
+
+## Learning Module 37 (Video)
+
+**module_id:** 37  
+**license_type_id:** 2  
+**title:** "Hill Start (Manual)"  
+**description:** "Video demonstration of hill start using handbrake, clutch biting point, and accelerator in a manual car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 5  
+**prerequisite_module_id:** 35  
+
+---
+
+## Learning Module 38 (Video)
+
+**module_id:** 38  
+**license_type_id:** 1  
+**title:** "Parallel Parking (Automatic)"  
+**description:** "Step-by-step video guide to parallel parking an automatic vehicle between two cars"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 5  
+**prerequisite_module_id:** 36  
+
+---
+
+## Learning Module 39 (Video)
+
+**module_id:** 39  
+**license_type_id:** 2  
+**title:** "Parallel Parking (Manual)"  
+**description:** "Step-by-step video guide to parallel parking a manual vehicle, including clutch control during reverse"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 6  
+**prerequisite_module_id:** 37  
+
+---
+
+## Learning Module 40 (Video)
+
+**module_id:** 40  
+**license_type_id:** 1  
+**title:** "Reverse Parking and Bay Parking (Automatic)"  
+**description:** "Video demonstration of reverse perpendicular parking and angled bay parking for automatic vehicles"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 6  
+**prerequisite_module_id:** 38  
+
+---
+
+## Learning Module 41 (Video)
+
+**module_id:** 41  
+**license_type_id:** 2  
+**title:** "Reverse Parking and Bay Parking (Manual)"  
+**description:** "Video demonstration of reverse parking into a bay using clutch and brake control in a manual car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 7  
+**prerequisite_module_id:** 39  
+
+---
+
+## Learning Module 42 (Video)
+
+**module_id:** 42  
+**license_type_id:** 1  
+**title:** "Three-Point Turn (Automatic)"  
+**description:** "Video guide to performing a three-point turn (U-turn in narrow road) safely in an automatic vehicle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 7  
+**prerequisite_module_id:** 40  
+
+---
+
+## Learning Module 43 (Video)
+
+**module_id:** 43  
+**license_type_id:** 2  
+**title:** "Three-Point Turn (Manual)"  
+**description:** "Video guide to performing a three-point turn in a manual car, including clutch and gear changes"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 8  
+**prerequisite_module_id:** 41  
+
+---
+
+## Learning Module 44 (Video)
+
+**module_id:** 44  
+**license_type_id:** 1  
+**title:** "Navigating Roundabouts (Automatic)"  
+**description:** "Video demonstration of entering, lane selection, giving priority, and exiting roundabouts in an automatic car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 8  
+**prerequisite_module_id:** 42  
+
+---
+
+## Learning Module 45 (Video)
+
+**module_id:** 45  
+**license_type_id:** 2  
+**title:** "Navigating Roundabouts (Manual)"  
+**description:** "Video demonstration of roundabout rules and gear management for manual cars"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 9  
+**prerequisite_module_id:** 43  
+
+---
+
+## Learning Module 46 (Video)
+
+**module_id:** 46  
+**license_type_id:** 1  
+**title:** "Safe Overtaking Demonstration (Automatic)"  
+**description:** "Video showing proper overtaking procedure: mirror checks, signaling, blind spot, passing, and returning to lane in an automatic vehicle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 9  
+**prerequisite_module_id:** 44  
+
+---
+
+## Learning Module 47 (Video)
+
+**module_id:** 47  
+**license_type_id:** 2  
+**title:** "Safe Overtaking Demonstration (Manual)"  
+**description:** "Video showing overtaking technique in a manual car, including downshifting for power and returning to lane smoothly"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 10  
+**prerequisite_module_id:** 45  
+
+---
+
+## Learning Module 48 (Video)
+
+**module_id:** 48  
+**license_type_id:** 3  
+**title:** "Motorcycle Mounting, Balance, and Basic Handling"  
+**description:** "Video demonstration of mounting the motorcycle, finding balance, slow-speed control, and basic turning"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 4  
+**prerequisite_module_id:** 29  
+
+---
+
+## Learning Module 49 (Video)
+
+**module_id:** 49  
+**license_type_id:** 3  
+**title:** "Motorcycle Braking Practice (Front and Rear)"  
+**description:** "Video showing how to use front and rear brakes progressively, emergency braking, and braking in a curve"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 5  
+**prerequisite_module_id:** 48  
+
+---
+
+## Learning Module 50 (Video)
+
+**module_id:** 50  
+**license_type_id:** 3  
+**title:** "Motorcycle Cornering and Lean Angle"  
+**description:** "Video guide to proper cornering technique: slow before the curve, look through, lean, and roll on throttle"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 6  
+**prerequisite_module_id:** 49  
+
+---
+
+## Learning Module 51 (Video)
+
+**module_id:** 51  
+**license_type_id:** 3  
+**title:** "Motorcycle Swerving (Quick Evasion)"  
+**description:** "Video demonstration of swerving to avoid an obstacle without braking, including handlebar pressure technique"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 7  
+**prerequisite_module_id:** 50  
+
+---
+
+## Learning Module 52 (Video)
+
+**module_id:** 52  
+**license_type_id:** 3  
+**title:** "Motorcycle Riding in Traffic and Lane Positioning"  
+**description:** "Video showing real traffic scenarios: lane positioning at intersections, avoiding blind spots, and being visible to cars"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 8  
+**prerequisite_module_id:** 51  
+
+---
+
+## Learning Module 53 (Video)
+
+**module_id:** 53  
+**license_type_id:** 1  
+**title:** "Emergency Stop Demonstration (Automatic)"  
+**description:** "Video showing how to perform an emergency stop in an automatic car without locking wheels"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 10  
+**prerequisite_module_id:** 46  
+
+---
+
+## Learning Module 54 (Video)
+
+**module_id:** 54  
+**license_type_id:** 2  
+**title:** "Emergency Stop Demonstration (Manual)"  
+**description:** "Video showing emergency stop technique in a manual car: braking while depressing clutch to avoid stalling"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 11  
+**prerequisite_module_id:** 47  
+
+---
+
+## Learning Module 55 (Video)
+
+**module_id:** 55  
+**license_type_id:** 1  
+**title:** "Driving in Fog and Rain (Automatic)"  
+**description:** "Video demonstration of correct lighting, reduced speed, and increased following distance in low visibility conditions for automatic cars"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 11  
+**prerequisite_module_id:** 53  
+
+---
+
+## Learning Module 56 (Video)
+
+**module_id:** 56  
+**license_type_id:** 2  
+**title:** "Driving in Fog and Rain (Manual)"  
+**description:** "Video demonstrating fog and rain driving techniques for manual cars, including gear selection for slippery roads"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 12  
+**prerequisite_module_id:** 54  
+
+---
+
+## Learning Module 57 (Video)
+
+**module_id:** 57  
+**license_type_id:** 1  
+**title:** "Night Driving Tips (Automatic)"  
+**description:** "Video guide to night driving: use of high/low beams, avoiding glare, and adjusting speed for reduced visibility"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 12  
+**prerequisite_module_id:** 55  
+
+---
+
+## Learning Module 58 (Video)
+
+**module_id:** 58  
+**license_type_id:** 2  
+**title:** "Night Driving Tips (Manual)"  
+**description:** "Video demonstration of night driving techniques for manual vehicles, including gear selection and light discipline"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 13  
+**prerequisite_module_id:** 56  
+
+---
+
+## Learning Module 59 (Video)
+
+**module_id:** 59  
+**license_type_id:** 1  
+**title:** "Handling a Skid (Automatic)"  
+**description:** "Video simulation of front-wheel and rear-wheel skids and how to recover in an automatic car"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 13  
+**prerequisite_module_id:** 57  
+
+---
+
+## Learning Module 60 (Video)
+
+**module_id:** 60  
+**license_type_id:** 2  
+**title:** "Handling a Skid (Manual)"  
+**description:** "Video simulation of skid recovery in a manual car, including clutch and neutral techniques"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 14  
+**prerequisite_module_id:** 58  
+
+---
+
+## Learning Module 61 (Video)
+
+**module_id:** 61  
+**license_type_id:** 1  
+**title:** "Reflective Triangle Placement (Automatic)"  
+**description:** "Video demonstration of correctly placing the reflective warning triangle during a breakdown on urban and rural roads"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 14  
+**prerequisite_module_id:** 59  
+
+---
+
+## Learning Module 62 (Video)
+
+**module_id:** 62  
+**license_type_id:** 2  
+**title:** "Reflective Triangle Placement (Manual)"  
+**description:** "Video demonstration of breakdown procedures and triangle placement for manual cars"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 15  
+**prerequisite_module_id:** 60  
+
+---
+
+## Learning Module 63 (Video)
+
+**module_id:** 63  
+**license_type_id:** 3  
+**title:** "Motorcycle Pre-Ride Inspection Checklist"  
+**description:** "Video walkthrough of the T-CLOCS inspection: tires, controls, lights, oil, chassis, and stands"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 9  
+**prerequisite_module_id:** 52  
+
+---
+
+## Learning Module 64 (Video)
+
+**module_id:** 64  
+**license_type_id:** 3  
+**title:** "Motorcycle Night Riding and Low Visibility"  
+**description:** "Video guide to night riding: proper headlight use, reflective gear, and reduced speed"  
+**content_type:** "video"  
+**phase:** "practical"  
+**order_index:** 10  
+**prerequisite_module_id:** 63  
+
+---

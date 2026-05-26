@@ -4,8 +4,8 @@ from deep_translator import GoogleTranslator
 # =============================
 # CONFIG
 # =============================
-INPUT_FILE  = "C:/Users/Lenovo/Documents/02 Programming/ro5setkom/learning_modules/learning_modules type-text.txt"
-OUTPUT_FILE = "sql/seed_modules.sql"
+INPUT_FILE  = "learning_modules/learning_modules type-text.txt"
+OUTPUT_FILE = "../RokhsetakDB/14_Seeds/03_seed_modules.sql"
 
 MAX_CHUNK_SIZE = 4000
 
@@ -15,6 +15,50 @@ translator = GoogleTranslator(source='auto', target='ar')
 # =============================
 # HELPERS
 # =============================
+def translate_preserving_images(text: str) -> str:
+    lines = text.splitlines()
+
+    chunks = []
+    current_chunk = []
+
+    def flush_chunk():
+        if not current_chunk:
+            return
+
+        chunk_text = "\n".join(current_chunk)
+
+        try:
+            translated = translator.translate(chunk_text)
+            if translated is None:
+                translated = chunk_text
+        except Exception:
+            print("⚠️ chunk translation failed, using original")
+            translated = chunk_text
+
+        chunks.append(translated)
+        current_chunk.clear()
+
+    for line in lines:
+        stripped = line.strip()
+
+        # keep image lines untouched AND flush current chunk first
+        if "{{img" in stripped:
+            flush_chunk()
+            chunks.append(line)
+            continue
+
+        # keep empty lines as separators (flush chunk first)
+        if not stripped:
+            flush_chunk()
+            chunks.append(line)
+            continue
+
+        current_chunk.append(line)
+
+    flush_chunk()
+    return "\n".join(chunks)
+
+
 def escape_sql(text: str) -> str:
     return text.replace("'", "''")
 
@@ -51,7 +95,7 @@ def identity_block(table: str, rows: list) -> str:
 # =============================
 # READ FILE
 # =============================
-with open(INPUT_FILE, "r", encoding="utf-8") as f:
+with open(INPUT_FILE, "r", encoding="utf-8-sig") as f:
     data = f.read()
 
 
@@ -131,7 +175,7 @@ for section in sections:
             f"INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) "
             f"VALUES ({content_id}, 'en', N'{escape_sql(content)}');"
         )
-        ar_content = translate_large(content)
+        ar_content = translate_preserving_images(content)
         module_content_trans.append(
             f"INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_content) "
             f"VALUES ({content_id}, 'ar', N'{escape_sql(ar_content)}');"
@@ -163,7 +207,7 @@ blocks = [
     "\n".join(module_content_trans),
 ]
 
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
     f.write("\n".join(blocks))
 
 print(f"""

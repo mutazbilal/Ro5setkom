@@ -1,0 +1,6 @@
+question_text: "{{img:solid-yellow-line}} What does this line mean for you?"
+question_text: "{{img:zebra-crossing}} What is the maximum speed limit when approaching this road marking?"
+question_text: "{{img:inverted-triangle}} What does this sign require you to do?"
+question_text: "Scenario: You are driving on a narrow mountain road and see {{img:red-up-black-down}}. What does this mean?"
+question_text: "{{img:yellow-diamond}} What does this sign indicate?"
+question_text: "{{img:blue-square}} What does this sign tell you?"

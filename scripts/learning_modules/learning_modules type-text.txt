@@ -1,0 +1,2092 @@
+```text
+## Learning Module 1
+
+**module_id:** 1
+**license_type_id:** 1
+**title:** "Introduction to Driving Responsibilities and Legal Framework"
+**description:** "Comprehensive overview of driver responsibilities, legal requirements, license categories, medical fitness, and the examination process in Jordan"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 1
+**prerequisite_module_id:** NULL
+
+### Module Content
+
+**content_id:** 1
+**module_id:** 1
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Introduction to Driving Responsibilities and Legal Framework
+
+## Section 1: Legal and Personal Responsibilities
+
+Driving is a privilege, not a right. When you get behind the wheel, you accept legal and moral responsibility for yourself, your passengers, and everyone else on the road.
+
+### Required Documents
+- No person may drive any vehicle in Jordan without a valid, lawful driving license authorizing them to drive that specific vehicle category.
+- Drivers must always carry their driving license, vehicle license (vehicle registration), and valid insurance documents.
+- You must present these documents to any traffic officer upon request. Failure to do so is a violation.
+
+### Basic Safety Principles
+- Driving is a skill that requires full attention, respect for laws, and consideration for all other road users including pedestrians, cyclists, and motorcyclists.
+- The general rule of right-of-way is fundamental: **priority is given, not taken**. Never assume another driver will yield to you even when you have the legal right-of-way.
+- Always drive in a way that avoids endangering yourself or others. Defensive driving means anticipating what other road users might do wrong.
+
+### Consequences of Violations
+- Traffic violations lead to fines, imprisonment, license suspension, or impoundment of the vehicle depending on severity.
+- Jordan operates a points system for driving violations. Accumulating points can result in license suspension or revocation.
+- Repeated violations demonstrate unfitness to drive and carry progressively harsher penalties.
+
+## Section 2: Fitness to Drive
+
+### Physical Fitness
+- You must be physically and mentally fit to drive at all times.
+- Medical fitness is determined through an official medical examination that tests vision, limb health, and general health.
+- Minimum vision requirement for most private licenses: 6/9 in the better eye with or without corrective lenses.
+- For one-eyed applicants: The healthy eye must have vision of at least 6/9.
+
+{{img:eye_examination}}
+
+### Mental and Emotional Fitness
+- Do not drive if you are tired, emotional (angry, upset, extremely excited), or under the influence of any substance that impairs judgment.
+- Emotional driving leads to aggressive behavior, poor decision-making, and increased risk-taking.
+- Good driving is a combination of technical skill, knowledge of laws, and ethical behavior toward all road users.
+
+### Medical Conditions Requiring Special Consideration
+- Certain medical conditions such as epilepsy, diabetes (with risk of hypoglycemia), heart conditions, or sleep disorders may require medical clearance or restrict driving privileges.
+- Always disclose relevant medical conditions during your license application.
+
+## Section 3: Jordanian License Categories (Feras)
+
+Jordan uses a category system (called "Feras" in Arabic) to classify different types of driving licenses.
+
+| Category | Vehicle Type | Minimum Age |
+|----------|--------------|--------------|
+| 1 | Motorcycle / Scooter | 18 years |
+| 2 | Agricultural vehicle | 18 years |
+| 3 | Private car (manual or automatic), up to 5 tons | 18 years |
+| 4 | Public passenger car / vehicle up to 7.5 tons | 21 years |
+| 5 | Medium bus / vehicle over 7.5 tons | (Requires 2 years after previous category) |
+| 6 | Tractor + trailer / heavy bus | (Requires 2 years after previous category) |
+| 7 | Vehicles for people with disabilities | 18 years |
+
+### Important Upgrade Rules
+- Category 4 requires at least 1 year holding Category 3 (manual transmission license).
+- Categories 5 and 6 require a minimum of 2 years after obtaining the previous category.
+- Driving a vehicle that requires a higher category than your license permits is a serious violation with severe penalties.
+
+## Section 4: Obtaining Your License – The Three-Step Process
+
+### Step 1: Medical Examination
+- Visit an approved medical center for a comprehensive driving fitness examination.
+- Tests include vision, color perception (to distinguish traffic lights), hearing, limb mobility, and general health screening.
+- The medical certificate is valid for a limited time and must be submitted with your application.
+
+### Step 2: Theoretical Examination
+- Tests your knowledge of traffic rules, right-of-way priorities, proper driving etiquette, basic vehicle maintenance, first aid, and traffic sign recognition.
+- The test is typically computer-based with multiple-choice questions.
+- If you fail, you may retake the exam after one week. There may be a limit on retakes within a specific period.
+
+{{img:computer-based-theoratical-exam}}
+
+### Step 3: Practical Driving Examination
+- Scheduled within one week after passing the theoretical test (subject to availability).
+- A licensed examiner rides with you and evaluates your driving skills on public roads or a closed course.
+- You must provide a suitable vehicle for the test (from a driving school or your own properly registered vehicle).
+
+#### Practical Test Components:
+- Vehicle preparation and pre-drive checks
+- Proper startup procedure
+- Moving off smoothly and safely
+- Interacting with traffic appropriately
+- Obeying all traffic signs and road markings
+- Demonstrating correct priority rules at intersections
+- Safe overtaking and meeting oncoming traffic
+- Reversing in a straight line and around a corner
+- Proper turning technique at junctions
+- Correct gear selection and usage (manual transmission)
+- Navigating curves and bends
+- Normal stop and emergency stop
+- Overall control, attention, and reaction time
+
+### If You Fail the Practical Test
+- You receive a written notice explaining the specific errors you made.
+- You must wait at least two weeks before retaking the test.
+- You may practice at a recognized training center during this waiting period.
+- Common reasons for failure include: failing to check mirrors, incorrect positioning at junctions, poor clutch control (manual), not observing blind spots, or creating a dangerous situation.
+
+### If Your Driving Poses an Immediate Danger
+- The examiner has the authority to stop the test immediately.
+- This results in an automatic failure and may require additional training before your next attempt.
+
+## Section 5: Required Documents for License Application
+
+When applying for a new driving license, prepare the following:
+
+1. Official application form (obtained from licensing department or downloaded online)
+2. Three recent color photographs (6×4 cm) with white or light blue background
+3. Civil ID card or passport showing your national number
+4. Proof of age (birth certificate or national ID)
+5. Training completion certificate (for practical and theoretical training – required for all categories except 1 and 2)
+6. Valid medical examination certificate
+7. Fee payment receipt
+
+### License Renewal and Replacement
+- **Renewal:** Requires the same documents as a new application plus your expired license. Renew before the expiration date to avoid penalties.
+- **Replacement for lost/damaged license:** Requires a special lost license form, new photographs, your ID, and the damaged license (if any). A police report may be required for lost licenses.
+"""
+"""
+
+---
+
+## Learning Module 2
+
+**module_id:** 2
+**license_type_id:** 1
+**title:** "Road Markings: Lines, Symbols, and Their Meanings"
+**description:** "Complete guide to understanding mandatory lines, warning lines, pedestrian crossings, lane arrows, and road symbols"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 2
+**prerequisite_module_id:** 1
+
+### Module Content
+
+**content_id:** 2
+**module_id:** 2
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Road Markings: Lines, Symbols, and Their Meanings
+
+Road markings are painted lines, raised reflective markers, or thermoplastic symbols on the road surface that guide, warn, and inform drivers. Understanding them is essential for safe and legal driving.
+
+## Section 1: Colors and Their Meanings
+
+- **White lines:** Separate traffic traveling in the same direction or indicate mandatory markings such as stop lines, pedestrian crossings, or lane edges.
+- **Yellow lines:** Indicate road edges (shoulder boundaries) or separate opposing traffic traveling in opposite directions.
+
+{{img:white-and-yellow-road-line-applications}}
+
+## Section 2: Mandatory (Compulsory) Lines
+
+These lines create legal obligations that drivers must obey. Violating them is a traffic offense.
+
+### Solid Longitudinal Lines (Continuous Lines)
+- **Legal meaning:** Cannot be crossed for overtaking or changing lanes under any normal circumstances.
+- **Purpose:** Separates opposing traffic flows, marks no-overtaking zones, approaches to obstacles or intersections, and road edges.
+- **Yellow solid line on your side:** You are prohibited from crossing into oncoming traffic to overtake.
+- **White solid line:** Do not change lanes; stay in your current lane.
+
+{{img:solid-center-line}}
+
+### Stop Line
+- **Appearance:** Thick solid white line painted across the road, typically 30–50 cm (12–20 inches) wide.
+- **Location:** Before intersections, railroad crossings, or any point where a complete stop is legally required.
+- **Legal requirement:** You must bring your vehicle to a complete stop before this line, not on top of it or beyond it.
+- **Often accompanied by:** A STOP sign on a post or the word "STOP" painted on the road surface.
+
+**Real-world scenario:** You approach an intersection with a stop line but no stop sign. The stop line alone legally requires you to stop because it indicates the edge of the intersection where your view of cross traffic may be limited.
+
+### Yield (Give Way) Line
+- **Appearance:** A broken line made of a series of small triangles painted across the road.
+- **Legal requirement:** You must give priority (yield) to all traffic on the main road. You may proceed without coming to a complete stop only if the main road is completely clear and it is safe to merge.
+- **If necessary:** Stop completely before this line to assess traffic.
+
+{{img:stop-line-vs-yield-line}}
+
+### Obstacle Lines (Hatched Areas)
+- **Appearance:** Painted hatched or slanted lines forming a triangular or diagonal pattern within an area.
+- **Location:** Before fixed obstacles (bridge pillars, medians, traffic islands) or to separate opposing traffic flows on wide roads.
+- **Rule:** The area is surrounded by solid mandatory lines – you must not drive over or enter this area under any normal circumstances.
+- **Exception:** Emergency vehicles responding to an incident may be permitted to cross in specific situations.
+
+**Common mistake:** Drivers sometimes use hatched areas as turning lanes or to bypass traffic. This is illegal and dangerous.
+
+## Section 3: Warning (Broken) Lines
+
+These lines indicate where overtaking and lane changing may be permitted with caution.
+
+### Broken Lines on Two-Way Roads
+- **Outside cities (rural roads):** Broken line ratio of approximately 3:1 (three units of line, one unit of gap). The longer line segments indicate higher speeds and greater caution needed.
+- **Inside cities (urban roads):** Broken line ratio of approximately 1:1 (equal line and gap lengths). Shorter segments reflect lower speeds and more frequent intersections.
+- **Meaning:** Overtaking is allowed **with extreme caution** and only when the road ahead is clearly visible and clear of oncoming traffic.
+- **Yellow broken lines:** Used primarily on secondary roads to warn drivers of the road edge, especially at night or in poor visibility.
+
+### What the Line Tells You About Overtaking
+- **Broken line on your side, solid on opposite side:** You may cross to overtake with caution; oncoming traffic must not cross into your lane.
+- **Solid line on your side, broken on opposite:** You must not cross; oncoming traffic may cross (meaning you may face overtaking vehicles coming toward you).
+- **Double solid lines (both sides solid):** No crossing from either direction under any circumstance.
+
+## Section 4: Pedestrian Crosswalk (Zebra Crossing)
+
+- **Appearance:** Wide white parallel stripes painted across the road, typically 2–3 meters wide.
+- **Legal speed limit when approaching:** 30 km/h maximum.
+- **Requirement:** You must stop completely if any pedestrian is on or about to step onto the crossing.
+- **Do not:** Overtake another vehicle that has stopped at a pedestrian crossing – they have likely stopped for a pedestrian you cannot see.
+
+### Zigzag Warning Lines
+- **Location:** Painted on the road before and after pedestrian crossings, especially near schools.
+- **Purpose:** Alert drivers that a pedestrian crossing is ahead and that parking and overtaking are prohibited in this zone.
+- **Rule:** No parking, no stopping, and no overtaking within the zigzag zone.
+
+{{img:zebra-crossing}}
+
+**Real-world scenario:** A school bus stops before a zebra crossing with its warning lights flashing. Children may be crossing. You must stop and wait until all children have crossed and the bus moves or turns off its lights.
+
+## Section 5: Bicycle Lane Markings
+
+- **Appearance:** Two solid white lines with a bicycle symbol painted in the space between them. The lane may also be painted a different color (often green or red) for visibility.
+- **Legal requirement:** Do not drive or park in a bicycle lane. It is reserved exclusively for cyclists.
+- **Intersection priority:** Cyclists using a marked bicycle lane have priority over turning vehicles at intersections. Always check your mirrors and blind spot for cyclists before turning across a bicycle lane.
+
+{{img:bicycle-lane}}
+
+## Section 6: Words, Numbers, and Arrows on the Road
+
+### Painted Words
+- **"STOP":** Painted on the road surface before a stop line to reinforce the requirement to stop.
+- **"BUS LANE":** Indicates a lane reserved for public transport buses. Private vehicles may be prohibited during certain hours (check local signs).
+- **"SLOW":** Warns drivers to reduce speed for an upcoming hazard.
+
+### Speed Numbers
+- Painted numbers (e.g., "60", "80", "100") indicate the maximum speed limit for that section of road.
+- These numbers supplement posted speed limit signs.
+
+### Directional Arrows
+- **Purpose:** Show the required or permitted direction of travel for each lane approaching an intersection.
+- **Common arrow types:**
+  - Straight ahead (arrow pointing up)
+  - Right turn only (arrow pointing right)
+  - Left turn only (arrow pointing left)
+  - Straight or right turn (combination arrow)
+  - Straight or left turn (combination arrow)
+
+{{img:lane-arrows}}
+
+**Legal requirement:** You must choose the lane that matches your intended direction. Using a lane with a straight arrow to turn left (or vice versa) is a traffic violation, even if no other vehicles are present.
+
+**Real-world scenario:** You approach an intersection in the left-turn-only lane but decide to go straight instead. You cannot legally do this. You must turn left and then find a way to turn around or re-route.
+
+## Section 7: Quick Reference Summary
+
+| Marking Type | Appearance | Rule |
+|--------------|------------|------|
+| Solid center line | Continuous line | No crossing |
+| Broken center line | Dashed line | May cross with caution |
+| Stop line | Thick white line across road | Complete stop required |
+| Yield line | Triangle dashes across road | Yield to traffic |
+| Hatched area | Diagonal lines inside solid border | Do not enter |
+| Zebra crossing | White stripes across road | Stop for pedestrians |
+| Bicycle lane | Solid lines with bicycle symbol | Do not drive or park |
+"""
+"""
+
+---
+
+## Learning Module 3
+
+**module_id:** 3
+**license_type_id:** 1
+**title:** "Traffic Signs Complete Guide – Warning, Priority, Prohibition, and Mandatory Signs"
+**description:** "Comprehensive coverage of all traffic sign categories with shapes, colors, meanings, and proper responses"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 3
+**prerequisite_module_id:** 2
+
+### Module Content
+
+**content_id:** 3
+**module_id:** 3
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Traffic Signs Complete Guide – Warning, Priority, Prohibition, and Mandatory Signs
+
+Traffic signs communicate rules, warnings, and information instantly. Recognizing and responding correctly to every sign is essential for safe driving and passing your theoretical exam.
+
+## Section 1: Warning Signs (Shape: Triangle, Point Up, Red Border, White Background, Black Symbol)
+
+Warning signs alert you to hazards ahead. They always require reducing speed and increasing attention.
+
+### Curve and Road Alignment Warnings
+
+| Sign | Meaning | Correct Response |
+|------|---------|-------------------|
+| Right curve ahead | Road bends to the right | Reduce speed before curve, no overtaking, watch for limited visibility around bend |
+| Left curve ahead | Road bends to the left | Same as right curve |
+| Double curve (right then left) | S-curve, first right then left | Reduce speed significantly, stay in lane |
+| Double curve (left then right) | S-curve, first left then right | Reduce speed significantly, stay in lane |
+
+
+### Hill and Road Surface Warnings
+
+| Sign | Meaning | Correct Response |
+|------|---------|-------------------|
+| Steep downhill | Significant downward slope ahead | Reduce speed before descent, use lower gears for engine braking, avoid riding brakes |
+| Steep uphill | Significant upward slope ahead | Maintain momentum, downshift early if needed, keep right for faster vehicles |
+| Uneven road | Bumps, dips, or damaged pavement ahead | Reduce speed, drive carefully to avoid vehicle damage or loss of control |
+| Speed bump | Raised pavement hump ahead | Slow down significantly to cross safely at low speed |
+| Dip | Sudden depression in road surface | Slow down to cross safely; suspension damage possible at speed |
+
+{{img:steep-downhill-warning}}
+
+### Road Width Warnings
+
+| Sign | Meaning | Correct Response |
+|------|---------|-------------------|
+| Road narrows from both sides | Road becomes narrower from left and right | Slow down, move to center of available width, no overtaking |
+| Road narrows from right | Right side of road narrows (obstruction or lane ends) | Slow down, keep left if safe, be prepared to yield |
+| Road narrows from left | Left side of road narrows | Slow down, keep right |
+| Bridge narrows | Bridge is narrower than approach road | Slow down, no overtaking, single file if necessary |
+| Road ends at quay/river | Road terminates at water (dock, riverbank) | Slow down, be ready to stop completely |
+
+### Work Zone Signs
+- **Men working:** Road construction or maintenance ahead. Reduce speed, watch for workers and equipment, be prepared for lane shifts or reduced lanes.
+- **Signals or flaggers may be present:** Obey flagger instructions even if they contradict traffic signs.
+
+{{img:men-working-sign}}
+
+### Other Important Warning Signs
+
+| Sign | Meaning | Correct Response |
+|------|---------|-------------------|
+| Slippery road | Reduced traction due to rain, ice, oil, or loose surface | Reduce speed significantly, no sudden braking or steering, increase following distance |
+| Falling rocks (right or left) | Risk of rocks falling onto road from adjacent hillside | Drive carefully, watch for rocks on road, avoid stopping in rockfall zone |
+| Loose stones | Gravel or loose stones on road surface | Reduce speed, increase following distance (stones can be thrown up), no overtaking |
+| Pedestrian crossing | Crosswalk ahead, pedestrians may be present | Reduce to 30 km/h, stop if pedestrians are crossing or waiting |
+| Two-way traffic ahead | Road changes from divided to two-way | Keep right, be alert for oncoming vehicles, no crossing center line |
+| Divided highway begins | Road ahead splits into separate carriageways | Keep right, follow lane markings, no crossing median |
+| Divided highway ends | Divided road ends, becomes two-way | Keep right, be alert for oncoming traffic after the merge |
+| Tunnel ahead | Enclosed tunnel passage | Reduce to 50 km/h (or posted limit), turn on headlights, keep lane, no overtaking, check that your vehicle height/width is permitted |
+| Railway crossing with gate | Railroad crossing protected by gates or barriers | Stop when gates are down, give priority to trains, wait for gates to fully rise before proceeding |
+| Railway crossing without gate | Unprotected railroad crossing | Reduce speed significantly, look and listen for trains, be ready to stop, proceed only when safe |
+| Railway crossing distance marker | Three-stripe marker showing distance to crossing | Prepare to stop; more stripes = farther distance |
+| Roundabout ahead | Circular intersection ahead | Reduce speed, give priority to vehicles already inside roundabout, choose correct lane for your exit |
+| Stop sign ahead | Intersection with stop sign is approaching | Prepare to come to a complete stop |
+| Yield sign ahead | Intersection with yield sign is approaching | Prepare to give way to crossing traffic |
+
+## Section 2: Priority Signs
+
+Priority signs tell you who has the right-of-way at intersections and narrow passages.
+
+### Yield (Give Way)
+- **Appearance:** Red-bordered inverted triangle (point down) with white center.
+- **Action:** Reduce speed before the intersection. Give priority to all vehicles on the intersecting road. You may proceed without stopping only when the intersecting road is completely clear and safe.
+
+### Stop
+- **Appearance:** Red octagon with white letters spelling "STOP".
+- **Action:** Come to a **complete stop** before the stop line or before entering the intersection if no line exists. Do not creep forward. Proceed only when safe and clear in all directions.
+- **Additional locations:** Also required at railway crossings without gates or signals.
+
+{{img:stop-sign}}
+
+### Main Road
+- **Appearance:** Yellow diamond with white border (and often a thick black outline).
+- **Meaning:** You are traveling on the main road and have priority over traffic entering from side roads.
+- **Caution:** Remain alert at intersections – not all drivers will yield to you properly.
+
+### End of Main Road
+- **Appearance:** Same yellow diamond shape but with black diagonal lines through it.
+- **Meaning:** Your priority ends. Reduce speed and give way as required by other signs or the general right-of-way rules.
+
+### Priority for Oncoming Traffic (Narrow Road)
+- **Appearance:** Red-bordered circle with two arrows: one red (pointing up), one black (pointing down).
+- **Meaning:** The red arrow indicates which direction has priority. If the red arrow points toward you, oncoming traffic has priority. You must stop and let them pass when the road is too narrow for two vehicles.
+- **Common location:** Narrow bridges or mountain roads with limited passing space.
+
+{{img:priority-for-incoming}}
+
+### Priority Over Oncoming Traffic
+- **Appearance:** Blue square with two arrows: white arrow pointing down, red arrow pointing up.
+- **Meaning:** You have priority. Oncoming vehicles must stop and let you pass when the road is too narrow.
+
+{{img:priority-over-incoming}}
+
+## Section 3: Prohibition (Regulatory) Signs
+
+Round signs with white background, red border, and black symbol. They tell you what you must NOT do.
+
+| Sign | Meaning |
+|------|---------|
+| No entry both directions | Road closed to all motor vehicles (pedestrians and bicycles only) |
+| No entry (one-way from opposite direction) | Do not enter this road from this end |
+| No motor vehicles | No engine-powered vehicles of any kind |
+| No motorcycles | Motorcycles prohibited |
+| No bicycles | Bicycles prohibited |
+| No mopeds | Small motorized scooters/bikes prohibited |
+| No trucks or goods vehicles | Trucks exceeding a specified weight prohibited |
+| No width over (number) | Vehicles wider than indicated (e.g., 2.2 meters) prohibited |
+| No height over (number) | Vehicles taller than indicated (e.g., 3.5 meters) prohibited |
+| No weight over (number) | Vehicles heavier than indicated (e.g., 12 tons) prohibited |
+| No axle weight over (number) | Vehicles with axle load exceeding limit prohibited |
+| No length over (number) | Vehicles longer than indicated prohibited |
+| No left turn | Left turn prohibited at this intersection |
+| No right turn | Right turn prohibited at this intersection |
+| No U-turn | Turning to opposite direction prohibited |
+| No overtaking | Overtaking prohibited for all vehicles (or for trucks over certain weight) |
+| Speed limit (maximum) | Do not exceed the posted speed (number in red circle) |
+| No horn | Horn use prohibited (near hospitals, schools, religious sites) |
+| No stopping | Stopping vehicle prohibited (even briefly) |
+| No parking | Parking vehicle prohibited (brief stopping may be allowed) |
+| Customs stop | Must stop for customs inspection at border or checkpoint |
+
+**Real-world scenario:** You see a "No left turn" sign at an intersection. You need to turn left. You cannot. You must go straight or turn right and find a safe place to turn around or re-route.
+
+## Section 4: Mandatory (Command) Signs
+
+Round or circular signs with blue background and white symbol. They tell you what you MUST do.
+
+| Sign | Action Required |
+|------|-----------------|
+| Straight ahead only | Must drive straight; no turning |
+| Turn left only | Must turn left |
+| Turn right only | Must turn right |
+| Straight or left | May go straight or turn left |
+| Straight or right | May go straight or turn right |
+| Keep left | Must keep to left side of obstacle or divider |
+| Keep right | Must keep to right side of obstacle or divider |
+| Minimum speed limit (blue circle with white number) | Must drive at least this speed (unless conditions prevent it) |
+
+
+## Section 5: Informational (Guide) Signs
+
+Rectangular or square signs, typically blue with white text/symbols. They provide navigation and service information.
+
+### Types of Informational Signs
+
+| Purpose | Example Information |
+|---------|---------------------|
+| Lane assignment | Diagram showing multiple lanes with arrows for each destination |
+| Advance direction | "Amman 25 km" or "Irbid →" showing distance and direction |
+| Route numbers | Primary route (e.g., Route 15) or secondary route (e.g., Route 122) |
+| Motorway begins/ends | Indicates entrance to or exit from controlled-access highway |
+| Additional lane | New lane joining from the right ahead |
+| Lane reduction | Two lanes merging into one; adjust position early |
+| Service signs | Petrol station, hospital, restaurant, hotel, rest area, repair shop |
+| Tourist attraction | Direction to historical or cultural sites (brown background often used) |
+
+**Real-world scenario:** You are driving on an unfamiliar highway. An advance direction sign tells you that your exit is 2 kilometers ahead and recommends the right lane. Moving over early reduces stress and avoids last-second dangerous lane changes.
+
+## Section 6: Summary – Recognizing Sign Shapes
+
+- **Triangle pointing up, red border:** Warning (danger ahead)
+- **Inverted triangle (point down), red border:** Yield
+- **Octagon, red:** Stop
+- **Circle, red border, white background:** Prohibition (something forbidden)
+- **Circle or round, blue background:** Mandatory (something required)
+- **Diamond, yellow:** Priority (main road or end of main road)
+- **Rectangle or square, blue:** Information or direction
+
+"""
+"""
+
+---
+
+## Learning Module 4
+
+**module_id:** 4
+**license_type_id:** 1
+**title:** "Right-of-Way Rules at Intersections and Roundabouts"
+**description:** "Complete guide to priority rules including right-hand rule, main road authority, roundabout navigation, T-junctions, and emergency vehicles"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 4
+**prerequisite_module_id:** 3
+
+### Module Content
+
+**content_id:** 4
+**module_id:** 4
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Right-of-Way Rules at Intersections and Roundabouts
+
+Right-of-way rules determine who goes first at intersections, roundabouts, and other traffic situations. These rules prevent confusion and crashes. Memorize them completely.
+
+## Section 1: General Approach to Any Intersection
+
+Before applying specific rules, follow this safety routine at every intersection:
+
+1. **Reduce speed** as you approach, even if you have priority.
+2. **Choose the correct lane** well in advance using road markings and signs.
+3. **Signal your intention** using turn signals at least 30 meters before the intersection.
+4. **Check for other road users** – pedestrians, cyclists, motorcyclists, and other vehicles.
+5. **Do not enter** if the intersection is already congested (gridlock rules).
+6. **Maintain awareness** of vehicles behind you that may not expect you to stop.
+
+## Section 2: Rule 1 – Right-Hand Rule (Equal Priority Intersections)
+
+**When does this apply?** At intersections where there are no traffic signs, no traffic lights, and no road markings indicating a main road.
+
+**The rule:** The vehicle coming from your **right** has priority over you. You must yield to that vehicle.
+
+**How it works in all directions:**
+- If you approach an intersection and see a vehicle coming from your right, you must wait for that vehicle to pass before proceeding.
+- The vehicle to your left must yield to you.
+- This creates a consistent clockwise priority system.
+
+
+**Real-world scenario:** You arrive at an uncontrolled four-way intersection in a residential area. A car approaches from your right at the same time. You stop and let that car go first. After it passes, you may proceed, checking that the vehicle to your left is also yielding to you.
+
+**Common mistake:** Assuming that the first vehicle to arrive goes first. While polite, this is not the legal rule. The right-hand rule is the law, even if you arrived first.
+
+## Section 3: Rule 2 – Opposite Direction Priority
+
+**The rule:** When vehicles approach from opposite directions and one intends to turn left across the path of the other, the vehicle going straight or turning right has priority over the left-turning vehicle.
+
+**Application:**
+- You face an oncoming vehicle at an intersection.
+- You want to turn left. The oncoming vehicle wants to go straight or turn right.
+- The oncoming vehicle has priority. You must wait.
+- The same applies if you want to go straight and the oncoming vehicle wants to turn left – you have priority.
+
+
+**Real-world scenario:** You are at an intersection, signaling left. An oncoming car is approaching with no turn signal (going straight). You must wait for that car to clear the intersection before completing your left turn.
+
+## Section 4: Rule 3 – Main Road vs. Secondary Road
+
+**The rule:** Vehicles traveling on the main road (marked by priority signs) have priority over vehicles entering from side roads.
+
+**Application:**
+- If you are on the main road (yellow diamond sign), you may proceed through intersections without stopping.
+- Vehicles from side roads must yield to you.
+- If you are entering from a secondary road, you must yield to all traffic on the main road.
+
+**Caution:** Even when you have priority, always be prepared for drivers on side roads to pull out in front of you. Defensive driving means anticipating mistakes.
+
+## Section 5: Rule 4 – Roundabout Priority
+
+Roundabouts (traffic circles) keep traffic moving and reduce the severity of crashes compared to traditional intersections when used correctly.
+
+### The Fundamental Rule
+- **Vehicles already inside the roundabout have priority.**
+- Vehicles waiting to enter must yield and wait for a safe gap in traffic.
+
+### Lane Selection for Roundabouts
+
+| Intended Exit | Lane to Enter | Lane to Stay In |
+|---------------|---------------|-----------------|
+| First exit (right turn) | Right lane | Right lane through roundabout |
+| Straight ahead (second exit) | Either lane (if two lanes entering) | Stay in your lane through roundabout |
+| Left turn (third exit or beyond) | Left lane | Left lane until near exit, then signal and move to exit |
+
+### Roundabout Navigation Steps
+
+1. **Approach:** Reduce speed. Choose correct lane based on your exit.
+2. **Yield:** Look left (in right-hand traffic countries) and yield to traffic already in the roundabout.
+3. **Enter:** When a safe gap appears, merge smoothly.
+4. **Navigate:** Stay in your lane. Do not change lanes inside the roundabout.
+5. **Signal to exit:** Use right turn signal before your exit.
+6. **Exit:** Exit smoothly, checking for pedestrians at crosswalks.
+
+**Prohibited actions in roundabouts:**
+- Stopping inside the roundabout (except to avoid a crash)
+- Changing lanes
+- Overtaking
+- Driving next to a large truck or bus (stay behind or ahead, not beside)
+
+**Real-world scenario:** You approach a roundabout and see a truck already inside, taking the left lane. You are in the right lane wanting to go straight. The truck blocks your view of traffic coming from the left. Wait until you have a clear view and a safe gap – do not assume the roundabout is clear just because you cannot see traffic.
+
+## Section 6: Rule 5 – Railway Crossing Priority
+
+**The rule:** Trains always have absolute priority over all road vehicles.
+
+**Requirements at railway crossings:**
+- Stop when gates are lowered or lights flash.
+- Do not proceed until the train has completely passed and gates have fully risen.
+- At crossings without gates, stop, look both ways, and listen before crossing.
+
+**Critical warning:** Never stop on railway tracks. If traffic is backed up across a crossing, wait before the tracks until there is space on the other side.
+
+## Section 7: Rule 6 – T-Junction Priority
+
+**The rule:** The road that continues straight (the through road) has priority over the road that ends (the stem of the T).
+
+**Application:**
+- If you are on the road that ends at the T, you must yield to traffic traveling in either direction on the continuing road.
+- If you are on the continuing road, you have priority over vehicles entering from the ending road.
+
+
+## Section 8: Rule 7 – Emergency and Official Vehicles
+
+**The rule:** Police vehicles, ambulances, civil defense vehicles, and official government convoys using flashing lights and/or sirens have priority over all other traffic.
+
+**Your legal duty:**
+- Pull to the right side of the road as far as safely possible.
+- Come to a complete stop if necessary to allow them to pass.
+- Do not follow closely behind an emergency vehicle responding to a call.
+- Do not enter an intersection if an emergency vehicle is approaching, even if your light is green.
+
+**Real-world scenario:** You are stopped at a red light and hear a siren approaching from behind. You see an ambulance in your mirror. You may carefully move forward or to the side (if safe) to create a path, even if the light is still red.
+
+## Section 9: Rule 8 – Exiting Private Property
+
+**The rule:** Vehicles exiting private areas (garages, fuel stations, private driveways, farms, parking lots) must stop and check for traffic before entering the public road.
+
+**Application:**
+- You do not have priority when entering a road from private property.
+- You must yield to all traffic already on the road.
+- This applies even if there are no signs or markings at the exit.
+
+## Section 10: Rule 9 – Organized Processions
+
+**The rule:** Organized pedestrian groups have priority. This includes:
+- School groups (students walking in an organized manner)
+- Scout troops
+- Military processions (on foot)
+- Funeral processions
+- Official marches or parades
+
+**Your duty:** Stop and allow the entire procession to pass before proceeding.
+
+## Section 11: The Golden Rule and Common Violations
+
+### Golden Rule (Memorize This)
+**Priority is given, not taken.**
+
+You never have the "right" to force your way through an intersection. You have the legal priority, but you must still drive safely and avoid crashes even if another driver violates your priority.
+
+### Common Priority Violations and Mistakes
+
+1. **Rolling through stop signs:** A complete stop is legally required, not a slow roll.
+2. **Entering roundabouts without yielding:** Drivers who speed into roundabouts cause crashes. Yield means wait.
+3. **Blocking intersections:** Entering a congested intersection even though you cannot clear it before the light changes.
+4. **Assuming right-of-way at four-way stops:** The right-hand rule applies, not first-come-first-served.
+5. **Not yielding to pedestrians:** Pedestrians in marked crosswalks have priority.
+
+**Real-world scenario:** You have a green light and approach an intersection. A car runs the red light from your left. You have priority, but if you continue without checking, you will crash. Always look even when you have the green.
+"""
+"""
+
+---
+
+## Learning Module 5
+
+**module_id:** 5
+**license_type_id:** 1
+**title:** "Lane Discipline, Turning, and Overtaking"
+**description:** "Proper lane positioning, turning procedures at intersections, U-turn rules, roundabout navigation, and safe overtaking techniques"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 5
+**prerequisite_module_id:** 4
+
+### Module Content
+
+**content_id:** 5
+**module_id:** 5
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Lane Discipline, Turning, and Overtaking
+
+Proper lane positioning, correct turning procedures, and safe overtaking are essential skills that prevent crashes and keep traffic flowing smoothly.
+
+## Section 1: The Keep Right Rule
+
+In Jordan (right-hand traffic), all drivers must keep to the right side of the road except when overtaking or turning left.
+
+### When to Move to the Right
+- You want to turn right at an upcoming intersection
+- You are driving slower than surrounding traffic and vehicles behind want to overtake
+- You approach a curve or hill crest (right position gives better view)
+- Emergency vehicles approach from behind
+
+### Multi-Lane Roads
+- Slower vehicles use the **rightmost lane**
+- Middle lanes for moderate speeds
+- Left lane(s) for passing or faster traffic
+- **Do not cruise in the left lane** – it blocks traffic and encourages dangerous passing on the right
+
+
+## Section 2: Proper Turning Procedures
+
+### Turning Right
+
+**Procedure:**
+1. Position your vehicle in the **rightmost lane** well before the intersection.
+2. Check your right mirror and blind spot for cyclists, pedestrians, or vehicles.
+3. Activate your right turn signal at least 30 meters before the turn.
+4. Reduce speed as you approach.
+5. Turn from the rightmost lane into the rightmost lane of the cross street.
+6. Complete the turn at a safe speed (typically 15–25 km/h).
+
+**Common mistakes:**
+- Swinging wide to the left before turning right
+- Turning from the middle lane
+- Failing to check for cyclists in the blind spot
+
+### Turning Left
+
+**On two-way roads with one lane each direction:**
+- Move to the **right side** of your lane (not the center)
+- Signal left
+- Wait for oncoming traffic to clear
+- Turn left only when safe and without blocking oncoming traffic
+
+**On divided roads or roads with multiple lanes:**
+- Use the **leftmost lane** designated for left turns
+- If no dedicated left-turn lane, position near the center line
+- Wait for oncoming traffic or a green arrow
+
+**On one-way streets:**
+- Turn left from the **leftmost lane**
+
+
+**Critical rule:** When turning left at an intersection without a dedicated arrow, you must yield to all oncoming traffic going straight or turning right. Do not assume oncoming drivers will stop for you.
+
+### U-Turns (Turning to Opposite Direction)
+
+**Legally permitted only when:**
+- No "No U-turn" sign is posted
+- The road is not one-way
+- You can complete the turn without blocking traffic or creating a hazard
+- Visibility is clear in both directions
+- You are not on a curve, near a hill crest, or near a railroad crossing
+
+**Procedure:**
+1. Move to the leftmost lane (or as far left as possible)
+2. Signal left
+3. Check mirrors and blind spot
+4. Wait for a safe gap in both directions (oncoming traffic and traffic behind)
+5. Turn quickly but smoothly when safe
+
+**Important:** You **lose your right-of-way** when making a U-turn. You must yield to all other vehicles and pedestrians.
+
+**Prohibited U-turn locations (even without a sign):**
+- At curves or on hill crests (limited visibility)
+- Within 150 meters of a railroad crossing
+- Where you would block traffic or create danger
+
+## Section 3: Roundabout Lane Discipline (Detailed)
+
+### Two-Lane Roundabout Navigation
+
+| Desired Exit | Entry Lane | Position in Roundabout | Exit |
+|--------------|------------|------------------------|------|
+| First exit (right turn) | Right lane | Right lane | Right lane of exit road |
+| Second exit (straight) | Either lane | Stay in your lane | Appropriate lane of exit |
+| Third exit (left turn) | Left lane | Left lane until past second exit | Right lane of exit after signaling |
+
+**Critical rule:** You must exit from the same lane you entered relative to the exit road. If you enter from the left lane and want to take the third exit, you stay in the left lane until you pass the exit before yours, then signal and move to the right lane to exit.
+
+
+## Section 4: Lane Changing Procedures
+
+**Safe lane change steps:**
+
+1. **Mirror check:** Check your interior mirror and side mirror on the side you intend to move.
+2. **Signal:** Activate your turn signal for at least 3 seconds before moving.
+3. **Blind spot check:** Turn your head to physically check the blind spot (area not visible in mirrors).
+4. **Move gradually:** Change lanes smoothly, not abruptly.
+5. **Cancel signal:** Turn off signal after completing the lane change.
+6. **Maintain speed:** Do not slow down unnecessarily when changing lanes.
+
+**Never change lanes:**
+- Across a solid white or yellow line
+- In an intersection
+- On a curve or hill crest with limited visibility
+- When it would force another driver to brake suddenly
+
+
+## Section 5: Overtaking Rules and Procedures
+
+Overtaking means passing a moving or stationary vehicle or obstacle on the road.
+
+### Where to Overtake
+
+**Standard rule:** Always overtake on the **left side** of the vehicle ahead.
+
+**Exceptions (overtake on right allowed when):**
+- The vehicle ahead is signaling and preparing to turn left
+- On multi-lane roads where lanes are separated and traffic is moving at different speeds (e.g., slower traffic in right lane)
+
+### Safe Overtaking Procedure
+
+1. **Check ahead:** Ensure the road is clear for enough distance to complete the overtake safely. For highway speeds, you need at least 300–400 meters of clear road ahead.
+2. **Check behind:** Check interior mirror, side mirror, and blind spot to ensure no vehicle is already overtaking you.
+3. **Signal:** Signal left to indicate your intention.
+4. **Move out:** Pull into the overtaking lane, maintaining a safe side distance (at least 1.5 meters) from the vehicle you are passing.
+5. **Complete quickly:** Accelerate to complete overtaking promptly but safely. Do not linger alongside the other vehicle.
+6. **Signal right:** Before returning to your lane, signal right.
+7. **Return safely:** Move back to your lane only when you can see the overtaken vehicle completely in your interior mirror (meaning you have at least a 2-second gap ahead of it).
+8. **Cancel signal:** Turn off signal after returning to lane.
+
+### Prohibited Overtaking Situations (Memorize)
+
+You must **NEVER** overtake in these situations:
+
+**Visibility-related:**
+- On curves where you cannot see far enough ahead
+- On hill crests (approaching the top of a rise)
+- In fog, heavy rain, dust storms, or any low-visibility condition
+
+**Infrastructure-related:**
+- Near pedestrian crosswalks or within 30 meters of one
+- Near intersections or railroad crossings
+- On bridges or in tunnels
+- Where signs or solid lines prohibit overtaking
+
+**Traffic-related:**
+- When a line of vehicles is stopped (traffic jam or red light)
+- When the vehicle ahead is already overtaking
+- When a vehicle behind has already started overtaking you
+- When traffic does not allow safe completion
+- When the vehicle ahead signals (with left turn signal or hand) not to overtake
+- Near stopped buses or passenger vehicles where passengers may be crossing the road
+
+**Surface-related:**
+- On slippery roads (rain, ice, snow, gravel, oil)
+
+### Responsibilities of the Driver Being Overtaken
+
+If another vehicle is overtaking you:
+- Keep as far right as safely possible
+- Do **NOT** increase your speed – this is illegal and dangerous
+- Reduce speed slightly if needed to allow the overtaking vehicle to complete the maneuver safely
+- Do not move left to block the overtaking vehicle
+
+**Heavy/Slow vehicles:** If you drive a heavy or slow vehicle and traffic is building behind you with no safe overtaking opportunity, pull over at the first safe location to let others pass.
+
+### Side Wind Effect During Overtaking
+
+When overtaking or being overtaken by large vehicles (trucks, buses):
+- Strong air displacement can push smaller vehicles sideways
+- Keep both hands firmly on the steering wheel
+- Anticipate the push and be ready to steer against it
+- Do not brake suddenly when a truck passes – maintain steady speed
+
+
+## Section 6: Common Lane and Overtaking Violations
+
+| Violation | Danger | Penalty Severity |
+|-----------|--------|------------------|
+| Crossing solid line to overtake | Head-on collision risk | Severe |
+| Overtaking on the right on a two-lane road | Blind spot collisions | Moderate to severe |
+| Cutting back too soon after overtaking | Rear-end or sideswipe crash | Moderate |
+| Overtaking at a pedestrian crossing | Pedestrian death or injury | Severe |
+| Blocking the left lane while driving slowly | Encourages dangerous passes | Minor (but dangerous) |
+
+**Real-world scenario:** You are driving on a two-lane rural road with a broken line on your side. You check ahead and see a curve approaching but it is still 500 meters away. You begin to overtake a slow truck. As you pull alongside, you realize the curve is closer than you thought and you cannot see around it. You abort the overtake, drop back behind the truck, and wait for a clearer stretch. This is the correct safe decision.
+"""
+"""
+
+---
+
+## Learning Module 6
+
+**module_id:** 6
+**license_type_id:** 1
+**title:** "Speed Limits, Following Distance, and Stopping Safely"
+**description:** "Maximum and minimum speed limits by road type, two-second and three-second following rules, stopping distances, and emergency braking"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 6
+**prerequisite_module_id:** 5
+
+### Module Content
+
+**content_id:** 6
+**module_id:** 6
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Speed Limits, Following Distance, and Stopping Safely
+
+Speed management and safe following distances are the most critical factors in preventing crashes. Even if you break no other rule, driving at appropriate speeds with adequate space ahead prevents most collisions.
+
+## Section 1: Understanding Stopping Distance
+
+Your total stopping distance = Reaction Distance + Braking Distance
+
+**Reaction distance:** The distance your vehicle travels from the moment you see a hazard to the moment you apply the brakes. For an alert driver, reaction time is approximately 0.75 to 1 second.
+
+**Braking distance:** The distance your vehicle travels from brake application to complete stop. This varies dramatically with speed, road conditions, tire quality, and brake condition.
+
+### Example: Stopping Distance at Different Speeds (Dry Road)
+
+| Speed | Reaction Distance | Braking Distance | Total Stopping Distance |
+|-------|------------------|------------------|------------------------|
+| 30 km/h | 8 meters | 6 meters | 14 meters |
+| 50 km/h | 14 meters | 17 meters | 31 meters |
+| 70 km/h | 19 meters | 33 meters | 52 meters |
+| 90 km/h | 25 meters | 55 meters | 80 meters |
+| 110 km/h | 31 meters | 82 meters | 113 meters |
+
+**Real-world implication:** At 110 km/h, you need more than the length of a football field to stop. If you follow closely at that speed, you will crash if the vehicle ahead stops suddenly.
+
+## Section 2: Speed Limits in Jordan
+
+### General Rules
+- Do not exceed the maximum posted speed limit.
+- Do not drive below the minimum speed if posted (usually on highways).
+- Speed must always be appropriate for **conditions** – weather, traffic density, road surface condition, vehicle load, and visibility. A safe speed may be well below the posted limit in poor conditions.
+
+### When to Reduce Speed Below the Limit
+- Residential areas with children playing
+- Poor visibility (fog, heavy rain, night without streetlights)
+- Near schools during drop-off and pick-up times
+- Approaching pedestrian crosswalks
+- Curves, hills, intersections
+- Areas with animals crossing (sheep, goats, camels)
+- Construction or work zones
+
+### Urban Roads (Inside City/Town Limits)
+
+| Road Type | Private Cars & Light Trucks (≤2 tons) | Buses & Heavy Trucks |
+|-----------|---------------------------------------|----------------------|
+| Multi-lane divided roads (2+ lanes each direction with median) | 90 km/h | 80 km/h |
+| Two-way undivided roads | 70 km/h | 70 km/h |
+| Near schools and local/residential roads | 40 km/h | 40 km/h |
+
+### Rural Roads (Outside City/Town Limits)
+
+| Road Type | Private Cars & Light Trucks (≤2 tons) | Other Vehicles |
+|-----------|---------------------------------------|----------------|
+| Multi-lane divided highways | 110 km/h | 100 km/h |
+| Two-way undivided roads | 110 km/h | 100 km/h |
+| Secondary and agricultural roads | Lower limits as posted | Lower limits as posted |
+
+### Minimum Speed
+While Jordanian law does not specify a universal minimum speed number, driving unreasonably slow without cause (e.g., driving 40 km/h on a 90 km/h highway with no mechanical issue or weather problem) is a traffic violation that obstructs traffic flow and creates dangerous conditions.
+
+### Speeding Penalties (Summary)
+
+| Excess Over Limit | Penalty |
+|-------------------|---------|
+| More than 50 km/h over limit | Jail (2 weeks to 3 months) OR fine (100 JD), plus license impoundment |
+| 31–50 km/h over limit | Fine 30 JD |
+| 11–30 km/h over limit | Fine 20 JD |
+
+## Section 3: The Two-Second Rule (Following Distance)
+
+The two-second rule provides a safe following distance in good conditions.
+
+### How to Apply the Two-Second Rule
+
+1. Watch for the vehicle ahead to pass a fixed object (sign, tree, bridge, road marking).
+2. As the rear of that vehicle passes the object, begin counting: "one-thousand-one, one-thousand-two".
+3. If you reach the object before finishing "one-thousand-two", you are following too closely. Increase your distance and repeat.
+
+
+### When to Use Three Seconds or More
+
+Apply the **three-second rule** (or greater) in these situations:
+
+- **Wet roads** (rain, standing water)
+- **Poor tire condition** (worn tread)
+- **Poor brake condition**
+- **Heavy vehicle load** (passengers or cargo)
+- **Night driving** (reduced visibility)
+- **Following motorcycles or trucks** (motorcycles stop faster than cars; trucks block view ahead)
+- **Driver fatigue or stress**
+- **Slippery surfaces** (gravel, snow, ice, loose stones)
+
+### Following Distance for Heavy Vehicles
+
+If you drive a truck, bus, or heavy vehicle, always use the **three-second rule as your minimum**, even in good weather. Heavy vehicles require longer stopping distances.
+
+### What Distance Is "Two Seconds" in Meters?
+
+As a rough guide:
+- At 50 km/h: 2 seconds = approximately 28 meters (about 4 car lengths)
+- At 80 km/h: 2 seconds = approximately 44 meters (about 7 car lengths)
+- At 110 km/h: 2 seconds = approximately 61 meters (about 10 car lengths)
+
+### Stopping Distance Relationship
+At 45 km/h, a small car needs a distance longer than **six times its own length** to stop completely.
+
+**Real-world scenario:** You are driving at 90 km/h on a divided highway in light rain. You apply the three-second rule for safety. Suddenly, the vehicle ahead brakes hard and stops for a stalled car. Your three-second gap gives you enough time to react and stop safely. If you had followed at one second, you would crash.
+
+## Section 4: Stopping and Parking Rules
+
+### Definitions
+
+- **Stopping (Tawaqquf):** Temporarily stopping for traffic reasons (red light, stop sign, congestion), boarding or alighting passengers, or loading/unloading goods. Brief and driver remains in vehicle.
+- **Parking (Wuquf):** Leaving the vehicle stationary for any non-temporary reason. Driver may exit the vehicle.
+
+### Where Parking AND Stopping Are Prohibited
+
+| Location | Why Prohibited |
+|----------|----------------|
+| On pedestrian crosswalks or sidewalks | Blocks pedestrian access |
+| On bicycle lanes | Endangers cyclists |
+| On railway tracks or too close to them | Train collision risk |
+| On bridges, tunnels, or overpasses (unless designated parking areas) | Blocks traffic; collision risk |
+| Within 15 meters of an intersection, curve, or hill crest | Blocks visibility for other drivers |
+| Double parking (parallel next to a parked car) | Blocks traffic lane |
+| Within 10 meters before or after a pedestrian crossing | Blocks view of crossing pedestrians |
+| In a roundabout | Extremely dangerous |
+| On driveways of public/private parking entrances | Blocks access |
+
+### Parallel Parking Procedure
+
+Parallel parking is a required skill for the practical driving test.
+
+**Step-by-step:**
+1. Signal your intention and position your vehicle parallel to the front vehicle, approximately 0.5 meters (1.5 feet) away from it.
+2. Check mirrors and blind spot for approaching traffic. Wait for a gap.
+3. Turn steering wheel fully toward the curb (right in Jordan).
+4. Reverse slowly. Watch your right mirror to see the curb and the rear vehicle.
+5. When your front bumper passes the rear bumper of the front vehicle (or when you are at approximately a 45-degree angle), turn steering wheel fully away from the curb (left).
+6. Continue reversing until your vehicle is close to the rear vehicle (about 0.5 meters gap).
+7. Turn steering wheel back toward the curb (right) to straighten your wheels and center your vehicle between the two vehicles.
+8. Adjust forward or backward as needed to center the vehicle.
+
+## Section 5: Emergency Stoppage (Breakdown)
+
+### If Your Vehicle Breaks Down
+
+1. **Move off the road** as soon as safely possible. Use momentum if the engine has died.
+2. **Choose a safe spot** – away from curves, hill crests, or intersections.
+3. **Turn on hazard lights** (four-way flashers) immediately.
+4. **Place the reflective triangle:**
+   - On rural roads: At least **100 meters before** your vehicle (not after)
+   - On urban roads: At least **50 meters before** your vehicle
+   - On curves: Place the triangle before the curve so approaching drivers see it in advance
+5. **At night or low visibility:** Keep parking lights on in addition to hazard lights.
+6. **Do NOT stand between your vehicle and oncoming traffic.** Stand behind a barrier or well off the road.
+7. **Call for help** using your mobile phone or emergency roadside telephone.
+
+### If You Have a Disability or Cannot Exit Safely
+
+- Stay inside your vehicle with seatbelt fastened
+- Keep hazard lights on
+- Display a "help" sign in your window if available
+- Call for assistance using your phone
+- Wait for help to arrive
+
+### Reflective Triangle Requirements
+
+- Equilateral triangle shape
+- Minimum side length: 45 cm (18 inches)
+- Reflective material on surface
+- Must be placed on the road surface or on a stand at road level
+
+### Vehicles Prohibited from Overnight Parking Inside Residential Areas
+
+- Vehicles over 7.5 tons gross weight (large trucks, heavy buses)
+- Agricultural and construction vehicles (tractors, excavators, bulldozers) on main residential streets
+
+These vehicles may be permitted in designated truck parking areas or industrial zones.
+
+## Section 6: Emergency Braking Techniques
+
+### For Vehicles Without ABS (Anti-lock Brakes)
+- Apply brakes firmly but do **not** lock the wheels.
+- If wheels lock (you hear screeching and lose steering), **pump the brakes** – release slightly and reapply.
+- Cadence braking: Apply, release slightly, apply again rapidly.
+
+### For Vehicles With ABS
+- Apply brakes **firmly and continuously**.
+- Do NOT pump the brakes – ABS pumps automatically.
+- You may feel pulsing through the brake pedal – this is normal.
+- Maintain steering control; ABS allows you to steer while braking hard.
+
+### In Wet or Slippery Conditions
+- Brake earlier and more gently than on dry roads.
+- Increase following distance significantly.
+- Avoid braking while turning – brake before entering curves.
+
+**Real-world scenario:** A child runs into the street 30 meters ahead of you while you are traveling at 60 km/h. You have approximately 1.8 seconds to react and stop. At 60 km/h, your total stopping distance on dry pavement is approximately 45 meters – you will stop just in time. On wet pavement, stopping distance nearly doubles. Your speed must be lower in rain to stop safely for unexpected hazards.
+"""
+"""
+
+---
+
+## Learning Module 7
+
+**module_id:** 7
+**license_type_id:** 1
+**title:** "Alcohol, Drugs, Fatigue, and Safe Driving Fitness"
+**description:** "Effects of alcohol, medications, and fatigue on driving ability; legal consequences; and concentration techniques"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 7
+**prerequisite_module_id:** 1
+
+### Module Content
+
+**content_id:** 7
+**module_id:** 7
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Alcohol, Drugs, Fatigue, and Safe Driving Fitness
+
+Driving requires full physical and mental fitness. Any impairment – from alcohol, drugs, medications, fatigue, or distraction – dramatically increases crash risk. This module covers the effects, legal consequences, and safe practices.
+
+## Section 1: Alcohol and Driving
+
+### How Alcohol Impairs Driving
+
+Alcohol affects the brain and body in ways directly dangerous to driving:
+
+| Blood Alcohol Level | Effects on Driving |
+|---------------------|---------------------|
+| Very low (0.02%) | Reduced coordination, decreased ability to track moving objects, difficulty multitasking |
+| Low (0.05%) | Reduced coordination, reduced ability to track moving objects, difficulty steering, reduced response to emergency situations |
+| Moderate (0.08% – legal limit in many countries) | Poor muscle coordination, difficulty detecting hazards, impaired judgment, reduced concentration, short-term memory loss, poor speed control |
+| High (0.10%+) | Slurred speech, poor coordination, slowed thinking, reduced ability to maintain lane position, significantly increased crash risk |
+
+### Specific Driving Skills Affected by Alcohol
+
+- **Reaction time:** Increases by 20–50% even at low levels. At 90 km/h, a 0.5-second delay adds 12.5 meters to stopping distance.
+- **Judgment:** Impairs ability to judge distances, speeds, and gaps in traffic.
+- **Vision:** Reduces peripheral vision (tunnel vision), decreases night vision, impairs depth perception.
+- **Coordination:** Impairs fine motor control needed for steering, pedals, and gear shifting.
+- **Concentration:** Makes it difficult to focus on multiple tasks (scanning, steering, speed control).
+
+### Legal Consequences in Jordan
+
+- Driving under the influence of alcohol is a **serious crime**, not just a traffic violation.
+- If caught with any measurable alcohol in your system while driving, penalties may include:
+  - Imprisonment
+  - Heavy fines (hundreds to thousands of JD)
+  - Long-term license suspension
+  - Vehicle impoundment
+- **Refusing a breathalyzer or blood test** may lead to immediate arrest and additional penalties.
+- For causing death or injury while impaired, penalties include long prison sentences and permanent license revocation.
+
+### Common Myths About Alcohol
+
+| Myth | Reality |
+|------|---------|
+| "Coffee will sober me up" | Caffeine makes you feel more awake but does NOT reduce impairment or lower BAC |
+| "I can drive after one drink" | One drink affects some people significantly; effects vary by weight, gender, food intake |
+| "Eating soaks up alcohol" | Food slows absorption but does not reduce total BAC or impairment |
+| "Time is the only cure" | TRUE. Only time lowers BAC. One hour per standard drink on average. |
+
+**Real-world scenario:** You have two beers with dinner over two hours, feel "fine," and decide to drive. Your BAC may still be above legal limits depending on your body weight and gender. You are stopped at a checkpoint and fail the breathalyzer. You face arrest, court appearance, fines, license suspension, and a criminal record. The safest choice: designate a sober driver or use a taxi/ride service.
+
+## Section 2: Drugs and Narcotics
+
+### Illegal Drugs
+- Any non-alcoholic narcotic substance (cannabis, cocaine, opioids, amphetamines, etc.) severely impairs driving.
+- **Effects include:**
+  - Increased risk-taking and reckless behavior
+  - Greatly reduced awareness of hazards
+  - Poor decision-making and judgment
+  - Significantly slower reflexes
+  - Hallucinations or altered perception (some drugs)
+  - Drowsiness or sudden loss of consciousness (some drugs)
+
+### Legal Consequences
+- Driving under the influence of any illegal drug is strictly prohibited.
+- Penalties are similar to or more severe than alcohol violations.
+- Drug-impaired driving causing death or injury carries enhanced penalties.
+
+## Section 3: Medications That Affect Driving
+
+Many legal over-the-counter and prescription medications can impair driving ability as much as alcohol.
+
+### Common Medications with Driving Warnings
+
+| Medication Type | Examples | Potential Effects |
+|-----------------|----------|-------------------|
+| Antihistamines (allergy) | Diphenhydramine (Benadryl), cetirizine (Zyrtec) | Drowsiness, dizziness, slowed reaction time |
+| Sleep aids (prescription and OTC) | Zolpidem (Ambien), diphenhydramine | Drowsiness, morning grogginess |
+| Anxiety medications | Benzodiazepines (Xanax, Valium) | Drowsiness, impaired coordination, confusion |
+| Some antidepressants | Certain SSRIs, tricyclics | Drowsiness, blurred vision, dizziness |
+| Some pain relievers | Opioids (codeine, tramadol, oxycodone) | Drowsiness, euphoria, impaired judgment, slowed breathing |
+| Blood pressure medications | Beta-blockers, some diuretics | Dizziness, fatigue, blurred vision |
+| Muscle relaxants | Cyclobenzaprine (Flexeril) | Drowsiness, weakness, dizziness |
+| Cold and flu medications | Multi-symptom formulas often contain antihistamines or cough suppressants | Drowsiness, dizziness, impaired coordination |
+| Anti-nausea medications | Promethazine (Phenergan), dimenhydrinate (Dramamine) | Drowsiness, blurred vision |
+
+### What to Do
+
+1. **Read warning labels** on all medications. Look for phrases like:
+   - "May cause drowsiness"
+   - "Do not operate heavy machinery"
+   - "Avoid driving until you know how this medication affects you"
+   - "Use caution when driving"
+
+2. **If the label warns against driving: DO NOT DRIVE** while taking that medication, especially during the first few days or when dosage changes.
+
+3. **Consult your doctor or pharmacist** before driving while on any medication. Ask specifically: "Is it safe for me to drive while taking this?"
+
+4. **Monitor yourself** even with medications that do not carry warnings. If you feel drowsy, dizzy, or "different" after taking any medication, do not drive.
+
+**Real-world scenario:** You have a cold and take an over-the-counter nighttime cold medication that contains an antihistamine. The label says "may cause marked drowsiness." You take it at 10 PM and plan to drive to work at 7 AM. The medication can still affect you for 8–12 hours. You wake up feeling groggy but think you are fine. On the road, your reaction time is slowed, and you fail to stop in time for a red light. You cause a crash. Wait 12+ hours or find alternative transportation.
+
+## Section 4: Driver Fatigue
+
+Fatigue is as dangerous as alcohol impairment. Studies show being awake for 18 hours produces impairment equivalent to a BAC of 0.05%, and 24 hours awake equals 0.10% BAC.
+
+### Why Fatigue Is Dangerous
+
+- Fatigue reduces reaction time similarly to alcohol
+- You may experience **micro-sleeps** (2–5 seconds of sleep with eyes open) without realizing it. At 90 km/h, a 4-second micro-sleep covers 100 meters of uncontrolled driving
+- Accident risk increases significantly at night (especially 2 AM–6 AM) and on long trips (after 2+ hours of continuous driving)
+
+### Signs of Fatigue (If You Experience Any, STOP Driving)
+
+- Frequent yawning
+- Heavy eyelids or blinking more than usual
+- Difficulty keeping your head up
+- Drifting out of your lane or hitting rumble strips
+- Missing traffic signs or exits
+- Not remembering the last few kilometers driven
+- Feeling restless or irritable
+- Slow reactions to changing traffic conditions
+
+### How to Prevent Fatigue
+
+**Before driving:**
+- Get adequate sleep – 7–8 hours recommended before long drives
+- Avoid driving during your normal sleeping hours
+- Avoid heavy meals before driving (digestion causes drowsiness)
+- Avoid alcohol the night before long drives
+
+**During driving:**
+- Take a break every **2 hours or 150–200 km** – whichever comes first
+- Stop at a safe rest area, service station, or parking area (not on the shoulder)
+- Get out of the vehicle, stretch, walk around for 10–15 minutes
+- If very tired: Take a **short nap (15–20 minutes)** before driving again. A 20-minute nap restores alertness for 2–3 hours.
+- Drink water – dehydration increases fatigue
+- Drive with a passenger who can share driving or keep you alert
+
+**What does NOT work for fatigue:**
+- Loud music
+- Opening windows
+- Slapping your face
+- Drinking coffee (caffeine takes 30 minutes to work and does not replace sleep)
+
+**Real-world scenario:** You are driving back from a weekend trip at 3 AM, two hours from home. You notice you are yawning and struggling to keep your eyes focused. Instead of pushing through, you stop at the next rest area. You nap for 20 minutes, drink water, and stretch. You complete the drive safely. That decision may have saved your life.
+
+## Section 5: Concentration and Distractions
+
+### Common Driving Distractions to Avoid
+
+| Distraction Type | Examples |
+|------------------|----------|
+| Mobile phone use | Talking without hands-free (illegal in Jordan), texting, checking notifications, using apps |
+| Eating/drinking | Unwrapping food, holding a drink, eating with one hand |
+| Vehicle controls | Adjusting radio, GPS, or climate controls while in complex traffic |
+| Passengers | Turning to talk to rear-seat passengers, arguing, dealing with children |
+| Grooming | Applying makeup, shaving, combing hair |
+| Reaching | Picking up dropped items from the floor or back seat |
+| External distractions | Looking at crashes, billboards, scenery for too long |
+
+### Safe Practices
+
+1. **Set up before moving:** Adjust seat, mirrors, steering wheel, climate controls, GPS destination, and music before shifting into gear.
+
+2. **Secure loose objects:** Phones, sunglasses, bags, and other items should be secured so they do not roll or slide.
+
+3. **Passenger management:** Ask passengers to keep noise at a reasonable level. Deal with children's needs before driving or pull over to address them.
+
+4. **Phone policy:** Pull over to a safe location to use your phone. Even hands-free conversations are distracting – keep them short and simple.
+
+5. **Eat before or after:** Do not eat while driving. If you must eat on a long trip, stop at a rest area.
+
+### Nighttime Concentration Challenges
+
+- Vision is reduced by **50–70%** at night compared to daylight.
+- Glare from oncoming high beams temporarily blinds you and takes seconds to recover.
+- **If an oncoming vehicle uses high beams:**
+  - Slow down
+  - Look to the right edge of your road (not at the lights)
+  - Keep right in your lane
+  - Do not flash your high beams back (escalates conflict)
+
+### Driving in High Heat/Strong Sun
+
+- Heat causes dehydration, headache, nausea, anxiety, and fatigue
+- Use sunglasses to reduce glare (polarized lenses are best)
+- Use your vehicle's sun visor
+- Monitor engine temperature gauge
+- Keep air conditioning or ventilation on
+- Reduce speed slightly and increase following distance (heat affects braking and tire grip)
+
+## Section 6: Quick Fitness-to-Drive Checklist
+
+**Before every drive, ask yourself:**
+
+- [ ] Have I consumed any alcohol in the past 6–8 hours?
+- [ ] Have I taken any medication that causes drowsiness or dizziness?
+- [ ] Have I used any illegal or recreational drugs?
+- [ ] Am I feeling tired or sleepy?
+- [ ] Am I emotionally upset (angry, very sad, extremely excited)?
+- [ ] Do I have any physical symptoms (fever, severe pain, dizziness)?
+
+**If you answer YES to any: DO NOT DRIVE.**
+
+**Real-world scenario:** You argued with your boss before leaving work. You are angry and distracted. You get behind the wheel. Your anger causes you to drive more aggressively – tailgating, speeding, running a yellow light. You cause a crash. Pull over, take 10 minutes to calm down, and only drive when you are emotionally ready to focus safely.
+"""
+"""
+
+---
+
+## Learning Module 8
+
+**module_id:** 8
+**license_type_id:** 1
+**title:** "Difficult Driving Conditions – Night, Weather, and Emergencies"
+**description:** "Techniques for driving safely at night, in fog, rain, snow, ice, strong wind, and managing skids and emergencies"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 8
+**prerequisite_module_id:** 6
+
+### Module Content
+
+**content_id:** 8
+**module_id:** 8
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Difficult Driving Conditions – Night, Weather, and Emergencies
+
+Driving becomes significantly more dangerous in adverse conditions. Crash rates double or triple at night, in rain, or in fog. This module teaches you how to adapt your driving to stay safe.
+
+## Section 1: Night Driving
+
+### The Statistics
+- Accident rate **doubles** at night compared to daytime.
+- At speeds over 110 km/h, the night crash rate increases **six times**.
+- Most night crashes occur between midnight and 6 AM, especially 2 AM–4 AM.
+
+### Vision Limitations at Night
+- Depth perception is reduced
+- Peripheral vision narrows
+- Color recognition decreases (red looks black, green looks gray)
+- Glare recovery takes longer (5–10 seconds after bright lights)
+- Overall vision is reduced by 50–70%
+
+### Night Driving Safety Checklist
+
+**Before driving:**
+- Ensure all lights work: headlights (high and low beam), taillights, brake lights, turn signals, hazard lights
+- Clean headlights, taillights, and windows (inside and out)
+- Aim headlights properly (ask a mechanic if unsure)
+- Check that reflective markers and license plates are clean and visible
+
+**During driving:**
+- Use **low beams** inside cities and on well-lit roads
+- Use **high beams** on dark rural roads with no oncoming traffic
+- **Dim high beams** when:
+  - A vehicle is less than 200 meters ahead of you in your direction
+  - A vehicle approaches from the opposite direction (dim at least 150 meters before meeting)
+- Reduce speed – your effective sight distance is shorter than your stopping distance
+- Increase following distance to 3–4 seconds minimum
+- Be extra cautious at intersections (other drivers may not see you)
+- Watch for pedestrians, cyclists, and animals (harder to see at night)
+
+### Managing Glare
+
+**From oncoming high beams:**
+- Slow down
+- Look to the right edge of the road (use the right line or shoulder as a guide)
+- Do not stare at the lights
+- Keep right in your lane
+- Do not flash your high beams back (this creates danger for both of you)
+
+**From high beams behind you:**
+- Adjust your rearview mirror to night mode (flip the tab)
+- Slow down and let the vehicle pass
+- Do not brake-check the driver
+
+**Real-world scenario:** You are driving on a dark rural road at 90 km/h with high beams on. You see headlights approaching on a curve. You dim your lights 150 meters before meeting. The oncoming driver does not dim theirs. You look to the right edge of the road, slow to 70 km/h, and stay in your lane. After passing, you return to normal speed and high beams. This safe response prevents temporary blindness and a potential crash.
+
+## Section 2: Fog Driving
+
+Fog is one of the most dangerous conditions because it dramatically reduces visibility and creates optical illusions.
+
+### Fog Types and Visibility
+- Light fog: 200–400 meters visibility – reduce speed moderately
+- Moderate fog: 100–200 meters visibility – reduce speed significantly
+- Dense fog: 50–100 meters visibility – drive very slowly, consider pulling over
+- Thick fog: Under 50 meters visibility – pull off the road safely
+
+### Fog Driving Rules
+
+1. **Use low beam headlights** – NOT high beams. High beams reflect off fog droplets and create a white wall, reducing visibility further.
+
+2. **Use fog lights** if your vehicle has them – but only in fog or heavy rain/snow. Do not use fog lights in clear conditions (they blind other drivers).
+
+3. **Reduce speed dramatically.** As a guide:
+   - 200m visibility: maximum 50 km/h
+   - 100m visibility: maximum 30 km/h
+   - 50m visibility: maximum 15 km/h
+
+4. **Increase following distance to 5+ seconds** – you may not see brake lights until very close.
+
+5. **Use the right edge line as a guide** – follow the white or reflective markers on the right side.
+
+6. **Do not stop in travel lanes** – if visibility drops to near zero, carefully pull off the road completely, turn on hazard lights, and wait for conditions to improve.
+
+7. **Watch for vehicles that have stopped ahead** – fog can hide stopped vehicles until you are very close.
+
+**Real-world scenario:** You enter a fog bank on a highway. Visibility drops to 50 meters. You reduce speed to 20 km/h, use low beams and fog lights, and follow the right edge line. You see taillights ahead – a chain of cars moving at 15 km/h. You maintain a 5-second gap. After 20 minutes, the fog clears. You avoided a multi-car pileup that happened 1 km ahead where drivers had been speeding.
+
+## Section 3: Rain and Wet Roads
+
+Rain reduces tire grip (traction) and increases stopping distances significantly.
+
+### Traction Loss in Rain
+
+| Condition | Traction Compared to Dry Road |
+|-----------|-------------------------------|
+| Light rain (road slightly damp) | 80-90% of dry traction |
+| Moderate rain (standing water) | 50-70% of dry traction |
+| Heavy rain (flowing water) | 30-50% of dry traction |
+| First rain after dry spell (oil rises to surface) | As low as 20-30% (extremely slippery) |
+
+### Rain Driving Rules
+
+1. **Reduce speed** – wet roads require lower speeds for safe stopping.
+
+2. **Increase following distance to 4+ seconds.**
+
+3. **Use low beam headlights** – required by law in rain in many jurisdictions. High beams reflect off raindrops.
+
+4. **Avoid sudden braking or sharp turns** – gentle inputs only.
+
+5. **Use windshield wipers** – replace wiper blades annually for best performance.
+
+6. **Defrost windows** – use defroster to prevent interior fogging.
+
+7. **Watch for hydroplaning** – when tires lose contact with road and ride on water film.
+
+### Hydroplaning: Causes and Recovery
+
+**Hydroplaning occurs when:**
+- Speed is too high for water depth
+- Tire tread is worn (less than 3mm tread depth)
+- Water depth exceeds tire tread capacity
+- Typically occurs above 70-80 km/h in standing water
+
+**Signs of hydroplaning:**
+- Steering feels "light"
+- Vehicle does not respond to steering input
+- Engine sounds louder (less resistance)
+
+**If you hydroplane:**
+- **DO NOT** brake suddenly
+- **DO NOT** turn sharply
+- **Gently** lift off the accelerator
+- Keep steering wheel straight
+- Wait for tires to regain contact (usually 1-3 seconds)
+- When traction returns, continue at reduced speed
+
+**Real-world scenario:** Heavy rain begins while you are driving at 100 km/h. You ignore advice and maintain speed. You hit a patch of standing water. The steering goes light – you are hydroplaning. You panic and hit the brakes. The vehicle spins. You crash. Alternative: You reduced speed to 70 km/h when rain started. You maintain control, arrive safely, and avoid a crash.
+
+## Section 4: Snow and Ice
+
+Snow and ice are the most dangerous driving surfaces. If you do not have experience driving in these conditions, consider postponing travel or using public transportation.
+
+### Traction Levels on Ice and Snow
+- Dry road: 100% traction
+- Wet road: 50-70% traction
+- Packed snow: 20-30% traction
+- Ice: 5-10% traction
+
+### Snow and Ice Driving Rules
+
+1. **Reduce speed dramatically** – maximum 30-40 km/h on snow, 10-20 km/h on ice.
+
+2. **Increase following distance to 10+ seconds** – stopping distances on ice are 10x longer than dry roads.
+
+3. **Avoid sudden ANYTHING** – no sudden acceleration, braking, or steering.
+
+4. **Use lower gears** – engine braking provides more control than brakes on ice. In an automatic, use "2" or "L" or manual mode.
+
+5. **Brake gently and early** – if wheels lock, release and pump brakes (or let ABS work).
+
+6. **Be extra careful on:** Bridges (freeze first), shaded areas (ice remains longer), curves, intersections (polished ice from vehicles stopping).
+
+7. **If you get stuck:** Do not spin tires (digs deeper). Rock back and forth (forward, reverse, forward). Use sand, salt, or floor mats under tires for traction.
+
+### Black Ice
+- Thin, transparent ice that looks like wet pavement
+- Extremely dangerous because drivers do not see it
+- Most common on bridges, overpasses, and shaded curves
+- If you hit black ice: Do NOT brake. Do NOT turn. Keep steering straight. Gently lift accelerator. Wait for tires to find pavement.
+
+## Section 5: Strong Wind and Sandstorms
+
+Jordan experiences khamsin winds and sandstorms, especially in spring and summer. High winds and blowing sand create serious driving hazards.
+
+### Effects of Strong Wind
+
+- **Lateral force** pushes vehicles sideways, especially:
+  - High-profile vehicles (SUVs, vans, trucks, buses)
+  - Lightweight vehicles
+  - Vehicles towing trailers
+- **Sand reduces visibility** and road grip (sand on pavement is like loose gravel)
+- **Sudden gusts** from gaps in buildings, terrain, or passing large trucks
+
+### Wind and Sand Driving Rules
+
+1. **Keep both hands on the steering wheel** – be ready to counter wind gusts.
+
+2. **Reduce speed** – slower speeds reduce wind effect.
+
+3. **Close all windows** – prevents sand from entering the vehicle.
+
+4. **Use low beam or fog lights** during daytime sandstorms. Use low beams after sunset (high beams reflect off sand).
+
+5. **Increase following distance** – sand reduces braking grip.
+
+6. **Watch for:** fallen branches, overturned vehicles, sand drifts across road.
+
+7. **If wind becomes extreme:** Pull off the road completely in a safe location (not on the shoulder if possible). Turn off engine. Set parking brake. Turn on hazard lights. Wait for conditions to improve.
+
+## Section 6: Skid Recovery (Loss of Traction)
+
+Skids occur when tires lose grip. Knowing how to recover is essential.
+
+### Rear-Wheel Skid (Oversteer) – Rear slides out
+- **Cause:** Too much speed in a turn, or too much acceleration (rear-wheel drive)
+- **Vehicle feels like:** The rear is trying to pass the front
+- **Recovery:**
+  1. Immediately lift foot from accelerator
+  2. **Steer in the direction the rear is sliding** (countersteer)
+  3. Do not brake
+  4. When rear regains grip, straighten steering wheel
+
+**Example:** Rear slides right. Steer right toward the skid.
+
+### Front-Wheel Skid (Understeer) – Front wheels lose grip
+- **Cause:** Too much speed entering a turn, braking in a turn
+- **Vehicle feels like:** The front continues straight even though wheels are turned
+- **Recovery:**
+  1. Lift foot from accelerator
+  2. Shift to neutral (or clutch in for manual)
+  3. Do NOT brake
+  4. Steer toward the direction of skid (continue steering into the turn)
+  5. When front regains grip, shift back to Drive (or appropriate gear)
+
+### Four-Wheel Skid (All wheels sliding)
+- **Cause:** Braking too hard on slippery surface
+- **Recovery:**
+  1. Lift accelerator
+  2. Shift to neutral
+  3. Release brakes to allow wheels to rotate
+  4. Pump brakes gently (do not lock wheels)
+  5. Steer desired direction
+
+### Skid Prevention
+- Reduce speed in rain, snow, ice, gravel
+- Brake before turns, not during turns
+- Accelerate gently on slippery surfaces
+- Avoid abrupt steering movements
+
+## Section 7: Accident and Emergency Procedures
+
+### After a Crash
+
+1. **Stop immediately** – leaving the scene is a crime (hit and run).
+
+2. **Check for injuries** – provide first aid if trained. Call ambulance for any serious injury.
+
+3. **Call police** – required for any crash with injuries or significant damage. Even minor crashes should be reported for insurance purposes.
+
+4. **Do NOT move vehicles** unless:
+   - They block traffic completely
+   - No serious injuries
+   - Minor damage only
+   - You have photographed the scene first
+
+5. **Exchange information** with the other driver:
+   - Full name
+   - Car registration number
+   - Driving license number
+   - Insurance company and policy number
+
+6. **Document the scene** (if safe):
+   - Photograph all vehicles from multiple angles
+   - Photograph license plates
+   - Photograph the intersection or location
+   - Get witness names and phone numbers
+
+### Your Legal Duty as a Witness
+
+If you pass a crash with injuries, you are legally required to stop and help until emergency services arrive. Failure to do so is a crime.
+
+### Reporting Requirement
+
+If you are involved in a crash, you must report it within **48 hours** to the police or licensing department with your name, car number, and license number. Failure to report makes you a "fleeing the scene" offender with severe penalties.
+
+### Breakdown Emergency (Review from Module 6)
+1. Move off road
+2. Hazard lights on
+3. Reflective triangle 100m (rural) or 50m (urban) before vehicle
+4. At night: parking lights on
+5. Do not stand between vehicle and traffic
+6. Call for help
+7. If disabled and cannot exit: stay inside, hazard lights on, call for help
+
+"""
+"""
+
+## Learning Module 9
+
+**module_id:** 9
+**license_type_id:** 1
+**title:** "Vehicle Safety Equipment, First Aid, and Accident Response"
+**description:** "Seatbelt use, airbags, child safety, first aid for fractures, burns, bleeding, and proper accident procedures"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 9
+**prerequisite_module_id:** 7
+
+### Module Content
+
+**content_id:** 9
+**module_id:** 9
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Vehicle Safety Equipment, First Aid, and Accident Response
+
+Safety equipment saves lives – but only if used correctly. This module covers proper use of seatbelts, airbags, headrests, child restraints, plus essential first aid for common crash injuries.
+
+## Section 1: Seatbelt Rules and Proper Use
+
+### Legal Requirements
+- Seatbelts are **mandatory** for the driver and all front-seat passengers.
+- Rear-seat passengers should also wear seatbelts (required in many jurisdictions and strongly recommended in all).
+- Children must be secured in appropriate child restraints (see Section 4).
+
+### Why Seatbelts Save Lives
+
+**Without a seatbelt in a 50 km/h crash:**
+- Your body continues moving at 50 km/h until it hits something
+- Impact forces are 30-60 times your body weight
+- You will hit the steering wheel, dashboard, windshield, or other passengers
+- You may be ejected from the vehicle (ejection is fatal in 75%+ of cases)
+
+**With a seatbelt:**
+- Crash forces are spread over stronger parts of your body (chest, pelvis, shoulders)
+- You stay in your seat, maintaining control if the vehicle continues moving
+- You avoid colliding with interior surfaces or other passengers
+- You are not ejected
+
+### Proper Seatbelt Fit
+
+**Lap belt:** Must sit **low across your hips** (not across your stomach). The hip bones are strong; the abdomen is not.
+
+**Shoulder belt:** Must sit **across your chest and over your shoulder** (not behind your back, not under your arm). The clavicle and sternum are strong.
+
+**Pregnant drivers:** Wear the lap belt low under the belly, across the hips. Shoulder belt across chest between breasts. Never place belt directly over the abdomen.
+
+## Section 2: Airbags
+
+Airbags are supplemental restraints – they work **with** seatbelts, not instead of them.
+
+### How Airbags Work
+- Deploy in moderate to severe frontal crashes (typically equivalent to hitting a solid barrier at 15-25 km/h or faster)
+- Inflate in 20-30 milliseconds (faster than you can blink)
+- Deflate immediately after contact to cushion impact
+
+### Airbag Safety Rules
+
+1. **Keep at least 25 cm (10 inches)** between your chest and the steering wheel (or dashboard on passenger side). Airbags deploy at 200+ km/h – sitting too close causes injury.
+
+2. **Never place rear-facing child seats** in the front passenger seat with an active airbag. The deploying airbag can kill an infant or small child.
+
+3. **Hands at 9 and 3 o'clock** (not 10 and 2). If the airbag deploys, your hands will be pushed outward rather than into your face.
+
+4. **Do not put anything on top of or in front of the airbag cover** – no phones, no air fresheners, no stickers. Items become projectiles when the airbag deploys.
+
+## Section 3: Headrests (Head Restraints)
+
+Headrests prevent whiplash – a common injury in rear-end collisions.
+
+### Proper Adjustment
+- Top of headrest should be level with **the top of your head** (not at your neck)
+- Distance from back of head: as close as comfortable (less than 7 cm / 3 inches)
+- When adjusted correctly, your head moves with the headrest in a rear crash rather than snapping backward
+
+## Section 4: Child Safety
+
+### Legal Requirements in Jordan
+- Children must be secured in appropriate child seats or restraints.
+- Children under 10 years old may not ride in the front seat.
+- When the vehicle is running, do not leave children under 10 alone inside the vehicle.
+
+### Child Restraint Guidelines by Age/Size
+
+| Child Size | Restraint Type | Notes |
+|------------|---------------|-------|
+| Infant (up to 1 year / 10 kg) | Rear-facing infant seat | Never in front seat with airbag |
+| Toddler (1-4 years / 10-18 kg) | Forward-facing with 5-point harness | Install in back seat |
+| Young child (4-8 years / 18-36 kg) | Booster seat with seatbelt | Belt fits correctly across hips and chest |
+| Older child (8+ years / 36+ kg) | Seatbelt | Must fit properly; back seat preferred until age 13 |
+
+**Real-world scenario:** You are driving with your 5-year-old child in the front seat because the back seat is full of cargo. You are stopped at a traffic light. A distracted driver rear-ends you at 40 km/h. The airbag deploys and seriously injures your child. The child would have been safe in the back seat in a booster seat. Never compromise on child safety for convenience.
+
+## Section 5: First Aid – Fractures
+
+Fractures (broken bones) are common in vehicle crashes. Knowing how to respond prevents further injury.
+
+### Types of Fractures
+
+**Closed fracture:** Bone broken but skin not pierced. Lower risk of infection.
+
+**Open fracture:** Bone breaks through the skin. High risk of infection and severe bleeding. Life-threatening emergency.
+
+### Signs of a Fracture
+- Person heard or felt a "snap" or "pop"
+- Severe pain at the injury site
+- Unable to move the injured part
+- Swelling, bruising, or visible deformity
+- Bone protruding (open fracture)
+
+### First Aid for Closed Fracture
+
+1. **Keep airway open** – if unconscious, position for breathing.
+2. **Call emergency services** (ambulance).
+3. **Immobilize the injured part** – do not move it unnecessarily.
+4. **Apply a splint** (use a board, rolled newspaper, or anything rigid) and secure it above and below the fracture site. Pad between splint and skin.
+5. **Support the injured limb** in a comfortable position.
+6. **Do not try to straighten** a deformed limb.
+
+### First Aid for Open Fracture
+
+1. **Do NOT push the bone back in** – this introduces infection and causes more damage.
+2. **Remove or cut away clothing** around the wound.
+3. **Stop bleeding** – apply sterile gauze with gentle pressure around the bone (not directly on the exposed bone if possible).
+4. **Cover wound** with sterile dressing.
+5. **Apply splint** as for closed fracture.
+6. **Call emergency services immediately** – open fractures require urgent surgery.
+
+### Neck and Back Fractures (Spinal Injury)
+- **DO NOT** let the person move their neck or back
+- **DO NOT** move them unless they are in immediate danger (fire, incoming traffic, etc.)
+- **DO NOT** remove a helmet (if motorcycle crash)
+- **Call emergency services immediately** – paramedics have specialized spinal immobilization equipment
+
+## Section 6: First Aid – Burns
+
+### Burn Degrees
+
+| Degree | Cause | Symptoms | Healing |
+|--------|-------|----------|---------|
+| First degree | Sun, hot objects, steam | Redness, pain, mild swelling | Heals quickly, no scars |
+| Second degree | Hot liquids, fire, mild chemicals | Redness, blisters, significant swelling | Heals slowly, possible minor scars |
+| Third degree | Open flame, electricity, concentrated acids | All skin layers destroyed, muscles/nerves damaged, may be painless (nerve damage) | Very slow, permanent disfigurement, skin grafts often needed |
+
+### First Aid for First Degree Burns
+- Apply **cold compresses** (cool, not ice-cold water) to the burned area
+- Cover with sterile gauze
+- Over-the-counter burn creams may help (check with pharmacist)
+
+### First Aid for Second Degree Burns
+- Soak burned part in **cool water** for 10 minutes (not ice water – ice causes more tissue damage)
+- **Do NOT break blisters** – broken blisters increase infection risk
+- Cover with **dry sterile gauze** (do not use fluffy cotton)
+- Keep burned limbs elevated
+- Seek medical help
+
+### First Aid for Third Degree Burns
+- **Do NOT remove burned clothing** stuck to skin
+- **Do NOT apply creams, ointments, or ice**
+- Cover with **thick dry sterile gauze** or a clean, non-fluffy cloth
+- Keep burned limbs elevated
+- **Call emergency services immediately** – third degree burns are life-threatening
+
+**For any burn involving the face, hands, feet, genitals, or major joints:** Seek medical attention regardless of degree.
+
+## Section 7: First Aid – Bleeding (Hemorrhage)
+
+### Types of Bleeding
+- **Arterial bleeding:** Bright red blood, spurts with heartbeat. Life-threatening – requires immediate action.
+- **Venous bleeding:** Dark red blood, flows steadily. Serious but less urgent than arterial.
+- **Capillary bleeding:** Slow oozing. Minor.
+
+### First Aid for Bleeding
+
+1. **Apply direct pressure** to the wound using sterile gauze or the cleanest cloth available.
+2. **Maintain pressure** for at least 5-10 minutes. Do not lift gauze to check – you will disrupt clotting.
+3. **If bleeding continues,** add more gauze on top of the first layer. Do not remove the first layer (removes clots).
+4. **Elevate the injured limb** above heart level if no fracture is suspected.
+5. **Apply pressure on the artery** (pressure point) if needed – for severe arm bleeding, press inside of upper arm against bone; for leg bleeding, press groin area.
+6. **Tourniquet (LAST RESORT only):** Use only for life-threatening extremity bleeding when direct pressure fails. Apply 5-7 cm above wound (not on joint). Note time applied. Tourniquets cause tissue death after 2+ hours – only trained responders should apply them.
+
+### Signs of Severe Blood Loss (Shock)
+- Rapid, weak pulse
+- Rapid, shallow breathing
+- Pale, cool, clammy skin
+- Anxiety or confusion
+- Unconsciousness
+
+If you see these signs, treat for shock: Keep person lying down, elevate legs (unless leg fracture), keep warm, do not give food or drink, call emergency services immediately.
+
+## Section 8: First Aid Summary – Accident Response Priorities
+
+**At a crash scene with injuries:**
+
+1. **Stop and ensure scene safety** – watch for traffic, fire, downed wires.
+2. **Call emergency services** – provide location, number of injured, types of injuries.
+3. **Check for responsiveness** – tap and shout "Are you okay?"
+4. **Airway** – tilt head back, lift chin to open airway (unless neck injury suspected).
+5. **Breathing** – look, listen, feel for breath. If not breathing, start CPR if trained.
+6. **Bleeding control** – apply direct pressure to severe bleeding.
+7. **Do not move seriously injured persons** unless in immediate danger.
+8. **Keep victims warm** – use blankets, jackets, or emergency blankets.
+
+**What NOT to do:**
+- Do not give food or drink to injured persons (may need surgery)
+- Do not remove helmets from motorcyclists (spinal injury risk)
+- Do not move neck/back injury victims
+- Do not apply tourniquets unless trained and bleeding is life-threatening
+- Do not enter dangerous areas (fire, toxic spills, active traffic) without protection
+
+**Real-world scenario:** You come upon a single-vehicle crash. The driver is conscious but bleeding heavily from a leg wound. You call emergency services. You apply direct pressure to the wound with your shirt. The bleeding slows. You maintain pressure until paramedics arrive (15 minutes). You keep the driver talking and warm. You do not move him. Paramedics take over and the driver survives. Your quick action saved a life.
+"""
+"""
+
+## Learning Module 10
+
+**module_id:** 10
+**license_type_id:** 1
+**title:** "Traffic Violations, Penalties, and Points System"
+**description:** "Complete overview of serious traffic offenses, fines, imprisonment terms, vehicle impoundment, and the driver points system"
+**content_type:** "text"
+**phase:** "theoretical"
+**order_index:** 10
+**prerequisite_module_id:** 9
+
+### Module Content
+
+**content_id:** 10
+**module_id:** 10
+**content_type:** "text"
+**video_url:** NULL
+**language_english:** 1
+
+**text_content:**
+"""
+# Traffic Violations, Penalties, and Points System
+
+Understanding the consequences of traffic violations is essential for responsible driving. Penalties range from fines to imprisonment and license suspension. This module covers major offenses, their penalties, and how the points system works.
+
+## Section 1: Major Offenses and Penalties
+
+### Causing Death or Permanent Disability
+
+| Penalty | Duration/Amount |
+|---------|-----------------|
+| Imprisonment | 3 months to 3 years |
+| Fine | 1000–2000 JD |
+| License suspension | 6 months to 2 years |
+| Combination | Imprisonment AND fine possible |
+
+### Arrest Without Warrant (Officer May Arrest On-Spot)
+
+The following offenses allow police to arrest a driver without a warrant:
+
+- Causing death or injury in a crash
+- Fleeing the scene of an accident
+- Driving without a valid license
+- Driving during a license suspension period
+- Using a forged or altered driver's license
+- Using a forged or altered vehicle registration plate
+- Reckless or show driving (exhibition driving)
+- Driving under the influence of alcohol or drugs
+- Driving a stolen vehicle or a vehicle wanted by authorities
+
+### Vehicle Impoundment (42 Hours Minimum)
+
+The following violations result in vehicle impoundment for at least 42 hours:
+
+- Driving an unregistered vehicle
+- Driving without a license (driver unlicensed)
+- Public passenger vehicle operating with suspended permit
+- Using a vehicle for a purpose not specified on its registration
+- Public vehicle driven by someone with Category 1, 2, 3, or 7 license (wrong category)
+- Reckless or show driving
+- Installing or using illegal flashing lights or sirens
+- No front or rear license plate / forged or altered plates
+- Vehicle registration expired for 6 months or more
+- Vehicle wanted by authorities for any reason
+- Vehicle leaking oil or transporting dangerous materials without proper permits
+
+## Section 2: Specific Serious Violations and Penalties
+
+| Violation | Penalty |
+|-----------|---------|
+| Stopping on railway crossing or inside intersection | Jail minimum 6 months, fine 500–1000 JD |
+| Ignoring railway crossing gates or signals | Jail 2–12 months, fine 500–1000 JD |
+| Fleeing accident scene when injuries occurred | Jail 3–6 months, fine 500–1000 JD |
+| Driving without a valid license | Jail 1–3 months, fine 250–500 JD |
+| Reckless driving (endangering lives) | Jail 1 week–1 month, fine 100–200 JD |
+| Running a red light | Same as reckless driving |
+| Wrong way on divided highway | Same as reckless driving |
+| Driving at night without required lights | Same as reckless driving |
+
+## Section 3: Speeding Violations (Detailed)
+
+### Speeding Fines
+
+| Excess Over Posted Limit | Penalty |
+|--------------------------|---------|
+| More than 50 km/h over limit | Jail 2 weeks to 3 months OR fine 100 JD, plus license impoundment |
+| 31–50 km/h over limit | Fine 30 JD |
+| 11–30 km/h over limit | Fine 20 JD |
+
+### Factors That Increase Speeding Penalties
+- Speeding in a school zone
+- Speeding in a work/construction zone
+- Speeding near a pedestrian crossing
+- Speeding with passengers (especially children)
+- Previous speeding violations
+
+## Section 4: The Points System
+
+Jordan operates a demerit point system for traffic violations. Each violation carries a certain number of points. Accumulating points leads to license suspension.
+
+### How the Points System Works
+
+- Points are assigned to your driving record based on violations you commit.
+- Points remain on your record for a specified period.
+- Different violations have different point values (see table below).
+- If you reach certain thresholds, your license is suspended for a period of time.
+- After serving suspension, points are cleared completely.
+
+### Point Values for Selected Violations
+
+| Violation | Points |
+|-----------|--------|
+| Wrong way on divided road | (High – see official table) |
+| Running red light | (High – see official table) |
+| Exceeding speed limit by more than 50 km/h | (High – see official table) |
+| Reckless driving (endangering lives) | (High – see official table) |
+| Dangerous overtaking (creating risk of crash) | (High – see official table) |
+| Wrong direction or no-entry violation | (High – see official table) |
+| Double parking inside cities | (Moderate – see official table) |
+| Motorcycle rider or passenger without helmet | (Moderate – see official table) |
+| Driving truck with excess weight | (Moderate – see official table) |
+| Driving under alcohol or drugs | (Maximum points – see official table) |
+
+*Note: The official point values are published by the Traffic Department and are subject to periodic updates. Consult the current official table for exact values.*
+
+### Suspension Thresholds
+
+| Points Accumulated | Suspension Period |
+|--------------------|-------------------|
+| 16 points | Suspension for a specific period (varies) |
+| 20 points | Longer suspension |
+| 24 points | 120 days suspension |
+| 28+ points | 180 days suspension |
+
+### Temporary Permit After Suspension
+- When your license is suspended, you receive a temporary permit valid for **24 hours** from the time of impoundment.
+- This allows you to make necessary arrangements (e.g., getting home, arranging alternative transportation).
+
+### Points Clearance Rules
+
+**Automatic clearance (no suspension):**
+- If you accumulate no additional points for **one full year**, all points are cleared from your record.
+- This applies only if you have not yet reached a suspension threshold during that year.
+
+**Clearance after suspension:**
+- After you serve a suspension period, all points are cleared completely from your record.
+- You start again with zero points.
+
+### Important Rules About Points
+
+- **Multiple violations at same time:** If you commit multiple violations at the same time (e.g., running a red light and speeding), only the violation with the **highest point value** is counted. Points are not added together for simultaneous violations.
+
+- **Points apply on violation date:** Points are added to your record on the date the violation occurred (or the date the citation was issued) for most violations.
+
+- **Accident-related violations:** For violations related to an accident (e.g., causing a crash), points are applied after the final court ruling (not on the violation date).
+
+**Real-world scenario:** You accumulate 14 points over 9 months. You are approaching the 16-point suspension threshold. You receive a speeding ticket (6 points) putting you at 20 points. Your license is suspended for a period. You serve the suspension. After the suspension ends, your points reset to zero. You have an opportunity to drive clean and keep your record clear.
+
+## Section 5: Additional Violations and Consequences
+
+### License Suspension for Accumulated Points
+
+Once your license is suspended due to points:
+- You must surrender your license to the licensing department.
+- You may not drive during the suspension period.
+- Driving during suspension is a serious offense with additional penalties (including possible arrest).
+
+### License Revocation (Permanent or Long-Term)
+
+In addition to suspension for points, the following may result in license revocation:
+- Multiple serious offenses (e.g., three DUIs)
+- Causing fatal crash while impaired
+- Using a forged or altered license
+- Driving while suspended (multiple times)
+- Commission of serious crime using a vehicle
+
+### Penalty Aggravation
+
+Penalties may be increased (aggravated) for:
+- Repeat offenders (previous similar violations)
+- Violations involving injury to vulnerable road users (pedestrians, cyclists, children, elderly)
+- Violations during adverse conditions (school hours, night, rain, fog)
+- Violations while driving with passengers (especially children)
+
+## Section 6: Comparison of Offense Severity Levels
+
+| Severity | Examples | Typical Penalties |
+|----------|----------|-------------------|
+| Minor | Parking violations, minor speeding (1-10 km/h over), no seatbelt | Fine only, 0–2 points |
+| Moderate | Speeding 11-30 km/h over, rolling stop at stop sign, improper lane change | Fine, 2–6 points |
+| Significant | Speeding 31-50 km/h over, running red light (no crash), wrong way (corrected quickly) | Larger fine, 6–12 points, possible short suspension |
+| Serious | Speeding 50+ km/h over, reckless driving, DUI, leaving crash scene (no injuries) | Jail possible, large fine, 12–20 points, license suspension |
+| Severe | Causing death or permanent disability, DUI with injuries, fleeing serious crash | Jail (months to years), very large fine, long suspension or revocation |
+
+**Real-world scenario:** You are stopped for running a red light. There was no crash. This is a significant violation. You receive a fine and points on your license. If this is your second red light violation in 6 months, you may be treated as a repeat offender with higher penalties. If you also were speeding at the same time, only the higher-point violation (the red light) is counted.
+
+## Section 7: Avoiding Points – Safe Driving Practices
+
+The best way to avoid points is to drive safely and legally. Key strategies:
+
+1. **Follow speed limits** – use cruise control on highways to avoid creeping over the limit.
+2. **Stop completely** at stop signs and red lights – no "rolling stops."
+3. **Signal every lane change and turn** – even when you think no one is watching.
+4. **Never drive impaired** – plan ahead for a sober driver or alternative transportation.
+5. **Adjust driving to conditions** – reduce speed in rain, fog, night, heavy traffic.
+6. **Maintain your vehicle** – working lights, brakes, and tires prevent violations.
+7. **Stay focused** – no phone use, eating, or other distractions.
+
+## Section 8: If You Receive a Citation
+
+1. **Do not argue** with the officer at the scene – you have the right to contest the citation in court later.
+2. **Sign the citation** – signing is not an admission of guilt; it acknowledges receipt.
+3. **Pay the fine or contest** – within the time period specified on the citation.
+4. **Check your points** – after paying or being convicted, check your driving record to ensure points are properly recorded.
+5. **Attend defensive driving school** – some jurisdictions allow point reduction for completing approved courses (check current regulations).
+
+**Real-world scenario:** You receive a speeding ticket for 20 km/h over the limit. The fine is 20 JD and the violation carries points. You pay the fine online. The points are added to your record. You now have 6 points. You drive carefully for the next year. When you reach one year with no additional violations, your points are cleared to zero.
+"""
+```

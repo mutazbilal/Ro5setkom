@@ -32,6 +32,7 @@ public class RegistrationService : IRegistrationService
     private readonly RokhsetakDbContext _db;
     private readonly IWebHostEnvironment _env;
     private readonly ILogger<RegistrationService> _logger;
+    private readonly BlobService _blobService;
 
     public RegistrationService(
         RokhsetakDbContext db,
@@ -41,6 +42,7 @@ public class RegistrationService : IRegistrationService
         _db   = db;
         _env  = env;
         _logger = logger;
+        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -249,7 +251,7 @@ public class RegistrationService : IRegistrationService
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            // 1. Create Mentor FIRST
+            // 1. Create Mentor
             var mentor = new Mentor
             {
                 MentorId = user.UserId,
@@ -264,7 +266,7 @@ public class RegistrationService : IRegistrationService
             await _db.SaveChangesAsync();
 
 
-            // 2. THEN create MentorApplication
+            // 2. create MentorApplication
             var application = new MentorApplication
             {
                 MentorId = mentor.MentorId,
@@ -312,7 +314,6 @@ public class RegistrationService : IRegistrationService
         }
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
     private async Task<ServiceResult<string>> SaveCertificationFileAsync(IFormFile file)
     {
         if (file == null || file.Length == 0)
@@ -321,22 +322,28 @@ public class RegistrationService : IRegistrationService
         if (file.Length > MaxCertFileSizeBytes)
             return ServiceResult<string>.Failure("File size must not exceed 5 MB.");
 
-        var ext = Path.GetExtension(file.FileName);
+        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+
         if (!AllowedCertExtensions.Contains(ext))
             return ServiceResult<string>.Failure(
                 "Only PDF, JPG, and PNG files are accepted for certification.");
 
-        var folder = Path.Combine(_env.WebRootPath, "uploads", "certifications");
-        Directory.CreateDirectory(folder);
+        var fileName = $"{Guid.NewGuid()}{ext}";
 
-        var fileName  = $"{Guid.NewGuid()}{ext}";
-        var fullPath  = Path.Combine(folder, fileName);
-        var webPath   = $"/uploads/certifications/{fileName}";
+        // Upload stream directly to Azure Blob
+        await using var stream = file.OpenReadStream();
 
-        await using var stream = File.Create(fullPath);
-        await file.CopyToAsync(stream);
+        var uploadResult = await _blobService.UploadAsync(
+            containerName: "uploads",
+            fileName: fileName,
+            content: stream,
+            contentType: file.ContentType
+        );
 
-        return ServiceResult<string>.Success(webPath);
+        if (!uploadResult.Succeeded)
+            return ServiceResult<string>.Failure("Failed to upload certification file.");
+
+        return ServiceResult<string>.Success(uploadResult.Data);
     }
 
     private void TryDeleteFile(string webPath)
