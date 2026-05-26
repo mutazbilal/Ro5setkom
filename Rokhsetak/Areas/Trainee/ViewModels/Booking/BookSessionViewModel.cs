@@ -24,4 +24,5 @@ public class BookSessionViewModel
 
     [Required(ErrorMessage = "End time is required.")]
     public TimeOnly EndTime { get; set; }
+
 }
