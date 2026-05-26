@@ -1,0 +1,2583 @@
+```text
+## Quiz
+
+quiz_id: 1
+module_id: 1
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Introduction to Driving Responsibilities and Legal Framework"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 1
+quiz_id: 1
+question_text: "You are driving on a main road and approach an intersection where a vehicle is waiting to enter from a side road. What should you do?"
+
+question_id: 2
+quiz_id: 1
+question_text: "What is the minimum vision requirement for obtaining a private driving license in Jordan?"
+
+question_id: 3
+quiz_id: 1
+question_text: "A driver causes a fatal crash while driving without a valid license. What is the potential imprisonment term?"
+
+question_id: 4
+quiz_id: 1
+question_text: "Which license category is required to drive a public passenger vehicle up to 7.5 tons?"
+
+question_id: 5
+quiz_id: 1
+question_text: "A driver accumulates 24 points on their license within one year. What happens?"
+
+question_id: 6
+quiz_id: 1
+question_text: "Scenario: You are a Category 3 license holder. How long must you wait before applying for a Category 4 license?"
+
+question_id: 7
+quiz_id: 1
+question_text: "What does the statement 'priority is given, not taken' mean in practical driving?"
+
+question_id: 8
+quiz_id: 1
+question_text: "You fail your theoretical driving test. When can you retake it?"
+
+question_id: 9
+quiz_id: 1
+question_text: "Which of the following is NOT a required document for a new driving license application?"
+
+question_id: 10
+quiz_id: 1
+question_text: "During the practical driving test, the examiner stops your test because your driving poses an immediate danger. What is the result?"
+
+---
+
+## Question Options
+
+option_id: 1
+question_id: 1
+option_text: "Speed up to pass before the side road vehicle enters"
+is_correct: 0
+
+option_id: 2
+question_id: 1
+option_text: "Continue at normal speed because you have priority on the main road"
+is_correct: 0
+
+option_id: 3
+question_id: 1
+option_text: "Maintain speed but remain alert, knowing you have priority"
+is_correct: 1
+
+option_id: 4
+question_id: 1
+option_text: "Stop and wave the side road vehicle to go first"
+is_correct: 0
+
+option_id: 5
+question_id: 2
+option_text: "6/6 in both eyes"
+is_correct: 0
+
+option_id: 6
+question_id: 2
+option_text: "6/9 in the better eye"
+is_correct: 1
+
+option_id: 7
+question_id: 2
+option_text: "6/12 in the worse eye"
+is_correct: 0
+
+option_id: 8
+question_id: 2
+option_text: "20/20 in at least one eye"
+is_correct: 0
+
+option_id: 9
+question_id: 3
+option_text: "1 week to 1 month"
+is_correct: 0
+
+option_id: 10
+question_id: 3
+option_text: "3 months to 3 years"
+is_correct: 1
+
+option_id: 11
+question_id: 3
+option_text: "6 months to 1 year"
+is_correct: 0
+
+option_id: 12
+question_id: 3
+option_text: "No imprisonment, only a fine"
+is_correct: 0
+
+option_id: 13
+question_id: 4
+option_text: "Category 3"
+is_correct: 0
+
+option_id: 14
+question_id: 4
+option_text: "Category 4"
+is_correct: 1
+
+option_id: 15
+question_id: 4
+option_text: "Category 5"
+is_correct: 0
+
+option_id: 16
+question_id: 4
+option_text: "Category 7"
+is_correct: 0
+
+option_id: 17
+question_id: 5
+option_text: "A warning letter"
+is_correct: 0
+
+option_id: 18
+question_id: 5
+option_text: "120 days license suspension"
+is_correct: 1
+
+option_id: 19
+question_id: 5
+option_text: "Permanent license revocation"
+is_correct: 0
+
+option_id: 20
+question_id: 5
+option_text: "A fine of 500 JD only"
+is_correct: 0
+
+option_id: 21
+question_id: 6
+option_text: "6 months"
+is_correct: 0
+
+option_id: 22
+question_id: 6
+option_text: "1 year"
+is_correct: 1
+
+option_id: 23
+question_id: 6
+option_text: "2 years"
+is_correct: 0
+
+option_id: 24
+question_id: 6
+option_text: "No waiting period required"
+is_correct: 0
+
+option_id: 25
+question_id: 7
+option_text: "Always take priority aggressively to assert your rights"
+is_correct: 0
+
+option_id: 26
+question_id: 7
+option_text: "Never assume other drivers will yield to you even when you have legal priority"
+is_correct: 1
+
+option_id: 27
+question_id: 7
+option_text: "Only yield to emergency vehicles, never to other cars"
+is_correct: 0
+
+option_id: 28
+question_id: 7
+option_text: "Priority is determined by who arrives first at an intersection"
+is_correct: 0
+
+option_id: 29
+question_id: 8
+option_text: "The next day"
+is_correct: 0
+
+option_id: 30
+question_id: 8
+option_text: "After one week"
+is_correct: 1
+
+option_id: 31
+question_id: 8
+option_text: "After one month"
+is_correct: 0
+
+option_id: 32
+question_id: 8
+option_text: "After completing additional training only"
+is_correct: 0
+
+option_id: 33
+question_id: 9
+option_text: "Three recent color photos (6×4 cm)"
+is_correct: 0
+
+option_id: 34
+question_id: 9
+option_text: "Vehicle registration certificate"
+is_correct: 1
+
+option_id: 35
+question_id: 9
+option_text: "Civil ID card or passport"
+is_correct: 0
+
+option_id: 36
+question_id: 9
+option_text: "Training completion certificate"
+is_correct: 0
+
+option_id: 37
+question_id: 10
+option_text: "You receive a warning but continue the test"
+is_correct: 0
+
+option_id: 38
+question_id: 10
+option_text: "The test stops and you automatically fail"
+is_correct: 1
+
+option_id: 39
+question_id: 10
+option_text: "You must retake only the failed portion"
+is_correct: 0
+
+option_id: 40
+question_id: 10
+option_text: "The examiner gives you a second chance immediately"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 2
+module_id: 2
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Road Markings – Lines, Symbols, and Meanings"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 11
+quiz_id: 2
+question_text: "{{img:solid-yellow-line}} What does this line mean for you?"
+
+question_id: 12
+quiz_id: 2
+question_text: "What is the legal requirement when you approach a stop line painted across the road?"
+
+question_id: 13
+quiz_id: 2
+question_text: "Scenario: You are driving on a rural road outside the city. The center line is broken with a 3:1 ratio (longer dashes). What does this allow?"
+
+question_id: 14
+quiz_id: 2
+question_text: "What does a hatched area surrounded by solid lines indicate?"
+
+question_id: 15
+quiz_id: 2
+question_text: "{{img:zebra-crossing}} What is the maximum speed limit when approaching this road marking?"
+
+question_id: 16
+quiz_id: 2
+question_text: "You are in a lane with a painted arrow pointing straight ahead only. What are you legally permitted to do?"
+
+question_id: 17
+quiz_id: 2
+question_text: "What do yellow lines painted on the road typically indicate?"
+
+question_id: 18
+quiz_id: 2
+question_text: "Scenario: You approach an intersection. The road has a yield line (broken triangles) painted across your lane. What must you do?"
+
+question_id: 19
+quiz_id: 2
+question_text: "What does a painted bicycle symbol between two solid white lines mean?"
+
+question_id: 20
+quiz_id: 2
+question_text: "You see a broken line on your side of the road and a solid line on the opposite side. What does this mean for overtaking?"
+
+---
+
+## Question Options
+
+option_id: 41
+question_id: 11
+option_text: "You may cross to overtake with caution"
+is_correct: 0
+
+option_id: 42
+question_id: 11
+option_text: "You cannot cross the line for overtaking or lane change"
+is_correct: 1
+
+option_id: 43
+question_id: 11
+option_text: "You may cross only for emergency vehicles"
+is_correct: 0
+
+option_id: 44
+question_id: 11
+option_text: "The line indicates a parking zone"
+is_correct: 0
+
+option_id: 45
+question_id: 12
+option_text: "Slow down and proceed if no traffic is visible"
+is_correct: 0
+
+option_id: 46
+question_id: 12
+option_text: "Come to a complete stop before the line"
+is_correct: 1
+
+option_id: 47
+question_id: 12
+option_text: "Stop only if there is a stop sign present"
+is_correct: 0
+
+option_id: 48
+question_id: 12
+option_text: "Roll through slowly while checking for traffic"
+is_correct: 0
+
+option_id: 49
+question_id: 13
+option_text: "Overtaking is prohibited under all circumstances"
+is_correct: 0
+
+option_id: 50
+question_id: 13
+option_text: "Overtaking is allowed with extreme caution"
+is_correct: 1
+
+option_id: 51
+question_id: 13
+option_text: "Overtaking is only allowed for motorcycles"
+is_correct: 0
+
+option_id: 52
+question_id: 13
+option_text: "You must maintain a 1-meter distance from the line"
+is_correct: 0
+
+option_id: 53
+question_id: 14
+option_text: "A parking area during emergencies"
+is_correct: 0
+
+option_id: 54
+question_id: 14
+option_text: "An area you must not enter under normal circumstances"
+is_correct: 1
+
+option_id: 55
+question_id: 14
+option_text: "A lane reserved for turning vehicles only"
+is_correct: 0
+
+option_id: 56
+question_id: 14
+option_text: "A recommended route for slow vehicles"
+is_correct: 0
+
+option_id: 57
+question_id: 15
+option_text: "50 km/h"
+is_correct: 0
+
+option_id: 58
+question_id: 15
+option_text: "40 km/h"
+is_correct: 0
+
+option_id: 59
+question_id: 15
+option_text: "30 km/h"
+is_correct: 1
+
+option_id: 60
+question_id: 15
+option_text: "20 km/h"
+is_correct: 0
+
+option_id: 61
+question_id: 16
+option_text: "Turn left or right as long as you signal"
+is_correct: 0
+
+option_id: 62
+question_id: 16
+option_text: "Only go straight, no turning"
+is_correct: 1
+
+option_id: 63
+question_id: 16
+option_text: "Make a U-turn if safe"
+is_correct: 0
+
+option_id: 64
+question_id: 16
+option_text: "Change lanes before the intersection"
+is_correct: 0
+
+option_id: 65
+question_id: 17
+option_text: "Separate traffic going in the same direction"
+is_correct: 0
+
+option_id: 66
+question_id: 17
+option_text: "Road edges or separate opposing traffic"
+is_correct: 1
+
+option_id: 67
+question_id: 17
+option_text: "Bicycle lanes only"
+is_correct: 0
+
+option_id: 68
+question_id: 17
+option_text: "Construction zones"
+is_correct: 0
+
+option_id: 69
+question_id: 18
+option_text: "Stop completely regardless of traffic"
+is_correct: 0
+
+option_id: 70
+question_id: 18
+option_text: "Yield to traffic on the intersecting road, stopping only if necessary"
+is_correct: 1
+
+option_id: 71
+question_id: 18
+option_text: "Proceed without stopping because you have priority"
+is_correct: 0
+
+option_id: 72
+question_id: 18
+option_text: "Honk to alert other drivers before proceeding"
+is_correct: 0
+
+option_id: 73
+question_id: 19
+option_text: "A parking space for bicycles"
+is_correct: 0
+
+option_id: 74
+question_id: 19
+option_text: "A lane reserved for cyclists; do not drive or park there"
+is_correct: 1
+
+option_id: 75
+question_id: 19
+option_text: "A lane where bicycles must yield to cars"
+is_correct: 0
+
+option_id: 76
+question_id: 19
+option_text: "A shared lane for cars and bicycles"
+is_correct: 0
+
+option_id: 77
+question_id: 20
+option_text: "You may cross to overtake, and oncoming traffic may also cross"
+is_correct: 0
+
+option_id: 78
+question_id: 20
+option_text: "You may cross to overtake with caution; oncoming traffic must not cross"
+is_correct: 1
+
+option_id: 79
+question_id: 20
+option_text: "Neither direction may cross the line"
+is_correct: 0
+
+option_id: 80
+question_id: 20
+option_text: "Only emergency vehicles may cross"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 3
+module_id: 3
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Traffic Signs Complete Guide"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 21
+quiz_id: 3
+question_text: "{{img:inverted-triangle}} What does this sign require you to do?"
+
+question_id: 22
+quiz_id: 3
+question_text: "What shape and color combination indicates a prohibition sign?"
+
+question_id: 23
+quiz_id: 3
+question_text: "Scenario: You are driving on a narrow mountain road and see {{img:red-up-black-down}}. What does this mean?"
+
+question_id: 24
+quiz_id: 3
+question_text: "{{img:yellow-diamond}} What does this sign indicate?"
+
+question_id: 25
+quiz_id: 3
+question_text: "You see a blue circular sign with a white number '50' inside. What does this require?"
+
+question_id: 26
+quiz_id: 3
+question_text: "What does a picture of red circle with a car and motorcycle inside, crossed by a red diagonal line mean?"
+
+question_id: 27
+quiz_id: 3
+question_text: "Scenario: You approach a tunnel. Which sign would you expect to see, and what is the speed limit?"
+
+question_id: 28
+quiz_id: 3
+question_text: "What does a red-bordered triangle with a symbol of a pedestrian crossing mean?"
+
+question_id: 29
+quiz_id: 3
+question_text: "{{img:blue-square}} What does this sign tell you?"
+
+question_id: 30
+quiz_id: 3
+question_text: "You see a round sign with a red border, white background, and the number '80' in black. What is the legal requirement?"
+
+---
+
+## Question Options
+
+option_id: 81
+question_id: 21
+option_text: "Stop completely before the intersection"
+is_correct: 0
+
+option_id: 82
+question_id: 21
+option_text: "Yield to traffic on the intersecting road"
+is_correct: 1
+
+option_id: 83
+question_id: 21
+option_text: "Speed up to merge quickly"
+is_correct: 0
+
+option_id: 84
+question_id: 21
+option_text: "Honk to alert other drivers"
+is_correct: 0
+
+option_id: 85
+question_id: 22
+option_text: "Red triangle with white border"
+is_correct: 0
+
+option_id: 86
+question_id: 22
+option_text: "Red circle with white background and black symbol"
+is_correct: 1
+
+option_id: 87
+question_id: 22
+option_text: "Blue rectangle with white symbol"
+is_correct: 0
+
+option_id: 88
+question_id: 22
+option_text: "Yellow diamond with black symbol"
+is_correct: 0
+
+option_id: 89
+question_id: 23
+option_text: "You have priority over oncoming traffic"
+is_correct: 0
+
+option_id: 90
+question_id: 23
+option_text: "Oncoming traffic has priority over you"
+is_correct: 1
+
+option_id: 91
+question_id: 23
+option_text: "The road is closed ahead"
+is_correct: 0
+
+option_id: 92
+question_id: 23
+option_text: "You must stop at all intersections"
+is_correct: 0
+
+option_id: 93
+question_id: 24
+option_text: "You are on a secondary road and must yield"
+is_correct: 0
+
+option_id: 94
+question_id: 24
+option_text: "You are on the main road and have priority"
+is_correct: 1
+
+option_id: 95
+question_id: 24
+option_text: "A school zone is ahead"
+is_correct: 0
+
+option_id: 96
+question_id: 24
+option_text: "The road narrows ahead"
+is_correct: 0
+
+option_id: 97
+question_id: 25
+option_text: "Maximum speed limit is 50 km/h"
+is_correct: 0
+
+option_id: 98
+question_id: 25
+option_text: "Minimum speed limit is 50 km/h"
+is_correct: 1
+
+option_id: 99
+question_id: 25
+option_text: "No parking within 50 meters"
+is_correct: 0
+
+option_id: 100
+question_id: 25
+option_text: "50 meters to the next exit"
+is_correct: 0
+
+option_id: 101
+question_id: 26
+option_text: "Motorcycles must park here"
+is_correct: 0
+
+option_id: 102
+question_id: 26
+option_text: "No motor vehicles allowed"
+is_correct: 1
+
+option_id: 103
+question_id: 26
+option_text: "Motorcycles only beyond this point"
+is_correct: 0
+
+option_id: 104
+question_id: 26
+option_text: "Low emission zone ahead"
+is_correct: 0
+
+option_id: 105
+question_id: 27
+option_text: "Warning triangle; reduce to 30 km/h"
+is_correct: 0
+
+option_id: 106
+question_id: 27
+option_text: "Tunnel sign; reduce to 50 km/h"
+is_correct: 1
+
+option_id: 107
+question_id: 27
+option_text: "No entry; find alternate route"
+is_correct: 0
+
+option_id: 108
+question_id: 27
+option_text: "Two-way traffic; reduce to 40 km/h"
+is_correct: 0
+
+option_id: 109
+question_id: 28
+option_text: "Children playing ahead"
+is_correct: 0
+
+option_id: 110
+question_id: 28
+option_text: "Pedestrian crossing ahead – reduce speed to 30 km/h"
+is_correct: 1
+
+option_id: 111
+question_id: 28
+option_text: "School zone – stop for buses"
+is_correct: 0
+
+option_id: 112
+question_id: 28
+option_text: "Bicycle crossing ahead"
+is_correct: 0
+
+option_id: 113
+question_id: 29
+option_text: "Oncoming traffic has priority"
+is_correct: 0
+
+option_id: 114
+question_id: 29
+option_text: "You have priority over oncoming traffic"
+is_correct: 1
+
+option_id: 115
+question_id: 29
+option_text: "The road is one-way"
+is_correct: 0
+
+option_id: 116
+question_id: 29
+option_text: "No passing allowed"
+is_correct: 0
+
+option_id: 117
+question_id: 30
+option_text: "Maximum speed 80 km/h"
+is_correct: 1
+
+option_id: 118
+question_id: 30
+option_text: "Minimum speed 80 km/h"
+is_correct: 0
+
+option_id: 119
+question_id: 30
+option_text: "80 meters to hazard"
+is_correct: 0
+
+option_id: 120
+question_id: 30
+option_text: "Road number 80 ahead"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 4
+module_id: 4
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Right-of-Way Rules at Intersections and Roundabouts"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 31
+quiz_id: 4
+question_text: "You arrive at an uncontrolled intersection (no signs, no lights). A vehicle is approaching from your right. Who has priority?"
+
+question_id: 32
+quiz_id: 4
+question_text: "Scenario: You are inside a roundabout. A vehicle at the entrance wants to enter. What is the rule?"
+
+question_id: 33
+quiz_id: 4
+question_text: "At a T-junction, which road has priority?"
+
+question_id: 34
+quiz_id: 4
+question_text: "You are turning left at an intersection. An oncoming vehicle is going straight. Who goes first?"
+
+question_id: 35
+quiz_id: 4
+question_text: "You hear a siren and see flashing lights from an ambulance behind you. What must you do?"
+
+question_id: 36
+quiz_id: 4
+question_text: "Scenario: You are exiting a gas station (private property) and want to enter a busy road. What is your legal duty?"
+
+question_id: 37
+quiz_id: 4
+question_text: "You approach a roundabout and intend to take the third exit (left turn). Which lane should you enter from?"
+
+question_id: 38
+quiz_id: 4
+question_text: "What does the golden rule 'priority is given, not taken' mean when approaching an intersection with a green light?"
+
+question_id: 39
+quiz_id: 4
+question_text: "At a railway crossing with gates down, what must you do?"
+
+question_id: 40
+quiz_id: 4
+question_text: "Scenario: You are on a main road (yellow diamond sign). A vehicle from a side road pulls out in front of you. Who is at fault?"
+
+---
+
+## Question Options
+
+option_id: 121
+question_id: 31
+option_text: "The vehicle on the left goes first"
+is_correct: 0
+
+option_id: 122
+question_id: 31
+option_text: "The vehicle on the right goes first"
+is_correct: 1
+
+option_id: 123
+question_id: 31
+option_text: "The first vehicle to arrive goes first"
+is_correct: 0
+
+option_id: 124
+question_id: 31
+option_text: "Both vehicles can proceed simultaneously"
+is_correct: 0
+
+option_id: 125
+question_id: 32
+option_text: "The entering vehicle has priority"
+is_correct: 0
+
+option_id: 126
+question_id: 32
+option_text: "Vehicles inside the roundabout have priority"
+is_correct: 1
+
+option_id: 127
+question_id: 32
+option_text: "Whoever signals first has priority"
+is_correct: 0
+
+option_id: 128
+question_id: 32
+option_text: "Larger vehicles have priority"
+is_correct: 0
+
+option_id: 129
+question_id: 33
+option_text: "The road that ends (the stem) has priority"
+is_correct: 0
+
+option_id: 130
+question_id: 33
+option_text: "The road that continues straight (the through road) has priority"
+is_correct: 1
+
+option_id: 131
+question_id: 33
+option_text: "Traffic from the left has priority"
+is_correct: 0
+
+option_id: 132
+question_id: 33
+option_text: "T-junctions have no priority rules"
+is_correct: 0
+
+option_id: 133
+question_id: 34
+option_text: "The left-turning vehicle goes first"
+is_correct: 0
+
+option_id: 134
+question_id: 34
+option_text: "The vehicle going straight has priority"
+is_correct: 1
+
+option_id: 135
+question_id: 34
+option_text: "Both vehicles can turn simultaneously"
+is_correct: 0
+
+option_id: 136
+question_id: 34
+option_text: "The vehicle that arrived first goes first"
+is_correct: 0
+
+option_id: 137
+question_id: 35
+option_text: "Maintain speed and let the ambulance overtake on the left"
+is_correct: 0
+
+option_id: 138
+question_id: 35
+option_text: "Pull to the right and stop if necessary to let it pass"
+is_correct: 1
+
+option_id: 139
+question_id: 35
+option_text: "Speed up to get out of its way"
+is_correct: 0
+
+option_id: 140
+question_id: 35
+option_text: "Ignore it if you are not blocking its path"
+is_correct: 0
+
+option_id: 141
+question_id: 36
+option_text: "Enter quickly before other vehicles reach you"
+is_correct: 0
+
+option_id: 142
+question_id: 36
+option_text: "Stop, check for traffic, and yield to all vehicles on the road"
+is_correct: 1
+
+option_id: 143
+question_id: 36
+option_text: "Honk and proceed slowly"
+is_correct: 0
+
+option_id: 144
+question_id: 36
+option_text: "You have priority because you are leaving private property"
+is_correct: 0
+
+option_id: 145
+question_id: 37
+option_text: "The right lane only"
+is_correct: 0
+
+option_id: 146
+question_id: 37
+option_text: "The left lane only"
+is_correct: 1
+
+option_id: 147
+question_id: 37
+option_text: "Either lane is acceptable"
+is_correct: 0
+
+option_id: 148
+question_id: 37
+option_text: "The lane that is least congested"
+is_correct: 0
+
+option_id: 149
+question_id: 38
+option_text: "You may proceed without checking because your light is green"
+is_correct: 0
+
+option_id: 150
+question_id: 38
+option_text: "You should still check for red-light runners before entering"
+is_correct: 1
+
+option_id: 151
+question_id: 38
+option_text: "You must stop at every green light"
+is_correct: 0
+
+option_id: 152
+question_id: 38
+option_text: "You may speed up to clear the intersection quickly"
+is_correct: 0
+
+option_id: 153
+question_id: 39
+option_text: "Slow down and proceed if no train is visible"
+is_correct: 0
+
+option_id: 154
+question_id: 39
+option_text: "Stop completely and wait for gates to rise"
+is_correct: 1
+
+option_id: 155
+question_id: 39
+option_text: "Go around the gates if they are taking too long"
+is_correct: 0
+
+option_id: 156
+question_id: 39
+option_text: "Honk to warn the train"
+is_correct: 0
+
+option_id: 157
+question_id: 40
+option_text: "The vehicle on the main road is at fault for not avoiding the crash"
+is_correct: 0
+
+option_id: 158
+question_id: 40
+option_text: "The vehicle entering from the side road is at fault"
+is_correct: 1
+
+option_id: 159
+question_id: 40
+option_text: "Both drivers share equal fault"
+is_correct: 0
+
+option_id: 160
+question_id: 40
+option_text: "No one is at fault because it was an accident"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 5
+module_id: 5
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Lane Discipline, Turning, and Overtaking"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 41
+quiz_id: 5
+question_text: "On a multi-lane highway, which lane should slower vehicles use?"
+
+question_id: 42
+quiz_id: 5
+question_text: "Scenario: You want to turn left at an intersection on a two-way road with one lane each direction. Where should you position your vehicle?"
+
+question_id: 43
+quiz_id: 5
+question_text: "hello how are you?"
+
+question_id: 44
+quiz_id: 5
+question_text: "You are overtaking a vehicle on a two-lane road. When should you return to your original lane?"
+
+question_id: 45
+quiz_id: 5
+question_text: "Scenario: You are driving on a curve and cannot see far ahead. A vehicle ahead is moving slowly. What should you do?"
+
+question_id: 46
+quiz_id: 5
+question_text: "What is the correct hand position on the steering wheel for airbag safety?"
+
+question_id: 47
+quiz_id: 5
+question_text: "You want to change lanes on a highway. What is the correct sequence of actions?"
+
+question_id: 48
+quiz_id: 5
+question_text: "Scenario: A truck begins overtaking you on a two-lane road. What should you do?"
+
+question_id: 49
+quiz_id: 5
+question_text: "Where is a U-turn prohibited even without a specific sign?"
+
+question_id: 50
+quiz_id: 5
+question_text: "At a roundabout, you want to take the first exit (right turn). Which lane should you enter from?"
+
+---
+
+## Question Options
+
+option_id: 161
+question_id: 41
+option_text: "The left lane"
+is_correct: 0
+
+option_id: 162
+question_id: 41
+option_text: "The rightmost lane"
+is_correct: 1
+
+option_id: 163
+question_id: 41
+option_text: "The center lane only"
+is_correct: 0
+
+option_id: 164
+question_id: 41
+option_text: "Any lane, as long as you signal"
+is_correct: 0
+
+option_id: 165
+question_id: 42
+option_text: "The left side of the lane near the center line"
+is_correct: 0
+
+option_id: 166
+question_id: 42
+option_text: "The right side of your lane"
+is_correct: 1
+
+option_id: 167
+question_id: 42
+option_text: "The leftmost lane of the road"
+is_correct: 0
+
+option_id: 168
+question_id: 42
+option_text: "Any position, as long as you signal left"
+is_correct: 0
+
+option_id: 169
+question_id: 43
+option_text: "Left turn"
+is_correct: 0
+
+option_id: 170
+question_id: 43
+option_text: "U-turn"
+is_correct: 1
+
+option_id: 171
+question_id: 43
+option_text: "Right turn"
+is_correct: 0
+
+option_id: 172
+question_id: 43
+option_text: "Overtaking"
+is_correct: 0
+
+option_id: 173
+question_id: 44
+option_text: "Immediately after passing the vehicle's front bumper"
+is_correct: 0
+
+option_id: 174
+question_id: 44
+option_text: "When you can see the overtaken vehicle in your interior mirror"
+is_correct: 1
+
+option_id: 175
+question_id: 44
+option_text: "After you have driven at least 500 meters ahead"
+is_correct: 0
+
+option_id: 176
+question_id: 44
+option_text: "When the other driver flashes their headlights"
+is_correct: 0
+
+option_id: 177
+question_id: 45
+option_text: "Overtake quickly because the slow vehicle is dangerous"
+is_correct: 0
+
+option_id: 178
+question_id: 45
+option_text: "Wait until after the curve where visibility improves before overtaking"
+is_correct: 1
+
+option_id: 179
+question_id: 45
+option_text: "Honk to make the slow vehicle pull over"
+is_correct: 0
+
+option_id: 180
+question_id: 45
+option_text: "Cross the solid line to overtake if safe"
+is_correct: 0
+
+option_id: 181
+question_id: 46
+option_text: "10 and 2 o'clock"
+is_correct: 0
+
+option_id: 182
+question_id: 46
+option_text: "9 and 3 o'clock"
+is_correct: 1
+
+option_id: 183
+question_id: 46
+option_text: "8 and 4 o'clock"
+is_correct: 0
+
+option_id: 184
+question_id: 46
+option_text: "One hand at 12 o'clock"
+is_correct: 0
+
+option_id: 185
+question_id: 47
+option_text: "Signal, check mirrors, check blind spot, change lanes"
+is_correct: 1
+
+option_id: 186
+question_id: 47
+option_text: "Change lanes, then signal"
+is_correct: 0
+
+option_id: 187
+question_id: 47
+option_text: "Check blind spot, signal, change lanes, check mirrors"
+is_correct: 0
+
+option_id: 188
+question_id: 47
+option_text: "Signal, change lanes immediately, check mirrors later"
+is_correct: 0
+
+option_id: 189
+question_id: 48
+option_text: "Speed up to prevent the truck from passing"
+is_correct: 0
+
+option_id: 190
+question_id: 48
+option_text: "Keep as far right as possible and do not increase speed"
+is_correct: 1
+
+option_id: 191
+question_id: 48
+option_text: "Move left to block the truck's path"
+is_correct: 0
+
+option_id: 192
+question_id: 48
+option_text: "Honk continuously to warn the truck driver"
+is_correct: 0
+
+option_id: 193
+question_id: 49
+option_text: "On straight roads with good visibility"
+is_correct: 0
+
+option_id: 194
+question_id: 49
+option_text: "On curves or near hill crests"
+is_correct: 1
+
+option_id: 195
+question_id: 49
+option_text: "In residential areas"
+is_correct: 0
+
+option_id: 196
+question_id: 49
+option_text: "On multi-lane divided highways"
+is_correct: 0
+
+option_id: 197
+question_id: 50
+option_text: "The left lane"
+is_correct: 0
+
+option_id: 198
+question_id: 50
+option_text: "The right lane"
+is_correct: 1
+
+option_id: 199
+question_id: 50
+option_text: "Either lane"
+is_correct: 0
+
+option_id: 200
+question_id: 50
+option_text: "The center lane"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 6
+module_id: 6
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Speed Limits, Following Distance, and Stopping"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 51
+quiz_id: 6
+question_text: "What is the maximum speed limit for a private car on a multi-lane divided highway outside city limits in Jordan?"
+
+question_id: 52
+quiz_id: 6
+question_text: "Scenario: You are driving at 80 km/h on a wet road. What following distance should you maintain?"
+
+question_id: 53
+quiz_id: 6
+question_text: "Where must you place the reflective triangle if you break down on a rural road?"
+
+question_id: 54
+quiz_id: 6
+question_text: "What does the two-second rule help you maintain?"
+
+question_id: 55
+quiz_id: 6
+question_text: "You exceed the speed limit by 40 km/h. What is the penalty?"
+
+question_id: 56
+quiz_id: 6
+question_text: "Scenario: You are driving at 50 km/h in a residential area. A child runs into the street. Approximately how far will you travel before you even begin braking (reaction distance)?"
+
+question_id: 57
+quiz_id: 6
+question_text: "Where is parking prohibited?"
+
+question_id: 58
+quiz_id: 6
+question_text: "What is the speed limit near schools and local residential roads?"
+
+question_id: 59
+quiz_id: 6
+question_text: "You are stopped behind another vehicle at a red light. How much space should you leave?"
+
+question_id: 60
+quiz_id: 6
+question_text: "Scenario: You break down on a highway at night with no streetlights. What must you do in addition to using hazard lights?"
+
+---
+
+## Question Options
+
+option_id: 201
+question_id: 51
+option_text: "90 km/h"
+is_correct: 0
+
+option_id: 202
+question_id: 51
+option_text: "100 km/h"
+is_correct: 0
+
+option_id: 203
+question_id: 51
+option_text: "110 km/h"
+is_correct: 1
+
+option_id: 204
+question_id: 51
+option_text: "120 km/h"
+is_correct: 0
+
+option_id: 205
+question_id: 52
+option_text: "2 seconds"
+is_correct: 0
+
+option_id: 206
+question_id: 52
+option_text: "3 seconds"
+is_correct: 1
+
+option_id: 207
+question_id: 52
+option_text: "4 seconds"
+is_correct: 0
+
+option_id: 208
+question_id: 52
+option_text: "1 second"
+is_correct: 0
+
+option_id: 209
+question_id: 53
+option_text: "At least 100 meters before the vehicle"
+is_correct: 1
+
+option_id: 210
+question_id: 53
+option_text: "At least 50 meters after the vehicle"
+is_correct: 0
+
+option_id: 211
+question_id: 53
+option_text: "Directly behind the vehicle"
+is_correct: 0
+
+option_id: 212
+question_id: 53
+option_text: "On top of the vehicle"
+is_correct: 0
+
+option_id: 213
+question_id: 54
+option_text: "A safe following distance"
+is_correct: 1
+
+option_id: 214
+question_id: 54
+option_text: "The correct parking distance from the curb"
+is_correct: 0
+
+option_id: 215
+question_id: 54
+option_text: "The time it takes to stop from 60 km/h"
+is_correct: 0
+
+option_id: 216
+question_id: 54
+option_text: "The minimum time between gear shifts"
+is_correct: 0
+
+option_id: 217
+question_id: 55
+option_text: "Fine 20 JD"
+is_correct: 0
+
+option_id: 218
+question_id: 55
+option_text: "Fine 30 JD"
+is_correct: 1
+
+option_id: 219
+question_id: 55
+option_text: "Fine 50 JD plus jail"
+is_correct: 0
+
+option_id: 220
+question_id: 55
+option_text: "Only a warning"
+is_correct: 0
+
+option_id: 221
+question_id: 56
+option_text: "Approximately 8 meters"
+is_correct: 0
+
+option_id: 222
+question_id: 56
+option_text: "Approximately 14 meters"
+is_correct: 1
+
+option_id: 223
+question_id: 56
+option_text: "Approximately 25 meters"
+is_correct: 0
+
+option_id: 224
+question_id: 56
+option_text: "Approximately 31 meters"
+is_correct: 0
+
+option_id: 225
+question_id: 57
+option_text: "On the shoulder of a rural road"
+is_correct: 0
+
+option_id: 226
+question_id: 57
+option_text: "Within 15 meters of an intersection"
+is_correct: 1
+
+option_id: 227
+question_id: 57
+option_text: "In designated parking bays"
+is_correct: 0
+
+option_id: 228
+question_id: 57
+option_text: "On wide residential streets"
+is_correct: 0
+
+option_id: 229
+question_id: 58
+option_text: "30 km/h"
+is_correct: 0
+
+option_id: 230
+question_id: 58
+option_text: "40 km/h"
+is_correct: 1
+
+option_id: 231
+question_id: 58
+option_text: "50 km/h"
+is_correct: 0
+
+option_id: 232
+question_id: 58
+option_text: "60 km/h"
+is_correct: 0
+
+option_id: 233
+question_id: 59
+option_text: "Just enough to see their rear tires touching the ground"
+is_correct: 1
+
+option_id: 234
+question_id: 59
+option_text: "At least 10 meters"
+is_correct: 0
+
+option_id: 235
+question_id: 59
+option_text: "As close as possible to avoid blocking intersections"
+is_correct: 0
+
+option_id: 236
+question_id: 59
+option_text: "Exactly one car length"
+is_correct: 0
+
+option_id: 237
+question_id: 60
+option_text: "Turn off all lights to save battery"
+is_correct: 0
+
+option_id: 238
+question_id: 60
+option_text: "Keep parking lights on in addition to hazard lights"
+is_correct: 1
+
+option_id: 239
+question_id: 60
+option_text: "Flash your high beams repeatedly"
+is_correct: 0
+
+option_id: 240
+question_id: 60
+option_text: "Stand in the road to wave down help"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 7
+module_id: 7
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Alcohol, Drugs, Fatigue, and Safe Driving Fitness"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 61
+quiz_id: 7
+question_text: "You have been awake for 18 hours. How does this compare to alcohol impairment?"
+
+question_id: 62
+quiz_id: 7
+question_text: "Scenario: You took an over-the-counter cold medication that says 'may cause drowsiness.' You feel fine after 6 hours. Can you drive?"
+
+question_id: 63
+quiz_id: 7
+question_text: "What is the legal consequence for refusing a breathalyzer test in Jordan?"
+
+question_id: 64
+quiz_id: 7
+question_text: "Which of the following is a sign of driver fatigue?"
+
+question_id: 65
+quiz_id: 7
+question_text: "Scenario: You are driving a long distance and feel tired. What should you do?"
+
+question_id: 66
+quiz_id: 7
+question_text: "Why is driving while emotionally upset (angry, very sad) dangerous?"
+
+question_id: 67
+quiz_id: 7
+question_text: "Which medication type is most likely to cause drowsiness that affects driving?"
+
+question_id: 68
+quiz_id: 7
+question_text: "What is the only effective way to reduce your blood alcohol concentration (BAC)?"
+
+question_id: 69
+quiz_id: 7
+question_text: "Scenario: You are driving at night and an oncoming vehicle does not dim their high beams. What should you do?"
+
+question_id: 70
+quiz_id: 7
+question_text: "Which of the following is considered a dangerous distraction while driving?"
+
+---
+
+## Question Options
+
+option_id: 241
+question_id: 61
+option_text: "No significant effect"
+is_correct: 0
+
+option_id: 242
+question_id: 61
+option_text: "Similar to 0.05% BAC (legally impaired in many jurisdictions)"
+is_correct: 1
+
+option_id: 243
+question_id: 61
+option_text: "Less than one drink"
+is_correct: 0
+
+option_id: 244
+question_id: 61
+option_text: "Similar to 0.02% BAC (safe to drive)"
+is_correct: 0
+
+option_id: 245
+question_id: 62
+option_text: "Yes, if you feel fine, the medication has worn off"
+is_correct: 0
+
+option_id: 246
+question_id: 62
+option_text: "No, you should wait 12+ hours or find alternative transportation"
+is_correct: 1
+
+option_id: 247
+question_id: 62
+option_text: "Yes, but only for short trips"
+is_correct: 0
+
+option_id: 248
+question_id: 62
+option_text: "Yes, if you drink coffee first"
+is_correct: 0
+
+option_id: 249
+question_id: 63
+option_text: "No penalty, you have the right to refuse"
+is_correct: 0
+
+option_id: 250
+question_id: 63
+option_text: "Possible arrest and additional penalties"
+is_correct: 1
+
+option_id: 251
+question_id: 63
+option_text: "A small fine only"
+is_correct: 0
+
+option_id: 252
+question_id: 63
+option_text: "License suspension only, no arrest"
+is_correct: 0
+
+option_id: 253
+question_id: 64
+option_text: "Frequent yawning and heavy eyelids"
+is_correct: 1
+
+option_id: 254
+question_id: 64
+option_text: "Increased alertness and faster reactions"
+is_correct: 0
+
+option_id: 255
+question_id: 64
+option_text: "Wanting to drive faster than usual"
+is_correct: 0
+
+option_id: 256
+question_id: 64
+option_text: "Increased appetite"
+is_correct: 0
+
+option_id: 257
+question_id: 65
+option_text: "Turn up the radio to stay awake"
+is_correct: 0
+
+option_id: 258
+question_id: 65
+option_text: "Open the window for fresh air"
+is_correct: 0
+
+option_id: 259
+question_id: 65
+option_text: "Stop at a safe rest area and take a 15-20 minute nap"
+is_correct: 1
+
+option_id: 260
+question_id: 65
+option_text: "Drink coffee and continue driving"
+is_correct: 0
+
+option_id: 261
+question_id: 66
+option_text: "Emotions do not affect driving ability"
+is_correct: 0
+
+option_id: 262
+question_id: 66
+option_text: "Anger leads to aggressive driving and poor decision-making"
+is_correct: 1
+
+option_id: 263
+question_id: 66
+option_text: "Sadness improves concentration"
+is_correct: 0
+
+option_id: 264
+question_id: 66
+option_text: "Only happiness affects driving"
+is_correct: 0
+
+option_id: 265
+question_id: 67
+option_text: "Antibiotics"
+is_correct: 0
+
+option_id: 266
+question_id: 67
+option_text: "Antihistamines (allergy medications)"
+is_correct: 1
+
+option_id: 267
+question_id: 67
+option_text: "Vitamins"
+is_correct: 0
+
+option_id: 268
+question_id: 67
+option_text: "Pain relievers like ibuprofen"
+is_correct: 0
+
+option_id: 269
+question_id: 68
+option_text: "Drinking coffee"
+is_correct: 0
+
+option_id: 270
+question_id: 68
+option_text: "Taking a cold shower"
+is_correct: 0
+
+option_id: 271
+question_id: 68
+option_text: "Time"
+is_correct: 1
+
+option_id: 272
+question_id: 68
+option_text: "Eating a heavy meal"
+is_correct: 0
+
+option_id: 273
+question_id: 69
+option_text: "Flash your high beams back to warn them"
+is_correct: 0
+
+option_id: 274
+question_id: 69
+option_text: "Slow down, look to the right edge of the road, and keep right"
+is_correct: 1
+
+option_id: 275
+question_id: 69
+option_text: "Speed up to pass them quickly"
+is_correct: 0
+
+option_id: 276
+question_id: 69
+option_text: "Turn off your lights entirely"
+is_correct: 0
+
+option_id: 277
+question_id: 70
+option_text: "Talking to a passenger briefly"
+is_correct: 0
+
+option_id: 278
+question_id: 70
+option_text: "Using a mobile phone without hands-free"
+is_correct: 1
+
+option_id: 279
+question_id: 70
+option_text: "Changing the radio station at a red light"
+is_correct: 0
+
+option_id: 280
+question_id: 70
+option_text: "Checking your mirrors every 5-8 seconds"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 8
+module_id: 8
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Difficult Driving Conditions – Night, Weather, and Emergencies"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 71
+quiz_id: 8
+question_text: "Why should you use low beam headlights in fog instead of high beams?"
+
+question_id: 72
+quiz_id: 8
+question_text: "Scenario: You are driving in heavy rain and feel your steering become 'light' and unresponsive. What is happening?"
+
+question_id: 73
+quiz_id: 8
+question_text: "Your rear wheels lose grip and the back of your car slides to the right. What should you do?"
+
+question_id: 74
+quiz_id: 8
+question_text: "What is black ice and why is it dangerous?"
+
+question_id: 75
+quiz_id: 8
+question_text: "Scenario: You are driving in a sandstorm with very low visibility. What should you do?"
+
+question_id: 76
+quiz_id: 8
+question_text: "How much does night vision typically decrease compared to daylight?"
+
+question_id: 77
+quiz_id: 8
+question_text: "You are involved in a crash with no injuries but significant damage. What must you do?"
+
+question_id: 78
+quiz_id: 8
+question_text: "Scenario: You drive through standing water and your brakes feel less effective afterward. What should you do?"
+
+question_id: 79
+quiz_id: 8
+question_text: "What is the recommended action if you hit a patch of ice (black ice)?"
+
+question_id: 80
+quiz_id: 8
+question_text: "You witness a crash with injuries. What is your legal duty?"
+
+---
+
+## Question Options
+
+option_id: 281
+question_id: 71
+option_text: "High beams reflect off fog droplets and reduce visibility further"
+is_correct: 1
+
+option_id: 282
+question_id: 71
+option_text: "High beams drain the battery faster"
+is_correct: 0
+
+option_id: 283
+question_id: 71
+option_text: "Low beams use less electricity"
+is_correct: 0
+
+option_id: 284
+question_id: 71
+option_text: "High beams are illegal in fog"
+is_correct: 0
+
+option_id: 285
+question_id: 72
+option_text: "A tire blowout"
+is_correct: 0
+
+option_id: 286
+question_id: 72
+option_text: "Hydroplaning (loss of traction on water)"
+is_correct: 1
+
+option_id: 287
+question_id: 72
+option_text: "Engine failure"
+is_correct: 0
+
+option_id: 288
+question_id: 72
+option_text: "Brake failure"
+is_correct: 0
+
+option_id: 289
+question_id: 73
+option_text: "Brake hard and steer left"
+is_correct: 0
+
+option_id: 290
+question_id: 73
+option_text: "Steer right (in the direction of the skid) and lift off the accelerator"
+is_correct: 1
+
+option_id: 291
+question_id: 73
+option_text: "Accelerate to regain traction"
+is_correct: 0
+
+option_id: 292
+question_id: 73
+option_text: "Turn off the engine immediately"
+is_correct: 0
+
+option_id: 293
+question_id: 74
+option_text: "Ice that is painted black for visibility"
+is_correct: 0
+
+option_id: 294
+question_id: 74
+option_text: "Thin, transparent ice that looks like wet pavement"
+is_correct: 1
+
+option_id: 295
+question_id: 74
+option_text: "Ice that only forms on black asphalt"
+is_correct: 0
+
+option_id: 296
+question_id: 74
+option_text: "Ice mixed with black sand"
+is_correct: 0
+
+option_id: 297
+question_id: 75
+option_text: "Continue at normal speed with high beams on"
+is_correct: 0
+
+option_id: 298
+question_id: 75
+option_text: "Pull off the road completely in a safe location and wait for conditions to improve"
+is_correct: 1
+
+option_id: 299
+question_id: 75
+option_text: "Drive in the center of the road to avoid sand drifts"
+is_correct: 0
+
+option_id: 300
+question_id: 75
+option_text: "Stop in the travel lane with hazard lights on"
+is_correct: 0
+
+option_id: 301
+question_id: 76
+option_text: "10-20%"
+is_correct: 0
+
+option_id: 302
+question_id: 76
+option_text: "30-40%"
+is_correct: 0
+
+option_id: 303
+question_id: 76
+option_text: "50-70%"
+is_correct: 1
+
+option_id: 304
+question_id: 76
+option_text: "80-90%"
+is_correct: 0
+
+option_id: 305
+question_id: 77
+option_text: "Leave the scene to avoid complications"
+is_correct: 0
+
+option_id: 306
+question_id: 77
+option_text: "Stop, call police, exchange information with other driver"
+is_correct: 1
+
+option_id: 307
+question_id: 77
+option_text: "Only stop if the other driver stops"
+is_correct: 0
+
+option_id: 308
+question_id: 77
+option_text: "Report within one week"
+is_correct: 0
+
+option_id: 309
+question_id: 78
+option_text: "Drive faster to dry the brakes"
+is_correct: 0
+
+option_id: 310
+question_id: 78
+option_text: "Gently apply brakes while driving slowly to dry them"
+is_correct: 1
+
+option_id: 311
+question_id: 78
+option_text: "Ignore it, the brakes will recover on their own"
+is_correct: 0
+
+option_id: 312
+question_id: 78
+option_text: "Stop and check brake fluid level"
+is_correct: 0
+
+option_id: 313
+question_id: 79
+option_text: "Brake firmly and steer away from the ice"
+is_correct: 0
+
+option_id: 314
+question_id: 79
+option_text: "Do not brake, keep steering straight, gently lift accelerator"
+is_correct: 1
+
+option_id: 315
+question_id: 79
+option_text: "Accelerate to gain traction"
+is_correct: 0
+
+option_id: 316
+question_id: 79
+option_text: "Turn sharply to get off the ice"
+is_correct: 0
+
+option_id: 317
+question_id: 80
+option_text: "Continue driving, someone else will help"
+is_correct: 0
+
+option_id: 318
+question_id: 80
+option_text: "You must stop and help until emergency services arrive"
+is_correct: 1
+
+option_id: 319
+question_id: 80
+option_text: "Call police from your car and keep driving"
+is_correct: 0
+
+option_id: 320
+question_id: 80
+option_text: "Only stop if you know the injured person"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 9
+module_id: 9
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Vehicle Safety Equipment, First Aid, and Accident Response"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 81
+quiz_id: 9
+question_text: "Where should the lap belt sit for proper safety?"
+
+question_id: 82
+quiz_id: 9
+question_text: "Scenario: You arrive at a crash scene. A victim has an open fracture (bone visible through skin). What should you NOT do?"
+
+question_id: 83
+quiz_id: 9
+question_text: "Where should a rear-facing child seat NEVER be placed?"
+
+question_id: 84
+quiz_id: 9
+question_text: "What is the proper first aid for a second-degree burn with blisters?"
+
+question_id: 85
+quiz_id: 9
+question_text: "Scenario: A crash victim has severe bleeding from their arm. Direct pressure is not stopping the bleeding. What should you do?"
+
+question_id: 86
+quiz_id: 9
+question_text: "How should headrests be adjusted for maximum safety?"
+
+question_id: 87
+quiz_id: 9
+question_text: "What is the legal requirement regarding children under 10 years old in a vehicle?"
+
+question_id: 88
+quiz_id: 9
+question_text: "Scenario: You are first on the scene of a crash. The driver is unconscious but breathing. What should you do first?"
+
+question_id: 89
+quiz_id: 9
+question_text: "What is the correct first aid for a first-degree burn (minor burn with redness)?"
+
+question_id: 90
+quiz_id: 9
+question_text: "Why is it dangerous to put anything on top of or in front of an airbag cover?"
+
+---
+
+## Question Options
+
+option_id: 321
+question_id: 81
+option_text: "Across your stomach"
+is_correct: 0
+
+option_id: 322
+question_id: 81
+option_text: "Low across your hips"
+is_correct: 1
+
+option_id: 323
+question_id: 81
+option_text: "Under your arm"
+is_correct: 0
+
+option_id: 324
+question_id: 81
+option_text: "Behind your back"
+is_correct: 0
+
+option_id: 325
+question_id: 82
+option_text: "Apply direct pressure around the wound"
+is_correct: 0
+
+option_id: 326
+question_id: 82
+option_text: "Cover the wound with sterile dressing"
+is_correct: 0
+
+option_id: 327
+question_id: 82
+option_text: "Try to push the bone back into place"
+is_correct: 1
+
+option_id: 328
+question_id: 82
+option_text: "Call emergency services"
+is_correct: 0
+
+option_id: 329
+question_id: 83
+option_text: "In the back seat"
+is_correct: 0
+
+option_id: 330
+question_id: 83
+option_text: "In the front passenger seat with an active airbag"
+is_correct: 1
+
+option_id: 331
+question_id: 83
+option_text: "In the middle of the back seat"
+is_correct: 0
+
+option_id: 332
+question_id: 83
+option_text: "Behind the driver's seat"
+is_correct: 0
+
+option_id: 333
+question_id: 84
+option_text: "Pop the blisters to drain fluid"
+is_correct: 0
+
+option_id: 334
+question_id: 84
+option_text: "Apply ice directly to the burn"
+is_correct: 0
+
+option_id: 335
+question_id: 84
+option_text: "Soak in cool water for 10 minutes, do not break blisters"
+is_correct: 1
+
+option_id: 336
+question_id: 84
+option_text: "Apply butter or oil to the burn"
+is_correct: 0
+
+option_id: 337
+question_id: 85
+option_text: "Apply a tourniquet as a last resort"
+is_correct: 1
+
+option_id: 338
+question_id: 85
+option_text: "Remove the first gauze layer and apply a new one"
+is_correct: 0
+
+option_id: 339
+question_id: 85
+option_text: "Give the victim water to drink"
+is_correct: 0
+
+option_id: 340
+question_id: 85
+option_text: "Move the victim to a different location"
+is_correct: 0
+
+option_id: 341
+question_id: 86
+option_text: "Level with your neck"
+is_correct: 0
+
+option_id: 342
+question_id: 86
+option_text: "Level with the top of your head"
+is_correct: 1
+
+option_id: 343
+question_id: 86
+option_text: "As low as possible"
+is_correct: 0
+
+option_id: 344
+question_id: 86
+option_text: "Removed for better visibility"
+is_correct: 0
+
+option_id: 345
+question_id: 87
+option_text: "They must be secured in appropriate child restraints and cannot ride in the front seat"
+is_correct: 1
+
+option_id: 346
+question_id: 87
+option_text: "They may ride in the front seat if wearing a seatbelt"
+is_correct: 0
+
+option_id: 347
+question_id: 87
+option_text: "No specific requirements for children under 10"
+is_correct: 0
+
+option_id: 348
+question_id: 87
+option_text: "They may be left alone in a running vehicle"
+is_correct: 0
+
+option_id: 349
+question_id: 88
+option_text: "Move them to your car to keep them warm"
+is_correct: 0
+
+option_id: 350
+question_id: 88
+option_text: "Do not move them (possible spinal injury) and call emergency services"
+is_correct: 1
+
+option_id: 351
+question_id: 88
+option_text: "Slap their face to wake them up"
+is_correct: 0
+
+option_id: 352
+question_id: 88
+option_text: "Give them water"
+is_correct: 0
+
+option_id: 353
+question_id: 89
+option_text: "Apply cold compresses and cover with sterile gauze"
+is_correct: 1
+
+option_id: 354
+question_id: 89
+option_text: "Apply butter or oil to soothe the burn"
+is_correct: 0
+
+option_id: 355
+question_id: 89
+option_text: "Pop any blisters that form"
+is_correct: 0
+
+option_id: 356
+question_id: 89
+option_text: "Ignore it, first-degree burns do not need treatment"
+is_correct: 0
+
+option_id: 357
+question_id: 90
+option_text: "It will block the airbag from deploying"
+is_correct: 0
+
+option_id: 358
+question_id: 90
+option_text: "Items become dangerous projectiles when the airbag deploys"
+is_correct: 1
+
+option_id: 359
+question_id: 90
+option_text: "It will cause the airbag to deploy unexpectedly"
+is_correct: 0
+
+option_id: 360
+question_id: 90
+option_text: "It is only a problem for child seats"
+is_correct: 0
+
+---
+
+## Quiz
+
+quiz_id: 10
+module_id: 10
+is_mock_exam: 0
+license_type_id: NULL
+title: "Quiz: Traffic Violations, Penalties, and Points System"
+passing_score: 70
+
+---
+
+## Quiz Questions
+
+question_id: 91
+quiz_id: 10
+question_text: "What is the penalty for driving without a valid license in Jordan?"
+
+question_id: 92
+quiz_id: 10
+question_text: "How many points accumulated in one year results in a 120-day license suspension?"
+
+question_id: 93
+quiz_id: 10
+question_text: "Scenario: You are stopped for running a red light and also speeding. How are points applied?"
+
+question_id: 94
+quiz_id: 10
+question_text: "What happens if you cause a crash with injuries and flee the scene?"
+
+question_id: 95
+quiz_id: 10
+question_text: "Which of the following can result in vehicle impoundment for 42 hours?"
+
+question_id: 96
+quiz_id: 10
+question_text: "After serving a license suspension for accumulated points, what happens to your point total?"
+
+question_id: 97
+quiz_id: 10
+question_text: "What is the penalty for causing permanent disability to another person in a crash?"
+
+question_id: 98
+quiz_id: 10
+question_text: "How long do you have to report an accident you were involved in before being considered a 'fleeing the scene' offender?"
+
+question_id: 99
+quiz_id: 10
+question_text: "If you accumulate no additional points for one full year, what happens?"
+
+question_id: 100
+quiz_id: 10
+question_text: "Which of the following allows police to arrest a driver without a warrant?"
+
+---
+
+## Question Options
+
+option_id: 361
+question_id: 91
+option_text: "Fine only (50 JD)"
+is_correct: 0
+
+option_id: 362
+question_id: 91
+option_text: "Jail 1-3 months and fine 250-500 JD"
+is_correct: 1
+
+option_id: 363
+question_id: 91
+option_text: "License suspension only"
+is_correct: 0
+
+option_id: 364
+question_id: 91
+option_text: "Warning for first offense"
+is_correct: 0
+
+option_id: 365
+question_id: 92
+option_text: "16 points"
+is_correct: 0
+
+option_id: 366
+question_id: 92
+option_text: "20 points"
+is_correct: 0
+
+option_id: 367
+question_id: 92
+option_text: "24 points"
+is_correct: 1
+
+option_id: 368
+question_id: 92
+option_text: "28 points"
+is_correct: 0
+
+option_id: 369
+question_id: 93
+option_text: "Points for both violations are added together"
+is_correct: 0
+
+option_id: 370
+question_id: 93
+option_text: "Only the violation with the highest point value is counted"
+is_correct: 1
+
+option_id: 371
+question_id: 93
+option_text: "Points are doubled for simultaneous violations"
+is_correct: 0
+
+option_id: 372
+question_id: 93
+option_text: "No points are given if you pay both fines immediately"
+is_correct: 0
+
+option_id: 373
+question_id: 94
+option_text: "Fine only (500 JD)"
+is_correct: 0
+
+option_id: 374
+question_id: 94
+option_text: "Jail 3-6 months and fine 500-1000 JD"
+is_correct: 1
+
+option_id: 375
+question_id: 94
+option_text: "License suspension for 1 year"
+is_correct: 0
+
+option_id: 376
+question_id: 94
+option_text: "Community service"
+is_correct: 0
+
+option_id: 377
+question_id: 95
+option_text: "Parking in a no-parking zone"
+is_correct: 0
+
+option_id: 378
+question_id: 95
+option_text: "Driving an unregistered vehicle"
+is_correct: 1
+
+option_id: 379
+question_id: 95
+option_text: "Speeding 15 km/h over the limit"
+is_correct: 0
+
+option_id: 380
+question_id: 95
+option_text: "Not carrying your license"
+is_correct: 0
+
+option_id: 381
+question_id: 96
+option_text: "Points are reduced by half"
+is_correct: 0
+
+option_id: 382
+question_id: 96
+option_text: "Points remain on your record"
+is_correct: 0
+
+option_id: 383
+question_id: 96
+option_text: "Points are cleared completely (reset to zero)"
+is_correct: 1
+
+option_id: 384
+question_id: 96
+option_text: "Points are transferred to a probationary period"
+is_correct: 0
+
+option_id: 385
+question_id: 97
+option_text: "Fine of 500 JD"
+is_correct: 0
+
+option_id: 386
+question_id: 97
+option_text: "Imprisonment 3 months to 3 years, fine 1000-2000 JD, license suspension"
+is_correct: 1
+
+option_id: 387
+question_id: 97
+option_text: "License suspension only"
+is_correct: 0
+
+option_id: 388
+question_id: 97
+option_text: "Warning and driving course"
+is_correct: 0
+
+option_id: 389
+question_id: 98
+option_text: "24 hours"
+is_correct: 0
+
+option_id: 390
+question_id: 98
+option_text: "48 hours"
+is_correct: 1
+
+option_id: 391
+question_id: 98
+option_text: "One week"
+is_correct: 0
+
+option_id: 392
+question_id: 98
+option_text: "30 days"
+is_correct: 0
+
+option_id: 393
+question_id: 99
+option_text: "All points are cleared from your record"
+is_correct: 1
+
+option_id: 394
+question_id: 99
+option_text: "Points are reduced by half"
+is_correct: 0
+
+option_id: 395
+question_id: 99
+option_text: "You receive a safe driver award"
+is_correct: 0
+
+option_id: 396
+question_id: 99
+option_text: "Your license is automatically renewed"
+is_correct: 0
+
+option_id: 397
+question_id: 100
+option_text: "Parking violation"
+is_correct: 0
+
+option_id: 398
+question_id: 100
+option_text: "Driving under the influence of alcohol or drugs"
+is_correct: 1
+
+option_id: 399
+question_id: 100
+option_text: "Minor speeding (10 km/h over)"
+is_correct:

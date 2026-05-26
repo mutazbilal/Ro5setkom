@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <p class="fw-semibold mb-3">
                         <span class="badge bg-secondary me-2">@(i + 1)</span>
-                        @q.QuestionText
+                        @Html.Raw(q.QuestionText)
                     </p>
                     <div class="d-flex flex-column gap-2">
                         @foreach (var opt in q.Options)

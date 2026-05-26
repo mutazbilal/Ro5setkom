@@ -1,7 +1,7 @@
 import re
 from deep_translator import GoogleTranslator
 
-INPUT_FILE = "C:/Users/Lenovo/Documents/02 Programming/ro5setkom/learning_modules/quizzes.txt"
+INPUT_FILE = "learning_modules/quizzes.txt"
 OUTPUT_FILE = "sql/seed_all_quizzes_questions_options.sql"
 
 translator = GoogleTranslator(source='auto', target='ar')

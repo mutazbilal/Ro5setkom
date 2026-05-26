@@ -67,6 +67,7 @@ builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IExamAppointmentService, ExamAppointmentService>();
 builder.Services.AddScoped<ICalendarService, CalendarService>();
 
+builder.Services.AddSingleton<BlobService>();
 // IHttpContextAccessor required by PasswordResetService to build reset URLs
 builder.Services.AddHttpContextAccessor();
 

@@ -11,11 +11,13 @@ public class ModuleService : IModuleService
 {
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
+    private BlobService _blobService;
 
     public ModuleService(RokhsetakDbContext context, INotificationService notifications)
     {
         _context = context;
         _notifications = notifications;
+        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -198,24 +200,40 @@ public class ModuleService : IModuleService
         var pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
             .Build();
-        var images = new Dictionary<string, string>
-        {
-            { "hi", "/images/modules/test.jpg" }
-        };
-
-        foreach (var c in contents.Where(c => c.ContentType == "text"
-                                           && !string.IsNullOrEmpty(c.TextContent)))
-        {
-            foreach (var img in images)
+        var imageKeys = new List<string>
             {
-                c.TextContent = c.TextContent.Replace(
-                    $"{{{{img:{img.Key}}}}}",
-                    $"![{img.Key}]({img.Value})"
-                );
-            }
-            c.TextContent = Markdig.Markdown.ToHtml(c.TextContent, pipeline);
-        }
+                "eye_examination",
+                "computer-based-theoratical-exam",
+                "white-and-yellow-road-line-applications",
+                "solid-center-line",
+                "stop-line-vs-yield-line",
+                "zebra-crossing",
+                "bicycle-lane",
+                "lane-arrows",
+                "steep-downhill-warning",
+                "men-working-sign",
+                "stop-sign",
+                "priority-for-incoming",
+                "priority-over-incoming"
+            };
 
+        foreach (var c in contents.Where(c =>
+            c.ContentType == "text" &&
+            !string.IsNullOrEmpty(c.TextContent)))
+        {
+            foreach (var img in imageKeys)
+            {
+                {
+                    var imgUrl = _blobService.GetImageSasUrl(img, "modules");
+                    c.TextContent = c.TextContent.Replace(
+                        $"{{{{img:{img}}}}}",
+                        $"<img src=\"{imgUrl}\" alt=\"{img}\" style=\"max-width:20%; height:auto;\" />"
+                    );
+                }
+
+                c.TextContent = Markdig.Markdown.ToHtml(c.TextContent, pipeline);
+            }
+        }
         // Quiz
         var quiz = await _context.Quizzes
             .Where(q => q.ModuleId == moduleId && q.IsMockExam == false)
