@@ -1,7 +1,8 @@
 INSERT INTO Learning.TrainingCenters (
-    name,
-    province,
-    city,
+    display_name_en,
+    display_name_ar,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -15,10 +16,12 @@ VALUES
 -- =========================
 -- Amman
 -- =========================
+
 (
     N'Al-Mustaqbal Driving Academy',
-    N'Amman',
-    N'Amman',
+    N'أكاديمية المستقبل لتعليم القيادة',
+    1, -- Amman
+    1, -- Marj Al-Hammam (default main area)
     N'Gardens Street, Building 45',
     NULL,
     N'11118',
@@ -27,10 +30,12 @@ VALUES
     N'TC-AMM-1001',
     1
 ),
+
 (
     N'Royal Road Safety Institute',
-    N'Amman',
-    N'Tlaa Al-Ali',
+    N'معهد الملكي للسلامة المرورية',
+    1,
+    2, -- Tlaa Al-Ali
     N'King Abdullah II Street',
     NULL,
     N'11953',
@@ -43,10 +48,12 @@ VALUES
 -- =========================
 -- Zarqa
 -- =========================
+
 (
     N'Zarqa Professional Driving School',
-    N'Az Zarqa',
-    N'Zarqa City',
+    N'مدرسة الزرقاء المهنية لتعليم القيادة',
+    2, -- Zarqa
+    5, -- Zarqa City
     N'Industrial Zone Road',
     NULL,
     N'13110',
@@ -59,10 +66,12 @@ VALUES
 -- =========================
 -- Irbid
 -- =========================
+
 (
     N'Irbid Safe Driving Center',
-    N'Irbid',
-    N'Irbid City',
+    N'مركز إربد الآمن لتعليم القيادة',
+    3, -- Irbid
+    6, -- Ramtha / Irbid region
     N'University Street near Yarmouk University',
     NULL,
     N'21110',
@@ -75,10 +84,12 @@ VALUES
 -- =========================
 -- Aqaba
 -- =========================
+
 (
     N'Aqaba Maritime Driving Academy',
-    N'Aqaba',
-    N'Aqaba City',
+    N'أكاديمية العقبة البحرية لتعليم القيادة',
+    4, -- Aqaba
+    7, -- Aqaba City
     N'Port Area Road',
     NULL,
     N'77110',

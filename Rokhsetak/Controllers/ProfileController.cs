@@ -16,12 +16,12 @@ namespace Rokhsetak.Controllers
     public class ProfileController : Controller
     {
         private readonly IProfileService _service;
-        private readonly ILicenseService _licenseService;
+        private readonly ILookupService _lookupService;
 
-        public ProfileController(IProfileService service, ILicenseService licenseService)
+        public ProfileController(IProfileService service, ILookupService licenseService)
         {
             _service = service;
-            _licenseService = licenseService;
+            _lookupService = licenseService;
         }
 
         public async Task<IActionResult> Index()
@@ -32,7 +32,8 @@ namespace Rokhsetak.Controllers
             {
                 return Unauthorized();
             }
-            var model = await _service.GetProfileAsync(userId);
+            var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var model = await _service.GetProfileAsync(userId, culture);
             return View(model.Data);
         }
 
@@ -48,14 +49,15 @@ namespace Rokhsetak.Controllers
                 return Unauthorized();
             }
 
-            var profile = await _service.GetProfileAsync(userId);
+            var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var profile = await _service.GetProfileAsync(userId, culture);
 
             return View(new EditProfileViewModel
             {
                 Email = profile.Data.Email,
                 PhoneNumber = profile.Data.PhoneNumber,
-                Province = profile.Data.Province,
-                City = profile.Data.City,
+                ProvinceId = profile.Data.ProvinceId,
+                CityId = profile.Data.CityId,
                 AddressLine1 = profile.Data.AddressLine1,
                 AddressLine2 = profile.Data.AddressLine2,
                 PostalCode = profile.Data.PostalCode,
@@ -92,8 +94,9 @@ namespace Rokhsetak.Controllers
             var userId = User.GetUserId();
             if (userId == null)
                 return Unauthorized();
+            var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
-            var profile = await _service.GetProfileAsync(userId.Value);
+            var profile = await _service.GetProfileAsync(userId.Value, culture);
 
             if (!profile.Succeeded)
                 return RedirectToAction("Index"); // or handle error properly
@@ -133,7 +136,7 @@ namespace Rokhsetak.Controllers
         public async Task<IActionResult> ChangeLicense()
         {
             var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-            var licenseTypes = await _licenseService.GetLicenseTypesAsync();
+            var licenseTypes = await _lookupService.GetLicenseTypesAsync(culture);
             var model = new ChangeLicenseViewModel
             {
                 AvailableLicenseTypes = licenseTypes

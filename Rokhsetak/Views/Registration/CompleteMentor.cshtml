@@ -110,15 +110,46 @@
                 @* ── Section B: Editable fields ── *@
 
                 <div class="auth-field">
-                    <input asp-for="Province" class="auth-input" type="text" placeholder=" " />
-                    <label asp-for="Province" class="auth-label">Province</label>
-                    <span asp-validation-for="Province" class="text-danger"></span>
+                    <label asp-for="ProvinceId"
+                           style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
+                        Province
+                    </label>
+
+                    <select asp-for="ProvinceId"
+                            asp-items="@(new SelectList(Model.Provinces, "ProvinceId", "DisplayName"))"
+                            class="auth-input auth-select"
+                            id="provinceSelect"
+                            aria-required="true">
+
+                        <option value="">-- Select Province --</option>
+                    </select>
+
+                    <span asp-validation-for="ProvinceId" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
-                    <input asp-for="City" class="auth-input" type="text" placeholder=" " />
-                    <label asp-for="City" class="auth-label">City</label>
-                    <span asp-validation-for="City" class="text-danger"></span>
+                    <label asp-for="CityId"
+                           style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
+                        City
+                    </label>
+
+                    <select asp-for="CityId"
+                            class="auth-input auth-select"
+                            id="citySelect"
+                            aria-required="true">
+
+                        <option value="">-- Select City --</option>
+
+                        @foreach (var city in Model.Cities)
+                        {
+                            <option value="@city.CityId"
+                                    data-province-id="@city.ProvinceId">
+                                @city.DisplayName
+                            </option>
+                        }
+                    </select>
+
+                    <span asp-validation-for="CityId" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
@@ -277,4 +308,14 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/register.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+        AuthShared.wireDependentCityDropdown(
+        '#provinceSelect',
+        '#citySelect'
+        );
+
+        });
+    </script>
 }

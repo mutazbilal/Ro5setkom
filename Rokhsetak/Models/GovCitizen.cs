@@ -15,9 +15,9 @@ public partial class GovCitizen
 
     public string Gender { get; set; } = null!;
 
-    public string Province { get; set; } = null!;
+    public int ProvinceId { get; set; }
 
-    public string City { get; set; } = null!;
+    public int CityId { get; set; }
 
     public string AddressLine1 { get; set; } = null!;
 
@@ -31,9 +31,13 @@ public partial class GovCitizen
 
     public DateTime? UpdatedAt { get; set; }
 
+    public virtual City City { get; set; } = null!;
+
     public virtual ICollection<GovExamResult> GovExamResults { get; set; } = new List<GovExamResult>();
 
     public virtual ICollection<GovLicenseRecord> GovLicenseRecords { get; set; } = new List<GovLicenseRecord>();
+
+    public virtual Province Province { get; set; } = null!;
 
     public virtual User? User { get; set; }
 }

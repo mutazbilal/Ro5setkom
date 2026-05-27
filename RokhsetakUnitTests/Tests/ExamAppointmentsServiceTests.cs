@@ -28,6 +28,92 @@ public class ExamAppointmentServiceTests
     private static void SeedBase(RokhsetakDbContext ctx,
         string stage = "mock_exam_completed")
     {
+        if (!ctx.Provinces.Any())
+        {
+            ctx.Provinces.AddRange(
+                new Province
+                {
+                    ProvinceId = 1,
+                    ProvinceKey = "amman",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                    }
+                },
+                new Province
+                {
+                    ProvinceId = 2,
+                    ProvinceKey = "zarqa",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
+
+        // ---------------- CITIES ----------------
+        if (!ctx.Cities.Any())
+        {
+            ctx.Cities.AddRange(
+                new City
+                {
+                    CityId = 1,
+                    ProvinceId = 1, // Amman
+                    CityKey = "ammancity",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                    }
+                },
+                new City
+                {
+                    CityId = 2,
+                    ProvinceId = 2, // Zarqa
+                    CityKey = "citykey",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
 
         ctx.LicenseTypes.Add(new LicenseType
         {
@@ -46,8 +132,8 @@ public class ExamAppointmentServiceTests
             LastName = "Salem",
             Email = "sara@test.com",
             NationalId = "0000000001",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 1",
             PasswordHash = "hash",
             RoleId = 3
@@ -66,8 +152,8 @@ public class ExamAppointmentServiceTests
         {
             CenterId = 1,
             Name = "Amman Test Center",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 1",
             IsActive = true
         });
@@ -325,7 +411,7 @@ public class ExamAppointmentServiceTests
         ctx.SaveChanges();
 
         var svc = new ExamAppointmentService(ctx, MockNotif().Object);
-        var result = await svc.GetMyExamAppointmentsAsync(1);
+        var result = await svc.GetMyExamAppointmentsAsync(1, "en");
 
         Assert.IsTrue(result.Succeeded);
         Assert.AreEqual(1, result.Data!.Appointments.Count);

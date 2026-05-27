@@ -38,7 +38,92 @@ namespace Rokhsetak.Tests
         public async Task Login_ShouldSucceed_WhenCredentialsAreValid()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.Roles.Add(new Role
             {
                 RoleId = 1,
@@ -56,8 +141,8 @@ namespace Rokhsetak.Tests
                 IsActive = true,
                 RoleId = 1,
                 AddressLine1 = "123 Test St",
-                City = "Testville",
-                Province = "Test Province",
+                CityId = 1,
+                ProvinceId = 1,
             });
 
             await db.SaveChangesAsync();
@@ -83,7 +168,92 @@ namespace Rokhsetak.Tests
         public async Task Login_ShouldFail_WhenPasswordIsWrong()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.Roles.Add(new Role
             {
                 RoleId = 1,
@@ -101,8 +271,8 @@ namespace Rokhsetak.Tests
                 IsActive = true,
                 RoleId = 1,
                 AddressLine1 = "123 Test St",
-                City = "Testville",
-                Province = "Test Province",
+                CityId = 1,
+                ProvinceId =1,
             });
 
             await db.SaveChangesAsync();
@@ -165,8 +335,8 @@ namespace Rokhsetak.Tests
                 IsActive = false,
                 RoleId = 1,
                 AddressLine1 = "123 Test St",
-                City = "Testville",
-                Province = "Test Province",
+                CityId = 1,
+                ProvinceId =1,
             });
 
             await db.SaveChangesAsync();

@@ -17,10 +17,33 @@
             _notificationService = notificationService;
         }
 
-        public async Task<ServiceResult<ProfileViewModel>> GetProfileAsync(int userId)
+        public async Task<ServiceResult<ProfileViewModel>> GetProfileAsync(int userId, string culture)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.UserId == userId);
+                .Where(u => u.UserId == userId)
+                .Select(c => new
+                {
+                    CityName = c.City.CityTranslations
+                        .Where(ct => ct.CityId == c.CityId && ct.LanguageCode == culture)
+                        .Select(ct => ct.DisplayName)
+                        .FirstOrDefault(),
+                    
+                    ProvinceName = c.Province.ProvinceTranslations
+                        .Where(pt => pt.ProvinceId == c.ProvinceId && pt.LanguageCode == culture)
+                        .Select(pt => pt.DisplayName)
+                        .FirstOrDefault(),
+
+                    c.ProvinceId,
+                    c.CityId,
+                    c.NationalId,
+                    c.PhoneNumber,
+                    c.AddressLine1,
+                    c.AddressLine2,
+                    c.Email,
+                    c.PostalCode,
+                    c.LanguagePreference
+                })
+                .FirstOrDefaultAsync();
             if (user == null)
                 return ServiceResult<ProfileViewModel>.Failure("User not found.");
 
@@ -35,8 +58,10 @@
             {
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                Province = user.Province,
-                City = user.City,
+                ProvinceId = user.ProvinceId,
+                ProvinceName = user.ProvinceName,
+                CityId = user.CityId,
+                CityName = user.CityName,
                 AddressLine1 = user.AddressLine1,
                 AddressLine2 = user.AddressLine2,
                 PostalCode = user.PostalCode,
@@ -60,8 +85,8 @@
 
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
-            user.Province = model.Province;
-            user.City = model.City;
+            user.ProvinceId = model.ProvinceId;
+            user.CityId = model.CityId;
             user.AddressLine1 = model.AddressLine1;
             user.AddressLine2 = model.AddressLine2;
             user.PostalCode = model.PostalCode;

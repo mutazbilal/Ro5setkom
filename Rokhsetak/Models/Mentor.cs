@@ -17,13 +17,15 @@ public partial class Mentor
 
     public string? VehicleType { get; set; }
 
-    public string? City { get; set; }
+    public int? CityId { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
     public virtual MentorApplication? Application { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
+    public virtual City? City { get; set; }
 
     public virtual ICollection<CompletionCertificate> CompletionCertificates { get; set; } = new List<CompletionCertificate>();
 

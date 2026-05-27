@@ -1,17 +1,20 @@
-﻿namespace Rokhsetak.Areas.Trainee.ViewModels.Booking;
+﻿using Rokhsetak.ViewModels.Registration;
+namespace Rokhsetak.Areas.Trainee.ViewModels.Booking;
 
 public class MentorBrowseListViewModel
 {
     public List<MentorBrowseCardViewModel> Mentors { get; set; } = new();
     public MentorBrowseFilterViewModel Filter { get; set; } = new();
     public int? ActiveMentorId { get; set; }
+    public List<CityOption?> Cities { get; set; } = new();
 }
 
 public class MentorBrowseCardViewModel
 {
     public int MentorId { get; set; }
     public string FullName { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
+    public string CityName { get; set; } = string.Empty;
+    public int? CityId { get; set; }
     public string LicenseType { get; set; } = string.Empty;
     public decimal PricePerSession { get; set; }
     public double AverageRating { get; set; }
@@ -21,10 +24,8 @@ public class MentorBrowseCardViewModel
 
 public class MentorBrowseFilterViewModel
 {
-    public string? City { get; set; }
+    public int? CityId { get; set; }
     public decimal? MinPrice { get; set; }
     public decimal? MaxPrice { get; set; }
     public double? MinRating { get; set; }
-
-    public List<string> AvailableCities { get; set; } = new();
 }

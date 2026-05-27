@@ -23,9 +23,9 @@ public partial class User
 
     public string? PhoneNumber { get; set; }
 
-    public string Province { get; set; } = null!;
+    public int? ProvinceId { get; set; }
 
-    public string City { get; set; } = null!;
+    public int? CityId { get; set; }
 
     public string AddressLine1 { get; set; } = null!;
 
@@ -35,7 +35,7 @@ public partial class User
 
     public string PasswordHash { get; set; } = null!;
 
-    public string? ProfilePicture { get; set; }
+    public string? ProfilePicturePath { get; set; }
 
     public string? LanguagePreference { get; set; }
 
@@ -51,6 +51,8 @@ public partial class User
 
     public virtual ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
 
+    public virtual City City { get; set; } = null!;
+
     public virtual ICollection<ConversationAttachment> ConversationAttachments { get; set; } = new List<ConversationAttachment>();
 
     public virtual Mentor? Mentor { get; set; }
@@ -62,6 +64,8 @@ public partial class User
     public virtual NotificationPreference? NotificationPreference { get; set; }
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
+    public virtual Province Province { get; set; } = null!;
 
     public virtual Role Role { get; set; } = null!;
 

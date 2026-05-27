@@ -24,6 +24,7 @@ public class BookingServiceTests
     }
 
     private static Mock<INotificationService> MockNotif() => new();
+    private static Mock<ILookupService> MockLookup() => new();
 
     private static void SeedFull(RokhsetakDbContext ctx)
     {
@@ -45,8 +46,8 @@ public class BookingServiceTests
             LastName = "Salem",
             Email = "sara@test.com",
             NationalId = "0000000001",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 1",
             PasswordHash = "hash",
             RoleId = 3
@@ -70,8 +71,8 @@ public class BookingServiceTests
             LastName = "Ali",
             Email = "ahmad@test.com",
             NationalId = "0000000002",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 2",
             PasswordHash = "hash",
             RoleId = 2
@@ -80,7 +81,7 @@ public class BookingServiceTests
         {
             MentorId = 2,
             LicenseTypeId = 1,
-            City = "Amman",
+            CityId = 1,
             PricePerSession = 15
         });
         ctx.MentorApplications.Add(new MentorApplication
@@ -98,7 +99,92 @@ public class BookingServiceTests
             EndTime = new TimeOnly(17, 0),
             IsActive = true
         });
+        if (!ctx.Provinces.Any())
+        {
+            ctx.Provinces.AddRange(
+                new Province
+                {
+                    ProvinceId = 1,
+                    ProvinceKey = "amman",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                    }
+                },
+                new Province
+                {
+                    ProvinceId = 2,
+                    ProvinceKey = "zarqa",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
 
+        // ---------------- CITIES ----------------
+        if (!ctx.Cities.Any())
+        {
+            ctx.Cities.AddRange(
+                new City
+                {
+                    CityId = 1,
+                    ProvinceId = 1, // Amman
+                    CityKey = "ammancity",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                    }
+                },
+                new City
+                {
+                    CityId = 2,
+                    ProvinceId = 2, // Zarqa
+                    CityKey = "citykey",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
         ctx.SaveChanges();
     }
 
@@ -122,7 +208,7 @@ public class BookingServiceTests
         using var ctx = CreateContext();
         SeedFull(ctx);
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(traineeId: 1, ValidBooking());
 
         Assert.IsTrue(result.Succeeded);
@@ -137,7 +223,7 @@ public class BookingServiceTests
         SeedFull(ctx);
 
         var model = ValidBooking(DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2)));
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
 
         var result = await svc.BookSessionAsync(1, model);
 
@@ -155,7 +241,7 @@ public class BookingServiceTests
         model.StartTime = new TimeOnly(12, 0);
         model.EndTime = new TimeOnly(10, 0);
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(1, model);
 
         Assert.IsFalse(result.Succeeded);
@@ -184,7 +270,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(1, ValidBooking(date));
 
         Assert.IsFalse(result.Succeeded);
@@ -213,7 +299,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(1, ValidBooking(date));
 
         Assert.IsFalse(result.Succeeded);
@@ -236,7 +322,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(1, ValidBooking(date));
 
         Assert.IsFalse(result.Succeeded);
@@ -252,7 +338,7 @@ public class BookingServiceTests
         ctx.MentorApplications.Single().Status = "pending";
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.BookSessionAsync(1, ValidBooking());
 
         Assert.IsFalse(result.Succeeded);
@@ -283,7 +369,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.CancelSessionAsync(traineeId: 1, bookingId: 1);
 
         Assert.IsTrue(result.Succeeded);
@@ -317,7 +403,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.CancelSessionAsync(1, 1);
 
         Assert.IsFalse(result.Succeeded);
@@ -347,7 +433,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.CancelSessionAsync(traineeId: 99, bookingId: 1);
 
         Assert.IsFalse(result.Succeeded);
@@ -361,8 +447,8 @@ public class BookingServiceTests
         using var ctx = CreateContext();
         SeedFull(ctx);
 
-        var svc = new BookingService(ctx, MockNotif().Object);
-        var result = await svc.BrowseMentorsAsync(1, new MentorBrowseFilterViewModel());
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
+        var result = await svc.BrowseMentorsAsync(1, new MentorBrowseFilterViewModel(), "en");
 
         Assert.IsTrue(result.Succeeded);
         Assert.AreEqual(1, result.Data!.Mentors.Count);
@@ -375,8 +461,8 @@ public class BookingServiceTests
         using var ctx = CreateContext();
         SeedFull(ctx);
 
-        var svc = new BookingService(ctx, MockNotif().Object);
-        var result = await svc.BrowseMentorsAsync(1, new MentorBrowseFilterViewModel { City = "Zarqa" });
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
+        var result = await svc.BrowseMentorsAsync(1, new MentorBrowseFilterViewModel { CityId = 2 }, "en");
 
         Assert.IsTrue(result.Succeeded);
         Assert.AreEqual(0, result.Data!.Mentors.Count); // mentor is in Amman
@@ -407,7 +493,7 @@ public class BookingServiceTests
         });
         ctx.SaveChanges();
 
-        var svc = new BookingService(ctx, MockNotif().Object);
+        var svc = new BookingService(ctx, MockNotif().Object, MockLookup().Object);
         var result = await svc.GetMyBookingsAsync(traineeId: 1);
 
         Assert.IsTrue(result.Succeeded);

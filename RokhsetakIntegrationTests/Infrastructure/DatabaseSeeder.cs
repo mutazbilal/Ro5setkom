@@ -19,7 +19,8 @@ internal static class DatabaseSeeder
             db.Roles.AddRange(
                 new Role { RoleId = RoleAdminId, RoleName = "admin" },
                 new Role { RoleId = RoleMentorId, RoleName = "mentor" },
-                new Role { RoleId = RoleTraineeId, RoleName = "trainee" });
+                new Role { RoleId = RoleTraineeId, RoleName = "trainee" }
+            );
         }
 
         if (!db.LicenseTypes.Any())
@@ -35,6 +36,94 @@ internal static class DatabaseSeeder
             });
         }
 
+        // ---------------- PROVINCES ----------------
+        if (!db.Provinces.Any())
+        {
+            db.Provinces.AddRange(
+                new Province
+                {
+                    ProvinceId = 1,
+                    ProvinceKey = "amman",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                    }
+                },
+                new Province
+                {
+                    ProvinceId = 2,
+                    ProvinceKey = "zarqa",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
+
+        // ---------------- CITIES ----------------
+        if (!db.Cities.Any())
+        {
+            db.Cities.AddRange(
+                new City
+                {
+                    CityId = 1,
+                    ProvinceId = 1, // Amman
+                    CityKey = "ammancity",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                    }
+                },
+                new City
+                {
+                    CityId = 2,
+                    ProvinceId = 2, // Zarqa
+                    CityKey = "citykey",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
+
         db.SaveChanges();
     }
 
@@ -47,8 +136,8 @@ internal static class DatabaseSeeder
             LastName = lastName,
             DateOfBirth = new DateOnly(1995, 1, 1),
             Gender = "male",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "Test Street",
             PostalCode = "11181",
             IsEligible = true
@@ -67,8 +156,8 @@ internal static class DatabaseSeeder
             Email = email,
             PasswordHash = BCryptNet.HashPassword(plainPassword),
             PhoneNumber = "0790000000",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "Test Street",
             DateOfBirth = new DateOnly(1995, 1, 1),
             Gender = "male",

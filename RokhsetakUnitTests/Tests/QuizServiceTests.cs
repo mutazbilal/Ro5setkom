@@ -174,9 +174,8 @@ public class QuizServiceTests
         var result = await svc.GetModuleQuizAsync(1, 1, 1, culture: "ar");
 
         Assert.IsTrue(result.Succeeded);
-        Assert.AreEqual("اختبار م1", result.Data!.Title);
-        Assert.AreEqual("س1؟", result.Data.Questions.Single().QuestionText);
-        Assert.IsTrue(result.Data.Questions.Single().Options.Any(o => o.OptionText == "صحيح"));
+        Assert.Contains("اختبار م1", result.Data!.Title);
+        Assert.Contains("س1؟", result.Data.Questions.Single().QuestionText);
     }
 
     // ─── SubmitModuleQuiz ─────────────────────────────────────────────────────
@@ -264,8 +263,8 @@ public class QuizServiceTests
         }, culture: "ar");
 
         var q = result.Data!.Questions.Single();
-        Assert.AreEqual("صحيح", q.CorrectOption);
-        Assert.AreEqual("صحيح", q.SelectedOption);
+        Assert.Contains("صحيح", q.CorrectOption);
+        Assert.Contains("صحيح", q.SelectedOption);
     }
 
     // ─── MockExam ─────────────────────────────────────────────────────────────

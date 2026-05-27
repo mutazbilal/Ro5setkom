@@ -3,6 +3,7 @@ using Rokhsetak.Areas.Trainee.ViewModels.Exam;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Trainee.Controllers;
 
@@ -23,8 +24,8 @@ public class ExamController : Controller
     public async Task<IActionResult> Index()
     {
         var traineeId = User.GetUserId().Value;
-
-        var result = await _examService.GetMyExamAppointmentsAsync(traineeId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _examService.GetMyExamAppointmentsAsync(traineeId, culture);
 
         if (!result.Succeeded)
         {
@@ -42,8 +43,8 @@ public class ExamController : Controller
     public async Task<IActionResult> Book(string examType)
     {
         var traineeId = User.GetUserId().Value;
-
-        var result = await _examService.GetAvailableExamsAsync(traineeId, examType);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _examService.GetAvailableExamsAsync(traineeId, examType, culture);
 
         if (!result.Succeeded)
         {

@@ -1,50 +1,52 @@
 ﻿SET IDENTITY_INSERT Core.Users ON;
-INSERT INTO [RokhsetakDB].[Core].[Users]
+
+INSERT INTO Core.Users
 (
-    [user_id],
-    [role_id],
-    [national_id],
-    [first_name],
-    [last_name],
-    [date_of_birth],
-    [gender],
-    [email],
-    [phone_number],
-    [province],
-    [city],
-    [address_line1],
-    [address_line2],
-    [postal_code],
-    [password_hash],
-    [profile_picture],
-    [language_preference],
-    [is_active],
-    [created_at],
-    [updated_at]
+    user_id,
+    role_id,
+    national_id,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    email,
+    phone_number,
+    province_id,
+    city_id,
+    address_line1,
+    address_line2,
+    postal_code,
+    password_hash,
+    profile_picture_path,
+    language_preference,
+    is_active,
+    created_at,
+    updated_at
 )
 VALUES
 (
     1,
     1,
-    2000939089,
-    'Abdalrahman',
-    'Obeid',
+    N'2000939089',
+    N'عبدالرحمن',
+    N'عبيد',
     '2004-10-18',
-    'male',
-    'aboudaboudiua2@gmail.com',
-    '078152830',
-    'Amman',
-    'Marj Al-Hammam',
-    'Asem-Ben Nayef Street',
+    N'male',
+    N'aboudaboudiua2@gmail.com',
+    N'078152830',
+    1, -- Amman
+    1, -- Marj Al-Hammam
+    N'شارع عاصم بن نايف',
     NULL,
-    '11732',
-    '$2a$11$cKsXAbTDzl6bx/GC0tDaHORqtNqlnAc7044jB/BK3v1cxMvbJrLTu',
+    N'11732',
+    N'$2a$11$cKsXAbTDzl6bx/GC0tDaHORqtNqlnAc7044jB/BK3v1cxMvbJrLTu',
     NULL,
-    'en',
+    N'en',
     1,
     GETDATE(),
     GETDATE()
-)
+);
+
 SET IDENTITY_INSERT Core.Users OFF;
 
 INSERT INTO Roles.Trainees
