@@ -36,14 +36,27 @@ public class ModuleService : IModuleService
             return ServiceResult<ModuleListViewModel>.Failure("License not found.");
 
         var modules = await _context.LearningModules
-            .Where(m => m.LicenseTypeId == license.LicenseTypeId)
+            .Where(m =>
+                m.Phase == "theoretical" ||
+                (m.Phase == "practical" && m.LicenseTypeId == license.LicenseTypeId)
+            )
             .OrderBy(m => m.Phase)
             .ThenBy(m => m.OrderIndex)
-            .Include(mt => mt.ModuleTranslations.Where(mt => mt.LanguageCode == culture))
+            .Include(m => m.ModuleTranslations
+                .Where(mt => mt.LanguageCode == culture))
             .ToListAsync();
 
         var progressMap = await _context.TraineeModuleProgresses
-            .Where(p => p.TraineeId == traineeId && p.TraineeLicenseId == traineeLicenseId)
+            .Where(p =>
+                p.TraineeId == traineeId &&
+                (
+                    p.Module.Phase == "theoretical" ||
+                    (
+                        p.Module.Phase == "practical" &&
+                        p.TraineeLicenseId == traineeLicenseId
+                    )
+                )
+            )
             .ToDictionaryAsync(p => p.ModuleId);
 
         var moduleIds = modules.Select(m => m.ModuleId).ToList();
@@ -173,7 +186,7 @@ public class ModuleService : IModuleService
             var prereqStatus = await _context.TraineeModuleProgresses
                 .Where(p => p.TraineeId == traineeId
                          && p.ModuleId == module.PrerequisiteModuleId.Value
-                         && p.TraineeLicenseId == traineeLicenseId)
+                         && p.Module.Phase == "theoretical")
                 .Select(p => p.Status)
                 .FirstOrDefaultAsync();
 
@@ -187,7 +200,14 @@ public class ModuleService : IModuleService
         var status = await _context.TraineeModuleProgresses
             .Where(p => p.TraineeId == traineeId
                      && p.ModuleId == moduleId
-                     && p.TraineeLicenseId == traineeLicenseId)
+                     && p.TraineeId == traineeId &&
+                        (
+                            p.Module.Phase == "theoretical" ||
+                            (
+                                p.Module.Phase == "practical" &&
+                                p.TraineeLicenseId == traineeLicenseId
+                            )
+                        ))
             .Select(p => p.Status)
             .FirstOrDefaultAsync() ?? "not_started";
 
@@ -290,10 +310,22 @@ public class ModuleService : IModuleService
     // ─────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult> StartModuleAsync(int traineeId, int traineeLicenseId, int moduleId)
     {
+        var phase = await _context.LearningModules
+            .Where(m => m.ModuleId == moduleId)
+            .Select(m => m.Phase)
+            .FirstOrDefaultAsync();
+
         var existing = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
                                    && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.TraineeId == traineeId &&
+                                        (
+                                            p.Module.Phase == "theoretical" ||
+                                            (
+                                                p.Module.Phase == "practical" &&
+                                                p.TraineeLicenseId == traineeLicenseId
+                                            )
+                                        ));
 
         if (existing != null)
             return ServiceResult.Success(); // already started or completed
@@ -318,7 +350,7 @@ public class ModuleService : IModuleService
         {
             TraineeId = traineeId,
             ModuleId = moduleId,
-            TraineeLicenseId = traineeLicenseId,
+            TraineeLicenseId = phase == "theoretical" ? null : traineeLicenseId,
             Status = "in_progress",
             StartedAt = DateTime.UtcNow
         });
@@ -342,7 +374,14 @@ public class ModuleService : IModuleService
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
                                    && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.TraineeId == traineeId &&
+                                        (
+                                            p.Module.Phase == "theoretical" ||
+                                            (
+                                                p.Module.Phase == "practical" &&
+                                                p.TraineeLicenseId == traineeLicenseId
+                                            )
+                                        ));
 
         if (progress == null)
             return ServiceResult.Failure("Module has not been started.");
@@ -378,7 +417,14 @@ public class ModuleService : IModuleService
 
         int completed = await _context.TraineeModuleProgresses
             .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
+                          && p.TraineeId == traineeId &&
+                            (
+                                p.Module.Phase == "theoretical" ||
+                                (
+                                    p.Module.Phase == "practical" &&
+                                    p.TraineeLicenseId == traineeLicenseId
+                                )
+                            )
                           && p.Status == "completed");
 
         license.ProgressPercentage = total == 0 ? 0 : (int)Math.Round((double)completed / total * 100);

@@ -644,7 +644,7 @@ CREATE TABLE Learning.TraineeModuleProgress (
     progress_id     INT PRIMARY KEY IDENTITY(1,1),
     trainee_id      INT          NOT NULL,
     module_id       INT          NOT NULL,
-    trainee_license_id INT          NOT NULL,
+    trainee_license_id INT          NULL,
     status          NVARCHAR(20) NOT NULL DEFAULT 'not_started'
                         CHECK (status IN ('not_started', 'in_progress', 'completed')),
     started_at      DATETIME2    NULL,

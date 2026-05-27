@@ -52,7 +52,14 @@ public class TraineeDashboardService : ITraineeDashboardService
         // 3. Progress records for this license
         var progressRecords = await _context.TraineeModuleProgresses
             .Where(p => p.TraineeId == traineeId
-                     && p.TraineeLicenseId == license.TraineeLicenseId)
+                     && p.TraineeId == traineeId &&
+                        (
+                            p.Module.Phase == "theoretical" ||
+                            (
+                                p.Module.Phase == "practical" &&
+                                p.TraineeLicenseId == license.TraineeLicenseId
+                            )
+                        ))
             .ToDictionaryAsync(p => p.ModuleId);
 
         // 4. Quiz info per module
