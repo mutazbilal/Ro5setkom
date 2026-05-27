@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.ViewModels.Registration;
+using System.Globalization;
 using System.Text.Json;
 
 namespace Rokhsetak.Controllers;
@@ -24,15 +25,15 @@ public class RegistrationController : Controller
 {
     private readonly IRegistrationService _registrationService;
     private readonly ILogger<RegistrationController> _logger;
-    private readonly ILicenseService _licenseService;
+    private readonly ILookupService _lookupService;
     public RegistrationController(
         IRegistrationService registrationService,
         ILogger<RegistrationController> logger,
-        ILicenseService licenseService)
+        ILookupService licenseService)
     {
         _registrationService = registrationService;
         _logger              = logger;
-        _licenseService      = licenseService;
+        _lookupService      = licenseService;
     }
 
     [HttpGet]
@@ -65,8 +66,10 @@ public class RegistrationController : Controller
         if (!ModelState.IsValid)
             return View("NationalIdLookup", model);
 
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
         var result = await _registrationService.LookupNationalIdAsync( 
-            model.NationalId, model.IsTrainee);
+            model.NationalId, model.IsTrainee, culture);
 
         if (!result.Succeeded)
         {
@@ -75,8 +78,10 @@ public class RegistrationController : Controller
         }
 
         var citizen          = result.Data!;
-        var licenseTypes     = await _licenseService.GetLicenseTypesAsync();
-        var trainingCenters = await _licenseService.GetTrainingCentersAsync();
+        var licenseTypes     = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture :"ar");
+        var trainingCenters = await _lookupService.GetTrainingCentersAsync(culture = culture != null? culture :"ar");
+        var cities = await _lookupService.GetCitiesAsync(culture = culture != null ? culture : "ar");
+        var provinces = await _lookupService.GetProvincesAsync(culture = culture != null ? culture : "ar");
 
         if (model.IsTrainee)
         {
@@ -93,6 +98,10 @@ public class RegistrationController : Controller
                 AddressLine2 = citizen.AddressLine2,
                 PostalCode   = citizen.PostalCode,
                 AvailableLicenseTypes = licenseTypes,
+                Provinces = provinces,
+                Cities = cities,
+                CityId = citizen.CityId,
+                ProvinceId = citizen.ProvinceId
             };
             _logger.LogInformation("National ID {NationalId} found for trainee registration. Prepopulating form.", model.NationalId);
             return View("CompleteTrainee", vm);
@@ -106,13 +115,15 @@ public class RegistrationController : Controller
                 LastName     = citizen.LastName,
                 DateOfBirth  = citizen.DateOfBirth,
                 Gender       = citizen.Gender,
-                Province     = citizen.Province,
-                City         = citizen.City,
                 AddressLine1 = citizen.AddressLine1,
                 AddressLine2 = citizen.AddressLine2,
                 PostalCode   = citizen.PostalCode,
                 AvailableLicenseTypes = licenseTypes,
-                AvailableTrainingCenters = trainingCenters
+                AvailableTrainingCenters = trainingCenters,
+                Provinces = provinces,
+                Cities = cities,
+                CityId = citizen.CityId,
+                ProvinceId = citizen.ProvinceId
             };
             return View("CompleteMentor", vm);
         }
@@ -127,12 +138,13 @@ public class RegistrationController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CompleteTrainee(TraineeRegistrationViewModel model)
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         string jsonString = JsonSerializer.Serialize(model);
         if (!ModelState.IsValid)
         {
             _logger.LogInformation("model state is invlaid");
             _logger.LogInformation(jsonString);
-            model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
+            model.AvailableLicenseTypes = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture : "ar");
             return View(model);
         }
         _logger.LogInformation("model state is valid");
@@ -143,7 +155,7 @@ public class RegistrationController : Controller
         if (!result.Succeeded)
         {
             ModelState.AddModelError(string.Empty, result.Error!);
-            model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
+            model.AvailableLicenseTypes = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture : "ar");
             return View(model);
         }
 
@@ -159,10 +171,11 @@ public class RegistrationController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CompleteMentor(MentorRegistrationViewModel model)
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         if (!ModelState.IsValid)
         {
-            model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
-            model.AvailableTrainingCenters = await _licenseService.GetTrainingCentersAsync();
+            model.AvailableLicenseTypes = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture : "ar");
+            model.AvailableTrainingCenters = await _lookupService.GetTrainingCentersAsync(culture = culture != null ? culture : "ar");
             return View(model);
         }
 
@@ -171,8 +184,8 @@ public class RegistrationController : Controller
         if (!result.Succeeded)
         {
             ModelState.AddModelError(string.Empty, result.Error!);
-            model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
-            model.AvailableTrainingCenters = await _licenseService.GetTrainingCentersAsync();
+            model.AvailableLicenseTypes = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture : "ar");
+            model.AvailableTrainingCenters = await _lookupService.GetTrainingCentersAsync(culture = culture != null ? culture : "ar");
             return View(model);
         }
 

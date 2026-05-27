@@ -18,6 +18,92 @@ public class MentorDashboardServiceTests
 
     private static void SeedMentor(RokhsetakDbContext ctx, int mentorId = 1)
     {
+        if (!ctx.Provinces.Any())
+        {
+            ctx.Provinces.AddRange(
+                new Province
+                {
+                    ProvinceId = 1,
+                    ProvinceKey = "amman",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                    }
+                },
+                new Province
+                {
+                    ProvinceId = 2,
+                    ProvinceKey = "zarqa",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
+
+        // ---------------- CITIES ----------------
+        if (!ctx.Cities.Any())
+        {
+            ctx.Cities.AddRange(
+                new City
+                {
+                    CityId = 1,
+                    ProvinceId = 1, // Amman
+                    CityKey = "ammancity",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                    }
+                },
+                new City
+                {
+                    CityId = 2,
+                    ProvinceId = 2, // Zarqa
+                    CityKey = "citykey",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
         ctx.Users.Add(new User
         {
             UserId = mentorId,
@@ -25,8 +111,8 @@ public class MentorDashboardServiceTests
             LastName = "Ali",
             Email = "ahmad@test.com",
             NationalId = "1234567890",
-            Province = "Zarqa",
-            City = "Zarqa",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "Street 1",
             PasswordHash = "hash",
             RoleId = 2
@@ -71,7 +157,92 @@ public class MentorDashboardServiceTests
     {
         using var ctx = CreateContext();
         SeedMentor(ctx);
+        if (!ctx.Provinces.Any())
+        {
+            ctx.Provinces.AddRange(
+                new Province
+                {
+                    ProvinceId = 1,
+                    ProvinceKey = "amman",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                    }
+                },
+                new Province
+                {
+                    ProvinceId = 2,
+                    ProvinceKey = "zarqa",
+                    ProvinceTranslations = new List<ProvinceTranslation>
+                    {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
 
+        // ---------------- CITIES ----------------
+        if (!ctx.Cities.Any())
+        {
+            ctx.Cities.AddRange(
+                new City
+                {
+                    CityId = 1,
+                    ProvinceId = 1, // Amman
+                    CityKey = "ammancity",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                    }
+                },
+                new City
+                {
+                    CityId = 2,
+                    ProvinceId = 2, // Zarqa
+                    CityKey = "citykey",
+                    CityTranslations = new List<CityTranslation>
+                    {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                    }
+                }
+            );
+        }
         ctx.LicenseTypes.Add(new LicenseType
         {
             LicenseTypeId = 1,
@@ -88,8 +259,8 @@ public class MentorDashboardServiceTests
             LastName = "Salem",
             Email = "sara@test.com",
             NationalId = "0987654321",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 2",
             PasswordHash = "hash",
             RoleId = 3
@@ -179,8 +350,8 @@ public class MentorDashboardServiceTests
             LastName = "Nour",
             Email = "leen@test.com",
             NationalId = "1111111111",
-            Province = "Amman",
-            City = "Amman",
+            ProvinceId = 1,
+            CityId = 1,
             AddressLine1 = "St 3",
             PasswordHash = "hash",
             RoleId = 3

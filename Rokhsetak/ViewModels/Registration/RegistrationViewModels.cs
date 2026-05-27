@@ -39,9 +39,11 @@ public class TraineeRegistrationViewModel
 
     [Display(Name = "Province")]
     public string Province { get; set; } = null!;
+    public int? ProvinceId { get; set; } = 0!;
 
     [Display(Name = "City")]
     public string City { get; set; } = null!;
+    public int? CityId { get; set; } = 0!;
 
     [Display(Name = "Address")]
     public string AddressLine1 { get; set; } = null!;
@@ -84,6 +86,8 @@ public class TraineeRegistrationViewModel
 
     // ─── UI only: populated by controller before rendering ─────────────────
     public List<LicenseTypeOption> AvailableLicenseTypes { get; set; } = new();
+    public List<CityOption> Cities { get; set; } = new();
+    public List<ProvinceOption> Provinces { get; set; } = new();
 }
 
 // Step 2 (Mentor) – separate ViewModel
@@ -106,10 +110,10 @@ public class MentorRegistrationViewModel
     public string Gender { get; set; } = null!;
 
     [Display(Name = "Province")]
-    public string Province { get; set; } = null!;
+    public int? ProvinceId { get; set; } = null!;
 
     [Display(Name = "City")]
-    public string City { get; set; } = null!;
+    public int? CityId { get; set; } = null!;
 
     [Display(Name = "Address")]
     public string AddressLine1 { get; set; } = null!;
@@ -166,8 +170,21 @@ public class MentorRegistrationViewModel
     // ─── UI ────────────────────────────────────────────────────────────────
     public List<LicenseTypeOption> AvailableLicenseTypes { get; set; } = new();
     public List<TrainingCenterOption> AvailableTrainingCenters { get; set; } = new();
+    public List<CityOption> Cities { get; set; } = new();
+    public List<ProvinceOption> Provinces { get; set; } = new();
 }
 
 // Lightweight option for dropdowns
 public record LicenseTypeOption(int Id, string Name, string? Description);
 public record TrainingCenterOption(int Id, string Name);
+
+public record ProvinceOption(
+    int ProvinceId,
+    string DisplayName
+);
+
+public record CityOption(
+    int? CityId,
+    int? ProvinceId,
+    string? DisplayName
+);

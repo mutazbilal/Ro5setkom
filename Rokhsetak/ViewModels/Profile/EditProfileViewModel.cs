@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Rokhsetak.ViewModels.Registration;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Rokhsetak.ViewModels.Profile
@@ -23,12 +24,12 @@ namespace Rokhsetak.ViewModels.Profile
         [Required(ErrorMessage = "Province is required.")]
         [StringLength(100, ErrorMessage = "Province cannot exceed 100 characters.")]
         [Display(Name = "Province")]
-        public string Province { get; set; } = null!;
+        public int? ProvinceId { get; set; }
 
         [Required(ErrorMessage = "City is required.")]
         [StringLength(100, ErrorMessage = "City cannot exceed 100 characters.")]
         [Display(Name = "City")]
-        public string City { get; set; } = null!;
+        public int? CityId { get; set; }
 
         [Required(ErrorMessage = "Address line 1 is required.")]
         [StringLength(200, ErrorMessage = "Address cannot exceed 200 characters.")]
@@ -54,5 +55,9 @@ namespace Rokhsetak.ViewModels.Profile
         public string Gender { get; set; }
         [ReadOnly(true)]
         public string NationalId { get; set; }
+
+        //UI
+        public List<ProvinceOption?> Provinces { get; set; }
+        public List<CityOption?> Cities { get; set; }
     }
 }

@@ -21,7 +21,7 @@ public class ExamAppointmentService : IExamAppointmentService
     // GET AVAILABLE EXAMS
     // ─────────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<ExamBookingViewModel>> GetAvailableExamsAsync(
-        int traineeId, string examType)
+        int traineeId, string examType, string culture = "ar")
     {
         if (examType is not ("theory" or "medical" or "practical"))
             return ServiceResult<ExamBookingViewModel>.Failure("Invalid exam type.");
@@ -47,7 +47,7 @@ public class ExamAppointmentService : IExamAppointmentService
             return ServiceResult<ExamBookingViewModel>.Success(vm); // show locked screen
 
         // ── Find eligible exam center (via mentor → training center → city) ───
-        var examCenterCity = await ResolveExamCenterCityAsync(traineeId, license);
+        var examCenterCityId = await ResolveExamCenterCityAsync(traineeId, license);
 
         // ── Query available slots ─────────────────────────────────────────────
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -69,8 +69,7 @@ public class ExamAppointmentService : IExamAppointmentService
         slotsQuery = slotsQuery.Where(e => !alreadyBooked.Contains(e.OfficialExamId));
 
         var slots = await slotsQuery
-            .Include(e => e.Center)
-            .Where(e => examCenterCity == null || e.Center.City == examCenterCity)
+            .Where(e => examCenterCityId == null || e.Center.CityId == examCenterCityId)
             .OrderBy(e => e.ExamDate)
             .ThenBy(e => e.ExamTime)
             .Take(20)
@@ -78,10 +77,14 @@ public class ExamAppointmentService : IExamAppointmentService
             {
                 OfficialExamId = e.OfficialExamId,
                 CenterName = e.Center.Name,
-                City = e.Center.City,
+                CityId = e.Center.CityId,
                 ExamDate = e.ExamDate,
                 ExamTime = e.ExamTime,
-                SlotsRemaining = e.TotalSlots - e.BookedSlots
+                SlotsRemaining = e.TotalSlots - e.BookedSlots,
+                CityName = e.Center.City.CityTranslations
+                    .Where(t => t.LanguageCode == culture)
+                    .Select(t => t.DisplayName)
+                    .FirstOrDefault(),
             })
             .ToListAsync();
 
@@ -188,7 +191,7 @@ public class ExamAppointmentService : IExamAppointmentService
     // GET MY EXAM APPOINTMENTS
     // ─────────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<ExamAppointmentListViewModel>> GetMyExamAppointmentsAsync(
-        int traineeId)
+        int traineeId, string culture)
     {
         var license = await _context.TraineeLicenses
             .FirstOrDefaultAsync(tl => tl.TraineeId == traineeId && tl.IsActive);
@@ -217,7 +220,15 @@ public class ExamAppointmentService : IExamAppointmentService
                 x.e.ExamDate,
                 x.e.ExamTime,
                 CenterName = x.c.Name,
-                City = x.c.City
+                City = x.c.City.CityTranslations
+                    .Where(ct => ct.CityId == x.c.CityId
+                           && ct.LanguageCode == culture)
+                    .Select(d => new
+                    {
+                        d.DisplayName,
+                        d.CityId
+                    })
+                    .FirstOrDefault()
             })
             .ToListAsync();
 
@@ -250,7 +261,8 @@ public class ExamAppointmentService : IExamAppointmentService
                 OfficialExamId = a.OfficialExamId,
                 ExamType = a.ExamType,
                 CenterName = a.CenterName,
-                City = a.City,
+                CityId = a.City.CityId,
+                CityName = a.City.DisplayName,
                 ExamDate = a.ExamDate,
                 ExamTime = a.ExamTime,
                 Status = a.Status,
@@ -394,7 +406,7 @@ public class ExamAppointmentService : IExamAppointmentService
         }
     }
 
-    private async Task<string?> ResolveExamCenterCityAsync(int traineeId, TraineeLicense license)
+    private async Task<int?> ResolveExamCenterCityAsync(int traineeId, TraineeLicense license)
     {
         // Mentor → TrainingCenter → City → GovExamCenters in same city
         if (license.MentorId == null) return null;
@@ -408,7 +420,7 @@ public class ExamAppointmentService : IExamAppointmentService
 
         return await _context.TrainingCenters
             .Where(tc => tc.CenterId == trainingCenterId)
-            .Select(tc => (string?)tc.City)
+            .Select(tc => (int?)tc.CityId)
             .FirstOrDefaultAsync();
     }
 

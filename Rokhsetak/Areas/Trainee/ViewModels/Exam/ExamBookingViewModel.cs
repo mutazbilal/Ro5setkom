@@ -13,7 +13,8 @@ public class ExamSlotViewModel
 {
     public int OfficialExamId { get; set; }
     public string CenterName { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
+    public int CityId { get; set; }
+    public string CityName {  get; set; } = string.Empty;
     public DateOnly ExamDate { get; set; }
     public TimeOnly ExamTime { get; set; }
     public int SlotsRemaining { get; set; }

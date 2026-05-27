@@ -9,9 +9,9 @@ public partial class GovExamCenter
 
     public string Name { get; set; } = null!;
 
-    public string Province { get; set; } = null!;
+    public int ProvinceId { get; set; }
 
-    public string City { get; set; } = null!;
+    public int CityId { get; set; }
 
     public string AddressLine1 { get; set; } = null!;
 
@@ -23,5 +23,9 @@ public partial class GovExamCenter
 
     public bool? IsActive { get; set; }
 
+    public virtual City City { get; set; } = null!;
+
     public virtual ICollection<GovOfficialExam> GovOfficialExams { get; set; } = new List<GovOfficialExam>();
+
+    public virtual Province Province { get; set; } = null!;
 }

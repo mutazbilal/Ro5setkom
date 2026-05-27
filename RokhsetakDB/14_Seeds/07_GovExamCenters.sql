@@ -1,9 +1,7 @@
-
-
 INSERT INTO Gov.GovExamCenters (
     name,
-    province,
-    city,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -15,21 +13,23 @@ VALUES
 -- =========================
 -- Amman Centers
 -- =========================
+
 (
-    N'Amman Central Driving Test Center',
-    N'Amman',
-    N'Amman',
-    N'University Street, near Traffic Department HQ',
+    N'مركز فحص السواقين الرئيسي - عمان',
+    1, -- Amman
+    1, -- Marj Al-Hammam (approx grouping center area)
+    N'شارع الجامعة - قرب مديرية السير',
     NULL,
     N'11118',
     N'06-535-1234',
     1
 ),
+
 (
-    N'Marj Al-Hammam Licensing Center',
-    N'Amman',
-    N'Marj Al-Hammam',
-    N'Asem Ben Nayef Street',
+    N'مركز ترخيص مرج الحمام',
+    1,
+    1,
+    N'شارع عاصم بن نايف',
     NULL,
     N'11732',
     N'06-420-8891',
@@ -39,21 +39,23 @@ VALUES
 -- =========================
 -- Zarqa Centers
 -- =========================
+
 (
-    N'Zarqa Driving Examination Center',
-    N'Az Zarqa',
-    N'Zarqa City',
-    N'Industrial Area Road 15',
+    N'مركز فحص السواقين الزرقاء',
+    2, -- Zarqa
+    5, -- Zarqa City
+    N'المنطقة الصناعية - شارع 15',
     NULL,
     N'13110',
     N'05-382-7710',
     1
 ),
+
 (
-    N'Russeifa Licensing Branch',
-    N'Az Zarqa',
-    N'Russeifa',
-    N'University Street Building 12',
+    N'فرع ترخيص الرصيفة',
+    2,
+    4, -- Russeifa
+    N'شارع الجامعة - مبنى رقم 12',
     NULL,
     N'13710',
     N'05-374-2201',
@@ -63,11 +65,12 @@ VALUES
 -- =========================
 -- Irbid Centers
 -- =========================
+
 (
-    N'Irbid Driving Test Center',
-    N'Irbid',
-    N'Irbid City',
-    N'University Street near Yarmouk University',
+    N'مركز فحص السواقين إربد',
+    3,
+    6, -- Ramtha area placeholder OR Irbid City depending your model
+    N'شارع الجامعة - قرب جامعة اليرموك',
     NULL,
     N'21110',
     N'02-724-5510',
@@ -77,11 +80,12 @@ VALUES
 -- =========================
 -- Aqaba Centers
 -- =========================
+
 (
-    N'Aqaba Licensing & Testing Center',
-    N'Aqaba',
-    N'Aqaba City',
-    N'Port Area Road',
+    N'مركز ترخيص وفحص العقبة',
+    4,
+    7,
+    N'منطقة الميناء - الطريق الرئيسي',
     NULL,
     N'77110',
     N'03-201-8899',
@@ -91,11 +95,12 @@ VALUES
 -- =========================
 -- Mafraq Centers
 -- =========================
+
 (
-    N'Mafraq Driving Examination Center',
-    N'Mafraq',
-    N'Mafraq City',
-    N'Central District Street',
+    N'مركز فحص السواقين المفرق',
+    5,
+    8,
+    N'الوسط التجاري - شارع الرئيسي',
     NULL,
     N'25110',
     N'02-623-4412',

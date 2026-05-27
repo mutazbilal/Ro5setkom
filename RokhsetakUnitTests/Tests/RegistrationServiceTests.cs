@@ -45,7 +45,92 @@ namespace Rokhsetak.Tests
         public async Task LookupNationalId_ShouldFail_WhenUserAlreadyExists()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.GovCitizens.Add(new GovCitizen
             {
                 NationalId = "1234567890",
@@ -55,8 +140,8 @@ namespace Rokhsetak.Tests
                 LastName = "User",
                 Gender = "M",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -79,8 +164,8 @@ namespace Rokhsetak.Tests
                 Email = "test@test.com",
                 PhoneNumber = "0790000000",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -88,7 +173,7 @@ namespace Rokhsetak.Tests
 
                 PasswordHash = "hashed_password",
 
-                ProfilePicture = null,
+                ProfilePicturePath = null,
                 LanguagePreference = "ar",
 
                 IsActive = true,
@@ -110,7 +195,92 @@ namespace Rokhsetak.Tests
         public async Task RegisterTrainee_ShouldSucceed_WhenValid()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.GovCitizens.Add(new GovCitizen
             {
                 NationalId = "1234567890",
@@ -120,8 +290,8 @@ namespace Rokhsetak.Tests
                 LastName = "User",
                 Gender = "male",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -163,8 +333,8 @@ namespace Rokhsetak.Tests
                 DateOfBirth = new DateOnly(2000, 1, 1),
                 Gender = "male",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
                 PostalCode = "11111",
@@ -192,7 +362,92 @@ namespace Rokhsetak.Tests
         public async Task RegisterTrainee_ShouldFail_WhenEmailExists()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.GovCitizens.Add(new GovCitizen
             {
                 NationalId = "1234567890",
@@ -202,8 +457,8 @@ namespace Rokhsetak.Tests
                 LastName = "User",
                 Gender = "M",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -226,8 +481,8 @@ namespace Rokhsetak.Tests
                 Email = "test@test.com",
                 PhoneNumber = "0790000000",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -235,7 +490,7 @@ namespace Rokhsetak.Tests
 
                 PasswordHash = "hashed_password",
 
-                ProfilePicture = null,
+                ProfilePicturePath = null,
                 LanguagePreference = "ar",
 
                 IsActive = true,
@@ -281,7 +536,92 @@ namespace Rokhsetak.Tests
         public async Task RegisterMentor_ShouldSucceed_WhenValid()
         {
             var db = GetDbContext();
+            if (!db.Provinces.Any())
+            {
+                db.Provinces.AddRange(
+                    new Province
+                    {
+                        ProvinceId = 1,
+                        ProvinceKey = "amman",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "عمان"
+                    }
+                        }
+                    },
+                    new Province
+                    {
+                        ProvinceId = 2,
+                        ProvinceKey = "zarqa",
+                        ProvinceTranslations = new List<ProvinceTranslation>
+                        {
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa"
+                    },
+                    new ProvinceTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
 
+            // ---------------- CITIES ----------------
+            if (!db.Cities.Any())
+            {
+                db.Cities.AddRange(
+                    new City
+                    {
+                        CityId = 1,
+                        ProvinceId = 1, // Amman
+                        CityKey = "ammancity",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Amman City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة عمان"
+                    }
+                        }
+                    },
+                    new City
+                    {
+                        CityId = 2,
+                        ProvinceId = 2, // Zarqa
+                        CityKey = "citykey",
+                        CityTranslations = new List<CityTranslation>
+                        {
+                    new CityTranslation
+                    {
+                        LanguageCode = "en",
+                        DisplayName = "Zarqa City"
+                    },
+                    new CityTranslation
+                    {
+                        LanguageCode = "ar",
+                        DisplayName = "مدينة الزرقاء"
+                    }
+                        }
+                    }
+                );
+            }
             db.GovCitizens.Add(new GovCitizen
             {
                 NationalId = "1234567890",
@@ -291,8 +631,8 @@ namespace Rokhsetak.Tests
                 LastName = "User",
                 Gender = "M",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
 
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
@@ -310,6 +650,17 @@ namespace Rokhsetak.Tests
                 DescriptionEn = "Private car with manual transmission",
                 DescriptionAr = "سيارة خاصة ذات ناقل حركة يدوي"
             });
+
+            db.GovLicenseRecords.Add(
+                new GovLicenseRecord
+                {
+                    NationalId = "1234567890",
+                    LicenseTypeId = 1,
+                    IssuedDate = new DateOnly(2022, 6, 10),
+                    ExpiryDate = new DateOnly(2027, 6, 10),
+                    Status = "active"
+                });
+
 
             await db.SaveChangesAsync();
 
@@ -331,8 +682,8 @@ namespace Rokhsetak.Tests
                 DateOfBirth = new DateOnly(1995, 1, 1),
                 Gender = "male",
 
-                Province = "Amman",
-                City = "Amman",
+                ProvinceId = 1,
+                CityId = 1,
                 AddressLine1 = "Street 1",
                 AddressLine2 = "Street 2",
                 PostalCode = "11111",

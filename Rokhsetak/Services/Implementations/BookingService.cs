@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Microsoft.AspNetCore.Mvc;
+using Rokhsetak.ViewModels.Registration;
 
 
 namespace Rokhsetak.Services.Implementations
@@ -12,18 +13,20 @@ namespace Rokhsetak.Services.Implementations
     {
         private readonly RokhsetakDbContext _context;
         private readonly INotificationService _notifications;
+        private readonly ILookupService _lookupService;
 
-        public BookingService(RokhsetakDbContext context, INotificationService notifications)
+        public BookingService(RokhsetakDbContext context, INotificationService notifications, ILookupService lookupService)
         {
             _context = context;
             _notifications = notifications;
+            _lookupService = lookupService;
         }
 
         // ─────────────────────────────────────────────────────────────────────────
         // BROWSE MENTORS
         // ─────────────────────────────────────────────────────────────────────────
         public async Task<ServiceResult<MentorBrowseListViewModel>> BrowseMentorsAsync(
-            int traineeId, MentorBrowseFilterViewModel filter)
+            int traineeId, MentorBrowseFilterViewModel filter, string culture)
         {
             // Trainee's active license type determines which mentors are shown
             var license = await _context.TraineeLicenses
@@ -42,8 +45,8 @@ namespace Rokhsetak.Services.Implementations
             var mentorQuery = _context.Mentors
                 .Where(m => approvedMentorIds.Contains(m.MentorId));
 
-            if (!string.IsNullOrWhiteSpace(filter.City))
-                mentorQuery = mentorQuery.Where(m => m.City == filter.City);
+            if (filter.CityId.HasValue)
+                mentorQuery = mentorQuery.Where(m => m.CityId == filter.CityId);
 
             if (filter.MinPrice.HasValue)
                 mentorQuery = mentorQuery.Where(m => m.PricePerSession >= filter.MinPrice.Value);
@@ -57,7 +60,6 @@ namespace Rokhsetak.Services.Implementations
             if (license.LicenseTypeId == 2)
                 mentorQuery = mentorQuery.Where(m => m.LicenseTypeId == 2);
 
-
             var mentors = await mentorQuery
                 .Join(_context.Users,
                       m => m.MentorId,
@@ -65,7 +67,7 @@ namespace Rokhsetak.Services.Implementations
                       (m, u) => new
                       {
                           m.MentorId,
-                          m.City,
+                          m.CityId,
                           m.LicenseTypeId,
                           m.PricePerSession,
                           FullName = u.FirstName + " " + u.LastName
@@ -76,11 +78,24 @@ namespace Rokhsetak.Services.Implementations
                       (m, lt) => new
                       {
                           m.MentorId,
-                          m.City,
+                          m.CityId,
                           m.PricePerSession,
                           m.FullName,
-                          LicenseName = lt.LicenseName
+                          LicenseName = culture == "ar"? lt.DisplayNameAr :lt.DisplayNameEn,
                       })
+                .Join(_context.CityTranslations
+                        .Where(ct => ct.LanguageCode == culture),
+                    m => m.CityId,
+                    ct => ct.CityId,
+                    (m, ct) => new
+                    {
+                        m.MentorId,
+                        m.CityId,
+                        m.PricePerSession,
+                        m.FullName,
+                        m.LicenseName,
+                        CityName = ct.DisplayName,
+                    })
                 .ToListAsync();
 
             var mentorIds = mentors.Select(m => m.MentorId).ToList();
@@ -104,7 +119,8 @@ namespace Rokhsetak.Services.Implementations
                 {
                     MentorId = m.MentorId,
                     FullName = m.FullName,
-                    City = m.City ?? string.Empty,
+                    CityName = m.CityName,
+                    CityId = m.CityId,
                     LicenseType = m.LicenseName,
                     PricePerSession = m.PricePerSession ?? 0,
                     AverageRating = Math.Round(rating?.Avg ?? 0, 1),
@@ -118,16 +134,7 @@ namespace Rokhsetak.Services.Implementations
                 cards = cards.Where(c => c.AverageRating >= filter.MinRating.Value);
 
             // Available cities for filter dropdown
-            var availableCities = await _context.Mentors
-                .Where(m => m.LicenseTypeId == license.LicenseTypeId
-                         && m.City != null
-                         && approvedMentorIds.Contains(m.MentorId))
-                .Select(m => m.City!)
-                .Distinct()
-                .OrderBy(c => c)
-                .ToListAsync();
-
-            filter.AvailableCities = availableCities;
+            var availableCities = await _lookupService.GetCitiesAsync(culture);
 
             var activeMentorId = await _context.TraineeLicenses
                 .Where(tl => tl.TraineeId == traineeId)
@@ -139,7 +146,8 @@ namespace Rokhsetak.Services.Implementations
             {
                 Mentors = cards.OrderByDescending(c => c.AverageRating).ToList(),
                 Filter = filter,
-                ActiveMentorId = activeMentorId
+                ActiveMentorId = activeMentorId,
+                Cities = availableCities
             };
 
             return ServiceResult<MentorBrowseListViewModel>.Success(vm);
@@ -149,7 +157,7 @@ namespace Rokhsetak.Services.Implementations
         // GET MENTOR BOOKING PAGE (availability + mentor info)
         // ─────────────────────────────────────────────────────────────────────────
         public async Task<ServiceResult<MentorBookingViewModel>> GetMentorBookingPageAsync(
-            int traineeId, int mentorId)
+            int traineeId, int mentorId, string culture)
         {
             var license = await _context.TraineeLicenses
                 .Include(tl => tl.LicenseType)
@@ -166,11 +174,24 @@ namespace Rokhsetak.Services.Implementations
                       (m, u) => new
                       {
                           m.MentorId,
-                          m.City,
+                          m.CityId,
                           m.PricePerSession,
                           m.LicenseTypeId,
                           FullName = u.FirstName + " " + u.LastName
                       })
+                .Join(_context.CityTranslations
+                        .Where(ct => ct.LanguageCode == culture),
+                    m => m.CityId,
+                    ct => ct.CityId,
+                    (m, ct) => new
+                    {
+                        m.MentorId,
+                        m.CityId,
+                        m.PricePerSession,
+                        m.LicenseTypeId,
+                        m.FullName,
+                        CityName = ct.DisplayName
+                    })
                 .FirstOrDefaultAsync();
 
             if (mentor == null)
@@ -220,7 +241,8 @@ namespace Rokhsetak.Services.Implementations
             {
                 MentorId = mentorId,
                 MentorName = mentor.FullName,
-                City = mentor.City ?? string.Empty,
+                CityId = mentor.CityId,
+                CityName = mentor.CityName,
                 LicenseType = licenseType?.LicenseName ?? string.Empty,
                 PricePerSession = mentor.PricePerSession ?? 0,
                 AverageRating = Math.Round(ratingData?.Avg ?? 0, 1),
@@ -568,9 +590,7 @@ namespace Rokhsetak.Services.Implementations
                         ? b.SessionFeedback.MentorNotes
                         : null,
 
-                    Score = b.Rating != null
-                        ? b.Rating.Score
-                        : null
+                    Score = b.Rating
                 })
                 .ToListAsync();
 

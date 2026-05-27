@@ -4,8 +4,8 @@ INSERT INTO Gov.GovCitizens (
     last_name,
     date_of_birth,
     gender,
-    province,
-    city,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -18,26 +18,27 @@ VALUES
 
 (
     N'2000649758',
-    N'Moath',
-    N'Freihat',
+    N'معاذ',
+    N'فريحات',
     '2003-04-03',
     N'male',
-    N'Az Zarqa',
-    N'Russeifa',
-    N'The Arabian University Street Building Number 54',
+    2, -- Zarqa
+    4, -- Russeifa
+    N'شارع الجامعة العربية - بناية رقم 54',
     NULL,
     N'13710',
     1
 ),
+
 (
     N'2000939089',
-    N'Abdalrahman',
-    N'Obeid',
+    N'عبدالرحمن',
+    N'عبيد',
     '2004-10-18',
     N'male',
-    N'Amman',
-    N'Marj Al-Hammam',
-    N'Asem-Ben Nayef Street',
+    1, -- Amman
+    1, -- Marj Al-Hammam
+    N'شارع عاصم بن نايف',
     NULL,
     N'11732',
     1
@@ -49,79 +50,84 @@ VALUES
 
 (
     N'2001123456',
-    N'Ahmad',
-    N'Al-Khalidi',
+    N'أحمد',
+    N'الخالدي',
     '2002-06-15',
     N'male',
-    N'Amman',
-    N'Tlaa Al-Ali',
-    N'King Abdullah II Street',
+    1,
+    2, -- Tlaa Al-Ali
+    N'شارع الملك عبدالله الثاني',
     NULL,
     N'11953',
     1
 ),
+
 (
     N'2001456781',
-    N'Yousef',
-    N'Abu Zaid',
+    N'يوسف',
+    N'أبو زيد',
     '2001-09-22',
     N'male',
-    N'Irbid',
-    N'Ramtha',
-    N'University Street',
+    3,
+    6, -- Ramtha
+    N'شارع الجامعة',
     NULL,
     N'21110',
     1
 ),
+
 (
     N'2001789452',
-    N'Khaled',
-    N'Jaber',
+    N'خالد',
+    N'جابر',
     '2005-02-10',
     N'male',
-    N'Aqaba',
-    N'Aqaba City',
-    N'Port Street',
+    4,
+    7, -- Aqaba City
+    N'شارع الميناء',
     NULL,
     N'77110',
     1
 ),
+
 (
     N'2001987345',
-    N'Omar',
-    N'Al-Salem',
+    N'عمر',
+    N'السالم',
     '2003-12-01',
     N'male',
-    N'Mafraq',
-    N'Mafraq City',
-    N'Central Market Street',
+    5,
+    8, -- Mafraq City
+    N'شارع السوق المركزي',
     NULL,
     N'25110',
     1
 ),
+
 (
     N'2001678910',
-    N'Hassan',
-    N'Al-Najjar',
+    N'حسن',
+    N'النجار',
     '2004-07-19',
     N'male',
-    N'Zarqa',
-    N'Zarqa City',
-    N'Industrial Street',
+    2,
+    5, -- Zarqa City
+    N'الشارع الصناعي',
     NULL,
     N'13110',
     1
 ),
+
 (
     N'2000493916',
-    N'Mutaz',
-    N'Alfrahneh',
+    N'معتز',
+    N'الفرحانة',
     '2002-06-18',
     N'male',
-    N'Amman',
-    N'Tabarbour',
-    N'Army st',
-    N'Southern Al-shaheed',
+    1,
+    3, -- Tabarbour
+    N'شارع الجيش',
+    N'جنوب الشهيد',
     N'11118',
     1
 );

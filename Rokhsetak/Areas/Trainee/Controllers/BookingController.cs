@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Trainee.ViewModels.Booking;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Trainee.Controllers;
 
@@ -36,18 +37,12 @@ public class BookingController : Controller
 
     // GET /Trainee/Booking/Browse
     public async Task<IActionResult> Browse(
-        string? city, decimal? minPrice, decimal? maxPrice, double? minRating)
+        MentorBrowseFilterViewModel filter)
     {
         var userId = User.GetUserId().Value;
-        var filter = new MentorBrowseFilterViewModel
-        {
-            City = city,
-            MinPrice = minPrice,
-            MaxPrice = maxPrice,
-            MinRating = minRating
-        };
 
-        var result = await _bookings.BrowseMentorsAsync(userId, filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _bookings.BrowseMentorsAsync(userId, filter, culture);
 
         if (!result.Succeeded)
         {
@@ -62,7 +57,8 @@ public class BookingController : Controller
     public async Task<IActionResult> Book(int mentorId)
     {
         var userId = User.GetUserId().Value;
-        var result = await _bookings.GetMentorBookingPageAsync(userId, mentorId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _bookings.GetMentorBookingPageAsync(userId, mentorId, culture);
 
         if (!result.Succeeded)
         {
@@ -82,7 +78,8 @@ public class BookingController : Controller
         {
             // Re-load page data on validation failure
             var userId2 = User.GetUserId().Value;
-            var page = await _bookings.GetMentorBookingPageAsync(userId2, model.MentorId);
+            var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var page = await _bookings.GetMentorBookingPageAsync(userId2, model.MentorId, culture);
             if (page.Succeeded) return View(page.Data);
             return RedirectToAction("Browse");
         }

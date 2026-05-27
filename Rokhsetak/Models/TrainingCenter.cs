@@ -7,11 +7,13 @@ public partial class TrainingCenter
 {
     public int CenterId { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string DisplayNameEn { get; set; } = null!;
 
-    public string Province { get; set; } = null!;
+    public string DisplayNameAr { get; set; } = null!;
 
-    public string City { get; set; } = null!;
+    public int ProvinceId { get; set; }
+
+    public int CityId { get; set; }
 
     public string AddressLine1 { get; set; } = null!;
 
@@ -29,7 +31,11 @@ public partial class TrainingCenter
 
     public DateTime? CreatedAt { get; set; }
 
+    public virtual City City { get; set; } = null!;
+
     public virtual ICollection<Mentor> Mentors { get; set; } = new List<Mentor>();
+
+    public virtual Province Province { get; set; } = null!;
 
     public virtual ICollection<Trainee> Trainees { get; set; } = new List<Trainee>();
 }

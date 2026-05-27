@@ -55,7 +55,7 @@ public class RegistrationService : IRegistrationService
     /// 4. (Trainee only) Citizen must not already hold an active government license.
     /// </summary>
     public async Task<ServiceResult<GovCitizenDto>> LookupNationalIdAsync(
-        string nationalId, bool isTrainee)
+        string nationalId, bool isTrainee, string culture = "ar")
     {
         var citizen = await _db.GovCitizens
             .AsNoTracking()
@@ -76,9 +76,6 @@ public class RegistrationService : IRegistrationService
             .FirstOrDefault();
         _logger.LogInformation("mentor license type: ", govRecordLicenseType);
 
-        if (govRecordLicenseType == 0)
-            return ServiceResult<GovCitizenDto>.Failure("You must have a registered license to become a mentor");
-
         // Already registered in the platform?
         var existingUser = await _db.Users
             .AsNoTracking()
@@ -88,6 +85,31 @@ public class RegistrationService : IRegistrationService
             return ServiceResult<GovCitizenDto>.Failure(
                 "This National ID is already registered. Please log in or contact support.");
 
+        if (govRecordLicenseType == 0)
+            return ServiceResult<GovCitizenDto>.Failure("You must have a registered license to become a mentor");
+        var province = await _db.Provinces
+            .Where(p => p.ProvinceId == citizen.ProvinceId)
+            .Select(p => p.ProvinceTranslations
+                .Where(t => t.LanguageCode == culture)
+                .Select(t => new
+                {
+                    t.DisplayName,
+                    t.ProvinceId
+                })
+                .FirstOrDefault())
+            .FirstOrDefaultAsync();
+
+        var city = await _db.Cities
+            .Where(c => c.CityId == citizen.CityId)
+            .Select(c => c.CityTranslations
+                .Where(t => t.LanguageCode == culture)
+                .Select(t => new
+                {
+                    t.DisplayName,
+                    t.CityId
+                })
+                .FirstOrDefault())
+            .FirstOrDefaultAsync();
 
         return ServiceResult<GovCitizenDto>.Success(new GovCitizenDto
         {
@@ -96,11 +118,13 @@ public class RegistrationService : IRegistrationService
             LastName     = citizen.LastName,
             DateOfBirth  = citizen.DateOfBirth,
             Gender       = citizen.Gender,
-            Province     = citizen.Province,
-            City         = citizen.City,
+            Province     = province.DisplayName != null? province.DisplayName :"",
+            City         = city.DisplayName != null? city.DisplayName :"",
             AddressLine1 = citizen.AddressLine1,
             AddressLine2 = citizen.AddressLine2,
-            PostalCode   = citizen.PostalCode
+            PostalCode   = citizen.PostalCode,
+            CityId       = city.CityId,
+            ProvinceId   = province.ProvinceId
         });
     }
 
@@ -131,6 +155,7 @@ public class RegistrationService : IRegistrationService
         if (licenseType == null)
             return ServiceResult.Failure("Invalid license type selected.");
 
+
         await using var tx = await _db.Database.BeginTransactionAsync();
         try
         {
@@ -143,8 +168,8 @@ public class RegistrationService : IRegistrationService
                 LastName         = model.LastName,
                 DateOfBirth      = model.DateOfBirth,
                 Gender           = model.Gender,
-                Province         = model.Province,
-                City             = model.City,
+                ProvinceId       = model.ProvinceId,
+                CityId           = model.CityId,
                 AddressLine1     = model.AddressLine1,
                 AddressLine2     = model.AddressLine2,
                 PostalCode       = model.PostalCode,
@@ -267,8 +292,8 @@ public class RegistrationService : IRegistrationService
                 LastName         = model.LastName,
                 DateOfBirth      = model.DateOfBirth,
                 Gender           = model.Gender,
-                Province         = model.Province,
-                City             = model.City,
+                ProvinceId       = model.ProvinceId,
+                CityId           = model.CityId,
                 AddressLine1     = model.AddressLine1,
                 AddressLine2     = model.AddressLine2,
                 PostalCode       = model.PostalCode,
@@ -288,7 +313,7 @@ public class RegistrationService : IRegistrationService
                 LicenseTypeId = model.LicenseTypeId,
                 VehicleType = model.VehicleType,
                 PricePerSession = model.PricePerSession,
-                City = model.City,
+                CityId = model.CityId,
                 TrainingCenterId = model.TrainingCenterId
             };
 

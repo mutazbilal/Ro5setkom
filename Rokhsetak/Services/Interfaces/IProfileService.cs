@@ -5,7 +5,7 @@ namespace Rokhsetak.Services.Interfaces
 {
     public interface IProfileService
     {
-        Task<ServiceResult<ProfileViewModel>> GetProfileAsync(int userId);
+        Task<ServiceResult<ProfileViewModel>> GetProfileAsync(int userId, string culture);
         Task<ServiceResult> UpdateProfileAsync(int userId, EditProfileViewModel model);
         Task<ServiceResult> ChangeLicenseAsync(int userId, int newLicenseTypeId);
         Task<ServiceResult> ChangeLanguageAsync(int userId, string language);

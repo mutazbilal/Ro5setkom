@@ -43,6 +43,18 @@ GO
 :r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\02_LicenseTypes.sql"
 GO
 
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\03_Provinces.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\04_ProvinceTranslations.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\05_Cities.sql"
+GO
+
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\01_Lookups\06_CityTranslations.sql"
+GO
+
 -- ============================================
 -- 4. GOVERNMENT MODULE
 -- ============================================
@@ -258,6 +270,9 @@ GO
 -- 16. SEEDS
 -- ============================================
 PRINT 'Seeding Data...';
+
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\10_Provinces_Cties.sql"
+GO
 
 :r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\14_Seeds\01_Roles.sql"
 GO

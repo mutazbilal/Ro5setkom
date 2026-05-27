@@ -54,7 +54,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IMentorAvailabilityService, MentorAvailabilityService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddScoped<ILicenseService, LicenseService>();
+builder.Services.AddScoped<ILookupService, LookupService>();
 
 builder.Services.AddScoped<ITraineeDashboardService, TraineeDashboardService>();
 builder.Services.AddScoped<IModuleService, ModuleService>();

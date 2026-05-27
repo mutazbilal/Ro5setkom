@@ -60,13 +60,13 @@
             <div class="filter-bar__grid">
 
                 <div class="form-field">
-                    <label asp-for="Filter.City" class="form-field__label form-field__label--small">City</label>
-                    <select asp-for="Filter.City"
+                    <label asp-for="@Model.Filter.CityId" class="form-field__label form-field__label--small">City</label>
+                    <select asp-for="@Model.Filter.CityId"
                             class="form-field__select form-field__select--sm">
                         <option value="">All cities</option>
-                        @foreach (var c in Model.Filter.AvailableCities)
+                        @foreach (var c in Model.Cities)
                         {
-                            <option value="@c">@c</option>
+                            <option value="@c.CityId">@c.DisplayName</option>
                         }
                     </select>
                 </div>
@@ -166,7 +166,7 @@
 
                             <p class="mentor-card__city">
                                 <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                                @m.City
+                                @m.CityName
                             </p>
 
                             <div class="mentor-card__stats">

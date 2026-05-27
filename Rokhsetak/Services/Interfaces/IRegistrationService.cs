@@ -9,7 +9,7 @@ namespace Rokhsetak.Services.Interfaces
         /// Looks up a citizen in GovCitizens by national ID and runs all
         /// pre-registration eligibility checks (shared by trainee & mentor flows).
         /// </summary>
-        Task<ServiceResult<GovCitizenDto>> LookupNationalIdAsync(string nationalId, bool isTrainee);
+        Task<ServiceResult<GovCitizenDto>> LookupNationalIdAsync(string nationalId, bool isTrainee, string culture = "ar");
 
         /// <summary>
         /// Creates User + Trainee + TraineeLicense + UserConsent in a single transaction.

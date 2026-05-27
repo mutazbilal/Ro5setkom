@@ -128,23 +128,116 @@ GO
 
 
 -- ============================================
+-- FILE: 01_Lookups\03_Provinces.sql
+-- ============================================
+
+CREATE TABLE Lookup.Provinces (
+    province_id INT PRIMARY KEY IDENTITY(1,1),
+
+    province_key NVARCHAR(50) NOT NULL UNIQUE
+);
+
+GO
+
+
+-- ============================================
+-- FILE: 01_Lookups\04_ProvinceTranslations.sql
+-- ============================================
+
+CREATE TABLE Lookup.ProvinceTranslations (
+    province_translation_id INT PRIMARY KEY IDENTITY(1,1),
+
+    province_id INT NOT NULL,
+    language_code NVARCHAR(5) NOT NULL,
+
+    display_name NVARCHAR(100) NOT NULL,
+
+    UNIQUE (province_id, language_code),
+
+    FOREIGN KEY (province_id)
+        REFERENCES Lookup.Provinces(province_id)
+        ON DELETE CASCADE
+);
+
+GO
+
+
+-- ============================================
+-- FILE: 01_Lookups\05_Cities.sql
+-- ============================================
+
+CREATE TABLE Lookup.Cities (
+    city_id INT PRIMARY KEY IDENTITY(1,1),
+
+    province_id INT NOT NULL,
+
+    city_key NVARCHAR(100) NOT NULL,
+
+    UNIQUE (province_id, city_key),
+
+    FOREIGN KEY (province_id)
+        REFERENCES Lookup.Provinces(province_id)
+);
+
+GO
+
+
+-- ============================================
+-- FILE: 01_Lookups\06_CityTranslations.sql
+-- ============================================
+
+CREATE TABLE Lookup.CityTranslations (
+    city_translation_id INT PRIMARY KEY IDENTITY(1,1),
+
+    city_id INT NOT NULL,
+    language_code NVARCHAR(5) NOT NULL,
+
+    display_name NVARCHAR(100) NOT NULL,
+
+    UNIQUE (city_id, language_code),
+
+    FOREIGN KEY (city_id)
+        REFERENCES Lookup.Cities(city_id)
+        ON DELETE CASCADE
+);
+
+GO
+
+
+-- ============================================
 -- FILE: 02_Government\01_GovCitizens.sql
 -- ============================================
 
 CREATE TABLE Gov.GovCitizens (
     national_id     NVARCHAR(10)  PRIMARY KEY,
+
     first_name      NVARCHAR(100) NOT NULL,
     last_name       NVARCHAR(100) NOT NULL,
+
     date_of_birth   DATE          NOT NULL,
-    gender          NVARCHAR(10)  NOT NULL CHECK (gender IN ('male', 'female')),
-    province       NVARCHAR(100) NOT NULL,
-    city           NVARCHAR(100) NOT NULL,
-    address_line1  NVARCHAR(255) NOT NULL,
-    address_line2  NVARCHAR(255),
-    postal_code    NVARCHAR(20),
-    is_eligible     BIT           DEFAULT 1,   -- false if citizen is barred from licensing
-    created_at      DATETIME2     DEFAULT GETDATE(),
-    updated_at      DATETIME2     DEFAULT GETDATE()
+
+    gender          NVARCHAR(10)
+        NOT NULL
+        CHECK (gender IN ('male', 'female')),
+
+    province_id     INT NOT NULL,
+    city_id         INT NOT NULL,
+
+    address_line1   NVARCHAR(255) NOT NULL,
+    address_line2   NVARCHAR(255),
+
+    postal_code     NVARCHAR(20),
+
+    is_eligible     BIT DEFAULT 1,
+
+    created_at      DATETIME2 DEFAULT GETDATE(),
+    updated_at      DATETIME2 DEFAULT GETDATE(),
+
+    FOREIGN KEY (province_id)
+        REFERENCES Lookup.Provinces(province_id),
+
+    FOREIGN KEY (city_id)
+        REFERENCES Lookup.Cities(city_id)
 );
 
 GO
@@ -157,14 +250,25 @@ GO
 -- Official exam centers where theory, medical, and practical tests are held
 CREATE TABLE Gov.GovExamCenters (
     center_id       INT PRIMARY KEY IDENTITY(1,1),
-    name            NVARCHAR(255) NOT NULL,
-    province        NVARCHAR(100) NOT NULL,
-    city            NVARCHAR(100) NOT NULL,
+
+    name            NVARCHAR(255) NOT NULL, -- optional fallback/internal name
+
+    province_id     INT NOT NULL,
+    city_id         INT NOT NULL,
+
     address_line1   NVARCHAR(255) NOT NULL,
     address_line2   NVARCHAR(255),
+
     postal_code     NVARCHAR(20),
     phone_number    NVARCHAR(20),
-    is_active       BIT DEFAULT 1
+
+    is_active       BIT DEFAULT 1,
+
+    FOREIGN KEY (province_id)
+        REFERENCES Lookup.Provinces(province_id),
+
+    FOREIGN KEY (city_id)
+        REFERENCES Lookup.Cities(city_id)
 );
 
 GO
@@ -256,20 +360,23 @@ CREATE TABLE Core.Users (
     gender              NVARCHAR(10)  CHECK (gender IN ('male', 'female')),
     email               NVARCHAR(255) UNIQUE NOT NULL,
     phone_number        NVARCHAR(20),
-    province            NVARCHAR(100) NOT NULL,
-    city                NVARCHAR(100) NOT NULL,
+    province_id         INT NOT NULL,
+    city_id             INT NOT NULL,
     address_line1       NVARCHAR(255) NOT NULL,
     address_line2       NVARCHAR(255),
     postal_code         NVARCHAR(20),
     password_hash       NVARCHAR(255) NOT NULL,
-    profile_picture     NVARCHAR(500),
+    profile_picture_path     NVARCHAR(500),
     language_preference NVARCHAR(5)   DEFAULT 'ar' CHECK (language_preference IN ('ar', 'en')),
     is_active           BIT           DEFAULT 1,
     created_at          DATETIME2     DEFAULT GETDATE(),
     updated_at          DATETIME2     DEFAULT GETDATE(),
 
     FOREIGN KEY (role_id)     REFERENCES Lookup.Roles(role_id),
-    FOREIGN KEY (national_id) REFERENCES Gov.GovCitizens(national_id)  -- identity must exist in gov registry
+    FOREIGN KEY (national_id) REFERENCES Gov.GovCitizens(national_id),  -- identity must exist in gov registry
+
+    FOREIGN KEY (province_id) REFERENCES Lookup.Provinces(province_id),
+    FOREIGN KEY (city_id) REFERENCES Lookup.Cities(city_id)
 );
 
 GO
@@ -369,11 +476,14 @@ CREATE TABLE Roles.Mentors (
     application_id       INT  NULL,
     price_per_session    DECIMAL(10, 2),
     vehicle_type         NVARCHAR(100),
-    city                 NVARCHAR(100),
+    city_id              INT,
     created_at           DATETIME2 DEFAULT GETDATE(),
 
     FOREIGN KEY (mentor_id)          REFERENCES Core.Users(user_id),
-    FOREIGN KEY (license_type_id)    REFERENCES Lookup.LicenseTypes(license_type_id)
+    FOREIGN KEY (license_type_id)    REFERENCES Lookup.LicenseTypes(license_type_id),
+
+    FOREIGN KEY (city_id)
+    REFERENCES Lookup.Cities(city_id)
 );
 
 GO
@@ -705,17 +815,30 @@ GO
 
 CREATE TABLE Learning.TrainingCenters (
     center_id      INT PRIMARY KEY IDENTITY(1,1),
-    name           NVARCHAR(255) NOT NULL,
-    province       NVARCHAR(100) NOT NULL,
-    city           NVARCHAR(100) NOT NULL,
+
+    display_name_en NVARCHAR(255) NOT NULL,
+    display_name_ar NVARCHAR(255) NOT NULL,
+
+    province_id    INT NOT NULL,
+    city_id        INT NOT NULL,
+
     address_line1  NVARCHAR(255) NOT NULL,
     address_line2  NVARCHAR(255),
+
     postal_code    NVARCHAR(20),
     phone_number   NVARCHAR(20),
     email          NVARCHAR(255) UNIQUE,
+
     license_number NVARCHAR(100) UNIQUE NOT NULL,
-    is_active      BIT       DEFAULT 1,
-    created_at     DATETIME2 DEFAULT GETDATE()
+
+    is_active      BIT DEFAULT 1,
+    created_at     DATETIME2 DEFAULT GETDATE(),
+
+    FOREIGN KEY (province_id)
+        REFERENCES Lookup.Provinces(province_id),
+
+    FOREIGN KEY (city_id)
+        REFERENCES Lookup.Cities(city_id)
 );
 
 GO
@@ -1213,6 +1336,95 @@ GO
 -- DATABASE SEED SCRIPT
 -- AUTO GENERATED
 -- ============================================
+
+
+-- ============================================
+-- FILE: 14_Seeds\10_Provinces_Cties.sql
+-- ============================================
+
+INSERT INTO Lookup.Provinces (province_key)
+VALUES
+('amman'),
+('zarqa'),
+('irbid'),
+('aqaba'),
+('mafraq');
+
+INSERT INTO Lookup.ProvinceTranslations (province_id, language_code, display_name)
+VALUES
+-- Amman
+(1, 'en', N'Amman'),
+(1, 'ar', N'عمّان'),
+
+-- Zarqa
+(2, 'en', N'Zarqa'),
+(2, 'ar', N'الزرقاء'),
+
+-- Irbid
+(3, 'en', N'Irbid'),
+(3, 'ar', N'إربد'),
+
+-- Aqaba
+(4, 'en', N'Aqaba'),
+(4, 'ar', N'العقبة'),
+
+-- Mafraq
+(5, 'en', N'Mafraq'),
+(5, 'ar', N'المفرق');
+
+INSERT INTO Lookup.Cities (province_id, city_key)
+VALUES
+-- Amman
+(1, 'marj_al_hammam'),
+(1, 'tlaa_al_ali'),
+(1, 'tabarbour'),
+
+-- Zarqa
+(2, 'russeifa'),
+(2, 'zarqa_city'),
+
+-- Irbid
+(3, 'ramtha'),
+
+-- Aqaba
+(4, 'aqaba_city'),
+
+-- Mafraq
+(5, 'mafraq_city');
+
+
+INSERT INTO Lookup.CityTranslations (city_id, language_code, display_name)
+VALUES
+-- Amman
+(1, 'en', N'Marj Al-Hammam'),
+(1, 'ar', N'مرج الحمام'),
+
+(2, 'en', N'Tlaa Al-Ali'),
+(2, 'ar', N'تلاع العلي'),
+
+(3, 'en', N'Tabarbour'),
+(3, 'ar', N'طبربور'),
+
+-- Zarqa
+(4, 'en', N'Russeifa'),
+(4, 'ar', N'الرصيفة'),
+
+(5, 'en', N'Zarqa City'),
+(5, 'ar', N'مدينة الزرقاء'),
+
+-- Irbid
+(6, 'en', N'Ramtha'),
+(6, 'ar', N'الرمثا'),
+
+-- Aqaba
+(7, 'en', N'Aqaba City'),
+(7, 'ar', N'مدينة العقبة'),
+
+-- Mafraq
+(8, 'en', N'Mafraq City'),
+(8, 'ar', N'مدينة المفرق');
+
+GO
 
 
 -- ============================================
@@ -5444,8 +5656,8 @@ INSERT INTO Gov.GovCitizens (
     last_name,
     date_of_birth,
     gender,
-    province,
-    city,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -5458,26 +5670,27 @@ VALUES
 
 (
     N'2000649758',
-    N'Moath',
-    N'Freihat',
+    N'معاذ',
+    N'فريحات',
     '2003-04-03',
     N'male',
-    N'Az Zarqa',
-    N'Russeifa',
-    N'The Arabian University Street Building Number 54',
+    2, -- Zarqa
+    4, -- Russeifa
+    N'شارع الجامعة العربية - بناية رقم 54',
     NULL,
     N'13710',
     1
 ),
+
 (
     N'2000939089',
-    N'Abdalrahman',
-    N'Obeid',
+    N'عبدالرحمن',
+    N'عبيد',
     '2004-10-18',
     N'male',
-    N'Amman',
-    N'Marj Al-Hammam',
-    N'Asem-Ben Nayef Street',
+    1, -- Amman
+    1, -- Marj Al-Hammam
+    N'شارع عاصم بن نايف',
     NULL,
     N'11732',
     1
@@ -5489,79 +5702,84 @@ VALUES
 
 (
     N'2001123456',
-    N'Ahmad',
-    N'Al-Khalidi',
+    N'أحمد',
+    N'الخالدي',
     '2002-06-15',
     N'male',
-    N'Amman',
-    N'Tlaa Al-Ali',
-    N'King Abdullah II Street',
+    1,
+    2, -- Tlaa Al-Ali
+    N'شارع الملك عبدالله الثاني',
     NULL,
     N'11953',
     1
 ),
+
 (
     N'2001456781',
-    N'Yousef',
-    N'Abu Zaid',
+    N'يوسف',
+    N'أبو زيد',
     '2001-09-22',
     N'male',
-    N'Irbid',
-    N'Ramtha',
-    N'University Street',
+    3,
+    6, -- Ramtha
+    N'شارع الجامعة',
     NULL,
     N'21110',
     1
 ),
+
 (
     N'2001789452',
-    N'Khaled',
-    N'Jaber',
+    N'خالد',
+    N'جابر',
     '2005-02-10',
     N'male',
-    N'Aqaba',
-    N'Aqaba City',
-    N'Port Street',
+    4,
+    7, -- Aqaba City
+    N'شارع الميناء',
     NULL,
     N'77110',
     1
 ),
+
 (
     N'2001987345',
-    N'Omar',
-    N'Al-Salem',
+    N'عمر',
+    N'السالم',
     '2003-12-01',
     N'male',
-    N'Mafraq',
-    N'Mafraq City',
-    N'Central Market Street',
+    5,
+    8, -- Mafraq City
+    N'شارع السوق المركزي',
     NULL,
     N'25110',
     1
 ),
+
 (
     N'2001678910',
-    N'Hassan',
-    N'Al-Najjar',
+    N'حسن',
+    N'النجار',
     '2004-07-19',
     N'male',
-    N'Zarqa',
-    N'Zarqa City',
-    N'Industrial Street',
+    2,
+    5, -- Zarqa City
+    N'الشارع الصناعي',
     NULL,
     N'13110',
     1
 ),
+
 (
     N'2000493916',
-    N'Mutaz',
-    N'Alfrahneh',
+    N'معتز',
+    N'الفرحانة',
     '2002-06-18',
     N'male',
-    N'Amman',
-    N'Tabarbour',
-    N'Army st',
-    N'Southern Al-shaheed',
+    1,
+    3, -- Tabarbour
+    N'شارع الجيش',
+    N'جنوب الشهيد',
     N'11118',
     1
 );
@@ -5636,8 +5854,8 @@ GO
 
 INSERT INTO Gov.GovExamCenters (
     name,
-    province,
-    city,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -5649,21 +5867,23 @@ VALUES
 -- =========================
 -- Amman Centers
 -- =========================
+
 (
-    N'Amman Central Driving Test Center',
-    N'Amman',
-    N'Amman',
-    N'University Street, near Traffic Department HQ',
+    N'مركز فحص السواقين الرئيسي - عمان',
+    1, -- Amman
+    1, -- Marj Al-Hammam (approx grouping center area)
+    N'شارع الجامعة - قرب مديرية السير',
     NULL,
     N'11118',
     N'06-535-1234',
     1
 ),
+
 (
-    N'Marj Al-Hammam Licensing Center',
-    N'Amman',
-    N'Marj Al-Hammam',
-    N'Asem Ben Nayef Street',
+    N'مركز ترخيص مرج الحمام',
+    1,
+    1,
+    N'شارع عاصم بن نايف',
     NULL,
     N'11732',
     N'06-420-8891',
@@ -5673,21 +5893,23 @@ VALUES
 -- =========================
 -- Zarqa Centers
 -- =========================
+
 (
-    N'Zarqa Driving Examination Center',
-    N'Az Zarqa',
-    N'Zarqa City',
-    N'Industrial Area Road 15',
+    N'مركز فحص السواقين الزرقاء',
+    2, -- Zarqa
+    5, -- Zarqa City
+    N'المنطقة الصناعية - شارع 15',
     NULL,
     N'13110',
     N'05-382-7710',
     1
 ),
+
 (
-    N'Russeifa Licensing Branch',
-    N'Az Zarqa',
-    N'Russeifa',
-    N'University Street Building 12',
+    N'فرع ترخيص الرصيفة',
+    2,
+    4, -- Russeifa
+    N'شارع الجامعة - مبنى رقم 12',
     NULL,
     N'13710',
     N'05-374-2201',
@@ -5697,11 +5919,12 @@ VALUES
 -- =========================
 -- Irbid Centers
 -- =========================
+
 (
-    N'Irbid Driving Test Center',
-    N'Irbid',
-    N'Irbid City',
-    N'University Street near Yarmouk University',
+    N'مركز فحص السواقين إربد',
+    3,
+    6, -- Ramtha area placeholder OR Irbid City depending your model
+    N'شارع الجامعة - قرب جامعة اليرموك',
     NULL,
     N'21110',
     N'02-724-5510',
@@ -5711,11 +5934,12 @@ VALUES
 -- =========================
 -- Aqaba Centers
 -- =========================
+
 (
-    N'Aqaba Licensing & Testing Center',
-    N'Aqaba',
-    N'Aqaba City',
-    N'Port Area Road',
+    N'مركز ترخيص وفحص العقبة',
+    4,
+    7,
+    N'منطقة الميناء - الطريق الرئيسي',
     NULL,
     N'77110',
     N'03-201-8899',
@@ -5725,11 +5949,12 @@ VALUES
 -- =========================
 -- Mafraq Centers
 -- =========================
+
 (
-    N'Mafraq Driving Examination Center',
-    N'Mafraq',
-    N'Mafraq City',
-    N'Central District Street',
+    N'مركز فحص السواقين المفرق',
+    5,
+    8,
+    N'الوسط التجاري - شارع الرئيسي',
     NULL,
     N'25110',
     N'02-623-4412',
@@ -5744,9 +5969,10 @@ GO
 -- ============================================
 
 INSERT INTO Learning.TrainingCenters (
-    name,
-    province,
-    city,
+    display_name_en,
+    display_name_ar,
+    province_id,
+    city_id,
     address_line1,
     address_line2,
     postal_code,
@@ -5760,10 +5986,12 @@ VALUES
 -- =========================
 -- Amman
 -- =========================
+
 (
     N'Al-Mustaqbal Driving Academy',
-    N'Amman',
-    N'Amman',
+    N'أكاديمية المستقبل لتعليم القيادة',
+    1, -- Amman
+    1, -- Marj Al-Hammam (default main area)
     N'Gardens Street, Building 45',
     NULL,
     N'11118',
@@ -5772,10 +6000,12 @@ VALUES
     N'TC-AMM-1001',
     1
 ),
+
 (
     N'Royal Road Safety Institute',
-    N'Amman',
-    N'Tlaa Al-Ali',
+    N'معهد الملكي للسلامة المرورية',
+    1,
+    2, -- Tlaa Al-Ali
     N'King Abdullah II Street',
     NULL,
     N'11953',
@@ -5788,10 +6018,12 @@ VALUES
 -- =========================
 -- Zarqa
 -- =========================
+
 (
     N'Zarqa Professional Driving School',
-    N'Az Zarqa',
-    N'Zarqa City',
+    N'مدرسة الزرقاء المهنية لتعليم القيادة',
+    2, -- Zarqa
+    5, -- Zarqa City
     N'Industrial Zone Road',
     NULL,
     N'13110',
@@ -5804,10 +6036,12 @@ VALUES
 -- =========================
 -- Irbid
 -- =========================
+
 (
     N'Irbid Safe Driving Center',
-    N'Irbid',
-    N'Irbid City',
+    N'مركز إربد الآمن لتعليم القيادة',
+    3, -- Irbid
+    6, -- Ramtha / Irbid region
     N'University Street near Yarmouk University',
     NULL,
     N'21110',
@@ -5820,10 +6054,12 @@ VALUES
 -- =========================
 -- Aqaba
 -- =========================
+
 (
     N'Aqaba Maritime Driving Academy',
-    N'Aqaba',
-    N'Aqaba City',
+    N'أكاديمية العقبة البحرية لتعليم القيادة',
+    4, -- Aqaba
+    7, -- Aqaba City
     N'Port Area Road',
     NULL,
     N'77110',
@@ -5841,52 +6077,54 @@ GO
 -- ============================================
 
 SET IDENTITY_INSERT Core.Users ON;
-INSERT INTO [RokhsetakDB].[Core].[Users]
+
+INSERT INTO Core.Users
 (
-    [user_id],
-    [role_id],
-    [national_id],
-    [first_name],
-    [last_name],
-    [date_of_birth],
-    [gender],
-    [email],
-    [phone_number],
-    [province],
-    [city],
-    [address_line1],
-    [address_line2],
-    [postal_code],
-    [password_hash],
-    [profile_picture],
-    [language_preference],
-    [is_active],
-    [created_at],
-    [updated_at]
+    user_id,
+    role_id,
+    national_id,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    email,
+    phone_number,
+    province_id,
+    city_id,
+    address_line1,
+    address_line2,
+    postal_code,
+    password_hash,
+    profile_picture_path,
+    language_preference,
+    is_active,
+    created_at,
+    updated_at
 )
 VALUES
 (
     1,
     1,
-    2000939089,
-    'Abdalrahman',
-    'Obeid',
+    N'2000939089',
+    N'عبدالرحمن',
+    N'عبيد',
     '2004-10-18',
-    'male',
-    'aboudaboudiua2@gmail.com',
-    '078152830',
-    'Amman',
-    'Marj Al-Hammam',
-    'Asem-Ben Nayef Street',
+    N'male',
+    N'aboudaboudiua2@gmail.com',
+    N'078152830',
+    1, -- Amman
+    1, -- Marj Al-Hammam
+    N'شارع عاصم بن نايف',
     NULL,
-    '11732',
-    '$2a$11$cKsXAbTDzl6bx/GC0tDaHORqtNqlnAc7044jB/BK3v1cxMvbJrLTu',
+    N'11732',
+    N'$2a$11$cKsXAbTDzl6bx/GC0tDaHORqtNqlnAc7044jB/BK3v1cxMvbJrLTu',
     NULL,
-    'en',
+    N'en',
     1,
     GETDATE(),
     GETDATE()
-)
+);
+
 SET IDENTITY_INSERT Core.Users OFF;
 
 INSERT INTO Roles.Trainees

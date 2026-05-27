@@ -97,11 +97,61 @@ window.AuthShared = (() => {
         input.addEventListener('change', () => { if (input.files?.[0]) applyFile(input.files[0]); });
         removeBtn?.addEventListener('click', (e) => { e.stopPropagation(); clearFile(); });
     }
+    function wireDependentCityDropdown(
+        provinceSelector,
+        citySelector
+    ) {
+        const provinceSelect = document.querySelector(provinceSelector);
+        const citySelect = document.querySelector(citySelector);
+
+        if (!provinceSelect || !citySelect) return;
+
+        function filterCities() {
+
+            const selectedProvinceId = provinceSelect.value;
+
+            citySelect.querySelectorAll('option').forEach(option => {
+
+                // Keep placeholder visible
+                if (!option.value) {
+                    option.hidden = false;
+                    return;
+                }
+
+                const provinceId = option.dataset.provinceId;
+
+                option.hidden = provinceId !== selectedProvinceId;
+            });
+
+            // Reset invalid selected city
+            const selectedCity = citySelect.selectedOptions[0];
+
+            if (
+                selectedCity &&
+                selectedCity.value &&
+                selectedCity.dataset.provinceId !== selectedProvinceId
+            ) {
+                citySelect.value = '';
+            }
+        }
+
+        provinceSelect.addEventListener('change', filterCities);
+
+        // Initial filtering for pre-selected values
+        filterCities();
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
         initFloatingLabels();
         initPasswordToggle();
     });
 
-    return { initFloatingLabels, initPasswordToggle, shake, toFileSize, wireDropzone };
+    return {
+        initFloatingLabels,
+        initPasswordToggle,
+        shake,
+        toFileSize,
+        wireDropzone,
+        wireDependentCityDropdown
+    };
 })();
