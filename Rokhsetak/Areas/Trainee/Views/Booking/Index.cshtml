@@ -1,5 +1,6 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @model TraineeBookingListViewModel
+
 @{
 	ViewData["Title"] = "My Bookings";
 }
@@ -21,6 +22,7 @@
 				</button>
 			</div>
 		}
+
 		@if (TempData["Success"] != null)
 		{
 			<div class="alert alert--success" role="status">
@@ -30,122 +32,196 @@
 					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
 				</button>
 			</div>
-		
+		}
+
 		<div class="booking-header">
 			<h2 class="booking-header__title">My Bookings</h2>
-			<a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+
+			<a asp-area="Trainee"
+			   asp-controller="Booking"
+			   asp-action="Browse"
 			   class="btn btn--primary">
 				<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
 				Find a Mentor
 			</a>
 		</div>
+
+		@if (!Model.Bookings.Any())
+		{
+			<div class="empty-state">
+				<i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
+
+				<p class="empty-state__text">
+					You have no bookings yet.
+				</p>
+
+				<a asp-area="Trainee"
+				   asp-controller="Booking"
+				   asp-action="Browse"
+				   class="btn btn--secondary">
+					Browse Mentors
+				</a>
+			</div>
 		}
 		else
 		{
-		<div class="table-responsive">
-			<table class="table table-hover align-middle">
-				<thead class="table-dark">
-					<tr>
-						<th>Mentor</th>
-						<th>Date &amp; Time</th>
-						<th>Type</th>
-						<th>Status</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var b in Model.Bookings)
-					{
-						var rowClass = b.Status switch
-						{
-							"pending" => "table-warning",
-							"confirmed" => "table-light",
-							"completed" => "table-success",
-							"cancelled" => "table-secondary",
-							_ => ""
-						};
-						<tr class="@rowClass">
-							<td class="fw-semibold">@b.MentorName</td>
-							<td>
-								<div class="fw-semibold">@b.BookingDate.ToString("dd MMM yyyy")</div>
-								<div class="text-muted small">
-									@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")
-								</div>
-							</td>
-							<td>
-								<span class="badge @(b.SessionType == "practical" ? "bg-warning text-dark" : "bg-info text-dark")">
-									@b.SessionType
-								</span>
-							</td>
-							<td>
-								@{
-									var (sc, sl) = b.Status switch
-									{
-										"pending" => ("bg-warning text-dark", "Pending"),
-										"confirmed" => ("bg-primary", "Confirmed"),
-										"completed" => ("bg-success", "Completed"),
-										"cancelled" => ("bg-secondary", "Cancelled"),
-										_ => ("bg-light text-dark", b.Status)
-									};
-								}
-								<span class="badge @sc">@sl</span>
-							</td>
-							<td>
-								<div class="d-flex gap-1 flex-wrap">
-									@if (b.CanReschedule)
-									{
-										<a asp-area="Trainee" asp-controller="Booking"
-										   asp-action="Reschedule" asp-route-bookingId="@b.BookingId"
-										   class="btn btn-outline-secondary btn-sm">
-											<i class="bi bi-arrow-repeat"></i> Reschedule
-										</a>
-									}
-									@if (b.CanCancel)
-									{
-										<form asp-area="Trainee" asp-controller="Booking"
-											  asp-action="Cancel" method="post">
-											@Html.AntiForgeryToken()
-											<input type="hidden" name="bookingId" value="@b.BookingId" />
-											<button class="btn btn-outline-danger btn-sm"
-													onclick="return confirm('Cancel this session?')">
-												<i class="bi bi-x-circle"></i> Cancel
-											</button>
-										</form>
-									}
-									@if (b.CanSeeFeedback)
-									{
-										<button type="button"
-												class="btn btn-outline-primary btn-sm feedback-btn"
-												data-feedback="@b.Feedback"
-												data-mentor="@b.MentorName">
-											<i class="bi bi-chat-left-text"></i> See Feedback
-										</button>
-									}
-									@if (b.CanRate)
-									{
-										<button type="button"
-												class="btn btn-outline-warning btn-sm rate-btn"
-												data-booking-id="@b.BookingId"
-												data-mentor="@b.MentorName">
-											<i class="bi bi-star"></i> Rate Session
-										</button>
-									}
-									@if (!b.CanCancel
-										&& !b.CanReschedule
-										&& !b.CanRate
-										&& !b.CanSeeFeedback)
-									{
-										<span class="text-muted small">—</span>
-									}
-								</div>
-							</td>
+			<div class="bookings-table-wrap">
+				<table class="bookings-table">
+					<thead>
+						<tr>
+							<th scope="col">Mentor</th>
+							<th scope="col">Date &amp; Time</th>
+							<th scope="col">Type</th>
+							<th scope="col">Status</th>
+							<th scope="col">Actions</th>
 						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
+					</thead>
+
+					<tbody>
+						@foreach (var b in Model.Bookings)
+						{
+							var rowClass = "is-" + b.Status;
+							var typeClass = b.SessionType == "practical"
+								? "type-pill--practical"
+								: "type-pill--theoretical";
+
+							var statusClass = "status-pill--" + b.Status;
+
+							var statusLabel =
+								char.ToUpper(b.Status[0]) + b.Status.Substring(1);
+
+							<tr class="@rowClass">
+
+								<td class="bookings-table__mentor"
+									data-label="Mentor">
+									@b.MentorName
+								</td>
+
+								<td data-label="Date &amp; Time">
+
+									<div class="bookings-table__date">
+										@b.BookingDate.ToString("dd MMM yyyy")
+									</div>
+
+									<div class="bookings-table__time">
+										@b.StartTime.ToString("HH:mm")
+										–
+										@b.EndTime.ToString("HH:mm")
+									</div>
+
+								</td>
+
+								<td data-label="Type">
+									<span class="type-pill @typeClass">
+										@b.SessionType
+									</span>
+								</td>
+
+								<td data-label="Status">
+									<span class="status-pill @statusClass">
+										@statusLabel
+									</span>
+								</td>
+
+								<td data-label="Actions">
+
+									<div class="bookings-table__actions">
+
+										@if (b.CanReschedule)
+										{
+											<a asp-area="Trainee"
+											   asp-controller="Booking"
+											   asp-action="Reschedule"
+											   asp-route-bookingId="@b.BookingId"
+											   class="btn btn--secondary btn--sm">
+
+												<i class="fa-solid fa-arrows-rotate"
+												   aria-hidden="true"></i>
+
+												Reschedule
+											</a>
+										}
+
+										@if (b.CanCancel)
+										{
+											<form asp-area="Trainee"
+												  asp-controller="Booking"
+												  asp-action="Cancel"
+												  method="post"
+												  class="btn-form"
+												  data-confirm="Cancel this session?">
+
+												@Html.AntiForgeryToken()
+
+												<input type="hidden"
+													   name="bookingId"
+													   value="@b.BookingId" />
+
+												<button type="submit"
+														class="btn btn--danger btn--sm">
+
+													<i class="fa-solid fa-circle-xmark"
+													   aria-hidden="true"></i>
+
+													Cancel
+												</button>
+
+											</form>
+										}
+
+										@if (b.CanSeeFeedback)
+										{
+											<button type="button"
+													class="btn btn--secondary btn--sm feedback-btn"
+													data-feedback="@b.Feedback"
+													data-mentor="@b.MentorName">
+
+												<i class="fa-solid fa-comment"
+												   aria-hidden="true"></i>
+
+												See Feedback
+											</button>
+										}
+
+										@if (b.CanRate)
+										{
+											<button type="button"
+													class="btn btn--secondary btn--sm rate-btn"
+													data-booking-id="@b.BookingId"
+													data-mentor="@b.MentorName">
+
+												<i class="fa-solid fa-star"
+												   aria-hidden="true"></i>
+
+												Rate Session
+											</button>
+										}
+
+										@if (!b.CanCancel
+											&& !b.CanReschedule
+											&& !b.CanRate
+											&& !b.CanSeeFeedback)
+										{
+											<span class="bookings-table__placeholder">
+												—
+											</span>
+										}
+
+									</div>
+
+								</td>
+
+							</tr>
+						}
+					</tbody>
+
+				</table>
+			</div>
 		}
+
 	</div>
+
+	<!-- Feedback Modal -->
 	<div class="modal fade" id="feedbackModal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -174,6 +250,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Rating Modal -->
 	<div class="modal fade" id="ratingModal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -186,6 +264,7 @@
 					@Html.AntiForgeryToken()
 
 					<div class="modal-header">
+
 						<h5 class="modal-title">
 							Rate Session
 						</h5>
@@ -194,6 +273,7 @@
 								class="btn-close"
 								data-bs-dismiss="modal">
 						</button>
+
 					</div>
 
 					<div class="modal-body">
@@ -205,6 +285,7 @@
 						<h6 id="ratingMentorName"></h6>
 
 						<div class="mb-3">
+
 							<label class="form-label">
 								Rating
 							</label>
@@ -212,24 +293,45 @@
 							<select class="form-select"
 									name="Score"
 									required>
-								<option value="">Choose rating</option>
-								<option value="1">1 - Very Poor</option>
-								<option value="2">2 - Poor</option>
-								<option value="3">3 - Average</option>
-								<option value="4">4 - Good</option>
-								<option value="5">5 - Excellent</option>
+
+								<option value="">
+									Choose rating
+								</option>
+
+								<option value="1">
+									1 - Very Poor
+								</option>
+
+								<option value="2">
+									2 - Poor
+								</option>
+
+								<option value="3">
+									3 - Average
+								</option>
+
+								<option value="4">
+									4 - Good
+								</option>
+
+								<option value="5">
+									5 - Excellent
+								</option>
+
 							</select>
+
 						</div>
 
 						<div class="mb-3">
+
 							<label class="form-label">
 								Review (Optional)
 							</label>
 
 							<textarea class="form-control"
 									  name="Review"
-									  rows="4">
-                        </textarea>
+									  rows="4"></textarea>
+
 						</div>
 
 					</div>
@@ -254,163 +356,81 @@
 			</div>
 		</div>
 	</div>
-	<script>
 
-			document.addEventListener("DOMContentLoaded", function () {
-
-				// =========================
-				// Feedback Modal
-				// =========================
-
-				const feedbackModal =
-					new bootstrap.Modal(
-						document.getElementById('feedbackModal'));
-
-				const feedbackText =
-					document.getElementById('feedbackText');
-
-				const feedbackMentorName =
-					document.getElementById('feedbackMentorName');
-
-				document.querySelectorAll('.feedback-btn')
-					.forEach(btn => {
-
-						btn.addEventListener('click', function () {
-
-							feedbackText.innerText =
-								this.dataset.feedback || "No feedback available.";
-
-							feedbackMentorName.innerText =
-								"Mentor: " + this.dataset.mentor;
-
-							feedbackModal.show();
-
-						});
-
-					});
-
-				// =========================
-				// Rating Modal
-				// =========================
-
-				const ratingModal =
-					new bootstrap.Modal(
-						document.getElementById('ratingModal'));
-
-				const ratingBookingId =
-					document.getElementById('ratingBookingId');
-
-				const ratingMentorName =
-					document.getElementById('ratingMentorName');
-
-				document.querySelectorAll('.rate-btn')
-					.forEach(btn => {
-
-						btn.addEventListener('click', function () {
-
-							ratingBookingId.value =
-								this.dataset.bookingId;
-
-							ratingMentorName.innerText =
-								"Mentor: " + this.dataset.mentor;
-
-							ratingModal.show();
-
-						});
-
-					});
-
-			});
-
-	</script>
-
-	@if (!Model.Bookings.Any())
-	{
-		<div class="empty-state">
-			<i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
-			<p class="empty-state__text">You have no bookings yet.</p>
-			<a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-			   class="btn btn--secondary">Browse Mentors</a>
-		</div>
-	}
-	else
-	{
-		<div class="bookings-table-wrap">
-			<table class="bookings-table">
-				<thead>
-					<tr>
-						<th scope="col">Mentor</th>
-						<th scope="col">Date &amp; Time</th>
-						<th scope="col">Type</th>
-						<th scope="col">Status</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var b in Model.Bookings)
-					{
-						var rowClass = "is-" + b.Status;
-						var typeClass = b.SessionType == "practical" ? "type-pill--practical" : "type-pill--theoretical";
-						var statusClass = "status-pill--" + b.Status;
-						var statusLabel = char.ToUpper(b.Status[0]) + b.Status.Substring(1);
-
-						<tr class="@rowClass">
-							<td class="bookings-table__mentor" data-label="Mentor">@b.MentorName</td>
-							<td data-label="Date &amp; Time">
-								<div class="bookings-table__date">@b.BookingDate.ToString("dd MMM yyyy")</div>
-								<div class="bookings-table__time">
-									@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")
-								</div>
-							</td>
-							<td data-label="Type">
-								<span class="type-pill @typeClass">@b.SessionType</span>
-							</td>
-							<td data-label="Status">
-								<span class="status-pill @statusClass">@statusLabel</span>
-							</td>
-							<td data-label="Actions">
-								<div class="bookings-table__actions">
-									@if (b.CanReschedule)
-									{
-										<a asp-area="Trainee" asp-controller="Booking"
-										   asp-action="Reschedule"
-										   asp-route-bookingId="@b.BookingId"
-										   class="btn btn--secondary btn--sm">
-											<i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-											Reschedule
-										</a>
-									}
-									@if (b.CanCancel)
-									{
-										<form asp-area="Trainee" asp-controller="Booking"
-											  asp-action="Cancel"
-											  method="post"
-											  class="btn-form"
-											  data-confirm="Cancel this session?">
-											@Html.AntiForgeryToken()
-											<input type="hidden" name="bookingId" value="@b.BookingId" />
-											<button type="submit" class="btn btn--danger btn--sm">
-												<i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
-												Cancel
-											</button>
-										</form>
-									}
-									@if (!b.CanCancel && !b.CanReschedule)
-									{
-										<span class="bookings-table__placeholder">—</span>
-									}
-								</div>
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
-	}
-
-</div>
 </div>
 
 @section Scripts {
-	<script src="~/js/booking-shared.js" asp-append-version="true"></script>
+
+	<script src="~/js/booking-shared.js"
+			asp-append-version="true"></script>
+
+	<script>
+
+		document.addEventListener("DOMContentLoaded", function () {
+
+			// =========================
+			// Feedback Modal
+			// =========================
+
+			const feedbackModal =
+				new bootstrap.Modal(
+					document.getElementById('feedbackModal'));
+
+			const feedbackText =
+				document.getElementById('feedbackText');
+
+			const feedbackMentorName =
+				document.getElementById('feedbackMentorName');
+
+			document.querySelectorAll('.feedback-btn')
+				.forEach(btn => {
+
+					btn.addEventListener('click', function () {
+
+						feedbackText.innerText =
+							this.dataset.feedback || "No feedback available.";
+
+						feedbackMentorName.innerText =
+							"Mentor: " + this.dataset.mentor;
+
+						feedbackModal.show();
+
+					});
+
+				});
+
+			// =========================
+			// Rating Modal
+			// =========================
+
+			const ratingModal =
+				new bootstrap.Modal(
+					document.getElementById('ratingModal'));
+
+			const ratingBookingId =
+				document.getElementById('ratingBookingId');
+
+			const ratingMentorName =
+				document.getElementById('ratingMentorName');
+
+			document.querySelectorAll('.rate-btn')
+				.forEach(btn => {
+
+					btn.addEventListener('click', function () {
+
+						ratingBookingId.value =
+							this.dataset.bookingId;
+
+						ratingMentorName.innerText =
+							"Mentor: " + this.dataset.mentor;
+
+						ratingModal.show();
+
+					});
+
+				});
+
+		});
+
+	</script>
 }

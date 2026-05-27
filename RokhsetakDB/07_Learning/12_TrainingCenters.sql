@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Learning.TrainingCenters (
     center_id      INT PRIMARY KEY IDENTITY(1,1),
     name           NVARCHAR(255) NOT NULL,

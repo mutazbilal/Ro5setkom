@@ -69,6 +69,16 @@ public class RegistrationService : IRegistrationService
             return ServiceResult<GovCitizenDto>.Failure(
                 "You are not eligible to register. Please contact the licensing authority.");
 
+
+        var govRecordLicenseType = _db.GovLicenseRecords
+            .Where(lr => lr.NationalId == nationalId)
+            .Select(m => m.LicenseTypeId)
+            .FirstOrDefault();
+        _logger.LogInformation("mentor license type: ", govRecordLicenseType);
+
+        if (govRecordLicenseType == 0)
+            return ServiceResult<GovCitizenDto>.Failure("You must have a registered license to become a mentor");
+
         // Already registered in the platform?
         var existingUser = await _db.Users
             .AsNoTracking()
@@ -219,6 +229,26 @@ public class RegistrationService : IRegistrationService
         var licenseType = await _db.LicenseTypes.FindAsync(model.LicenseTypeId);
         if (licenseType == null)
             return ServiceResult.Failure("Invalid license type selected.");
+
+        var mentorCitizen = await _db.GovCitizens
+            .Where(gc => gc.NationalId == model.NationalId)
+                .Include(gc => gc.GovLicenseRecords)
+            .FirstOrDefaultAsync();
+
+        var govRecordLicenseType = mentorCitizen.GovLicenseRecords
+            .Where(lr => lr.NationalId == mentorCitizen.NationalId)
+            .Select(m => m.LicenseTypeId)
+            .FirstOrDefault();
+        _logger.LogInformation("mentor license type: ", govRecordLicenseType);
+
+        if (govRecordLicenseType == null)
+            return ServiceResult.Failure("You must have a registered license to become a mentor");
+        if (govRecordLicenseType == 3 && model.LicenseTypeId == 1)
+            return ServiceResult.Failure("You cant teach automatic if you only have an motorcycle license");
+        if (govRecordLicenseType == 2 && model.LicenseTypeId == 1)
+            return ServiceResult.Failure("You cant teach manual if you only have an automatic license");
+        if (govRecordLicenseType != 3 && model.LicenseTypeId == 3)
+            return ServiceResult.Failure("You cant teach motorcycle if you dont have a license");
 
         // Validate and persist certification file
         var certPathResult = await SaveCertificationFileAsync(model.CertificationFile);

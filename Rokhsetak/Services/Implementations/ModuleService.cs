@@ -115,10 +115,18 @@ public class ModuleService : IModuleService
                             && a.TraineeLicenseId == traineeLicenseId);
         }
 
+        var licenseName = "";
+        if (culture == "en")
+            licenseName = license.LicenseType.DisplayNameEn;
+        else if (culture == "ar")
+            licenseName = license.LicenseType.DisplayNameAr;
+        else
+            return ServiceResult<ModuleListViewModel>.Failure("Invalid Culture Code");
+
         var vm = new ModuleListViewModel
         {
             TraineeLicenseId = traineeLicenseId,
-            LicenseTypeName = license.LicenseType.DisplayNameEn,
+            LicenseTypeName = licenseName,
             IsMockExamAvailable = allTheoreticalDone && mockQuiz != null,
             IsMockExamCompleted = mockCompleted,
             TheoreticalModules = cards.Where(c => c.Phase == "theoretical").ToList(),

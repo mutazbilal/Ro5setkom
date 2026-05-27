@@ -70,7 +70,7 @@ public class RegistrationController : Controller
 
         if (!result.Succeeded)
         {
-            ModelState.AddModelError(string.Empty, result.Error!);
+            ModelState.AddModelError(string.Empty, result.Error);
             return View("NationalIdLookup", model);
         }
 
