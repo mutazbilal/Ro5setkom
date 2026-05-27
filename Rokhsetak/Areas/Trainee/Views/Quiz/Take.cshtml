@@ -1,84 +1,116 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Quiz;
+@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@using System.Text.RegularExpressions;
 @model QuizViewModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Regex.Replace(Model.Title, "<.*?>", string.Empty);
 }
 
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold mb-0">@Model.Title</h3>
-        <span class="badge bg-info text-dark">@Model.Questions.Count Questions</span>
-    </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/quiz.css" asp-append-version="true" />
+}
 
-    <div class="alert alert-light border mb-4">
-        Passing score: <strong>@Model.PassingScore%</strong>. You may reattempt if you do not pass.
-    </div>
+<div class="quiz-page">
+    <div class="quiz-shell">
 
-    <form asp-area="Trainee" asp-controller="Quiz" asp-action="Submit" method="post"
-          id="quizForm">
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="QuizId" value="@Model.QuizId" />
-        <input type="hidden" name="TraineeLicenseId" value="@Model.TraineeLicenseId" />
-        <input type="hidden" name="ModuleId" value="@Model.ModuleId" />
+        <header class="quiz-header">
+            <div class="quiz-header__row">
+                <h1 class="quiz-header__title">@Html.Raw(Model.Title)</h1>
+                <div class="quiz-header__meta">
+                    <span class="quiz-chip" aria-label="@Model.Questions.Count questions in this quiz">
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                        @Model.Questions.Count Questions
+                    </span>
+                </div>
+            </div>
+        </header>
 
-        @for (int i = 0; i < Model.Questions.Count; i++)
-        {
-            var q = Model.Questions[i];
-            <div class="card shadow-sm mb-3" id="q-@q.QuestionId">
-                <div class="card-body">
-                    <p class="fw-semibold mb-3">
-                        <span class="badge bg-secondary me-2">@(i + 1)</span>
-                        @Html.Raw(q.QuestionText)
-                    </p>
-                    <div class="d-flex flex-column gap-2">
+        <div class="quiz-banner" role="note">
+            <span class="quiz-banner__icon" aria-hidden="true">
+                <i class="fa-solid fa-circle-info"></i>
+            </span>
+            <span>
+                <span class="quiz-banner__title">Passing score: @Model.PassingScore%</span>
+                Take your time. If you don’t pass on this attempt, you can retake the quiz as many times as you need.
+            </span>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="quiz-validation"></div>
+
+        <form asp-area="Trainee"
+              asp-controller="Quiz"
+              asp-action="Submit"
+              method="post"
+              data-quiz-form
+              novalidate>
+            @Html.AntiForgeryToken()
+
+            @* Bound to QuizViewModel — names match SubmitQuizViewModel so model binding works on POST. *@
+            <input type="hidden" asp-for="QuizId" />
+            <input type="hidden" asp-for="TraineeLicenseId" />
+            <input type="hidden" asp-for="ModuleId" />
+
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                var q = Model.Questions[i];
+                var legendId = $"q-legend-{q.QuestionId}";
+
+                <div class="quiz-question" id="q-@q.QuestionId" aria-labelledby="@legendId">
+                    <div class="quiz-question__legend">
+                        <span class="quiz-question__number" aria-hidden="true">@(i + 1)</span>
+                        <div class="quiz-question__text" id="@legendId">
+                            @Html.Raw(q.QuestionText)
+                        </div>
+                    </div>
+
+                    <div class="quiz-options" role="radiogroup" aria-labelledby="@legendId">
                         @foreach (var opt in q.Options)
                         {
-                            <div class="form-check quiz-option p-2 rounded border">
-                                <input class="form-check-input"
+                            var optId = $"opt-{q.QuestionId}-{opt.OptionId}";
+
+                            <label class="quiz-option" for="@optId">
+                                @*
+                                    NOTE: The radio name must be "Answers[QuestionId]" so that
+                                    ASP.NET binds it to SubmitQuizViewModel.Answers (Dictionary<int,int>).
+                                    asp-for cannot express a dictionary key based on a dynamic loop
+                                    variable, so the literal name attribute is intentional here.
+                                *@
+                                <input class="quiz-option__input"
                                        type="radio"
+                                       id="@optId"
                                        name="Answers[@q.QuestionId]"
-                                       id="opt-@opt.OptionId"
                                        value="@opt.OptionId"
-                                       required />
-                                <label class="form-check-label w-100" for="opt-@opt.OptionId">
-                                    @opt.OptionText
-                                </label>
-                            </div>
+                                       required
+                                       aria-required="true" />
+                                <span class="quiz-option__dot" aria-hidden="true"></span>
+                                <span class="quiz-option__label">@Html.Raw(opt.OptionText)</span>
+                            </label>
                         }
                     </div>
                 </div>
-            </div>
-        }
+            }
 
-        <div class="d-flex justify-content-between mt-4">
-            <a asp-area="Trainee" asp-controller="Modules" asp-action="Detail"
-                   asp-route-id="@Model.ModuleId" class="btn btn-outline-secondary">
-                ← Cancel
-            </a>
-            <button type="submit" class="btn btn-primary px-4" id="submitBtn">
-                <i class="bi bi-send-check"></i> Submit Quiz
-            </button>
-        </div>
-    </form>
+            <div class="quiz-actions">
+                <a asp-area="Trainee"
+                   asp-controller="Modules"
+                   asp-action="Detail"
+                   asp-route-id="@Model.ModuleId"
+                   class="quiz-btn quiz-btn--ghost">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="quiz-btn quiz-btn--primary"
+                        data-quiz-submit>
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    <span data-quiz-submit-label data-loading-text="Submitting…">Submit Quiz</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
-    <script>
-        // Prevent accidental double-submit
-        document.getElementById('quizForm').addEventListener('submit', function () {
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').textContent = 'Submitting...';
-        });
-
-        // Highlight selected option
-        document.querySelectorAll('.quiz-option').forEach(function (label) {
-            label.querySelector('input').addEventListener('change', function () {
-                const name = this.name;
-                document.querySelectorAll(`input[name="${name}"]`).forEach(function (r) {
-                    r.closest('.quiz-option').classList.remove('border-primary', 'bg-primary', 'bg-opacity-10');
-                });
-                this.closest('.quiz-option').classList.add('border-primary', 'bg-primary', 'bg-opacity-10');
-            });
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
 }

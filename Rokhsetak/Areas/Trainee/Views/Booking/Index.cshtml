@@ -2,435 +2,445 @@
 @model TraineeBookingListViewModel
 
 @{
-	ViewData["Title"] = "My Bookings";
+    ViewData["Title"] = "My Bookings";
+
+    // Pre-count for tabs
+    var counts = new {
+        all       = Model.Bookings.Count,
+        pending   = Model.Bookings.Count(b => b.Status == "pending"),
+        confirmed = Model.Bookings.Count(b => b.Status == "confirmed"),
+        completed = Model.Bookings.Count(b => b.Status == "completed"),
+        cancelled = Model.Bookings.Count(b => b.Status == "cancelled")
+    };
 }
 
 @section Styles {
-	<link rel="stylesheet" href="~/css/booking-shared.css" />
+    <link rel="stylesheet" href="~/css/booking-shared.css" asp-append-version="true" />
 }
 
 <div class="booking-page">
-	<div class="booking-page__inner">
-
-		@if (TempData["Error"] != null)
-		{
-			<div class="alert alert--error" role="alert">
-				<i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
-				<div class="alert__body">@TempData["Error"]</div>
-				<button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
-					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
-				</button>
-			</div>
-		}
-
-		@if (TempData["Success"] != null)
-		{
-			<div class="alert alert--success" role="status">
-				<i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
-				<div class="alert__body">@TempData["Success"]</div>
-				<button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
-					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
-				</button>
-			</div>
-		}
-
-		<div class="booking-header">
-			<h2 class="booking-header__title">My Bookings</h2>
-
-			<a asp-area="Trainee"
-			   asp-controller="Booking"
-			   asp-action="Browse"
-			   class="btn btn--primary">
-				<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-				Find a Mentor
-			</a>
-		</div>
-
-		@if (!Model.Bookings.Any())
-		{
-			<div class="empty-state">
-				<i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
-
-				<p class="empty-state__text">
-					You have no bookings yet.
-				</p>
-
-				<a asp-area="Trainee"
-				   asp-controller="Booking"
-				   asp-action="Browse"
-				   class="btn btn--secondary">
-					Browse Mentors
-				</a>
-			</div>
-		}
-		else
-		{
-			<div class="bookings-table-wrap">
-				<table class="bookings-table">
-					<thead>
-						<tr>
-							<th scope="col">Mentor</th>
-							<th scope="col">Date &amp; Time</th>
-							<th scope="col">Type</th>
-							<th scope="col">Status</th>
-							<th scope="col">Actions</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						@foreach (var b in Model.Bookings)
-						{
-							var rowClass = "is-" + b.Status;
-							var typeClass = b.SessionType == "practical"
-								? "type-pill--practical"
-								: "type-pill--theoretical";
-
-							var statusClass = "status-pill--" + b.Status;
-
-							var statusLabel =
-								char.ToUpper(b.Status[0]) + b.Status.Substring(1);
-
-							<tr class="@rowClass">
-
-								<td class="bookings-table__mentor"
-									data-label="Mentor">
-									@b.MentorName
-								</td>
-
-								<td data-label="Date &amp; Time">
-
-									<div class="bookings-table__date">
-										@b.BookingDate.ToString("dd MMM yyyy")
-									</div>
-
-									<div class="bookings-table__time">
-										@b.StartTime.ToString("HH:mm")
-										–
-										@b.EndTime.ToString("HH:mm")
-									</div>
-
-								</td>
-
-								<td data-label="Type">
-									<span class="type-pill @typeClass">
-										@b.SessionType
-									</span>
-								</td>
-
-								<td data-label="Status">
-									<span class="status-pill @statusClass">
-										@statusLabel
-									</span>
-								</td>
-
-								<td data-label="Actions">
-
-									<div class="bookings-table__actions">
-
-										@if (b.CanReschedule)
-										{
-											<a asp-area="Trainee"
-											   asp-controller="Booking"
-											   asp-action="Reschedule"
-											   asp-route-bookingId="@b.BookingId"
-											   class="btn btn--secondary btn--sm">
-
-												<i class="fa-solid fa-arrows-rotate"
-												   aria-hidden="true"></i>
-
-												Reschedule
-											</a>
-										}
-
-										@if (b.CanCancel)
-										{
-											<form asp-area="Trainee"
-												  asp-controller="Booking"
-												  asp-action="Cancel"
-												  method="post"
-												  class="btn-form"
-												  data-confirm="Cancel this session?">
-
-												@Html.AntiForgeryToken()
-
-												<input type="hidden"
-													   name="bookingId"
-													   value="@b.BookingId" />
-
-												<button type="submit"
-														class="btn btn--danger btn--sm">
-
-													<i class="fa-solid fa-circle-xmark"
-													   aria-hidden="true"></i>
-
-													Cancel
-												</button>
-
-											</form>
-										}
-
-										@if (b.CanSeeFeedback)
-										{
-											<button type="button"
-													class="btn btn--secondary btn--sm feedback-btn"
-													data-feedback="@b.Feedback"
-													data-mentor="@b.MentorName">
-
-												<i class="fa-solid fa-comment"
-												   aria-hidden="true"></i>
-
-												See Feedback
-											</button>
-										}
-
-										@if (b.CanRate)
-										{
-											<button type="button"
-													class="btn btn--secondary btn--sm rate-btn"
-													data-booking-id="@b.BookingId"
-													data-mentor="@b.MentorName">
-
-												<i class="fa-solid fa-star"
-												   aria-hidden="true"></i>
-
-												Rate Session
-											</button>
-										}
-
-										@if (!b.CanCancel
-											&& !b.CanReschedule
-											&& !b.CanRate
-											&& !b.CanSeeFeedback)
-										{
-											<span class="bookings-table__placeholder">
-												—
-											</span>
-										}
-
-									</div>
-
-								</td>
-
-							</tr>
-						}
-					</tbody>
-
-				</table>
-			</div>
-		}
-
-	</div>
-
-	<!-- Feedback Modal -->
-	<div class="modal fade" id="feedbackModal" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<h5 class="modal-title">
-						Mentor Feedback
-					</h5>
-
-					<button type="button"
-							class="btn-close"
-							data-bs-dismiss="modal">
-					</button>
-				</div>
-
-				<div class="modal-body">
-
-					<h6 id="feedbackMentorName"></h6>
-
-					<div class="border rounded p-3 bg-light"
-						 id="feedbackText">
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Rating Modal -->
-	<div class="modal fade" id="ratingModal" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-
-				<form asp-area="Trainee"
-					  asp-controller="Booking"
-					  asp-action="Rate"
-					  method="post">
-
-					@Html.AntiForgeryToken()
-
-					<div class="modal-header">
-
-						<h5 class="modal-title">
-							Rate Session
-						</h5>
-
-						<button type="button"
-								class="btn-close"
-								data-bs-dismiss="modal">
-						</button>
-
-					</div>
-
-					<div class="modal-body">
-
-						<input type="hidden"
-							   id="ratingBookingId"
-							   name="BookingId" />
-
-						<h6 id="ratingMentorName"></h6>
-
-						<div class="mb-3">
-
-							<label class="form-label">
-								Rating
-							</label>
-
-							<select class="form-select"
-									name="Score"
-									required>
-
-								<option value="">
-									Choose rating
-								</option>
-
-								<option value="1">
-									1 - Very Poor
-								</option>
-
-								<option value="2">
-									2 - Poor
-								</option>
-
-								<option value="3">
-									3 - Average
-								</option>
-
-								<option value="4">
-									4 - Good
-								</option>
-
-								<option value="5">
-									5 - Excellent
-								</option>
-
-							</select>
-
-						</div>
-
-						<div class="mb-3">
-
-							<label class="form-label">
-								Review (Optional)
-							</label>
-
-							<textarea class="form-control"
-									  name="Review"
-									  rows="4"></textarea>
-
-						</div>
-
-					</div>
-
-					<div class="modal-footer">
-
-						<button type="button"
-								class="btn btn-secondary"
-								data-bs-dismiss="modal">
-							Cancel
-						</button>
-
-						<button type="submit"
-								class="btn btn-warning">
-							Submit Rating
-						</button>
-
-					</div>
-
-				</form>
-
-			</div>
-		</div>
-	</div>
-
+    <div class="booking-page__inner">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert--error" role="alert">
+                <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Error"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert--success" role="status">
+                <i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Success"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <div class="booking-header">
+            <h2 class="booking-header__title">My Bookings</h2>
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+               class="btn btn--primary">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                Find a Mentor
+            </a>
+        </div>
+
+        @if (Model.PrimaryMentorId.HasValue)
+        {
+            <div class="primary-mentor-banner">
+                <div class="primary-mentor-banner__icon" aria-hidden="true">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="primary-mentor-banner__text">
+                    <div class="primary-mentor-banner__label">Your Primary Mentor</div>
+                    <div class="primary-mentor-banner__name">@Model.PrimaryMentorName</div>
+                </div>
+                <div class="primary-mentor-banner__action">
+                    <a asp-area="Trainee" asp-controller="Booking" asp-action="Book"
+                       asp-route-mentorId="@Model.PrimaryMentorId"
+                       class="btn btn--sm" style="background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.25);">
+                        <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
+                        Book Again
+                    </a>
+                </div>
+            </div>
+        }
+
+        @if (!Model.Bookings.Any())
+        {
+            <div class="empty-state">
+                <i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
+                <p class="empty-state__text">You have no bookings yet.</p>
+                <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+                   class="btn btn--secondary">Browse Mentors</a>
+            </div>
+        }
+        else
+        {
+            <div class="booking-tabs" role="tablist" aria-label="Filter bookings by status">
+                <button type="button" class="booking-tab is-active" data-filter="all" role="tab">
+                    All <span class="booking-tab__count">@counts.all</span>
+                </button>
+                <button type="button" class="booking-tab" data-filter="pending" role="tab">
+                    Pending <span class="booking-tab__count">@counts.pending</span>
+                </button>
+                <button type="button" class="booking-tab" data-filter="confirmed" role="tab">
+                    Confirmed <span class="booking-tab__count">@counts.confirmed</span>
+                </button>
+                <button type="button" class="booking-tab" data-filter="completed" role="tab">
+                    Completed <span class="booking-tab__count">@counts.completed</span>
+                </button>
+                <button type="button" class="booking-tab" data-filter="cancelled" role="tab">
+                    Cancelled <span class="booking-tab__count">@counts.cancelled</span>
+                </button>
+            </div>
+
+            <div class="bookings-table-wrap">
+                <table class="bookings-table" id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mentor</th>
+                            <th scope="col">Date &amp; Time</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var b in Model.Bookings)
+                        {
+                            var rowClass = "is-" + b.Status;
+                            var typeClass = b.SessionType == "practical"
+                                ? "type-pill--practical"
+                                : "type-pill--theoretical";
+                            var statusClass = "status-pill--" + b.Status;
+                            var statusLabel = b.Status.Length > 0
+                                ? char.ToUpper(b.Status[0]) + b.Status.Substring(1)
+                                : b.Status;
+
+                            <tr class="@rowClass" data-status="@b.Status">
+
+                                <td class="bookings-table__mentor" data-label="Mentor">
+                                    @b.MentorName
+                                </td>
+
+                                <td data-label="Date &amp; Time">
+                                    <div class="bookings-table__date">
+                                        @b.BookingDate.ToString("ddd, dd MMM yyyy")
+                                    </div>
+                                    <div class="bookings-table__time">
+                                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                        @b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")
+                                    </div>
+                                </td>
+
+                                <td data-label="Type">
+                                    <span class="type-pill @typeClass">@b.SessionType</span>
+                                </td>
+
+                                <td data-label="Status">
+                                    <span class="status-pill @statusClass">@statusLabel</span>
+                                </td>
+
+                                <td data-label="Actions">
+                                    <div class="bookings-table__actions">
+
+                                        @if (b.CanReschedule)
+                                        {
+                                            <a asp-area="Trainee" asp-controller="Booking"
+                                               asp-action="Reschedule"
+                                               asp-route-bookingId="@b.BookingId"
+                                               class="btn btn--secondary btn--sm">
+                                                <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                                                Reschedule
+                                            </a>
+                                        }
+
+                                        @if (b.CanCancel)
+                                        {
+                                            <form asp-area="Trainee" asp-controller="Booking"
+                                                  asp-action="Cancel"
+                                                  method="post"
+                                                  class="btn-form"
+                                                  onsubmit="return confirm('Cancel this session?');">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="bookingId" value="@b.BookingId" />
+                                                <button type="submit" class="btn btn--danger btn--sm">
+                                                    <i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>
+                                                    Cancel
+                                                </button>
+                                            </form>
+                                        }
+
+                                        @if (b.CanRate)
+                                        {
+                                            <button type="button"
+                                                    class="btn btn--warning btn--sm rate-btn"
+                                                    data-booking-id="@b.BookingId"
+                                                    data-mentor="@b.MentorName">
+                                                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                                                Rate
+                                            </button>
+                                        }
+
+                                        @if (b.CanSeeFeedback)
+                                        {
+                                            <button type="button"
+                                                    class="btn btn--secondary btn--sm feedback-btn"
+                                                    data-feedback="@(b.Feedback ?? "No feedback provided.")"
+                                                    data-mentor="@b.MentorName">
+                                                <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+                                                Feedback
+                                            </button>
+                                        }
+
+                                        @if (!b.CanCancel
+                                          && !b.CanReschedule
+                                          && !b.CanRate
+                                          && !b.CanSeeFeedback)
+                                        {
+                                            <span class="bookings-table__placeholder">—</span>
+                                        }
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="result-count" id="resultCount">
+                Showing @Model.Bookings.Count booking@(Model.Bookings.Count == 1 ? "" : "s").
+            </p>
+        }
+
+    </div>
+</div>
+
+<!-- =========================================================
+     Feedback Modal
+     ========================================================= -->
+<div id="feedbackModal"
+     style="display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 20px;">
+
+    <div class="booking-card" style="max-width: 460px; width: 100%; animation: card-in 0.25s ease-out;">
+
+        <div class="booking-card__header">
+            <span class="booking-card__header-icon">
+                <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+            </span>
+            Mentor Feedback
+        </div>
+
+        <div class="booking-card__body">
+            <div class="form-field__label form-field__label--small">From</div>
+            <h6 id="feedbackMentorName" style="font-family: var(--font-head); color: var(--color-primary); margin: 4px 0 14px;"></h6>
+
+            <div id="feedbackText"
+                 style="background: var(--color-background); border: 1px solid var(--color-border);
+                        border-radius: var(--radius-md); padding: 14px 16px; color: var(--color-text);
+                        line-height: 1.5; font-size: 0.92rem; white-space: pre-wrap;">
+            </div>
+
+            <div class="form-actions" style="margin-top: 18px; justify-content: flex-end;">
+                <button type="button" class="btn btn--secondary" id="closeFeedbackBtn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     Rating Modal
+     ========================================================= -->
+<div id="ratingModal"
+     style="display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 20px;">
+
+    <div class="booking-card" style="max-width: 460px; width: 100%; animation: card-in 0.25s ease-out;">
+
+        <form asp-area="Trainee" asp-controller="Booking" asp-action="Rate" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="booking-card__header">
+                <span class="booking-card__header-icon">
+                    <i class="fa-solid fa-star" aria-hidden="true"></i>
+                </span>
+                Rate Your Session
+            </div>
+
+            <div class="booking-card__body">
+
+                <input type="hidden" id="ratingBookingId" name="BookingId" />
+
+                <div class="form-field__label form-field__label--small">Mentor</div>
+                <h6 id="ratingMentorName"
+                    style="font-family: var(--font-head); color: var(--color-primary); margin: 4px 0 18px;">
+                </h6>
+
+                <div class="form-field">
+                    <label class="form-field__label">Your Rating</label>
+                    <div class="star-rating" id="starRating" role="radiogroup" aria-label="Rating from 1 to 5">
+                        <span class="star-rating__star" data-value="1" role="radio" aria-label="1 star" tabindex="0">★</span>
+                        <span class="star-rating__star" data-value="2" role="radio" aria-label="2 stars" tabindex="0">★</span>
+                        <span class="star-rating__star" data-value="3" role="radio" aria-label="3 stars" tabindex="0">★</span>
+                        <span class="star-rating__star" data-value="4" role="radio" aria-label="4 stars" tabindex="0">★</span>
+                        <span class="star-rating__star" data-value="5" role="radio" aria-label="5 stars" tabindex="0">★</span>
+                    </div>
+                    <input type="hidden" name="Score" id="ratingScore" required />
+                </div>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="ratingReview">Review <span style="color: var(--color-text-muted); font-weight: 400;">(optional)</span></label>
+                    <textarea id="ratingReview" name="Review" class="form-field__input"
+                              rows="4" placeholder="Share your experience…"
+                              style="resize: vertical; min-height: 90px;"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn--secondary" id="closeRatingBtn">Cancel</button>
+                    <button type="submit" class="btn btn--primary">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        Submit Rating
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
+    <script>
+    (function () {
+        'use strict';
 
-	<script src="~/js/booking-shared.js"
-			asp-append-version="true"></script>
+        // ---- Dismissable alerts ----
+        document.querySelectorAll('[data-alert-dismiss]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const alert = this.closest('.alert');
+                if (alert) alert.style.display = 'none';
+            });
+        });
 
-	<script>
+        // ---- Tabs filter ----
+        const tabs = document.querySelectorAll('.booking-tab');
+        const rows = document.querySelectorAll('#bookingsTable tbody tr');
+        const resultCount = document.getElementById('resultCount');
 
-		document.addEventListener("DOMContentLoaded", function () {
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                tabs.forEach(t => t.classList.remove('is-active'));
+                this.classList.add('is-active');
 
-			// =========================
-			// Feedback Modal
-			// =========================
+                const filter = this.dataset.filter;
+                let visible = 0;
+                rows.forEach(row => {
+                    const match = (filter === 'all' || row.dataset.status === filter);
+                    row.style.display = match ? '' : 'none';
+                    if (match) visible++;
+                });
 
-			const feedbackModal =
-				new bootstrap.Modal(
-					document.getElementById('feedbackModal'));
+                if (resultCount) {
+                    resultCount.textContent = 'Showing ' + visible + ' booking' + (visible === 1 ? '' : 's') + '.';
+                }
+            });
+        });
 
-			const feedbackText =
-				document.getElementById('feedbackText');
+        // ---- Feedback modal ----
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackText = document.getElementById('feedbackText');
+        const feedbackMentorName = document.getElementById('feedbackMentorName');
 
-			const feedbackMentorName =
-				document.getElementById('feedbackMentorName');
+        function openFeedback(text, mentor) {
+            feedbackText.textContent = text || 'No feedback available.';
+            feedbackMentorName.textContent = mentor || '';
+            feedbackModal.style.display = 'flex';
+        }
+        function closeFeedback() { feedbackModal.style.display = 'none'; }
 
-			document.querySelectorAll('.feedback-btn')
-				.forEach(btn => {
+        document.querySelectorAll('.feedback-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                openFeedback(this.dataset.feedback, this.dataset.mentor);
+            });
+        });
+        document.getElementById('closeFeedbackBtn')?.addEventListener('click', closeFeedback);
+        feedbackModal?.addEventListener('click', function (e) {
+            if (e.target === feedbackModal) closeFeedback();
+        });
 
-					btn.addEventListener('click', function () {
+        // ---- Rating modal + star widget ----
+        const ratingModal = document.getElementById('ratingModal');
+        const ratingBookingId = document.getElementById('ratingBookingId');
+        const ratingMentorName = document.getElementById('ratingMentorName');
+        const ratingScore = document.getElementById('ratingScore');
+        const starRating = document.getElementById('starRating');
+        const stars = starRating ? starRating.querySelectorAll('.star-rating__star') : [];
 
-						feedbackText.innerText =
-							this.dataset.feedback || "No feedback available.";
+        function paintStars(value) {
+            stars.forEach(s => {
+                s.classList.toggle('is-active', parseInt(s.dataset.value, 10) <= value);
+            });
+        }
 
-						feedbackMentorName.innerText =
-							"Mentor: " + this.dataset.mentor;
+        stars.forEach(star => {
+            star.addEventListener('mouseenter', function () {
+                paintStars(parseInt(this.dataset.value, 10));
+            });
+            star.addEventListener('click', function () {
+                const v = parseInt(this.dataset.value, 10);
+                ratingScore.value = v;
+                paintStars(v);
+            });
+            star.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const v = parseInt(this.dataset.value, 10);
+                    ratingScore.value = v;
+                    paintStars(v);
+                }
+            });
+        });
+        starRating?.addEventListener('mouseleave', function () {
+            paintStars(parseInt(ratingScore.value, 10) || 0);
+        });
 
-						feedbackModal.show();
+        function openRating(bookingId, mentor) {
+            ratingBookingId.value = bookingId;
+            ratingMentorName.textContent = mentor || '';
+            ratingScore.value = '';
+            paintStars(0);
+            document.getElementById('ratingReview').value = '';
+            ratingModal.style.display = 'flex';
+        }
+        function closeRating() { ratingModal.style.display = 'none'; }
 
-					});
+        document.querySelectorAll('.rate-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                openRating(this.dataset.bookingId, this.dataset.mentor);
+            });
+        });
+        document.getElementById('closeRatingBtn')?.addEventListener('click', closeRating);
+        ratingModal?.addEventListener('click', function (e) {
+            if (e.target === ratingModal) closeRating();
+        });
 
-				});
-
-			// =========================
-			// Rating Modal
-			// =========================
-
-			const ratingModal =
-				new bootstrap.Modal(
-					document.getElementById('ratingModal'));
-
-			const ratingBookingId =
-				document.getElementById('ratingBookingId');
-
-			const ratingMentorName =
-				document.getElementById('ratingMentorName');
-
-			document.querySelectorAll('.rate-btn')
-				.forEach(btn => {
-
-					btn.addEventListener('click', function () {
-
-						ratingBookingId.value =
-							this.dataset.bookingId;
-
-						ratingMentorName.innerText =
-							"Mentor: " + this.dataset.mentor;
-
-						ratingModal.show();
-
-					});
-
-				});
-
-		});
-
-	</script>
+        // ---- Escape closes any open modal ----
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeFeedback();
+                closeRating();
+            }
+        });
+    })();
+    </script>
 }

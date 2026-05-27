@@ -1232,9 +1232,9 @@ GO
 -- ============================================
 
 INSERT INTO Lookup.LicenseTypes (license_name, display_name_en, display_name_ar, description_en, description_ar) VALUES
-    ('private_automatic', 'Private Car (Automatic)', 'سيارة خاصة (أوتوماتيك)', 'Private car with automatic transmission',        'سيارة خاصة ذات ناقل حركة أوتوماتيكي'),
-    ('private_manual',    'Private Car (Manual)',    'سيارة خاصة (يدوي)',      'Private car with manual transmission',           'سيارة خاصة ذات ناقل حركة يدوي'),
-    ('motorcycle',        'Motorcycle',              'دراجة نارية',            'Two-wheel motorcycle license',                   'رخصة دراجة نارية ذات عجلتين');
+    ('private_automatic', 'Private Car (Automatic)', N'سيارة خاصة (أوتوماتيك)', 'Private car with automatic transmission',        N'سيارة خاصة ذات ناقل حركة أوتوماتيكي'),
+    ('private_manual',    'Private Car (Manual)',    N'سيارة خاصة (يدوي)',      'Private car with manual transmission',           N'سيارة خاصة ذات ناقل حركة يدوي'),
+    ('motorcycle',        'Motorcycle',              N'دراجة نارية',            'Two-wheel motorcycle license',                   N'رخصة دراجة نارية ذات عجلتين');
 
 GO
 
@@ -4354,8 +4354,8 @@ INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (24, 'ar', N'{{img:yellow-diamond}} إلى ماذا تشير هذه العلامة؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (25, 'en', N'You see a blue circular sign with a white number ''50'' inside. What does this require?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (25, 'ar', N'ترى علامة دائرية زرقاء بداخلها رقم أبيض "50". ماذا يتطلب هذا؟');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (26, 'en', N'What does [Insert picture of red circle with a car and motorcycle inside, crossed by a red diagonal line] mean?');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (26, 'ar', N'ماذا يعني [أدخل صورة لدائرة حمراء بداخلها سيارة ودراجة نارية، يقطعها خط قطري أحمر]؟');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (26, 'en', N'What does a red circle with a car and motorcycle inside, crossed by a red diagonal line mean?');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (26, 'ar', N'ماذا يعني دائرة حمراء بداخلها سيارة ودراجة نارية، يقطعها خط قطري أحمر؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (27, 'en', N'Scenario: You approach a tunnel. Which sign would you expect to see, and what is the speed limit?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (27, 'ar', N'السيناريو: أنت تقترب من النفق. ما هي العلامة التي تتوقع رؤيتها، وما هو الحد الأقصى للسرعة؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (28, 'en', N'What does a red-bordered triangle with a symbol of a pedestrian crossing mean?');
@@ -4368,8 +4368,8 @@ INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (31, 'ar', N'وصلت إلى تقاطع غير متحكم فيه (لا توجد إشارات ولا أضواء). هناك مركبة تقترب من يمينك. لمن الأولوية؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (32, 'en', N'Scenario: You are inside a roundabout. A vehicle at the entrance wants to enter. What is the rule?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (32, 'ar', N'السيناريو: أنت داخل الدوار. سيارة عند المدخل تريد الدخول. ما هي القاعدة؟');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (33, 'en', N'[Insert picture of T-junction] At a T-junction, which road has priority?');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (33, 'ar', N'[أدخل صورة تقاطع T] عند تقاطع T، أي طريق له الأولوية؟');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (33, 'en', N'At a T-junction, which road has priority?');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (33, 'ar', N'عند تقاطع T، أي طريق له الأولوية؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (34, 'en', N'You are turning left at an intersection. An oncoming vehicle is going straight. Who goes first?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (34, 'ar', N'أنت تنعطف يسارًا عند تقاطع. مركبة قادمة تسير بشكل مستقيم. من يذهب أولا؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (35, 'en', N'You hear a siren and see flashing lights from an ambulance behind you. What must you do?');
@@ -4388,8 +4388,8 @@ INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (41, 'ar', N'على الطريق السريع متعدد الحارات، أي حارة يجب أن تستخدمها المركبات الأبطأ؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (42, 'en', N'Scenario: You want to turn left at an intersection on a two-way road with one lane each direction. Where should you position your vehicle?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (42, 'ar', N'السيناريو: تريد الانعطاف يسارًا عند تقاطع طرق على طريق ذو اتجاهين بمسار واحد في كل اتجاه. أين يجب أن تضع سيارتك؟');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (43, 'en', N'[Insert picture of U-turn prohibition sign] What is prohibited by this sign?');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (43, 'ar', N'[أدخل صورة علامة منع الدوران على شكل حرف U] ما الذي تمنعه ​​هذه العلامة؟');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (43, 'en', N'What is prohibited by this sign?');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (43, 'ar', N'ما الذي تمنعه ​​هذه العلامة؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (44, 'en', N'You are overtaking a vehicle on a two-lane road. When should you return to your original lane?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (44, 'ar', N'أنت تتجاوز مركبة على طريق ذو مسارين. متى يجب عليك العودة إلى مسارك الأصلي؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (45, 'en', N'Scenario: You are driving on a curve and cannot see far ahead. A vehicle ahead is moving slowly. What should you do?');
@@ -4408,8 +4408,8 @@ INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (51, 'ar', N'ما هو الحد الأقصى للسرعة القصوى للسيارة الخاصة على الطريق السريع المقسم متعدد المسارات خارج حدود المدينة في الأردن؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (52, 'en', N'Scenario: You are driving at 80 km/h on a wet road. What following distance should you maintain?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (52, 'ar', N'السيناريو: أنت تقود بسرعة 80 كم/ساعة على طريق مبلل. ما المسافة التالية التي يجب عليك الحفاظ عليها؟');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (53, 'en', N'[Insert picture of reflective triangle placed on roadside] Where must you place the reflective triangle if you break down on a rural road?');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (53, 'ar', N'[أدخل صورة للمثلث العاكس الموجود على جانب الطريق] أين يجب أن تضع المثلث العاكس إذا تعطلت على طريق ريفي؟');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (53, 'en', N'Where must you place the reflective triangle if you break down on a rural road?');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (53, 'ar', N'أين يجب أن تضع المثلث العاكس إذا تعطلت على طريق ريفي؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (54, 'en', N'What does the two-second rule help you maintain?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (54, 'ar', N'ما الذي تساعدك قاعدة الثانيتين في الحفاظ عليه؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (55, 'en', N'You exceed the speed limit by 40 km/h. What is the penalty?');
@@ -4448,8 +4448,8 @@ INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (71, 'ar', N'لماذا يجب عليك استخدام المصابيح الأمامية ذات الضوء المنخفض في الضباب بدلاً من الضوء العالي؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (72, 'en', N'Scenario: You are driving in heavy rain and feel your steering become ''light'' and unresponsive. What is happening?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (72, 'ar', N'السيناريو: أنت تقود السيارة تحت أمطار غزيرة وتشعر أن توجيهك أصبح "خفيفًا" وغير مستجيب. ماذا يحدث؟');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (73, 'en', N'[Insert picture of skidding car] Your rear wheels lose grip and the back of your car slides to the right. What should you do?');
-INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (73, 'ar', N'[أدخل صورة للسيارة التي تنزلق] تفقد العجلات الخلفية قبضتها وينزلق الجزء الخلفي من سيارتك إلى اليمين. ماذا يجب عليك أن تفعل؟');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (73, 'en', N'Your rear wheels lose grip and the back of your car slides to the right. What should you do?');
+INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (73, 'ar', N'تفقد العجلات الخلفية قبضتها وينزلق الجزء الخلفي من سيارتك إلى اليمين. ماذا يجب عليك أن تفعل؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (74, 'en', N'What is black ice and why is it dangerous?');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (74, 'ar', N'ما هو الجليد الأسود ولماذا هو خطير؟');
 INSERT INTO Learning.QuestionTranslations (question_id, language_code, question_text) VALUES (75, 'en', N'Scenario: You are driving in a sandstorm with very low visibility. What should you do?');

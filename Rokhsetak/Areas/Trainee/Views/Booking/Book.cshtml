@@ -1,129 +1,582 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Booking;
+@using Rokhsetak.Areas.Trainee.ViewModels.Booking
+@using System.Text.Json
 @model MentorBookingViewModel
+
 @{
     ViewData["Title"] = $"Book with {Model.MentorName}";
+
+    // Serialize availability for the client picker.
+    // Keys: dayOfWeek (string), slots [{startTime, endTime}]
+    var availabilityJson = JsonSerializer.Serialize(
+        Model.AvailableDays.Select(d => new {
+            dayOfWeek = d.DayOfWeek,
+            slots = d.Slots.Select(s => new {
+                startTime = s.StartTime.ToString("HH:mm"),
+                endTime   = s.EndTime.ToString("HH:mm")
+            })
+        }));
+
+    var initials = string.IsNullOrWhiteSpace(Model.MentorName)
+        ? "?"
+        : string.Concat(Model.MentorName
+            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Take(2)
+            .Select(p => char.ToUpper(p[0])));
 }
 
-<div class="container py-4" style="max-width: 680px;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/booking-shared.css" asp-append-version="true"/>
+}
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+<div class="booking-page">
+    <div class="booking-page__inner">
 
-    <!-- Mentor profile -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body d-flex justify-content-between flex-wrap gap-3">
-            <div>
-                <h4 class="fw-bold mb-1">@Model.MentorName</h4>
-                <p class="text-muted mb-1"><i class="bi bi-geo-alt"></i> @Model.City</p>
-                <span class="badge bg-light text-dark border me-2">
-                    @Model.LicenseType.Replace("_", " ")
-                </span>
-                <span class="text-warning fw-semibold">
-                    @Model.AverageRating.ToString("0.0") ★
-                    <span class="text-muted fw-normal small">(@Model.TotalRatings)</span>
-                </span>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert--error" role="alert">
+                <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
+                <div class="alert__body">@TempData["Error"]</div>
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="text-end">
-                <div class="fs-4 fw-bold text-primary">@Model.PricePerSession JD</div>
-                <div class="text-muted small">per session</div>
-                <div class="text-success small">@Model.CompletionRate% completion rate</div>
-            </div>
-        </div>
-    </div>
+        }
 
-    <!-- Availability -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header fw-semibold">
-            <i class="bi bi-clock text-success"></i> Available Slots
-        </div>
-        <div class="card-body">
-            @if (Model.AvailableDays.Any())
-            {
-                <div class="row g-2">
-                    @foreach (var day in Model.AvailableDays)
-                    {
-                        <div class="col-md-4 mb-2">
-                            <div class="fw-semibold text-capitalize mb-1">@day.DayOfWeek</div>
-                            @foreach (var slot in day.Slots)
-                            {
-                                <span class="badge bg-light text-dark border me-1 mb-1">
-                                    @slot.StartTime.ToString("hh:mm tt") – @slot.EndTime.ToString("hh:mm tt")
-                                </span>
-                            }
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
+               class="breadcrumb__item">My Bookings</a>
+            <span class="breadcrumb__sep" aria-hidden="true">
+                <i class="fa-solid fa-chevron-right"></i>
+            </span>
+            <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
+               class="breadcrumb__item">Find a Mentor</a>
+            <span class="breadcrumb__sep" aria-hidden="true">
+                <i class="fa-solid fa-chevron-right"></i>
+            </span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Book Session</span>
+        </nav>
+
+        <!-- Mentor Hero -->
+        <section class="mentor-hero">
+            <div class="mentor-hero__inner">
+                <div class="mentor-hero__avatar" aria-hidden="true">@initials</div>
+
+                <div class="mentor-hero__main">
+                    <h1 class="mentor-hero__name">@Model.MentorName</h1>
+                    <div class="mentor-hero__meta">
+                        <span>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            @Model.City
+                        </span>
+                        <span class="tag">@Model.LicenseType.Replace("_", " ")</span>
+                    </div>
+                </div>
+
+                <div class="mentor-hero__stats">
+                    <div class="mentor-hero__stat">
+                        <div class="mentor-hero__stat-value mentor-hero__stat-value--price">
+                            @Model.PricePerSession.ToString("0.##") JD
                         </div>
-                    }
-                </div>
-            }
-            else
-            {
-                <p class="text-muted">No availability slots set by this mentor yet.</p>
-            }
-        </div>
-    </div>
-
-    <!-- Booking form -->
-    <div class="card shadow-sm">
-        <div class="card-header fw-semibold">
-            <i class="bi bi-calendar-plus text-primary"></i> Book a Session
-        </div>
-        <div class="card-body">
-            <form asp-area="Trainee" asp-controller="Booking" asp-action="Book" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="MentorId" value="@Model.MentorId" />
-                <input type="hidden" name="TraineeLicenseId" value="@Model.TraineeLicenseId" />
-                <input type="hidden" name="LicenseTypeId" value="@Model.LicenseTypeId" />
-
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Session Type</label>
-                    <select name="SessionType" class="form-select" required>
-                        <option value="">— Select —</option>
-                        <option value="theoretical">📘 Theoretical</option>
-                        <option value="practical">🚗 Practical</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Date</label>
-                    <input type="date" name="BookingDate" class="form-control" required
-                           min="@DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd")" />
-                </div>
-
-                <div class="row g-3 mb-4">
-                    <div class="col-6">
-                        <label class="form-label fw-semibold">Start Time</label>
-                        <input type="time" name="StartTime" class="form-control" required />
+                        <div class="mentor-hero__stat-label">Per Session</div>
                     </div>
-                    <div class="col-6">
-                        <label class="form-label fw-semibold">End Time</label>
-                        <input type="time" name="EndTime" class="form-control" required />
+                    <div class="mentor-hero__stat">
+                        <div class="mentor-hero__stat-value mentor-hero__stat-value--rating">
+                            @Model.AverageRating.ToString("0.0") ★
+                        </div>
+                        <div class="mentor-hero__stat-label">@Model.TotalRatings Reviews</div>
+                    </div>
+                    <div class="mentor-hero__stat">
+                        <div class="mentor-hero__stat-value mentor-hero__stat-value--completion">
+                            @Model.CompletionRate.ToString("0")%
+                        </div>
+                        <div class="mentor-hero__stat-label">Completion</div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="alert alert-light border small mb-4">
-                    <i class="bi bi-info-circle"></i>
-                    Select a time within the mentor's available slots above.
-                    The booking will be <strong>pending</strong> until the mentor confirms it.
-                </div>
+        <!-- 2-column layout: schedule + sticky confirm panel -->
+        <div class="booking-layout">
 
-                <div class="d-flex justify-content-between">
-                    <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-                       class="btn btn-outline-secondary">← Back</a>
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-calendar-check"></i> Request Booking
-                    </button>
+            <div class="booking-layout__main">
+
+                <!-- Session Type -->
+                <section class="booking-card">
+                    <div class="booking-card__header">
+                        <span class="booking-card__header-icon">
+                            <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                        </span>
+                        Choose Session Type
+                    </div>
+                    <div class="booking-card__body">
+                        <div class="session-type-cards" role="radiogroup" aria-label="Session Type">
+
+                            <label class="session-type-card" data-session-type="theoretical">
+                                <input type="radio"
+                                       name="_sessionTypeChooser"
+                                       value="theoretical"
+                                       class="session-type-card__input" />
+                                <span class="session-type-card__check" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span class="session-type-card__icon">
+                                    <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                                </span>
+                                <span class="session-type-card__label">Theoretical</span>
+                                <span class="session-type-card__sub">In-class / online lesson</span>
+                            </label>
+
+                            <label class="session-type-card" data-session-type="practical">
+                                <input type="radio"
+                                       name="_sessionTypeChooser"
+                                       value="practical"
+                                       class="session-type-card__input" />
+                                <span class="session-type-card__check" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span class="session-type-card__icon">
+                                    <i class="fa-solid fa-car" aria-hidden="true"></i>
+                                </span>
+                                <span class="session-type-card__label">Practical</span>
+                                <span class="session-type-card__sub">On-road driving lesson</span>
+                            </label>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Weekly Schedule -->
+                <section class="booking-card">
+                    <div class="booking-card__header">
+                        <span class="booking-card__header-icon">
+                            <i class="fa-solid fa-calendar-week" aria-hidden="true"></i>
+                        </span>
+                        Pick a Time Slot
+                    </div>
+                    <div class="booking-card__body" style="padding: 0;">
+
+                        @if (!Model.AvailableDays.Any())
+                        {
+                            <div class="empty-state" style="border: none; border-radius: 0;">
+                                <i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
+                                <p class="empty-state__text">
+                                    This mentor hasn't set their availability yet.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="week-schedule">
+
+                                <div class="week-schedule__nav">
+                                    <button type="button" class="week-schedule__nav-btn"
+                                            id="weekPrevBtn" aria-label="Previous week">
+                                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="week-schedule__nav-title" id="weekRangeLabel">
+                                        Loading…
+                                    </div>
+                                    <button type="button" class="week-schedule__nav-btn"
+                                            id="weekNextBtn" aria-label="Next week">
+                                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
+                                <div class="week-schedule__grid" id="weekGrid"
+                                     role="list" aria-label="Available time slots by day">
+                                    <!-- JS-populated -->
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Confirm Card (sticky on desktop) -->
+            <aside class="booking-layout__aside">
+                <div class="booking-card confirm-card">
+
+                    <div class="confirm-card__title">
+                        <span>Booking Summary</span>
+                        <span class="confirm-card__step">Step 1</span>
+                    </div>
+
+                    <div class="confirm-card__body">
+
+                        <form asp-area="Trainee"
+                              asp-controller="Booking"
+                              asp-action="Book"
+                              method="post"
+                              id="bookingForm"
+                              novalidate>
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="MentorId" />
+                            <input type="hidden" asp-for="TraineeLicenseId" />
+                            <input type="hidden" asp-for="LicenseTypeId" />
+                            <input type="hidden" name="SessionType" id="hiddenSessionType" />
+                            <input type="hidden" name="BookingDate" id="hiddenBookingDate" />
+                            <input type="hidden" name="StartTime" id="hiddenStartTime" />
+                            <input type="hidden" name="EndTime" id="hiddenEndTime" />
+
+                            <div asp-validation-summary="ModelOnly" class="alert alert--error"></div>
+
+                            <!-- Default prompt state -->
+                            <div id="confirmPrompt" class="selection-prompt">
+                                <div class="selection-prompt__icon">
+                                    <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
+                                </div>
+                                <p class="selection-prompt__text">No slot selected yet</p>
+                                <p class="selection-prompt__sub">
+                                    Pick a session type and a time to continue.
+                                </p>
+                            </div>
+
+                            <!-- Filled state -->
+                            <div id="confirmDetails" style="display: none;">
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Mentor</span>
+                                    <span class="confirm-row__value">@Model.MentorName</span>
+                                </div>
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Session Type</span>
+                                    <span class="confirm-row__value" id="confSessionType">—</span>
+                                </div>
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Date</span>
+                                    <span class="confirm-row__value" id="confDate">—</span>
+                                </div>
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Time</span>
+                                    <span class="confirm-row__value" id="confTime">—</span>
+                                </div>
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Duration</span>
+                                    <span class="confirm-row__value" id="confDuration">—</span>
+                                </div>
+
+                                <div class="confirm-row">
+                                    <span class="confirm-row__label">Total</span>
+                                    <span class="confirm-row__value confirm-row__value--price">
+                                        @Model.PricePerSession.ToString("0.##") JD
+                                    </span>
+                                </div>
+
+                                <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
+                                    <button type="submit" class="btn btn--primary btn--block" id="submitBtn">
+                                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                                        Request Booking
+                                    </button>
+                                    <button type="button" class="btn btn--ghost btn--block" id="clearSelectionBtn">
+                                        Change Selection
+                                    </button>
+                                </div>
+
+                                <div class="alert alert--soft" style="margin-top: 14px; margin-bottom: 0;">
+                                    <i class="fa-solid fa-info-circle alert__icon" aria-hidden="true"></i>
+                                    <div class="alert__body" style="font-size: 0.82rem;">
+                                        Booking will be <strong>pending</strong> until the mentor confirms it.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
-            </form>
+            </aside>
+
         </div>
+
     </div>
 </div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ---- Availability data from server (MentorBookingViewModel.AvailableDays) ----
+        const AVAILABILITY = @Html.Raw(availabilityJson);
+
+        // Build a map: lower-cased day name -> array of slots
+        const slotsByDay = {};
+        AVAILABILITY.forEach(d => {
+            slotsByDay[(d.dayOfWeek || '').toLowerCase()] = d.slots || [];
+        });
+
+        const DAY_NAMES_FULL  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const DAY_NAMES_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const MONTHS_SHORT    = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        // Week starts on Sunday (common in Jordan)
+        let weekOffset = 0;
+        let selectedSlot = null;       // { date: Date, dateStr, startTime, endTime }
+        let selectedSessionType = null;
+
+        function startOfThisWeek() {
+            const t = new Date();
+            t.setHours(0, 0, 0, 0);
+            t.setDate(t.getDate() - t.getDay()); // back to Sunday
+            return t;
+        }
+
+        function getWeekStart(offset) {
+            const base = startOfThisWeek();
+            base.setDate(base.getDate() + offset * 7);
+            return base;
+        }
+
+        function pad2(n) { return String(n).padStart(2, '0'); }
+
+        function dateInputValue(d) {
+            return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+        }
+
+        function formatRangeLabel(start, end) {
+            const sameMonth = start.getMonth() === end.getMonth();
+            const sameYear  = start.getFullYear() === end.getFullYear();
+            if (sameMonth && sameYear) {
+                return start.getDate() + ' – ' + end.getDate() + ' ' +
+                       MONTHS_SHORT[end.getMonth()] + ' ' + end.getFullYear();
+            }
+            if (sameYear) {
+                return start.getDate() + ' ' + MONTHS_SHORT[start.getMonth()] + ' – ' +
+                       end.getDate() + ' ' + MONTHS_SHORT[end.getMonth()] + ' ' + end.getFullYear();
+            }
+            return start.getDate() + ' ' + MONTHS_SHORT[start.getMonth()] + ' ' + start.getFullYear() +
+                   ' – ' +
+                   end.getDate() + ' ' + MONTHS_SHORT[end.getMonth()] + ' ' + end.getFullYear();
+        }
+
+        function renderWeek() {
+            const grid = document.getElementById('weekGrid');
+            if (!grid) return;
+
+            const weekStart = getWeekStart(weekOffset);
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekEnd.getDate() + 6);
+
+            document.getElementById('weekRangeLabel').textContent =
+                formatRangeLabel(weekStart, weekEnd);
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const prevBtn = document.getElementById('weekPrevBtn');
+            prevBtn.disabled = weekOffset <= 0;
+
+            grid.innerHTML = '';
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(weekStart);
+                date.setDate(weekStart.getDate() + i);
+
+                const isPast = date < today;
+                const isToday = date.getTime() === today.getTime();
+                const dayKey = DAY_NAMES_FULL[date.getDay()].toLowerCase();
+                const daySlots = slotsByDay[dayKey] || [];
+
+                const dayCol = document.createElement('div');
+                dayCol.className = 'week-schedule__day';
+                if (isPast) dayCol.classList.add('week-schedule__day--past');
+                if (isToday) dayCol.classList.add('week-schedule__day--today');
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'week-schedule__day-header';
+                header.innerHTML =
+                    '<span class="week-schedule__day-name">' + DAY_NAMES_SHORT[date.getDay()] + '</span>' +
+                    (isToday
+                        ? '<span class="week-schedule__day-date-pill">' + date.getDate() + '</span>'
+                        : '<span class="week-schedule__day-date">' + date.getDate() + '</span>');
+                dayCol.appendChild(header);
+
+                // Slots
+                const slotsWrap = document.createElement('div');
+                slotsWrap.className = 'week-schedule__slots';
+
+                if (isPast || daySlots.length === 0) {
+                    const empty = document.createElement('div');
+                    empty.className = 'week-schedule__empty';
+                    empty.textContent = isPast ? '—' : 'No slots';
+                    slotsWrap.appendChild(empty);
+                } else {
+                    daySlots.forEach(slot => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'week-slot';
+                        btn.setAttribute('role', 'listitem');
+                        btn.setAttribute('aria-label',
+                            'Book slot on ' + DAY_NAMES_FULL[date.getDay()] +
+                            ' from ' + slot.startTime + ' to ' + slot.endTime);
+                        btn.innerHTML =
+                            '<span class="week-slot__time">' + slot.startTime + '</span>' +
+                            '<span class="week-slot__divider" aria-hidden="true"></span>' +
+                            '<span class="week-slot__time">' + slot.endTime + '</span>';
+
+                        const dateStr = dateInputValue(date);
+                        if (selectedSlot &&
+                            selectedSlot.dateStr === dateStr &&
+                            selectedSlot.startTime === slot.startTime &&
+                            selectedSlot.endTime === slot.endTime) {
+                            btn.classList.add('is-selected');
+                        }
+
+                        btn.addEventListener('click', function () {
+                            selectSlot(date, slot, btn);
+                        });
+
+                        slotsWrap.appendChild(btn);
+                    });
+                }
+
+                dayCol.appendChild(slotsWrap);
+                grid.appendChild(dayCol);
+            }
+        }
+
+        function selectSlot(date, slot, btnEl) {
+            selectedSlot = {
+                date: new Date(date),
+                dateStr: dateInputValue(date),
+                startTime: slot.startTime,
+                endTime: slot.endTime
+            };
+
+            // Update hidden ViewModel fields
+            document.getElementById('hiddenBookingDate').value = selectedSlot.dateStr;
+            document.getElementById('hiddenStartTime').value = slot.startTime;
+            document.getElementById('hiddenEndTime').value = slot.endTime;
+
+            // Highlight
+            document.querySelectorAll('.week-slot.is-selected')
+                .forEach(el => el.classList.remove('is-selected'));
+            btnEl.classList.add('is-selected');
+
+            updateConfirmPanel();
+        }
+
+        function selectSessionType(type) {
+            selectedSessionType = type;
+            document.getElementById('hiddenSessionType').value = type;
+
+            document.querySelectorAll('.session-type-card').forEach(el => {
+                el.classList.toggle('is-selected', el.dataset.sessionType === type);
+                const input = el.querySelector('.session-type-card__input');
+                if (input) input.checked = (el.dataset.sessionType === type);
+            });
+
+            updateConfirmPanel();
+        }
+
+        function clearSelection() {
+            selectedSlot = null;
+            document.getElementById('hiddenBookingDate').value = '';
+            document.getElementById('hiddenStartTime').value = '';
+            document.getElementById('hiddenEndTime').value = '';
+            document.querySelectorAll('.week-slot.is-selected')
+                .forEach(el => el.classList.remove('is-selected'));
+            updateConfirmPanel();
+        }
+
+        function updateConfirmPanel() {
+            const promptEl  = document.getElementById('confirmPrompt');
+            const detailsEl = document.getElementById('confirmDetails');
+
+            const ready = selectedSlot && selectedSessionType;
+
+            if (!ready) {
+                promptEl.style.display = '';
+                detailsEl.style.display = 'none';
+                return;
+            }
+
+            promptEl.style.display = 'none';
+            detailsEl.style.display = '';
+
+            const d = selectedSlot.date;
+            document.getElementById('confSessionType').textContent =
+                selectedSessionType.charAt(0).toUpperCase() + selectedSessionType.slice(1);
+
+            document.getElementById('confDate').textContent =
+                DAY_NAMES_FULL[d.getDay()] + ', ' + d.getDate() + ' ' +
+                MONTHS_SHORT[d.getMonth()] + ' ' + d.getFullYear();
+
+            document.getElementById('confTime').textContent =
+                selectedSlot.startTime + ' – ' + selectedSlot.endTime;
+
+            // Duration
+            const [sh, sm] = selectedSlot.startTime.split(':').map(Number);
+            const [eh, em] = selectedSlot.endTime.split(':').map(Number);
+            const durMin = (eh * 60 + em) - (sh * 60 + sm);
+            let durLabel;
+            if (durMin >= 60) {
+                const h = Math.floor(durMin / 60);
+                const m = durMin % 60;
+                durLabel = h + 'h' + (m > 0 ? ' ' + m + 'm' : '');
+            } else {
+                durLabel = durMin + ' min';
+            }
+            document.getElementById('confDuration').textContent = durLabel;
+        }
+
+        // ---- Wire up events ----
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.session-type-card').forEach(card => {
+                card.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    selectSessionType(this.dataset.sessionType);
+                });
+            });
+
+            const prevBtn = document.getElementById('weekPrevBtn');
+            const nextBtn = document.getElementById('weekNextBtn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function () {
+                    if (weekOffset > 0) { weekOffset--; renderWeek(); }
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function () {
+                    weekOffset++;
+                    renderWeek();
+                });
+            }
+
+            const clearBtn = document.getElementById('clearSelectionBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', clearSelection);
+            }
+
+            // Block submit unless both selections present
+            const form = document.getElementById('bookingForm');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    if (!selectedSlot || !selectedSessionType) {
+                        e.preventDefault();
+                        alert('Please select a session type and an available time slot.');
+                    }
+                });
+            }
+
+            // Initial render
+            if (document.getElementById('weekGrid')) {
+                renderWeek();
+            }
+        });
+
+    })();
+    </script>
 }

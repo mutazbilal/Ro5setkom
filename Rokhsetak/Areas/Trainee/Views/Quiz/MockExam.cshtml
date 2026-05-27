@@ -1,119 +1,113 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
 @model QuizViewModel
 @{
     ViewData["Title"] = "Mock Exam";
     int totalSeconds = Model.TimeLimitMinutes * 60;
 }
 
-<div class="container py-4">
-    <!-- Timer bar -->
-    <div class="sticky-top bg-white shadow-sm py-2 mb-4" style="z-index:1000;">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h4 class="fw-bold mb-0">@Model.Title</h4>
-            <div class="d-flex align-items-center gap-3">
-                <span class="badge bg-danger fs-6" id="timerDisplay">
-                    @Model.TimeLimitMinutes:00
-                </span>
-                <span class="text-muted small">@Model.Questions.Count questions</span>
-            </div>
-        </div>
-        <div class="progress mt-2" style="height:4px;">
-            <div class="progress-bar bg-danger" id="timerBar" style="width:100%"></div>
-        </div>
-    </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/quiz.css" asp-append-version="true" />
+}
 
-    <div class="alert alert-warning mb-4">
-        <strong>Mock Exam Rules:</strong> This is a timed simulation. You have
-        <strong>@Model.TimeLimitMinutes minutes</strong>. The exam will submit automatically
-        when time runs out. Passing is not required to proceed.
-    </div>
+<div class="quiz-page">
+    <div class="quiz-shell">
 
-    <form asp-area="Trainee" asp-controller="Quiz" asp-action="SubmitMockExam"
-          method="post" id="mockExamForm">
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="QuizId" value="@Model.QuizId" />
-        <input type="hidden" name="TraineeLicenseId" value="@Model.TraineeLicenseId" />
-        <input type="hidden" name="ModuleId" value="0" />
-
-        @for (int i = 0; i < Model.Questions.Count; i++)
-        {
-            var q = Model.Questions[i];
-            <div class="card shadow-sm mb-3">
-                <div class="card-body">
-                    <p class="fw-semibold mb-3">
-                        <span class="badge bg-secondary me-2">@(i + 1)</span>
-                        @q.QuestionText
-                    </p>
-                    <div class="d-flex flex-column gap-2">
-                        @foreach (var opt in q.Options)
-                        {
-                            <div class="form-check quiz-option p-2 rounded border">
-                                <input class="form-check-input" type="radio"
-                                       name="Answers[@q.QuestionId]"
-                                       id="opt-@opt.OptionId"
-                                       value="@opt.OptionId" />
-                                <label class="form-check-label w-100" for="opt-@opt.OptionId">
-                                    @opt.OptionText
-                                </label>
-                            </div>
-                        }
-                    </div>
+        <header class="quiz-header">
+            <div class="quiz-header__row">
+                <h1 class="quiz-header__title">@Model.Title</h1>
+                <div class="quiz-header__meta">
+                    <span class="quiz-timer"
+                          data-quiz-timer="@totalSeconds"
+                          role="timer"
+                          aria-live="polite"
+                          aria-label="Time remaining">
+                        <i class="fa-regular fa-clock quiz-timer__icon" aria-hidden="true"></i>
+                        <span class="quiz-timer__value" data-quiz-timer-value>@Model.TimeLimitMinutes:00</span>
+                    </span>
+                    <span class="quiz-chip" aria-label="@Model.Questions.Count questions in this exam">
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                        @Model.Questions.Count
+                    </span>
                 </div>
             </div>
-        }
+            <div class="quiz-timer-bar" aria-hidden="true">
+                <div class="quiz-timer-bar__fill" data-quiz-timer-bar></div>
+            </div>
+        </header>
 
-        <div class="d-flex justify-content-end mt-4">
-            <button type="submit" class="btn btn-danger px-4" id="submitMockBtn">
-                <i class="bi bi-send-check"></i> Submit Mock Exam
-            </button>
+        <div class="quiz-banner quiz-banner--warning" role="note">
+            <span class="quiz-banner__icon" aria-hidden="true">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </span>
+            <span>
+                <span class="quiz-banner__title">Mock exam rules</span>
+                This is a timed simulation. You have <strong>@Model.TimeLimitMinutes minutes</strong>.
+                The exam will submit automatically when time runs out. Passing is not required to proceed.
+            </span>
         </div>
-    </form>
+
+        <div asp-validation-summary="ModelOnly" class="quiz-validation"></div>
+
+        <form asp-area="Trainee"
+              asp-controller="Quiz"
+              asp-action="SubmitMockExam"
+              method="post"
+              data-quiz-form
+              novalidate>
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="QuizId" />
+            <input type="hidden" asp-for="TraineeLicenseId" />
+            @* Mock exam isn't tied to a module — keep the 0 value the original posted. *@
+            <input type="hidden" name="ModuleId" value="0" />
+
+            @for (int i = 0; i < Model.Questions.Count; i++)
+            {
+                var q = Model.Questions[i];
+                var legendId = $"mq-legend-{q.QuestionId}";
+
+                <fieldset class="quiz-question" id="mq-@q.QuestionId" aria-labelledby="@legendId">
+                    <legend class="quiz-question__legend">
+                        <span class="quiz-question__number" aria-hidden="true">@(i + 1)</span>
+                        <span class="quiz-question__text" id="@legendId">@q.QuestionText</span>
+                    </legend>
+
+                    <div class="quiz-options" role="radiogroup" aria-labelledby="@legendId">
+                        @foreach (var opt in q.Options)
+                        {
+                            var optId = $"mopt-{q.QuestionId}-{opt.OptionId}";
+
+                            <label class="quiz-option" for="@optId">
+                                @*
+                                    Literal name="Answers[QuestionId]" required for Dictionary<int,int>
+                                    model binding on SubmitQuizViewModel.
+                                *@
+                                <input class="quiz-option__input"
+                                       type="radio"
+                                       id="@optId"
+                                       name="Answers[@q.QuestionId]"
+                                       value="@opt.OptionId" />
+                                <span class="quiz-option__dot" aria-hidden="true"></span>
+                                <span class="quiz-option__label">@opt.OptionText</span>
+                            </label>
+                        }
+                    </div>
+                </fieldset>
+            }
+
+            <div class="quiz-actions quiz-actions--end">
+                <button type="submit"
+                        class="quiz-btn quiz-btn--primary"
+                        data-quiz-submit>
+                    <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+                    <span data-quiz-submit-label data-loading-text="Submitting…">Submit Mock Exam</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
-    <script>
-        let totalSeconds = @totalSeconds;
-        const display   = document.getElementById('timerDisplay');
-        const bar       = document.getElementById('timerBar');
-        const form      = document.getElementById('mockExamForm');
-        const btn       = document.getElementById('submitMockBtn');
-
-        function updateTimer() {
-            if (totalSeconds <= 0) {
-                display.textContent = '0:00';
-                bar.style.width = '0%';
-                btn.disabled = true;
-                btn.textContent = 'Time is up — submitting...';
-                form.submit();
-                return;
-            }
-            const m = Math.floor(totalSeconds / 60);
-            const s = totalSeconds % 60;
-            display.textContent = `${m}:${s.toString().padStart(2, '0')}`;
-            const pct = (totalSeconds / @totalSeconds) * 100;
-            bar.style.width = pct + '%';
-            if (totalSeconds <= 60) {
-                display.classList.remove('bg-danger');
-                display.classList.add('bg-warning', 'text-dark');
-            }
-            totalSeconds--;
-        }
-
-        updateTimer();
-        setInterval(updateTimer, 1000);
-
-        form.addEventListener('submit', function () {
-            btn.disabled = true;
-        });
-
-        document.querySelectorAll('.quiz-option').forEach(function (opt) {
-            opt.querySelector('input').addEventListener('change', function () {
-                const name = this.name;
-                document.querySelectorAll(`input[name="${name}"]`).forEach(function (r) {
-                    r.closest('.quiz-option').classList.remove('border-primary', 'bg-primary', 'bg-opacity-10');
-                });
-                this.closest('.quiz-option').classList.add('border-primary', 'bg-primary', 'bg-opacity-10');
-            });
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
 }
