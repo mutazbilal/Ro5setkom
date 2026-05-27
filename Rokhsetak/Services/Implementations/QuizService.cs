@@ -30,7 +30,14 @@ public class QuizService : IQuizService
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
                                    && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.TraineeId == traineeId &&
+                                        (
+                                            p.Module.Phase == "theoretical" ||
+                                            (
+                                                p.Module.Phase == "practical" &&
+                                                p.TraineeLicenseId == traineeLicenseId
+                                            )
+                                        ));
 
         if (progress == null || progress.Status == "not_started")
             return ServiceResult<QuizViewModel>.Failure("Start the module before taking the quiz.");
@@ -60,7 +67,14 @@ public class QuizService : IQuizService
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
                                    && p.ModuleId == quiz.ModuleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.TraineeId == traineeId &&
+                                        (
+                                            p.Module.Phase == "theoretical" ||
+                                            (
+                                                p.Module.Phase == "practical" &&
+                                                p.TraineeLicenseId == traineeLicenseId
+                                            )
+                                        ));
 
         if (progress == null || progress.Status == "not_started")
             return ServiceResult<QuizResultViewModel>.Failure("Module must be started before taking the quiz.");
@@ -145,7 +159,6 @@ public class QuizService : IQuizService
 
         var completedTheoryCount = await _context.TraineeModuleProgresses
             .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
                           && theoreticalModuleIds.Contains(p.ModuleId)
                           && p.Status == "completed");
 
@@ -379,8 +392,15 @@ public class QuizService : IQuizService
 
         int completed = await _context.TraineeModuleProgresses
             .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
-                          && p.Status == "completed");
+                          && p.Status == "completed"
+                          && p.TraineeId == traineeId &&
+                            (
+                                p.Module.Phase == "theoretical" ||
+                                (
+                                    p.Module.Phase == "practical" &&
+                                    p.TraineeLicenseId == traineeLicenseId
+                                )
+                            ));
 
         license.ProgressPercentage = total == 0 ? 0 : (int)Math.Round((double)completed / total * 100);
         license.UpdatedAt = DateTime.UtcNow;

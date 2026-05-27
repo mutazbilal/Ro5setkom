@@ -359,7 +359,6 @@ public class ExamAppointmentService : IExamAppointmentService
 
                     var completedCount = await _context.TraineeModuleProgresses
                         .CountAsync(p => p.TraineeId == traineeId
-                                      && p.TraineeLicenseId == license.TraineeLicenseId
                                       && theoreticalIds.Contains(p.ModuleId)
                                       && p.Status == "completed");
 

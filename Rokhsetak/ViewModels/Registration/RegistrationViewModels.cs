@@ -39,11 +39,11 @@ public class TraineeRegistrationViewModel
 
     [Display(Name = "Province")]
     public string Province { get; set; } = null!;
-    public int? ProvinceId { get; set; } = 0!;
+    public int ProvinceId { get; set; } = 0!;
 
     [Display(Name = "City")]
     public string City { get; set; } = null!;
-    public int? CityId { get; set; } = 0!;
+    public int CityId { get; set; } = 0!;
 
     [Display(Name = "Address")]
     public string AddressLine1 { get; set; } = null!;
@@ -110,10 +110,10 @@ public class MentorRegistrationViewModel
     public string Gender { get; set; } = null!;
 
     [Display(Name = "Province")]
-    public int? ProvinceId { get; set; } = null!;
+    public int ProvinceId { get; set; }
 
     [Display(Name = "City")]
-    public int? CityId { get; set; } = null!;
+    public int CityId { get; set; }
 
     [Display(Name = "Address")]
     public string AddressLine1 { get; set; } = null!;
