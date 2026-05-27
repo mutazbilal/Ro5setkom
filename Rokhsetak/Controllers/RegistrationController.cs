@@ -162,6 +162,7 @@ public class RegistrationController : Controller
         if (!ModelState.IsValid)
         {
             model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
+            model.AvailableTrainingCenters = await _licenseService.GetTrainingCentersAsync();
             return View(model);
         }
 
@@ -171,6 +172,7 @@ public class RegistrationController : Controller
         {
             ModelState.AddModelError(string.Empty, result.Error!);
             model.AvailableLicenseTypes = await _licenseService.GetLicenseTypesAsync();
+            model.AvailableTrainingCenters = await _licenseService.GetTrainingCentersAsync();
             return View(model);
         }
 

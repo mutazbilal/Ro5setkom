@@ -1,127 +1,187 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@using Rokhsetak.Areas.Trainee.ViewModels.Quiz
 @model QuizResultViewModel
 @{
     ViewData["Title"] = "Quiz Result";
+
+    // Drive the hero state class + iconography off the ViewModel.
+    string heroState;
+    string heroIcon;
+    string heroHeading;
+    string heroSubhead;
+    if (Model.Passed)
+    {
+        heroState   = "passed";
+        heroIcon    = "fa-solid fa-trophy";
+        heroHeading = "Passed!";
+        heroSubhead = "Excellent work. You’ve cleared the passing threshold and can move on with confidence.";
+    }
+    else if (Model.IsMockExam)
+    {
+        heroState   = "mock";
+        heroIcon    = "fa-solid fa-clipboard-check";
+        heroHeading = "Mock exam completed";
+        heroSubhead = "Passing isn’t required for the mock — you’re cleared to book your theory test whenever you’re ready.";
+    }
+    else
+    {
+        heroState   = "retry";
+        heroIcon    = "fa-solid fa-book-open-reader";
+        heroHeading = "Not passed yet";
+        heroSubhead = "Review the material and try again — there’s no limit on attempts.";
+    }
 }
 
-<div class="container py-4">
+@section Styles {
+    <link rel="stylesheet" href="~/css/quiz.css" asp-append-version="true" />
+}
 
-    <!-- Result Summary -->
-    <div class="card shadow text-center mb-4
-        @(Model.Passed ? "border-success" : Model.IsMockExam ? "border-info" : "border-danger")">
-        <div class="card-body py-5">
-            @if (Model.Passed)
-            {
-                <div class="display-1 mb-2">🎉</div>
-                <h2 class="text-success fw-bold">Passed!</h2>
-            }
-            else if (Model.IsMockExam)
-            {
-                <div class="display-1 mb-2">📋</div>
-                <h2 class="text-info fw-bold">Mock Exam Completed</h2>
-                <p class="text-muted">Passing is not required — you may proceed to book your theory test.</p>
-            }
-            else
-            {
-                <div class="display-1 mb-2">📚</div>
-                <h2 class="text-danger fw-bold">Not Passed Yet</h2>
-                <p class="text-muted">Review the material and try again — unlimited attempts!</p>
-            }
+<div class="quiz-page">
+    <div class="quiz-shell">
 
-            <h3 class="fw-bold mt-3">
-                Score: <span class="@(Model.Passed ? "text-success" : "text-danger")">@Model.Score%</span>
-            </h3>
-            <p class="text-muted mb-0">Passing score: @Model.PassingScore%</p>
-
-            <div class="d-flex justify-content-center gap-4 mt-3">
-                <div>
-                    <span class="fs-4 fw-bold text-success">@Model.CorrectCount</span>
-                    <p class="text-muted small mb-0">Correct</p>
+        <!-- Result hero -->
+        <section class="quiz-result quiz-result--@heroState">
+            <div class="quiz-result-hero quiz-result-hero--@heroState">
+                <div class="quiz-result__icon" aria-hidden="true">
+                    <i class="@heroIcon"></i>
                 </div>
-                <div>
-                    <span class="fs-4 fw-bold text-danger">@Model.IncorrectCount</span>
-                    <p class="text-muted small mb-0">Incorrect</p>
+
+                <h1 class="quiz-result__heading">@heroHeading</h1>
+                <p class="quiz-result__subhead">@heroSubhead</p>
+
+                <div class="quiz-score"
+                     data-quiz-score="@Model.Score"
+                     role="img"
+                     aria-label="Score: @Model.Score percent. Passing score: @Model.PassingScore percent.">
+                    <div class="quiz-score__inner">
+                        <span class="quiz-score__value">@Model.Score%</span>
+                        <span class="quiz-score__label">Pass @Model.PassingScore%</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="fs-4 fw-bold text-secondary">@Model.TotalQuestions</span>
-                    <p class="text-muted small mb-0">Total</p>
+
+                <div class="quiz-stats">
+                    <div class="quiz-stat quiz-stat--correct">
+                        <div class="quiz-stat__value">@Model.CorrectCount</div>
+                        <div class="quiz-stat__label">Correct</div>
+                    </div>
+                    <div class="quiz-stat quiz-stat--incorrect">
+                        <div class="quiz-stat__value">@Model.IncorrectCount</div>
+                        <div class="quiz-stat__label">Incorrect</div>
+                    </div>
+                    <div class="quiz-stat">
+                        <div class="quiz-stat__value">@Model.TotalQuestions</div>
+                        <div class="quiz-stat__label">Total</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-                @if (!Model.IsMockExam)
-                {
-                    <a asp-area="Trainee" asp-controller="Quiz" asp-action="Take"
-                           asp-route-moduleId="@Model.ModuleId"
-                           class="btn btn-outline-primary">
-                        Retake Quiz
-                    </a>
-                    <a asp-area="Trainee" asp-controller="Modules" asp-action="Detail"
-                           asp-route-id="@Model.ModuleId"
-                           class="btn btn-outline-secondary">
-                        Back to Module
-                    </a>
-                }
-                else
-                {
-                    <a asp-area="Trainee" asp-controller="Quiz" asp-action="MockExam"
-                           class="btn btn-outline-info">
-                        Retake Mock Exam
-                    </a>
-                }
-                <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
-                       class="btn btn-primary">
-                    Go to Dashboard
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Question breakdown -->
-    <h5 class="fw-bold mb-3">Question Breakdown</h5>
-
-    @for (int i = 0; i < Model.Questions.Count; i++)
-    {
-        var q = Model.Questions[i];
-        <div class="card mb-3 @(q.IsCorrect ? "border-success" : "border-danger") border-2">
-            <div class="card-header d-flex justify-content-between align-items-center
-                @(q.IsCorrect ? "bg-success bg-opacity-10" : "bg-danger bg-opacity-10")">
-                <span>
-                    <span class="badge @(q.IsCorrect ? "bg-success" : "bg-danger") me-2">@(i + 1)</span>
-                    @q.QuestionText
-                </span>
-                @if (q.IsCorrect)
-                {
-                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
-                }
-                else
-                {
-                    <i class="bi bi-x-circle-fill text-danger fs-5"></i>
-                }
-            </div>
-            <ul class="list-group list-group-flush">
-                @foreach (var opt in q.Options)
-                {
-                    var (cls, icon) = (opt.IsCorrect, opt.WasSelected) switch
+                <div class="quiz-result__cta">
+                    @if (!Model.IsMockExam)
                     {
-                        (true, true) => ("list-group-item-success fw-semibold", "✅"),
-                        (true, false) => ("list-group-item-success", "✅"),
-                        (false, true) => ("list-group-item-danger", "❌"),
-                        _ => ("", "")
-                    };
-                    <li class="list-group-item @cls">
-                        @icon @opt.OptionText
-                        @if (opt.WasSelected && !opt.IsCorrect)
+                        <a asp-area="Trainee"
+                           asp-controller="Quiz"
+                           asp-action="Take"
+                           asp-route-moduleId="@Model.ModuleId"
+                           class="quiz-btn quiz-btn--outline">
+                            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                            Retake quiz
+                        </a>
+                        <a asp-area="Trainee"
+                           asp-controller="Modules"
+                           asp-action="Detail"
+                           asp-route-id="@Model.ModuleId"
+                           class="quiz-btn quiz-btn--ghost">
+                            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                            Back to module
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Trainee"
+                           asp-controller="Quiz"
+                           asp-action="MockExam"
+                           class="quiz-btn quiz-btn--gold">
+                            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                            Retake mock exam
+                        </a>
+                    }
+                    <a asp-area="Trainee"
+                       asp-controller="Dashboard"
+                       asp-action="Index"
+                       class="quiz-btn quiz-btn--primary">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        Go to dashboard
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question breakdown -->
+        <h2 class="quiz-section-title">Question breakdown</h2>
+
+        @for (int i = 0; i < Model.Questions.Count; i++)
+        {
+            var q = Model.Questions[i];
+            var statusModifier = q.IsCorrect ? "correct" : "incorrect";
+
+            <article class="quiz-breakdown quiz-breakdown--@statusModifier">
+                <header class="quiz-breakdown__head">
+                    <div class="quiz-breakdown__head-left">
+                        <span class="quiz-question__number" aria-hidden="true">@(i + 1)</span>
+                        <span class="quiz-breakdown__qtext">@Html.Raw(q.QuestionText)</span>
+                    </div>
+                    <span class="quiz-breakdown__status quiz-breakdown__status--@statusModifier"
+                          aria-label="@(q.IsCorrect ? "Answered correctly" : "Answered incorrectly")">
+                        <i class="fa-solid @(q.IsCorrect ? "fa-check" : "fa-xmark")" aria-hidden="true"></i>
+                    </span>
+                </header>
+
+                <ul class="quiz-breakdown__options">
+                    @foreach (var opt in q.Options)
+                    {
+                        string optClass;
+                        string optIcon;
+                        if (opt.IsCorrect && opt.WasSelected)
                         {
-                            <span class="badge bg-danger ms-2">Your answer</span>
+                            optClass = "quiz-breakdown__option--correct-selected";
+                            optIcon  = "fa-solid fa-check";
                         }
-                        @if (opt.IsCorrect)
+                        else if (opt.IsCorrect)
                         {
-                            <span class="badge bg-success ms-2">Correct</span>
+                            optClass = "quiz-breakdown__option--correct";
+                            optIcon  = "fa-solid fa-check";
                         }
-                    </li>
-                }
-            </ul>
-        </div>
-    }
+                        else if (opt.WasSelected)
+                        {
+                            optClass = "quiz-breakdown__option--wrong-selected";
+                            optIcon  = "fa-solid fa-xmark";
+                        }
+                        else
+                        {
+                            optClass = "";
+                            optIcon  = "fa-regular fa-circle";
+                        }
+
+                        <li class="quiz-breakdown__option @optClass">
+                            <span class="quiz-breakdown__opt-icon" aria-hidden="true">
+                                <i class="@optIcon"></i>
+                            </span>
+                            <span class="quiz-breakdown__opt-text">@Html.Raw(opt.OptionText)</span>
+
+                            @if (opt.WasSelected && !opt.IsCorrect)
+                            {
+                                <span class="quiz-tag quiz-tag--danger">Your answer</span>
+                            }
+                            @if (opt.IsCorrect)
+                            {
+                                <span class="quiz-tag quiz-tag--success">Correct</span>
+                            }
+                        </li>
+                    }
+                </ul>
+            </article>
+        }
+    </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
+}
