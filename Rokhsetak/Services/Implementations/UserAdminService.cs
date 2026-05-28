@@ -83,13 +83,33 @@ public class UserAdminService : IUserAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // USER DETAILS (with booking history)
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<UserDetailViewModel>> GetUserDetailsAsync(int userId)
+    public async Task<ServiceResult<UserDetailViewModel>> GetUserDetailsAsync(int userId, string culture)
     {
         var data = await (
             from u in _context.Users.AsNoTracking()
             join r in _context.Roles on u.RoleId equals r.RoleId
+            join ct in _context.Cities on u.CityId equals ct.CityId into ctJoin
+            from ct in ctJoin.DefaultIfEmpty()
+            join pr in _context.Provinces on u.ProvinceId equals pr.ProvinceId into prJoin
+            from pr in prJoin.DefaultIfEmpty()
             where u.UserId == userId
-            select new { u, RoleName = r.RoleName }
+            select new
+            {
+                u,
+                r.RoleName,
+
+                CityName = ct.CityTranslations
+                    .Where(c => c.CityId == u.CityId && c.LanguageCode == culture)
+                    .Select(c => c.DisplayName)
+                    .FirstOrDefault(),
+
+                ProvinceName = pr.ProvinceTranslations
+                    .Where(p => p.ProvinceId == u.ProvinceId && p.LanguageCode == culture)
+                    .Select(p => p.DisplayName)
+                    .FirstOrDefault(),
+
+                u.ProfilePicturePath
+            }
         ).FirstOrDefaultAsync();
 
         if (data == null)
@@ -107,10 +127,10 @@ public class UserAdminService : IUserAdminService
             CreatedAt = data.u.CreatedAt,
             DateOfBirth = data.u.DateOfBirth,
             Gender = data.u.Gender,
-            City = data.u.City,
-            Province = data.u.Province,
+            CityName = data.CityName,
+            ProvinceName = data.ProvinceName,
             AddressLine1 = data.u.AddressLine1,
-            ProfilePicture = data.u.ProfilePicture
+            ProfilePicture = data.u.ProfilePicturePath
         };
 
         // Bookings either as trainee or as mentor

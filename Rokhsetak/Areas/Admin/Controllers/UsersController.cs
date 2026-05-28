@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Admin.ViewModels.Users;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Admin.Controllers;
 
@@ -34,7 +35,8 @@ public class UsersController : Controller
     // GET /Admin/Users/Details/5
     public async Task<IActionResult> Details(int id)
     {
-        var result = await _users.GetUserDetailsAsync(id);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _users.GetUserDetailsAsync(id, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
