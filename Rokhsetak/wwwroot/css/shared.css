@@ -224,6 +224,20 @@
     transform: translateY(-1px);
 }
 
+/* Active state for ghost CTAs that represent a section (e.g. Profile).
+   Mirrors the link active treatment: tinted surface + gold icon accent. */
+.landing-nav__cta--ghost.is-active {
+    background: rgba(26, 58, 107, 0.07);
+    border-color: rgba(26, 58, 107, 0.3);
+    color: var(--color-primary, #1A3A6B);
+    font-weight: 600;
+}
+
+.landing-nav__cta--ghost.is-active > i {
+    color: var(--color-accent-gold, #C9A84C);
+    opacity: 1;
+}
+
 /* ---------- Mobile toggle (CSS-only) ---------- */
 
 /* The checkbox holds open/closed state. Hidden from view, still focusable. */
