@@ -38,11 +38,9 @@ public class TraineeRegistrationViewModel
     public string Gender { get; set; } = null!;
 
     [Display(Name = "Province")]
-    public string Province { get; set; } = null!;
     public int ProvinceId { get; set; } = 0!;
 
     [Display(Name = "City")]
-    public string City { get; set; } = null!;
     public int CityId { get; set; } = 0!;
 
     [Display(Name = "Address")]

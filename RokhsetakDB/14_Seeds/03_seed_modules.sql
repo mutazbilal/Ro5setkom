@@ -10,8 +10,8 @@ INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_i
 INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (4, NULL, 'theoretical', 4, 3, 'global');
 INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (5, NULL, 'theoretical', 5, 4, 'global');
 INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (6, 1, 'theoretical', 6, 5, 'per_license');
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (7, 2, 'theoretical', 7, 6, 'per_license');
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (8, 3, 'theoretical', 8, 7, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (7, 2, 'theoretical', 7, 5, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (8, 3, 'theoretical', 8, NULL, 'per_license');
 SET IDENTITY_INSERT Learning.LearningModules OFF;
 
 -- ModuleTranslations
