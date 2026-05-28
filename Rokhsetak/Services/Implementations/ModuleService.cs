@@ -36,14 +36,19 @@ public class ModuleService : IModuleService
             return ServiceResult<ModuleListViewModel>.Failure("License not found.");
 
         var modules = await _context.LearningModules
-            .Where(m => m.LicenseTypeId == license.LicenseTypeId)
-            .OrderBy(m => m.Phase)
-            .ThenBy(m => m.OrderIndex)
-            .Include(mt => mt.ModuleTranslations.Where(mt => mt.LanguageCode == culture))
-            .ToListAsync();
+                .Where(m =>
+                    m.LicenseTypes.Any(lt =>
+                        lt.LicenseTypeId == license.LicenseTypeId))
+                .OrderBy(m => m.OrderIndex)
+                .Include(m => m.ModuleTranslations
+                    .Where(mt => mt.LanguageCode == culture))
+                .ToListAsync();
 
         var progressMap = await _context.TraineeModuleProgresses
-            .Where(p => p.TraineeId == traineeId && p.TraineeLicenseId == traineeLicenseId)
+            .Where(p =>
+                p.TraineeId == traineeId &&
+                p.Module.LicenseTypes.Any(lt =>
+                    lt.LicenseTypeId == license.LicenseTypeId))
             .ToDictionaryAsync(p => p.ModuleId);
 
         var moduleIds = modules.Select(m => m.ModuleId).ToList();
@@ -152,14 +157,15 @@ public class ModuleService : IModuleService
 
         // Pull module + its translation in one query
         var module = await _context.LearningModules
-            .Where(m => m.ModuleId == moduleId && m.LicenseTypeId == license.LicenseTypeId)
+            .Where(m => m.ModuleId == moduleId)
             .Select(m => new
             {
                 m.ModuleId,
                 m.Phase,
                 m.PrerequisiteModuleId,
                 Translation = m.ModuleTranslations
-                    .FirstOrDefault(t => t.LanguageCode == culture)
+                    .FirstOrDefault(t => t.LanguageCode == culture),
+
             })
             .FirstOrDefaultAsync();
 
@@ -171,9 +177,9 @@ public class ModuleService : IModuleService
         if (module.PrerequisiteModuleId.HasValue)
         {
             var prereqStatus = await _context.TraineeModuleProgresses
-                .Where(p => p.TraineeId == traineeId
-                         && p.ModuleId == module.PrerequisiteModuleId.Value
-                         && p.TraineeLicenseId == traineeLicenseId)
+                .Where(p =>
+                    p.TraineeId == traineeId &&
+                    p.ModuleId == module.PrerequisiteModuleId.Value)
                 .Select(p => p.Status)
                 .FirstOrDefaultAsync();
 
@@ -182,14 +188,13 @@ public class ModuleService : IModuleService
 
         if (isLocked)
             return ServiceResult<ModuleDetailViewModel>.Failure("Module is locked. Complete the prerequisite first.");
-
-        // Progress
         var status = await _context.TraineeModuleProgresses
-            .Where(p => p.TraineeId == traineeId
-                     && p.ModuleId == moduleId
-                     && p.TraineeLicenseId == traineeLicenseId)
+            .Where(p =>
+                p.TraineeId == traineeId &&
+                p.ModuleId == moduleId)
             .Select(p => p.Status)
-            .FirstOrDefaultAsync() ?? "not_started";
+            .FirstOrDefaultAsync()
+            ?? "not_started";
 
         // Contents — join to translation table, filter by culture
         var contents = await _context.ModuleContents
@@ -198,10 +203,13 @@ public class ModuleService : IModuleService
             {
                 ContentId = c.ContentId,
                 ContentType = c.ContentType,
-                VideoUrl = c.VideoUrl,
                 TextContent = c.ModuleContentTranslations
                     .Where(t => t.LanguageCode == culture)
                     .Select(t => t.TextContent)
+                    .FirstOrDefault(),
+                VideoUrl = c.ModuleContentTranslations
+                    .Where (t => t.LanguageCode == culture)
+                    .Select(t => t.VideoUrl)
                     .FirstOrDefault()
             })
             .ToListAsync();
@@ -290,10 +298,15 @@ public class ModuleService : IModuleService
     // ─────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult> StartModuleAsync(int traineeId, int traineeLicenseId, int moduleId)
     {
+        var phase = await _context.LearningModules
+            .Where(m => m.ModuleId == moduleId)
+            .Select(m => m.Phase)
+            .FirstOrDefaultAsync();
+
         var existing = await _context.TraineeModuleProgresses
-            .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                   && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+            .FirstOrDefaultAsync(p =>
+                p.TraineeId == traineeId &&
+                p.ModuleId == moduleId);
 
         if (existing != null)
             return ServiceResult.Success(); // already started or completed
@@ -341,8 +354,7 @@ public class ModuleService : IModuleService
 
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                   && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.ModuleId == moduleId);
 
         if (progress == null)
             return ServiceResult.Failure("Module has not been started.");
@@ -374,12 +386,19 @@ public class ModuleService : IModuleService
         if (license == null) return;
 
         int total = await _context.LearningModules
-            .CountAsync(m => m.LicenseTypeId == license.LicenseTypeId);
+            .CountAsync(m =>
+                m.LicenseTypes.Any(lt =>
+                    lt.LicenseTypeId == license.LicenseTypeId));
 
         int completed = await _context.TraineeModuleProgresses
-            .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
-                          && p.Status == "completed");
+                .Where(p =>
+                    p.TraineeId == traineeId &&
+                    p.Status == "completed" &&
+                    p.Module.LicenseTypes.Any(lt =>
+                        lt.LicenseTypeId == license.LicenseTypeId))
+                .Select(p => p.ModuleId)
+                .Distinct()
+                .CountAsync();
 
         license.ProgressPercentage = total == 0 ? 0 : (int)Math.Round((double)completed / total * 100);
         license.UpdatedAt = DateTime.UtcNow;

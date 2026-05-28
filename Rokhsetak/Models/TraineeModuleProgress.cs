@@ -11,7 +11,7 @@ public partial class TraineeModuleProgress
 
     public int ModuleId { get; set; }
 
-    public int TraineeLicenseId { get; set; }
+    public int? TraineeLicenseId { get; set; }
 
     public string Status { get; set; } = null!;
 
@@ -23,5 +23,5 @@ public partial class TraineeModuleProgress
 
     public virtual Trainee Trainee { get; set; } = null!;
 
-    public virtual TraineeLicense TraineeLicense { get; set; } = null!;
+    public virtual TraineeLicense? TraineeLicense { get; set; }
 }

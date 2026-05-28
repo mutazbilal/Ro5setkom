@@ -28,7 +28,9 @@ public class TraineeDashboardService : ITraineeDashboardService
 
         // 2. Modules — project translated title directly, no extra round-trips
         var modules = await _context.LearningModules
-            .Where(m => m.LicenseTypeId == license.LicenseTypeId)
+            .Where(m =>
+                m.LicenseTypes.Any(lt =>
+                    lt.LicenseTypeId == license.LicenseTypeId))
             .OrderBy(m => m.Phase)
             .ThenBy(m => m.OrderIndex)
             .Select(m => new
@@ -37,6 +39,7 @@ public class TraineeDashboardService : ITraineeDashboardService
                 m.Phase,
                 m.OrderIndex,
                 m.PrerequisiteModuleId,
+
                 Title = m.ModuleTranslations
                     .Where(t => t.LanguageCode == culture)
                     .Select(t => t.Title)
@@ -51,8 +54,7 @@ public class TraineeDashboardService : ITraineeDashboardService
 
         // 3. Progress records for this license
         var progressRecords = await _context.TraineeModuleProgresses
-            .Where(p => p.TraineeId == traineeId
-                     && p.TraineeLicenseId == license.TraineeLicenseId)
+            .Where(p => p.TraineeId == traineeId)
             .ToDictionaryAsync(p => p.ModuleId);
 
         // 4. Quiz info per module

@@ -29,8 +29,7 @@ public class QuizService : IQuizService
     {
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                   && p.ModuleId == moduleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.ModuleId == moduleId);
 
         if (progress == null || progress.Status == "not_started")
             return ServiceResult<QuizViewModel>.Failure("Start the module before taking the quiz.");
@@ -59,8 +58,7 @@ public class QuizService : IQuizService
 
         var progress = await _context.TraineeModuleProgresses
             .FirstOrDefaultAsync(p => p.TraineeId == traineeId
-                                   && p.ModuleId == quiz.ModuleId
-                                   && p.TraineeLicenseId == traineeLicenseId);
+                                   && p.ModuleId == quiz.ModuleId);
 
         if (progress == null || progress.Status == "not_started")
             return ServiceResult<QuizResultViewModel>.Failure("Module must be started before taking the quiz.");
@@ -139,13 +137,15 @@ public class QuizService : IQuizService
             return ServiceResult<QuizViewModel>.Failure("License not found.");
 
         var theoreticalModuleIds = await _context.LearningModules
-            .Where(m => m.LicenseTypeId == license.LicenseTypeId && m.Phase == "theoretical")
-            .Select(m => m.ModuleId)
-            .ToListAsync();
+                .Where(m =>
+                    m.Phase == "theoretical" &&
+                    m.LicenseTypes.Any(lt =>
+                        lt.LicenseTypeId == license.LicenseTypeId))
+                .Select(m => m.ModuleId)
+                .ToListAsync();
 
         var completedTheoryCount = await _context.TraineeModuleProgresses
             .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
                           && theoreticalModuleIds.Contains(p.ModuleId)
                           && p.Status == "completed");
 
@@ -375,12 +375,19 @@ public class QuizService : IQuizService
         if (license == null) return;
 
         int total = await _context.LearningModules
-            .CountAsync(m => m.LicenseTypeId == license.LicenseTypeId);
+            .CountAsync(m =>
+                m.LicenseTypes.Any(lt =>
+                    lt.LicenseTypeId == license.LicenseTypeId));
 
         int completed = await _context.TraineeModuleProgresses
-            .CountAsync(p => p.TraineeId == traineeId
-                          && p.TraineeLicenseId == traineeLicenseId
-                          && p.Status == "completed");
+            .Where(p =>
+                p.TraineeId == traineeId &&
+                p.Status == "completed" &&
+                p.Module.LicenseTypes.Any(lt =>
+                    lt.LicenseTypeId == license.LicenseTypeId))
+            .Select(p => p.ModuleId)
+            .Distinct()
+            .CountAsync();
 
         license.ProgressPercentage = total == 0 ? 0 : (int)Math.Round((double)completed / total * 100);
         license.UpdatedAt = DateTime.UtcNow;
