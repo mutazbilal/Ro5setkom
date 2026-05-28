@@ -164,7 +164,8 @@ public class ModuleService : IModuleService
                 m.Phase,
                 m.PrerequisiteModuleId,
                 Translation = m.ModuleTranslations
-                    .FirstOrDefault(t => t.LanguageCode == culture)
+                    .FirstOrDefault(t => t.LanguageCode == culture),
+
             })
             .FirstOrDefaultAsync();
 
@@ -205,6 +206,10 @@ public class ModuleService : IModuleService
                 TextContent = c.ModuleContentTranslations
                     .Where(t => t.LanguageCode == culture)
                     .Select(t => t.TextContent)
+                    .FirstOrDefault(),
+                VideoUrl = c.ModuleContentTranslations
+                    .Where (t => t.LanguageCode == culture)
+                    .Select(t => t.VideoUrl)
                     .FirstOrDefault()
             })
             .ToListAsync();
