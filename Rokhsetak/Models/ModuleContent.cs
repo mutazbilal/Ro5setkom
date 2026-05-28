@@ -11,8 +11,6 @@ public partial class ModuleContent
 
     public string? ContentType { get; set; }
 
-    public string? VideoUrl { get; set; }
-
     public virtual LearningModule Module { get; set; } = null!;
 
     public virtual ICollection<ModuleContentTranslation> ModuleContentTranslations { get; set; } = new List<ModuleContentTranslation>();

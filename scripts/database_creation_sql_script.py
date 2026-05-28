@@ -74,7 +74,8 @@ def read_sql_file(file_path: Path) -> str:
     Reads a SQL file safely.
     """
     try:
-        return file_path.read_text(encoding="utf-8-sig").strip()
+        content = file_path.read_text(encoding="utf-8-sig")
+        return content.replace("\ufeff", "").strip()
     except Exception as ex:
         return f"-- ERROR READING FILE: {file_path}\n-- {ex}"
 
@@ -165,8 +166,8 @@ def main():
     #SEED_OUTPUT.write_text(seed_script, encoding="utf-8")
     FULL_OUTPUT.write_text(concatenated_script, encoding="utf-8")
     print("Done.")
-    print(f"Created: {CREATE_OUTPUT}")
-    print(f"Created: {SEED_OUTPUT}")
+    #print(f"Created: {CREATE_OUTPUT}")
+    #print(f"Created: {SEED_OUTPUT}")
     print(f"Created: {FULL_OUTPUT}")
 
 

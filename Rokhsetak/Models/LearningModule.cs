@@ -7,7 +7,7 @@ public partial class LearningModule
 {
     public int ModuleId { get; set; }
 
-    public int LicenseTypeId { get; set; }
+    public int? LicenseTypeId { get; set; }
 
     public string Phase { get; set; } = null!;
 
@@ -15,9 +15,11 @@ public partial class LearningModule
 
     public int? PrerequisiteModuleId { get; set; }
 
+    public string ProgressScope { get; set; } = null!;
+
     public virtual ICollection<LearningModule> InversePrerequisiteModule { get; set; } = new List<LearningModule>();
 
-    public virtual LicenseType LicenseType { get; set; } = null!;
+    public virtual LicenseType? LicenseType { get; set; }
 
     public virtual ICollection<ModuleContent> ModuleContents { get; set; } = new List<ModuleContent>();
 
@@ -30,4 +32,6 @@ public partial class LearningModule
     public virtual ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
 
     public virtual ICollection<TraineeModuleProgress> TraineeModuleProgresses { get; set; } = new List<TraineeModuleProgress>();
+
+    public virtual ICollection<LicenseType> LicenseTypes { get; set; } = new List<LicenseType>();
 }
