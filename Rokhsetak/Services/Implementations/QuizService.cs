@@ -9,6 +9,7 @@ namespace Rokhsetak.Services.Implementations;
 public class QuizService : IQuizService
 {
     private const int MockExamTimeLimitMinutes = 45;
+    private const int MockExamQuestionCount = 30;
 
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
@@ -137,12 +138,11 @@ public class QuizService : IQuizService
             return ServiceResult<QuizViewModel>.Failure("License not found.");
 
         var theoreticalModuleIds = await _context.LearningModules
-                .Where(m =>
-                    m.Phase == "theoretical" &&
-                    m.LicenseTypes.Any(lt =>
-                        lt.LicenseTypeId == license.LicenseTypeId))
-                .Select(m => m.ModuleId)
-                .ToListAsync();
+            .Where(m =>
+                m.Phase == "theoretical" &&
+                m.LicenseTypes.Any(lt => lt.LicenseTypeId == license.LicenseTypeId))
+            .Select(m => m.ModuleId)
+            .ToListAsync();
 
         var completedTheoryCount = await _context.TraineeModuleProgresses
             .CountAsync(p => p.TraineeId == traineeId
@@ -158,8 +158,10 @@ public class QuizService : IQuizService
         if (mockQuiz == null)
             return ServiceResult<QuizViewModel>.Failure("No mock exam found for this license type.");
 
-        // Shuffle questions
-        mockQuiz.QuizQuestions = mockQuiz.QuizQuestions.OrderBy(_ => Random.Shared.Next()).ToList();
+        // Dynamically draw questions from the trainee's theoretical module pool.
+        // The seeded mock exam quiz intentionally has no questions of its own.
+        mockQuiz.QuizQuestions = await LoadMockExamQuestionsAsync(
+            theoreticalModuleIds, MockExamQuestionCount);
 
         var vm = MapToQuizViewModel(mockQuiz, 0, traineeLicenseId, isMockExam: true, culture);
         vm.TimeLimitMinutes = MockExamTimeLimitMinutes;
@@ -178,6 +180,17 @@ public class QuizService : IQuizService
 
         if (quiz == null)
             return ServiceResult<QuizResultViewModel>.Failure("Mock exam not found.");
+
+        // Reconstruct only the questions that were actually served to the trainee.
+        // We key off the submitted answer IDs — no server-side session needed.
+        var submittedQuestionIds = model.Answers.Keys.ToList();
+
+        quiz.QuizQuestions = await _context.QuizQuestions
+            .Include(q => q.QuestionTranslations)
+            .Include(q => q.QuestionOptions)
+                .ThenInclude(o => o.OptionTranslations)
+            .Where(q => submittedQuestionIds.Contains(q.QuestionId))
+            .ToListAsync();
 
         var (score, passed, resultQuestions) = GradeQuiz(quiz, model.Answers, culture);
 
@@ -391,5 +404,29 @@ public class QuizService : IQuizService
 
         license.ProgressPercentage = total == 0 ? 0 : (int)Math.Round((double)completed / total * 100);
         license.UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Draws a random pool of questions from all theoretical module quizzes
+    /// belonging to the given set of module IDs. Never touches the mock exam
+    /// quiz's own (empty) question list.
+    /// </summary>
+    private async Task<List<QuizQuestion>> LoadMockExamQuestionsAsync(
+        IEnumerable<int> theoreticalModuleIds, int count)
+    {
+        var questions = await _context.QuizQuestions
+            .Include(q => q.QuestionTranslations)
+            .Include(q => q.QuestionOptions)
+                .ThenInclude(o => o.OptionTranslations)
+            .Where(q =>
+                q.Quiz.IsMockExam != true &&
+                q.Quiz.ModuleId != null &&
+                theoreticalModuleIds.Contains(q.Quiz.ModuleId.Value))
+            .ToListAsync();
+
+        return questions
+            .OrderBy(_ => Random.Shared.Next())
+            .Take(count)
+            .ToList();
     }
 }
