@@ -131,6 +131,17 @@
                             </a>
                         </li>
                     }
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li>
+                            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
+                               class="landing-nav__link @ActiveClass("Admin", "Dashboard", "index")"
+                               aria-current="@ActiveAria("Admin", "Dashboard", "index")">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span>Admin Dashboard</span>
+                            </a>
+                        </li>
+                    }
                     else
                     {
                         <li>

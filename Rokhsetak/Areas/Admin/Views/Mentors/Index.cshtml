@@ -1,0 +1,151 @@
+@model MentorListViewModel
+@{
+    ViewData["Title"] = "Mentors";
+    ViewData["Subtitle"] = "All approved mentors on the platform";
+}
+
+<form asp-area="Admin" asp-controller="Mentors" asp-action="Index" method="get" class="admin-card admin-card--padded mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label asp-for="Filter.Search" class="form-label">Search</label>
+            <input asp-for="Filter.Search" class="form-control" placeholder="Name, email or city" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Filter.Status" class="form-label">Status</label>
+            <select asp-for="Filter.Status" class="form-select">
+                <option value="">All</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Filter.LicenseTypeId" class="form-label">License type</label>
+            <select asp-for="Filter.LicenseTypeId" class="form-select">
+                <option value="">All license types</option>
+                @foreach (var (id, name) in Model.LicenseTypeOptions)
+                {
+                    <option value="@id">@name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn admin-btn-primary w-100">
+                <i class="fa-solid fa-magnifying-glass"></i> Filter
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="admin-card">
+    <div class="admin-card__header admin-card__header--bordered">
+        <h3>Mentors <span class="admin-count-badge">@Model.TotalCount</span></h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>License</th>
+                    <th>City</th>
+                    <th>Rating</th>
+                    <th>Sessions</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.Items)
+                {
+                    <tr>
+                        <td><strong>@m.FullName</strong></td>
+                        <td>@m.Email</td>
+                        <td>@m.LicenseType</td>
+                        <td>@(m.City ?? "—")</td>
+                        <td>
+                            @if (m.AverageRating > 0)
+                            {
+                                <span><i class="fa-solid fa-star text-warning"></i> @m.AverageRating.ToString("0.0")</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
+                        <td>@m.TotalSessions</td>
+                        <td>
+                            @if (m.IsActive)
+                            {
+                                <span class="admin-pill admin-pill--success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="admin-pill admin-pill--danger">Inactive</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a asp-area="Admin" asp-controller="Mentors" asp-action="Details" asp-route-id="@m.MentorId"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Items.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-5">No mentors match your filters.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="admin-card__footer">
+            <small class="text-muted">
+                Page @Model.Filter.Page of @Model.TotalPages
+            </small>
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    @{
+                        var current = Model.Filter.Page;
+                        var total = Model.TotalPages;
+                        int start = Math.Max(1, current - 2);
+                        int end = Math.Min(total, current + 2);
+                    }
+                    <li class="page-item @(current <= 1 ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-area="Admin" asp-controller="Mentors" asp-action="Index"
+                           asp-route-Search="@Model.Filter.Search"
+                           asp-route-Status="@Model.Filter.Status"
+                           asp-route-LicenseTypeId="@Model.Filter.LicenseTypeId"
+                           asp-route-Page="@(current - 1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = start; i <= end; i++)
+                    {
+                        <li class="page-item @(i == current ? "active" : "")">
+                            <a class="page-link"
+                               asp-area="Admin" asp-controller="Mentors" asp-action="Index"
+                               asp-route-Search="@Model.Filter.Search"
+                               asp-route-Status="@Model.Filter.Status"
+                               asp-route-LicenseTypeId="@Model.Filter.LicenseTypeId"
+                               asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(current >= total ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-area="Admin" asp-controller="Mentors" asp-action="Index"
+                           asp-route-Search="@Model.Filter.Search"
+                           asp-route-Status="@Model.Filter.Status"
+                           asp-route-LicenseTypeId="@Model.Filter.LicenseTypeId"
+                           asp-route-Page="@(current + 1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

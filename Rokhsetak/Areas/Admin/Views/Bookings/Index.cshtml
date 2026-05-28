@@ -1,0 +1,163 @@
+@model AdminBookingListViewModel
+@{
+    ViewData["Title"] = "Bookings &amp; Exams";
+    ViewData["Subtitle"] = "Sessions, exam appointments and their statuses";
+    var activeTab = ViewData["ActiveTab"] as string ?? "bookings";
+}
+
+<ul class="nav nav-tabs admin-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link @(activeTab == "bookings" ? "active" : "")"
+           asp-area="Admin" asp-controller="Bookings" asp-action="Index">
+            <i class="fa-solid fa-calendar-check"></i> Bookings
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(activeTab == "exams" ? "active" : "")"
+           asp-area="Admin" asp-controller="Bookings" asp-action="Exams">
+            <i class="fa-solid fa-graduation-cap"></i> Exam appointments
+        </a>
+    </li>
+</ul>
+
+<form asp-area="Admin" asp-controller="Bookings" asp-action="Index" method="get" class="admin-card admin-card--padded mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+            <label asp-for="Filter.Search" class="form-label">Search</label>
+            <input asp-for="Filter.Search" class="form-control" placeholder="Trainee or mentor name" />
+        </div>
+        <div class="col-md-2">
+            <label asp-for="Filter.Status" class="form-label">Status</label>
+            <select asp-for="Filter.Status" class="form-select">
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label asp-for="Filter.FromDate" class="form-label">From</label>
+            <input asp-for="Filter.FromDate" type="date" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label asp-for="Filter.ToDate" class="form-label">To</label>
+            <input asp-for="Filter.ToDate" type="date" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <label asp-for="Filter.MentorId" class="form-label">Mentor</label>
+            <input asp-for="Filter.MentorId" type="number" class="form-control" placeholder="ID" />
+        </div>
+        <div class="col-md-1">
+            <label asp-for="Filter.TraineeId" class="form-label">Trainee</label>
+            <input asp-for="Filter.TraineeId" type="number" class="form-control" placeholder="ID" />
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn admin-btn-primary w-100">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="admin-card">
+    <div class="admin-card__header admin-card__header--bordered">
+        <h3>Bookings <span class="admin-count-badge">@Model.TotalCount</span></h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Trainee</th>
+                    <th>Mentor</th>
+                    <th>License</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model.Items)
+                {
+                    <tr>
+                        <td><small class="text-muted">#@b.BookingId</small></td>
+                        <td>@b.BookingDate.ToString("dd MMM yyyy")</td>
+                        <td>@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")</td>
+                        <td>@b.TraineeName</td>
+                        <td>@b.MentorName</td>
+                        <td>@b.LicenseType</td>
+                        <td>@b.SessionType</td>
+                        <td>
+                            <span class="admin-pill admin-pill--status admin-pill--@b.Status">@b.Status</span>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Items.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-5">No bookings match your filters.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="admin-card__footer">
+            <small class="text-muted">
+                Page @Model.Filter.Page of @Model.TotalPages
+            </small>
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    @{
+                        var current = Model.Filter.Page;
+                        var total = Model.TotalPages;
+                        int start = Math.Max(1, current - 2);
+                        int end = Math.Min(total, current + 2);
+                    }
+                    <li class="page-item @(current <= 1 ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                           asp-route-Search="@Model.Filter.Search"
+                           asp-route-Status="@Model.Filter.Status"
+                           asp-route-FromDate="@Model.Filter.FromDate"
+                           asp-route-ToDate="@Model.Filter.ToDate"
+                           asp-route-MentorId="@Model.Filter.MentorId"
+                           asp-route-TraineeId="@Model.Filter.TraineeId"
+                           asp-route-Page="@(current - 1)">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = start; i <= end; i++)
+                    {
+                        <li class="page-item @(i == current ? "active" : "")">
+                            <a class="page-link"
+                               asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                               asp-route-Search="@Model.Filter.Search"
+                               asp-route-Status="@Model.Filter.Status"
+                               asp-route-FromDate="@Model.Filter.FromDate"
+                               asp-route-ToDate="@Model.Filter.ToDate"
+                               asp-route-MentorId="@Model.Filter.MentorId"
+                               asp-route-TraineeId="@Model.Filter.TraineeId"
+                               asp-route-Page="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(current >= total ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                           asp-route-Search="@Model.Filter.Search"
+                           asp-route-Status="@Model.Filter.Status"
+                           asp-route-FromDate="@Model.Filter.FromDate"
+                           asp-route-ToDate="@Model.Filter.ToDate"
+                           asp-route-MentorId="@Model.Filter.MentorId"
+                           asp-route-TraineeId="@Model.Filter.TraineeId"
+                           asp-route-Page="@(current + 1)">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+</div>

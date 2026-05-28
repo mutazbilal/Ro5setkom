@@ -1,0 +1,417 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Rokhsetak.Areas.Admin.ViewModels.MentorApplications;
+using Rokhsetak.Areas.Admin.ViewModels.Mentors;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Common;
+using Rokhsetak.Services.Interfaces;
+
+namespace Rokhsetak.Services.Implementations;
+
+public class MentorAdminService : IMentorAdminService
+{
+    private readonly RokhsetakDbContext _context;
+    private readonly IAuditService _audit;
+    private readonly INotificationService _notifications;
+    private readonly IEmailService _email;
+    private readonly IWebHostEnvironment _env;
+
+    private const string CertificationsRelative = "uploads/certifications";
+
+    public MentorAdminService(
+        RokhsetakDbContext context,
+        IAuditService audit,
+        INotificationService notifications,
+        IEmailService email,
+        IWebHostEnvironment env)
+    {
+        _context = context;
+        _audit = audit;
+        _notifications = notifications;
+        _email = email;
+        _env = env;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // LIST MENTORS
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<MentorListViewModel>> GetMentorsAsync(MentorListFilter filter)
+    {
+        if (filter.Page < 1) filter.Page = 1;
+        if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
+
+        var query =
+            from m in _context.Mentors.AsNoTracking()
+            join u in _context.Users on m.MentorId equals u.UserId
+            join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
+            from lt in ltj.DefaultIfEmpty()
+            join app in _context.MentorApplications on m.ApplicationId equals app.ApplicationId into appj
+            from app in appj.DefaultIfEmpty()
+            select new { m, u, LicenseName = lt != null ? lt.LicenseName : "—", AppStatus = app != null ? app.Status : "—" };
+
+        if (filter.LicenseTypeId.HasValue)
+            query = query.Where(x => x.m.LicenseTypeId == filter.LicenseTypeId.Value);
+
+        if (!string.IsNullOrWhiteSpace(filter.Status))
+        {
+            if (filter.Status.Equals("active", StringComparison.OrdinalIgnoreCase))
+                query = query.Where(x => x.u.IsActive == true);
+            else if (filter.Status.Equals("inactive", StringComparison.OrdinalIgnoreCase))
+                query = query.Where(x => x.u.IsActive == false);
+        }
+
+        if (!string.IsNullOrWhiteSpace(filter.Search))
+        {
+            var s = filter.Search.Trim().ToLower();
+            query = query.Where(x =>
+                x.u.Email.ToLower().Contains(s) ||
+                (x.u.FirstName + " " + x.u.LastName).ToLower().Contains(s));
+        }
+
+        var total = await query.CountAsync();
+
+        var page = await query
+            .OrderByDescending(x => x.m.CreatedAt)
+            .Skip((filter.Page - 1) * filter.PageSize)
+            .Take(filter.PageSize)
+            .Select(x => new
+            {
+                x.m.MentorId,
+                x.u.FirstName,
+                x.u.LastName,
+                x.u.Email,
+                x.u.PhoneNumber,
+                x.u.IsActive,
+                x.m.PricePerSession,
+                x.m.City,
+                x.LicenseName,
+                x.AppStatus
+            })
+            .ToListAsync();
+
+        var ids = page.Select(p => p.MentorId).ToList();
+
+        var ratingStats = await _context.Ratings
+            .Where(r => ids.Contains(r.MentorId))
+            .GroupBy(r => r.MentorId)
+            .Select(g => new { MentorId = g.Key, Avg = (double)g.Average(r => r.Score) })
+            .ToDictionaryAsync(x => x.MentorId, x => x.Avg);
+
+        var sessionStats = await _context.Bookings
+            .Where(b => ids.Contains(b.MentorId))
+            .GroupBy(b => b.MentorId)
+            .Select(g => new { MentorId = g.Key, Total = g.Count() })
+            .ToDictionaryAsync(x => x.MentorId, x => x.Total);
+
+        var items = page.Select(p => new MentorListItem
+        {
+            MentorId = p.MentorId,
+            FullName = $"{p.FirstName} {p.LastName}",
+            Email = p.Email,
+            PhoneNumber = p.PhoneNumber,
+            LicenseType = p.LicenseName,
+            City = p.City,
+            PricePerSession = p.PricePerSession,
+            IsActive = p.IsActive ?? true,
+            ApplicationStatus = p.AppStatus,
+            AverageRating = ratingStats.TryGetValue(p.MentorId, out var avg) ? Math.Round(avg, 2) : 0,
+            TotalSessions = sessionStats.TryGetValue(p.MentorId, out var t) ? t : 0
+        }).ToList();
+
+        var licenseTypeOptions = await _context.LicenseTypes
+            .AsNoTracking()
+            .OrderBy(l => l.LicenseName)
+            .Select(l => new { l.LicenseTypeId, l.LicenseName })
+            .ToListAsync();
+
+        return ServiceResult<MentorListViewModel>.Success(new MentorListViewModel
+        {
+            Filter = filter,
+            Items = items,
+            TotalCount = total,
+            LicenseTypeOptions = licenseTypeOptions
+                .Select(o => (o.LicenseTypeId, o.LicenseName))
+                .ToList()
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // MENTOR DETAILS
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<MentorDetailViewModel>> GetMentorDetailsAsync(int mentorId)
+    {
+        var data = await (
+            from m in _context.Mentors.AsNoTracking()
+            join u in _context.Users on m.MentorId equals u.UserId
+            join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
+            from lt in ltj.DefaultIfEmpty()
+            join app in _context.MentorApplications on m.ApplicationId equals app.ApplicationId into appj
+            from app in appj.DefaultIfEmpty()
+            where m.MentorId == mentorId
+            select new
+            {
+                m,
+                u,
+                LicenseName = lt != null ? lt.LicenseName : "—",
+                AppStatus = app != null ? app.Status : "—"
+            }
+        ).FirstOrDefaultAsync();
+
+        if (data == null) return ServiceResult<MentorDetailViewModel>.Failure("Mentor not found.");
+
+        var ratingAgg = await _context.Ratings
+            .Where(r => r.MentorId == mentorId)
+            .GroupBy(r => 1)
+            .Select(g => new { Avg = g.Average(r => (double)r.Score), Count = g.Count() })
+            .FirstOrDefaultAsync();
+
+        var totalSessions = await _context.Bookings.CountAsync(b => b.MentorId == mentorId);
+        var completedSessions = await _context.Bookings.CountAsync(b => b.MentorId == mentorId && b.Status == "completed");
+
+        var vm = new MentorDetailViewModel
+        {
+            MentorId = data.m.MentorId,
+            FullName = $"{data.u.FirstName} {data.u.LastName}",
+            Email = data.u.Email,
+            PhoneNumber = data.u.PhoneNumber,
+            LicenseType = data.LicenseName,
+            City = data.m.City,
+            VehicleType = data.m.VehicleType,
+            PricePerSession = data.m.PricePerSession,
+            IsActive = data.u.IsActive ?? true,
+            ApplicationStatus = data.AppStatus,
+            AverageRating = ratingAgg != null ? Math.Round(ratingAgg.Avg, 2) : 0,
+            TotalRatings = ratingAgg?.Count ?? 0,
+            TotalSessions = totalSessions,
+            CompletedSessions = completedSessions,
+            CreatedAt = data.m.CreatedAt
+        };
+
+        return ServiceResult<MentorDetailViewModel>.Success(vm);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // PENDING APPLICATIONS
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<MentorApplicationListViewModel>> GetPendingApplicationsAsync()
+    {
+        var items = await (
+            from app in _context.MentorApplications.AsNoTracking()
+            join m in _context.Mentors on app.MentorId equals m.MentorId
+            join u in _context.Users on m.MentorId equals u.UserId
+            join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
+            from lt in ltj.DefaultIfEmpty()
+            where app.Status == "pending"
+            orderby app.SubmittedAt
+            select new MentorApplicationListItem
+            {
+                ApplicationId = app.ApplicationId,
+                MentorId = m.MentorId,
+                FullName = u.FirstName + " " + u.LastName,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber,
+                LicenseType = lt != null ? lt.LicenseName : "—",
+                City = m.City,
+                SubmittedAt = app.SubmittedAt,
+                HasCertificationFile = !string.IsNullOrEmpty(app.CertificationFilePath)
+            }
+        ).ToListAsync();
+
+        return ServiceResult<MentorApplicationListViewModel>.Success(
+            new MentorApplicationListViewModel { Items = items });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // APPLICATION DETAILS
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<MentorApplicationDetailViewModel>> GetApplicationDetailsAsync(int applicationId)
+    {
+        var data = await (
+            from app in _context.MentorApplications.AsNoTracking()
+            join m in _context.Mentors on app.MentorId equals m.MentorId
+            join u in _context.Users on m.MentorId equals u.UserId
+            join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
+            from lt in ltj.DefaultIfEmpty()
+            where app.ApplicationId == applicationId
+            select new { app, m, u, LicenseName = lt != null ? lt.LicenseName : "—" }
+        ).FirstOrDefaultAsync();
+
+        if (data == null)
+            return ServiceResult<MentorApplicationDetailViewModel>.Failure("Application not found.");
+
+        var fileName = !string.IsNullOrEmpty(data.app.CertificationFilePath)
+            ? Path.GetFileName(data.app.CertificationFilePath)
+            : null;
+
+        var vm = new MentorApplicationDetailViewModel
+        {
+            ApplicationId = data.app.ApplicationId,
+            MentorId = data.m.MentorId,
+            FullName = $"{data.u.FirstName} {data.u.LastName}",
+            Email = data.u.Email,
+            PhoneNumber = data.u.PhoneNumber,
+            NationalId = data.u.NationalId,
+            DateOfBirth = data.u.DateOfBirth,
+            Gender = data.u.Gender,
+            City = data.m.City ?? data.u.City,
+            Province = data.u.Province,
+            LicenseType = data.LicenseName,
+            VehicleType = data.m.VehicleType,
+            PricePerSession = data.m.PricePerSession,
+            Status = data.app.Status,
+            SubmittedAt = data.app.SubmittedAt,
+            CertificationUploadedAt = data.app.CertificationUploadedAt,
+            HasCertificationFile = !string.IsNullOrEmpty(data.app.CertificationFilePath),
+            CertificationFileName = fileName
+        };
+
+        return ServiceResult<MentorApplicationDetailViewModel>.Success(vm);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // APPROVE
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult> ApproveApplicationAsync(int adminUserId, int applicationId)
+    {
+        var app = await _context.MentorApplications
+            .FirstOrDefaultAsync(a => a.ApplicationId == applicationId);
+
+        if (app == null) return ServiceResult.Failure("Application not found.");
+        if (app.Status != "pending")
+            return ServiceResult.Failure("Only pending applications can be approved.");
+
+        app.Status = "approved";
+        app.ReviewedAt = DateTime.UtcNow;
+        app.ReviewedBy = adminUserId;
+        app.IsCertificationVerified = true;
+
+        _audit.Log(adminUserId, "ApproveMentorApplication", "MentorApplications", applicationId.ToString());
+
+        await _context.SaveChangesAsync();
+
+        // In-app notification
+        await _notifications.CreateAsync(
+            app.MentorId,
+            "Application Approved",
+            "Congratulations — your mentor application has been approved. You can now start receiving bookings.",
+            "application");
+
+        // Email notification (best-effort, do not fail the action)
+        var mentorEmail = await _context.Users
+            .Where(u => u.UserId == app.MentorId)
+            .Select(u => u.Email)
+            .FirstOrDefaultAsync();
+
+        if (!string.IsNullOrWhiteSpace(mentorEmail))
+        {
+            try
+            {
+                await _email.SendEmailAsync(
+                    mentorEmail,
+                    "Your Rokhsetak mentor application has been approved",
+                    "<p>Welcome aboard.</p><p>Your mentor application has been approved. You can now sign in and start receiving bookings from trainees.</p>");
+            }
+            catch
+            {
+                // Swallow — approval persisted; email delivery is non-critical here.
+            }
+        }
+
+        return ServiceResult.Success();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // REJECT
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult> RejectApplicationAsync(int adminUserId, int applicationId, string reason)
+    {
+        if (string.IsNullOrWhiteSpace(reason))
+            return ServiceResult.Failure("A rejection reason is required.");
+
+        if (reason.Length > 500)
+            return ServiceResult.Failure("Rejection reason cannot exceed 500 characters.");
+
+        var app = await _context.MentorApplications
+            .FirstOrDefaultAsync(a => a.ApplicationId == applicationId);
+
+        if (app == null) return ServiceResult.Failure("Application not found.");
+        if (app.Status != "pending")
+            return ServiceResult.Failure("Only pending applications can be rejected.");
+
+        app.Status = "rejected";
+        app.RejectionReason = reason.Trim();
+        app.ReviewedAt = DateTime.UtcNow;
+        app.ReviewedBy = adminUserId;
+
+        _audit.Log(adminUserId, "RejectMentorApplication", "MentorApplications", applicationId.ToString());
+
+        await _context.SaveChangesAsync();
+
+        // In-app notification
+        await _notifications.CreateAsync(
+            app.MentorId,
+            "Application Rejected",
+            $"Your mentor application has been rejected. Reason: {app.RejectionReason}",
+            "application");
+
+        // Email
+        var mentorEmail = await _context.Users
+            .Where(u => u.UserId == app.MentorId)
+            .Select(u => u.Email)
+            .FirstOrDefaultAsync();
+
+        if (!string.IsNullOrWhiteSpace(mentorEmail))
+        {
+            try
+            {
+                await _email.SendEmailAsync(
+                    mentorEmail,
+                    "Your Rokhsetak mentor application has been rejected",
+                    $"<p>Thank you for applying.</p><p>Unfortunately, we are unable to approve your application at this time.</p><p><strong>Reason:</strong> {System.Net.WebUtility.HtmlEncode(app.RejectionReason)}</p>");
+            }
+            catch
+            {
+                // Swallow.
+            }
+        }
+
+        return ServiceResult.Success();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // SECURE CERTIFICATION FILE RESOLUTION
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<(string PhysicalPath, string FileName)>> GetCertificationFileAsync(int applicationId)
+    {
+        var app = await _context.MentorApplications
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.ApplicationId == applicationId);
+
+        if (app == null)
+            return ServiceResult<(string, string)>.Failure("Application not found.");
+
+        if (string.IsNullOrWhiteSpace(app.CertificationFilePath))
+            return ServiceResult<(string, string)>.Failure("No certification file attached.");
+
+        // Resolve and validate path strictly within the certifications directory
+        var webRoot = _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+        var certRoot = Path.GetFullPath(Path.Combine(webRoot, CertificationsRelative));
+
+        // Stored path may be absolute, root-relative, or just a filename.
+        // We accept only the filename for traversal safety.
+        var fileName = Path.GetFileName(app.CertificationFilePath);
+        if (string.IsNullOrWhiteSpace(fileName))
+            return ServiceResult<(string, string)>.Failure("Invalid certification file path.");
+
+        var fullPath = Path.GetFullPath(Path.Combine(certRoot, fileName));
+
+        // Defence in depth: the resolved path MUST live under certRoot
+        if (!fullPath.StartsWith(certRoot, StringComparison.OrdinalIgnoreCase))
+            return ServiceResult<(string, string)>.Failure("Invalid file location.");
+
+        if (!File.Exists(fullPath))
+            return ServiceResult<(string, string)>.Failure("File not found on server.");
+
+        return ServiceResult<(string, string)>.Success((fullPath, fileName));
+    }
+}

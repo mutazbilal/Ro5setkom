@@ -1,0 +1,154 @@
+@model MentorApplicationDetailViewModel
+@{
+    ViewData["Title"] = $"Application · {Model.FullName}";
+    ViewData["Subtitle"] = $"Submitted {Model.SubmittedAt?.ToString("dd MMM yyyy") ?? "—"}";
+}
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="admin-card admin-card--padded">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h3 class="mb-1">@Model.FullName</h3>
+                    <p class="text-muted mb-0">@Model.Email</p>
+                </div>
+                <span class="admin-pill admin-pill--status admin-pill--@Model.Status.ToLower()">@Model.Status</span>
+            </div>
+
+            <hr />
+
+            <h5 class="mb-3">Personal information</h5>
+            <dl class="admin-detail-list">
+                <dt>National ID</dt><dd>@(Model.NationalId ?? "—")</dd>
+                <dt>Phone</dt><dd>@(Model.PhoneNumber ?? "—")</dd>
+                <dt>Date of birth</dt><dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
+                <dt>Gender</dt><dd>@(Model.Gender ?? "—")</dd>
+                <dt>City</dt><dd>@(Model.City ?? "—")</dd>
+                <dt>Province</dt><dd>@(Model.Province ?? "—")</dd>
+            </dl>
+
+            <hr />
+
+            <h5 class="mb-3">Mentor profile</h5>
+            <dl class="admin-detail-list">
+                <dt>License type</dt><dd>@Model.LicenseType</dd>
+                <dt>Vehicle</dt><dd>@(Model.VehicleType ?? "—")</dd>
+                <dt>Price / session</dt>
+                <dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="admin-card admin-card--padded mb-3">
+            <h5 class="mb-3"><i class="fa-solid fa-file-shield"></i> Certification</h5>
+            @if (Model.HasCertificationFile)
+            {
+                <p class="text-muted small mb-3">
+                    Uploaded @(Model.CertificationUploadedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")
+                </p>
+                <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Download"
+                   asp-route-id="@Model.ApplicationId"
+                   class="btn admin-btn-primary w-100">
+                    <i class="fa-solid fa-download"></i>
+                    Download @(Model.CertificationFileName ?? "certification")
+                </a>
+                <p class="text-muted small mt-2 mb-0">
+                    Files are served from a secure admin-only endpoint; trainees and mentors cannot access this URL.
+                </p>
+            }
+            else
+            {
+                <div class="alert alert-warning mb-0">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    No certification file has been uploaded for this application.
+                </div>
+            }
+        </div>
+
+        @if (Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase))
+        {
+            <div class="admin-card admin-card--padded">
+                <h5 class="mb-3">Decision</h5>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn admin-btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
+                        <i class="fa-solid fa-check"></i> Approve application
+                    </button>
+                    <button type="button" class="btn admin-btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">
+                        <i class="fa-solid fa-xmark"></i> Reject application
+                    </button>
+                    <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-arrow-left"></i> Back to applications
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="admin-card admin-card--padded">
+                <p class="text-muted mb-3">This application has already been reviewed.</p>
+                <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="btn btn-outline-secondary w-100">
+                    <i class="fa-solid fa-arrow-left"></i> Back to applications
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase))
+{
+    <!-- Approve Modal -->
+    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Approve" method="post" class="modal-content">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.ApplicationId" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approveModalLabel">Approve application?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You're about to approve <strong>@Model.FullName</strong> as a mentor.</p>
+                    <p class="text-muted small mb-0">
+                        They'll be notified by email and will become visible to trainees immediately.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn admin-btn-success">
+                        <i class="fa-solid fa-check"></i> Approve
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Reject" method="post" class="modal-content">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ApplicationId" value="@Model.ApplicationId" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">Reject application?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You're about to reject <strong>@Model.FullName</strong>.</p>
+                    <div class="mb-3">
+                        <label for="rejectReason" class="form-label">Rejection reason <span class="text-danger">*</span></label>
+                        <textarea id="rejectReason" name="Reason" rows="4" maxlength="500" required
+                                  class="form-control" placeholder="Explain why this application is being rejected (sent to applicant)."></textarea>
+                        <small class="form-text text-muted">Required, 5–500 characters. This message is included in the email to the applicant.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn admin-btn-danger">
+                        <i class="fa-solid fa-xmark"></i> Reject
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+}

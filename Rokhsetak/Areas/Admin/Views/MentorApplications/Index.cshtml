@@ -1,0 +1,64 @@
+@model MentorApplicationListViewModel
+@{
+    ViewData["Title"] = "Mentor applications";
+    ViewData["Subtitle"] = "Pending applications awaiting your review";
+}
+
+<div class="admin-card">
+    <div class="admin-card__header admin-card__header--bordered">
+        <h3>Pending applications <span class="admin-count-badge">@Model.Items.Count</span></h3>
+        <small class="text-muted">Approved and rejected applications are not shown here.</small>
+    </div>
+    <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Applicant</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>License</th>
+                    <th>City</th>
+                    <th>Submitted</th>
+                    <th>Cert.</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var app in Model.Items)
+                {
+                    <tr>
+                        <td><strong>@app.FullName</strong></td>
+                        <td>@app.Email</td>
+                        <td>@(app.PhoneNumber ?? "—")</td>
+                        <td>@app.LicenseType</td>
+                        <td>@(app.City ?? "—")</td>
+                        <td>@(app.SubmittedAt?.ToString("dd MMM yyyy") ?? "—")</td>
+                        <td>
+                            @if (app.HasCertificationFile)
+                            {
+                                <span class="admin-pill admin-pill--success">
+                                    <i class="fa-solid fa-paperclip"></i> Uploaded
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="admin-pill admin-pill--danger">Missing</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Details"
+                               asp-route-id="@app.ApplicationId"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-eye"></i> Review
+                            </a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Items.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-5">No pending applications right now.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
