@@ -92,8 +92,6 @@ public class RegistrationController : Controller
                 LastName     = citizen.LastName,
                 DateOfBirth  = citizen.DateOfBirth,
                 Gender       = citizen.Gender,
-                Province     = citizen.Province,
-                City         = citizen.City,
                 AddressLine1 = citizen.AddressLine1,
                 AddressLine2 = citizen.AddressLine2,
                 PostalCode   = citizen.PostalCode,
@@ -145,6 +143,10 @@ public class RegistrationController : Controller
             _logger.LogInformation("model state is invlaid");
             _logger.LogInformation(jsonString);
             model.AvailableLicenseTypes = await _lookupService.GetLicenseTypesAsync(culture = culture != null ? culture : "ar");
+            var cities = await _lookupService.GetCitiesAsync(culture = culture != null ? culture : "ar");
+            var provinces = await _lookupService.GetProvincesAsync(culture = culture != null ? culture : "ar");
+            model.Cities = cities;
+            model.Provinces = provinces;
             return View(model);
         }
         _logger.LogInformation("model state is valid");

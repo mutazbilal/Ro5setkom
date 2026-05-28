@@ -32,4 +32,6 @@ public partial class LicenseType
     public virtual ICollection<TraineeLicense> TraineeLicenses { get; set; } = new List<TraineeLicense>();
 
     public virtual ICollection<Trainee> Trainees { get; set; } = new List<Trainee>();
+
+    public virtual ICollection<LearningModule> Modules { get; set; } = new List<LearningModule>();
 }
