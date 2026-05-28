@@ -185,6 +185,9 @@ GO
 :r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\18_OptionTranslations.sql"
 GO
 
+:r "C:\Users\Lenovo\source\repos\Rokhsetak\RokhsetakDB\07_Learning\19_LearningModuleLicenseType.sql"
+GO
+
 -- ============================================
 -- 11. MESSAGING
 -- ============================================

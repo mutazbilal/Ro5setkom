@@ -4,14 +4,14 @@
 
 -- LearningModules (base)
 SET IDENTITY_INSERT Learning.LearningModules ON;
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (1, 1, 'theoretical', 1, NULL);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (2, 1, 'theoretical', 2, 1);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (3, 1, 'theoretical', 3, 2);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (4, 1, 'theoretical', 4, 3);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (5, 1, 'theoretical', 5, 4);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (6, 1, 'theoretical', 6, 5);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (7, 1, 'theoretical', 7, 1);
-INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id) VALUES (8, 1, 'theoretical', 8, 6);
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (1, NULL, 'theoretical', 1, NULL, 'global');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (2, NULL, 'theoretical', 2, 1, 'global');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (3, NULL, 'theoretical', 3, 2, 'global');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (4, NULL, 'theoretical', 4, 3, 'global');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (5, NULL, 'theoretical', 5, 4, 'global');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (6, 1, 'theoretical', 6, 5, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (7, 2, 'theoretical', 7, 6, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (8, 3, 'theoretical', 8, 7, 'per_license');
 SET IDENTITY_INSERT Learning.LearningModules OFF;
 
 -- ModuleTranslations
@@ -34,14 +34,14 @@ INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, descri
 
 -- ModuleContents (base)
 SET IDENTITY_INSERT Learning.ModuleContents ON;
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (1, 1, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (2, 2, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (3, 3, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (4, 4, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (5, 5, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (6, 6, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (7, 7, 'text', NULL);
-INSERT INTO Learning.ModuleContents (content_id, module_id, content_type, video_url) VALUES (8, 8, 'text', NULL);
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (1, 1, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (2, 2, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (3, 3, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (4, 4, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (5, 5, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (6, 6, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (7, 7, 'text');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (8, 8, 'text');
 SET IDENTITY_INSERT Learning.ModuleContents OFF;
 
 -- ModuleContentTranslations
@@ -2931,3 +2931,118 @@ INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, text_
 5. لا تقف بين السيارة وحركة المرور
 6. اطلب المساعدة
 7. إذا كنت معطلاً ولا تستطيع الخروج: ابق في الداخل، وأضيئ أضواء الخطر، واطلب المساعدة');
+
+
+-- ============================================
+-- Practical Modules for License Type 1 (Private Automatic)
+-- ============================================
+SET IDENTITY_INSERT Learning.LearningModules ON;
+
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (9, 1, 'practical', 1, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (10, 1, 'practical', 2, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (11, 1, 'practical', 3, NULL, 'per_license');
+
+-- ============================================
+-- Practical Modules for License Type 2 (Private Manual)
+-- ============================================
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (12, 2, 'practical', 1, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (13, 2, 'practical', 2, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (14, 2, 'practical', 3, NULL, 'per_license');
+
+-- ============================================
+-- Practical Modules for License Type 3 (Motorcycle)
+-- ============================================
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (15, 3, 'practical', 1, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (16, 3, 'practical', 2, NULL, 'per_license');
+INSERT INTO Learning.LearningModules (module_id, license_type_id, phase, order_index, prerequisite_module_id, progress_scope) VALUES (17, 3, 'practical', 3, NULL, 'per_license');
+
+SET IDENTITY_INSERT Learning.LearningModules OFF;
+
+-- ============================================
+-- Module Translations (English & Arabic)
+-- ============================================
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (9, 'en', N'Basic Vehicle Controls & Automatic Transmission Handling', N'Starting, stopping, steering control, and automatic transmission basics in a closed area.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (9, 'ar', N'التحكم الأساسي بالمركبة وناقل الحركة الأوتوماتيكي', N'بدء الحركة، التوقف، التحكم بالتوجيه، وأساسيات ناقل الحركة الأوتوماتيكي في منطقة مغلقة.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (10, 'en', N'Urban Driving & Intersections (Automatic)', N'Navigating city traffic, lane changes, roundabouts, and right-of-way in real conditions.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (10, 'ar', N'القيادة في المدينة والتقاطعات (أوتوماتيك)', N'القيادة في حركة المرور بالمدينة، تغيير المسارب، الدوارات، وحق المرور في ظروف حقيقية.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (11, 'en', N'Highway & Emergency Maneuvers (Automatic)', N'Highway merging, safe following distance, emergency braking, and skid prevention.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (11, 'ar', N'الطريق السريع والمناورات الطارئة (أوتوماتيك)', N'الاندماج على الطريق السريع، مسافة التتبع الآمنة، الفرملة الطارئة، ومنع الانزلاق.');
+
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (12, 'en', N'Clutch Control & Manual Transmission Basics', N'Finding bite point, moving off smoothly, gear changes, and stopping without stalling.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (12, 'ar', N'التحكم بالقابض وناقل الحركة اليدوي الأساسي', N'إيجاد نقطة التعشيق، الانطلاق بسلاسة، تغيير التروس، والتوقف دون توقف المحرك.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (13, 'en', N'Hill Starts & Gear Selection (Manual)', N'Hill starts with handbrake, clutch control on inclines, and selecting correct gear for speed.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (13, 'ar', N'انطلاقات التل واختيار الترس (يدوي)', N'انطلاقات التل باستخدام فرامل اليد، التحكم بالقابض على المرتفعات، واختيار الترس المناسب للسرعة.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (14, 'en', N'Advanced Manual Handling & Rev Matching', N'Downshifting, rev matching, engine braking, and smooth stopping techniques.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (14, 'ar', N'التحكم المتقدم في ناقل الحركة اليدوي ومطابقة اللفات', N'خفض التروس، مطابقة اللفات، فرملة المحرك، وتقنيات التوقف السلس.');
+
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (15, 'en', N'Balance & Low-Speed Motorcycle Control', N'Mounting, dismounting, balancing, figure-eights, and slow-riding exercises.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (15, 'ar', N'التوازن والتحكم بالدراجة النارية بسرعة منخفضة', N'ركوب وإنزال الدراجة، التوازن، تمارين الرقم ثمانية، والقيادة البطيئة.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (16, 'en', N'Cornering & Emergency Braking (Motorcycle)', N'Proper cornering lines, counter-steering, emergency front/rear braking, and swerving.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (16, 'ar', N'المنعطفات والفرملة الطارئة (دراجة نارية)', N'خطوط المنعطفات الصحيحة، التوجيه المعاكس، الفرملة الطارئة بالأمام/الخلف، والمراوغة.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (17, 'en', N'Obstacle Avoidance & Real Traffic Scenarios', N'Avoiding potholes, debris, car doors, and practicing in light city traffic.');
+INSERT INTO Learning.ModuleTranslations (module_id, language_code, title, description) VALUES (17, 'ar', N'تجنب العوائق وسيناريوهات حركة المرور الحقيقية', N'تجنب الحفر، الحطام، أبواب السيارات، والتدرب في حركة مرور خفيفة بالمدينة.');
+
+-- ============================================
+-- Module Contents (video type)
+-- ============================================
+SET IDENTITY_INSERT Learning.ModuleContents ON;
+
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (9, 9, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (10, 10, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (11, 11, 'video');
+
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (12, 12, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (13, 13, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (14, 14, 'video');
+
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (15, 15, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (16, 16, 'video');
+INSERT INTO Learning.ModuleContents (content_id, module_id, content_type) VALUES (17, 17, 'video');
+
+SET IDENTITY_INSERT Learning.ModuleContents OFF;
+
+-- ============================================
+-- Module Content Translations (video_url per language)
+-- ============================================
+-- Private Automatic (9-11)
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (9, 'en', N'https://www.youtube.com/embed/watch?v=kTZCinivLco&t=2s');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (9, 'ar', N'https://www.youtube.com/embed/watch?v=DpA_eJR5MIw');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (10, 'en', N'https://www.youtube.com/embed/watch?v=4av7-79Uum4');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (10, 'ar', N'https://www.youtube.com/embed/watch?v=Exjzd3zSq-I');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (11, 'en', N'https://www.youtube.com/embed/watch?v=GCeXFeHpm1I');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (11, 'ar', N'https://www.youtube.com/embed/watch?v=uGpSVsb6b44');
+
+-- Private Manual (12-14)
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (12, 'en', N'https://www.youtube.com/embed/watch?v=pXXPknNhx30');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (12, 'ar', N'https://www.youtube.com/embed/watch?v=yA3DmwhoS9o');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (13, 'en', N'https://www.youtube.com/embed/watch?v=UTrj-pe20e8');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (13, 'ar', N'https://www.youtube.com/embed/watch?v=HqpdyfZwO0U');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (14, 'en', N'https://www.youtube.com/embed/watch?v=-RnPUq2yut4');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (14, 'ar', N'https://www.youtube.com/embed/watch?v=CizcRB1VG2U');
+
+-- Motorcycle (15-17)
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (15, 'en', N'https://www.youtube.com/embed/watch?v=bm1Xynt0QuE');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (15, 'ar', N'https://www.youtube.com/embed/watch?v=qh8c6gpji8Y');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (16, 'en', N'https://www.youtube.com/embed/watch?v=HxJPOQ_4L18');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (16, 'ar', N'https://www.youtube.com/embed/watch?v=l1SycZf2IPI');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (17, 'en', N'https://www.youtube.com/embed/watch?v=Z55kS9uzTXk');
+INSERT INTO Learning.ModuleContentTranslations (content_id, language_code, video_url) VALUES (17, 'ar', N'https://www.youtube.com/embed/watch?v=pufX4YjQ0uU');
+
+--------------------------
+-- SEED module license types
+---------------------------
+
+INSERT INTO Learning.LearningModuleLicenseTypes (module_id, license_type_id)
+SELECT 
+    m.module_id,
+    lt.license_type_id
+FROM Learning.LearningModules m
+JOIN Lookup.LicenseTypes lt
+    ON (
+        -- GLOBAL modules → Auto + Manual
+        (m.progress_scope = 'global' AND lt.license_type_id IN (1, 2))
+
+        -- PER LICENSE modules → only their license
+        OR
+        (m.progress_scope = 'per_license' AND lt.license_type_id = m.license_type_id)
+    );
