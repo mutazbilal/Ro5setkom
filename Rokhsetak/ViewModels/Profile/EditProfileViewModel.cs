@@ -24,12 +24,12 @@ namespace Rokhsetak.ViewModels.Profile
         [Required(ErrorMessage = "Province is required.")]
         [StringLength(100, ErrorMessage = "Province cannot exceed 100 characters.")]
         [Display(Name = "Province")]
-        public int? ProvinceId { get; set; }
+        public int ProvinceId { get; set; }
 
         [Required(ErrorMessage = "City is required.")]
         [StringLength(100, ErrorMessage = "City cannot exceed 100 characters.")]
         [Display(Name = "City")]
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
 
         [Required(ErrorMessage = "Address line 1 is required.")]
         [StringLength(200, ErrorMessage = "Address cannot exceed 200 characters.")]

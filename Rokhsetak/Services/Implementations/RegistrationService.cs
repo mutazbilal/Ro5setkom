@@ -85,7 +85,7 @@ public class RegistrationService : IRegistrationService
             return ServiceResult<GovCitizenDto>.Failure(
                 "This National ID is already registered. Please log in or contact support.");
 
-        if (govRecordLicenseType == 0)
+        if (govRecordLicenseType == 0 && isTrainee == false)
             return ServiceResult<GovCitizenDto>.Failure("You must have a registered license to become a mentor");
         var province = await _db.Provinces
             .Where(p => p.ProvinceId == citizen.ProvinceId)

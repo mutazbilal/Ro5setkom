@@ -1,9 +1,11 @@
 CREATE TABLE Learning.LearningModules (
     module_id              INT PRIMARY KEY IDENTITY(1,1),
-    license_type_id        INT           NOT NULL,
+    license_type_id        INT           NULL,
     phase                  NVARCHAR(20)  NOT NULL CHECK (phase IN ('theoretical', 'practical')),
     order_index            INT           NOT NULL,
     prerequisite_module_id INT           NULL,
+
+    progress_scope NVARCHAR(20) NOT NULL CHECK (progress_scope IN ('global', 'per_license')),
 
     UNIQUE (license_type_id, order_index, phase),
 

@@ -353,13 +353,15 @@ public class ExamAppointmentService : IExamAppointmentService
                 {
                     // All theoretical modules completed
                     var theoreticalIds = await _context.LearningModules
-                        .Where(m => m.LicenseTypeId == license.LicenseTypeId && m.Phase == "theoretical")
+                        .Where(m =>
+                            m.ProgressScope != null &&
+                            m.LicenseTypes.Any(lt =>
+                                lt.LicenseTypeId == license.LicenseTypeId))
                         .Select(m => m.ModuleId)
                         .ToListAsync();
 
                     var completedCount = await _context.TraineeModuleProgresses
                         .CountAsync(p => p.TraineeId == traineeId
-                                      && p.TraineeLicenseId == license.TraineeLicenseId
                                       && theoreticalIds.Contains(p.ModuleId)
                                       && p.Status == "completed");
 

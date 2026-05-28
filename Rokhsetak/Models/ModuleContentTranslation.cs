@@ -13,5 +13,7 @@ public partial class ModuleContentTranslation
 
     public string? TextContent { get; set; }
 
+    public string? VideoUrl { get; set; }
+
     public virtual ModuleContent Content { get; set; } = null!;
 }
