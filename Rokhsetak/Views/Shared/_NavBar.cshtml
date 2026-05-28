@@ -31,6 +31,18 @@
     // Returns "page" or null so Razor omits the aria-current attribute when not active.
     string ActiveAria(string area, string controller, string action) =>
         IsActive(area, controller, action) ? "page" : null;
+
+    // Controller-scoped variant: true whenever the user is anywhere inside the given controller.
+    // Used for multi-page sections (e.g. Profile/Index, Profile/Edit, Profile/ChangeLicense).
+    bool IsActiveController(string area, string controller) =>
+        string.Equals(currentArea, area, System.StringComparison.OrdinalIgnoreCase) &&
+        string.Equals(currentController, controller, System.StringComparison.OrdinalIgnoreCase);
+
+    string ActiveControllerClass(string area, string controller) =>
+        IsActiveController(area, controller) ? "is-active" : null;
+
+    string ActiveControllerAria(string area, string controller) =>
+        IsActiveController(area, controller) ? "page" : null;
 }
 
 <header class="landing-nav">
@@ -170,6 +182,15 @@
                         </button>
                     </form>
                 </div>
+
+                <a asp-area=""
+                   asp-controller="Profile"
+                   asp-action="Index"
+                   class="landing-nav__cta landing-nav__cta--ghost @ActiveControllerClass("", "Profile")"
+                   aria-current="@ActiveControllerAria("", "Profile")">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <span>Profile</span>
+                </a>
 
                 <form asp-area="" asp-controller="Auth" asp-action="Logout"
                       method="post" class="landing-nav__form">
