@@ -34,7 +34,7 @@ public class BlockedDatesController : Controller
     // POST /Admin/BlockedDates/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CreateBlockedDateViewModel model)
+    public async Task<IActionResult> Create(BlockedDateListViewModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -43,7 +43,11 @@ public class BlockedDatesController : Controller
         }
 
         var adminUserId = User.GetUserId()!.Value;
-        var result = await _blockedDates.AddBlockedDateAsync(adminUserId, model);
+
+        var result = await _blockedDates.AddBlockedDateAsync(
+            adminUserId,
+            model.NewBlockedDate
+        );
 
         TempData[result.Succeeded ? "Success" : "Error"] =
             result.Succeeded ? "Date blocked successfully." : result.Error;

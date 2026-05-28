@@ -67,10 +67,21 @@ public class MentorAdminService : IMentorAdminService
 
         if (!string.IsNullOrWhiteSpace(filter.Status))
         {
-            if (filter.Status.Equals("active", StringComparison.OrdinalIgnoreCase))
-                query = query.Where(x => x.u.IsActive == true);
-            else if (filter.Status.Equals("inactive", StringComparison.OrdinalIgnoreCase))
-                query = query.Where(x => x.u.IsActive == false);
+            var status = filter.Status.ToLower();
+
+            query = status switch
+            {
+                "pending" => query.Where(x => x.AppStatus == "pending"),
+
+                "active" => query.Where(x =>
+                    x.AppStatus == "approved" &&
+                    x.u.IsActive == true),
+
+                "inactive" => query.Where(x =>
+                    x.u.IsActive == false),
+
+                _ => query
+            };
         }
 
         if (!string.IsNullOrWhiteSpace(filter.Search))
@@ -125,7 +136,7 @@ public class MentorAdminService : IMentorAdminService
             LicenseType = p.LicenseName,
             CityName = p.CityName,
             PricePerSession = p.PricePerSession,
-            IsActive = p.IsActive ?? true,
+            IsActive = p.AppStatus == "approved",
             ApplicationStatus = p.AppStatus,
             AverageRating = ratingStats.TryGetValue(p.MentorId, out var avg) ? Math.Round(avg, 2) : 0,
             TotalSessions = sessionStats.TryGetValue(p.MentorId, out var t) ? t : 0
@@ -329,6 +340,13 @@ public class MentorAdminService : IMentorAdminService
         app.ReviewedBy = adminUserId;
         app.IsCertificationVerified = true;
 
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == app.MentorId);
+
+        if (user != null)
+        {
+            user.IsActive = true;
+        }
+
         _audit.Log(adminUserId, "ApproveMentorApplication", "MentorApplications", applicationId.ToString());
 
         await _context.SaveChangesAsync();
@@ -386,6 +404,13 @@ public class MentorAdminService : IMentorAdminService
         app.RejectionReason = reason.Trim();
         app.ReviewedAt = DateTime.UtcNow;
         app.ReviewedBy = adminUserId;
+
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == app.MentorId);
+
+        if (user != null)
+        {
+            user.IsActive = false;
+        }
 
         _audit.Log(adminUserId, "RejectMentorApplication", "MentorApplications", applicationId.ToString());
 

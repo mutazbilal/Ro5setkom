@@ -148,7 +148,12 @@ public class AnalyticsService : IAnalyticsService
         var bookingLookup = bookingStatsByMentor.ToDictionary(x => x.MentorId, x => x);
         var licenseLookup = licenseStatsByMentor.ToDictionary(x => x.MentorId, x => x);
 
-        var topMentors = mentorIds
+        var page = filter.Page < 1 ? 1 : filter.Page;
+        var pageSize = filter.PageSize < 1 ? 10 : filter.PageSize;
+
+        var totalMentors = mentorIds.Count;
+
+        var topMentorsPaged = mentorIds
             .Select(id =>
             {
                 ratingLookup.TryGetValue(id, out var r);
@@ -172,7 +177,8 @@ public class AnalyticsService : IAnalyticsService
             })
             .OrderByDescending(x => x.AverageRating)
             .ThenByDescending(x => x.CompletedSessions)
-            .Take(10)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToList();
 
         // ── Platform rollups ────────────────────────────────────────────────
@@ -200,10 +206,11 @@ public class AnalyticsService : IAnalyticsService
             UsersOverTime = usersOverTime,
             BookingsPerMonth = bookingsPerMonth,
             MentorPerformanceDistribution = distribution,
-            TopMentors = topMentors,
             PlatformAvgRating = platformAvgRating,
             PlatformCompletionRate = platformCompletionRate,
-            PlatformAvgDaysToCompletion = platformAvgDays
+            PlatformAvgDaysToCompletion = platformAvgDays,
+            TopMentors = topMentorsPaged,
+            TopMentorsTotalCount = totalMentors
         };
 
         return ServiceResult<AnalyticsDashboardViewModel>.Success(vm);
