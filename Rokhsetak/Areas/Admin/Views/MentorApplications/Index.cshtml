@@ -31,7 +31,7 @@
                         <td>@app.Email</td>
                         <td>@(app.PhoneNumber ?? "—")</td>
                         <td>@app.LicenseType</td>
-                        <td>@(app.City ?? "—")</td>
+                        <td>@(app.CityName ?? "—")</td>
                         <td>@(app.SubmittedAt?.ToString("dd MMM yyyy") ?? "—")</td>
                         <td>
                             @if (app.HasCertificationFile)

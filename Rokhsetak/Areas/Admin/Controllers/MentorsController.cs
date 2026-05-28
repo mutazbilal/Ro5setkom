@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Admin.ViewModels.Mentors;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Admin.Controllers;
 
@@ -22,7 +23,8 @@ public class MentorsController : Controller
     // GET /Admin/Mentors
     public async Task<IActionResult> Index(MentorListFilter filter)
     {
-        var result = await _mentors.GetMentorsAsync(filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _mentors.GetMentorsAsync(filter, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -36,7 +38,8 @@ public class MentorsController : Controller
     // GET /Admin/Mentors/Details/5
     public async Task<IActionResult> Details(int id)
     {
-        var result = await _mentors.GetMentorDetailsAsync(id);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _mentors.GetMentorDetailsAsync(id, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;

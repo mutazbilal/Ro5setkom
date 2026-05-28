@@ -40,7 +40,7 @@
                 <dt>Phone</dt><dd>@(Model.PhoneNumber ?? "—")</dd>
                 <dt>License type</dt><dd>@Model.LicenseType</dd>
                 <dt>Vehicle</dt><dd>@(Model.VehicleType ?? "—")</dd>
-                <dt>City</dt><dd>@(Model.City ?? "—")</dd>
+                <dt>City</dt><dd>@(Model.CityName ?? "—")</dd>
                 <dt>Price / session</dt>
                 <dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
                 <dt>Joined</dt><dd>@(Model.CreatedAt?.ToString("dd MMM yyyy") ?? "—")</dd>

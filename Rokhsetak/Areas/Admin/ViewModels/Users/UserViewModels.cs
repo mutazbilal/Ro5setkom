@@ -53,8 +53,8 @@ public class UserDetailViewModel
     public DateTime? CreatedAt { get; set; }
     public DateOnly? DateOfBirth { get; set; }
     public string? Gender { get; set; }
-    public string? City { get; set; }
-    public string? Province { get; set; }
+    public string? CityName { get; set; }
+    public string? ProvinceName { get; set; }
     public string? AddressLine1 { get; set; }
     public string? ProfilePicture { get; set; }
 

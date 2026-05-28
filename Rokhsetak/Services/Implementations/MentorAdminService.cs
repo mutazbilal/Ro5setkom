@@ -5,6 +5,7 @@ using Rokhsetak.Areas.Admin.ViewModels.Mentors;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -35,7 +36,7 @@ public class MentorAdminService : IMentorAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // LIST MENTORS
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<MentorListViewModel>> GetMentorsAsync(MentorListFilter filter)
+    public async Task<ServiceResult<MentorListViewModel>> GetMentorsAsync(MentorListFilter filter, string culture)
     {
         if (filter.Page < 1) filter.Page = 1;
         if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
@@ -47,7 +48,19 @@ public class MentorAdminService : IMentorAdminService
             from lt in ltj.DefaultIfEmpty()
             join app in _context.MentorApplications on m.ApplicationId equals app.ApplicationId into appj
             from app in appj.DefaultIfEmpty()
-            select new { m, u, LicenseName = lt != null ? lt.LicenseName : "—", AppStatus = app != null ? app.Status : "—" };
+            join ct in _context.Cities on m.CityId equals ct.CityId into ctj
+            from ct in ctj.DefaultIfEmpty()
+            select new
+            {
+                m,
+                u,
+                LicenseName = lt != null ? lt.LicenseName : "—",
+                AppStatus = app != null ? app.Status : "—",
+                CityName = ct.CityTranslations
+                    .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
+                    .Select(c => c.DisplayName)
+                    .FirstOrDefault()
+            };
 
         if (filter.LicenseTypeId.HasValue)
             query = query.Where(x => x.m.LicenseTypeId == filter.LicenseTypeId.Value);
@@ -83,7 +96,7 @@ public class MentorAdminService : IMentorAdminService
                 x.u.PhoneNumber,
                 x.u.IsActive,
                 x.m.PricePerSession,
-                x.m.City,
+                x.CityName,
                 x.LicenseName,
                 x.AppStatus
             })
@@ -110,7 +123,7 @@ public class MentorAdminService : IMentorAdminService
             Email = p.Email,
             PhoneNumber = p.PhoneNumber,
             LicenseType = p.LicenseName,
-            City = p.City,
+            CityName = p.CityName,
             PricePerSession = p.PricePerSession,
             IsActive = p.IsActive ?? true,
             ApplicationStatus = p.AppStatus,
@@ -138,7 +151,7 @@ public class MentorAdminService : IMentorAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // MENTOR DETAILS
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<MentorDetailViewModel>> GetMentorDetailsAsync(int mentorId)
+    public async Task<ServiceResult<MentorDetailViewModel>> GetMentorDetailsAsync(int mentorId, string culture)
     {
         var data = await (
             from m in _context.Mentors.AsNoTracking()
@@ -147,13 +160,19 @@ public class MentorAdminService : IMentorAdminService
             from lt in ltj.DefaultIfEmpty()
             join app in _context.MentorApplications on m.ApplicationId equals app.ApplicationId into appj
             from app in appj.DefaultIfEmpty()
+            join ct in _context.Cities on m.CityId equals ct.CityId into ctj
+            from ct in ctj.DefaultIfEmpty()
             where m.MentorId == mentorId
             select new
             {
                 m,
                 u,
                 LicenseName = lt != null ? lt.LicenseName : "—",
-                AppStatus = app != null ? app.Status : "—"
+                AppStatus = app != null ? app.Status : "—",
+                CityName = ct.CityTranslations
+                    .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
+                    .Select(c => c.DisplayName)
+                    .FirstOrDefault()
             }
         ).FirstOrDefaultAsync();
 
@@ -175,7 +194,7 @@ public class MentorAdminService : IMentorAdminService
             Email = data.u.Email,
             PhoneNumber = data.u.PhoneNumber,
             LicenseType = data.LicenseName,
-            City = data.m.City,
+            CityName = data.CityName,
             VehicleType = data.m.VehicleType,
             PricePerSession = data.m.PricePerSession,
             IsActive = data.u.IsActive ?? true,
@@ -193,7 +212,7 @@ public class MentorAdminService : IMentorAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // PENDING APPLICATIONS
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<MentorApplicationListViewModel>> GetPendingApplicationsAsync()
+    public async Task<ServiceResult<MentorApplicationListViewModel>> GetPendingApplicationsAsync(string culture)
     {
         var items = await (
             from app in _context.MentorApplications.AsNoTracking()
@@ -201,6 +220,8 @@ public class MentorAdminService : IMentorAdminService
             join u in _context.Users on m.MentorId equals u.UserId
             join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
             from lt in ltj.DefaultIfEmpty()
+            join ct in _context.Cities on m.CityId equals ct.CityId into ctj
+            from ct in ctj.DefaultIfEmpty()
             where app.Status == "pending"
             orderby app.SubmittedAt
             select new MentorApplicationListItem
@@ -211,7 +232,10 @@ public class MentorAdminService : IMentorAdminService
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
                 LicenseType = lt != null ? lt.LicenseName : "—",
-                City = m.City,
+                CityName = ct.CityTranslations
+                .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
+                .Select(c => c.DisplayName)
+                .FirstOrDefault(),
                 SubmittedAt = app.SubmittedAt,
                 HasCertificationFile = !string.IsNullOrEmpty(app.CertificationFilePath)
             }
@@ -224,7 +248,7 @@ public class MentorAdminService : IMentorAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // APPLICATION DETAILS
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<MentorApplicationDetailViewModel>> GetApplicationDetailsAsync(int applicationId)
+    public async Task<ServiceResult<MentorApplicationDetailViewModel>> GetApplicationDetailsAsync(int applicationId, string culture)
     {
         var data = await (
             from app in _context.MentorApplications.AsNoTracking()
@@ -232,8 +256,28 @@ public class MentorAdminService : IMentorAdminService
             join u in _context.Users on m.MentorId equals u.UserId
             join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
             from lt in ltj.DefaultIfEmpty()
+            join ct in _context.Cities on m.CityId equals ct.CityId into ctj
+            from ct in ctj.DefaultIfEmpty()
+            join pr in _context.Provinces on u.ProvinceId equals pr.ProvinceId into prj
+            from pr in prj.DefaultIfEmpty()
             where app.ApplicationId == applicationId
-            select new { app, m, u, LicenseName = lt != null ? lt.LicenseName : "—" }
+            select new
+            {
+                app,
+                m,
+                u,
+                LicenseName = lt != null ? lt.LicenseName : "—",
+
+                CityName = ct.CityTranslations
+                .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
+                .Select(c => c.DisplayName)
+                .FirstOrDefault(),
+
+                ProvinceName = pr.ProvinceTranslations
+                .Where(p => p.ProvinceId == u.ProvinceId && p.LanguageCode == culture)
+                .Select(p => p.DisplayName)
+                .FirstOrDefault()
+            }
         ).FirstOrDefaultAsync();
 
         if (data == null)
@@ -253,8 +297,8 @@ public class MentorAdminService : IMentorAdminService
             NationalId = data.u.NationalId,
             DateOfBirth = data.u.DateOfBirth,
             Gender = data.u.Gender,
-            City = data.m.City ?? data.u.City,
-            Province = data.u.Province,
+            CityName = data.CityName,
+            ProvinceName = data.ProvinceName,
             LicenseType = data.LicenseName,
             VehicleType = data.m.VehicleType,
             PricePerSession = data.m.PricePerSession,
@@ -306,7 +350,7 @@ public class MentorAdminService : IMentorAdminService
         {
             try
             {
-                await _email.SendEmailAsync(
+                await _email.SendAsync(
                     mentorEmail,
                     "Your Rokhsetak mentor application has been approved",
                     "<p>Welcome aboard.</p><p>Your mentor application has been approved. You can now sign in and start receiving bookings from trainees.</p>");
@@ -364,7 +408,7 @@ public class MentorAdminService : IMentorAdminService
         {
             try
             {
-                await _email.SendEmailAsync(
+                await _email.SendAsync(
                     mentorEmail,
                     "Your Rokhsetak mentor application has been rejected",
                     $"<p>Thank you for applying.</p><p>Unfortunately, we are unable to approve your application at this time.</p><p><strong>Reason:</strong> {System.Net.WebUtility.HtmlEncode(app.RejectionReason)}</p>");

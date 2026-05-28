@@ -10,7 +10,7 @@ public class MentorApplicationListItem
     public string Email { get; set; } = string.Empty;
     public string? PhoneNumber { get; set; }
     public string LicenseType { get; set; } = string.Empty;
-    public string? City { get; set; }
+    public string? CityName { get; set; }
     public DateTime? SubmittedAt { get; set; }
     public bool HasCertificationFile { get; set; }
 }
@@ -30,8 +30,8 @@ public class MentorApplicationDetailViewModel
     public string? NationalId { get; set; }
     public DateOnly? DateOfBirth { get; set; }
     public string? Gender { get; set; }
-    public string? City { get; set; }
-    public string? Province { get; set; }
+    public string? CityName { get; set; }
+    public string? ProvinceName { get; set; }
     public string LicenseType { get; set; } = string.Empty;
     public string? VehicleType { get; set; }
     public decimal? PricePerSession { get; set; }
