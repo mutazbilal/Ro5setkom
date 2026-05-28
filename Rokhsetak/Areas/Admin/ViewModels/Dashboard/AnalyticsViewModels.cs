@@ -11,6 +11,8 @@ public class AnalyticsFilter
     [DataType(DataType.Date)]
     [Display(Name = "To")]
     public DateOnly? ToDate { get; set; }
+    public int Page { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 }
 
 public class TimeSeriesPoint
@@ -45,6 +47,7 @@ public class AnalyticsDashboardViewModel
     public int TotalUsers { get; set; }
     public int ActiveTrainees { get; set; }
     public int ActiveMentors { get; set; }
+    public int TopMentorsTotalCount { get; set; }
     public int TotalBookings { get; set; }
     public int PendingMentorApplications { get; set; }
     public int CompletedLicenses { get; set; }
