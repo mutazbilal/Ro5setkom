@@ -1244,3 +1244,24 @@ INSERT INTO Learning.OptionTranslations (option_id, language_code, option_text) 
 INSERT INTO Learning.OptionTranslations (option_id, language_code, option_text) VALUES (319, 'ar', N'اتصل بالشرطة من سيارتك واستمر في القيادة');
 INSERT INTO Learning.OptionTranslations (option_id, language_code, option_text) VALUES (320, 'en', N'Only stop if you know the injured person');
 INSERT INTO Learning.OptionTranslations (option_id, language_code, option_text) VALUES (320, 'ar', N'توقف فقط إذا كنت تعرف الشخص المصاب');
+
+
+-- ─────────────────────────────────────────────────────────────────────
+-- MOCK EXAM QUIZZES
+-- Replace quiz_id values with the next available IDs after your last existing quiz.
+-- Replace license_type_id values with your actual LicenseType IDs.
+-- ─────────────────────────────────────────────────────────────────────
+
+SET IDENTITY_INSERT Learning.Quizzes ON;
+INSERT INTO Learning.Quizzes (quiz_id, module_id, is_mock_exam, license_type_id, passing_score) VALUES (9, NULL, 1, 1, 70);
+INSERT INTO Learning.Quizzes (quiz_id, module_id, is_mock_exam, license_type_id, passing_score) VALUES (10, NULL, 1, 2, 70);
+INSERT INTO Learning.Quizzes (quiz_id, module_id, is_mock_exam, license_type_id, passing_score) VALUES (11, NULL, 1, 3, 70);
+-- add one row per license type
+SET IDENTITY_INSERT Learning.Quizzes OFF;
+
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (9, 'en', N'Mock Theory Exam');
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (9, 'ar', N'اختبار النظري التجريبي');
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (10, 'en', N'Mock Theory Exam');
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (10, 'ar', N'اختبار النظري التجريبي');
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (11, 'en', N'Mock Theory Exam');
+INSERT INTO Learning.QuizTranslations (quiz_id, language_code, title) VALUES (11, 'ar', N'اختبار النظري التجريبي');

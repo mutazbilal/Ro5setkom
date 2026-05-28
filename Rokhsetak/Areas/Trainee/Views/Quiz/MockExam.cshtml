@@ -14,7 +14,7 @@
 
         <header class="quiz-header">
             <div class="quiz-header__row">
-                <h1 class="quiz-header__title">@Model.Title</h1>
+                <h1 class="quiz-header__title">@Html.Raw(Model.Title)</h1>
                 <div class="quiz-header__meta">
                     <span class="quiz-timer"
                           data-quiz-timer="@totalSeconds"
@@ -61,38 +61,45 @@
             @* Mock exam isn't tied to a module — keep the 0 value the original posted. *@
             <input type="hidden" name="ModuleId" value="0" />
 
+
             @for (int i = 0; i < Model.Questions.Count; i++)
             {
                 var q = Model.Questions[i];
-                var legendId = $"mq-legend-{q.QuestionId}";
+                var legendId = $"q-legend-{q.QuestionId}";
 
-                <fieldset class="quiz-question" id="mq-@q.QuestionId" aria-labelledby="@legendId">
-                    <legend class="quiz-question__legend">
+                <div class="quiz-question" id="q-@q.QuestionId" aria-labelledby="@legendId">
+                    <div class="quiz-question__legend">
                         <span class="quiz-question__number" aria-hidden="true">@(i + 1)</span>
-                        <span class="quiz-question__text" id="@legendId">@q.QuestionText</span>
-                    </legend>
+                        <div class="quiz-question__text" id="@legendId">
+                            @Html.Raw(q.QuestionText)
+                        </div>
+                    </div>
 
                     <div class="quiz-options" role="radiogroup" aria-labelledby="@legendId">
                         @foreach (var opt in q.Options)
                         {
-                            var optId = $"mopt-{q.QuestionId}-{opt.OptionId}";
+                            var optId = $"opt-{q.QuestionId}-{opt.OptionId}";
 
                             <label class="quiz-option" for="@optId">
                                 @*
-                                    Literal name="Answers[QuestionId]" required for Dictionary<int,int>
-                                    model binding on SubmitQuizViewModel.
+                                    NOTE: The radio name must be "Answers[QuestionId]" so that
+                                    ASP.NET binds it to SubmitQuizViewModel.Answers (Dictionary<int,int>).
+                                    asp-for cannot express a dictionary key based on a dynamic loop
+                                    variable, so the literal name attribute is intentional here.
                                 *@
                                 <input class="quiz-option__input"
                                        type="radio"
                                        id="@optId"
                                        name="Answers[@q.QuestionId]"
-                                       value="@opt.OptionId" />
+                                       value="@opt.OptionId"
+                                       required
+                                       aria-required="true" />
                                 <span class="quiz-option__dot" aria-hidden="true"></span>
-                                <span class="quiz-option__label">@opt.OptionText</span>
+                                <span class="quiz-option__label">@Html.Raw(opt.OptionText)</span>
                             </label>
                         }
                     </div>
-                </fieldset>
+                </div>
             }
 
             <div class="quiz-actions quiz-actions--end">

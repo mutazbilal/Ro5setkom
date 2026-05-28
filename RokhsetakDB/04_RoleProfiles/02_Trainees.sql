@@ -2,7 +2,6 @@
 
 CREATE TABLE Roles.Trainees (
     trainee_id         INT PRIMARY KEY,
-    license_type_id    INT,
     training_center_id INT,
     enrolled_at        DATE DEFAULT CAST(GETDATE() AS DATE),
 

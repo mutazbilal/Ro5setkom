@@ -5,7 +5,7 @@ using Rokhsetak.Models;
 using Rokhsetak.Services.Implementations;
 using Rokhsetak.Services.Interfaces;
 using System.Globalization;
-
+using Rokhsetak.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +67,10 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IExamAppointmentService, ExamAppointmentService>();
 builder.Services.AddScoped<ICalendarService, CalendarService>();
+builder.Services.AddScoped<IRecurringExamSchedulerService, RecurringExamSchedulerService>();
+
+builder.Services.AddHostedService<ExamSchedulerWorker>();
+builder.Services.AddHostedService<ExamResultSimulatorWorker>();
 
 builder.Services.AddSingleton<BlobService>();
 // IHttpContextAccessor required by PasswordResetService to build reset URLs
