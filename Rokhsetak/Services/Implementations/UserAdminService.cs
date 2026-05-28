@@ -1,0 +1,178 @@
+using Microsoft.EntityFrameworkCore;
+using Rokhsetak.Areas.Admin.ViewModels.Users;
+using Rokhsetak.Models;
+using Rokhsetak.Services.Common;
+using Rokhsetak.Services.Interfaces;
+
+namespace Rokhsetak.Services.Implementations;
+
+public class UserAdminService : IUserAdminService
+{
+    private readonly RokhsetakDbContext _context;
+    private readonly IAuditService _audit;
+
+    public UserAdminService(RokhsetakDbContext context, IAuditService audit)
+    {
+        _context = context;
+        _audit = audit;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // LIST USERS (filter + paginate)
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<UserListViewModel>> GetUsersAsync(UserListFilter filter)
+    {
+        if (filter.Page < 1) filter.Page = 1;
+        if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
+
+        var query =
+            from u in _context.Users.AsNoTracking()
+            join r in _context.Roles on u.RoleId equals r.RoleId
+            select new { u, RoleName = r.RoleName };
+
+        if (!string.IsNullOrWhiteSpace(filter.Role))
+        {
+            var role = filter.Role.Trim().ToLower();
+            query = query.Where(x => x.RoleName.ToLower() == role);
+        }
+
+        if (!string.IsNullOrWhiteSpace(filter.Status))
+        {
+            if (filter.Status.Equals("active", StringComparison.OrdinalIgnoreCase))
+                query = query.Where(x => x.u.IsActive == true);
+            else if (filter.Status.Equals("inactive", StringComparison.OrdinalIgnoreCase))
+                query = query.Where(x => x.u.IsActive == false);
+        }
+
+        if (!string.IsNullOrWhiteSpace(filter.Search))
+        {
+            var s = filter.Search.Trim().ToLower();
+            query = query.Where(x =>
+                x.u.Email.ToLower().Contains(s) ||
+                (x.u.FirstName + " " + x.u.LastName).ToLower().Contains(s) ||
+                x.u.FirstName.ToLower().Contains(s) ||
+                x.u.LastName.ToLower().Contains(s));
+        }
+
+        var total = await query.CountAsync();
+
+        var items = await query
+            .OrderByDescending(x => x.u.CreatedAt)
+            .Skip((filter.Page - 1) * filter.PageSize)
+            .Take(filter.PageSize)
+            .Select(x => new UserListItem
+            {
+                UserId = x.u.UserId,
+                FullName = x.u.FirstName + " " + x.u.LastName,
+                Email = x.u.Email,
+                Role = x.RoleName,
+                IsActive = x.u.IsActive ?? true,
+                CreatedAt = x.u.CreatedAt,
+                PhoneNumber = x.u.PhoneNumber
+            })
+            .ToListAsync();
+
+        return ServiceResult<UserListViewModel>.Success(new UserListViewModel
+        {
+            Filter = filter,
+            Items = items,
+            TotalCount = total
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // USER DETAILS (with booking history)
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult<UserDetailViewModel>> GetUserDetailsAsync(int userId)
+    {
+        var data = await (
+            from u in _context.Users.AsNoTracking()
+            join r in _context.Roles on u.RoleId equals r.RoleId
+            where u.UserId == userId
+            select new { u, RoleName = r.RoleName }
+        ).FirstOrDefaultAsync();
+
+        if (data == null)
+            return ServiceResult<UserDetailViewModel>.Failure("User not found.");
+
+        var vm = new UserDetailViewModel
+        {
+            UserId = data.u.UserId,
+            FullName = $"{data.u.FirstName} {data.u.LastName}",
+            Email = data.u.Email,
+            PhoneNumber = data.u.PhoneNumber,
+            NationalId = data.u.NationalId,
+            Role = data.RoleName,
+            IsActive = data.u.IsActive ?? true,
+            CreatedAt = data.u.CreatedAt,
+            DateOfBirth = data.u.DateOfBirth,
+            Gender = data.u.Gender,
+            City = data.u.City,
+            Province = data.u.Province,
+            AddressLine1 = data.u.AddressLine1,
+            ProfilePicture = data.u.ProfilePicture
+        };
+
+        // Bookings either as trainee or as mentor
+        vm.BookingHistory = await (
+            from b in _context.Bookings.AsNoTracking()
+            join trainee in _context.Users on b.TraineeId equals trainee.UserId
+            join mentor in _context.Users on b.MentorId equals mentor.UserId
+            where b.TraineeId == userId || b.MentorId == userId
+            orderby b.BookingDate descending, b.StartTime descending
+            select new UserBookingHistoryItem
+            {
+                BookingId = b.BookingId,
+                BookingDate = b.BookingDate,
+                StartTime = b.StartTime,
+                EndTime = b.EndTime,
+                Counterparty = b.TraineeId == userId
+                    ? (mentor.FirstName + " " + mentor.LastName)
+                    : (trainee.FirstName + " " + trainee.LastName),
+                SessionType = b.SessionType ?? string.Empty,
+                Status = b.Status
+            }
+        ).Take(200).ToListAsync();
+
+        return ServiceResult<UserDetailViewModel>.Success(vm);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DEACTIVATE
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult> DeactivateUserAsync(int adminUserId, int userId)
+    {
+        if (adminUserId == userId)
+            return ServiceResult.Failure("You cannot deactivate your own account.");
+
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        if (user == null) return ServiceResult.Failure("User not found.");
+        if (user.IsActive == false) return ServiceResult.Failure("User is already inactive.");
+
+        user.IsActive = false;
+        user.UpdatedAt = DateTime.UtcNow;
+
+        _audit.Log(adminUserId, "DeactivateUser", "Users", userId.ToString());
+        await _context.SaveChangesAsync();
+
+        return ServiceResult.Success();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // REACTIVATE
+    // ─────────────────────────────────────────────────────────────────────────
+    public async Task<ServiceResult> ReactivateUserAsync(int adminUserId, int userId)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        if (user == null) return ServiceResult.Failure("User not found.");
+        if (user.IsActive == true) return ServiceResult.Failure("User is already active.");
+
+        user.IsActive = true;
+        user.UpdatedAt = DateTime.UtcNow;
+
+        _audit.Log(adminUserId, "ReactivateUser", "Users", userId.ToString());
+        await _context.SaveChangesAsync();
+
+        return ServiceResult.Success();
+    }
+}

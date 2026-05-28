@@ -1,0 +1,69 @@
+@{
+    var pageTitle = ViewData["Title"] as string ?? "Admin";
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pageTitle · Rokhsetak Admin</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body class="admin-body">
+
+    <partial name="_Sidebar" />
+
+    <div class="admin-shell">
+        <header class="admin-topbar">
+            <div class="admin-topbar__title">
+                <h1>@pageTitle</h1>
+                @if (ViewData["Subtitle"] is string subtitle)
+                {
+                    <p class="admin-topbar__subtitle">@subtitle</p>
+                }
+            </div>
+            <div class="admin-topbar__user">
+                <span class="admin-topbar__role">Administrator</span>
+                <span class="admin-topbar__name">@User.Identity?.Name</span>
+                <form asp-controller="Auth" asp-action="Logout" asp-area="" method="post" class="admin-topbar__logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-sm btn-outline-light">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            @if (TempData["Success"] is string successMessage)
+            {
+                <div class="alert alert-success admin-alert" role="alert">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>@successMessage</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["Error"] is string errorMessage)
+            {
+                <div class="alert alert-danger admin-alert" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>@errorMessage</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

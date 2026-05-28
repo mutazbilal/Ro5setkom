@@ -1,0 +1,12 @@
+using Rokhsetak.Areas.Admin.ViewModels.Users;
+using Rokhsetak.Services.Common;
+
+namespace Rokhsetak.Services.Interfaces;
+
+public interface IUserAdminService
+{
+    Task<ServiceResult<UserListViewModel>> GetUsersAsync(UserListFilter filter);
+    Task<ServiceResult<UserDetailViewModel>> GetUserDetailsAsync(int userId);
+    Task<ServiceResult> DeactivateUserAsync(int adminUserId, int userId);
+    Task<ServiceResult> ReactivateUserAsync(int adminUserId, int userId);
+}
