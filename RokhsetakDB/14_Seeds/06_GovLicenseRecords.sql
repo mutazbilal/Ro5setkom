@@ -18,15 +18,6 @@ VALUES
     N'active'
 ),
 
--- Yousef (Motorcycle)
-(
-    N'2001456781',
-    3,
-    '2021-03-15',
-    '2026-03-15',
-    N'expired'
-),
-
 -- Hassan (Private Manual)
 (
     N'2001678910',
@@ -43,13 +34,4 @@ VALUES
     '2020-09-05',
     '2025-09-05',
     N'expired'
-),
-
--- Omar (Motorcycle)
-(
-    N'2001987345',
-    3,
-    '2024-02-12',
-    '2029-02-12',
-    N'active'
 );
