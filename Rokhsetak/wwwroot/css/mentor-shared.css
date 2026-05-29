@@ -1,0 +1,328 @@
+﻿
+/* ============================================================
+   Mentor Dashboard — App Shell + Sidebar
+   Scoped to the Mentor dashboard only (top navbar is hidden here).
+   Reuses the --td-* design tokens declared on .mentor-dashboard.
+   ============================================================ */
+
+.mentor-shell {
+    --ms-sidebar-w: 264px;
+    /* Token mirror so the sidebar can stand alone outside .mentor-dashboard */
+    --ms-primary: var(--color-primary, #1A3A6B);
+    --ms-primary-dark: #122a4f;
+    --ms-accent-orange: var(--color-accent-orange, #F26522);
+    --ms-accent-gold: var(--color-accent-gold, #C9A84C);
+    --ms-bg: var(--color-bg, #F5F7FA);
+    --ms-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: stretch;
+    min-height: 100vh;
+    background: var(--ms-bg);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+    /* The sidebar already provides page chrome, so drop the dashboard's own top padding */
+    .mentor-shell .mentor-dashboard {
+        flex: 1;
+        min-width: 0;
+        padding-block: 2.25rem 3.5rem;
+    }
+
+/* ---- Sidebar ---- */
+.mentor-sidebar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    width: var(--ms-sidebar-w);
+    flex-shrink: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.75rem 1.1rem;
+    color: #fff;
+    background: radial-gradient(420px 300px at 120% 0%, rgba(242, 101, 34, 0.18), transparent 60%), radial-gradient(420px 360px at -20% 100%, rgba(201, 168, 76, 0.16), transparent 60%), linear-gradient(180deg, var(--ms-primary) 0%, var(--ms-primary-dark) 100%);
+    box-shadow: 22px 0 48px -34px rgba(15, 23, 42, 0.55);
+    z-index: 20;
+}
+
+/* ---- Brand ---- */
+.mentor-sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    color: #fff;
+}
+
+.mentor-sidebar__logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    font-size: 1.05rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--ms-accent-orange) 0%, var(--ms-accent-gold) 100%);
+    box-shadow: 0 8px 18px -8px rgba(242, 101, 34, 0.7);
+}
+
+.mentor-sidebar__brand-name {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+}
+
+/* ---- Nav ---- */
+.mentor-sidebar__nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mentor-sidebar__heading {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 0 0.85rem;
+    margin-bottom: 0.35rem;
+}
+
+.mentor-sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.mentor-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border-radius: 11px;
+    font-size: 0.93rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.78);
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    text-align: start;
+    transition: background 200ms var(--ms-ease), color 200ms var(--ms-ease), border-color 200ms var(--ms-ease), transform 200ms var(--ms-ease);
+}
+
+    .mentor-sidebar__link i {
+        width: 20px;
+        text-align: center;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        transition: color 200ms var(--ms-ease);
+        flex-shrink: 0;
+    }
+
+    .mentor-sidebar__link:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(2px);
+    }
+
+        .mentor-sidebar__link:hover i {
+            color: var(--ms-accent-gold);
+        }
+
+    .mentor-sidebar__link:focus-visible {
+        outline: none;
+        border-color: rgba(201, 168, 76, 0.7);
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.25);
+    }
+
+    .mentor-sidebar__link.is-active {
+        color: #fff;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.16);
+    }
+
+        .mentor-sidebar__link.is-active i {
+            color: var(--ms-accent-gold);
+        }
+
+    /* Active accent bar */
+    .mentor-sidebar__link.is-active {
+        position: relative;
+    }
+
+        .mentor-sidebar__link.is-active::before {
+            content: "";
+            position: absolute;
+            inset-inline-start: -1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 22px;
+            border-radius: 0 4px 4px 0;
+            background: linear-gradient(180deg, var(--ms-accent-orange), var(--ms-accent-gold));
+        }
+
+/* Pending badge */
+.mentor-sidebar__badge {
+    margin-inline-start: auto;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 0.4rem;
+    display: inline-grid;
+    place-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--ms-accent-orange), var(--ms-accent-gold));
+    box-shadow: 0 4px 10px -4px rgba(242, 101, 34, 0.7);
+}
+
+/* ---- Footer ---- */
+.mentor-sidebar__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mentor-sidebar__lang {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.15rem 0.35rem 0.6rem;
+}
+
+.mentor-sidebar__lang-form {
+    margin: 0;
+    flex: 1;
+}
+
+.mentor-sidebar__lang-btn {
+    width: 100%;
+    padding: 0.45rem 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 180ms var(--ms-ease);
+}
+
+    .mentor-sidebar__lang-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .mentor-sidebar__lang-btn.is-active {
+        color: var(--ms-primary-dark);
+        background: linear-gradient(135deg, var(--ms-accent-orange), var(--ms-accent-gold));
+        border-color: transparent;
+    }
+
+.mentor-sidebar__logout-form {
+    margin: 0;
+}
+
+.mentor-sidebar__link--logout {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+    .mentor-sidebar__link--logout:hover {
+        color: #fff;
+        background: rgba(214, 48, 49, 0.22);
+    }
+
+        .mentor-sidebar__link--logout:hover i {
+            color: #ffb4b4;
+        }
+
+/* ============================================================
+   Responsive — collapse the sidebar to a top strip on narrow screens
+   ============================================================ */
+@media (max-width: 860px) {
+    .mentor-shell {
+        flex-direction: column;
+    }
+
+    .mentor-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1rem;
+        box-shadow: 0 18px 36px -28px rgba(15, 23, 42, 0.55);
+    }
+
+    .mentor-sidebar__brand {
+        padding: 0;
+        margin-inline-end: auto;
+    }
+
+    .mentor-sidebar__heading {
+        display: none;
+    }
+
+    .mentor-sidebar__nav {
+        flex: 1 1 100%;
+    }
+
+    .mentor-sidebar__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .mentor-sidebar__link {
+        width: auto;
+    }
+
+        .mentor-sidebar__link.is-active::before {
+            display: none;
+        }
+
+    .mentor-sidebar__footer {
+        flex: 1 1 100%;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .mentor-sidebar__lang {
+        padding: 0;
+    }
+
+    .mentor-sidebar__lang-form {
+        flex: 0 0 auto;
+    }
+
+    .mentor-sidebar__lang-btn {
+        padding: 0.45rem 0.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mentor-sidebar__link {
+        transition: none;
+    }
+}
