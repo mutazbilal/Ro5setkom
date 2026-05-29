@@ -82,8 +82,7 @@ public class EmailService : IEmailService
         await SendAsync(toEmail, subject, body);
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
-    private async Task SendAsync(string toEmail, string subject, string htmlBody)
+    public async Task SendAsync(string toEmail, string subject, string htmlBody)
     {
         var message = new MimeMessage();
 
