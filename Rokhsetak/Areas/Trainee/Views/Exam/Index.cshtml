@@ -1,133 +1,179 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Exam
-
 @model ExamAppointmentListViewModel
 @{
     ViewData["Title"] = "My Exam Appointments";
+
+    string TypeIcon(string t) => t switch
+    {
+        "theory"    => "fa-solid fa-book-open",
+        "medical"   => "fa-solid fa-stethoscope",
+        "practical" => "fa-solid fa-car",
+        _           => "fa-solid fa-file-lines"
+    };
+
+    string TypeStripe(string t) => t switch
+    {
+        "theory"    => "exam-card__stripe--theory",
+        "medical"   => "exam-card__stripe--medical",
+        "practical" => "exam-card__stripe--practical",
+        _           => "exam-card__stripe--default"
+    };
+
+    string TypeIconMod(string t) => t switch
+    {
+        "theory"    => "exam-card__type-icon--theory",
+        "medical"   => "exam-card__type-icon--medical",
+        "practical" => "exam-card__type-icon--practical",
+        _           => "exam-card__type-icon--default"
+    };
+
+    string StatusPill(string s) => s switch
+    {
+        "scheduled" => "pill--scheduled",
+        "completed" => "pill--completed",
+        "cancelled" => "pill--cancelled",
+        _           => "pill--default"
+    };
+
+    string StatusLabel(string s) => s switch
+    {
+        "scheduled" => "Scheduled",
+        "completed" => "Completed",
+        "cancelled" => "Cancelled",
+        _           => s
+    };
+
+    string ResultPill(string r) => r switch
+    {
+        "pass"   => "pill--pass",
+        "fail"   => "pill--fail",
+        "absent" => "pill--absent",
+        _        => "pill--default"
+    };
 }
 
-<div class="container py-4">
+@section Styles {
+    <link href="~/css/exam.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="exam-wrap">
 
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="exam-flash exam-flash--error" role="alert">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span>@TempData["Error"]</span>
         </div>
     }
     @if (TempData["Success"] != null)
     {
-        <div class="alert alert-success alert-dismissible fade show">
-            @TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="exam-flash exam-flash--success" role="status">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <span>@TempData["Success"]</span>
         </div>
     }
 
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <h2 class="fw-bold mb-0">Exam Appointments</h2>
-        <div class="d-flex gap-2 flex-wrap">
-            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
-                   asp-route-examType="theory"
-                   class="btn btn-outline-danger btn-sm">
-                📋 Book Theory Exam
-            </a>
-            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
-                   asp-route-examType="medical"
-                   class="btn btn-outline-info btn-sm">
-                🏥 Book Medical Exam
-            </a>
-            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
-                   asp-route-examType="practical"
-                   class="btn btn-outline-warning btn-sm">
-                🚗 Book Practical Exam
-            </a>
+    <header class="exam-header">
+        <div class="exam-header__left">
+            <p class="exam-eyebrow">
+                <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+                Examinations
+            </p>
+            <h1>Exam Appointments</h1>
         </div>
-    </div>
+
+        <nav class="exam-book-group" aria-label="Book an exam">
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+               asp-route-examType="theory"
+               class="exam-book-btn exam-book-btn--theory">
+                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                Book Theory
+            </a>
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+               asp-route-examType="medical"
+               class="exam-book-btn exam-book-btn--medical">
+                <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+                Book Medical
+            </a>
+            <a asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+               asp-route-examType="practical"
+               class="exam-book-btn exam-book-btn--practical">
+                <i class="fa-solid fa-car" aria-hidden="true"></i>
+                Book Practical
+            </a>
+        </nav>
+    </header>
 
     @if (!Model.Appointments.Any())
     {
-        <div class="text-center py-5 text-muted">
-            <i class="bi bi-clipboard-x fs-1 d-block mb-2"></i>
-            No exam appointments yet. Book one when you are eligible.
+        <div class="exam-empty">
+            <i class="fa-solid fa-clipboard-question" aria-hidden="true"></i>
+            <p>No exam appointments yet. Book one above when you're eligible.</p>
         </div>
     }
     else
     {
-        <div class="row g-3">
+        <div class="exam-grid">
             @foreach (var a in Model.Appointments)
             {
-                var (cardBorder, icon) = a.ExamType switch
-                {
-                    "theory" => ("border-danger", "📋"),
-                    "medical" => ("border-info", "🏥"),
-                    "practical" => ("border-warning", "🚗"),
-                    _ => ("", "📄")
-                };
+                <article class="exam-card" aria-label="@a.ExamType exam at @a.CenterName">
+                    <div class="exam-card__stripe @TypeStripe(a.ExamType)" aria-hidden="true"></div>
 
-                var resultClass = a.Result switch
-                {
-                    "pass" => "text-success fw-bold",
-                    "fail" => "text-danger fw-bold",
-                    "absent" => "text-warning fw-bold",
-                    _ => "text-muted"
-                };
-
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 @cardBorder border-2">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">
-                                @icon @a.ExamType.ToUpper() Exam
-                            </h5>
-                            <p class="mb-1">
-                                <i class="bi bi-building"></i> @a.CenterName
-                                <span class="text-muted small">— @a.CityName</span>
-                            </p>
-                            <p class="mb-1">
-                                <i class="bi bi-calendar-date"></i>
-                                @a.ExamDate.ToString("dd MMMM yyyy")
-                                at @a.ExamTime.ToString("HH:mm")
-                            </p>
-
-                            <div class="mt-2 mb-1">
-                                @{
-                                    var (sc, sl) = a.Status switch
-                                    {
-                                        "scheduled" => ("bg-primary", "Scheduled"),
-                                        "completed" => ("bg-success", "Completed"),
-                                        "cancelled" => ("bg-secondary", "Cancelled"),
-                                        _ => ("bg-light text-dark", a.Status)
-                                    };
-                                }
-                                <span class="badge @sc">@sl</span>
+                    <div class="exam-card__body">
+                        <div class="exam-card__title-row">
+                            <div class="exam-card__type">
+                                <span class="exam-card__type-icon @TypeIconMod(a.ExamType)" aria-hidden="true">
+                                    <i class="@TypeIcon(a.ExamType)"></i>
+                                </span>
+                                @a.ExamType Exam
                             </div>
-
-                            @if (a.Result != null)
-                            {
-                                <p class="mb-0 mt-2">
-                                    Result:
-                                    <span class="@resultClass text-uppercase">@a.Result</span>
-                                    @if (a.Score.HasValue)
-                                    {
-                                        <span class="text-muted small"> — Score: @a.Score</span>
-                                    }
-                                </p>
-                            }
+                            <span class="pill @StatusPill(a.Status)">@StatusLabel(a.Status)</span>
                         </div>
-                        @if (a.CanCancel)
+
+                        <div class="exam-card__details">
+                            <div class="exam-card__detail">
+                                <i class="fa-solid fa-building" aria-hidden="true"></i>
+                                <span><strong>@a.CenterName</strong> &mdash; @a.CityName</span>
+                            </div>
+                            <div class="exam-card__detail">
+                                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                                <span>@a.ExamDate.ToString("dd MMMM yyyy")</span>
+                            </div>
+                            <div class="exam-card__detail">
+                                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                <span>@a.ExamTime.ToString("HH:mm")</span>
+                            </div>
+                        </div>
+
+                        @if (a.Result != null)
                         {
-                            <div class="card-footer bg-transparent">
-                                <form asp-area="Trainee" asp-controller="Exam"
-                                      asp-action="Cancel" method="post">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="appointmentId" value="@a.AppointmentId" />
-                                    <button class="btn btn-outline-danger btn-sm w-100"
-                                            onclick="return confirm('Cancel this exam appointment?')">
-                                        <i class="bi bi-x-circle"></i> Cancel
-                                    </button>
-                                </form>
+                            <div class="result-row">
+                                <span class="label">Result</span>
+                                <span class="pill @ResultPill(a.Result)">@a.Result</span>
+                                @if (a.Score.HasValue)
+                                {
+                                    <span class="result-score">Score: @a.Score</span>
+                                }
                             </div>
                         }
                     </div>
-                </div>
+
+                    @if (a.CanCancel)
+                    {
+                        <div class="exam-card__footer">
+                            <form asp-area="Trainee" asp-controller="Exam" asp-action="Cancel"
+                                  method="post" class="js-confirm"
+                                  data-confirm="Cancel this exam appointment?">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="appointmentId" value="@a.AppointmentId" />
+                                <button type="submit" class="btn-cancel">
+                                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                                    Cancel Appointment
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </article>
             }
         </div>
     }

@@ -1,93 +1,139 @@
-﻿@using Rokhsetak.Areas.Trainee.ViewModels.Exam;
+@using Rokhsetak.Areas.Trainee.ViewModels.Exam
 @model ExamBookingViewModel
 @{
-    ViewData["Title"] = $"Book {Model.ExamType.ToUpper()} Exam";
-    string icon = Model.ExamType switch { "theory" => "📋", "medical" => "🏥", _ => "🚗" };
+    ViewData["Title"] = $"Book {Model.ExamType} Exam";
+
+    string TypeIcon(string t) => t switch
+    {
+        "theory"    => "fa-solid fa-book-open",
+        "medical"   => "fa-solid fa-stethoscope",
+        "practical" => "fa-solid fa-car",
+        _           => "fa-solid fa-file-lines"
+    };
+
+    string TypeLabel(string t) =>
+        char.ToUpper(t[0]) + t[1..];
 }
 
-<div class="container py-4">
+@section Styles {
+    <link href="~/css/exam.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="exam-wrap">
 
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="exam-flash exam-flash--error" role="alert">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span>@TempData["Error"]</span>
         </div>
     }
 
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Trainee" asp-controller="Exam" asp-action="Index">
-                    Exam Appointments
-                </a>
-            </li>
-            <li class="breadcrumb-item active">Book @Model.ExamType.ToUpper() Exam</li>
-        </ol>
+    <nav class="exam-breadcrumb" aria-label="Breadcrumb">
+        <a asp-area="Trainee" asp-controller="Exam" asp-action="Index">Exam Appointments</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">Book @TypeLabel(Model.ExamType) Exam</span>
     </nav>
 
-    <h3 class="fw-bold mb-4">@icon Book @Model.ExamType.ToUpper() Exam</h3>
+    <header class="exam-header">
+        <div class="exam-header__left">
+            <p class="exam-eyebrow">
+                <i class="@TypeIcon(Model.ExamType)" aria-hidden="true"></i>
+                @TypeLabel(Model.ExamType) Exam
+            </p>
+            <h1>Book Your Slot</h1>
+        </div>
+    </header>
 
+    @* ── Ineligible ──────────────────────────────────────── *@
     @if (!Model.IsEligible)
     {
-        <div class="alert alert-warning d-flex align-items-center gap-3">
-            <i class="bi bi-lock-fill fs-3"></i>
+        <div class="exam-ineligible" role="alert">
+            <div class="exam-ineligible__icon" aria-hidden="true">
+                <i class="fa-solid fa-lock"></i>
+            </div>
             <div>
-                <strong>Not eligible yet</strong>
-                <p class="mb-0">@Model.IneligibilityReason</p>
+                <p class="exam-ineligible__title">Not eligible yet</p>
+                <p class="exam-ineligible__reason">@Model.IneligibilityReason</p>
             </div>
         </div>
-        <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
-               class="btn btn-outline-primary mt-3">
-            ← Back to Dashboard
+
+        <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index" class="btn-back">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Back to Dashboard
         </a>
     }
+
+    @* ── No slots ────────────────────────────────────────── *@
     else if (!Model.AvailableSlots.Any())
     {
-        <div class="alert alert-info">
-            <i class="bi bi-info-circle"></i>
-            No exam slots are currently available in your area. Please check back later.
+        <div class="exam-info-banner" role="status">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>No exam slots are currently available in your area. Please check back later.</span>
         </div>
+
+        <a asp-area="Trainee" asp-controller="Exam" asp-action="Index" class="btn-back">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Back to Appointments
+        </a>
     }
+
+    @* ── Slot grid ───────────────────────────────────────── *@
     else
     {
-        <div class="row g-3">
+        <div class="slot-grid">
             @foreach (var slot in Model.AvailableSlots)
             {
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
-                        <div class="card-body">
-                            <h6 class="fw-bold mb-1">@slot.CenterName</h6>
-                            <p class="text-muted small mb-2">
-                                <i class="bi bi-geo-alt"></i> @slot.CityName
-                            </p>
-                            <p class="mb-1">
-                                <i class="bi bi-calendar-date"></i>
+                var isLow = slot.SlotsRemaining <= 3;
+
+                <article class="slot-card" aria-label="@slot.CenterName, @slot.ExamDate.ToString("dd MMMM yyyy")">
+                    <div class="slot-card__body">
+                        <h2 class="slot-card__center">@slot.CenterName</h2>
+
+                        <p class="slot-card__city">
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            @slot.CityName
+                        </p>
+
+                        <div class="slot-card__details">
+                            <div class="slot-card__detail">
+                                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
                                 @slot.ExamDate.ToString("dd MMMM yyyy")
-                            </p>
-                            <p class="mb-2">
-                                <i class="bi bi-clock"></i> @slot.ExamTime.ToString("HH:mm")
-                            </p>
-                            <span class="badge @(slot.SlotsRemaining <= 3 ? "bg-warning text-dark" : "bg-success")">
-                                @slot.SlotsRemaining slot(s) left
-                            </span>
+                            </div>
+                            <div class="slot-card__detail">
+                                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                @slot.ExamTime.ToString("HH:mm")
+                            </div>
                         </div>
-                        <div class="card-footer bg-transparent">
-                            <form asp-area="Trainee" asp-controller="Exam"
-                                  asp-action="Book" method="post">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="OfficialExamId" value="@slot.OfficialExamId" />
-                                <input type="hidden" name="TraineeLicenseId" value="@Model.TraineeLicenseId" />
-                                <input type="hidden" name="ExamType" value="@Model.ExamType" />
-                                <button type="submit" class="btn btn-primary w-100"
-                                        onclick="return confirm('Confirm booking for @slot.ExamDate.ToString("dd MMM yyyy") at @slot.ExamTime.ToString("HH:mm")?')">
-                                    <i class="bi bi-check-circle"></i> Confirm Booking
-                                </button>
-                            </form>
-                        </div>
+
+                        <span class="slots-chip @(isLow ? "slots-chip--low" : "slots-chip--ok")"
+                              aria-label="@slot.SlotsRemaining slots remaining">
+                            <i class="fa-solid @(isLow ? "fa-fire" : "fa-circle-check")" aria-hidden="true"></i>
+                            @slot.SlotsRemaining @(slot.SlotsRemaining == 1 ? "slot" : "slots") left
+                        </span>
                     </div>
-                </div>
+
+                    <div class="slot-card__footer">
+                        <form asp-area="Trainee" asp-controller="Exam" asp-action="Book"
+                              method="post" class="js-confirm"
+                              data-confirm="Confirm booking for @slot.ExamDate.ToString("dd MMM yyyy") at @slot.ExamTime.ToString("HH:mm")?">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="OfficialExamId"    value="@slot.OfficialExamId" />
+                            <input type="hidden" name="TraineeLicenseId"  value="@Model.TraineeLicenseId" />
+                            <input type="hidden" name="ExamType"          value="@Model.ExamType" />
+                            <button type="submit" class="btn-confirm">
+                                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                Confirm Booking
+                            </button>
+                        </form>
+                    </div>
+                </article>
             }
         </div>
+
+        <a asp-area="Trainee" asp-controller="Exam" asp-action="Index" class="btn-back">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Back to Appointments
+        </a>
     }
 </div>

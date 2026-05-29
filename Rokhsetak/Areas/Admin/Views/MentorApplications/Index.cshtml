@@ -1,26 +1,24 @@
+@using Rokhsetak.Areas.Admin.ViewModels.MentorApplications
 @model MentorApplicationListViewModel
 @{
-    ViewData["Title"] = "Mentor applications";
+    ViewData["Title"] = "Mentor Applications";
     ViewData["Subtitle"] = "Pending applications awaiting your review";
+    ViewData["ActiveNav"] = "applications";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="admin-card">
     <div class="admin-card__header admin-card__header--bordered">
         <h3>Pending applications <span class="admin-count-badge">@Model.Items.Count</span></h3>
-        <small class="text-muted">Approved and rejected applications are not shown here.</small>
+        <small>Approved and rejected applications are not shown here.</small>
     </div>
-    <div class="table-responsive">
-        <table class="table admin-table align-middle mb-0">
+    <div style="overflow-x:auto">
+        <table class="admin-table">
             <thead>
                 <tr>
-                    <th>Applicant</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>License</th>
-                    <th>City</th>
-                    <th>Submitted</th>
-                    <th>Cert.</th>
-                    <th class="text-end">Actions</th>
+                    <th>Applicant</th><th>Email</th><th>Phone</th>
+                    <th>License</th><th>City</th><th>Submitted</th>
+                    <th>Cert.</th><th class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,16 +26,16 @@
                 {
                     <tr>
                         <td><strong>@app.FullName</strong></td>
-                        <td>@app.Email</td>
+                        <td style="color:var(--muted)">@app.Email</td>
                         <td>@(app.PhoneNumber ?? "—")</td>
                         <td>@app.LicenseType</td>
                         <td>@(app.CityName ?? "—")</td>
-                        <td>@(app.SubmittedAt?.ToString("dd MMM yyyy") ?? "—")</td>
+                        <td style="color:var(--muted);font-size:.82rem">@(app.SubmittedAt?.ToString("dd MMM yyyy") ?? "—")</td>
                         <td>
                             @if (app.HasCertificationFile)
                             {
                                 <span class="admin-pill admin-pill--success">
-                                    <i class="fa-solid fa-paperclip"></i> Uploaded
+                                    <i class="fa-solid fa-paperclip" aria-hidden="true"></i> Uploaded
                                 </span>
                             }
                             else
@@ -47,16 +45,15 @@
                         </td>
                         <td class="text-end">
                             <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Details"
-                               asp-route-id="@app.ApplicationId"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa-solid fa-eye"></i> Review
+                               asp-route-id="@app.ApplicationId" class="admin-row-action">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Review
                             </a>
                         </td>
                     </tr>
                 }
                 @if (!Model.Items.Any())
                 {
-                    <tr><td colspan="8" class="text-center text-muted py-5">No pending applications right now.</td></tr>
+                    <tr class="empty-row"><td colspan="8">No pending applications right now.</td></tr>
                 }
             </tbody>
         </table>
