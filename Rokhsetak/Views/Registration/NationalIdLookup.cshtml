@@ -1,8 +1,11 @@
 @using Rokhsetak.ViewModels.Registration
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model NationalIdLookupViewModel
 @{
-    ViewData["Title"] = Model.IsTrainee ? "Trainee Registration" : "Mentor Registration";
-    var heading = Model.IsTrainee ? "Trainee Registration" : "Mentor Registration";
+    ViewData["Title"] = Model.IsTrainee ? L["Reg_TraineeRegistration_Title"] : L["Reg_MentorRegistration_Title"];
+    var heading = Model.IsTrainee ? L["Reg_TraineeRegistration_Title"] : L["Reg_MentorRegistration_Title"];
 }
 
 @section Styles {
@@ -14,18 +17,18 @@
     <span>Rokhsetak</span>
 </div>
 
-<main class="auth-page" aria-label="@heading — identity verification">
+<main class="auth-page" aria-label="@heading @L["Reg_NationalIdLookup_AriaSuffix"]">
     <section class="auth-brand" aria-hidden="true">
         <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
         <h1 class="auth-brand__title">@heading</h1>
-        <p class="auth-brand__tagline">Secure identity verification powered by government records.</p>
+        <p class="auth-brand__tagline">@L["Reg_NationalIdLookup_Tagline"]</p>
 
         <span class="auth-floating-shape auth-floating-shape--circle"></span>
         <span class="auth-floating-shape auth-floating-shape--hex"></span>
         <span class="auth-floating-shape auth-floating-shape--diamond"></span>
 
         <svg class="auth-brand__art" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg"
-             role="img" aria-label="Road illustration">
+             role="img" aria-label="@L["Reg_RoadIllustration"]">
             <path d="M0 90 C150 22, 275 168, 430 116 C578 67, 696 48, 800 90 L800 240 L0 240 Z"
                   fill="rgba(22,53,96,.95)"/>
             <path d="M100 172 C240 120, 380 158, 540 130 C625 116, 700 112, 760 122"
@@ -46,13 +49,13 @@
                class="auth-link"
                style="display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                Back to role selection
+                @L["Reg_BackToRoleSelection"]
             </a>
 
             <h2 class="auth-card__title">@heading</h2>
-            <p class="auth-card__subtitle">Step 2 of 3: Verify Identity</p>
+            <p class="auth-card__subtitle">@L["Reg_Step2"]</p>
 
-            <div class="auth-stepper" aria-label="Registration progress — step 2 of 3">
+            <div class="auth-stepper" aria-label="@L["Reg_Step2Aria"]">
                 <div class="auth-step is-complete"></div>
                 <div class="auth-step is-active" aria-current="step"></div>
                 <div class="auth-step"></div>
@@ -72,7 +75,7 @@
                     <input asp-for="AcceptedDataRetrievalConsent" type="checkbox" />
                     <span class="auth-custom-check__box" aria-hidden="true"></span>
                     <span>
-						I Consent to the retrieval of my national ID data for identity verification purposes only. I understand that this information will be used solely to confirm my eligibility for registration and will not be stored or shared beyond this process.
+                        @L["Reg_Consent_DataRetrieval"]
                     </span>
                 </label>
                 <span asp-validation-for="AcceptedDataRetrievalConsent" class="text-danger"></span>
@@ -88,16 +91,16 @@
                            autofocus
                            aria-required="true"
                            aria-describedby="nationalIdHelp" />
-                    <label asp-for="NationalId" class="auth-label">National ID</label>
-                    <span id="nationalIdHelp" class="sr-only">Enter your valid 10-digit national ID number.</span>
+                    <label asp-for="NationalId" class="auth-label">@L["Reg_NationalId"]</label>
+                    <span id="nationalIdHelp" class="sr-only">@L["Reg_NationalIdHelp"]</span>
                     <span asp-validation-for="NationalId" class="text-danger"></span>
                 </div>
 
-                <button class="auth-btn" type="submit">Look Up My ID</button>
+                <button class="auth-btn" type="submit">@L["Reg_LookupID"]</button>
 
                 <p style="text-align:center;color:var(--color-muted);font-size:.92rem;margin-top:10px;">
-                    Already have an account?
-                    <a asp-controller="Auth" asp-action="Login" class="auth-link">Sign In</a>
+                    @L["Auth_AlreadyHaveAccount"]
+                    <a asp-controller="Auth" asp-action="Login" class="auth-link">@L["Auth_SignIn"]</a>
                 </p>
             </form>
         </article>

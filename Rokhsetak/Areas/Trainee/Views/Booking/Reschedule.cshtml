@@ -1,8 +1,11 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @using System.Text.Json
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model RescheduleTraineeViewModel
 @{
-    ViewData["Title"] = "Reschedule Session";
+    ViewData["Title"] = L["Booking_Reschedule"];
 
     var availabilityJson = JsonSerializer.Serialize(
         Model.AvailableDays.Select(d => new {
@@ -33,19 +36,19 @@
             <div class="alert alert--error" role="alert">
                 <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
                 <div class="alert__body">@TempData["Error"]</div>
-                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="@L["Booking_Dismiss"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
         }
 
-        <nav class="breadcrumb" aria-label="Breadcrumb">
+        <nav class="breadcrumb" aria-label="@L["Booking_Breadcrumb"]">
             <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
-               class="breadcrumb__item">My Bookings</a>
+               class="breadcrumb__item">@L["Booking_MyBookings"]</a>
             <span class="breadcrumb__sep" aria-hidden="true">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
-            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Reschedule</span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">@L["Booking_Reschedule"]</span>
         </nav>
 
         <!-- Mentor Hero (warm tone — this is a change action) -->
@@ -53,11 +56,11 @@
             <div class="mentor-hero__inner">
                 <div class="mentor-hero__avatar" aria-hidden="true">@initials</div>
                 <div class="mentor-hero__main">
-                    <h1 class="mentor-hero__name">Reschedule with @Model.MentorName</h1>
+                    <h1 class="mentor-hero__name">@string.Format(L["Booking_RescheduleWith"], Model.MentorName)</h1>
                     <div class="mentor-hero__meta">
                         <span class="tag">
                             <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                            Pick a new time
+                            @L["Booking_PickNewTime"]
                         </span>
                         <span class="type-pill @(Model.SessionType == "practical" ? "type-pill--practical" : "type-pill--theoretical")">
                             @Model.SessionType
@@ -76,7 +79,7 @@
                         <span class="booking-card__header-icon">
                             <i class="fa-solid fa-calendar-week" aria-hidden="true"></i>
                         </span>
-                        Pick a New Time Slot
+                        @L["Booking_PickNewTimeSlot"]
                     </div>
                     <div class="booking-card__body" style="padding: 0;">
 
@@ -85,7 +88,7 @@
                             <div class="empty-state" style="border: none; border-radius: 0;">
                                 <i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
                                 <p class="empty-state__text">
-                                    Your mentor hasn't set their availability yet.
+                                    @L["Booking_NoAvailability"]
                                 </p>
                             </div>
                         }
@@ -95,18 +98,18 @@
 
                                 <div class="week-schedule__nav">
                                     <button type="button" class="week-schedule__nav-btn"
-                                            id="weekPrevBtn" aria-label="Previous week">
+                                            id="weekPrevBtn" aria-label="@L["Booking_PreviousWeek"]">
                                         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                                     </button>
-                                    <div class="week-schedule__nav-title" id="weekRangeLabel">Loading…</div>
+                                    <div class="week-schedule__nav-title" id="weekRangeLabel">@L["Common_Loading"]</div>
                                     <button type="button" class="week-schedule__nav-btn"
-                                            id="weekNextBtn" aria-label="Next week">
+                                            id="weekNextBtn" aria-label="@L["Booking_NextWeek"]">
                                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                                     </button>
                                 </div>
 
                                 <div class="week-schedule__grid" id="weekGrid"
-                                     role="list" aria-label="Available time slots by day">
+                                     role="list" aria-label="@L["Booking_AvailableSlotsByDay"]">
                                     <!-- JS-populated -->
                                 </div>
 
@@ -119,8 +122,7 @@
                 <div class="alert alert--warning-soft" style="margin-top: 18px;" role="note">
                     <i class="fa-solid fa-triangle-exclamation alert__icon" aria-hidden="true"></i>
                     <div class="alert__body">
-                        Your original booking will be cancelled and a new pending request created.
-                        The mentor will need to confirm the new time.
+                        @L["Booking_RescheduleConfirmMsg"]
                     </div>
                 </div>
 
@@ -130,10 +132,10 @@
                 <div class="booking-card confirm-card">
 
                     <div class="confirm-card__title">
-                        <span>New Time</span>
+                        <span>@L["Booking_NewTime"]</span>
                         <span class="confirm-card__step">
                             <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                            Change
+                            @L["Booking_Change"]
                         </span>
                     </div>
 
@@ -161,44 +163,44 @@
                                 <div class="selection-prompt__icon">
                                     <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
                                 </div>
-                                <p class="selection-prompt__text">No new slot picked</p>
+                                <p class="selection-prompt__text">@L["Booking_NoNewSlotPicked"]</p>
                                 <p class="selection-prompt__sub">
-                                    Pick an available slot from the schedule.
+                                    @L["Booking_PickSlotPrompt"]
                                 </p>
                             </div>
 
                             <div id="confirmDetails" style="display: none;">
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Mentor</span>
+                                    <span class="confirm-row__label">@L["Booking_Mentor"]</span>
                                     <span class="confirm-row__value">@Model.MentorName</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Type</span>
+                                    <span class="confirm-row__label">@L["Booking_SessionType"]</span>
                                     <span class="confirm-row__value" style="text-transform: capitalize;">
                                         @Model.SessionType
                                     </span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">New Date</span>
+                                    <span class="confirm-row__label">@L["Booking_NewDate"]</span>
                                     <span class="confirm-row__value" id="confDate">—</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">New Time</span>
+                                    <span class="confirm-row__label">@L["Booking_NewTime"]</span>
                                     <span class="confirm-row__value" id="confTime">—</span>
                                 </div>
 
                                 <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
                                     <button type="submit" class="btn btn--warning btn--block">
                                         <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                                        Confirm Reschedule
+                                        @L["Booking_ConfirmReschedule"]
                                     </button>
                                     <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
                                        class="btn btn--secondary btn--block">
-                                        Cancel
+                                        @L["Booking_Cancel"]
                                     </a>
                                 </div>
 
@@ -323,7 +325,7 @@
                 if (isPastOrToday || daySlots.length === 0) {
                     const empty = document.createElement('div');
                     empty.className = 'week-schedule__empty';
-                    empty.textContent = isPastOrToday ? '—' : 'No slots';
+                    empty.textContent = isPastOrToday ? '—' : '@L["Booking_NoSlots"]';
                     slotsWrap.appendChild(empty);
                 } else {
                     daySlots.forEach(slot => {
@@ -419,7 +421,7 @@
                 form.addEventListener('submit', function (e) {
                     if (!selectedSlot) {
                         e.preventDefault();
-                        alert('Please pick an available time slot.');
+                        alert('@L["Booking_AlertPickSlot"]');
                     }
                 });
             }

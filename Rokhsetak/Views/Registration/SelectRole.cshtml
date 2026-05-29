@@ -1,5 +1,8 @@
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @{
-    ViewData["Title"] = "Choose Your Role";
+    ViewData["Title"] = L["Reg_SelectRole_Title"];
     ViewData["HideAuthNav"] = true;
 }
 
@@ -13,18 +16,18 @@
     <span>ro5setkom</span>
 </div>
 
-<main class="auth-page" aria-label="Registration — choose your role">
+<main class="auth-page" aria-label="@L["Reg_SelectRole_Aria"]">
     <section class="auth-brand" aria-hidden="true">
         <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-        <h1 class="auth-brand__title">Join ro5setkom</h1>
-        <p class="auth-brand__tagline">Choose how you'd like to be part of the journey.</p>
+        <h1 class="auth-brand__title">@L["Reg_SelectRole_HeroTitle"]</h1>
+        <p class="auth-brand__tagline">@L["Reg_SelectRole_Tagline"]</p>
 
         <span class="auth-floating-shape auth-floating-shape--circle"></span>
         <span class="auth-floating-shape auth-floating-shape--hex"></span>
         <span class="auth-floating-shape auth-floating-shape--diamond"></span>
 
         <svg class="auth-brand__art" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg"
-             role="img" aria-label="Road illustration">
+             role="img" aria-label="@L["Reg_RoadIllustration"]">
             <path d="M0 90 C150 22, 275 168, 430 116 C578 67, 696 48, 800 90 L800 240 L0 240 Z"
                   fill="rgba(22,53,96,.95)"/>
             <path d="M100 172 C240 120, 380 158, 540 130 C625 116, 700 112, 760 122"
@@ -44,13 +47,13 @@
             <a asp-controller="Home" asp-action="Index"
                class="auth-link role-select-back">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                Back to Home
+                @L["Auth_BackToHome"]
             </a>
 
-            <h2 class="auth-card__title">Choose Your Role</h2>
-            <p class="auth-card__subtitle">Step 1 of 3: Choose Role</p>
+            <h2 class="auth-card__title">@L["Reg_SelectRole_Title"]</h2>
+            <p class="auth-card__subtitle">@L["Reg_Step1"]</p>
 
-            <div class="auth-stepper" aria-label="Registration progress — step 1 of 3">
+            <div class="auth-stepper" aria-label="@L["Reg_Step1Aria"]">
                 <div class="auth-step is-active" aria-current="step"></div>
                 <div class="auth-step"></div>
                 <div class="auth-step"></div>
@@ -60,21 +63,21 @@
                 <a asp-controller="Registration" asp-action="Trainee"
                    class="role-card role-card--trainee"
                    role="listitem"
-                   aria-label="Register as a Trainee — learn to drive with a certified mentor">
+                   aria-label="@L["Reg_Trainee_AriaLabel"]">
                     <span class="role-card__badge">
                         <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
                     </span>
-                    <span class="role-card__title">Trainee</span>
+                    <span class="role-card__title">@L["Reg_Role_Trainee"]</span>
                     <span class="role-card__desc">
-                        Learn to drive with certified mentors and earn your license through a guided, structured program.
+                        @L["Reg_Role_Trainee_Desc"]
                     </span>
                     <span class="role-card__features" aria-hidden="true">
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Browse mentors</span>
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Book sessions</span>
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Track progress</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_BrowseMentors"]</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_BookSessions"]</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_TrackProgress"]</span>
                     </span>
                     <span class="role-card__cta">
-                        Continue as Trainee
+                        @L["Reg_ContinueAsTrainee"]
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </span>
                 </a>
@@ -82,33 +85,33 @@
                 <a asp-controller="Registration" asp-action="Mentor"
                    class="role-card role-card--mentor"
                    role="listitem"
-                   aria-label="Register as a Mentor — teach trainees and grow your driving school">
+                   aria-label="@L["Reg_Mentor_AriaLabel"]">
                     <span class="role-card__badge">
                         <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
                     </span>
-                    <span class="role-card__title">Mentor</span>
+                    <span class="role-card__title">@L["Reg_Role_Mentor"]</span>
                     <span class="role-card__desc">
-                        Share your expertise, train new drivers, and build your reputation on a trusted platform.
+                        @L["Reg_Role_Mentor_Desc"]
                     </span>
                     <span class="role-card__features" aria-hidden="true">
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Set your rates</span>
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Manage schedule</span>
-                        <span class="role-card__feature"><i class="fa-solid fa-check"></i>Reach trainees</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_SetRates"]</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_ManageSchedule"]</span>
+                        <span class="role-card__feature"><i class="fa-solid fa-check"></i> @L["Reg_Feature_ReachTrainees"]</span>
                     </span>
                     <span class="role-card__cta">
-                        Continue as Mentor
+                        @L["Reg_ContinueAsMentor"]
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </span>
                     <span class="role-card__note" aria-hidden="true">
                         <i class="fa-solid fa-circle-info"></i>
-                        Application requires admin approval
+                        @L["Reg_AdminApprovalNote"]
                     </span>
                 </a>
             </div>
 
             <p class="role-select-footer">
-                Already have an account?
-                <a asp-controller="Auth" asp-action="Login" class="auth-link">Sign In</a>
+                @L["Auth_AlreadyHaveAccount"]
+                <a asp-controller="Auth" asp-action="Login" class="auth-link">@L["Auth_SignIn"]</a>
             </p>
         </article>
     </section>

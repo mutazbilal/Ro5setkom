@@ -1,6 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<Rokhsetak.Resources.SharedResourceMarker> L
+@{
+    ViewData["Title"] = L["Privacy_Title"];
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>@L["Privacy_Message"]</p>

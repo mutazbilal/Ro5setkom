@@ -1,7 +1,10 @@
 ﻿@using Rokhsetak.ViewModels.Profile
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model LanguagePreferenceViewModel
 @{
-    ViewData["Title"] = "Language Preference";
+    ViewData["Title"] = L["Profile_LanguagePreference"];
 }
 
 @section Styles {
@@ -16,7 +19,7 @@
             <div class="alert dashboard-alert dashboard-alert--error" role="alert">
                 <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Error"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -26,7 +29,7 @@
             <div class="alert dashboard-alert dashboard-alert--success" role="alert">
                 <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Success"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -39,10 +42,10 @@
                     <i class="fa-solid fa-language"></i>
                 </span>
                 <div class="profile-hero__intro">
-                    <span class="profile-hero__eyebrow">Preferences</span>
-                    <h1 id="lang-page-title" class="profile-hero__title">Language Preference</h1>
+                    <span class="profile-hero__eyebrow">@L["Profile_Preferences"]</span>
+                    <h1 id="lang-page-title" class="profile-hero__title">@L["Profile_LanguagePreference"]</h1>
                     <p class="profile-hero__description">
-                        Choose the language used throughout your dashboard, modules, and notifications.
+                        @L["Profile_LanguagePreference_Desc"]
                     </p>
                 </div>
             </div>
@@ -52,7 +55,7 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Back to Profile</span>
+                    <span>@L["Profile_BackToProfile"]</span>
                 </a>
             </div>
         </section>
@@ -69,14 +72,14 @@
                         <i class="fa-solid fa-globe"></i>
                     </span>
                     <div class="profile-card__headings">
-                        <p class="profile-card__eyebrow">Interface Language</p>
-                        <h2 id="lang-options-title" class="profile-card__title">Select your language</h2>
+                        <p class="profile-card__eyebrow">@L["Profile_InterfaceLanguage"]</p>
+                        <h2 id="lang-options-title" class="profile-card__title">@L["Profile_SelectLanguage"]</h2>
                     </div>
                 </header>
 
                 <div class="profile-card__body">
                     <fieldset class="lang-options" aria-labelledby="lang-options-title">
-                        <legend class="visually-hidden">Language</legend>
+                        <legend class="visually-hidden">@L["Profile_Language"]</legend>
 
                         <label class="lang-option" for="Language_ar">
                             <input type="radio"
@@ -87,7 +90,7 @@
                             <span class="lang-option__card">
                                 <span class="lang-option__abbr" aria-hidden="true">AR</span>
                                 <span class="lang-option__text">
-                                    <span class="lang-option__name">Arabic</span>
+                                    <span class="lang-option__name">@L["Profile_Language_Arabic"]</span>
                                     <span class="lang-option__native" lang="ar" dir="rtl">العربية</span>
                                 </span>
                                 <span class="lang-option__check" aria-hidden="true">
@@ -105,7 +108,7 @@
                             <span class="lang-option__card">
                                 <span class="lang-option__abbr" aria-hidden="true">EN</span>
                                 <span class="lang-option__text">
-                                    <span class="lang-option__name">English</span>
+                                    <span class="lang-option__name">@L["Profile_Language_English"]</span>
                                     <span class="lang-option__native">English</span>
                                 </span>
                                 <span class="lang-option__check" aria-hidden="true">
@@ -123,11 +126,11 @@
                 <a asp-controller="Profile"
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
-                    <span>Cancel</span>
+                    <span>@L["Profile_Cancel"]</span>
                 </a>
                 <button type="submit" class="btn-action btn-action--gradient">
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                    <span>Save Preference</span>
+                    <span>@L["Profile_SavePreference"]</span>
                 </button>
             </div>
         </form>

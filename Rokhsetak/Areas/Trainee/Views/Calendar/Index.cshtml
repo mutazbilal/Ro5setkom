@@ -1,8 +1,11 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model Areas_Trainee_Views_Calendar_Index
  
 @{
-    ViewData["Title"] = "My Calendar";
+    ViewData["Title"] = L["Calendar_MyCalendar"];
 }
 
 @section Styles {
@@ -19,7 +22,7 @@
             <div class="alert alert--error" role="alert">
                 <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
                 <div class="alert__body">@TempData["Error"]</div>
-                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="@L["Calendar_Dismiss"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -28,20 +31,20 @@
         <div class="booking-header">
             <h2 class="booking-header__title">
                 <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                My Calendar
+                @L["Calendar_MyCalendar"]
             </h2>
-            <div class="calendar-legend" role="group" aria-label="Calendar legend">
-                <span class="status-pill status-pill--confirmed">Confirmed</span>
-                <span class="status-pill status-pill--pending">Pending</span>
-                <span class="status-pill status-pill--exam">Exam</span>
-                <span class="status-pill status-pill--completed">Completed</span>
+            <div class="calendar-legend" role="group" aria-label="@L["Calendar_LegendAria"]">
+                <span class="status-pill status-pill--confirmed">@L["Calendar_Confirmed"]</span>
+                <span class="status-pill status-pill--pending">@L["Calendar_Pending"]</span>
+                <span class="status-pill status-pill--exam">@L["Calendar_Exam"]</span>
+                <span class="status-pill status-pill--completed">@L["Calendar_Completed"]</span>
             </div>
         </div>
 
         <section class="booking-card">
             <div class="booking-card__body">
                 <div id="calendar" class="calendar-shell"
-                     aria-label="Calendar of bookings and exams"></div>
+                     aria-label="@L["Calendar_CalendarAria"]"></div>
             </div>
         </section>
 

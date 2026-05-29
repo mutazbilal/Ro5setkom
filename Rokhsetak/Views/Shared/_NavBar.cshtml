@@ -3,6 +3,9 @@
 *@
 
 @using System.Security.Claims
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<Rokhsetak.Resources.SharedResourceMarker> L
 @inject Rokhsetak.Services.Interfaces.INotificationService NotificationService
 
 @{
@@ -62,7 +65,7 @@
        asp-controller="Home"
        asp-action="Index"
        class="landing-brand"
-       aria-label="Rokhsetak — Home">
+       aria-label="Rokhsetak — @L["Nav_Home"]">
         <span class="landing-brand__logo" aria-hidden="true">
             <i class="fa-solid fa-shield-halved"></i>
         </span>
@@ -74,7 +77,7 @@
         <input type="checkbox"
                id="rk-nav-toggle"
                class="landing-nav__check"
-               aria-label="Toggle navigation menu"
+               aria-label="@L["Nav_ToggleMenu"]"
                aria-controls="rk-nav-cluster" />
 
         <label for="rk-nav-toggle" class="landing-nav__toggle">
@@ -97,7 +100,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Dashboard", "index")"
                                aria-current="@ActiveAria("Trainee", "Dashboard", "index")">
                                 <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
-                                <span>Dashboard</span>
+                                <span>@L["Nav_Dashboard"]</span>
                             </a>
                         </li>
 
@@ -106,7 +109,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Modules", "index")"
                                aria-current="@ActiveAria("Trainee", "Modules", "index")">
                                 <i class="fa-solid fa-book-open" aria-hidden="true"></i>
-                                <span>Modules</span>
+                                <span>@L["Nav_Modules"]</span>
                             </a>
                         </li>
 
@@ -115,7 +118,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Booking", "browse")"
                                aria-current="@ActiveAria("Trainee", "Booking", "browse")">
                                 <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-                                <span>Find Mentor</span>
+                                <span>@L["Nav_FindMentor"]</span>
                             </a>
                         </li>
 
@@ -124,7 +127,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Booking", "index")"
                                aria-current="@ActiveAria("Trainee", "Booking", "index")">
                                 <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                                <span>My Bookings</span>
+                                <span>@L["Nav_MyBookings"]</span>
                             </a>
                         </li>
 
@@ -133,7 +136,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Exam", "index")"
                                aria-current="@ActiveAria("Trainee", "Exam", "index")">
                                 <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
-                                <span>Exams</span>
+                                <span>@L["Nav_Exams"]</span>
                             </a>
                         </li>
 
@@ -142,7 +145,7 @@
                                class="landing-nav__link @ActiveClass("Trainee", "Calendar", "index")"
                                aria-current="@ActiveAria("Trainee", "Calendar", "index")">
                                 <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                                <span>Calendar</span>
+                                <span>@L["Nav_Calendar"]</span>
                             </a>
                         </li>
                     }
@@ -154,7 +157,7 @@
                                class="landing-nav__link @ActiveClass("Mentor", "Dashboard", "index")"
                                aria-current="@ActiveAria("Mentor", "Dashboard", "index")">
                                 <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
-                                <span>Mentor Dashboard</span>
+                                <span>@L["Mentor_Dashboard"]</span>
                             </a>
                         </li>
                     }
@@ -166,7 +169,7 @@
                                class="landing-nav__link @ActiveClass("Admin", "Dashboard", "index")"
                                aria-current="@ActiveAria("Admin", "Dashboard", "index")">
                                 <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
-                                <span>Admin Dashboard</span>
+                                <span>@L["Admin_Nav_Dashboard"]</span>
                             </a>
                         </li>
                     }
@@ -179,12 +182,12 @@
                 @if (User.IsInRole("mentor") || User.IsInRole("trainee"))
                 {
                     <div class="nav-notification dropdown">
-                        <a class="landing-nav__link position-relative" data-bs-toggle="dropdown" aria-label="Notifications">
+                        <a class="landing-nav__link position-relative" data-bs-toggle="dropdown" aria-label="@L["Nav_Notifications"]">
                             <i class="fa-solid fa-bell" aria-hidden="true"></i>
 
                             @if (unreadCount > 0)
                             {
-                                <span class="nav-notification__badge" aria-label="@unreadCount unread notifications">
+                                <span class="nav-notification__badge" aria-label="@unreadCount @L["Nav_UnreadNotifications"]">
                                     @unreadCount
                                 </span>
                             }
@@ -194,7 +197,7 @@
                             style="width: 360px; max-height: 400px; overflow-y: auto;">
 
                             <li class="dropdown-header fw-bold">
-                                Notifications
+                                @L["Nav_Notifications"]
                             </li>
 
                             @if (notifications.Any())
@@ -214,9 +217,9 @@
                                             {
                                                 <button type="button"
                                                         class="btn btn-sm btn-light border ms-2"
-                                                        title="Mark as read"
+                                                        title="@L["Nav_MarkAsRead"]"
                                                         data-notification-id="@n.NotificationId"
-                                                        aria-label="Mark notification as read">
+                                                        aria-label="@L["Nav_MarkAsReadAria"]">
                                                     ✓
                                                 </button>
                                             }
@@ -228,7 +231,7 @@
                             else
                             {
                                 <li class="dropdown-item text-center text-muted">
-                                    No notifications
+                                    @L["Nav_NoNotifications"]
                                 </li>
                             }
 
@@ -268,7 +271,7 @@
                    class="landing-nav__cta landing-nav__cta--ghost @ActiveControllerClass("", "Profile")"
                    aria-current="@ActiveControllerAria("", "Profile")">
                     <i class="fa-solid fa-user" aria-hidden="true"></i>
-                    <span>Profile</span>
+                    <span>@L["Nav_Profile"]</span>
                 </a>
 
                 @* ── Logout ── *@
@@ -276,7 +279,7 @@
                     @Html.AntiForgeryToken()
                     <button type="submit" class="landing-nav__cta landing-nav__cta--ghost">
                         <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
-                        <span>Log out</span>
+                        <span>@L["Nav_Logout"]</span>
                     </button>
                 </form>
 
@@ -287,10 +290,10 @@
         {
             <div class="landing-nav__actions">
                 <a asp-controller="Auth" asp-action="Login" class="landing-nav__link">
-                    Login
+                    @L["Nav_Login"]
                 </a>
                 <a asp-controller="Registration" asp-action="SelectRole" class="landing-nav__cta">
-                    Create Account
+                    @L["Nav_Register"]
                 </a>
             </div>
         }
@@ -298,7 +301,7 @@
     </div>
 </header>
 
-@* ── Notification mark-as-read handler ── *@
+@* ── Notification mark-as-read handler (unchanged) ── *@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const markButtons = document.querySelectorAll('[data-notification-id]');
