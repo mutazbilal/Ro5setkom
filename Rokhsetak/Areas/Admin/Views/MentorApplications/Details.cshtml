@@ -1,85 +1,86 @@
+@using Rokhsetak.Areas.Admin.ViewModels.MentorApplications
 @model MentorApplicationDetailViewModel
 @{
     ViewData["Title"] = $"Application · {Model.FullName}";
     ViewData["Subtitle"] = $"Submitted {Model.SubmittedAt?.ToString("dd MMM yyyy") ?? "—"}";
+    ViewData["ActiveNav"] = "applications";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    bool isPending = Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase);
 }
 
-<div class="row g-3">
-    <div class="col-lg-7">
-        <div class="admin-card admin-card--padded">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                    <h3 class="mb-1">@Model.FullName</h3>
-                    <p class="text-muted mb-0">@Model.Email</p>
-                </div>
-                <span class="admin-pill admin-pill--status admin-pill--@Model.Status.ToLower()">@Model.Status</span>
+<div class="app-layout">
+    @* ── Main info ────────────────────────────────────────── *@
+    <div class="admin-card admin-card--padded">
+        <div class="app-name-row">
+            <div>
+                <h3>@Model.FullName</h3>
+                <p>@Model.Email</p>
             </div>
-
-            <hr />
-
-            <h5 class="mb-3">Personal information</h5>
-            <dl class="admin-detail-list">
-                <dt>National ID</dt><dd>@(Model.NationalId ?? "—")</dd>
-                <dt>Phone</dt><dd>@(Model.PhoneNumber ?? "—")</dd>
-                <dt>Date of birth</dt><dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
-                <dt>Gender</dt><dd>@(Model.Gender ?? "—")</dd>
-                <dt>City</dt><dd>@(Model.CityName ?? "—")</dd>
-                <dt>Province</dt><dd>@(Model.ProvinceName ?? "—")</dd>
-            </dl>
-
-            <hr />
-
-            <h5 class="mb-3">Mentor profile</h5>
-            <dl class="admin-detail-list">
-                <dt>License type</dt><dd>@Model.LicenseType</dd>
-                <dt>Vehicle</dt><dd>@(Model.VehicleType ?? "—")</dd>
-                <dt>Price / session</dt>
-                <dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
-            </dl>
+            <span class="admin-pill admin-pill--@Model.Status.ToLower()">@Model.Status</span>
         </div>
+
+        <hr class="admin-divider" />
+        <p class="admin-section-title">Personal information</p>
+        <dl class="admin-detail-list">
+            <dt>National ID</dt>    <dd>@(Model.NationalId ?? "—")</dd>
+            <dt>Phone</dt>          <dd>@(Model.PhoneNumber ?? "—")</dd>
+            <dt>Date of birth</dt>  <dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
+            <dt>Gender</dt>         <dd>@(Model.Gender ?? "—")</dd>
+            <dt>City</dt>           <dd>@(Model.CityName ?? "—")</dd>
+            <dt>Province</dt>       <dd>@(Model.ProvinceName ?? "—")</dd>
+        </dl>
+
+        <hr class="admin-divider" />
+        <p class="admin-section-title">Mentor profile</p>
+        <dl class="admin-detail-list">
+            <dt>License type</dt>   <dd>@Model.LicenseType</dd>
+            <dt>Vehicle</dt>        <dd>@(Model.VehicleType ?? "—")</dd>
+            <dt>Price / session</dt><dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
+        </dl>
     </div>
 
-    <div class="col-lg-5">
-        <div class="admin-card admin-card--padded mb-3">
-            <h5 class="mb-3"><i class="fa-solid fa-file-shield"></i> Certification</h5>
+    @* ── Sidebar ──────────────────────────────────────────── *@
+    <div class="app-layout__sidebar">
+        <div class="admin-card admin-card--padded">
+            <p class="admin-section-title">
+                <i class="fa-solid fa-file-shield" aria-hidden="true"></i> Certification
+            </p>
             @if (Model.HasCertificationFile)
             {
-                <p class="text-muted small mb-3">
-                    Uploaded @(Model.CertificationUploadedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")
-                </p>
+                <p class="cert-upload-info">Uploaded @(Model.CertificationUploadedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")</p>
                 <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Download"
                    asp-route-id="@Model.ApplicationId"
                    asp-route-fileName="@Model.CertificationFileName"
-                   class="btn admin-btn-primary w-100">
-                    <i class="fa-solid fa-download"></i>
+                   class="admin-btn-primary" style="width:100%;justify-content:center;text-decoration:none">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
                     Download @(Model.CertificationFileName ?? "certification")
                 </a>
-                <p class="text-muted small mt-2 mb-0">
-                    Files are served from a secure admin-only endpoint; trainees and mentors cannot access this URL.
-                </p>
+                <p class="cert-secure-note">Files are served from a secure admin-only endpoint.</p>
             }
             else
             {
-                <div class="alert alert-warning mb-0">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                <div class="no-cert-banner">
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     No certification file has been uploaded for this application.
                 </div>
             }
         </div>
 
-        @if (Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase))
+        @if (isPending)
         {
             <div class="admin-card admin-card--padded">
-                <h5 class="mb-3">Decision</h5>
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn admin-btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
-                        <i class="fa-solid fa-check"></i> Approve application
+                <p class="admin-section-title">Decision</p>
+                <div class="decision-stack">
+                    <button type="button" class="admin-btn-success"
+                            onclick="document.getElementById('approveDialog').showModal()">
+                        <i class="fa-solid fa-check" aria-hidden="true"></i> Approve application
                     </button>
-                    <button type="button" class="btn admin-btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal">
-                        <i class="fa-solid fa-xmark"></i> Reject application
+                    <button type="button" class="admin-btn-danger"
+                            onclick="document.getElementById('rejectDialog').showModal()">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i> Reject application
                     </button>
-                    <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="btn btn-outline-secondary">
-                        <i class="fa-solid fa-arrow-left"></i> Back to applications
+                    <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="admin-back-link">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to applications
                     </a>
                 </div>
             </div>
@@ -87,69 +88,73 @@
         else
         {
             <div class="admin-card admin-card--padded">
-                <p class="text-muted mb-3">This application has already been reviewed.</p>
-                <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="btn btn-outline-secondary w-100">
-                    <i class="fa-solid fa-arrow-left"></i> Back to applications
+                <p class="already-reviewed">This application has already been reviewed.</p>
+                <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index"
+                   class="admin-back-link" style="width:100%;justify-content:center">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to applications
                 </a>
             </div>
         }
     </div>
 </div>
 
-@if (Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase))
+@if (isPending)
 {
-    <!-- Approve Modal -->
-    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Approve" method="post" class="modal-content">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="id" value="@Model.ApplicationId" />
-                <div class="modal-header">
-                    <h5 class="modal-title" id="approveModalLabel">Approve application?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>You're about to approve <strong>@Model.FullName</strong> as a mentor.</p>
-                    <p class="text-muted small mb-0">
-                        They'll be notified by email and will become visible to trainees immediately.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn admin-btn-success">
-                        <i class="fa-solid fa-check"></i> Approve
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <dialog id="approveDialog" class="admin-dialog" aria-labelledby="approve-title">
+        <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Approve" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.ApplicationId" />
+            <div class="admin-dialog__header">
+                <span class="admin-dialog__title" id="approve-title">Approve application?</span>
+                <button type="button" class="admin-dialog__close"
+                        onclick="document.getElementById('approveDialog').close()" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="admin-dialog__body">
+                <p>You're about to approve <strong>@Model.FullName</strong> as a mentor.</p>
+                <p style="color:var(--muted)">They'll be notified by email and will become visible to trainees immediately.</p>
+            </div>
+            <div class="admin-dialog__footer">
+                <button type="button" class="admin-dialog__cancel"
+                        onclick="document.getElementById('approveDialog').close()">Cancel</button>
+                <button type="submit" class="admin-btn-success">
+                    <i class="fa-solid fa-check" aria-hidden="true"></i> Approve
+                </button>
+            </div>
+        </form>
+    </dialog>
 
-    <!-- Reject Modal -->
-    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Reject" method="post" class="modal-content">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="ApplicationId" value="@Model.ApplicationId" />
-                <div class="modal-header">
-                    <h5 class="modal-title" id="rejectModalLabel">Reject application?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <dialog id="rejectDialog" class="admin-dialog" aria-labelledby="reject-title">
+        <form asp-area="Admin" asp-controller="MentorApplications" asp-action="Reject" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ApplicationId" value="@Model.ApplicationId" />
+            <div class="admin-dialog__header">
+                <span class="admin-dialog__title" id="reject-title">Reject application?</span>
+                <button type="button" class="admin-dialog__close"
+                        onclick="document.getElementById('rejectDialog').close()" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="admin-dialog__body">
+                <p>You're about to reject <strong>@Model.FullName</strong>.</p>
+                <div class="reject-field">
+                    <label for="rejectReason">
+                        Rejection reason <span style="color:var(--danger)" aria-hidden="true">*</span>
+                    </label>
+                    <textarea id="rejectReason" name="Reason" rows="4" maxlength="500"
+                              required aria-required="true"
+                              placeholder="Explain why this application is being rejected (sent to applicant)."></textarea>
+                    <small>Required, 5–500 characters. This message is included in the email to the applicant.</small>
                 </div>
-                <div class="modal-body">
-                    <p>You're about to reject <strong>@Model.FullName</strong>.</p>
-                    <div class="mb-3">
-                        <label for="rejectReason" class="form-label">Rejection reason <span class="text-danger">*</span></label>
-                        <textarea id="rejectReason" name="Reason" rows="4" maxlength="500" required
-                                  class="form-control" placeholder="Explain why this application is being rejected (sent to applicant)."></textarea>
-                        <small class="form-text text-muted">Required, 5–500 characters. This message is included in the email to the applicant.</small>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn admin-btn-danger">
-                        <i class="fa-solid fa-xmark"></i> Reject
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+            </div>
+            <div class="admin-dialog__footer">
+                <button type="button" class="admin-dialog__cancel"
+                        onclick="document.getElementById('rejectDialog').close()">Cancel</button>
+                <button type="submit" class="admin-btn-danger">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i> Reject
+                </button>
+            </div>
+        </form>
+    </dialog>
 }

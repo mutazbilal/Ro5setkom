@@ -1,108 +1,118 @@
+@using Rokhsetak.Areas.Admin.ViewModels.BlockedDates
 @model BlockedDateListViewModel
 @{
-    ViewData["Title"] = "Blocked dates";
+    ViewData["Title"] = "Blocked Dates";
     ViewData["Subtitle"] = "Days on which exam appointments cannot be booked";
+    ViewData["ActiveNav"] = "blocked-dates";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row g-3">
-    <div class="col-lg-4">
-        <div class="admin-card admin-card--padded">
-            <h4 class="mb-3"><i class="fa-solid fa-calendar-xmark"></i> Block a new date</h4>
-            <form asp-area="Admin" asp-controller="BlockedDates" asp-action="Create" method="post">
-                @Html.AntiForgeryToken()
-                <div class="mb-3">
-                    <label asp-for="NewBlockedDate.Date" class="form-label"></label>
-                    <input asp-for="NewBlockedDate.Date" type="date" class="form-control" required />
-                    <span asp-validation-for="NewBlockedDate.Date" class="text-danger small"></span>
+<div class="bd-layout">
+    @* ── Add form ─────────────────────────────────────────── *@
+    <div class="admin-card admin-card--padded">
+        <h3 class="admin-section-title">
+            <i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i> Block a new date
+        </h3>
+        <form asp-area="Admin" asp-controller="BlockedDates" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;flex-direction:column;gap:5px">
+                    <label asp-for="NewBlockedDate.Date" class="admin-detail-list dt" style="font-size:.82rem;font-weight:600;color:var(--ink)"></label>
+                    <input asp-for="NewBlockedDate.Date" type="date" class="admin-input" required aria-required="true" />
+                    <span asp-validation-for="NewBlockedDate.Date" style="color:var(--danger);font-size:.78rem"></span>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="NewBlockedDate.Reason" class="form-label"></label>
-                    <input asp-for="NewBlockedDate.Reason" class="form-control" maxlength="255"
-                           placeholder="e.g. Public holiday, system maintenance" />
-                    <span asp-validation-for="NewBlockedDate.Reason" class="text-danger small"></span>
+                <div style="display:flex;flex-direction:column;gap:5px">
+                    <label asp-for="NewBlockedDate.Reason" style="font-size:.82rem;font-weight:600;color:var(--ink)"></label>
+                    <input asp-for="NewBlockedDate.Reason" class="admin-input" maxlength="255"
+                           placeholder="e.g. Public holiday, system maintenance"
+                           aria-describedby="reason-hint" />
+                    <span asp-validation-for="NewBlockedDate.Reason" style="color:var(--danger);font-size:.78rem"></span>
                 </div>
-                <button type="submit" class="btn admin-btn-primary w-100">
-                    <i class="fa-solid fa-ban"></i> Block date
+                <button type="submit" class="admin-btn-primary">
+                    <i class="fa-solid fa-ban" aria-hidden="true"></i> Block date
                 </button>
-                <p class="text-muted small mt-3 mb-0">
-                    Blocking a date prevents new exam appointments from being scheduled on that day.
-                    Existing will be cancelled.
+                <p id="reason-hint" style="font-size:.78rem;color:var(--muted);margin:0">
+                    Blocking a date prevents new exam appointments. Existing appointments on that day will be cancelled.
                 </p>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
-    <div class="col-lg-8">
-        <div class="admin-card">
-            <div class="admin-card__header admin-card__header--bordered">
-                <h3>Active blocks <span class="admin-count-badge">@Model.Items.Count</span></h3>
-            </div>
-            <div class="table-responsive">
-                <table class="table admin-table align-middle mb-0">
-                    <thead>
+    @* ── List ─────────────────────────────────────────────── *@
+    <div class="admin-card">
+        <div class="admin-card__header admin-card__header--bordered">
+            <h3>Active blocks <span class="admin-count-badge">@Model.Items.Count</span></h3>
+        </div>
+        <div style="overflow-x:auto">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Reason</th>
+                        <th>Created by</th>
+                        <th>Created</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model.Items)
+                    {
                         <tr>
-                            <th>Date</th>
-                            <th>Reason</th>
-                            <th>Created by</th>
-                            <th>Created</th>
-                            <th class="text-end">Actions</th>
+                            <td>
+                                <strong>@b.Date.ToString("dd MMM yyyy")</strong><br />
+                                <small style="color:var(--muted)">@b.Date.ToString("dddd")</small>
+                            </td>
+                            <td style="color:var(--muted)">@(string.IsNullOrWhiteSpace(b.Reason) ? "—" : b.Reason)</td>
+                            <td>@b.CreatedByName</td>
+                            <td style="color:var(--muted);font-size:.82rem">@(b.CreatedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")</td>
+                            <td class="text-end">
+                                <button type="button" class="admin-btn-danger"
+                                        style="padding:7px 14px;font-size:.8rem"
+                                        onclick="document.getElementById('del-@b.BlockedDateId').showModal()"
+                                        aria-label="Remove block for @b.Date.ToString("dd MMM yyyy")">
+                                    <i class="fa-solid fa-trash" aria-hidden="true"></i> Remove
+                                </button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var b in Model.Items)
-                        {
-                            <tr>
-                                <td><strong>@b.Date.ToString("dd MMM yyyy")</strong>
-                                    <br /><small class="text-muted">@b.Date.ToString("dddd")</small>
-                                </td>
-                                <td>@(string.IsNullOrWhiteSpace(b.Reason) ? "—" : b.Reason)</td>
-                                <td>@b.CreatedByName</td>
-                                <td>@(b.CreatedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")</td>
-                                <td class="text-end">
-                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                            data-bs-toggle="modal" data-bs-target="#deleteModal-@b.BlockedDateId">
-                                        <i class="fa-solid fa-trash"></i> Remove
-                                    </button>
-                                </td>
-                            </tr>
-                        }
-                        @if (!Model.Items.Any())
-                        {
-                            <tr><td colspan="5" class="text-center text-muted py-5">No blocked dates configured.</td></tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                    @if (!Model.Items.Any())
+                    {
+                        <tr class="empty-row"><td colspan="5">No blocked dates configured.</td></tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
+@* ── Delete dialogs ────────────────────────────────────────── *@
 @foreach (var b in Model.Items)
 {
-    <div class="modal fade" id="deleteModal-@b.BlockedDateId" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form asp-area="Admin" asp-controller="BlockedDates" asp-action="Delete" method="post" class="modal-content">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="id" value="@b.BlockedDateId" />
-                <div class="modal-header">
-                    <h5 class="modal-title">Remove blocked date?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>You're about to remove the block on <strong>@b.Date.ToString("dd MMM yyyy")</strong>.</p>
-                    <p class="text-muted small mb-0">
-                        Trainees will be able to schedule new exam appointments for this date.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn admin-btn-danger">
-                        <i class="fa-solid fa-trash"></i> Remove
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <dialog id="del-@b.BlockedDateId" class="admin-dialog" aria-labelledby="del-title-@b.BlockedDateId">
+        <form asp-area="Admin" asp-controller="BlockedDates" asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@b.BlockedDateId" />
+            <div class="admin-dialog__header">
+                <span class="admin-dialog__title" id="del-title-@b.BlockedDateId">Remove blocked date?</span>
+                <button type="button" class="admin-dialog__close"
+                        onclick="document.getElementById('del-@b.BlockedDateId').close()"
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="admin-dialog__body">
+                <p>You're about to remove the block on <strong>@b.Date.ToString("dd MMM yyyy")</strong>.</p>
+                <p style="color:var(--muted);font-size:.85rem">Trainees will be able to schedule new exam appointments for this date.</p>
+            </div>
+            <div class="admin-dialog__footer">
+                <button type="button" class="admin-dialog__cancel"
+                        onclick="document.getElementById('del-@b.BlockedDateId').close()">Cancel</button>
+                <button type="submit" class="admin-btn-danger">
+                    <i class="fa-solid fa-trash" aria-hidden="true"></i> Remove
+                </button>
+            </div>
+        </form>
+    </dialog>
 }
 
 @section Scripts {

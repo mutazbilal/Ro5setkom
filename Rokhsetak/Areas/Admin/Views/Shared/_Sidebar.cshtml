@@ -10,45 +10,46 @@
         </div>
     </div>
 
-    <nav class="admin-sidebar__nav">
+    <nav class="admin-sidebar__nav" aria-label="Admin sections">
         <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
-           class="admin-sidebar__link @(active == "dashboard" ? "is-active" : "")">
-            <i class="fa-solid fa-chart-line"></i>
+           class="admin-sidebar__link @(active == "dashboard" ? "is-active" : "")"
+           aria-current="@(active == "dashboard" ? "page" : null)">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
             <span>Dashboard</span>
         </a>
-
         <a asp-area="Admin" asp-controller="Users" asp-action="Index"
-           class="admin-sidebar__link @(active == "users" ? "is-active" : "")">
-            <i class="fa-solid fa-users"></i>
+           class="admin-sidebar__link @(active == "users" ? "is-active" : "")"
+           aria-current="@(active == "users" ? "page" : null)">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
             <span>Users</span>
         </a>
-
         <a asp-area="Admin" asp-controller="Mentors" asp-action="Index"
-           class="admin-sidebar__link @(active == "mentors" ? "is-active" : "")">
-            <i class="fa-solid fa-user-tie"></i>
+           class="admin-sidebar__link @(active == "mentors" ? "is-active" : "")"
+           aria-current="@(active == "mentors" ? "page" : null)">
+            <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
             <span>Mentors</span>
         </a>
-
         <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index"
-           class="admin-sidebar__link @(active == "applications" ? "is-active" : "")">
-            <i class="fa-solid fa-file-signature"></i>
+           class="admin-sidebar__link @(active == "applications" ? "is-active" : "")"
+           aria-current="@(active == "applications" ? "page" : null)">
+            <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
             <span>Applications</span>
         </a>
-
         <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
-           class="admin-sidebar__link @(active == "bookings" ? "is-active" : "")">
-            <i class="fa-solid fa-calendar-check"></i>
+           class="admin-sidebar__link @(active == "bookings" ? "is-active" : "")"
+           aria-current="@(active == "bookings" ? "page" : null)">
+            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
             <span>Bookings &amp; Exams</span>
         </a>
-
         <a asp-area="Admin" asp-controller="BlockedDates" asp-action="Index"
-           class="admin-sidebar__link @(active == "blocked-dates" ? "is-active" : "")">
-            <i class="fa-solid fa-calendar-xmark"></i>
+           class="admin-sidebar__link @(active == "blocked-dates" ? "is-active" : "")"
+           aria-current="@(active == "blocked-dates" ? "page" : null)">
+            <i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i>
             <span>Blocked Dates</span>
         </a>
     </nav>
 
     <div class="admin-sidebar__footer">
-        <small>© @DateTime.UtcNow.Year Rokhsetak</small>
+        <small>&copy; @DateTime.UtcNow.Year Rokhsetak</small>
     </div>
 </aside>

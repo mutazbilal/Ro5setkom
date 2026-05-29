@@ -14,7 +14,7 @@
     if (string.IsNullOrEmpty(initials)) { initials = "?"; }
 
     string fullName = $"{Model.FirstName} {Model.LastName}".Trim();
-    if (string.IsNullOrEmpty(fullName)) { fullName = "Trainee"; }
+    if (string.IsNullOrEmpty(fullName)) { fullName = User.IsInRole("mentor") ? "Mentor" : "Trainee"; }
 }
 
 @section Styles {
@@ -70,12 +70,15 @@
                     <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
                     <span>Edit Profile</span>
                 </a>
-                <a asp-controller="Profile"
-                   asp-action="ChangeLicense"
-                   class="btn-action btn-action--ghost">
-                    <i class="fa-solid fa-id-card-clip" aria-hidden="true"></i>
-                    <span>Change License</span>
-                </a>
+                @if (!User.IsInRole("mentor"))
+                {
+                    <a asp-controller="Profile"
+                       asp-action="ChangeLicense"
+                       class="btn-action btn-action--ghost">
+                        <i class="fa-solid fa-id-card-clip" aria-hidden="true"></i>
+                        <span>Change License</span>
+                    </a>
+                }
             </div>
         </section>
 
