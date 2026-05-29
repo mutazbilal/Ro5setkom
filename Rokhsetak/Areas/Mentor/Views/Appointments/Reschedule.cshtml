@@ -1,82 +1,147 @@
-﻿@model RescheduleViewModel
+@using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@model RescheduleViewModel
 @{
     ViewData["Title"] = "Reschedule Session";
+
+    var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd");
 }
 
-<div class="container py-4" style="max-width: 560px;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/appointments.css" />
+}
 
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index">Appointments</a>
-            </li>
-            <li class="breadcrumb-item active">Reschedule</li>
-        </ol>
-    </nav>
+<div class="appointments-page">
+    <div class="appointments-page__inner">
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-warning fw-semibold">
-            <i class="bi bi-arrow-repeat"></i> Reschedule Session
-        </div>
-        <div class="card-body">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
 
-            <div class="mb-3 p-3 bg-light rounded border">
-                <p class="mb-1 small text-muted">Trainee</p>
-                <p class="mb-1 fw-semibold">@Model.TraineeName</p>
-                <p class="mb-0 small text-muted">
-                    Session type:
-                    <span class="badge bg-info text-dark">@Model.SessionType</span>
+        <!-- ============ Hero ============ -->
+        <section class="appointments-hero appointments-hero--compact" aria-labelledby="reschedule-page-title">
+            <div class="appointments-hero__intro">
+                <span class="appointments-hero__eyebrow">Reschedule Session</span>
+                <h1 id="reschedule-page-title" class="appointments-hero__title">Pick a new time</h1>
+                <p class="appointments-hero__description">
+                    Choose a new date and time. The original booking will be cancelled and replaced.
                 </p>
             </div>
 
-            <form asp-area="Mentor" asp-controller="Appointments" asp-action="Reschedule"
-                  method="post">
+            <div class="appointments-hero__cta">
+                <a asp-area="Mentor"
+                   asp-controller="Appointments"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Appointments</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Form card ============ -->
+        <section class="form-card" aria-labelledby="reschedule-form-title">
+            <h2 id="reschedule-form-title" class="visually-hidden">Reschedule form</h2>
+
+            <!-- Context strip: who + what -->
+            <div class="context-strip">
+                <span class="context-strip__icon" aria-hidden="true">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </span>
+                <div class="context-strip__body">
+                    <span class="context-strip__label">Trainee</span>
+                    <span class="context-strip__name">@Model.TraineeName</span>
+                </div>
+                <div class="context-strip__meta">
+                    <span class="chip @(string.Equals(Model.SessionType, "practical", System.StringComparison.OrdinalIgnoreCase) ? "chip--accent" : "chip--primary")">
+                        <i class="fa-solid @(string.Equals(Model.SessionType, "practical", System.StringComparison.OrdinalIgnoreCase) ? "fa-car" : "fa-book")"
+                           aria-hidden="true"></i>
+                        @Model.SessionType
+                    </span>
+                </div>
+            </div>
+
+            <form asp-area="Mentor"
+                  asp-controller="Appointments"
+                  asp-action="Reschedule"
+                  method="post"
+                  novalidate>
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="BookingId" />
                 <input type="hidden" asp-for="TraineeName" />
                 <input type="hidden" asp-for="SessionType" />
 
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-                <div class="mb-3">
-                    <label asp-for="NewDate" class="form-label fw-semibold">New Date</label>
+                <!-- Date picker — type=date always shows a value, so label sits floated -->
+                <div class="field-floating field-floating--filled">
                     <input asp-for="NewDate"
                            type="date"
-                           class="form-control"
-                           min="@DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd")" />
-                    <span asp-validation-for="NewDate" class="text-danger small"></span>
+                           class="field-floating__input"
+                           min="@minDate"
+                           placeholder=" "
+                           aria-required="true" />
+                    <label asp-for="NewDate" class="field-floating__label">New date</label>
+                    <span asp-validation-for="NewDate" class="field-floating__error"></span>
                 </div>
 
-                <div class="row g-3 mb-4">
-                    <div class="col-6">
-                        <label asp-for="NewStartTime" class="form-label fw-semibold">Start Time</label>
-                        <input asp-for="NewStartTime" type="time" class="form-control" />
-                        <span asp-validation-for="NewStartTime" class="text-danger small"></span>
+                <!-- Time pickers — side by side on wider screens -->
+                <div class="field-grid">
+                    <div class="field-floating field-floating--filled">
+                        <input asp-for="NewStartTime"
+                               type="time"
+                               class="field-floating__input"
+                               placeholder=" "
+                               aria-required="true" />
+                        <label asp-for="NewStartTime" class="field-floating__label">Start time</label>
+                        <span asp-validation-for="NewStartTime" class="field-floating__error"></span>
                     </div>
-                    <div class="col-6">
-                        <label asp-for="NewEndTime" class="form-label fw-semibold">End Time</label>
-                        <input asp-for="NewEndTime" type="time" class="form-control" />
-                        <span asp-validation-for="NewEndTime" class="text-danger small"></span>
+                    <div class="field-floating field-floating--filled">
+                        <input asp-for="NewEndTime"
+                               type="time"
+                               class="field-floating__input"
+                               placeholder=" "
+                               aria-required="true" />
+                        <label asp-for="NewEndTime" class="field-floating__label">End time</label>
+                        <span asp-validation-for="NewEndTime" class="field-floating__error"></span>
                     </div>
                 </div>
 
-                <div class="alert alert-info small mb-4">
-                    <i class="bi bi-info-circle"></i>
-                    The original booking will be cancelled and a new confirmed session will be created.
-                    The trainee will be notified automatically.
+                <div class="callout callout--warning" role="note">
+                    <span class="callout__icon" aria-hidden="true">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </span>
+                    <div class="callout__body">
+                        The original booking will be cancelled and a new confirmed session created in its place.
+                        The trainee will be notified automatically.
+                    </div>
                 </div>
 
-                <div class="d-flex justify-content-between">
-                    <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index"
-                           class="btn btn-outline-secondary">
-                        Cancel
+                <div class="form-actions">
+                    <a asp-area="Mentor"
+                       asp-controller="Appointments"
+                       asp-action="Index"
+                       class="btn-action btn-action--ghost">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        <span>Cancel</span>
                     </a>
-                    <button type="submit" class="btn btn-warning fw-semibold">
-                        <i class="bi bi-arrow-repeat"></i> Confirm Reschedule
+                    <button type="submit" class="btn-action btn-action--gradient">
+                        <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                        <span>Confirm Reschedule</span>
                     </button>
                 </div>
             </form>
-        </div>
+        </section>
+
     </div>
 </div>
 

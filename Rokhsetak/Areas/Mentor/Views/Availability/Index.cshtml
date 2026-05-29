@@ -1,4 +1,4 @@
-﻿@using Rokhsetak.Areas.Mentor.ViewModels.Availability
+@using Rokhsetak.Areas.Mentor.ViewModels.Availability
 @model List<MentorAvailabilityViewModel>
 
 @{
@@ -16,31 +16,35 @@
                 .ToList()
         })
         .ToList();
+
+    string Title(string s) => System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
 }
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet" />
-<link href="~/css/availability.css" rel="stylesheet" />
+@section Styles {
+    <link href="~/css/availability.css" rel="stylesheet" asp-append-version="true" />
+}
 
 <div class="avail-wrap">
 
-    <div class="page-header">
+    <header class="page-header">
+        <p class="page-eyebrow"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Schedule</p>
         <h1>My Availability</h1>
-        <p>Set the time slots when students can book sessions with you.</p>
-    </div>
+        <p class="page-lead">Set the time slots when trainees can book sessions with you. Active slots appear in their booking calendar instantly.</p>
+    </header>
 
     @* ── Flash messages ──────────────────────────────────── *@
     @if (TempData["Error"] != null)
     {
-        <div class="flash flash-error">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            @TempData["Error"]
+        <div class="flash flash-error" role="alert">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span>@TempData["Error"]</span>
         </div>
     }
     @if (TempData["Success"] != null)
     {
-        <div class="flash flash-success">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            @TempData["Success"]
+        <div class="flash flash-success" role="status">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <span>@TempData["Success"]</span>
         </div>
     }
 
@@ -48,7 +52,7 @@
     <div class="week-grid">
         @foreach (var group in grouped)
         {
-            <div class="day-card">
+            <section class="day-card" aria-label="@Title(group.Day) availability">
                 <div class="day-header">
                     <span class="day-name">@group.Day</span>
                     @if (group.Slots.Any())
@@ -71,9 +75,9 @@
                         {
                             <div class="slot-row">
                                 <div class="slot-time">
-                                    @slot.StartTime.ToString(@"hh:mm tt")
-                                    <span>→</span>
-                                    @slot.EndTime.ToString(@"hh:mm tt")
+                                    @slot.StartTime.ToString(@"hh\:mm tt")
+                                    <span aria-hidden="true">→</span>
+                                    @slot.EndTime.ToString(@"hh\:mm tt")
                                 </div>
 
                                 @if (slot.IsActive)
@@ -86,28 +90,26 @@
                                 }
 
                                 <div class="slot-actions">
-                                    @* Edit — opens modal pre-filled *@
-                                    <button type="button" class="btn-edit"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#editModal"
+                                    @* Edit — opens dialog, pre-filled via data-* read by availability.js *@
+                                    <button type="button" class="btn-slot btn-edit js-edit-slot"
                                             data-slot-id="@slot.Id"
                                             data-day="@slot.DayOfWeek.ToLower()"
-                                            data-start="@slot.StartTime.ToString(@"HH:mm")"
-                                            data-end="@slot.EndTime.ToString(@"HH:mm")">
-                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                            data-start="@slot.StartTime.ToString(@"HH\:mm")"
+                                            data-end="@slot.EndTime.ToString(@"HH\:mm")"
+                                            aria-label="Edit slot @slot.StartTime.ToString(@"hh\:mm tt") to @slot.EndTime.ToString(@"hh\:mm tt")">
+                                        <i class="fa-solid fa-pen" aria-hidden="true"></i>
                                         Edit
                                     </button>
 
                                     @* Deactivate — inline POST *@
                                     @if (slot.IsActive)
                                     {
-                                        <form asp-arae="mentor" asp-action="DeactivateSlot" asp-controller="Availability"
-                                              method="post" style="margin:0"
-                                              onsubmit="return confirm('Deactivate this slot?')">
+                                        <form asp-area="Mentor" asp-controller="Availability" asp-action="DeactivateSlot"
+                                              method="post" class="js-confirm" data-confirm="Deactivate this slot?">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="slotId" value="@slot.Id" />
-                                            <button type="submit" class="btn-deactivate">
-                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                                            <button type="submit" class="btn-slot btn-deactivate">
+                                                <i class="fa-solid fa-ban" aria-hidden="true"></i>
                                                 Deactivate
                                             </button>
                                         </form>
@@ -117,127 +119,94 @@
                         }
                     }
                 </div>
-            </div>
+            </section>
         }
     </div>
 
     @* ── Add slot form ───────────────────────────────────── *@
-    <div class="add-card">
-        <h2>+ Add New Slot</h2>
-        <form asp-area="mentor" asp-action="AddSlot" asp-controller="Availability" method="post">
+    <section class="add-card" aria-label="Add new availability slot">
+        <h2><i class="fa-solid fa-plus" aria-hidden="true"></i> Add New Slot</h2>
+        <form asp-area="Mentor" asp-controller="Availability" asp-action="AddSlot" method="post" class="js-time-form">
             @Html.AntiForgeryToken()
             <div class="form-row">
                 <div class="form-group">
                     <label for="add-day">Day</label>
-                    <select name="DayOfWeek" id="add-day" required>
+                    <select name="DayOfWeek" id="add-day" required aria-required="true">
                         <option value="" disabled selected>Select day</option>
                         @foreach (var d in days)
                         {
-                            <option value="@d">@System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(d)</option>
+                            <option value="@d">@Title(d)</option>
                         }
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="add-start">Start time</label>
-                    <input type="time" id="add-start" name="StartTime" required />
+                    <input type="time" id="add-start" name="StartTime" required aria-required="true" />
                 </div>
 
                 <div class="form-group">
                     <label for="add-end">End time</label>
-                    <input type="time" id="add-end" name="EndTime" required />
+                    <input type="time" id="add-end" name="EndTime" required aria-required="true" />
                 </div>
 
-                <button type="submit" class="btn-primary">Add Slot</button>
+                <button type="submit" class="btn-primary">
+                    <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+                    Add Slot
+                </button>
             </div>
         </form>
-    </div>
+    </section>
 
 </div>
 
-@* ── Edit modal ──────────────────────────────────────────── *@
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Slot</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form asp-area="mentor" asp-action="EditSlot" asp-controller="Availability" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="slotId" id="edit-slot-id" />
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="edit-day">Day</label>
-                            <select name="DayOfWeek" id="edit-day" required>
-                                @foreach (var d in days)
-                                {
-                                    <option value="@d">@System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(d)</option>
-                                }
-                            </select>
-                        </div>
+@* ── Edit dialog (native <dialog>, controlled by availability.js) ─────── *@
+<dialog id="editDialog" class="avail-dialog" aria-labelledby="editDialogTitle">
+    <form asp-area="Mentor" asp-controller="Availability" asp-action="EditSlot" method="post" class="js-time-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="slotId" id="edit-slot-id" />
 
-                        <div class="form-group">
-                            <label for="edit-start">Start time</label>
-                            <input type="time" id="edit-start" name="StartTime" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="edit-end">End time</label>
-                            <input type="time" id="edit-end" name="EndTime" required />
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Changes</button>
-                </div>
-            </form>
+        <div class="dialog-header">
+            <h2 id="editDialogTitle"><i class="fa-solid fa-pen" aria-hidden="true"></i> Edit Slot</h2>
+            <button type="button" class="dialog-close js-dialog-close" aria-label="Close dialog">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
         </div>
-    </div>
-</div>
+
+        <div class="dialog-body">
+            <div class="form-stack">
+                <div class="form-group">
+                    <label for="edit-day">Day</label>
+                    <select name="DayOfWeek" id="edit-day" required aria-required="true">
+                        @foreach (var d in days)
+                        {
+                            <option value="@d">@Title(d)</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-start">Start time</label>
+                    <input type="time" id="edit-start" name="StartTime" required aria-required="true" />
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-end">End time</label>
+                    <input type="time" id="edit-end" name="EndTime" required aria-required="true" />
+                </div>
+            </div>
+        </div>
+
+        <div class="dialog-footer">
+            <button type="button" class="btn-ghost js-dialog-close">Cancel</button>
+            <button type="submit" class="btn-primary">
+                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
+                Save Changes
+            </button>
+        </div>
+    </form>
+</dialog>
 
 @section Scripts {
-<script>
-    // Pre-fill edit modal from data attributes on the Edit button
-    document.getElementById('editModal').addEventListener('show.bs.modal', function (e) {
-        var btn = e.relatedTarget;
-        document.getElementById('edit-slot-id').value = btn.dataset.slotId;
-        document.getElementById('edit-start').value   = btn.dataset.start;
-        document.getElementById('edit-end').value     = btn.dataset.end;
-
-        var daySelect = document.getElementById('edit-day');
-        for (var i = 0; i < daySelect.options.length; i++) {
-            if (daySelect.options[i].value === btn.dataset.day) {
-                daySelect.selectedIndex = i;
-                break;
-            }
-        }
-    });
-
-    // Basic client-side validation: end must be after start
-    function validateTimes(startId, endId) {
-        var start = document.getElementById(startId).value;
-        var end   = document.getElementById(endId).value;
-        if (start && end && end <= start) {
-            alert('End time must be after start time.');
-            return false;
-        }
-        return true;
-    }
-
-    document.querySelector('[asp-action="AddSlot"]') // resolved at runtime;
-    // Attach via native form query instead:
-    document.querySelectorAll('form').forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-            var s = form.querySelector('input[name="StartTime"]');
-            var en = form.querySelector('input[name="EndTime"]');
-            if (s && en && en.value && s.value && en.value <= s.value) {
-                e.preventDefault();
-                alert('End time must be after start time.');
-            }
-        });
-    });
-</script>
+    <script src="~/js/availability.js" asp-append-version="true"></script>
 }
