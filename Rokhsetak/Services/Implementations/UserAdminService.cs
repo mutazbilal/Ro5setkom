@@ -10,11 +10,13 @@ public class UserAdminService : IUserAdminService
 {
     private readonly RokhsetakDbContext _context;
     private readonly IAuditService _audit;
+    private readonly INotificationService _notifications;
 
-    public UserAdminService(RokhsetakDbContext context, IAuditService audit)
+    public UserAdminService(RokhsetakDbContext context, IAuditService audit, INotificationService notificationService)
     {
         _context = context;
         _audit = audit;
+        _notifications = notificationService;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -162,15 +164,47 @@ public class UserAdminService : IUserAdminService
     // ─────────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult> DeactivateUserAsync(int adminUserId, int userId)
     {
+        var adminIds = await _context.Admins
+            .Select(a => a.AdminId)
+            .ToListAsync();
+
         if (adminUserId == userId)
             return ServiceResult.Failure("You cannot deactivate your own account.");
+
+        if (adminIds.Contains(userId))
+            return ServiceResult.Failure("You cannot deactivate another admin");
 
         var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         if (user == null) return ServiceResult.Failure("User not found.");
         if (user.IsActive == false) return ServiceResult.Failure("User is already inactive.");
-
+        
         user.IsActive = false;
         user.UpdatedAt = DateTime.UtcNow;
+
+        // change the application status automatically if user is mentor
+        if (user.RoleId == 2)
+        {
+            var mentorApplication = await _context.MentorApplications
+                .Where(ma => ma.MentorId == userId)
+                .FirstOrDefaultAsync();
+
+            mentorApplication.Status = "pending";
+            mentorApplication.ReviewedAt = DateTime.UtcNow;
+            mentorApplication.ReviewedBy = adminUserId;
+
+            var bookings = await _context.Bookings
+            .Where(b => b.MentorId == userId)
+            .ToListAsync();
+
+            foreach (var booking in bookings)
+            {
+                booking.Status = "cancelled";
+                await _notifications.CreateAsync(booking.TraineeId,
+                    "booking cancelled",
+                    $"your booking with {user.FirstName} {user.LastName} have beeing cancelled",
+                    "booking");
+            }
+        }
 
         _audit.Log(adminUserId, "DeactivateUser", "Users", userId.ToString());
         await _context.SaveChangesAsync();

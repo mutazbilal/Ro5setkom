@@ -80,7 +80,7 @@ builder.Services.AddScoped<IExamAdminService, ExamAdminService>();
 builder.Services.AddScoped<IUserAdminService, UserAdminService>();
 builder.Services.AddScoped<IMentorAdminService, MentorAdminService>();
 
-builder.Services.AddSingleton<BlobService>();
+builder.Services.AddScoped<IBlobService, BlobService>();
 // IHttpContextAccessor required by PasswordResetService to build reset URLs
 builder.Services.AddHttpContextAccessor();
 

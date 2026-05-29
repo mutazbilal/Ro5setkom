@@ -28,6 +28,24 @@
                 }
             </select>
         </div>
+        <div class="col-md-3">
+            <label asp-for="Filter.CityId" class="form-label">City</label>
+            <select asp-for="Filter.CityId"
+                    class="form-select"
+                    id="citySelect"
+                    aria-required="true">
+
+                <option value="">-- Select City --</option>
+
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city.CityId"
+                            data-province-id="@city.ProvinceId">
+                        @city.DisplayName
+                    </option>
+                }
+            </select>
+        </div>
         <div class="col-md-2">
             <button type="submit" class="btn admin-btn-primary w-100">
                 <i class="fa-solid fa-magnifying-glass"></i> Filter

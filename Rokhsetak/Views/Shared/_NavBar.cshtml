@@ -159,18 +159,6 @@
                             </a>
                         </li>
                     }
-
-                    else
-                    {
-                        <li>
-                            <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
-                               class="landing-nav__link">
-                                <i class="fa-solid fa-gauge-high"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                    }
-
                 </ul>
             </nav>
 
@@ -294,7 +282,7 @@
         })
         .then(res => {
             if (res.ok) {
-                location.reload(); // للتأكد إن التغيير ظاهر
+                location.reload();
             } else {
                 console.log("Failed to mark as read");
             }

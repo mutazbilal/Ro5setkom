@@ -211,16 +211,36 @@ namespace Rokhsetak.Services.Implementations
                 .ThenBy(a => a.StartTime)
                 .ToListAsync();
 
-            var availableDays = slots
+            var bookings = await _context.Bookings
+                .Where(b => b.MentorId == mentorId)
+                .ToListAsync();
+
+
+            var availableSlots = slots
+                .Where(slot =>
+                    !bookings.Any(b =>
+                        b.Status != "cancelled" &&
+                        b.BookingDate.DayOfWeek.ToString().ToLower() == slot.DayOfWeek.ToLower() &&
+                        b.StartTime < slot.EndTime &&
+                        b.EndTime > slot.StartTime
+                    )
+                )
+                .ToList();
+
+
+            var availableDays = availableSlots
                 .GroupBy(s => s.DayOfWeek)
                 .Select(g => new AvailableDayViewModel
                 {
                     DayOfWeek = g.Key,
-                    Slots = g.Select(s => new SlotViewModel
-                    {
-                        StartTime = s.StartTime,
-                        EndTime = s.EndTime
-                    }).ToList()
+                    Slots = g
+                        .OrderBy(s => s.StartTime)
+                        .Select(s => new SlotViewModel
+                        {
+                            StartTime = s.StartTime,
+                            EndTime = s.EndTime
+                        })
+                        .ToList()
                 })
                 .ToList();
 

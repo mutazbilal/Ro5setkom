@@ -2,11 +2,12 @@
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Sas;
 using Rokhsetak.Services.Common;
+using Rokhsetak.Services.Interfaces;
 using System.ComponentModel;
 
 namespace Rokhsetak.Services.Implementations
 {
-    public class BlobService
+    public class BlobService : IBlobService
     {
         private readonly BlobServiceClient _client;
 
@@ -84,6 +85,36 @@ namespace Rokhsetak.Services.Implementations
             await blob.UploadAsync(content, options);
 
             return ServiceResult<string>.Success(blob.Uri.ToString());
+        }
+        public async Task<ServiceResult<Stream>> DownloadAsync(
+            string containerName,
+            string fileName)
+        {
+            try
+            {
+                var container = _client.GetBlobContainerClient(containerName);
+
+                var blob = container.GetBlobClient(fileName);
+
+                if (!await blob.ExistsAsync())
+                {
+                    return ServiceResult<Stream>.Failure("File not found.");
+                }
+
+                var response = await blob.DownloadStreamingAsync();
+
+                var memoryStream = new MemoryStream();
+
+                await response.Value.Content.CopyToAsync(memoryStream);
+
+                memoryStream.Position = 0;
+
+                return ServiceResult<Stream>.Success(memoryStream);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<Stream>.Failure(ex.Message);
+            }
         }
     }
 }

@@ -83,31 +83,30 @@ public class MentorApplicationsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // GET /Admin/MentorApplications/Download/5  — secure certification download
-    public async Task<IActionResult> Download(int id)
+    // GET /Admin/MentorApplications/Download/5
+    public async Task<IActionResult> Download(int id, string fileName)
     {
+        
         var result = await _mentors.GetCertificationFileAsync(id);
+
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
             return RedirectToAction(nameof(Details), new { id });
         }
 
-        var (physicalPath, fileName) = result.Data;
+        var (stream, resolvedFileName) = result.Data;
 
-        // MIME sniffing via FileExtensionContentTypeProvider
+        // Prefer filename from query if provided from view
+        var finalFileName = string.IsNullOrWhiteSpace(fileName)
+            ? resolvedFileName
+            : Path.GetFileName(fileName);
+
         var provider = new FileExtensionContentTypeProvider();
-        if (!provider.TryGetContentType(physicalPath, out var contentType))
+
+        if (!provider.TryGetContentType(finalFileName, out var contentType))
             contentType = "application/octet-stream";
 
-        var stream = new FileStream(
-            physicalPath,
-            FileMode.Open,
-            FileAccess.Read,
-            FileShare.Read,
-            bufferSize: 4096,
-            useAsync: true);
-
-        return File(stream, contentType, fileName);
+        return File(stream, contentType, finalFileName);
     }
 }

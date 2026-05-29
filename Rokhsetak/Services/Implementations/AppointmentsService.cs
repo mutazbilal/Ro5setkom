@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Security;
 using Rokhsetak.Areas.Mentor.ViewModels.Appointments;
 using Rokhsetak.Areas.Mentor.ViewModels.Trainees;
 using Rokhsetak.Models;
@@ -101,17 +102,9 @@ public class AppointmentService : IAppointmentService
 
         booking.Status = "confirmed";
         booking.UpdatedAt = DateTime.UtcNow;
-
-        //update trainee license mentor id
-        var tl = await _context.TraineeLicenses
-            .FirstOrDefaultAsync(tl => tl.TraineeId == booking.TraineeId);
-        if (tl.MentorId != mentorId)
-        {
-            tl.MentorId = mentorId;
-            tl.UpdatedAt = DateTime.UtcNow;
-        }
-
         await _context.SaveChangesAsync();
+        //update trainee license mentor id
+        await ChangePrimaryMentorAsync(booking.TraineeId, mentorId);
 
         await _notifications.CreateAsync(
             booking.TraineeId,
@@ -492,5 +485,55 @@ public class AppointmentService : IAppointmentService
         };
 
         return ServiceResult<TraineeDetailViewModel>.Success(vm);
+    }
+
+    private async Task ChangePrimaryMentorAsync(int traineeId, int newMentorId)
+    {
+        //update trainee license mentor id
+        var tl = await _context.TraineeLicenses
+            .FirstOrDefaultAsync(tl => tl.TraineeId == traineeId);
+        var oldMentorId = tl.MentorId;
+        
+        if (oldMentorId == null)
+            return;
+        if (oldMentorId != newMentorId)
+        {
+            tl.MentorId = newMentorId;
+            tl.UpdatedAt = DateTime.UtcNow;
+        }
+
+        var traineeName = await _context.Users
+            .Where(t => t.UserId == traineeId)
+            .Select(t => t.FirstName + "" + t.LastName)
+            .FirstOrDefaultAsync();
+
+        var mentorName = await _context.Users
+            .Where(m => m.UserId == oldMentorId)
+            .Select(t => t.FirstName + "" + t.LastName)
+            .FirstOrDefaultAsync();
+
+        var oldBbookings = await _context.Bookings
+            .Where(b => b.MentorId == oldMentorId && b.TraineeId == traineeId)
+            .ToListAsync();
+
+        foreach (var booking in oldBbookings)
+        {
+            booking.Status = "cancelled";
+        }
+        await _context.SaveChangesAsync();
+        var traineeMessage = "all your future bookings with your mentor have been cancelled";
+        if (mentorName != "")
+        {
+            traineeMessage = $"all your future bookings with {mentorName} have been cancelled";
+        }
+
+        var mentorMessage = "all your future bookings with a trainee have been cancelled";
+        if (traineeName != "")
+        {
+            mentorMessage = $"all your future bookings with {traineeName} have been cancelled";
+        }
+
+        await _notifications.CreateAsync(traineeId, "bookings cancelled", traineeMessage, "booking");
+        await _notifications.CreateAsync(oldMentorId.Value, "bookings cancelled", mentorMessage, "booking");
     }
 }
