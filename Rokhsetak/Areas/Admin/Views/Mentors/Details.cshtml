@@ -1,0 +1,161 @@
+@model MentorDetailViewModel
+@{
+    ViewData["Title"] = Model.FullName;
+    ViewData["Subtitle"] = $"Mentor profile · {Model.LicenseType}";
+}
+
+<div class="row g-3">
+    <div class="col-lg-4">
+        <div class="admin-card admin-card--padded">
+            <div class="admin-profile">
+                <div class="admin-profile__avatar">
+                    @{
+                        var initials = string.Join("", Model.FullName.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                                                                       .Take(2)
+                                                                       .Select(s => s[0]));
+                    }
+                    <span>@initials.ToUpper()</span>
+                </div>
+                <h2 class="admin-profile__name">@Model.FullName</h2>
+                <p class="admin-profile__email">@Model.Email</p>
+                <div class="admin-profile__badges">
+                    <span class="admin-pill admin-pill--role">mentor</span>
+                    @if (Model.IsActive)
+                    {
+                        <span class="admin-pill admin-pill--success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="admin-pill admin-pill--danger">Inactive</span>
+                    }
+                    <span class="admin-pill admin-pill--status admin-pill--@Model.ApplicationStatus.ToLower()">
+                        @Model.ApplicationStatus
+                    </span>
+                </div>
+            </div>
+
+            <hr />
+
+            <dl class="admin-detail-list">
+                <dt>Phone</dt><dd>@(Model.PhoneNumber ?? "—")</dd>
+                <dt>License type</dt><dd>@Model.LicenseType</dd>
+                <dt>Vehicle</dt><dd>@(Model.VehicleType ?? "—")</dd>
+                <dt>City</dt><dd>@(Model.CityName ?? "—")</dd>
+                <dt>Price / session</dt>
+                <dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
+                <dt>Joined</dt><dd>@(Model.CreatedAt?.ToString("dd MMM yyyy") ?? "—")</dd>
+            </dl>
+
+            <div class="d-grid gap-2 mt-3">
+                @if (Model.IsActive)
+                {
+                    <button type="button" class="btn admin-btn-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
+                        <i class="fa-solid fa-user-slash"></i> Deactivate mentor
+                    </button>
+                }
+                else
+                {
+                    <form asp-area="Admin" asp-controller="Mentors" asp-action="Reactivate" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.MentorId" />
+                        <button type="submit" class="btn admin-btn-success w-100">
+                            <i class="fa-solid fa-user-check"></i> Reactivate mentor
+                        </button>
+                    </form>
+                }
+                <a asp-area="Admin" asp-controller="Mentors" asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Back to mentors
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="row g-3 mb-3">
+            <div class="col-md-4">
+                <div class="admin-card admin-card--padded admin-stat-card">
+                    <div class="admin-stat-card__label">Average rating</div>
+                    <div class="admin-stat-card__value">
+                        @if (Model.AverageRating > 0)
+                        {
+                            <span><i class="fa-solid fa-star text-warning"></i> @Model.AverageRating.ToString("0.0")</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">—</span>
+                        }
+                    </div>
+                    <div class="admin-stat-card__sub">@Model.TotalRatings rating(s)</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="admin-card admin-card--padded admin-stat-card">
+                    <div class="admin-stat-card__label">Total sessions</div>
+                    <div class="admin-stat-card__value">@Model.TotalSessions</div>
+                    <div class="admin-stat-card__sub">All-time bookings</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="admin-card admin-card--padded admin-stat-card">
+                    <div class="admin-stat-card__label">Completed sessions</div>
+                    <div class="admin-stat-card__value">@Model.CompletedSessions</div>
+                    <div class="admin-stat-card__sub">
+                        @if (Model.TotalSessions > 0)
+                        {
+                            var pct = (Model.CompletedSessions / (double)Model.TotalSessions) * 100;
+                            <text>@pct.ToString("0")% completion</text>
+                        }
+                        else
+                        {
+                            <text>No data</text>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-card admin-card--padded">
+            <h4 class="mb-3">Application history</h4>
+            <p class="text-muted mb-2">
+                This mentor's current application status is
+                <span class="admin-pill admin-pill--status admin-pill--@Model.ApplicationStatus.ToLower()">
+                    @Model.ApplicationStatus
+                </span>.
+            </p>
+            <p class="text-muted small mb-0">
+                To review the original certification submission, find this mentor in the
+                <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index">Applications</a> page
+                (only pending applications are listed there).
+            </p>
+        </div>
+    </div>
+</div>
+
+@if (Model.IsActive)
+{
+    <div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form asp-area="Admin" asp-controller="Mentors" asp-action="Deactivate" method="post" class="modal-content">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.MentorId" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deactivateModalLabel">Deactivate mentor?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You're about to deactivate <strong>@Model.FullName</strong>.</p>
+                    <p class="text-muted small mb-0">
+                        They'll be blocked from signing in and won't appear in trainee mentor searches.
+                        Their existing bookings and ratings are preserved. You can reactivate them at any time.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn admin-btn-danger">
+                        <i class="fa-solid fa-user-slash"></i> Deactivate
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+}

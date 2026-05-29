@@ -37,6 +37,7 @@ namespace Rokhsetak.Controllers
             return View(model.Data);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit()
         {
             if (!User.Identity?.IsAuthenticated ?? false)
@@ -74,6 +75,7 @@ namespace Rokhsetak.Controllers
                 Provinces = provinces
             });
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditProfileViewModel model)

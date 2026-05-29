@@ -22,12 +22,10 @@ namespace Rokhsetak.ViewModels.Profile
         // ─── ADDRESS INFO ────────────────────────────────────────────
 
         [Required(ErrorMessage = "Province is required.")]
-        [StringLength(100, ErrorMessage = "Province cannot exceed 100 characters.")]
         [Display(Name = "Province")]
         public int ProvinceId { get; set; }
 
         [Required(ErrorMessage = "City is required.")]
-        [StringLength(100, ErrorMessage = "City cannot exceed 100 characters.")]
         [Display(Name = "City")]
         public int CityId { get; set; }
 
@@ -57,7 +55,7 @@ namespace Rokhsetak.ViewModels.Profile
         public string NationalId { get; set; }
 
         //UI
-        public List<ProvinceOption?> Provinces { get; set; }
-        public List<CityOption?> Cities { get; set; }
+        public List<ProvinceOption?>? Provinces { get; set; }
+        public List<CityOption?>? Cities { get; set; }
     }
 }
