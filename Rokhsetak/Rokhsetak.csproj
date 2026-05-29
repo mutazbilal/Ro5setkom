@@ -37,20 +37,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\SharedResource.Designer.cs">
+    <Compile Update="Resources\Resources.SharedResourceMarker.ar.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SharedResource.resx</DependentUpon>
+      <DependentUpon>Resources.SharedResourceMarker.ar.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\SharedResource.ar.resx">
+    <EmbeddedResource Update="Resources\Resources.SharedResourceMarker.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SharedResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.SharedResourceMarker.ar.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

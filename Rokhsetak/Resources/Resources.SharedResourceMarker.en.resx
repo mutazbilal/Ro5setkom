@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true" />
+	</xsd:schema>
+
 	<resheader name="resmimetype">
 		<value>text/microsoft-resx</value>
 	</resheader>
@@ -7,30 +12,81 @@
 		<value>2.0</value>
 	</resheader>
 	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
 	</resheader>
 	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
 	</resheader>
 
-	<!-- ========== التنقل / التخطيط ========== -->
+	<data name="Dashboard_Title" xml:space="preserve"><value>My Dashboard</value></data>
+	<data name="Dashboard_Progress" xml:space="preserve"><value>Overall Progress</value></data>
+	<data name="Dashboard_NextMilestone" xml:space="preserve"><value>Next milestone</value></data>
+	<data name="Dashboard_MockExam" xml:space="preserve"><value>Mock Exam</value></data>
+	<data name="Dashboard_StartMockExam" xml:space="preserve"><value>Start Mock Exam</value></data>
+	<data name="Dashboard_RetakeMockExam" xml:space="preserve"><value>Retake Mock Exam</value></data>
+	<data name="Modules_Title" xml:space="preserve"><value>Learning Modules</value></data>
+	<data name="Modules_Locked" xml:space="preserve"><value>Locked</value></data>
+	<data name="Modules_Start" xml:space="preserve"><value>Start Module</value></data>
+	<data name="Modules_Continue" xml:space="preserve"><value>Continue</value></data>
+	<data name="Modules_Review" xml:space="preserve"><value>Review</value></data>
+	<data name="Modules_Complete" xml:space="preserve"><value>Mark as Complete</value></data>
+	<data name="Quiz_TakeQuiz" xml:space="preserve"><value>Take Quiz</value></data>
+	<data name="Quiz_RetakeQuiz" xml:space="preserve"><value>Retake Quiz</value></data>
+	<data name="Quiz_Submit" xml:space="preserve"><value>Submit Quiz</value></data>
+	<data name="Quiz_Passed" xml:space="preserve"><value>Passed!</value></data>
+	<data name="Quiz_Failed" xml:space="preserve"><value>Not Passed Yet</value></data>
+	<data name="Quiz_Score" xml:space="preserve"><value>Score</value></data>
+	<data name="Quiz_Correct" xml:space="preserve"><value>Correct</value></data>
+	<data name="Quiz_Incorrect" xml:space="preserve"><value>Incorrect</value></data>
+	<data name="Status_NotStarted" xml:space="preserve"><value>Not Started</value></data>
+	<data name="Status_InProgress" xml:space="preserve"><value>In Progress</value></data>
+	<data name="Status_Completed" xml:space="preserve"><value>Completed</value></data>
+	<data name="Modules_Title" xml:space="preserve"><value>Learning Modules</value></data>
+	<data name="Modules_Theoretical" xml:space="preserve"><value>Theoretical Modules</value></data>
+	<data name="Modules_Practical" xml:space="preserve"><value>Practical Modules</value></data>
+	<data name="Modules_NoneTheoretical" xml:space="preserve"><value>No theoretical modules available.</value></data>
+	<data name="Modules_NonePractical" xml:space="preserve"><value>No practical modules available yet.</value></data>
+	<data name="Nav_Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+	<data name="MockExam_Title" xml:space="preserve"><value>Mock Exam</value></data>
+	<data name="MockExam_Start" xml:space="preserve"><value>Take Mock Exam</value></data>
+	<data name="MockExam_Retake" xml:space="preserve"><value>Retake</value></data>
+	<data name="MockExam_Completed" xml:space="preserve"><value>Completed ✓ — you can retake anytime.</value></data>
+	<data name="MockExam_UnlockMessage" xml:space="preserve"><value>All theoretical modules complete! Take the mock exam to unlock theory booking.</value></data>
+	<data name="Module_Locked" xml:space="preserve"><value>Locked</value></data>
+	<data name="Module_LockedTooltip" xml:space="preserve"><value>Locked</value></data>
+	<data name="Module_CompletedTooltip" xml:space="preserve"><value>Completed</value></data>
+
+	<data name="Module_Theory" xml:space="preserve"><value>Theory</value></data>
+	<data name="Module_Practical" xml:space="preserve"><value>Practical</value></data>
+
+	<data name="Module_Start" xml:space="preserve"><value>Start Module</value></data>
+	<data name="Module_Continue" xml:space="preserve"><value>Continue</value></data>
+	<data name="Module_Review" xml:space="preserve"><value>Review</value></data>
+
+	<data name="Status_NotStarted" xml:space="preserve"><value>Not Started</value></data>
+	<data name="Status_InProgress" xml:space="preserve"><value>In Progress</value></data>
+	<data name="Status_Completed" xml:space="preserve"><value>Completed</value></data>
+
+	<data name="Quiz_Label" xml:space="preserve"><value>Quiz</value></data>
+	<data name="Quiz_PassedShort" xml:space="preserve"><value>Passed ✓</value></data>
+	<data name="Quiz_NotPassedShort" xml:space="preserve"><value>Not passed</value></data>
 	<data name="Nav_Dashboard" xml:space="preserve">
-    <value>لوحة التحكم</value>
+    <value>Dashboard</value>
   </data>
 	<data name="Nav_Home" xml:space="preserve">
-    <value>الرئيسية</value>
+    <value>Home</value>
   </data>
 	<data name="Nav_Login" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+    <value>Login</value>
   </data>
 	<data name="Nav_Register" xml:space="preserve">
-    <value>إنشاء حساب</value>
+    <value>Create Account</value>
   </data>
 	<data name="Nav_Profile" xml:space="preserve">
-    <value>الملف الشخصي</value>
+    <value>Profile</value>
   </data>
 	<data name="Nav_Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+    <value>Log out</value>
   </data>
 	<data name="Nav_Language_EN" xml:space="preserve">
     <value>EN</value>
@@ -39,1800 +95,1800 @@
     <value>AR</value>
   </data>
 	<data name="Nav_ToggleMenu" xml:space="preserve">
-    <value>تبديل قائمة التنقل</value>
+    <value>Toggle navigation menu</value>
   </data>
 	<data name="Nav_MyBookings" xml:space="preserve">
-    <value>حجوزاتي</value>
+    <value>My Bookings</value>
   </data>
 	<data name="Nav_FindMentor" xml:space="preserve">
-    <value>ابحث عن مرشد</value>
+    <value>Find Mentor</value>
   </data>
 	<data name="Nav_Modules" xml:space="preserve">
-    <value>الوحدات</value>
+    <value>Modules</value>
   </data>
 	<data name="Nav_Exams" xml:space="preserve">
-    <value>الامتحانات</value>
+    <value>Exams</value>
   </data>
 	<data name="Nav_Calendar" xml:space="preserve">
-    <value>التقويم</value>
+    <value>Calendar</value>
   </data>
 
-	<!-- ========== لوحة التحكم (المتدرّب) ========== -->
+	<!-- ========== DASHBOARD ========== -->
 	<data name="Dashboard_Title" xml:space="preserve">
-    <value>لوحة التحكم الخاصة بي</value>
+    <value>My Dashboard</value>
   </data>
 	<data name="Dashboard_Progress" xml:space="preserve">
-    <value>التقدم الكلي</value>
+    <value>Overall Progress</value>
   </data>
 	<data name="Dashboard_NextMilestone" xml:space="preserve">
-    <value>المرحلة التالية</value>
+    <value>Next milestone</value>
   </data>
 	<data name="Dashboard_MockExam" xml:space="preserve">
-    <value>الامتحان التجريبي</value>
+    <value>Mock Exam</value>
   </data>
 	<data name="Dashboard_StartMockExam" xml:space="preserve">
-    <value>بدء الامتحان التجريبي</value>
+    <value>Start Mock Exam</value>
   </data>
 	<data name="Dashboard_RetakeMockExam" xml:space="preserve">
-    <value>إعادة الامتحان التجريبي</value>
+    <value>Retake Mock Exam</value>
   </data>
 	<data name="Dashboard_MyLicenseJourney" xml:space="preserve">
-    <value>رحلة رخصتي</value>
+    <value>My License Journey</value>
   </data>
 	<data name="Dashboard_LicenseType" xml:space="preserve">
-    <value>نوع الرخصة</value>
+    <value>License type</value>
   </data>
 	<data name="Dashboard_CurrentStage" xml:space="preserve">
-    <value>المرحلة الحالية</value>
+    <value>Current stage</value>
   </data>
 	<data name="Dashboard_ViewModules" xml:space="preserve">
-    <value>عرض الوحدات</value>
+    <value>View Modules</value>
   </data>
 	<data name="Dashboard_YourJourney" xml:space="preserve">
-    <value>رحلتك الكاملة من النظري إلى السائق المرخص</value>
+    <value>Your full journey from theory to licensed driver</value>
   </data>
 	<data name="Dashboard_TheoreticalPreparation" xml:space="preserve">
-    <value>التحضير النظري</value>
+    <value>Theoretical Preparation</value>
   </data>
 	<data name="Dashboard_PracticalPreparation" xml:space="preserve">
-    <value>التحضير العملي</value>
+    <value>Practical Preparation</value>
   </data>
 	<data name="Dashboard_Track01" xml:space="preserve">
-    <value>المسار 01</value>
+    <value>Track 01</value>
   </data>
 	<data name="Dashboard_Track02" xml:space="preserve">
-    <value>المسار 02</value>
+    <value>Track 02</value>
   </data>
 	<data name="Dashboard_ModulesComplete" xml:space="preserve">
-    <value>من {0} مكتمل</value>
+    <value>of {0} complete</value>
   </data>
 	<data name="Dashboard_UpNext" xml:space="preserve">
-    <value>التالي</value>
+    <value>up next</value>
   </data>
 	<data name="Dashboard_FinalCheckpoint" xml:space="preserve">
-    <value>نقطة التفتيش النهائية</value>
+    <value>Final Checkpoint</value>
   </data>
 	<data name="Dashboard_MockExam_CompletedMsg" xml:space="preserve">
-    <value>مكتمل — يمكنك الآن حجز اختبار النظرية.</value>
+    <value>Completed — you may now book the theory test.</value>
   </data>
 	<data name="Dashboard_MockExam_ReadyMsg" xml:space="preserve">
-    <value>جاهز! أكمِل هذا الامتحان لفتح حجز اختبار النظرية.</value>
+    <value>Ready! Complete this exam to unlock your theory test booking.</value>
   </data>
 	<data name="Dashboard_MockExam_LockedMsg" xml:space="preserve">
-    <value>يُفتح بعد إكمال جميع الوحدات النظرية.</value>
+    <value>Unlocks once all theoretical modules are completed.</value>
   </data>
 	<data name="Dashboard_Locked" xml:space="preserve">
-    <value>مغلق</value>
+    <value>Locked</value>
   </data>
 
-	<!-- ========== الوحدات ========== -->
+	<!-- ========== MODULES ========== -->
 	<data name="Modules_Title" xml:space="preserve">
-    <value>وحدات التعلم</value>
+    <value>Learning Modules</value>
   </data>
 	<data name="Modules_Theoretical" xml:space="preserve">
-    <value>الوحدات النظرية</value>
+    <value>Theoretical Modules</value>
   </data>
 	<data name="Modules_Practical" xml:space="preserve">
-    <value>الوحدات العملية</value>
+    <value>Practical Modules</value>
   </data>
 	<data name="Modules_NoneTheoretical" xml:space="preserve">
-    <value>لا توجد وحدات نظرية متاحة.</value>
+    <value>No theoretical modules available.</value>
   </data>
 	<data name="Modules_NonePractical" xml:space="preserve">
-    <value>لا توجد وحدات عملية متاحة بعد.</value>
+    <value>No practical modules available yet.</value>
   </data>
 	<data name="Modules_Start" xml:space="preserve">
-    <value>بدء الوحدة</value>
+    <value>Start Module</value>
   </data>
 	<data name="Modules_Continue" xml:space="preserve">
-    <value>متابعة</value>
+    <value>Continue</value>
   </data>
 	<data name="Modules_Complete" xml:space="preserve">
-    <value>وضع علامة مكتمل</value>
+    <value>Mark as Complete</value>
   </data>
 	<data name="Modules_Review" xml:space="preserve">
-    <value>مراجعة</value>
+    <value>Review</value>
   </data>
 	<data name="Modules_Locked" xml:space="preserve">
-    <value>مغلق</value>
+    <value>Locked</value>
   </data>
 	<data name="Module_Detail" xml:space="preserve">
-    <value>تفاصيل الوحدة</value>
+    <value>Module Details</value>
   </data>
 	<data name="Module_VideoLesson" xml:space="preserve">
-    <value>درس فيديو</value>
+    <value>Video Lesson</value>
   </data>
 	<data name="Module_ReadingMaterial" xml:space="preserve">
-    <value>مادة قراءة</value>
+    <value>Reading Material</value>
   </data>
 	<data name="Module_NoContent" xml:space="preserve">
-    <value>لا يوجد محتوى متاح بعد للغة المفضلة لديك.</value>
+    <value>No content available for your language preference yet.</value>
   </data>
 	<data name="Module_MarkComplete" xml:space="preserve">
-    <value>وضع علامة مكتمل</value>
+    <value>Mark as Complete</value>
   </data>
 	<data name="Module_QuizLabel" xml:space="preserve">
-    <value>اختبار</value>
+    <value>Quiz</value>
   </data>
 	<data name="Module_QuizPassedShort" xml:space="preserve">
-    <value>ناجح</value>
+    <value>Passed</value>
   </data>
 	<data name="Module_QuizNotPassedShort" xml:space="preserve">
-    <value>راسب</value>
+    <value>Fail</value>
   </data>
 	<data name="Module_LockedTooltip" xml:space="preserve">
-    <value>أكمل الوحدات السابقة أولاً</value>
+    <value>Complete previous modules first</value>
   </data>
 	<data name="Module_CompletedTooltip" xml:space="preserve">
-    <value>الوحدة مكتملة</value>
+    <value>Module completed</value>
   </data>
 
-	<!-- ========== الاختبارات والامتحان التجريبي ========== -->
+	<!-- ========== QUIZ & MOCK EXAM ========== -->
 	<data name="Quiz_TakeQuiz" xml:space="preserve">
-    <value>أداء الاختبار</value>
+    <value>Take Quiz</value>
   </data>
 	<data name="Quiz_Submit" xml:space="preserve">
-    <value>إرسال الاختبار</value>
+    <value>Submit Quiz</value>
   </data>
 	<data name="Quiz_RetakeQuiz" xml:space="preserve">
-    <value>إعادة الاختبار</value>
+    <value>Retake Quiz</value>
   </data>
 	<data name="Quiz_Score" xml:space="preserve">
-    <value>النتيجة</value>
+    <value>Score</value>
   </data>
 	<data name="Quiz_Passed" xml:space="preserve">
-    <value>نجحت!</value>
+    <value>Passed!</value>
   </data>
 	<data name="Quiz_Failed" xml:space="preserve">
-    <value>لم تنجح بعد</value>
+    <value>Not Passed Yet</value>
   </data>
 	<data name="Quiz_Correct" xml:space="preserve">
-    <value>صحيح</value>
+    <value>Correct</value>
   </data>
 	<data name="Quiz_Incorrect" xml:space="preserve">
-    <value>خطأ</value>
+    <value>Incorrect</value>
   </data>
 	<data name="MockExam_Title" xml:space="preserve">
-    <value>الامتحان التجريبي</value>
+    <value>Mock Exam</value>
   </data>
 	<data name="MockExam_Start" xml:space="preserve">
-    <value>بدء الامتحان التجريبي</value>
+    <value>Take Mock Exam</value>
   </data>
 	<data name="MockExam_Retake" xml:space="preserve">
-    <value>إعادة المحاولة</value>
+    <value>Retake</value>
   </data>
 	<data name="MockExam_Completed" xml:space="preserve">
-    <value>مكتمل ✓ — يمكنك إعادة المحاولة في أي وقت.</value>
+    <value>Completed ✓ — you can retake anytime.</value>
   </data>
 	<data name="MockExam_UnlockMessage" xml:space="preserve">
-    <value>جميع الوحدات النظرية مكتملة! أجرِ الامتحان التجريبي لفتح حجز اختبار النظرية.</value>
+    <value>All theoretical modules complete! Take the mock exam to unlock theory booking.</value>
   </data>
 	<data name="Quiz_PassingScore" xml:space="preserve">
-    <value>درجة النجاح</value>
+    <value>Passing score</value>
   </data>
 	<data name="Quiz_CorrectCount" xml:space="preserve">
-    <value>صحيح</value>
+    <value>Correct</value>
   </data>
 	<data name="Quiz_IncorrectCount" xml:space="preserve">
-    <value>خطأ</value>
+    <value>Incorrect</value>
   </data>
 	<data name="Quiz_TotalQuestions" xml:space="preserve">
-    <value>الإجمالي</value>
+    <value>Total</value>
   </data>
 	<data name="Quiz_QuestionBreakdown" xml:space="preserve">
-    <value>تفصيل الأسئلة</value>
+    <value>Question breakdown</value>
   </data>
 	<data name="Quiz_TimeRemaining" xml:space="preserve">
-    <value>الوقت المتبقي</value>
+    <value>Time remaining</value>
   </data>
 	<data name="Quiz_MockExamRules" xml:space="preserve">
-    <value>قواعد الامتحان التجريبي</value>
+    <value>Mock exam rules</value>
   </data>
 	<data name="Quiz_MockExamDesc" xml:space="preserve">
-    <value>هذه محاكاة بوقت محدد. لديك {0} دقيقة. سيتم إرسال الامتحان تلقائياً عند انتهاء الوقت. النجاح ليس مطلوباً للمتابعة.</value>
+    <value>This is a timed simulation. You have {0} minutes. The exam will submit automatically when time runs out. Passing is not required to proceed.</value>
   </data>
 	<data name="Quiz_SubmitMock" xml:space="preserve">
-    <value>إرسال الامتحان التجريبي</value>
+    <value>Submit Mock Exam</value>
   </data>
 	<data name="Quiz_Result_Passed" xml:space="preserve">
-    <value>نجحت!</value>
+    <value>Passed!</value>
   </data>
 	<data name="Quiz_Result_PassedMessage" xml:space="preserve">
-    <value>عمل ممتاز. لقد اجتزت عتبة النجاح ويمكنك المتابعة بثقة.</value>
+    <value>Excellent work. You’ve cleared the passing threshold and can move on with confidence.</value>
   </data>
 	<data name="Quiz_Result_MockCompleted" xml:space="preserve">
-    <value>اكتمل الامتحان التجريبي</value>
+    <value>Mock exam completed</value>
   </data>
 	<data name="Quiz_Result_MockMessage" xml:space="preserve">
-    <value>النجاح غير مطلوب للتجريبي — تم تأهيلك لحجز اختبار النظرية متى أصبحت جاهزاً.</value>
+    <value>Passing isn’t required for the mock — you’re cleared to book your theory test whenever you’re ready.</value>
   </data>
 	<data name="Quiz_Result_NotPassed" xml:space="preserve">
-    <value>لم تنجح بعد</value>
+    <value>Not passed yet</value>
   </data>
 	<data name="Quiz_Result_RetryMessage" xml:space="preserve">
-    <value>راجع المادة وحاول مرة أخرى — لا يوجد حد للمحاولات.</value>
+    <value>Review the material and try again — there’s no limit on attempts.</value>
   </data>
 	<data name="Quiz_GoToDashboard" xml:space="preserve">
-    <value>اذهب إلى لوحة التحكم</value>
+    <value>Go to dashboard</value>
   </data>
 	<data name="Quiz_YourAnswer" xml:space="preserve">
-    <value>إجابتك</value>
+    <value>Your answer</value>
   </data>
 	<data name="Quiz_CorrectAnswer" xml:space="preserve">
-    <value>الإجابة الصحيحة</value>
+    <value>Correct answer</value>
   </data>
 
-	<!-- ========== الحالات ========== -->
+	<!-- ========== STATUS ========== -->
 	<data name="Status_Completed" xml:space="preserve">
-    <value>مكتمل</value>
+    <value>Completed</value>
   </data>
 	<data name="Status_InProgress" xml:space="preserve">
-    <value>قيد التقدم</value>
+    <value>In Progress</value>
   </data>
 	<data name="Status_NotStarted" xml:space="preserve">
-    <value>لم يبدأ</value>
+    <value>Not Started</value>
   </data>
 
-	<!-- ========== المصادقة / الوصول ========== -->
+	<!-- ========== AUTHENTICATION / ACCESS ========== -->
 	<data name="Auth_AccessDenied_Title" xml:space="preserve">
-    <value>دخول مرفوض</value>
+    <value>Access Denied</value>
   </data>
 	<data name="Auth_AccessDenied_Message" xml:space="preserve">
-    <value>أنت مسجل الدخول ولكن ليس لديك صلاحية لعرض هذه الصفحة. عد إلى لوحة التحكم أو سجل الخروج ثم سجل الدخول بحساب صحيح.</value>
+    <value>You are signed in but do not have permission to view that page. Return to your dashboard or log out and sign in with the correct account.</value>
   </data>
 	<data name="Auth_GoToDashboard" xml:space="preserve">
-    <value>اذهب إلى لوحة التحكم</value>
+    <value>Go to Dashboard</value>
   </data>
 	<data name="Auth_Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+    <value>Log Out</value>
   </data>
 	<data name="Auth_BackToHome" xml:space="preserve">
-    <value>العودة إلى الرئيسية</value>
+    <value>Back to Home</value>
   </data>
 	<data name="Auth_ForgotPassword_Title" xml:space="preserve">
-    <value>إعادة تعيين كلمة المرور</value>
+    <value>Reset Your Password</value>
   </data>
 	<data name="Auth_ForgotPassword_Subtitle" xml:space="preserve">
-    <value>أدخل بريدك الإلكتروني المسجل وسنرسل لك رابط إعادة التعيين.</value>
+    <value>Enter your registered email address and we'll send you a reset link.</value>
   </data>
 	<data name="Auth_ForgotPassword_EmailLabel" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email Address</value>
   </data>
 	<data name="Auth_ForgotPassword_SendLink" xml:space="preserve">
-    <value>إرسال رابط إعادة التعيين</value>
+    <value>Send Reset Link</value>
   </data>
 	<data name="Auth_BackToLogin" xml:space="preserve">
-    <value>العودة إلى تسجيل الدخول</value>
+    <value>Back to Login</value>
   </data>
 	<data name="Auth_CheckEmail_Title" xml:space="preserve">
-    <value>تفقّد بريدك الوارد</value>
+    <value>Check Your Inbox</value>
   </data>
 	<data name="Auth_CheckEmail_Message" xml:space="preserve">
-    <value>إذا كان هناك حساب بهذا البريد، فقد تم إرسال رابط إعادة التعيين. ستنتهي صلاحية الرابط بعد ساعة واحدة.</value>
+    <value>If an account with that email exists, a password reset link has been sent. The link will expire in 1 hour.</value>
   </data>
 	<data name="Auth_ResetPassword_Title" xml:space="preserve">
-    <value>تعيين كلمة مرور جديدة</value>
+    <value>Set New Password</value>
   </data>
 	<data name="Auth_ResetPassword_Subtitle" xml:space="preserve">
-    <value>اختر كلمة مرور جديدة قوية لحسابك.</value>
+    <value>Choose a strong new password for your account.</value>
   </data>
 	<data name="Auth_NewPassword" xml:space="preserve">
-    <value>كلمة المرور الجديدة</value>
+    <value>New Password</value>
   </data>
 	<data name="Auth_ConfirmPassword" xml:space="preserve">
-    <value>تأكيد كلمة المرور الجديدة</value>
+    <value>Confirm New Password</value>
   </data>
 	<data name="Auth_ResetPassword_Button" xml:space="preserve">
-    <value>إعادة تعيين كلمة المرور</value>
+    <value>Reset Password</value>
   </data>
 	<data name="Auth_Login_Title" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+    <value>Login</value>
   </data>
 	<data name="Auth_Login_Subtitle" xml:space="preserve">
-    <value>دخول آمن لحسابك لمواصلة رحلة التدريب.</value>
+    <value>Access your account securely to continue your training journey.</value>
   </data>
 	<data name="Auth_NationalId" xml:space="preserve">
-    <value>الرقم الوطني</value>
+    <value>National ID</value>
   </data>
 	<data name="Auth_Password" xml:space="preserve">
-    <value>كلمة المرور</value>
+    <value>Password</value>
   </data>
 	<data name="Auth_RememberMe" xml:space="preserve">
-    <value>تذكرني</value>
+    <value>Remember Me</value>
   </data>
 	<data name="Auth_ForgotPassword_Link" xml:space="preserve">
-    <value>نسيت كلمة المرور؟</value>
+    <value>Forgot Password?</value>
   </data>
 	<data name="Auth_SignIn" xml:space="preserve">
-    <value>دخول</value>
+    <value>Sign In</value>
   </data>
 	<data name="Auth_NoAccount" xml:space="preserve">
-    <value>ليس لديك حساب؟</value>
+    <value>Don't have an account?</value>
   </data>
 	<data name="Auth_RegisterTrainee" xml:space="preserve">
-    <value>التسجيل كمتدرّب</value>
+    <value>Register as Trainee</value>
   </data>
 	<data name="Auth_RegisterMentor" xml:space="preserve">
-    <value>التسجيل كمرشد</value>
+    <value>Register as Mentor</value>
   </data>
 	<data name="Auth_ShowPassword" xml:space="preserve">
-    <value>إظهار كلمة المرور</value>
+    <value>Show password</value>
   </data>
 
-	<!-- ========== التسجيل ========== -->
+	<!-- ========== REGISTRATION ========== -->
 	<data name="Reg_SelectRole_Title" xml:space="preserve">
-    <value>اختر دورك</value>
+    <value>Choose Your Role</value>
   </data>
 	<data name="Reg_SelectRole_Subtitle" xml:space="preserve">
-    <value>الخطوة 1 من 3: اختر الدور</value>
+    <value>Step 1 of 3: Choose Role</value>
   </data>
 	<data name="Reg_Role_Trainee" xml:space="preserve">
-    <value>متدرّب</value>
+    <value>Trainee</value>
   </data>
 	<data name="Reg_Role_Trainee_Desc" xml:space="preserve">
-    <value>تعلّم القيادة مع مرشدين معتمدين واحصل على رخصتك من خلال برنامج منظم وموجَّه.</value>
+    <value>Learn to drive with certified mentors and earn your license through a guided, structured program.</value>
   </data>
 	<data name="Reg_Role_Mentor" xml:space="preserve">
-    <value>مرشد</value>
+    <value>Mentor</value>
   </data>
 	<data name="Reg_Role_Mentor_Desc" xml:space="preserve">
-    <value>شارك خبرتك، درّب سائقين جدد، وابنِ سمعتك على منصة موثوقة.</value>
+    <value>Share your expertise, train new drivers, and build your reputation on a trusted platform.</value>
   </data>
 	<data name="Reg_ContinueAsTrainee" xml:space="preserve">
-    <value>الاستمرار كمتدرّب</value>
+    <value>Continue as Trainee</value>
   </data>
 	<data name="Reg_ContinueAsMentor" xml:space="preserve">
-    <value>الاستمرار كمرشد</value>
+    <value>Continue as Mentor</value>
   </data>
 	<data name="Reg_AdminApprovalNote" xml:space="preserve">
-    <value>يحتاج الطلب إلى موافقة المشرف</value>
+    <value>Application requires admin approval</value>
   </data>
 	<data name="Reg_NationalIdLookup_Title" xml:space="preserve">
-    <value>التحقق من الهوية</value>
+    <value>Verify Identity</value>
   </data>
 	<data name="Reg_NationalIdLookup_Subtitle" xml:space="preserve">
-    <value>الخطوة 2 من 3: التحقق من الهوية</value>
+    <value>Step 2 of 3: Verify Identity</value>
   </data>
 	<data name="Reg_Consent_DataRetrieval" xml:space="preserve">
-    <value>أوافق على استرداد بيانات رقمي الوطني لغرض التحقق من الهوية فقط. أتفهم أن هذه المعلومات ستُستخدم فقط لتأكيد أهليتي للتسجيل ولن تُخزَّن أو تُشارَك خارج هذه العملية.</value>
+    <value>I consent to the retrieval of my national ID data for identity verification purposes only. I understand that this information will be used solely to confirm my eligibility for registration and will not be stored or shared beyond this process.</value>
   </data>
 	<data name="Reg_LookupID" xml:space="preserve">
-    <value>البحث عن رقمي الوطني</value>
+    <value>Look Up My ID</value>
   </data>
 	<data name="Reg_AlreadyHaveAccount" xml:space="preserve">
-    <value>لديك حساب بالفعل؟</value>
+    <value>Already have an account?</value>
   </data>
 	<data name="Reg_SignIn" xml:space="preserve">
-    <value>تسجيل الدخول</value>
+    <value>Sign In</value>
   </data>
 	<data name="Reg_CompleteProfile_Title" xml:space="preserve">
-    <value>إكمال ملفك الشخصي</value>
+    <value>Complete Your Profile</value>
   </data>
 	<data name="Reg_CompleteProfile_Subtitle" xml:space="preserve">
-    <value>الخطوة 3 من 3: إكمال الملف الشخصي</value>
+    <value>Step 3 of 3: Complete Your Profile</value>
   </data>
 	<data name="Reg_LockedGovFields" xml:space="preserve">
-    <value>التفاصيل التالية مأخوذة من السجلات الحكومية ولا يمكن تعديلها.</value>
+    <value>The following details are sourced from government records and cannot be modified.</value>
   </data>
 	<data name="Reg_Province" xml:space="preserve">
-    <value>المحافظة</value>
+    <value>Province</value>
   </data>
 	<data name="Reg_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Reg_AddressLine1" xml:space="preserve">
-    <value>عنوان السطر 1</value>
+    <value>Address Line 1</value>
   </data>
 	<data name="Reg_AddressLine2" xml:space="preserve">
-    <value>عنوان السطر 2</value>
+    <value>Address Line 2</value>
   </data>
 	<data name="Reg_PostalCode" xml:space="preserve">
-    <value>الرمز البريدي</value>
+    <value>Postal Code</value>
   </data>
 	<data name="Reg_Email" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email Address</value>
   </data>
 	<data name="Reg_PhoneNumber" xml:space="preserve">
-    <value>رقم الهاتف</value>
+    <value>Phone Number</value>
   </data>
 	<data name="Reg_Password" xml:space="preserve">
-    <value>كلمة المرور</value>
+    <value>Password</value>
   </data>
 	<data name="Reg_ConfirmPassword" xml:space="preserve">
-    <value>تأكيد كلمة المرور</value>
+    <value>Confirm Password</value>
   </data>
 	<data name="Reg_LicenseType" xml:space="preserve">
-    <value>نوع الرخصة</value>
+    <value>License Type</value>
   </data>
 	<data name="Reg_SelectLicenseType" xml:space="preserve">
-    <value>-- اختر نوع الرخصة --</value>
+    <value>-- Select License Type --</value>
   </data>
 	<data name="Reg_TrainingCenter" xml:space="preserve">
-    <value>مركز التدريب الرسمي الخاص بك</value>
+    <value>Your official training center</value>
   </data>
 	<data name="Reg_SelectTrainingCenter" xml:space="preserve">
-    <value>-- اختر مركز التدريب --</value>
+    <value>-- Select Training Center --</value>
   </data>
 	<data name="Reg_VehicleType_Optional" xml:space="preserve">
-    <value>نوع المركبة (اختياري)</value>
+    <value>Vehicle Type (optional)</value>
   </data>
 	<data name="Reg_PricePerSession_Optional" xml:space="preserve">
-    <value>السعر لكل حصة — دينار (اختياري)</value>
+    <value>Price Per Session — JOD (optional)</value>
   </data>
 	<data name="Reg_CertificationDocument" xml:space="preserve">
-    <value>وثيقة الترخيص/الشهادة</value>
+    <value>Certification Document</value>
   </data>
 	<data name="Reg_UploadCert" xml:space="preserve">
-    <value>اسحب وأفلت أو انقر للرفع — PDF / JPG / PNG</value>
+    <value>Drag &amp; drop or click to upload — PDF / JPG / PNG</value>
   </data>
 	<data name="Reg_MaxFileSize" xml:space="preserve">
-    <value>الحد الأقصى لحجم الملف: 5 ميجابايت</value>
+    <value>Maximum file size: 5 MB</value>
   </data>
 	<data name="Reg_AcceptTerms" xml:space="preserve">
-    <value>أوافق على الشروط والأحكام وسياسة الخصوصية</value>
+    <value>I accept the Terms &amp; Conditions and Privacy Policy</value>
   </data>
 	<data name="Reg_SubmitApplication" xml:space="preserve">
-    <value>تقديم الطلب</value>
+    <value>Submit Application</value>
   </data>
 	<data name="Reg_CompleteRegistration" xml:space="preserve">
-    <value>إكمال التسجيل</value>
+    <value>Complete Registration</value>
   </data>
 	<data name="Reg_MentorPending_Title" xml:space="preserve">
-    <value>تم تقديم الطلب</value>
+    <value>Application Submitted</value>
   </data>
 	<data name="Reg_MentorPending_Message" xml:space="preserve">
-    <value>تم تقديم طلب الإرشاد الخاص بك وهو قيد المراجعة حالياً. ستتلقى إشعاراً بالبريد الإلكتروني بعد أن يقوم المشرف بمراجعة طلبك.</value>
+    <value>Your mentor application has been submitted and is currently under review. You will receive an email notification once an administrator has reviewed your application.</value>
   </data>
 	<data name="Reg_ReturnHome" xml:space="preserve">
-    <value>العودة إلى الرئيسية</value>
+    <value>Return to Home</value>
   </data>
 	<data name="Reg_Step1" xml:space="preserve">
-    <value>الخطوة 1 من 3: اختر الدور</value>
+    <value>Step 1 of 3: Choose Role</value>
   </data>
 	<data name="Reg_Step2" xml:space="preserve">
-    <value>الخطوة 2 من 3: التحقق من الهوية</value>
+    <value>Step 2 of 3: Verify Identity</value>
   </data>
 	<data name="Reg_Step3" xml:space="preserve">
-    <value>الخطوة 3 من 3: إكمال الملف الشخصي</value>
+    <value>Step 3 of 3: Complete Profile</value>
   </data>
 
-	<!-- ========== الملف الشخصي ========== -->
+	<!-- ========== PROFILE ========== -->
 	<data name="Profile_MyProfile" xml:space="preserve">
-    <value>ملفي الشخصي</value>
+    <value>My Profile</value>
   </data>
 	<data name="Profile_EditProfile" xml:space="preserve">
-    <value>تعديل الملف الشخصي</value>
+    <value>Edit Profile</value>
   </data>
 	<data name="Profile_ChangeLicense" xml:space="preserve">
-    <value>تغيير نوع الرخصة</value>
+    <value>Change License Type</value>
   </data>
 	<data name="Profile_LanguagePreference" xml:space="preserve">
-    <value>تفضيل اللغة</value>
+    <value>Language Preference</value>
   </data>
 	<data name="Profile_BackToProfile" xml:space="preserve">
-    <value>العودة إلى الملف الشخصي</value>
+    <value>Back to Profile</value>
   </data>
 	<data name="Profile_PersonalInfo" xml:space="preserve">
-    <value>المعلومات الشخصية</value>
+    <value>Personal Information</value>
   </data>
 	<data name="Profile_ReadOnly" xml:space="preserve">
-    <value>للقراءة فقط</value>
+    <value>Read-only</value>
   </data>
 	<data name="Profile_SourcedFromGov" xml:space="preserve">
-    <value>التفاصيل التالية مأخوذة من السجلات الحكومية ولا يمكن تعديلها.</value>
+    <value>The following details are sourced from government records and cannot be modified.</value>
   </data>
 	<data name="Profile_FirstName" xml:space="preserve">
-    <value>الاسم الأول</value>
+    <value>First Name</value>
   </data>
 	<data name="Profile_LastName" xml:space="preserve">
-    <value>اسم العائلة</value>
+    <value>Last Name</value>
   </data>
 	<data name="Profile_DateOfBirth" xml:space="preserve">
-    <value>تاريخ الميلاد</value>
+    <value>Date of Birth</value>
   </data>
 	<data name="Profile_Gender" xml:space="preserve">
-    <value>الجنس</value>
+    <value>Gender</value>
   </data>
 	<data name="Profile_NationalId" xml:space="preserve">
-    <value>الرقم الوطني</value>
+    <value>National ID</value>
   </data>
 	<data name="Profile_ContactInfo" xml:space="preserve">
-    <value>معلومات الاتصال</value>
+    <value>Contact Information</value>
   </data>
 	<data name="Profile_Email" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email Address</value>
   </data>
 	<data name="Profile_PhoneNumber" xml:space="preserve">
-    <value>رقم الهاتف</value>
+    <value>Phone Number</value>
   </data>
 	<data name="Profile_Address" xml:space="preserve">
-    <value>العنوان</value>
+    <value>Address</value>
   </data>
 	<data name="Profile_AddressLine1" xml:space="preserve">
-    <value>عنوان السطر 1</value>
+    <value>Address Line 1</value>
   </data>
 	<data name="Profile_AddressLine2" xml:space="preserve">
-    <value>عنوان السطر 2</value>
+    <value>Address Line 2</value>
   </data>
 	<data name="Profile_PostalCode" xml:space="preserve">
-    <value>الرمز البريدي</value>
+    <value>Postal Code</value>
   </data>
 	<data name="Profile_SaveChanges" xml:space="preserve">
-    <value>حفظ التغييرات</value>
+    <value>Save Changes</value>
   </data>
 	<data name="Profile_Cancel" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>Cancel</value>
   </data>
 	<data name="Profile_ChangeLicense_Warning" xml:space="preserve">
-    <value>تنبيه — هذا تغيير جوهري</value>
+    <value>Heads up — this is a major change</value>
   </data>
 	<data name="Profile_ChangeLicense_Desc" xml:space="preserve">
-    <value>تغيير نوع الرخصة سيؤدي إلى إلغاء أي حجوزات مستقبلية مرتبطة برخصتك الحالية. سيتم حفظ تقدمك في الوحدات المؤهلة ونقلها إلى الفئة الجديدة حيثما ينطبق ذلك.</value>
+    <value>Changing your license type will cancel any future bookings tied to your current license. Your eligible module progress will be saved and carried over to the new category where applicable.</value>
   </data>
 	<data name="Profile_NewLicenseType" xml:space="preserve">
-    <value>نوع الرخصة الجديد</value>
+    <value>New License Type</value>
   </data>
 	<data name="Profile_ConfirmChange" xml:space="preserve">
-    <value>أتفهم أن تغيير رخصتي سيلغي الحجوزات المستقبلية وسيعيد تعيين التقدم في الوحدات غير المتوافقة.</value>
+    <value>I understand that changing my license will cancel future bookings and reset incompatible module progress.</value>
   </data>
 	<data name="Profile_SelectLanguage" xml:space="preserve">
-    <value>اختر لغتك</value>
+    <value>Select your language</value>
   </data>
 	<data name="Profile_Language_Arabic" xml:space="preserve">
-    <value>العربية</value>
+    <value>Arabic</value>
   </data>
 	<data name="Profile_Language_English" xml:space="preserve">
-    <value>الإنجليزية</value>
+    <value>English</value>
   </data>
 	<data name="Profile_SavePreference" xml:space="preserve">
-    <value>حفظ التفضيل</value>
+    <value>Save Preference</value>
   </data>
 
-	<!-- ========== الحجوزات (المتدرّب) ========== -->
+	<!-- ========== BOOKING (Trainee) ========== -->
 	<data name="Booking_MyBookings" xml:space="preserve">
-    <value>حجوزاتي</value>
+    <value>My Bookings</value>
   </data>
 	<data name="Booking_FindMentor" xml:space="preserve">
-    <value>ابحث عن مرشد</value>
+    <value>Find a Mentor</value>
   </data>
 	<data name="Booking_BookSession" xml:space="preserve">
-    <value>حجز حصة</value>
+    <value>Book Session</value>
   </data>
 	<data name="Booking_Reschedule" xml:space="preserve">
-    <value>إعادة جدولة</value>
+    <value>Reschedule</value>
   </data>
 	<data name="Booking_Cancel" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>Cancel</value>
   </data>
 	<data name="Booking_Rate" xml:space="preserve">
-    <value>تقييم</value>
+    <value>Rate</value>
   </data>
 	<data name="Booking_Feedback" xml:space="preserve">
-    <value>ملاحظات</value>
+    <value>Feedback</value>
   </data>
 	<data name="Booking_YourPrimaryMentor" xml:space="preserve">
-    <value>مرشدك الأساسي</value>
+    <value>Your Primary Mentor</value>
   </data>
 	<data name="Booking_BookAgain" xml:space="preserve">
-    <value>حجز مرة أخرى</value>
+    <value>Book Again</value>
   </data>
 	<data name="Booking_All" xml:space="preserve">
-    <value>الكل</value>
+    <value>All</value>
   </data>
 	<data name="Booking_Pending" xml:space="preserve">
-    <value>معلق</value>
+    <value>Pending</value>
   </data>
 	<data name="Booking_Confirmed" xml:space="preserve">
-    <value>مؤكد</value>
+    <value>Confirmed</value>
   </data>
 	<data name="Booking_Completed" xml:space="preserve">
-    <value>مكتمل</value>
+    <value>Completed</value>
   </data>
 	<data name="Booking_Cancelled" xml:space="preserve">
-    <value>ملغي</value>
+    <value>Cancelled</value>
   </data>
 	<data name="Booking_SessionType" xml:space="preserve">
-    <value>نوع الحصة</value>
+    <value>Session Type</value>
   </data>
 	<data name="Booking_Theoretical" xml:space="preserve">
-    <value>نظري</value>
+    <value>Theoretical</value>
   </data>
 	<data name="Booking_Practical" xml:space="preserve">
-    <value>عملي</value>
+    <value>Practical</value>
   </data>
 	<data name="Booking_DateAndTime" xml:space="preserve">
-    <value>التاريخ والوقت</value>
+    <value>Date &amp; Time</value>
   </data>
 	<data name="Booking_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Booking_Actions" xml:space="preserve">
-    <value>إجراءات</value>
+    <value>Actions</value>
   </data>
 	<data name="Booking_NoBookings" xml:space="preserve">
-    <value>ليس لديك حجوزات بعد.</value>
+    <value>You have no bookings yet.</value>
   </data>
 	<data name="Booking_BrowseMentors" xml:space="preserve">
-    <value>تصفح المرشدين</value>
+    <value>Browse Mentors</value>
   </data>
 	<data name="Booking_ChangePrimaryMentor" xml:space="preserve">
-    <value>تغيير المرشد الأساسي؟</value>
+    <value>Change Primary Mentor?</value>
   </data>
 	<data name="Booking_ChangePrimaryMsg" xml:space="preserve">
-    <value>أنت على وشك حجز حصة مع {0}. سيصبح هذا مرشدك الأساسي.</value>
+    <value>You are about to book a session with {0}. This will become your primary mentor.</value>
   </data>
 	<data name="Booking_ChangePrimaryConsequences" xml:space="preserve">
-    <value>سيتم إلغاء جميع الحجوزات المستقبلية مع مرشدك الحالي. إذا تمت الموافقة، يصبح المرشد الجديد هو مرشدك الأساسي. ستستخدم الحجوزات المستقبلية المرشد الجديد تلقائياً.</value>
+    <value>All future bookings with your current mentor will be cancelled. If approved, the new mentor becomes your primary mentor. Future bookings will use the new mentor automatically.</value>
   </data>
 	<data name="Booking_ConfirmSwitch" xml:space="preserve">
-    <value>نعم، متابعة</value>
+    <value>Yes, Continue</value>
   </data>
 	<data name="Booking_CancelSwitch" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>Cancel</value>
   </data>
 	<data name="Booking_FilterByCity" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Booking_MinPrice" xml:space="preserve">
-    <value>أقل سعر (دينار)</value>
+    <value>Min Price (JD)</value>
   </data>
 	<data name="Booking_MaxPrice" xml:space="preserve">
-    <value>أعلى سعر (دينار)</value>
+    <value>Max Price (JD)</value>
   </data>
 	<data name="Booking_MinRating" xml:space="preserve">
-    <value>أقل تقييم</value>
+    <value>Min Rating</value>
   </data>
 	<data name="Booking_FilterButton" xml:space="preserve">
-    <value>تصفية</value>
+    <value>Filter</value>
   </data>
 	<data name="Booking_ClearFilter" xml:space="preserve">
-    <value>مسح</value>
+    <value>Clear</value>
   </data>
 	<data name="Booking_NoMentors" xml:space="preserve">
-    <value>لم يتم العثور على مرشدين حسب التصفية.</value>
+    <value>No mentors found for your filters.</value>
   </data>
 	<data name="Booking_MentorStats" xml:space="preserve">
-    <value>تقييمات</value>
+    <value>ratings</value>
   </data>
 	<data name="Booking_Completion" xml:space="preserve">
-    <value>الإنجاز</value>
+    <value>Completion</value>
   </data>
 	<data name="Booking_PerSession" xml:space="preserve">
-    <value>لكل حصة</value>
+    <value>Per session</value>
   </data>
 	<data name="Booking_SelectSessionType" xml:space="preserve">
-    <value>اختر نوع الحصة</value>
+    <value>Choose Session Type</value>
   </data>
 	<data name="Booking_TheoreticalDesc" xml:space="preserve">
-    <value>درس في القاعة / عبر الإنترنت</value>
+    <value>In-class / online lesson</value>
   </data>
 	<data name="Booking_PracticalDesc" xml:space="preserve">
-    <value>درس قيادة على الطريق</value>
+    <value>On-road driving lesson</value>
   </data>
 	<data name="Booking_PickTimeSlot" xml:space="preserve">
-    <value>اختر موعداً زمنياً</value>
+    <value>Pick a Time Slot</value>
   </data>
 	<data name="Booking_NoSlots" xml:space="preserve">
-    <value>لا توجد مواعيد</value>
+    <value>No slots</value>
   </data>
 	<data name="Booking_BookingSummary" xml:space="preserve">
-    <value>ملخص الحجز</value>
+    <value>Booking Summary</value>
   </data>
 	<data name="Booking_Duration" xml:space="preserve">
-    <value>المدة</value>
+    <value>Duration</value>
   </data>
 	<data name="Booking_Total" xml:space="preserve">
-    <value>الإجمالي</value>
+    <value>Total</value>
   </data>
 	<data name="Booking_RequestBooking" xml:space="preserve">
-    <value>طلب حجز</value>
+    <value>Request Booking</value>
   </data>
 	<data name="Booking_ChangeSelection" xml:space="preserve">
-    <value>تغيير الاختيار</value>
+    <value>Change Selection</value>
   </data>
 	<data name="Booking_PendingConfirmation" xml:space="preserve">
-    <value>سيكون الحجز معلقاً حتى يقوم المرشد بتأكيده.</value>
+    <value>Booking will be pending until the mentor confirms it.</value>
   </data>
 	<data name="Booking_RescheduleConfirmMsg" xml:space="preserve">
-    <value>سيتم إلغاء حجزك الأصلي وإنشاء طلب جديد معلق. سيحتاج المرشد إلى تأكيد الموعد الجديد.</value>
+    <value>Your original booking will be cancelled and a new pending request created. The mentor will need to confirm the new time.</value>
   </data>
 	<data name="Booking_ConfirmReschedule" xml:space="preserve">
-    <value>تأكيد إعادة الجدولة</value>
+    <value>Confirm Reschedule</value>
   </data>
 	<data name="Booking_NoSlotSelected" xml:space="preserve">
-    <value>لم يتم اختيار موعد بعد</value>
+    <value>No slot selected yet</value>
   </data>
 	<data name="Booking_RatingModal_Title" xml:space="preserve">
-    <value>قيم حصتك</value>
+    <value>Rate Your Session</value>
   </data>
 	<data name="Booking_Rating_Label" xml:space="preserve">
-    <value>تقييمك</value>
+    <value>Your Rating</value>
   </data>
 	<data name="Booking_ReviewOptional" xml:space="preserve">
-    <value>مراجعة (اختياري)</value>
+    <value>Review (optional)</value>
   </data>
 	<data name="Booking_SubmitRating" xml:space="preserve">
-    <value>إرسال التقييم</value>
+    <value>Submit Rating</value>
   </data>
 	<data name="Booking_FeedbackModal_Title" xml:space="preserve">
-    <value>ملاحظات المرشد</value>
+    <value>Mentor Feedback</value>
   </data>
 	<data name="Booking_FeedbackFrom" xml:space="preserve">
-    <value>من</value>
+    <value>From</value>
   </data>
 	<data name="Booking_Close" xml:space="preserve">
-    <value>إغلاق</value>
+    <value>Close</value>
   </data>
 
-	<!-- ========== الامتحانات (المتدرّب) ========== -->
+	<!-- ========== EXAM (Trainee) ========== -->
 	<data name="Exam_Appointments" xml:space="preserve">
-    <value>مواعيد الامتحانات</value>
+    <value>Exam Appointments</value>
   </data>
 	<data name="Exam_BookTheory" xml:space="preserve">
-    <value>حجز امتحان النظرية</value>
+    <value>Book Theory Exam</value>
   </data>
 	<data name="Exam_BookMedical" xml:space="preserve">
-    <value>حجز الفحص الطبي</value>
+    <value>Book Medical Exam</value>
   </data>
 	<data name="Exam_BookPractical" xml:space="preserve">
-    <value>حجز امتحان القيادة العملي</value>
+    <value>Book Practical Exam</value>
   </data>
 	<data name="Exam_NoAppointments" xml:space="preserve">
-    <value>لا توجد مواعيد امتحان بعد. احجز موعداً عندما تصبح مؤهلاً.</value>
+    <value>No exam appointments yet. Book one when you are eligible.</value>
   </data>
 	<data name="Exam_Result" xml:space="preserve">
-    <value>النتيجة</value>
+    <value>Result</value>
   </data>
 	<data name="Exam_Pass" xml:space="preserve">
-    <value>ناجح</value>
+    <value>Pass</value>
   </data>
 	<data name="Exam_Fail" xml:space="preserve">
-    <value>راسب</value>
+    <value>Fail</value>
   </data>
 	<data name="Exam_Absent" xml:space="preserve">
-    <value>غائب</value>
+    <value>Absent</value>
   </data>
 	<data name="Exam_Score" xml:space="preserve">
-    <value>الدرجة</value>
+    <value>Score</value>
   </data>
 	<data name="Exam_Cancel" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>Cancel</value>
   </data>
 	<data name="Exam_NotEligible" xml:space="preserve">
-    <value>غير مؤهل بعد</value>
+    <value>Not eligible yet</value>
   </data>
 	<data name="Exam_IneligibilityReason" xml:space="preserve">
-    <value>السبب</value>
+    <value>Reason</value>
   </data>
 	<data name="Exam_NoSlots" xml:space="preserve">
-    <value>لا توجد مواعيد امتحان متاحة حالياً في منطقتك. يرجى التحقق لاحقاً.</value>
+    <value>No exam slots are currently available in your area. Please check back later.</value>
   </data>
 	<data name="Exam_SlotsLeft" xml:space="preserve">
-    <value>موعد(مواعيد) متبقي</value>
+    <value>slot(s) left</value>
   </data>
 	<data name="Exam_ConfirmBooking" xml:space="preserve">
-    <value>تأكيد الحجز</value>
+    <value>Confirm Booking</value>
   </data>
 
-	<!-- ========== منطقة المرشد ========== -->
+	<!-- ========== MENTOR AREA ========== -->
 	<data name="Mentor_Dashboard" xml:space="preserve">
-    <value>لوحة تحكم المرشد</value>
+    <value>Mentor Dashboard</value>
   </data>
 	<data name="Mentor_Today" xml:space="preserve">
-    <value>اليوم</value>
+    <value>Today</value>
   </data>
 	<data name="Mentor_AllAppointments" xml:space="preserve">
-    <value>جميع المواعيد</value>
+    <value>All Appointments</value>
   </data>
 	<data name="Mentor_TraineesSummary" xml:space="preserve">
-    <value>ملخص المتدرّبين</value>
+    <value>Trainees Summary</value>
   </data>
 	<data name="Mentor_SetAvailability" xml:space="preserve">
-    <value>تعيين المواعيد المتاحة</value>
+    <value>Set Availability</value>
   </data>
 	<data name="Mentor_PendingRequests" xml:space="preserve">
-    <value>الطلبات المعلقة</value>
+    <value>Pending Requests</value>
   </data>
 	<data name="Mentor_UpcomingConfirmed" xml:space="preserve">
-    <value>المؤكدة القادمة</value>
+    <value>Upcoming Confirmed</value>
   </data>
 	<data name="Mentor_TodaysSessions" xml:space="preserve">
-    <value>حصص اليوم</value>
+    <value>Today's Sessions</value>
   </data>
 	<data name="Mentor_TodaysAvailability" xml:space="preserve">
-    <value>المواعيد المتاحة اليوم</value>
+    <value>Today's Availability Slots</value>
   </data>
 	<data name="Mentor_AvailableSlots" xml:space="preserve">
-    <value>المواعيد المتاحة اليوم</value>
+    <value>Available Slots Today</value>
   </data>
 	<data name="Mentor_Booked" xml:space="preserve">
-    <value>محجوز</value>
+    <value>Booked</value>
   </data>
 	<data name="Mentor_Free" xml:space="preserve">
-    <value>متاح</value>
+    <value>Free</value>
   </data>
 	<data name="Mentor_Confirm" xml:space="preserve">
-    <value>تأكيد</value>
+    <value>Confirm</value>
   </data>
 	<data name="Mentor_MarkDone" xml:space="preserve">
-    <value>وضع علامة منتهي</value>
+    <value>Mark Done</value>
   </data>
 	<data name="Mentor_FeedbackGiven" xml:space="preserve">
-    <value>تم تقديم الملاحظات</value>
+    <value>Feedback Given</value>
   </data>
 	<data name="Mentor_NoSessionsToday" xml:space="preserve">
-    <value>لا توجد حصص مؤكدة اليوم.</value>
+    <value>No confirmed sessions for today.</value>
   </data>
 	<data name="Mentor_NoAvailabilityToday" xml:space="preserve">
-    <value>لم يتم تعيين مواعيد متاحة لليوم.</value>
+    <value>No availability slots set for today.</value>
   </data>
 	<data name="Mentor_NoPending" xml:space="preserve">
-    <value>لا توجد طلبات معلقة.</value>
+    <value>No pending requests.</value>
   </data>
 	<data name="Mentor_ViewAllPending" xml:space="preserve">
-    <value>عرض جميع {0} معلق →</value>
+    <value>View all {0} pending →</value>
   </data>
 	<data name="Mentor_MyAvailability" xml:space="preserve">
-    <value>مواعيدي المتاحة</value>
+    <value>My Availability</value>
   </data>
 	<data name="Mentor_AvailabilityDesc" xml:space="preserve">
-    <value>حدد الفترات الزمنية التي يمكن للطلاب حجز حصص معك خلالها.</value>
+    <value>Set the time slots when students can book sessions with you.</value>
   </data>
 	<data name="Mentor_AddSlot" xml:space="preserve">
-    <value>إضافة موعد جديد</value>
+    <value>Add New Slot</value>
   </data>
 	<data name="Mentor_Day" xml:space="preserve">
-    <value>اليوم</value>
+    <value>Day</value>
   </data>
 	<data name="Mentor_StartTime" xml:space="preserve">
-    <value>وقت البدء</value>
+    <value>Start time</value>
   </data>
 	<data name="Mentor_EndTime" xml:space="preserve">
-    <value>وقت الانتهاء</value>
+    <value>End time</value>
   </data>
 	<data name="Mentor_Active" xml:space="preserve">
-    <value>نشط</value>
+    <value>Active</value>
   </data>
 	<data name="Mentor_Inactive" xml:space="preserve">
-    <value>غير نشط</value>
+    <value>Inactive</value>
   </data>
 	<data name="Mentor_Edit" xml:space="preserve">
-    <value>تعديل</value>
+    <value>Edit</value>
   </data>
 	<data name="Mentor_Deactivate" xml:space="preserve">
-    <value>إلغاء التنشيط</value>
+    <value>Deactivate</value>
   </data>
 	<data name="Mentor_NoSlotsForDay" xml:space="preserve">
-    <value>لا توجد مواعيد متاحة لهذا اليوم.</value>
+    <value>No availability set for this day.</value>
   </data>
 	<data name="Mentor_EditSlot" xml:space="preserve">
-    <value>تعديل الموعد</value>
+    <value>Edit Slot</value>
   </data>
 	<data name="Mentor_SaveChanges" xml:space="preserve">
-    <value>حفظ التغييرات</value>
+    <value>Save Changes</value>
   </data>
 	<data name="Mentor_DeleteSlotConfirm" xml:space="preserve">
-    <value>إلغاء تنشيط هذا الموعد؟</value>
+    <value>Deactivate this slot?</value>
   </data>
 	<data name="Mentor_EndTimeAfterStart" xml:space="preserve">
-    <value>يجب أن يكون وقت الانتهاء بعد وقت البدء.</value>
+    <value>End time must be after start time.</value>
   </data>
 	<data name="Mentor_Feedback_Title" xml:space="preserve">
-    <value>ملاحظات الحصة</value>
+    <value>Session Feedback</value>
   </data>
 	<data name="Mentor_Feedback_Notes" xml:space="preserve">
-    <value>ملاحظات (مرئية للمتدرّب)</value>
+    <value>Feedback Notes (visible to trainee)</value>
   </data>
 	<data name="Mentor_Feedback_Placeholder" xml:space="preserve">
-    <value>صف أداء المتدرّب، ومجالات التحسين، ونقاط القوة...</value>
+    <value>Describe the trainee's performance, areas of improvement, and strengths...</value>
   </data>
 	<data name="Mentor_SubmitFeedback" xml:space="preserve">
-    <value>إرسال الملاحظات</value>
+    <value>Submit Feedback</value>
   </data>
 	<data name="Mentor_TraineeDetail" xml:space="preserve">
-    <value>تفاصيل المتدرّب</value>
+    <value>Trainee Details</value>
   </data>
 	<data name="Mentor_SessionHistory" xml:space="preserve">
-    <value>سجل الحصص</value>
+    <value>Session History</value>
   </data>
 	<data name="Mentor_FeedbackHistory" xml:space="preserve">
-    <value>ملاحظات سابقة</value>
+    <value>Feedback Notes</value>
   </data>
 	<data name="Mentor_OverallProgress" xml:space="preserve">
-    <value>التقدم الكلي</value>
+    <value>Overall Progress</value>
   </data>
 	<data name="Mentor_BackToTrainees" xml:space="preserve">
-    <value>العودة إلى قائمة المتدرّبين</value>
+    <value>Back to Trainees</value>
   </data>
 	<data name="Mentor_SearchTrainees" xml:space="preserve">
-    <value>البحث بالاسم</value>
+    <value>Search by name</value>
   </data>
 	<data name="Mentor_FilterByStatus" xml:space="preserve">
-    <value>تصفية حسب الحالة</value>
+    <value>Filter by status</value>
   </data>
 	<data name="Mentor_AllStatuses" xml:space="preserve">
-    <value>— جميع الحالات —</value>
+    <value>— All statuses —</value>
   </data>
 	<data name="Mentor_ClearFilters" xml:space="preserve">
-    <value>مسح</value>
+    <value>Clear</value>
   </data>
 	<data name="Mentor_NoTraineesFound" xml:space="preserve">
-    <value>لم يتم العثور على متدرّبين مطابقين لبحثك.</value>
+    <value>No trainees found matching your search.</value>
   </data>
 	<data name="Mentor_TotalSessions" xml:space="preserve">
-    <value>إجمالي الحصص</value>
+    <value>Total Sessions</value>
   </data>
 	<data name="Mentor_LastSession" xml:space="preserve">
-    <value>آخر حصة</value>
+    <value>Last Session</value>
   </data>
 	<data name="Mentor_ViewDetails" xml:space="preserve">
-    <value>عرض التفاصيل ←</value>
+    <value>View Details →</value>
   </data>
 
-	<!-- ========== التقويم ========== -->
+	<!-- ========== CALENDAR ========== -->
 	<data name="Calendar_MyCalendar" xml:space="preserve">
-    <value>تقويمي</value>
+    <value>My Calendar</value>
   </data>
 	<data name="Calendar_Legend" xml:space="preserve">
-    <value>مفتاح التقويم</value>
+    <value>Calendar legend</value>
   </data>
 	<data name="Calendar_Confirmed" xml:space="preserve">
-    <value>مؤكد</value>
+    <value>Confirmed</value>
   </data>
 	<data name="Calendar_Pending" xml:space="preserve">
-    <value>معلق</value>
+    <value>Pending</value>
   </data>
 	<data name="Calendar_Exam" xml:space="preserve">
-    <value>امتحان</value>
+    <value>Exam</value>
   </data>
 	<data name="Calendar_Completed" xml:space="preserve">
-    <value>مكتمل</value>
+    <value>Completed</value>
   </data>
 
-	<!-- ========== الأخطاء والتنبيهات ========== -->
+	<!-- ========== ERRORS & ALERTS ========== -->
 	<data name="Error_General" xml:space="preserve">
-    <value>حدث خطأ أثناء معالجة طلبك.</value>
+    <value>An error occurred while processing your request.</value>
   </data>
 	<data name="Error_RequestId" xml:space="preserve">
-    <value>معرف الطلب</value>
+    <value>Request ID</value>
   </data>
 	<data name="Error_DevelopmentMode" xml:space="preserve">
-    <value>وضع التطوير</value>
+    <value>Development Mode</value>
   </data>
 	<data name="Error_SensitiveInfo" xml:space="preserve">
-    <value>لا ينبغي تمكين بيئة التطوير للتطبيقات المنشورة، حيث قد يؤدي ذلك إلى عرض معلومات حساسة من الاستثناءات للمستخدمين النهائيين.</value>
+    <value>The Development environment shouldn't be enabled for deployed applications. It can result in displaying sensitive information from exceptions to end users.</value>
   </data>
 	<data name="Alert_Success" xml:space="preserve">
-    <value>تم بنجاح</value>
+    <value>Success</value>
   </data>
 	<data name="Alert_Error" xml:space="preserve">
-    <value>خطأ</value>
+    <value>Error</value>
   </data>
 	<data name="Alert_Close" xml:space="preserve">
-    <value>إغلاق</value>
+    <value>Close</value>
   </data>
 
-	<!-- ========== عام / مشترك ========== -->
+	<!-- ========== COMMON / GENERIC ========== -->
 	<data name="Common_Back" xml:space="preserve">
-    <value>رجوع</value>
+    <value>Back</value>
   </data>
 	<data name="Common_Cancel" xml:space="preserve">
-    <value>إلغاء</value>
+    <value>Cancel</value>
   </data>
 	<data name="Common_Save" xml:space="preserve">
-    <value>حفظ</value>
+    <value>Save</value>
   </data>
 	<data name="Common_Delete" xml:space="preserve">
-    <value>حذف</value>
+    <value>Delete</value>
   </data>
 	<data name="Common_Edit" xml:space="preserve">
-    <value>تعديل</value>
+    <value>Edit</value>
   </data>
 	<data name="Common_View" xml:space="preserve">
-    <value>عرض</value>
+    <value>View</value>
   </data>
 	<data name="Common_Loading" xml:space="preserve">
-    <value>جار التحميل...</value>
+    <value>Loading...</value>
   </data>
 	<data name="Common_Submit" xml:space="preserve">
-    <value>إرسال</value>
+    <value>Submit</value>
   </data>
 	<data name="Common_Confirm" xml:space="preserve">
-    <value>تأكيد</value>
+    <value>Confirm</value>
   </data>
 	<data name="Common_Continue" xml:space="preserve">
-    <value>متابعة</value>
+    <value>Continue</value>
   </data>
 	<data name="Common_NoData" xml:space="preserve">
-    <value>لا توجد بيانات.</value>
+    <value>No data available.</value>
   </data>
 	<data name="Common_Optional" xml:space="preserve">
-    <value>اختياري</value>
+    <value>optional</value>
   </data>
 	<data name="Common_Required" xml:space="preserve">
-    <value>مطلوب</value>
+    <value>required</value>
   </data>
 	<data name="Common_Of" xml:space="preserve">
-    <value>من</value>
+    <value>of</value>
   </data>
 	<data name="Common_Showing" xml:space="preserve">
-    <value>عرض</value>
+    <value>Showing</value>
   </data>
 	<data name="Common_Search" xml:space="preserve">
-    <value>بحث</value>
+    <value>Search</value>
   </data>
 	<data name="Common_Filter" xml:space="preserve">
-    <value>تصفية</value>
+    <value>Filter</value>
   </data>
 	<data name="Common_Clear" xml:space="preserve">
-    <value>مسح</value>
+    <value>Clear</value>
   </data>
 	<data name="Common_All" xml:space="preserve">
-    <value>الكل</value>
+    <value>All</value>
   </data>
 	<data name="Common_Yes" xml:space="preserve">
-    <value>نعم</value>
+    <value>Yes</value>
   </data>
 	<data name="Common_No" xml:space="preserve">
-    <value>لا</value>
+    <value>No</value>
   </data>
 	<data name="Common_Or" xml:space="preserve">
-    <value>أو</value>
+    <value>or</value>
   </data>
 	<data name="Common_From" xml:space="preserve">
-    <value>من</value>
+    <value>From</value>
   </data>
 	<data name="Common_To" xml:space="preserve">
-    <value>إلى</value>
+    <value>To</value>
   </data>
 	<data name="Common_ViewAll" xml:space="preserve">
-    <value>عرض الكل</value>
+    <value>View all</value>
   </data>
-	<!-- ========== منطقة المشرف ========== -->
+	<!-- ========== ADMIN AREA ========== -->
 
-	<!-- التخطيط والتنقل -->
+	<!-- Layout & Navigation -->
 	<data name="Admin_Layout_Title" xml:space="preserve">
-    <value>بوابة المشرف</value>
+    <value>Admin Portal</value>
   </data>
 	<data name="Admin_Layout_Role" xml:space="preserve">
-    <value>مدير النظام</value>
+    <value>Administrator</value>
   </data>
 	<data name="Admin_Layout_Logout" xml:space="preserve">
-    <value>تسجيل الخروج</value>
+    <value>Log out</value>
   </data>
 	<data name="Admin_Nav_Dashboard" xml:space="preserve">
-    <value>لوحة التحكم</value>
+    <value>Dashboard</value>
   </data>
 	<data name="Admin_Nav_Users" xml:space="preserve">
-    <value>المستخدمون</value>
+    <value>Users</value>
   </data>
 	<data name="Admin_Nav_Mentors" xml:space="preserve">
-    <value>المرشدون</value>
+    <value>Mentors</value>
   </data>
 	<data name="Admin_Nav_Applications" xml:space="preserve">
-    <value>الطلبات</value>
+    <value>Applications</value>
   </data>
 	<data name="Admin_Nav_Bookings" xml:space="preserve">
-    <value>الحجوزات والامتحانات</value>
+    <value>Bookings &amp; Exams</value>
   </data>
 	<data name="Admin_Nav_BlockedDates" xml:space="preserve">
-    <value>التواريخ المحظورة</value>
+    <value>Blocked Dates</value>
   </data>
 	<data name="Admin_Copyright" xml:space="preserve">
-    <value>© {0} رخصة طرق</value>
+    <value>© {0} Rokhsetak</value>
   </data>
 
-	<!-- التواريخ المحظورة -->
+	<!-- Blocked Dates -->
 	<data name="Admin_BlockedDates_Title" xml:space="preserve">
-    <value>التواريخ المحظورة</value>
+    <value>Blocked Dates</value>
   </data>
 	<data name="Admin_BlockedDates_Subtitle" xml:space="preserve">
-    <value>الأيام التي لا يمكن فيها حجز مواعيد الامتحان</value>
+    <value>Days on which exam appointments cannot be booked</value>
   </data>
 	<data name="Admin_BlockedDates_BlockNew" xml:space="preserve">
-    <value>حظر تاريخ جديد</value>
+    <value>Block a new date</value>
   </data>
 	<data name="Admin_BlockedDates_DateLabel" xml:space="preserve">
-    <value>التاريخ</value>
+    <value>Date</value>
   </data>
 	<data name="Admin_BlockedDates_ReasonLabel" xml:space="preserve">
-    <value>السبب</value>
+    <value>Reason</value>
   </data>
 	<data name="Admin_BlockedDates_ReasonPlaceholder" xml:space="preserve">
-    <value>مثال: عطلة رسمية، صيانة النظام</value>
+    <value>e.g. Public holiday, system maintenance</value>
   </data>
 	<data name="Admin_BlockedDates_BlockButton" xml:space="preserve">
-    <value>حظر التاريخ</value>
+    <value>Block date</value>
   </data>
 	<data name="Admin_BlockedDates_WarningMessage" xml:space="preserve">
-    <value>حظر التاريخ يمنع حجوزات امتحانات جديدة. سيتم إلغاء المواعيد الموجودة في ذلك اليوم.</value>
+    <value>Blocking a date prevents new exam appointments. Existing appointments on that day will be cancelled.</value>
   </data>
 	<data name="Admin_BlockedDates_ActiveBlocks" xml:space="preserve">
-    <value>الحجوزات النشطة</value>
+    <value>Active blocks</value>
   </data>
 	<data name="Admin_BlockedDates_Table_Date" xml:space="preserve">
-    <value>التاريخ</value>
+    <value>Date</value>
   </data>
 	<data name="Admin_BlockedDates_Table_Reason" xml:space="preserve">
-    <value>السبب</value>
+    <value>Reason</value>
   </data>
 	<data name="Admin_BlockedDates_Table_CreatedBy" xml:space="preserve">
-    <value>تم الإنشاء بواسطة</value>
+    <value>Created by</value>
   </data>
 	<data name="Admin_BlockedDates_Table_CreatedAt" xml:space="preserve">
-    <value>تاريخ الإنشاء</value>
+    <value>Created</value>
   </data>
 	<data name="Admin_BlockedDates_Table_Actions" xml:space="preserve">
-    <value>إجراءات</value>
+    <value>Actions</value>
   </data>
 	<data name="Admin_BlockedDates_RemoveButton" xml:space="preserve">
-    <value>إزالة</value>
+    <value>Remove</value>
   </data>
 	<data name="Admin_BlockedDates_RemoveDialog_Title" xml:space="preserve">
-    <value>إزالة التاريخ المحظور؟</value>
+    <value>Remove blocked date?</value>
   </data>
 	<data name="Admin_BlockedDates_RemoveDialog_Body" xml:space="preserve">
-    <value>أنت على وشك إزالة الحظر عن &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+    <value>You're about to remove the block on &lt;strong&gt;{0}&lt;/strong&gt;.</value>
   </data>
 	<data name="Admin_BlockedDates_RemoveDialog_Note" xml:space="preserve">
-    <value>سيتمكن المتدربون من جدولة مواعيد امتحان جديدة لهذا التاريخ.</value>
+    <value>Trainees will be able to schedule new exam appointments for this date.</value>
   </data>
 	<data name="Admin_BlockedDates_NoData" xml:space="preserve">
-    <value>لا توجد تواريخ محظورة.</value>
+    <value>No blocked dates configured.</value>
   </data>
 
-	<!-- الحجوزات والامتحانات (مشترك) -->
+	<!-- Bookings & Exams (shared) -->
 	<data name="Admin_Bookings_Title" xml:space="preserve">
-    <value>الحجوزات والامتحانات</value>
+    <value>Bookings &amp; Exams</value>
   </data>
 	<data name="Admin_Bookings_Subtitle" xml:space="preserve">
-    <value>الحصص ومواعيد الامتحانات وحالاتها</value>
+    <value>Sessions, exam appointments and their statuses</value>
   </data>
 	<data name="Admin_Bookings_Tab_Bookings" xml:space="preserve">
-    <value>الحجوزات</value>
+    <value>Bookings</value>
   </data>
 	<data name="Admin_Bookings_Tab_Exams" xml:space="preserve">
-    <value>مواعيد الامتحانات</value>
+    <value>Exam appointments</value>
   </data>
 	<data name="Admin_Bookings_Filter_Search" xml:space="preserve">
-    <value>بحث</value>
+    <value>Search</value>
   </data>
 	<data name="Admin_Bookings_Filter_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Admin_Bookings_Filter_FromDate" xml:space="preserve">
-    <value>من تاريخ</value>
+    <value>From</value>
   </data>
 	<data name="Admin_Bookings_Filter_ToDate" xml:space="preserve">
-    <value>إلى تاريخ</value>
+    <value>To</value>
   </data>
 	<data name="Admin_Bookings_Filter_MentorId" xml:space="preserve">
-    <value>معرف المرشد</value>
+    <value>Mentor ID</value>
   </data>
 	<data name="Admin_Bookings_Filter_TraineeId" xml:space="preserve">
-    <value>معرف المتدرب</value>
+    <value>Trainee ID</value>
   </data>
 	<data name="Admin_Bookings_Filter_Button" xml:space="preserve">
-    <value>بحث</value>
+    <value>Search</value>
   </data>
 	<data name="Admin_Bookings_Table_BookingId" xml:space="preserve">
     <value>#</value>
   </data>
 	<data name="Admin_Bookings_Table_Date" xml:space="preserve">
-    <value>التاريخ</value>
+    <value>Date</value>
   </data>
 	<data name="Admin_Bookings_Table_Time" xml:space="preserve">
-    <value>الوقت</value>
+    <value>Time</value>
   </data>
 	<data name="Admin_Bookings_Table_Trainee" xml:space="preserve">
-    <value>المتدرب</value>
+    <value>Trainee</value>
   </data>
 	<data name="Admin_Bookings_Table_Mentor" xml:space="preserve">
-    <value>المرشد</value>
+    <value>Mentor</value>
   </data>
 	<data name="Admin_Bookings_Table_License" xml:space="preserve">
-    <value>الرخصة</value>
+    <value>License</value>
   </data>
 	<data name="Admin_Bookings_Table_Type" xml:space="preserve">
-    <value>النوع</value>
+    <value>Type</value>
   </data>
 	<data name="Admin_Bookings_Table_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Admin_Bookings_NoData" xml:space="preserve">
-    <value>لا توجد حجوزات تطابق معايير التصفية.</value>
+    <value>No bookings match your filters.</value>
   </data>
 	<data name="Admin_Exams_Filter_SearchPlaceholder" xml:space="preserve">
-    <value>اسم المتدرب أو المركز</value>
+    <value>Trainee or center name</value>
   </data>
 	<data name="Admin_Exams_Filter_StatusOptions_All" xml:space="preserve">
-    <value>الكل</value>
+    <value>All</value>
   </data>
 	<data name="Admin_Exams_Filter_Status_Scheduled" xml:space="preserve">
-    <value>مجدول</value>
+    <value>Scheduled</value>
   </data>
 	<data name="Admin_Exams_Filter_Status_Completed" xml:space="preserve">
-    <value>مكتمل</value>
+    <value>Completed</value>
   </data>
 	<data name="Admin_Exams_Filter_Status_Cancelled" xml:space="preserve">
-    <value>ملغي</value>
+    <value>Cancelled</value>
   </data>
 	<data name="Admin_Exams_Table_Center" xml:space="preserve">
-    <value>المركز</value>
+    <value>Center</value>
   </data>
 	<data name="Admin_Exams_NoData" xml:space="preserve">
-    <value>لا توجد مواعيد امتحان تطابق معايير التصفية.</value>
+    <value>No exam appointments match your filters.</value>
   </data>
 	<data name="Admin_Pagination_Page" xml:space="preserve">
-    <value>صفحة</value>
+    <value>Page</value>
   </data>
 	<data name="Admin_Pagination_Of" xml:space="preserve">
-    <value>من</value>
+    <value>of</value>
   </data>
 
-	<!-- لوحة تحكم المشرف -->
+	<!-- Admin Dashboard -->
 	<data name="Admin_Dashboard_Title" xml:space="preserve">
-    <value>لوحة التحكم</value>
+    <value>Dashboard</value>
   </data>
 	<data name="Admin_Dashboard_Subtitle" xml:space="preserve">
-    <value>نظرة عامة وتحليلات المنصة</value>
+    <value>Platform overview and analytics</value>
   </data>
 	<data name="Admin_Dashboard_Filter_Apply" xml:space="preserve">
-    <value>تطبيق</value>
+    <value>Apply</value>
   </data>
 	<data name="Admin_Dashboard_Filter_Reset" xml:space="preserve">
-    <value>إعادة تعيين</value>
+    <value>Reset</value>
   </data>
 	<data name="Admin_Dashboard_Stat_TotalUsers" xml:space="preserve">
-    <value>إجمالي المستخدمين</value>
+    <value>Total Users</value>
   </data>
 	<data name="Admin_Dashboard_Stat_ActiveTrainees" xml:space="preserve">
-    <value>المتدربون النشطون</value>
+    <value>Active Trainees</value>
   </data>
 	<data name="Admin_Dashboard_Stat_ActiveMentors" xml:space="preserve">
-    <value>المرشدون النشطون</value>
+    <value>Active Mentors</value>
   </data>
 	<data name="Admin_Dashboard_Stat_TotalBookings" xml:space="preserve">
-    <value>إجمالي الحجوزات</value>
+    <value>Total Bookings</value>
   </data>
 	<data name="Admin_Dashboard_Stat_PendingApps" xml:space="preserve">
-    <value>الطلبات المعلقة</value>
+    <value>Pending Apps</value>
   </data>
 	<data name="Admin_Dashboard_Stat_CompletedLicenses" xml:space="preserve">
-    <value>الرخص المكتملة</value>
+    <value>Completed Licenses</value>
   </data>
 	<data name="Admin_Dashboard_Metric_AvgRating" xml:space="preserve">
-    <value>متوسط تقييم المرشدين</value>
+    <value>Avg. Mentor Rating</value>
   </data>
 	<data name="Admin_Dashboard_Metric_CompletionRate" xml:space="preserve">
-    <value>نسبة الإكمال</value>
+    <value>Completion Rate</value>
   </data>
 	<data name="Admin_Dashboard_Metric_AvgTimeToCompletion" xml:space="preserve">
-    <value>متوسط الوقت حتى الإكمال</value>
+    <value>Avg. Time to Completion</value>
   </data>
 	<data name="Admin_Dashboard_Metric_Days" xml:space="preserve">
-    <value>يوم</value>
+    <value>days</value>
   </data>
 	<data name="Admin_Dashboard_Chart_UsersOverTime" xml:space="preserve">
-    <value>المستخدمين بمرور الوقت</value>
+    <value>Users over time</value>
   </data>
 	<data name="Admin_Dashboard_Chart_UsersSubtitle" xml:space="preserve">
-    <value>التسجيلات الجديدة حسب الشهر</value>
+    <value>New registrations by month</value>
   </data>
 	<data name="Admin_Dashboard_Chart_BookingsPerMonth" xml:space="preserve">
-    <value>الحجوزات لكل شهر</value>
+    <value>Bookings per month</value>
   </data>
 	<data name="Admin_Dashboard_Chart_BookingsSubtitle" xml:space="preserve">
-    <value>حجوزات الحصص المنشأة حسب الشهر</value>
+    <value>Session bookings created by month</value>
   </data>
 	<data name="Admin_Dashboard_Chart_PerformanceTitle" xml:space="preserve">
-    <value>توزيع أداء المرشدين</value>
+    <value>Mentor performance distribution</value>
   </data>
 	<data name="Admin_Dashboard_Chart_PerformanceSubtitle" xml:space="preserve">
-    <value>فئات التقييم عبر جميع المرشدين</value>
+    <value>Rating buckets across all mentors</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Title" xml:space="preserve">
-    <value>أفضل المرشدين</value>
+    <value>Top mentors</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Subtitle" xml:space="preserve">
-    <value>مرتب حسب التقييم ثم الحصص المكتملة</value>
+    <value>Sorted by rating then completed sessions</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Table_Mentor" xml:space="preserve">
-    <value>المرشد</value>
+    <value>Mentor</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Table_Rating" xml:space="preserve">
-    <value>التقييم</value>
+    <value>Rating</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Table_Sessions" xml:space="preserve">
-    <value>الحصص</value>
+    <value>Sessions</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Table_Completion" xml:space="preserve">
-    <value>الإكمال</value>
+    <value>Completion</value>
   </data>
 	<data name="Admin_Dashboard_TopMentors_Table_AvgDays" xml:space="preserve">
-    <value>متوسط الأيام</value>
+    <value>Avg. Days</value>
   </data>
 	<data name="Admin_Dashboard_NoMentorData" xml:space="preserve">
-    <value>لا توجد بيانات أداء للمرشدين بعد.</value>
+    <value>No mentor performance data yet.</value>
   </data>
 
-	<!-- طلبات الإرشاد (قائمة) -->
+	<!-- Mentor Applications (list) -->
 	<data name="Admin_Applications_Title" xml:space="preserve">
-    <value>طلبات الإرشاد</value>
+    <value>Mentor Applications</value>
   </data>
 	<data name="Admin_Applications_Subtitle" xml:space="preserve">
-    <value>الطلبات المعلقة في انتظار مراجعتك</value>
+    <value>Pending applications awaiting your review</value>
   </data>
 	<data name="Admin_Applications_PendingHeader" xml:space="preserve">
-    <value>الطلبات المعلقة</value>
+    <value>Pending applications</value>
   </data>
 	<data name="Admin_Applications_Table_Applicant" xml:space="preserve">
-    <value>مقدم الطلب</value>
+    <value>Applicant</value>
   </data>
 	<data name="Admin_Applications_Table_Email" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email</value>
   </data>
 	<data name="Admin_Applications_Table_Phone" xml:space="preserve">
-    <value>الهاتف</value>
+    <value>Phone</value>
   </data>
 	<data name="Admin_Applications_Table_License" xml:space="preserve">
-    <value>الرخصة</value>
+    <value>License</value>
   </data>
 	<data name="Admin_Applications_Table_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_Applications_Table_Submitted" xml:space="preserve">
-    <value>تاريخ التقديم</value>
+    <value>Submitted</value>
   </data>
 	<data name="Admin_Applications_Table_Cert" xml:space="preserve">
-    <value>الشهادة</value>
+    <value>Cert.</value>
   </data>
 	<data name="Admin_Applications_Cert_Uploaded" xml:space="preserve">
-    <value>مرفوع</value>
+    <value>Uploaded</value>
   </data>
 	<data name="Admin_Applications_Cert_Missing" xml:space="preserve">
-    <value>مفقود</value>
+    <value>Missing</value>
   </data>
 	<data name="Admin_Applications_Action_Review" xml:space="preserve">
-    <value>مراجعة</value>
+    <value>Review</value>
   </data>
 	<data name="Admin_Applications_NoData" xml:space="preserve">
-    <value>لا توجد طلبات معلقة حالياً.</value>
+    <value>No pending applications right now.</value>
   </data>
 
-	<!-- طلبات الإرشاد (تفاصيل) -->
+	<!-- Mentor Applications (details) -->
 	<data name="Admin_Application_Detail_Title" xml:space="preserve">
-    <value>طلب · {0}</value>
+    <value>Application · {0}</value>
   </data>
 	<data name="Admin_Application_Detail_Submitted" xml:space="preserve">
-    <value>تم التقديم {0}</value>
+    <value>Submitted {0}</value>
   </data>
 	<data name="Admin_Application_Section_Personal" xml:space="preserve">
-    <value>المعلومات الشخصية</value>
+    <value>Personal information</value>
   </data>
 	<data name="Admin_Application_Field_NationalId" xml:space="preserve">
-    <value>الرقم الوطني</value>
+    <value>National ID</value>
   </data>
 	<data name="Admin_Application_Field_Phone" xml:space="preserve">
-    <value>الهاتف</value>
+    <value>Phone</value>
   </data>
 	<data name="Admin_Application_Field_DateOfBirth" xml:space="preserve">
-    <value>تاريخ الميلاد</value>
+    <value>Date of birth</value>
   </data>
 	<data name="Admin_Application_Field_Gender" xml:space="preserve">
-    <value>الجنس</value>
+    <value>Gender</value>
   </data>
 	<data name="Admin_Application_Field_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_Application_Field_Province" xml:space="preserve">
-    <value>المحافظة</value>
+    <value>Province</value>
   </data>
 	<data name="Admin_Application_Section_MentorProfile" xml:space="preserve">
-    <value>ملف المرشد</value>
+    <value>Mentor profile</value>
   </data>
 	<data name="Admin_Application_Field_LicenseType" xml:space="preserve">
-    <value>نوع الرخصة</value>
+    <value>License type</value>
   </data>
 	<data name="Admin_Application_Field_Vehicle" xml:space="preserve">
-    <value>المركبة</value>
+    <value>Vehicle</value>
   </data>
 	<data name="Admin_Application_Field_PricePerSession" xml:space="preserve">
-    <value>السعر / الحصة</value>
+    <value>Price / session</value>
   </data>
 	<data name="Admin_Application_Currency_JOD" xml:space="preserve">
-    <value>د.أ</value>
+    <value>JOD</value>
   </data>
 	<data name="Admin_Application_Certification_Title" xml:space="preserve">
-    <value>الشهادة</value>
+    <value>Certification</value>
   </data>
 	<data name="Admin_Application_Cert_UploadedAt" xml:space="preserve">
-    <value>تم الرفع {0}</value>
+    <value>Uploaded {0}</value>
   </data>
 	<data name="Admin_Application_Cert_Download" xml:space="preserve">
-    <value>تحميل {0}</value>
+    <value>Download {0}</value>
   </data>
 	<data name="Admin_Application_Cert_SecureNote" xml:space="preserve">
-    <value>يتم تقديم الملفات من نقطة نهاية آمنة للمشرفين فقط.</value>
+    <value>Files are served from a secure admin-only endpoint.</value>
   </data>
 	<data name="Admin_Application_Cert_None" xml:space="preserve">
-    <value>لم يتم رفع ملف شهادة لهذا الطلب.</value>
+    <value>No certification file has been uploaded for this application.</value>
   </data>
 	<data name="Admin_Application_Decision_Title" xml:space="preserve">
-    <value>القرار</value>
+    <value>Decision</value>
   </data>
 	<data name="Admin_Application_Button_Approve" xml:space="preserve">
-    <value>قبول الطلب</value>
+    <value>Approve application</value>
   </data>
 	<data name="Admin_Application_Button_Reject" xml:space="preserve">
-    <value>رفض الطلب</value>
+    <value>Reject application</value>
   </data>
 	<data name="Admin_Application_Button_Back" xml:space="preserve">
-    <value>العودة إلى الطلبات</value>
+    <value>Back to applications</value>
   </data>
 	<data name="Admin_Application_AlreadyReviewed" xml:space="preserve">
-    <value>تمت مراجعة هذا الطلب بالفعل.</value>
+    <value>This application has already been reviewed.</value>
   </data>
 	<data name="Admin_Application_ApproveDialog_Title" xml:space="preserve">
-    <value>قبول الطلب؟</value>
+    <value>Approve application?</value>
   </data>
 	<data name="Admin_Application_ApproveDialog_Body" xml:space="preserve">
-    <value>أنت على وشك قبول &lt;strong&gt;{0}&lt;/strong&gt; كمرشد.</value>
+    <value>You're about to approve &lt;strong&gt;{0}&lt;/strong&gt; as a mentor.</value>
   </data>
 	<data name="Admin_Application_ApproveDialog_Note" xml:space="preserve">
-    <value>سيتم إخطاره عبر البريد الإلكتروني وسيصبح مرئياً للمتدربين فوراً.</value>
+    <value>They'll be notified by email and will become visible to trainees immediately.</value>
   </data>
 	<data name="Admin_Application_ApproveDialog_Confirm" xml:space="preserve">
-    <value>قبول</value>
+    <value>Approve</value>
   </data>
 	<data name="Admin_Application_RejectDialog_Title" xml:space="preserve">
-    <value>رفض الطلب؟</value>
+    <value>Reject application?</value>
   </data>
 	<data name="Admin_Application_RejectDialog_Body" xml:space="preserve">
-    <value>أنت على وشك رفض &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+    <value>You're about to reject &lt;strong&gt;{0}&lt;/strong&gt;.</value>
   </data>
 	<data name="Admin_Application_RejectDialog_ReasonLabel" xml:space="preserve">
-    <value>سبب الرفض</value>
+    <value>Rejection reason</value>
   </data>
 	<data name="Admin_Application_RejectDialog_ReasonPlaceholder" xml:space="preserve">
-    <value>اشرح سبب رفض هذا الطلب (سيُرسل إلى مقدم الطلب).</value>
+    <value>Explain why this application is being rejected (sent to applicant).</value>
   </data>
 	<data name="Admin_Application_RejectDialog_ReasonHint" xml:space="preserve">
-    <value>مطلوب، 5–500 حرف. تُضمّن هذه الرسالة في البريد الإلكتروني لمقدم الطلب.</value>
+    <value>Required, 5–500 characters. This message is included in the email to the applicant.</value>
   </data>
 	<data name="Admin_Application_RejectDialog_Confirm" xml:space="preserve">
-    <value>رفض</value>
+    <value>Reject</value>
   </data>
 
-	<!-- المرشدون (قائمة) -->
+	<!-- Mentors (list) -->
 	<data name="Admin_Mentors_Title" xml:space="preserve">
-    <value>المرشدون</value>
+    <value>Mentors</value>
   </data>
 	<data name="Admin_Mentors_Subtitle" xml:space="preserve">
-    <value>جميع المرشدين المعتمدين على المنصة</value>
+    <value>All approved mentors on the platform</value>
   </data>
 	<data name="Admin_Mentors_Filter_SearchPlaceholder" xml:space="preserve">
-    <value>الاسم، البريد الإلكتروني أو المدينة</value>
+    <value>Name, email or city</value>
   </data>
 	<data name="Admin_Mentors_Filter_Status_Active" xml:space="preserve">
-    <value>نشط</value>
+    <value>Active</value>
   </data>
 	<data name="Admin_Mentors_Filter_Status_Inactive" xml:space="preserve">
-    <value>غير نشط</value>
+    <value>Inactive</value>
   </data>
 	<data name="Admin_Mentors_Filter_LicenseType" xml:space="preserve">
-    <value>نوع الرخصة</value>
+    <value>License type</value>
   </data>
 	<data name="Admin_Mentors_Filter_AllLicenseTypes" xml:space="preserve">
-    <value>جميع أنواع الرخص</value>
+    <value>All license types</value>
   </data>
 	<data name="Admin_Mentors_Filter_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_Mentors_Filter_AllCities" xml:space="preserve">
-    <value>جميع المدن</value>
+    <value>All cities</value>
   </data>
 	<data name="Admin_Mentors_Filter_Button" xml:space="preserve">
-    <value>تصفية</value>
+    <value>Filter</value>
   </data>
 	<data name="Admin_Mentors_Table_Name" xml:space="preserve">
-    <value>الاسم</value>
+    <value>Name</value>
   </data>
 	<data name="Admin_Mentors_Table_Email" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email</value>
   </data>
 	<data name="Admin_Mentors_Table_License" xml:space="preserve">
-    <value>الرخصة</value>
+    <value>License</value>
   </data>
 	<data name="Admin_Mentors_Table_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_Mentors_Table_Rating" xml:space="preserve">
-    <value>التقييم</value>
+    <value>Rating</value>
   </data>
 	<data name="Admin_Mentors_Table_Sessions" xml:space="preserve">
-    <value>الحصص</value>
+    <value>Sessions</value>
   </data>
 	<data name="Admin_Mentors_Table_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Admin_Mentors_Table_Actions" xml:space="preserve">
-    <value>الإجراءات</value>
+    <value>Actions</value>
   </data>
 	<data name="Admin_Mentors_Action_View" xml:space="preserve">
-    <value>عرض</value>
+    <value>View</value>
   </data>
 	<data name="Admin_Mentors_NoData" xml:space="preserve">
-    <value>لا يوجد مرشدون يطابقون معايير التصفية.</value>
+    <value>No mentors match your filters.</value>
   </data>
 
-	<!-- المرشدون (تفاصيل) -->
+	<!-- Mentors (details) -->
 	<data name="Admin_Mentor_Detail_Title" xml:space="preserve">
     <value>{0}</value>
   </data>
 	<data name="Admin_Mentor_Detail_Subtitle" xml:space="preserve">
-    <value>ملف المرشد · {0}</value>
+    <value>Mentor profile · {0}</value>
   </data>
 	<data name="Admin_Mentor_Detail_RoleMentor" xml:space="preserve">
-    <value>مرشد</value>
+    <value>mentor</value>
   </data>
 	<data name="Admin_Mentor_Detail_Status_Active" xml:space="preserve">
-    <value>نشط</value>
+    <value>Active</value>
   </data>
 	<data name="Admin_Mentor_Detail_Status_Inactive" xml:space="preserve">
-    <value>غير نشط</value>
+    <value>Inactive</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_Phone" xml:space="preserve">
-    <value>الهاتف</value>
+    <value>Phone</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_LicenseType" xml:space="preserve">
-    <value>نوع الرخصة</value>
+    <value>License type</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_Vehicle" xml:space="preserve">
-    <value>المركبة</value>
+    <value>Vehicle</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_Price" xml:space="preserve">
-    <value>السعر / الحصة</value>
+    <value>Price / session</value>
   </data>
 	<data name="Admin_Mentor_Detail_Field_Joined" xml:space="preserve">
-    <value>تاريخ الانضمام</value>
+    <value>Joined</value>
   </data>
 	<data name="Admin_Mentor_Detail_Button_Deactivate" xml:space="preserve">
-    <value>إلغاء تنشيط المرشد</value>
+    <value>Deactivate mentor</value>
   </data>
 	<data name="Admin_Mentor_Detail_Button_Reactivate" xml:space="preserve">
-    <value>إعادة تنشيط المرشد</value>
+    <value>Reactivate mentor</value>
   </data>
 	<data name="Admin_Mentor_Detail_Button_Back" xml:space="preserve">
-    <value>العودة إلى المرشدين</value>
+    <value>Back to mentors</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_AvgRating" xml:space="preserve">
-    <value>متوسط التقييم</value>
+    <value>Avg. Rating</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_Ratings" xml:space="preserve">
-    <value>تقييم(ات)</value>
+    <value>rating(s)</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_TotalSessions" xml:space="preserve">
-    <value>إجمالي الحصص</value>
+    <value>Total Sessions</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_AllTimeBookings" xml:space="preserve">
-    <value>إجمالي الحجوزات</value>
+    <value>All-time bookings</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_Completed" xml:space="preserve">
-    <value>مكتمل</value>
+    <value>Completed</value>
   </data>
 	<data name="Admin_Mentor_Detail_Stat_Completion" xml:space="preserve">
-    <value>إكمال</value>
+    <value>completion</value>
   </data>
 	<data name="Admin_Mentor_Detail_ApplicationHistory_Title" xml:space="preserve">
-    <value>سجل الطلب</value>
+    <value>Application history</value>
   </data>
 	<data name="Admin_Mentor_Detail_ApplicationHistory_Text" xml:space="preserve">
-    <value>الحالة الحالية لطلب هذا المرشد هي</value>
+    <value>This mentor's current application status is</value>
   </data>
 	<data name="Admin_Mentor_Detail_ApplicationHistory_Note" xml:space="preserve">
-    <value>لمراجعة ملف الشهادة الأصلي، ابحث عن هذا المرشد في صفحة &lt;a href="{0}"&gt;الطلبات&lt;/a&gt; (تُعرض هناك الطلبات المعلقة فقط).</value>
+    <value>To review the original certification submission, find this mentor in the &lt;a href="{0}"&gt;Applications&lt;/a&gt; page (only pending applications are listed there).</value>
   </data>
 	<data name="Admin_Mentor_DeactivateDialog_Title" xml:space="preserve">
-    <value>إلغاء تنشيط المرشد؟</value>
+    <value>Deactivate mentor?</value>
   </data>
 	<data name="Admin_Mentor_DeactivateDialog_Body" xml:space="preserve">
-    <value>أنت على وشك إلغاء تنشيط &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+    <value>You're about to deactivate &lt;strong&gt;{0}&lt;/strong&gt;.</value>
   </data>
 	<data name="Admin_Mentor_DeactivateDialog_Note" xml:space="preserve">
-    <value>سيتم منعه من تسجيل الدخول ولن يظهر في بحث المتدربين. يتم الاحتفاظ بالحجوزات والتقييمات الحالية. يمكنك إعادة تنشيطه في أي وقت.</value>
+    <value>They'll be blocked from signing in and won't appear in trainee searches. Existing bookings and ratings are preserved. You can reactivate them at any time.</value>
   </data>
 	<data name="Admin_Mentor_DeactivateDialog_Confirm" xml:space="preserve">
-    <value>إلغاء التنشيط</value>
+    <value>Deactivate</value>
   </data>
 
-	<!-- المستخدمون (قائمة) -->
+	<!-- Users (list) -->
 	<data name="Admin_Users_Title" xml:space="preserve">
-    <value>المستخدمون</value>
+    <value>Users</value>
   </data>
 	<data name="Admin_Users_Subtitle" xml:space="preserve">
-    <value>إدارة جميع مستخدمي المنصة</value>
+    <value>Manage all platform users</value>
   </data>
 	<data name="Admin_Users_Filter_SearchPlaceholder" xml:space="preserve">
-    <value>الاسم أو البريد الإلكتروني</value>
+    <value>Name or email</value>
   </data>
 	<data name="Admin_Users_Filter_Role" xml:space="preserve">
-    <value>الدور</value>
+    <value>Role</value>
   </data>
 	<data name="Admin_Users_Filter_AllRoles" xml:space="preserve">
-    <value>جميع الأدوار</value>
+    <value>All roles</value>
   </data>
 	<data name="Admin_Users_Filter_Role_Trainee" xml:space="preserve">
-    <value>متدرب</value>
+    <value>Trainee</value>
   </data>
 	<data name="Admin_Users_Filter_Role_Mentor" xml:space="preserve">
-    <value>مرشد</value>
+    <value>Mentor</value>
   </data>
 	<data name="Admin_Users_Filter_Role_Admin" xml:space="preserve">
-    <value>مشرف</value>
+    <value>Admin</value>
   </data>
 	<data name="Admin_Users_Filter_Status_All" xml:space="preserve">
-    <value>الكل</value>
+    <value>All</value>
   </data>
 	<data name="Admin_Users_Filter_Status_Active" xml:space="preserve">
-    <value>نشط</value>
+    <value>Active</value>
   </data>
 	<data name="Admin_Users_Filter_Status_Inactive" xml:space="preserve">
-    <value>غير نشط</value>
+    <value>Inactive</value>
   </data>
 	<data name="Admin_Users_Filter_Button" xml:space="preserve">
-    <value>تصفية</value>
+    <value>Filter</value>
   </data>
 	<data name="Admin_Users_Table_Name" xml:space="preserve">
-    <value>الاسم</value>
+    <value>Name</value>
   </data>
 	<data name="Admin_Users_Table_Email" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
+    <value>Email</value>
   </data>
 	<data name="Admin_Users_Table_Role" xml:space="preserve">
-    <value>الدور</value>
+    <value>Role</value>
   </data>
 	<data name="Admin_Users_Table_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Admin_Users_Table_Joined" xml:space="preserve">
-    <value>تاريخ الانضمام</value>
+    <value>Joined</value>
   </data>
 	<data name="Admin_Users_Table_Actions" xml:space="preserve">
-    <value>الإجراءات</value>
+    <value>Actions</value>
   </data>
 	<data name="Admin_Users_Action_View" xml:space="preserve">
-    <value>عرض</value>
+    <value>View</value>
   </data>
 	<data name="Admin_Users_NoData" xml:space="preserve">
-    <value>لا يوجد مستخدمون يطابقون معايير التصفية.</value>
+    <value>No users match your filters.</value>
   </data>
 
-	<!-- المستخدمون (تفاصيل) -->
+	<!-- Users (details) -->
 	<data name="Admin_User_Detail_Title" xml:space="preserve">
     <value>{0}</value>
   </data>
 	<data name="Admin_User_Detail_Subtitle" xml:space="preserve">
-    <value>ملف المستخدم · {0}</value>
+    <value>User profile · {0}</value>
   </data>
 	<data name="Admin_User_Detail_Status_Active" xml:space="preserve">
-    <value>نشط</value>
+    <value>Active</value>
   </data>
 	<data name="Admin_User_Detail_Status_Inactive" xml:space="preserve">
-    <value>غير نشط</value>
+    <value>Inactive</value>
   </data>
 	<data name="Admin_User_Detail_Field_Phone" xml:space="preserve">
-    <value>الهاتف</value>
+    <value>Phone</value>
   </data>
 	<data name="Admin_User_Detail_Field_NationalId" xml:space="preserve">
-    <value>الرقم الوطني</value>
+    <value>National ID</value>
   </data>
 	<data name="Admin_User_Detail_Field_DateOfBirth" xml:space="preserve">
-    <value>تاريخ الميلاد</value>
+    <value>Date of birth</value>
   </data>
 	<data name="Admin_User_Detail_Field_Gender" xml:space="preserve">
-    <value>الجنس</value>
+    <value>Gender</value>
   </data>
 	<data name="Admin_User_Detail_Field_City" xml:space="preserve">
-    <value>المدينة</value>
+    <value>City</value>
   </data>
 	<data name="Admin_User_Detail_Field_Province" xml:space="preserve">
-    <value>المحافظة</value>
+    <value>Province</value>
   </data>
 	<data name="Admin_User_Detail_Field_Address" xml:space="preserve">
-    <value>العنوان</value>
+    <value>Address</value>
   </data>
 	<data name="Admin_User_Detail_Field_Joined" xml:space="preserve">
-    <value>تاريخ الانضمام</value>
+    <value>Joined</value>
   </data>
 	<data name="Admin_User_Detail_Button_Deactivate" xml:space="preserve">
-    <value>إلغاء تنشيط المستخدم</value>
+    <value>Deactivate user</value>
   </data>
 	<data name="Admin_User_Detail_Button_Reactivate" xml:space="preserve">
-    <value>إعادة تنشيط المستخدم</value>
+    <value>Reactivate user</value>
   </data>
 	<data name="Admin_User_Detail_Button_Back" xml:space="preserve">
-    <value>العودة إلى المستخدمين</value>
+    <value>Back to users</value>
   </data>
 	<data name="Admin_User_Detail_BookingHistory_Title" xml:space="preserve">
-    <value>سجل الحجوزات</value>
+    <value>Booking history</value>
   </data>
 	<data name="Admin_User_BookingHistory_Table_Date" xml:space="preserve">
-    <value>التاريخ</value>
+    <value>Date</value>
   </data>
 	<data name="Admin_User_BookingHistory_Table_Time" xml:space="preserve">
-    <value>الوقت</value>
+    <value>Time</value>
   </data>
 	<data name="Admin_User_BookingHistory_Table_Counterparty" xml:space="preserve">
-    <value>الطرف الآخر</value>
+    <value>Counterparty</value>
   </data>
 	<data name="Admin_User_BookingHistory_Table_Type" xml:space="preserve">
-    <value>النوع</value>
+    <value>Type</value>
   </data>
 	<data name="Admin_User_BookingHistory_Table_Status" xml:space="preserve">
-    <value>الحالة</value>
+    <value>Status</value>
   </data>
 	<data name="Admin_User_BookingHistory_NoData" xml:space="preserve">
-    <value>لا توجد حجوزات لهذا المستخدم بعد.</value>
+    <value>No bookings for this user yet.</value>
   </data>
 	<data name="Admin_User_DeactivateDialog_Title" xml:space="preserve">
-    <value>إلغاء تنشيط المستخدم؟</value>
+    <value>Deactivate user?</value>
   </data>
 	<data name="Admin_User_DeactivateDialog_Body" xml:space="preserve">
-    <value>أنت على وشك إلغاء تنشيط &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+    <value>You're about to deactivate &lt;strong&gt;{0}&lt;/strong&gt;.</value>
   </data>
 	<data name="Admin_User_DeactivateDialog_Note" xml:space="preserve">
-    <value>سيتم حظر حسابه من تسجيل الدخول. يتم الاحتفاظ بسجل الحجوزات والتقييمات. يمكنك إعادة تنشيطه في أي وقت.</value>
+    <value>Their account will be blocked from signing in. Booking and feedback history is preserved. You can reactivate them at any time.</value>
   </data>
 	<data name="Admin_User_DeactivateDialog_Confirm" xml:space="preserve">
-    <value>إلغاء التنشيط</value>
+    <value>Deactivate</value>
   </data>
-	<!-- ========== مفاتيح إضافية للمصادقة ========== -->
+	<!-- ========== ADDITIONAL AUTH KEYS ========== -->
 	<data name="Auth_WelcomeBack" xml:space="preserve">
-    <value>مرحباً بعودتك</value>
+    <value>Welcome Back</value>
   </data>
 	<data name="Auth_WelcomeTagline" xml:space="preserve">
-    <value>رحلتك إلى الطريق تبدأ من هنا.</value>
+    <value>Your journey to the road starts here.</value>
   </data>
 	<data name="Auth_RoadIllustration" xml:space="preserve">
-    <value>رسم توضيحي للطريق</value>
+    <value>Road illustration</value>
   </data>
 	<data name="Auth_NationalIdHelp" xml:space="preserve">
-    <value>أدخل رقمك الوطني المكون من 10 أرقام.</value>
+    <value>Enter your 10-digit national identification number.</value>
   </data>
 	<data name="Auth_PasswordHelp" xml:space="preserve">
-    <value>أدخل كلمة مرور حسابك.</value>
+    <value>Enter your account password.</value>
   </data>
 	<data name="Auth_Or" xml:space="preserve">
-    <value>أو</value>
+    <value>or</value>
   </data>
 	<data name="Auth_ForgotPassword_EmailHelp" xml:space="preserve">
-    <value>أدخل عنوان البريد الإلكتروني المرتبط بحسابك.</value>
+    <value>Enter the email address tied to your account.</value>
   </data>
 	<data name="Auth_ShowConfirmPassword" xml:space="preserve">
-    <value>إظهار تأكيد كلمة المرور</value>
+    <value>Show confirm password</value>
   </data>
 </root>
