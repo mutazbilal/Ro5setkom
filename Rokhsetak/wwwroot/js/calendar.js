@@ -59,10 +59,22 @@
 
             eventClick: function (info) {
                 var props = info.event.extendedProps || {};
-                var lines = [info.event.title];
-                lines.push('Status: ' + (props.status || '—'));
-                if (props.location) lines.push('Location: ' + props.location);
-                window.alert(lines.join('\n'));
+
+                var message = [
+                    info.event.title,
+                    'Status: ' + (props.status || '—'),
+                    props.location ? ('Location: ' + props.location) : null
+                ].filter(Boolean).join('\n');
+
+                var url = props.url;
+
+                if (url) {
+                    if (confirm(message + '\n\nGo to details page?')) {
+                        window.location.href = url;
+                    }
+                } else {
+                    alert(message);
+                }
             },
 
             eventDidMount: function (info) {

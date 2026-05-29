@@ -50,6 +50,9 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script id="calendar-events-data" type="application/json">
+        @Html.Raw(ViewBag.EventsJson)
+    </script>
     <script src="~/js/calendar.js" asp-append-version="true"></script>
     <script src="~/js/booking-shared.js" asp-append-version="true"></script>
 }
