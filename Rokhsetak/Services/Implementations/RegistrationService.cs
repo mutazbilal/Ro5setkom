@@ -32,17 +32,18 @@ public class RegistrationService : IRegistrationService
     private readonly RokhsetakDbContext _db;
     private readonly IWebHostEnvironment _env;
     private readonly ILogger<RegistrationService> _logger;
-    private readonly BlobService _blobService;
+    private readonly IBlobService _blobService;
 
     public RegistrationService(
         RokhsetakDbContext db,
         IWebHostEnvironment env,
-        ILogger<RegistrationService> logger)
+        ILogger<RegistrationService> logger,
+        IBlobService blobservice)
     {
         _db   = db;
         _env  = env;
         _logger = logger;
-        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
+        _blobService = blobservice;
     }
 
     // ─────────────────────────────────────────────────────────────────────────

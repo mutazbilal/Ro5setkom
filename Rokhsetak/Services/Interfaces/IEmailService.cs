@@ -4,5 +4,6 @@
     {
         Task SendPasswordResetEmailAsync(string toEmail, string fullName, string resetLink);
         Task SendMentorApplicationStatusEmailAsync(string toEmail, string fullName, bool approved, string? reason);
+        Task SendAsync(string toEmail, string subject, string htmlBody);
     }
 }

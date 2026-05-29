@@ -1,0 +1,54 @@
+@{
+    var active = ViewData["ActiveNav"] as string ?? "";
+}
+<aside class="admin-sidebar" aria-label="Admin navigation">
+    <div class="admin-sidebar__brand">
+        <span class="admin-sidebar__brand-mark">R</span>
+        <div class="admin-sidebar__brand-text">
+            <strong>Rokhsetak</strong>
+            <small>Admin Portal</small>
+        </div>
+    </div>
+
+    <nav class="admin-sidebar__nav">
+        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
+           class="admin-sidebar__link @(active == "dashboard" ? "is-active" : "")">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Users" asp-action="Index"
+           class="admin-sidebar__link @(active == "users" ? "is-active" : "")">
+            <i class="fa-solid fa-users"></i>
+            <span>Users</span>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Mentors" asp-action="Index"
+           class="admin-sidebar__link @(active == "mentors" ? "is-active" : "")">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>Mentors</span>
+        </a>
+
+        <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index"
+           class="admin-sidebar__link @(active == "applications" ? "is-active" : "")">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>Applications</span>
+        </a>
+
+        <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+           class="admin-sidebar__link @(active == "bookings" ? "is-active" : "")">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Bookings &amp; Exams</span>
+        </a>
+
+        <a asp-area="Admin" asp-controller="BlockedDates" asp-action="Index"
+           class="admin-sidebar__link @(active == "blocked-dates" ? "is-active" : "")">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <span>Blocked Dates</span>
+        </a>
+    </nav>
+
+    <div class="admin-sidebar__footer">
+        <small>© @DateTime.UtcNow.Year Rokhsetak</small>
+    </div>
+</aside>
