@@ -47,7 +47,10 @@ public class ExamAppointmentService : IExamAppointmentService
             return ServiceResult<ExamBookingViewModel>.Success(vm); // show locked screen
 
         // ── Find eligible exam center (via mentor → training center → city) ───
-        var examCenterCityId = await ResolveExamCenterCityAsync(traineeId, license);
+        var examCenterCityId = await _context.Users
+            .Where(u => u.UserId == traineeId)
+            .Select(u => u.CityId)
+            .FirstOrDefaultAsync();
 
         // ── Query available slots ─────────────────────────────────────────────
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -354,6 +357,7 @@ public class ExamAppointmentService : IExamAppointmentService
                     // All theoretical modules completed
                     var theoreticalIds = await _context.LearningModules
                         .Where(m =>
+                            m.Phase == "theoretical" &&
                             m.ProgressScope != null &&
                             m.LicenseTypes.Any(lt =>
                                 lt.LicenseTypeId == license.LicenseTypeId))
@@ -408,23 +412,6 @@ public class ExamAppointmentService : IExamAppointmentService
         }
     }
 
-    private async Task<int?> ResolveExamCenterCityAsync(int traineeId, TraineeLicense license)
-    {
-        // Mentor → TrainingCenter → City → GovExamCenters in same city
-        if (license.MentorId == null) return null;
-
-        var trainingCenterId = await _context.Mentors
-            .Where(m => m.MentorId == license.MentorId)
-            .Select(m => (int?)m.TrainingCenterId)
-            .FirstOrDefaultAsync();
-
-        if (trainingCenterId == null) return null;
-
-        return await _context.TrainingCenters
-            .Where(tc => tc.CenterId == trainingCenterId)
-            .Select(tc => (int?)tc.CityId)
-            .FirstOrDefaultAsync();
-    }
 
     private async Task ApplyExamResultEffectsAsync(
         int traineeId, TraineeLicense license, List<ExamAppointmentItemViewModel> items)

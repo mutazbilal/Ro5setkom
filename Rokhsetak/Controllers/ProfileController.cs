@@ -37,6 +37,7 @@ namespace Rokhsetak.Controllers
             return View(model.Data);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit()
         {
             if (!User.Identity?.IsAuthenticated ?? false)
@@ -51,6 +52,9 @@ namespace Rokhsetak.Controllers
 
             var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             var profile = await _service.GetProfileAsync(userId, culture);
+
+            var cities = await _lookupService.GetCitiesAsync(culture = culture != null ? culture : "ar");
+            var provinces = await _lookupService.GetProvincesAsync(culture = culture != null ? culture : "ar");
 
             return View(new EditProfileViewModel
             {
@@ -67,8 +71,11 @@ namespace Rokhsetak.Controllers
                 DateOfBirth = profile.Data.DateOfBirth,
                 Gender = profile.Data.Gender,
                 NationalId = profile.Data.NationalId,
+                Cities = cities,
+                Provinces = provinces
             });
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditProfileViewModel model)

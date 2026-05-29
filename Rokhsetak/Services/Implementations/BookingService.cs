@@ -54,11 +54,11 @@ namespace Rokhsetak.Services.Implementations
             if (filter.MaxPrice.HasValue)
                 mentorQuery = mentorQuery.Where(m => m.PricePerSession <= filter.MaxPrice.Value);
 
-            if (license.LicenseTypeId == 1)
+            if (license.LicenseTypeId == 2)
                 mentorQuery = mentorQuery.Where(m => m.LicenseTypeId == 1 || m.LicenseTypeId == 2);
             
-            if (license.LicenseTypeId == 2)
-                mentorQuery = mentorQuery.Where(m => m.LicenseTypeId == 2);
+            if (license.LicenseTypeId == 1)
+                mentorQuery = mentorQuery.Where(m => m.LicenseTypeId == 1);
 
             var mentors = await mentorQuery
                 .Join(_context.Users,
