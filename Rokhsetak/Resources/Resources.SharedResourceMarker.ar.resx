@@ -1893,4 +1893,858 @@
 	<data name="Auth_ShowConfirmPassword" xml:space="preserve">
     <value>إظهار تأكيد كلمة المرور</value>
   </data>
+	<!-- ========== الصفحة الرئيسية ========== -->
+	<data name="Home_Welcome" xml:space="preserve">
+    <value>مرحباً</value>
+  </data>
+	<data name="Home_LandingPageAria" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+	<data name="Home_HeroBadge" xml:space="preserve">
+    <value>رحلة التدريب والترخيص الرسمية</value>
+  </data>
+	<data name="Home_HeroTitle" xml:space="preserve">
+    <value>طريقك إلى رخصة القيادة يبدأ من هنا</value>
+  </data>
+	<data name="Home_HeroSubtitle" xml:space="preserve">
+    <value>بوابة حديثة وآمنة للمتدربين والمرشدين مع تأهيل موجه، وتحقق من الهوية، وتعلم جاهز للامتحان.</value>
+  </data>
+	<data name="Home_LoginButton" xml:space="preserve">
+    <value>تسجيل الدخول للمتابعة</value>
+  </data>
+	<data name="Home_RegisterButton" xml:space="preserve">
+    <value>مستخدم جديد؟ سجل</value>
+  </data>
+	<data name="Home_RoadmapTitle" xml:space="preserve">
+    <value>خريطة الطريق إلى الرخصة</value>
+  </data>
+	<data name="Home_RoadmapStep1" xml:space="preserve">
+    <value>تحقق من هويتك بشكل آمن</value>
+  </data>
+	<data name="Home_RoadmapStep2" xml:space="preserve">
+    <value>أكمل الملف الشخصي والموافقات القانونية</value>
+  </data>
+	<data name="Home_RoadmapStep3" xml:space="preserve">
+    <value>اختر مسار التدريب والجدول الزمني</value>
+  </data>
+	<data name="Home_RoadmapStep4" xml:space="preserve">
+    <value>تتبع التقدم حتى الامتحان النهائي</value>
+  </data>
+	<data name="Home_HeroImageAlt" xml:space="preserve">
+    <value>مرشد تعليم القيادة يوجه متدرباً بجانب مركبة تدريب صفراء</value>
+  </data>
+	<data name="Home_ImageCaption" xml:space="preserve">
+    <value>مدربون حقيقيون. تدريب حقيقي. تقدم حقيقي.</value>
+  </data>
+	<data name="Home_HighlightsAria" xml:space="preserve">
+    <value>لماذا تختار رخصة طرق</value>
+  </data>
+	<data name="Home_WhyUsEyebrow" xml:space="preserve">
+    <value>لماذا رخصة طرق</value>
+  </data>
+	<data name="Home_WhyUsTitle" xml:space="preserve">
+    <value>مُصمم للثقة، مُهيأ للطريق</value>
+  </data>
+	<data name="Home_WhyUsLead" xml:space="preserve">
+    <value>ثلاث ركائز تجعل منصتنا الطريقة الأكثر أماناً وذكاءً للحصول على رخصتك.</value>
+  </data>
+	<data name="Home_FeatureGovTitle" xml:space="preserve">
+    <value>التحقق الحكومي</value>
+  </data>
+	<data name="Home_FeatureGovDesc" xml:space="preserve">
+    <value>يتم التحقق من كل رقم وطني في الوقت الفعلي مقابل سجل الأحوال المدنية الرسمي. يتم سحب اسمك وتاريخ ميلادك وعنوانك مباشرة من السجلات الحكومية – لذلك لا يوجد وثائق يمكن تزويرها ولا هوية يمكن انتحالها.</value>
+  </data>
+	<data name="Home_FeatureMentorsTitle" xml:space="preserve">
+    <value>مرشدون معتمدون</value>
+  </data>
+	<data name="Home_FeatureMentorsDesc" xml:space="preserve">
+    <value>يظهر المرشدون في منصتنا فقط بعد مراجعة واعتماد تراخيص التدريس وشهاداتهم من قبل المشرف. لن يتم مطابقتك أبداً مع مدرب غير مؤهل – يتم فحص كل ملف شخصي قبل نشره.</value>
+  </data>
+	<data name="Home_FeatureScheduleTitle" xml:space="preserve">
+    <value>جدولة ذكية</value>
+  </data>
+	<data name="Home_FeatureScheduleDesc" xml:space="preserve">
+    <value>تصفح مواعيد المرشدين حسب اليوم والوقت، واحجز الحصص بنقرة واحدة، واستلم تذكيرات تلقائية قبل كل درس. بحاجة إلى إعادة جدولة؟ قم بالإلغاء قبل 12 ساعة دون عقوبة – التقويم يتكيف مع حياتك.</value>
+  </data>
+	<data name="Home_FeaturesAria" xml:space="preserve">
+    <value>ميزات المنصة</value>
+  </data>
+	<data name="Home_FeatureModulesTitle" xml:space="preserve">
+    <value>وحدات التعلم</value>
+  </data>
+	<data name="Home_FeatureModulesDesc" xml:space="preserve">
+    <value>محتوى تحضيري نظري وعملي، مصمم حسب نوع الرخصة.</value>
+  </data>
+	<data name="Home_FeatureMatchingTitle" xml:space="preserve">
+    <value>مطابقة المرشدين</value>
+  </data>
+	<data name="Home_FeatureMatchingDesc" xml:space="preserve">
+    <value>ابحث وقارن واحجز مرشدين معتمدين يناسبون جدولك.</value>
+  </data>
+	<data name="Home_FeatureSecureTitle" xml:space="preserve">
+    <value>وصول آمن</value>
+  </data>
+	<data name="Home_FeatureSecureDesc" xml:space="preserve">
+    <value>سير عمل محمي مع فحوصات هوية وضوابط حساب موثوقة.</value>
+  </data>
+	<data name="Home_ContactAria" xml:space="preserve">
+    <value>معلومات الاتصال</value>
+  </data>
+	<data name="Home_ContactEyebrow" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+	<data name="Home_ContactTitle" xml:space="preserve">
+    <value>نحن هنا للمساعدة</value>
+  </data>
+	<data name="Home_ContactLead" xml:space="preserve">
+    <value>أسئلة حول التسجيل، موافقة المرشد، أو خطة التدريب الخاصة بك؟ تواصل معنا – فريق الدعم لدينا يرد خلال يوم عمل واحد.</value>
+  </data>
+	<data name="Home_ContactEmailTitle" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Home_ContactEmailLead" xml:space="preserve">
+    <value>للاستفسارات المتعلقة بالحساب والتسجيل والاستفسارات العامة.</value>
+  </data>
+	<data name="Home_ContactPhoneTitle" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+	<data name="Home_ContactPhoneLead" xml:space="preserve">
+    <value>تحدث مباشرة مع فريق الدعم لدينا.</value>
+  </data>
+	<data name="Home_ContactOffice" xml:space="preserve">
+    <value>المكتب</value>
+  </data>
+	<data name="Home_ContactMobile" xml:space="preserve">
+    <value>الجوال / واتساب</value>
+  </data>
+	<data name="Home_ContactVisitTitle" xml:space="preserve">
+    <value>زرنا</value>
+  </data>
+	<data name="Home_ContactVisitLead" xml:space="preserve">
+    <value>تفضل بزيارة مقرنا خلال ساعات العمل.</value>
+  </data>
+	<data name="Home_AddressLine1" xml:space="preserve">
+    <value>بوليفارد العبدلي، الطابق الرابع</value>
+  </data>
+	<data name="Home_AddressLine2" xml:space="preserve">
+    <value>عمان، الأردن</value>
+  </data>
+	<data name="Home_OfficeHours" xml:space="preserve">
+    <value>الأحد – الخميس · 9:00 ص – 6:00 م</value>
+  </data>
+	<data name="Home_ContactNotePrefix" xml:space="preserve">
+    <value>للمشكلات العاجلة خارج ساعات العمل، يرجى مراسلتنا على</value>
+  </data>
+	<data name="Home_ContactNoteSuffix" xml:space="preserve">
+    <value>وسنعود إليك في يوم العمل التالي.</value>
+  </data>
+
+	<!-- ========== صفحة سياسة الخصوصية ========== -->
+	<data name="Privacy_Title" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+	<data name="Privacy_Message" xml:space="preserve">
+    <value>استخدم هذه الصفحة لتفصيل سياسة الخصوصية لموقعك.</value>
+  </data>
+	<!-- ========== ملفات تعريف المستخدم (مفاتيح إضافية) ========== -->
+	<data name="Profile_AccountManagement" xml:space="preserve">
+    <value>إدارة الحساب</value>
+  </data>
+	<data name="Profile_ChangeLicense_WarningText" xml:space="preserve">
+    <value>تغيير نوع الرخصة سيؤدي إلى &lt;strong&gt;إلغاء أي حجوزات مستقبلية&lt;/strong&gt; مرتبطة برخصتك الحالية. سيتم حفظ تقدمك في الوحدات المؤهلة ونقلها إلى الفئة الجديدة حيثما ينطبق ذلك.</value>
+  </data>
+	<data name="Profile_LicenseSelection" xml:space="preserve">
+    <value>اختيار الرخصة</value>
+  </data>
+	<data name="Profile_PickNewLicense" xml:space="preserve">
+    <value>اختر رخصتك الجديدة</value>
+  </data>
+	<data name="Profile_SelectLicenseType" xml:space="preserve">
+    <value>-- اختر نوع الرخصة --</value>
+  </data>
+	<data name="Profile_Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+	<data name="Profile_EditProfile_Desc" xml:space="preserve">
+    <value>حدّث معلومات الاتصال والعنوان الخاص بك. التفاصيل الصادرة عن الجهات الحكومية هي للقراءة فقط.</value>
+  </data>
+	<data name="Profile_Section01" xml:space="preserve">
+    <value>القسم 01</value>
+  </data>
+	<data name="Profile_Section02" xml:space="preserve">
+    <value>القسم 02</value>
+  </data>
+	<data name="Profile_Section03" xml:space="preserve">
+    <value>القسم 03</value>
+  </data>
+	<data name="Profile_SelectProvince" xml:space="preserve">
+    <value>-- اختر المحافظة --</value>
+  </data>
+	<data name="Profile_SelectCity" xml:space="preserve">
+    <value>-- اختر المدينة --</value>
+  </data>
+	<data name="Profile_MentorDefault" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+	<data name="Profile_TraineeDefault" xml:space="preserve">
+    <value>متدرب</value>
+  </data>
+	<data name="Profile_NationalIdLabel" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+	<data name="Profile_ContactDetails" xml:space="preserve">
+    <value>تفاصيل الاتصال</value>
+  </data>
+	<data name="Profile_HowWeReachYou" xml:space="preserve">
+    <value>كيف نتواصل معك</value>
+  </data>
+	<data name="Profile_EmailAddress" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Profile_FullName" xml:space="preserve">
+    <value>الاسم الكامل</value>
+  </data>
+	<data name="Profile_NationalID" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+	<data name="Profile_GovernmentRecord" xml:space="preserve">
+    <value>سجل حكومي</value>
+  </data>
+	<data name="Profile_Preferences" xml:space="preserve">
+    <value>التفضيلات</value>
+  </data>
+	<data name="Profile_LanguagePreference_Desc" xml:space="preserve">
+    <value>اختر اللغة المستخدمة في لوحة التحكم والوحدات والإشعارات.</value>
+  </data>
+	<data name="Profile_InterfaceLanguage" xml:space="preserve">
+    <value>لغة الواجهة</value>
+  </data>
+	<data name="Profile_Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+	<!-- ========== مفاتيح إضافية لصفحات التسجيل ========== -->
+	<data name="Reg_MentorRegistration_Title" xml:space="preserve">
+    <value>تسجيل المرشد</value>
+  </data>
+	<data name="Reg_Mentor_AriaLabel" xml:space="preserve">
+    <value>تسجيل مرشد — إكمال الملف الشخصي</value>
+  </data>
+	<data name="Reg_Mentor_Tagline" xml:space="preserve">
+    <value>قدّم طلبك لمراجعة المشرف.</value>
+  </data>
+	<data name="Reg_Step3" xml:space="preserve">
+    <value>الخطوة 3 من 3: إكمال ملفك الشخصي</value>
+  </data>
+	<data name="Reg_Step3Aria" xml:space="preserve">
+    <value>تقدم التسجيل — الخطوة 3 من 3</value>
+  </data>
+	<data name="Reg_Mentor_ReviewNotice" xml:space="preserve">
+    <value>سيتم مراجعة طلبك من قبل المشرف. لن تتمكن من تسجيل الدخول حتى تتم الموافقة عليه.</value>
+  </data>
+	<data name="Reg_FirstName" xml:space="preserve">
+    <value>الاسم الأول</value>
+  </data>
+	<data name="Reg_LastName" xml:space="preserve">
+    <value>اسم العائلة</value>
+  </data>
+	<data name="Reg_DateOfBirth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+	<data name="Reg_Gender" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+	<data name="Reg_NationalId" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+	<data name="Reg_SelectProvince" xml:space="preserve">
+    <value>-- اختر المحافظة --</value>
+  </data>
+	<data name="Reg_SelectCity" xml:space="preserve">
+    <value>-- اختر المدينة --</value>
+  </data>
+	<data name="Reg_AddressLine1" xml:space="preserve">
+    <value>عنوان السطر 1</value>
+  </data>
+	<data name="Reg_AddressLine2" xml:space="preserve">
+    <value>عنوان السطر 2</value>
+  </data>
+	<data name="Reg_PostalCode" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+	<data name="Reg_Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Reg_PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+	<data name="Reg_Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+	<data name="Reg_ConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+	<data name="Reg_LicenseTypeYouTeach" xml:space="preserve">
+    <value>نوع الرخصة التي تدرّسها</value>
+  </data>
+	<data name="Reg_TrainingCenter" xml:space="preserve">
+    <value>مركز التدريب الرسمي الخاص بك</value>
+  </data>
+	<data name="Reg_SelectTrainingCenter" xml:space="preserve">
+    <value>-- اختر مركز التدريب --</value>
+  </data>
+	<data name="Reg_CertificationDocument" xml:space="preserve">
+    <value>وثيقة الشهادة</value>
+  </data>
+	<data name="Reg_UploadCert" xml:space="preserve">
+    <value>اسحب وأفلت أو انقر للرفع — PDF / JPG / PNG</value>
+  </data>
+	<data name="Reg_MaxFileSize" xml:space="preserve">
+    <value>الحد الأقصى لحجم الملف: 5 ميجابايت</value>
+  </data>
+	<data name="Reg_RemoveFile" xml:space="preserve">
+    <value>إزالة الملف المرفوع</value>
+  </data>
+	<data name="Reg_AcceptTermsFull" xml:space="preserve">
+    <value>أوافق على &lt;a href="/Home/Terms"&gt;الشروط والأحكام&lt;/a&gt; و &lt;a href="/Home/Privacy"&gt;سياسة الخصوصية&lt;/a&gt;</value>
+  </data>
+	<data name="Reg_SubmitApplication" xml:space="preserve">
+    <value>تقديم الطلب</value>
+  </data>
+	<data name="Reg_TraineeRegistration_Title" xml:space="preserve">
+    <value>تسجيل المتدرّب</value>
+  </data>
+	<data name="Reg_Trainee_AriaLabel" xml:space="preserve">
+    <value>تسجيل متدرّب — إكمال الملف الشخصي</value>
+  </data>
+	<data name="Reg_Trainee_Tagline" xml:space="preserve">
+    <value>أكمل ملفك الشخصي لبدء التدريب.</value>
+  </data>
+	<data name="Reg_RoadIllustration" xml:space="preserve">
+    <value>رسم توضيحي للطريق</value>
+  </data>
+	<data name="Reg_AcceptTermsShort" xml:space="preserve">
+    <value>أوافق على الشروط والأحكام و &lt;a href="/Home/Privacy"&gt;سياسة الخصوصية&lt;/a&gt;</value>
+  </data>
+	<data name="Reg_CompleteRegistration" xml:space="preserve">
+    <value>إكمال التسجيل</value>
+  </data>
+	<data name="Reg_MentorPending_Aria" xml:space="preserve">
+    <value>تم تقديم طلب المرشد</value>
+  </data>
+	<data name="Reg_MentorPending_Message_Part1" xml:space="preserve">
+    <value>تم تقديم طلب الإرشاد الخاص بك وهو قيد المراجعة حالياً.</value>
+  </data>
+	<data name="Reg_MentorPending_Message_Part2" xml:space="preserve">
+    <value>ستتلقى إشعاراً بالبريد الإلكتروني بعد أن يقوم المشرف بمراجعة طلبك.</value>
+  </data>
+	<data name="Reg_NationalIdLookup_AriaSuffix" xml:space="preserve">
+    <value> — التحقق من الهوية</value>
+  </data>
+	<data name="Reg_NationalIdLookup_Tagline" xml:space="preserve">
+    <value>تحقق آمن من الهوية مدعوم بالسجلات الحكومية.</value>
+  </data>
+	<data name="Reg_BackToRoleSelection" xml:space="preserve">
+    <value>العودة إلى اختيار الدور</value>
+  </data>
+	<data name="Reg_Step2" xml:space="preserve">
+    <value>الخطوة 2 من 3: التحقق من الهوية</value>
+  </data>
+	<data name="Reg_Step2Aria" xml:space="preserve">
+    <value>تقدم التسجيل — الخطوة 2 من 3</value>
+  </data>
+	<data name="Reg_NationalIdHelp" xml:space="preserve">
+    <value>أدخل رقمك الوطني المكون من 10 أرقام.</value>
+  </data>
+	<data name="Reg_SelectRole_HeroTitle" xml:space="preserve">
+    <value>انضم إلى رخصة طرق</value>
+  </data>
+	<data name="Reg_SelectRole_Tagline" xml:space="preserve">
+    <value>اختر كيف تريد أن تكون جزءاً من الرحلة.</value>
+  </data>
+	<data name="Reg_SelectRole_Aria" xml:space="preserve">
+    <value>التسجيل — اختر دورك</value>
+  </data>
+	<data name="Reg_Step1Aria" xml:space="preserve">
+    <value>تقدم التسجيل — الخطوة 1 من 3</value>
+  </data>
+	<data name="Reg_Feature_BrowseMentors" xml:space="preserve">
+    <value>تصفح المرشدين</value>
+  </data>
+	<data name="Reg_Feature_BookSessions" xml:space="preserve">
+    <value>حجز الحصص</value>
+  </data>
+	<data name="Reg_Feature_TrackProgress" xml:space="preserve">
+    <value>تتبع التقدم</value>
+  </data>
+	<data name="Reg_Feature_SetRates" xml:space="preserve">
+    <value>تحديد أسعارك</value>
+  </data>
+	<data name="Reg_Feature_ManageSchedule" xml:space="preserve">
+    <value>إدارة الجدول</value>
+  </data>
+	<data name="Reg_Feature_ReachTrainees" xml:space="preserve">
+    <value>الوصول إلى المتدربين</value>
+  </data>
+	<!-- ========== مفاتيح إضافية للتخطيط والقائمة ========== -->
+	<data name="Nav_Notifications" xml:space="preserve">
+    <value>الإشعارات</value>
+  </data>
+	<data name="Nav_UnreadNotifications" xml:space="preserve">
+    <value>إشعارات غير مقروءة</value>
+  </data>
+	<data name="Nav_MarkAsRead" xml:space="preserve">
+    <value>وضع علامة مقروء</value>
+  </data>
+	<data name="Nav_MarkAsReadAria" xml:space="preserve">
+    <value>وضع علامة على الإشعار كمقروء</value>
+  </data>
+	<data name="Nav_NoNotifications" xml:space="preserve">
+    <value>لا توجد إشعارات</value>
+  </data>
+
+	<!-- ========== صفحة الخطأ ========== -->
+	<data name="Error_GeneralTitle" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+	<data name="Error_DevelopmentModeDesc" xml:space="preserve">
+    <value>سيؤدي التبديل إلى بيئة {0} إلى عرض معلومات أكثر تفصيلاً حول الخطأ الذي حدث.</value>
+  </data>
+	<data name="Error_DevelopmentModeWarningDesc" xml:space="preserve">
+    <value>يمكن أن يؤدي ذلك إلى عرض معلومات حساسة من الاستثناءات للمستخدمين النهائيين. لتصحيح الأخطاء محلياً، قم بتمكين بيئة {0} عن طريق تعيين متغير البيئة <strong>ASPNETCORE_ENVIRONMENT</strong> إلى <strong>Development</strong> وإعادة تشغيل التطبيق.</value>
+  </data>
+	<!-- ========== مفاتيح إضافية لحجوزات المتدرب ========== -->
+	<data name="Booking_BookWithTitle" xml:space="preserve">
+    <value>حجز مع {0}</value>
+  </data>
+	<data name="Booking_Dismiss" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+	<data name="Booking_Breadcrumb" xml:space="preserve">
+    <value>مسار التنقل</value>
+  </data>
+	<data name="Booking_PerSessionShort" xml:space="preserve">
+    <value>لكل حصة</value>
+  </data>
+	<data name="Booking_ReviewsCount" xml:space="preserve">
+    <value>{0} تقييم</value>
+  </data>
+	<data name="Booking_ChooseSessionType" xml:space="preserve">
+    <value>اختر نوع الحصة</value>
+  </data>
+	<data name="Booking_SessionTypeLabel" xml:space="preserve">
+    <value>نوع الحصة</value>
+  </data>
+	<data name="Booking_PickTimeSlot" xml:space="preserve">
+    <value>اختر موعداً زمنياً</value>
+  </data>
+	<data name="Booking_NoAvailability" xml:space="preserve">
+    <value>لم يحدد هذا المرشد مواعيده المتاحة بعد.</value>
+  </data>
+	<data name="Booking_PreviousWeek" xml:space="preserve">
+    <value>الأسبوع السابق</value>
+  </data>
+	<data name="Booking_NextWeek" xml:space="preserve">
+    <value>الأسبوع التالي</value>
+  </data>
+	<data name="Booking_AvailableSlotsByDay" xml:space="preserve">
+    <value>المواعيد المتاحة حسب اليوم</value>
+  </data>
+	<data name="Booking_BookingSummary" xml:space="preserve">
+    <value>ملخص الحجز</value>
+  </data>
+	<data name="Booking_Step1" xml:space="preserve">
+    <value>الخطوة 1</value>
+  </data>
+	<data name="Booking_NoSlotSelected" xml:space="preserve">
+    <value>لم يتم اختيار موعد بعد</value>
+  </data>
+	<data name="Booking_SelectPromptSub" xml:space="preserve">
+    <value>اختر نوع الحصة ووقتاً للمتابعة.</value>
+  </data>
+	<data name="Booking_Mentor" xml:space="preserve">
+    <value>المرشد</value>
+  </data>
+	<data name="Booking_Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+	<data name="Booking_Time" xml:space="preserve">
+    <value>الوقت</value>
+  </data>
+	<data name="Booking_RequestBooking" xml:space="preserve">
+    <value>طلب حجز</value>
+  </data>
+	<data name="Booking_ChangeSelection" xml:space="preserve">
+    <value>تغيير الاختيار</value>
+  </data>
+	<data name="Booking_BookSlotAria" xml:space="preserve">
+    <value>حجز موعد في</value>
+  </data>
+	<data name="Booking_From" xml:space="preserve">
+    <value>من</value>
+  </data>
+	<data name="Booking_To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+	<data name="Booking_NoSlots" xml:space="preserve">
+    <value>لا توجد مواعيد</value>
+  </data>
+	<data name="Booking_HourAbbr" xml:space="preserve">
+    <value>س</value>
+  </data>
+	<data name="Booking_MinAbbr" xml:space="preserve">
+    <value>د</value>
+  </data>
+	<data name="Booking_MinAbbrFull" xml:space="preserve">
+    <value>دقيقة</value>
+  </data>
+	<data name="Booking_AlertSelectSlotAndType" xml:space="preserve">
+    <value>يرجى اختيار نوع الحصة وموعد متاح.</value>
+  </data>
+	<data name="Booking_FindYourMentor" xml:space="preserve">
+    <value>ابحث عن مرشدك</value>
+  </data>
+	<data name="Booking_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+	<data name="Booking_AllCities" xml:space="preserve">
+    <value>جميع المدن</value>
+  </data>
+	<data name="Booking_MinPrice" xml:space="preserve">
+    <value>أقل سعر (دينار)</value>
+  </data>
+	<data name="Booking_MaxPrice" xml:space="preserve">
+    <value>أعلى سعر (دينار)</value>
+  </data>
+	<data name="Booking_MinRating" xml:space="preserve">
+    <value>أقل تقييم</value>
+  </data>
+	<data name="Booking_AnyRating" xml:space="preserve">
+    <value>أي</value>
+  </data>
+	<data name="Booking_AndUp" xml:space="preserve">
+    <value>★ فأكثر</value>
+  </data>
+	<data name="Booking_ClearFilters" xml:space="preserve">
+    <value>مسح التصفية</value>
+  </data>
+	<data name="Booking_MentorsAvailable" xml:space="preserve">
+    <value>مرشد(ين) متاح(ين)</value>
+  </data>
+	<data name="Booking_RatingsCount" xml:space="preserve">
+    <value>{0} تقييم</value>
+  </data>
+	<data name="Booking_BookSession" xml:space="preserve">
+    <value>حجز حصة</value>
+  </data>
+	<data name="Booking_ChangePrimaryConsequences_1" xml:space="preserve">
+    <value>سيتم إلغاء جميع الحجوزات المستقبلية مع مرشدك الحالي.</value>
+  </data>
+	<data name="Booking_ChangePrimaryConsequences_2" xml:space="preserve">
+    <value>إذا تمت الموافقة، يصبح المرشد الجديد هو مرشدك الأساسي.</value>
+  </data>
+	<data name="Booking_ChangePrimaryConsequences_3" xml:space="preserve">
+    <value>ستستخدم الحجوزات المستقبلية المرشد الجديد تلقائياً.</value>
+  </data>
+	<data name="Booking_ConfirmSwitchQuestion" xml:space="preserve">
+    <value>هل أنت متأكد من رغبتك في المتابعة؟</value>
+  </data>
+	<data name="Booking_ThisMentor" xml:space="preserve">
+    <value>هذا المرشد</value>
+  </data>
+	<data name="Booking_FilterBookingsByStatus" xml:space="preserve">
+    <value>تصفية الحجوزات حسب الحالة</value>
+  </data>
+	<data name="Booking_ShowingXBookings" xml:space="preserve">
+    <value>عرض {0} حجز(ات).</value>
+  </data>
+	<data name="Booking_FeedbackModalTitle" xml:space="preserve">
+    <value>ملاحظات المرشد</value>
+  </data>
+	<data name="Booking_Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+	<data name="Booking_RatingModalTitle" xml:space="preserve">
+    <value>قيم حصتك</value>
+  </data>
+	<data name="Booking_RatingLabel" xml:space="preserve">
+    <value>تقييمك</value>
+  </data>
+	<data name="Booking_RatingAria" xml:space="preserve">
+    <value>تقييم من 1 إلى 5</value>
+  </data>
+	<data name="Booking_ReviewOptional" xml:space="preserve">
+    <value>مراجعة (اختياري)</value>
+  </data>
+	<data name="Booking_ReviewPlaceholder" xml:space="preserve">
+    <value>شارك تجربتك…</value>
+  </data>
+	<data name="Booking_SubmitRating" xml:space="preserve">
+    <value>إرسال التقييم</value>
+  </data>
+	<data name="Booking_NoFeedbackProvided" xml:space="preserve">
+    <value>لم يتم تقديم ملاحظات.</value>
+  </data>
+	<data name="Booking_NoFeedbackAvailable" xml:space="preserve">
+    <value>لا توجد ملاحظات متاحة.</value>
+  </data>
+	<data name="Booking_CancelConfirm" xml:space="preserve">
+    <value>إلغاء هذه الحصة؟</value>
+  </data>
+	<data name="Booking_RescheduleWith" xml:space="preserve">
+    <value>إعادة جدولة مع {0}</value>
+  </data>
+	<data name="Booking_PickNewTime" xml:space="preserve">
+    <value>اختر وقتاً جديداً</value>
+  </data>
+	<data name="Booking_PickNewTimeSlot" xml:space="preserve">
+    <value>اختر موعداً جديداً</value>
+  </data>
+	<data name="Booking_RescheduleConfirmMsg" xml:space="preserve">
+    <value>سيتم إلغاء حجزك الأصلي وإنشاء طلب جديد معلق. سيحتاج المرشد إلى تأكيد الموعد الجديد.</value>
+  </data>
+	<data name="Booking_NewTime" xml:space="preserve">
+    <value>الوقت الجديد</value>
+  </data>
+	<data name="Booking_Change" xml:space="preserve">
+    <value>تغيير</value>
+  </data>
+	<data name="Booking_NoNewSlotPicked" xml:space="preserve">
+    <value>لم يتم اختيار موعد جديد</value>
+  </data>
+	<data name="Booking_PickSlotPrompt" xml:space="preserve">
+    <value>اختر موعداً متاحاً من الجدول.</value>
+  </data>
+	<data name="Booking_NewDate" xml:space="preserve">
+    <value>التاريخ الجديد</value>
+  </data>
+	<data name="Booking_NewTimeLabel" xml:space="preserve">
+    <value>الوقت الجديد</value>
+  </data>
+	<data name="Booking_ConfirmReschedule" xml:space="preserve">
+    <value>تأكيد إعادة الجدولة</value>
+  </data>
+	<data name="Booking_AlertPickSlot" xml:space="preserve">
+    <value>يرجى اختيار موعد متاح.</value>
+  </data>
+	<!-- ========== عرض تقويم المتدرب ========== -->
+	<data name="Calendar_MyCalendar" xml:space="preserve">
+    <value>تقويمي</value>
+  </data>
+	<data name="Calendar_Dismiss" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+	<data name="Calendar_LegendAria" xml:space="preserve">
+    <value>مفتاح التقويم</value>
+  </data>
+	<data name="Calendar_Confirmed" xml:space="preserve">
+    <value>مؤكد</value>
+  </data>
+	<data name="Calendar_Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+	<data name="Calendar_Exam" xml:space="preserve">
+    <value>امتحان</value>
+  </data>
+	<data name="Calendar_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+	<data name="Calendar_CalendarAria" xml:space="preserve">
+    <value>تقويم الحجوزات والامتحانات</value>
+  </data>
+	<!-- ========== لوحة تحكم المتدرب (مفاتيح إضافية) ========== -->
+	<data name="Dashboard_TraineeDashboard" xml:space="preserve">
+    <value>لوحة تحكم المتدرب</value>
+  </data>
+	<data name="Dashboard_OverallCompletionAria" xml:space="preserve">
+    <value>الإكمال الكلي</value>
+  </data>
+	<data name="Dashboard_ModulesInTrack" xml:space="preserve">
+    <value>الوحدات في هذا المسار</value>
+  </data>
+	<data name="Dashboard_TheoreticalProgressAria" xml:space="preserve">
+    <value>تقدم المسار النظري</value>
+  </data>
+	<data name="Dashboard_PracticalProgressAria" xml:space="preserve">
+    <value>تقدم المسار العملي</value>
+  </data>
+	<data name="Dashboard_ModulesComplete" xml:space="preserve">
+    <value>{0} من {1} مكتمل</value>
+  </data>
+	<!-- ========== مواعيد امتحانات المتدرب ========== -->
+	<data name="Exam_BookTitle" xml:space="preserve">
+    <value>حجز امتحان {0}</value>
+  </data>
+	<data name="Exam_theory_Name" xml:space="preserve">
+    <value>النظري</value>
+  </data>
+	<data name="Exam_medical_Name" xml:space="preserve">
+    <value>الطبي</value>
+  </data>
+	<data name="Exam_practical_Name" xml:space="preserve">
+    <value>العملي</value>
+  </data>
+	<data name="Exam_Breadcrumb" xml:space="preserve">
+    <value>مسار التنقل</value>
+  </data>
+	<data name="Exam_BookType" xml:space="preserve">
+    <value>حجز امتحان {0}</value>
+  </data>
+	<data name="Exam_ExamLabel" xml:space="preserve">
+    <value>امتحان</value>
+  </data>
+	<data name="Exam_BookYourSlot" xml:space="preserve">
+    <value>احجز موعدك</value>
+  </data>
+	<data name="Exam_BackToDashboard" xml:space="preserve">
+    <value>العودة إلى لوحة التحكم</value>
+  </data>
+	<data name="Exam_BackToAppointments" xml:space="preserve">
+    <value>العودة إلى المواعيد</value>
+  </data>
+	<data name="Exam_SlotsRemainingAria" xml:space="preserve">
+    <value>{0} موعد متبقي</value>
+  </data>
+	<data name="Exam_SlotsLeft" xml:space="preserve">
+    <value>{0} موعد متبقي</value>
+  </data>
+	<data name="Exam_ConfirmBookingMessage" xml:space="preserve">
+    <value>تأكيد حجز الامتحان في {0} الساعة {1}؟</value>
+  </data>
+	<data name="Exam_ConfirmBooking" xml:space="preserve">
+    <value>تأكيد الحجز</value>
+  </data>
+	<data name="Exam_Appointments" xml:space="preserve">
+    <value>مواعيد الامتحانات</value>
+  </data>
+	<data name="Exam_Examinations" xml:space="preserve">
+    <value>الامتحانات</value>
+  </data>
+	<data name="Exam_BookGroupLabel" xml:space="preserve">
+    <value>حجز امتحان</value>
+  </data>
+	<data name="Exam_BookTheory" xml:space="preserve">
+    <value>حجز نظري</value>
+  </data>
+	<data name="Exam_BookMedical" xml:space="preserve">
+    <value>حجز طبي</value>
+  </data>
+	<data name="Exam_BookPractical" xml:space="preserve">
+    <value>حجز عملي</value>
+  </data>
+	<data name="Exam_NoAppointments" xml:space="preserve">
+    <value>لا توجد مواعيد امتحان بعد. احجز موعداً أعلاه عندما تصبح مؤهلاً.</value>
+  </data>
+	<data name="Exam_CardAria" xml:space="preserve">
+    <value>امتحان {0} في {1}</value>
+  </data>
+	<data name="Exam_ExamTypeLabel" xml:space="preserve">
+    <value>امتحان {0}</value>
+  </data>
+	<data name="Exam_Status_Scheduled" xml:space="preserve">
+    <value>مجدول</value>
+  </data>
+	<data name="Exam_Status_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+	<data name="Exam_Status_Cancelled" xml:space="preserve">
+    <value>ملغي</value>
+  </data>
+	<data name="Exam_Result_pass" xml:space="preserve">
+    <value>ناجح</value>
+  </data>
+	<data name="Exam_Result_fail" xml:space="preserve">
+    <value>راسب</value>
+  </data>
+	<data name="Exam_Result_absent" xml:space="preserve">
+    <value>غائب</value>
+  </data>
+	<data name="Exam_ScoreLabel" xml:space="preserve">
+    <value>الدرجة: {0}</value>
+  </data>
+	<data name="Exam_CancelConfirmMessage" xml:space="preserve">
+    <value>إلغاء موعد الامتحان هذا؟</value>
+  </data>
+	<data name="Exam_Cancel" xml:space="preserve">
+    <value>إلغاء الموعد</value>
+  </data>
+	<!-- ========== الوحدات (مفاتيح إضافية) ========== -->
+	<data name="Module_Theory" xml:space="preserve">
+    <value>نظري</value>
+  </data>
+	<data name="Module_Practical" xml:space="preserve">
+    <value>عملي</value>
+  </data>
+	<data name="Modules_Breadcrumb" xml:space="preserve">
+    <value>مسار التنقل</value>
+  </data>
+	<data name="Module_VideoLesson" xml:space="preserve">
+    <value>درس فيديو</value>
+  </data>
+	<data name="Module_VideoTitle" xml:space="preserve">
+    <value>فيديو الوحدة</value>
+  </data>
+	<data name="Module_ReadingMaterial" xml:space="preserve">
+    <value>مادة قراءة</value>
+  </data>
+	<data name="Module_NoContent" xml:space="preserve">
+    <value>لا يوجد محتوى متاح بعد للغة المفضلة لديك.</value>
+  </data>
+	<data name="Module_ActionsAria" xml:space="preserve">
+    <value>إجراءات الوحدة</value>
+  </data>
+	<data name="Module_LastScore" xml:space="preserve">
+    <value>آخر درجة</value>
+  </data>
+	<data name="Module_Passed" xml:space="preserve">
+    <value>ناجح</value>
+  </data>
+	<data name="Module_NotPassed" xml:space="preserve">
+    <value>غير ناجح</value>
+  </data>
+	<data name="Module_AutoStartHint" xml:space="preserve">
+    <value>ستبدأ هذه الوحدة عند فتحها.</value>
+  </data>
+	<data name="Module_BackToModules" xml:space="preserve">
+    <value>العودة إلى الوحدات</value>
+  </data>
+	<data name="Modules_TotalModulesAria" xml:space="preserve">
+    <value>إجمالي الوحدات</value>
+  </data>
+	<!-- ========== الاختبارات (مفاتيح إضافية) ========== -->
+	<data name="Quiz_ResultTitle" xml:space="preserve">
+    <value>نتيجة الاختبار</value>
+  </data>
+	<data name="Quiz_QuestionsCount" xml:space="preserve">
+    <value>{0} سؤال</value>
+  </data>
+	<data name="Quiz_QuestionsInExamAria" xml:space="preserve">
+    <value>{0} سؤالاً في هذا الامتحان</value>
+  </data>
+	<data name="Quiz_QuestionsInQuizAria" xml:space="preserve">
+    <value>{0} سؤالاً في هذا الاختبار</value>
+  </data>
+	<data name="Quiz_Submitting" xml:space="preserve">
+    <value>جاري الإرسال…</value>
+  </data>
+	<data name="Quiz_ScoreAria" xml:space="preserve">
+    <value>النتيجة: {0} بالمائة. درجة النجاح: {1} بالمائة.</value>
+  </data>
+	<data name="Quiz_PassLabel" xml:space="preserve">
+    <value>نجاح {0}%</value>
+  </data>
+	<data name="Quiz_BackToModule" xml:space="preserve">
+    <value>العودة إلى الوحدة</value>
+  </data>
+	<data name="Quiz_AnsweredCorrectly" xml:space="preserve">
+    <value>تمت الإجابة بشكل صحيح</value>
+  </data>
+	<data name="Quiz_AnsweredIncorrectly" xml:space="preserve">
+    <value>تمت الإجابة بشكل خاطئ</value>
+  </data>
+	<data name="Quiz_PassingScoreLabel" xml:space="preserve">
+    <value>درجة النجاح: {0}%</value>
+  </data>
+	<data name="Quiz_RetakeUnlimitedMessage" xml:space="preserve">
+    <value>خذ وقتك. إذا لم تنجح في هذه المحاولة، يمكنك إعادة الاختبار عدة مرات حسب حاجتك.</value>
+  </data>
 </root>

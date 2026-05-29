@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Exam
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model ExamBookingViewModel
 @{
-    ViewData["Title"] = $"Book {Model.ExamType} Exam";
+    ViewData["Title"] = string.Format(L["Exam_BookTitle"], L[$"Exam_{Model.ExamType}_Name"]);
 
     string TypeIcon(string t) => t switch
     {
@@ -11,8 +14,7 @@
         _           => "fa-solid fa-file-lines"
     };
 
-    string TypeLabel(string t) =>
-        char.ToUpper(t[0]) + t[1..];
+    string TypeLabel(string t) => L[$"Exam_{t}_Name"];
 }
 
 @section Styles {
@@ -29,19 +31,19 @@
         </div>
     }
 
-    <nav class="exam-breadcrumb" aria-label="Breadcrumb">
-        <a asp-area="Trainee" asp-controller="Exam" asp-action="Index">Exam Appointments</a>
+    <nav class="exam-breadcrumb" aria-label="@L["Exam_Breadcrumb"]">
+        <a asp-area="Trainee" asp-controller="Exam" asp-action="Index">@L["Exam_Appointments"]</a>
         <span class="sep" aria-hidden="true">/</span>
-        <span class="current">Book @TypeLabel(Model.ExamType) Exam</span>
+        <span class="current">@string.Format(L["Exam_BookType"], TypeLabel(Model.ExamType))</span>
     </nav>
 
     <header class="exam-header">
         <div class="exam-header__left">
             <p class="exam-eyebrow">
                 <i class="@TypeIcon(Model.ExamType)" aria-hidden="true"></i>
-                @TypeLabel(Model.ExamType) Exam
+                @TypeLabel(Model.ExamType) @L["Exam_ExamLabel"]
             </p>
-            <h1>Book Your Slot</h1>
+            <h1>@L["Exam_BookYourSlot"]</h1>
         </div>
     </header>
 
@@ -53,14 +55,14 @@
                 <i class="fa-solid fa-lock"></i>
             </div>
             <div>
-                <strong>Not eligible</strong>
+                <strong>@L["Exam_NotEligible"]</strong>
                 <p class="mb-0">@Model.IneligibilityReason</p>
             </div>
         </div>
 
         <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index" class="btn-back">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Back to Dashboard
+            @L["Exam_BackToDashboard"]
         </a>
     }
 
@@ -69,12 +71,12 @@
     {
         <div class="exam-info-banner" role="status">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-            <span>No exam slots are currently available in your area. Please check back later.</span>
+            <span>@L["Exam_NoSlots"]</span>
         </div>
 
         <a asp-area="Trainee" asp-controller="Exam" asp-action="Index" class="btn-back">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Back to Appointments
+            @L["Exam_BackToAppointments"]
         </a>
     }
 
@@ -107,23 +109,23 @@
                         </div>
 
                         <span class="slots-chip @(isLow ? "slots-chip--low" : "slots-chip--ok")"
-                              aria-label="@slot.SlotsRemaining slots remaining">
+                              aria-label="@string.Format(L["Exam_SlotsRemainingAria"], slot.SlotsRemaining)">
                             <i class="fa-solid @(isLow ? "fa-fire" : "fa-circle-check")" aria-hidden="true"></i>
-                            @slot.SlotsRemaining @(slot.SlotsRemaining == 1 ? "slot" : "slots") left
+                            @string.Format(L["Exam_SlotsLeft"], slot.SlotsRemaining)
                         </span>
                     </div>
 
                     <div class="slot-card__footer">
                         <form asp-area="Trainee" asp-controller="Exam" asp-action="Book"
                               method="post" class="js-confirm"
-                              data-confirm="Confirm booking for @slot.ExamDate.ToString("dd MMM yyyy") at @slot.ExamTime.ToString("HH:mm")?">
+                              data-confirm="@string.Format(L["Exam_ConfirmBookingMessage"], slot.ExamDate.ToString("dd MMM yyyy"), slot.ExamTime.ToString("HH:mm"))">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="OfficialExamId"    value="@slot.OfficialExamId" />
                             <input type="hidden" name="TraineeLicenseId"  value="@Model.TraineeLicenseId" />
                             <input type="hidden" name="ExamType"          value="@Model.ExamType" />
                             <button type="submit" class="btn-confirm">
                                 <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                                Confirm Booking
+                                @L["Exam_ConfirmBooking"]
                             </button>
                         </form>
                     </div>
@@ -133,7 +135,7 @@
 
         <a asp-area="Trainee" asp-controller="Exam" asp-action="Index" class="btn-back">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Back to Appointments
+            @L["Exam_BackToAppointments"]
         </a>
     }
 </div>

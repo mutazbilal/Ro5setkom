@@ -1,17 +1,20 @@
 ﻿@using Rokhsetak.Areas.Trainee.ViewModels.Modules
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model ModuleDetailViewModel
 @{
     ViewData["Title"] = Model.Title;
 
     var (phaseIcon, phaseLabel) = Model.Phase == "theoretical"
-        ? ("fa-book", "Theory")
-        : ("fa-car-side", "Practical");
+        ? ("fa-book", L["Module_Theory"])
+        : ("fa-car-side", L["Module_Practical"]);
 
     var (statusModifier, statusLabel) = Model.Status switch
     {
-        "completed"   => ("completed",   "Completed"),
-        "in_progress" => ("in-progress", "In Progress"),
-        _             => ("not-started", "Not Started")
+        "completed"   => ("completed",   L["Status_Completed"]),
+        "in_progress" => ("in-progress", L["Status_InProgress"]),
+        _             => ("not-started", L["Status_NotStarted"])
     };
 }
 
@@ -30,7 +33,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-bs-dismiss="alert"
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -43,20 +46,20 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-bs-dismiss="alert"
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
         }
 
         <!-- ============ Breadcrumb ============ -->
-        <nav class="module-breadcrumb" aria-label="breadcrumb">
+        <nav class="module-breadcrumb" aria-label="@L["Modules_Breadcrumb"]">
             <ol class="module-breadcrumb__list">
                 <li class="module-breadcrumb__item">
                     <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
                        class="module-breadcrumb__link">
                         <i class="fa-solid fa-folder" aria-hidden="true"></i>
-                        <span>Modules</span>
+                        <span>@L["Modules_Title"]</span>
                     </a>
                 </li>
                 <li class="module-breadcrumb__sep" aria-hidden="true">
@@ -106,14 +109,14 @@
                                 <span class="content-block__icon" aria-hidden="true">
                                     <i class="fa-solid fa-circle-play"></i>
                                 </span>
-                                <h2 class="content-block__title">Video Lesson</h2>
+                                <h2 class="content-block__title">@L["Module_VideoLesson"]</h2>
                             </header>
                             <div class="content-block__body content-block__body--media">
                                 <div class="content-block__video">
                                     <iframe src="@content.VideoUrl"
                                             allowfullscreen
                                             loading="lazy"
-                                            title="Module video"></iframe>
+                                            title="@L["Module_VideoTitle"]"></iframe>
                                 </div>
                             </div>
                         </article>
@@ -125,7 +128,7 @@
                                 <span class="content-block__icon" aria-hidden="true">
                                     <i class="fa-solid fa-book-open"></i>
                                 </span>
-                                <h2 class="content-block__title">Reading Material</h2>
+                                <h2 class="content-block__title">@L["Module_ReadingMaterial"]</h2>
                             </header>
                             <div class="content-block__body">
                                 <div class="content-block__prose">
@@ -141,12 +144,12 @@
         {
             <div class="module-content-empty">
                 <i class="fa-regular fa-file" aria-hidden="true"></i>
-                <p>No content available for your language preference yet.</p>
+                <p>@L["Module_NoContent"]</p>
             </div>
         }
 
         <!-- ============ Action Bar ============ -->
-        <section class="module-actions" aria-label="Module actions">
+        <section class="module-actions" aria-label="@L["Module_ActionsAria"]">
             <div class="module-actions__primary">
                 @if (Model.HasQuiz && Model.Status != "not_started")
                 {
@@ -156,17 +159,17 @@
                        asp-route-moduleId="@Model.ModuleId"
                        class="btn-action @(Model.QuizPassed ? "btn-action--ghost-success" : "btn-action--gradient")">
                         <i class="fa-solid @(Model.QuizPassed ? "fa-rotate-right" : "fa-pen-to-square")" aria-hidden="true"></i>
-                        <span>@(Model.QuizPassed ? "Retake Quiz" : "Take Quiz")</span>
+                        <span>@(Model.QuizPassed ? L["Quiz_RetakeQuiz"] : L["Quiz_TakeQuiz"])</span>
                     </a>
 
                     @if (Model.LastAttemptScore.HasValue)
                     {
                         <div class="quiz-score @(Model.QuizPassed ? "quiz-score--passed" : "quiz-score--failed")">
-                            <span class="quiz-score__label">Last score</span>
+                            <span class="quiz-score__label">@L["Module_LastScore"]</span>
                             <span class="quiz-score__value">@Model.LastAttemptScore<small>%</small></span>
                             <span class="quiz-score__verdict">
                                 <i class="fa-solid @(Model.QuizPassed ? "fa-circle-check" : "fa-circle-xmark")" aria-hidden="true"></i>
-                                @(Model.QuizPassed ? "Passed" : "Not passed")
+                                @(Model.QuizPassed ? L["Module_Passed"] : L["Module_NotPassed"])
                             </span>
                         </div>
                     }
@@ -183,7 +186,7 @@
                         <input type="hidden" name="traineeLicenseId" value="@Model.TraineeLicenseId" />
                         <button type="submit" class="btn-action btn-action--success">
                             <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                            <span>Mark as Complete</span>
+                            <span>@L["Modules_Complete"]</span>
                         </button>
                     </form>
                 }
@@ -191,7 +194,7 @@
                 {
                     <p class="module-actions__hint">
                         <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
-                        <span>This module will start when you open it.</span>
+                        <span>@L["Module_AutoStartHint"]</span>
                     </p>
                 }
             </div>
@@ -201,7 +204,7 @@
                asp-action="Index"
                class="btn-action btn-action--ghost">
                 <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                <span>Back to Modules</span>
+                <span>@L["Module_BackToModules"]</span>
             </a>
         </section>
 
