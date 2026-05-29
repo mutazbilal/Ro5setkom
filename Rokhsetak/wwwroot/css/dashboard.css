@@ -5,7 +5,8 @@
    BEM conventions, RTL-aware
    ============================================================ */
 
-.trainee-dashboard {
+.trainee-dashboard,
+.mentor-dashboard {
     /* ---- Local design tokens (scoped to this view) ----
        Falls back to project-level custom properties if defined globally */
     --td-primary:        var(--color-primary,        #1A3A6B);
@@ -51,7 +52,8 @@
         var(--td-bg);
 }
 
-.trainee-dashboard__inner {
+.trainee-dashboard__inner,
+.mentor-dashboard__inner {
     max-width: 1240px;
     margin: 0 auto;
     padding-inline: clamp(1rem, 3vw, 2rem);
@@ -62,7 +64,10 @@
 
 .trainee-dashboard h1,
 .trainee-dashboard h2,
-.trainee-dashboard h3 {
+.trainee-dashboard h3,
+.mentor-dashboard h1,
+.mentor-dashboard h2,
+.mentor-dashboard h3 {
     font-family: 'Poppins', 'Inter', system-ui, sans-serif;
     letter-spacing: -0.01em;
     color: var(--td-primary);
@@ -884,7 +889,8 @@
    ============================================================ */
 
 @media (max-width: 760px) {
-    .trainee-dashboard {
+    .trainee-dashboard,
+    .mentor-dashboard {
         padding-block: 1.5rem 2.5rem;
     }
 
@@ -960,13 +966,16 @@
    ============================================================ */
 
 /* ---- Page-level decorative accents (layered onto existing background) ---- */
-.trainee-dashboard {
+.trainee-dashboard,
+.mentor-dashboard {
     position: relative;
     isolation: isolate;
 }
 
 .trainee-dashboard::before,
-.trainee-dashboard::after {
+.trainee-dashboard::after,
+.mentor-dashboard::before,
+.mentor-dashboard::after {
     content: '';
     position: absolute;
     border-radius: 50%;
@@ -976,7 +985,8 @@
     opacity: 0.55;
 }
 
-.trainee-dashboard::before {
+.trainee-dashboard::before,
+.mentor-dashboard::before {
     top: 12%;
     inset-inline-end: -120px;
     width: 320px;
@@ -985,7 +995,8 @@
     animation: td-drift-a 18s ease-in-out infinite alternate;
 }
 
-.trainee-dashboard::after {
+.trainee-dashboard::after,
+.mentor-dashboard::after {
     bottom: 18%;
     inset-inline-start: -140px;
     width: 360px;
@@ -1005,16 +1016,23 @@
 }
 
 /* ---- Staggered entrance for the dashboard column ---- */
-.trainee-dashboard__inner > * {
+.trainee-dashboard__inner > *,
+.mentor-dashboard__inner > * {
     animation: td-fade-up 600ms var(--td-ease) both;
 }
 
-.trainee-dashboard__inner > *:nth-child(1) { animation-delay:   0ms; }
-.trainee-dashboard__inner > *:nth-child(2) { animation-delay:  80ms; }
-.trainee-dashboard__inner > *:nth-child(3) { animation-delay: 160ms; }
-.trainee-dashboard__inner > *:nth-child(4) { animation-delay: 240ms; }
-.trainee-dashboard__inner > *:nth-child(5) { animation-delay: 320ms; }
-.trainee-dashboard__inner > *:nth-child(6) { animation-delay: 400ms; }
+.trainee-dashboard__inner > *:nth-child(1),
+.mentor-dashboard__inner > *:nth-child(1) { animation-delay:   0ms; }
+.trainee-dashboard__inner > *:nth-child(2),
+.mentor-dashboard__inner > *:nth-child(2) { animation-delay:  80ms; }
+.trainee-dashboard__inner > *:nth-child(3),
+.mentor-dashboard__inner > *:nth-child(3) { animation-delay: 160ms; }
+.trainee-dashboard__inner > *:nth-child(4),
+.mentor-dashboard__inner > *:nth-child(4) { animation-delay: 240ms; }
+.trainee-dashboard__inner > *:nth-child(5),
+.mentor-dashboard__inner > *:nth-child(5) { animation-delay: 320ms; }
+.trainee-dashboard__inner > *:nth-child(6),
+.mentor-dashboard__inner > *:nth-child(6) { animation-delay: 400ms; }
 
 @keyframes td-fade-up {
     from { opacity: 0; transform: translateY(14px); }
@@ -1160,11 +1178,15 @@
     .trainee-dashboard::before,
     .trainee-dashboard::after,
     .trainee-dashboard__inner > *,
+    .mentor-dashboard::before,
+    .mentor-dashboard::after,
+    .mentor-dashboard__inner > *,
     .module-item--up-next .module-item__status-icon,
     .mock-exam--ready .btn-action--gradient {
         animation: none !important;
     }
-    .trainee-dashboard__inner > * {
+    .trainee-dashboard__inner > *,
+    .mentor-dashboard__inner > * {
         opacity: 1;
         transform: none;
     }

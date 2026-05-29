@@ -1,0 +1,1111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!-- ========== التنقل / التخطيط ========== -->
+	<data name="Nav_Dashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
+	<data name="Nav_Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+	<data name="Nav_Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+	<data name="Nav_Register" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
+	<data name="Nav_Profile" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+	<data name="Nav_Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+	<data name="Nav_Language_EN" xml:space="preserve">
+    <value>EN</value>
+  </data>
+	<data name="Nav_Language_AR" xml:space="preserve">
+    <value>AR</value>
+  </data>
+	<data name="Nav_ToggleMenu" xml:space="preserve">
+    <value>تبديل قائمة التنقل</value>
+  </data>
+	<data name="Nav_MyBookings" xml:space="preserve">
+    <value>حجوزاتي</value>
+  </data>
+	<data name="Nav_FindMentor" xml:space="preserve">
+    <value>ابحث عن مرشد</value>
+  </data>
+	<data name="Nav_Modules" xml:space="preserve">
+    <value>الوحدات</value>
+  </data>
+	<data name="Nav_Exams" xml:space="preserve">
+    <value>الامتحانات</value>
+  </data>
+	<data name="Nav_Calendar" xml:space="preserve">
+    <value>التقويم</value>
+  </data>
+
+	<!-- ========== لوحة التحكم (المتدرّب) ========== -->
+	<data name="Dashboard_Title" xml:space="preserve">
+    <value>لوحة التحكم الخاصة بي</value>
+  </data>
+	<data name="Dashboard_Progress" xml:space="preserve">
+    <value>التقدم الكلي</value>
+  </data>
+	<data name="Dashboard_NextMilestone" xml:space="preserve">
+    <value>المرحلة التالية</value>
+  </data>
+	<data name="Dashboard_MockExam" xml:space="preserve">
+    <value>الامتحان التجريبي</value>
+  </data>
+	<data name="Dashboard_StartMockExam" xml:space="preserve">
+    <value>بدء الامتحان التجريبي</value>
+  </data>
+	<data name="Dashboard_RetakeMockExam" xml:space="preserve">
+    <value>إعادة الامتحان التجريبي</value>
+  </data>
+	<data name="Dashboard_MyLicenseJourney" xml:space="preserve">
+    <value>رحلة رخصتي</value>
+  </data>
+	<data name="Dashboard_LicenseType" xml:space="preserve">
+    <value>نوع الرخصة</value>
+  </data>
+	<data name="Dashboard_CurrentStage" xml:space="preserve">
+    <value>المرحلة الحالية</value>
+  </data>
+	<data name="Dashboard_ViewModules" xml:space="preserve">
+    <value>عرض الوحدات</value>
+  </data>
+	<data name="Dashboard_YourJourney" xml:space="preserve">
+    <value>رحلتك الكاملة من النظري إلى السائق المرخص</value>
+  </data>
+	<data name="Dashboard_TheoreticalPreparation" xml:space="preserve">
+    <value>التحضير النظري</value>
+  </data>
+	<data name="Dashboard_PracticalPreparation" xml:space="preserve">
+    <value>التحضير العملي</value>
+  </data>
+	<data name="Dashboard_Track01" xml:space="preserve">
+    <value>المسار 01</value>
+  </data>
+	<data name="Dashboard_Track02" xml:space="preserve">
+    <value>المسار 02</value>
+  </data>
+	<data name="Dashboard_ModulesComplete" xml:space="preserve">
+    <value>من {0} مكتمل</value>
+  </data>
+	<data name="Dashboard_UpNext" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+	<data name="Dashboard_FinalCheckpoint" xml:space="preserve">
+    <value>نقطة التفتيش النهائية</value>
+  </data>
+	<data name="Dashboard_MockExam_CompletedMsg" xml:space="preserve">
+    <value>مكتمل — يمكنك الآن حجز اختبار النظرية.</value>
+  </data>
+	<data name="Dashboard_MockExam_ReadyMsg" xml:space="preserve">
+    <value>جاهز! أكمِل هذا الامتحان لفتح حجز اختبار النظرية.</value>
+  </data>
+	<data name="Dashboard_MockExam_LockedMsg" xml:space="preserve">
+    <value>يُفتح بعد إكمال جميع الوحدات النظرية.</value>
+  </data>
+	<data name="Dashboard_Locked" xml:space="preserve">
+    <value>مغلق</value>
+  </data>
+
+	<!-- ========== الوحدات ========== -->
+	<data name="Modules_Title" xml:space="preserve">
+    <value>وحدات التعلم</value>
+  </data>
+	<data name="Modules_Theoretical" xml:space="preserve">
+    <value>الوحدات النظرية</value>
+  </data>
+	<data name="Modules_Practical" xml:space="preserve">
+    <value>الوحدات العملية</value>
+  </data>
+	<data name="Modules_NoneTheoretical" xml:space="preserve">
+    <value>لا توجد وحدات نظرية متاحة.</value>
+  </data>
+	<data name="Modules_NonePractical" xml:space="preserve">
+    <value>لا توجد وحدات عملية متاحة بعد.</value>
+  </data>
+	<data name="Modules_Start" xml:space="preserve">
+    <value>بدء الوحدة</value>
+  </data>
+	<data name="Modules_Continue" xml:space="preserve">
+    <value>متابعة</value>
+  </data>
+	<data name="Modules_Complete" xml:space="preserve">
+    <value>وضع علامة مكتمل</value>
+  </data>
+	<data name="Modules_Review" xml:space="preserve">
+    <value>مراجعة</value>
+  </data>
+	<data name="Modules_Locked" xml:space="preserve">
+    <value>مغلق</value>
+  </data>
+	<data name="Module_Detail" xml:space="preserve">
+    <value>تفاصيل الوحدة</value>
+  </data>
+	<data name="Module_VideoLesson" xml:space="preserve">
+    <value>درس فيديو</value>
+  </data>
+	<data name="Module_ReadingMaterial" xml:space="preserve">
+    <value>مادة قراءة</value>
+  </data>
+	<data name="Module_NoContent" xml:space="preserve">
+    <value>لا يوجد محتوى متاح بعد للغة المفضلة لديك.</value>
+  </data>
+	<data name="Module_MarkComplete" xml:space="preserve">
+    <value>وضع علامة مكتمل</value>
+  </data>
+	<data name="Module_QuizLabel" xml:space="preserve">
+    <value>اختبار</value>
+  </data>
+	<data name="Module_QuizPassedShort" xml:space="preserve">
+    <value>ناجح</value>
+  </data>
+	<data name="Module_QuizNotPassedShort" xml:space="preserve">
+    <value>راسب</value>
+  </data>
+	<data name="Module_LockedTooltip" xml:space="preserve">
+    <value>أكمل الوحدات السابقة أولاً</value>
+  </data>
+	<data name="Module_CompletedTooltip" xml:space="preserve">
+    <value>الوحدة مكتملة</value>
+  </data>
+
+	<!-- ========== الاختبارات والامتحان التجريبي ========== -->
+	<data name="Quiz_TakeQuiz" xml:space="preserve">
+    <value>أداء الاختبار</value>
+  </data>
+	<data name="Quiz_Submit" xml:space="preserve">
+    <value>إرسال الاختبار</value>
+  </data>
+	<data name="Quiz_RetakeQuiz" xml:space="preserve">
+    <value>إعادة الاختبار</value>
+  </data>
+	<data name="Quiz_Score" xml:space="preserve">
+    <value>النتيجة</value>
+  </data>
+	<data name="Quiz_Passed" xml:space="preserve">
+    <value>نجحت!</value>
+  </data>
+	<data name="Quiz_Failed" xml:space="preserve">
+    <value>لم تنجح بعد</value>
+  </data>
+	<data name="Quiz_Correct" xml:space="preserve">
+    <value>صحيح</value>
+  </data>
+	<data name="Quiz_Incorrect" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+	<data name="MockExam_Title" xml:space="preserve">
+    <value>الامتحان التجريبي</value>
+  </data>
+	<data name="MockExam_Start" xml:space="preserve">
+    <value>بدء الامتحان التجريبي</value>
+  </data>
+	<data name="MockExam_Retake" xml:space="preserve">
+    <value>إعادة المحاولة</value>
+  </data>
+	<data name="MockExam_Completed" xml:space="preserve">
+    <value>مكتمل ✓ — يمكنك إعادة المحاولة في أي وقت.</value>
+  </data>
+	<data name="MockExam_UnlockMessage" xml:space="preserve">
+    <value>جميع الوحدات النظرية مكتملة! أجرِ الامتحان التجريبي لفتح حجز اختبار النظرية.</value>
+  </data>
+	<data name="Quiz_PassingScore" xml:space="preserve">
+    <value>درجة النجاح</value>
+  </data>
+	<data name="Quiz_CorrectCount" xml:space="preserve">
+    <value>صحيح</value>
+  </data>
+	<data name="Quiz_IncorrectCount" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+	<data name="Quiz_TotalQuestions" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+	<data name="Quiz_QuestionBreakdown" xml:space="preserve">
+    <value>تفصيل الأسئلة</value>
+  </data>
+	<data name="Quiz_TimeRemaining" xml:space="preserve">
+    <value>الوقت المتبقي</value>
+  </data>
+	<data name="Quiz_MockExamRules" xml:space="preserve">
+    <value>قواعد الامتحان التجريبي</value>
+  </data>
+	<data name="Quiz_MockExamDesc" xml:space="preserve">
+    <value>هذه محاكاة بوقت محدد. لديك {0} دقيقة. سيتم إرسال الامتحان تلقائياً عند انتهاء الوقت. النجاح ليس مطلوباً للمتابعة.</value>
+  </data>
+	<data name="Quiz_SubmitMock" xml:space="preserve">
+    <value>إرسال الامتحان التجريبي</value>
+  </data>
+	<data name="Quiz_Result_Passed" xml:space="preserve">
+    <value>نجحت!</value>
+  </data>
+	<data name="Quiz_Result_PassedMessage" xml:space="preserve">
+    <value>عمل ممتاز. لقد اجتزت عتبة النجاح ويمكنك المتابعة بثقة.</value>
+  </data>
+	<data name="Quiz_Result_MockCompleted" xml:space="preserve">
+    <value>اكتمل الامتحان التجريبي</value>
+  </data>
+	<data name="Quiz_Result_MockMessage" xml:space="preserve">
+    <value>النجاح غير مطلوب للتجريبي — تم تأهيلك لحجز اختبار النظرية متى أصبحت جاهزاً.</value>
+  </data>
+	<data name="Quiz_Result_NotPassed" xml:space="preserve">
+    <value>لم تنجح بعد</value>
+  </data>
+	<data name="Quiz_Result_RetryMessage" xml:space="preserve">
+    <value>راجع المادة وحاول مرة أخرى — لا يوجد حد للمحاولات.</value>
+  </data>
+	<data name="Quiz_GoToDashboard" xml:space="preserve">
+    <value>اذهب إلى لوحة التحكم</value>
+  </data>
+	<data name="Quiz_YourAnswer" xml:space="preserve">
+    <value>إجابتك</value>
+  </data>
+	<data name="Quiz_CorrectAnswer" xml:space="preserve">
+    <value>الإجابة الصحيحة</value>
+  </data>
+
+	<!-- ========== الحالات ========== -->
+	<data name="Status_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+	<data name="Status_InProgress" xml:space="preserve">
+    <value>قيد التقدم</value>
+  </data>
+	<data name="Status_NotStarted" xml:space="preserve">
+    <value>لم يبدأ</value>
+  </data>
+
+	<!-- ========== المصادقة / الوصول ========== -->
+	<data name="Auth_AccessDenied_Title" xml:space="preserve">
+    <value>دخول مرفوض</value>
+  </data>
+	<data name="Auth_AccessDenied_Message" xml:space="preserve">
+    <value>أنت مسجل الدخول ولكن ليس لديك صلاحية لعرض هذه الصفحة. عد إلى لوحة التحكم أو سجل الخروج ثم سجل الدخول بحساب صحيح.</value>
+  </data>
+	<data name="Auth_GoToDashboard" xml:space="preserve">
+    <value>اذهب إلى لوحة التحكم</value>
+  </data>
+	<data name="Auth_Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+	<data name="Auth_BackToHome" xml:space="preserve">
+    <value>العودة إلى الرئيسية</value>
+  </data>
+	<data name="Auth_ForgotPassword_Title" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+	<data name="Auth_ForgotPassword_Subtitle" xml:space="preserve">
+    <value>أدخل بريدك الإلكتروني المسجل وسنرسل لك رابط إعادة التعيين.</value>
+  </data>
+	<data name="Auth_ForgotPassword_EmailLabel" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Auth_ForgotPassword_SendLink" xml:space="preserve">
+    <value>إرسال رابط إعادة التعيين</value>
+  </data>
+	<data name="Auth_BackToLogin" xml:space="preserve">
+    <value>العودة إلى تسجيل الدخول</value>
+  </data>
+	<data name="Auth_CheckEmail_Title" xml:space="preserve">
+    <value>تفقّد بريدك الوارد</value>
+  </data>
+	<data name="Auth_CheckEmail_Message" xml:space="preserve">
+    <value>إذا كان هناك حساب بهذا البريد، فقد تم إرسال رابط إعادة التعيين. ستنتهي صلاحية الرابط بعد ساعة واحدة.</value>
+  </data>
+	<data name="Auth_ResetPassword_Title" xml:space="preserve">
+    <value>تعيين كلمة مرور جديدة</value>
+  </data>
+	<data name="Auth_ResetPassword_Subtitle" xml:space="preserve">
+    <value>اختر كلمة مرور جديدة قوية لحسابك.</value>
+  </data>
+	<data name="Auth_NewPassword" xml:space="preserve">
+    <value>كلمة المرور الجديدة</value>
+  </data>
+	<data name="Auth_ConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور الجديدة</value>
+  </data>
+	<data name="Auth_ResetPassword_Button" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+	<data name="Auth_Login_Title" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+	<data name="Auth_Login_Subtitle" xml:space="preserve">
+    <value>دخول آمن لحسابك لمواصلة رحلة التدريب.</value>
+  </data>
+	<data name="Auth_NationalId" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+	<data name="Auth_Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+	<data name="Auth_RememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+	<data name="Auth_ForgotPassword_Link" xml:space="preserve">
+    <value>نسيت كلمة المرور؟</value>
+  </data>
+	<data name="Auth_SignIn" xml:space="preserve">
+    <value>دخول</value>
+  </data>
+	<data name="Auth_NoAccount" xml:space="preserve">
+    <value>ليس لديك حساب؟</value>
+  </data>
+	<data name="Auth_RegisterTrainee" xml:space="preserve">
+    <value>التسجيل كمتدرّب</value>
+  </data>
+	<data name="Auth_RegisterMentor" xml:space="preserve">
+    <value>التسجيل كمرشد</value>
+  </data>
+	<data name="Auth_ShowPassword" xml:space="preserve">
+    <value>إظهار كلمة المرور</value>
+  </data>
+
+	<!-- ========== التسجيل ========== -->
+	<data name="Reg_SelectRole_Title" xml:space="preserve">
+    <value>اختر دورك</value>
+  </data>
+	<data name="Reg_SelectRole_Subtitle" xml:space="preserve">
+    <value>الخطوة 1 من 3: اختر الدور</value>
+  </data>
+	<data name="Reg_Role_Trainee" xml:space="preserve">
+    <value>متدرّب</value>
+  </data>
+	<data name="Reg_Role_Trainee_Desc" xml:space="preserve">
+    <value>تعلّم القيادة مع مرشدين معتمدين واحصل على رخصتك من خلال برنامج منظم وموجَّه.</value>
+  </data>
+	<data name="Reg_Role_Mentor" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+	<data name="Reg_Role_Mentor_Desc" xml:space="preserve">
+    <value>شارك خبرتك، درّب سائقين جدد، وابنِ سمعتك على منصة موثوقة.</value>
+  </data>
+	<data name="Reg_ContinueAsTrainee" xml:space="preserve">
+    <value>الاستمرار كمتدرّب</value>
+  </data>
+	<data name="Reg_ContinueAsMentor" xml:space="preserve">
+    <value>الاستمرار كمرشد</value>
+  </data>
+	<data name="Reg_AdminApprovalNote" xml:space="preserve">
+    <value>يحتاج الطلب إلى موافقة المشرف</value>
+  </data>
+	<data name="Reg_NationalIdLookup_Title" xml:space="preserve">
+    <value>التحقق من الهوية</value>
+  </data>
+	<data name="Reg_NationalIdLookup_Subtitle" xml:space="preserve">
+    <value>الخطوة 2 من 3: التحقق من الهوية</value>
+  </data>
+	<data name="Reg_Consent_DataRetrieval" xml:space="preserve">
+    <value>أوافق على استرداد بيانات رقمي الوطني لغرض التحقق من الهوية فقط. أتفهم أن هذه المعلومات ستُستخدم فقط لتأكيد أهليتي للتسجيل ولن تُخزَّن أو تُشارَك خارج هذه العملية.</value>
+  </data>
+	<data name="Reg_LookupID" xml:space="preserve">
+    <value>البحث عن رقمي الوطني</value>
+  </data>
+	<data name="Reg_AlreadyHaveAccount" xml:space="preserve">
+    <value>لديك حساب بالفعل؟</value>
+  </data>
+	<data name="Reg_SignIn" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+	<data name="Reg_CompleteProfile_Title" xml:space="preserve">
+    <value>إكمال ملفك الشخصي</value>
+  </data>
+	<data name="Reg_CompleteProfile_Subtitle" xml:space="preserve">
+    <value>الخطوة 3 من 3: إكمال الملف الشخصي</value>
+  </data>
+	<data name="Reg_LockedGovFields" xml:space="preserve">
+    <value>التفاصيل التالية مأخوذة من السجلات الحكومية ولا يمكن تعديلها.</value>
+  </data>
+	<data name="Reg_Province" xml:space="preserve">
+    <value>المحافظة</value>
+  </data>
+	<data name="Reg_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+	<data name="Reg_AddressLine1" xml:space="preserve">
+    <value>عنوان السطر 1</value>
+  </data>
+	<data name="Reg_AddressLine2" xml:space="preserve">
+    <value>عنوان السطر 2</value>
+  </data>
+	<data name="Reg_PostalCode" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+	<data name="Reg_Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Reg_PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+	<data name="Reg_Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+	<data name="Reg_ConfirmPassword" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+	<data name="Reg_LicenseType" xml:space="preserve">
+    <value>نوع الرخصة</value>
+  </data>
+	<data name="Reg_SelectLicenseType" xml:space="preserve">
+    <value>-- اختر نوع الرخصة --</value>
+  </data>
+	<data name="Reg_TrainingCenter" xml:space="preserve">
+    <value>مركز التدريب الرسمي الخاص بك</value>
+  </data>
+	<data name="Reg_SelectTrainingCenter" xml:space="preserve">
+    <value>-- اختر مركز التدريب --</value>
+  </data>
+	<data name="Reg_VehicleType_Optional" xml:space="preserve">
+    <value>نوع المركبة (اختياري)</value>
+  </data>
+	<data name="Reg_PricePerSession_Optional" xml:space="preserve">
+    <value>السعر لكل حصة — دينار (اختياري)</value>
+  </data>
+	<data name="Reg_CertificationDocument" xml:space="preserve">
+    <value>وثيقة الترخيص/الشهادة</value>
+  </data>
+	<data name="Reg_UploadCert" xml:space="preserve">
+    <value>اسحب وأفلت أو انقر للرفع — PDF / JPG / PNG</value>
+  </data>
+	<data name="Reg_MaxFileSize" xml:space="preserve">
+    <value>الحد الأقصى لحجم الملف: 5 ميجابايت</value>
+  </data>
+	<data name="Reg_AcceptTerms" xml:space="preserve">
+    <value>أوافق على الشروط والأحكام وسياسة الخصوصية</value>
+  </data>
+	<data name="Reg_SubmitApplication" xml:space="preserve">
+    <value>تقديم الطلب</value>
+  </data>
+	<data name="Reg_CompleteRegistration" xml:space="preserve">
+    <value>إكمال التسجيل</value>
+  </data>
+	<data name="Reg_MentorPending_Title" xml:space="preserve">
+    <value>تم تقديم الطلب</value>
+  </data>
+	<data name="Reg_MentorPending_Message" xml:space="preserve">
+    <value>تم تقديم طلب الإرشاد الخاص بك وهو قيد المراجعة حالياً. ستتلقى إشعاراً بالبريد الإلكتروني بعد أن يقوم المشرف بمراجعة طلبك.</value>
+  </data>
+	<data name="Reg_ReturnHome" xml:space="preserve">
+    <value>العودة إلى الرئيسية</value>
+  </data>
+	<data name="Reg_Step1" xml:space="preserve">
+    <value>الخطوة 1 من 3: اختر الدور</value>
+  </data>
+	<data name="Reg_Step2" xml:space="preserve">
+    <value>الخطوة 2 من 3: التحقق من الهوية</value>
+  </data>
+	<data name="Reg_Step3" xml:space="preserve">
+    <value>الخطوة 3 من 3: إكمال الملف الشخصي</value>
+  </data>
+
+	<!-- ========== الملف الشخصي ========== -->
+	<data name="Profile_MyProfile" xml:space="preserve">
+    <value>ملفي الشخصي</value>
+  </data>
+	<data name="Profile_EditProfile" xml:space="preserve">
+    <value>تعديل الملف الشخصي</value>
+  </data>
+	<data name="Profile_ChangeLicense" xml:space="preserve">
+    <value>تغيير نوع الرخصة</value>
+  </data>
+	<data name="Profile_LanguagePreference" xml:space="preserve">
+    <value>تفضيل اللغة</value>
+  </data>
+	<data name="Profile_BackToProfile" xml:space="preserve">
+    <value>العودة إلى الملف الشخصي</value>
+  </data>
+	<data name="Profile_PersonalInfo" xml:space="preserve">
+    <value>المعلومات الشخصية</value>
+  </data>
+	<data name="Profile_ReadOnly" xml:space="preserve">
+    <value>للقراءة فقط</value>
+  </data>
+	<data name="Profile_SourcedFromGov" xml:space="preserve">
+    <value>التفاصيل التالية مأخوذة من السجلات الحكومية ولا يمكن تعديلها.</value>
+  </data>
+	<data name="Profile_FirstName" xml:space="preserve">
+    <value>الاسم الأول</value>
+  </data>
+	<data name="Profile_LastName" xml:space="preserve">
+    <value>اسم العائلة</value>
+  </data>
+	<data name="Profile_DateOfBirth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+	<data name="Profile_Gender" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+	<data name="Profile_NationalId" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+	<data name="Profile_ContactInfo" xml:space="preserve">
+    <value>معلومات الاتصال</value>
+  </data>
+	<data name="Profile_Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+	<data name="Profile_PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+	<data name="Profile_Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+	<data name="Profile_AddressLine1" xml:space="preserve">
+    <value>عنوان السطر 1</value>
+  </data>
+	<data name="Profile_AddressLine2" xml:space="preserve">
+    <value>عنوان السطر 2</value>
+  </data>
+	<data name="Profile_PostalCode" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+	<data name="Profile_SaveChanges" xml:space="preserve">
+    <value>حفظ التغييرات</value>
+  </data>
+	<data name="Profile_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+	<data name="Profile_ChangeLicense_Warning" xml:space="preserve">
+    <value>تنبيه — هذا تغيير جوهري</value>
+  </data>
+	<data name="Profile_ChangeLicense_Desc" xml:space="preserve">
+    <value>تغيير نوع الرخصة سيؤدي إلى إلغاء أي حجوزات مستقبلية مرتبطة برخصتك الحالية. سيتم حفظ تقدمك في الوحدات المؤهلة ونقلها إلى الفئة الجديدة حيثما ينطبق ذلك.</value>
+  </data>
+	<data name="Profile_NewLicenseType" xml:space="preserve">
+    <value>نوع الرخصة الجديد</value>
+  </data>
+	<data name="Profile_ConfirmChange" xml:space="preserve">
+    <value>أتفهم أن تغيير رخصتي سيلغي الحجوزات المستقبلية وسيعيد تعيين التقدم في الوحدات غير المتوافقة.</value>
+  </data>
+	<data name="Profile_SelectLanguage" xml:space="preserve">
+    <value>اختر لغتك</value>
+  </data>
+	<data name="Profile_Language_Arabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+	<data name="Profile_Language_English" xml:space="preserve">
+    <value>الإنجليزية</value>
+  </data>
+	<data name="Profile_SavePreference" xml:space="preserve">
+    <value>حفظ التفضيل</value>
+  </data>
+
+	<!-- ========== الحجوزات (المتدرّب) ========== -->
+	<data name="Booking_MyBookings" xml:space="preserve">
+    <value>حجوزاتي</value>
+  </data>
+	<data name="Booking_FindMentor" xml:space="preserve">
+    <value>ابحث عن مرشد</value>
+  </data>
+	<data name="Booking_BookSession" xml:space="preserve">
+    <value>حجز حصة</value>
+  </data>
+	<data name="Booking_Reschedule" xml:space="preserve">
+    <value>إعادة جدولة</value>
+  </data>
+	<data name="Booking_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+	<data name="Booking_Rate" xml:space="preserve">
+    <value>تقييم</value>
+  </data>
+	<data name="Booking_Feedback" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+	<data name="Booking_YourPrimaryMentor" xml:space="preserve">
+    <value>مرشدك الأساسي</value>
+  </data>
+	<data name="Booking_BookAgain" xml:space="preserve">
+    <value>حجز مرة أخرى</value>
+  </data>
+	<data name="Booking_All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+	<data name="Booking_Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+	<data name="Booking_Confirmed" xml:space="preserve">
+    <value>مؤكد</value>
+  </data>
+	<data name="Booking_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+	<data name="Booking_Cancelled" xml:space="preserve">
+    <value>ملغي</value>
+  </data>
+	<data name="Booking_SessionType" xml:space="preserve">
+    <value>نوع الحصة</value>
+  </data>
+	<data name="Booking_Theoretical" xml:space="preserve">
+    <value>نظري</value>
+  </data>
+	<data name="Booking_Practical" xml:space="preserve">
+    <value>عملي</value>
+  </data>
+	<data name="Booking_DateAndTime" xml:space="preserve">
+    <value>التاريخ والوقت</value>
+  </data>
+	<data name="Booking_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+	<data name="Booking_Actions" xml:space="preserve">
+    <value>إجراءات</value>
+  </data>
+	<data name="Booking_NoBookings" xml:space="preserve">
+    <value>ليس لديك حجوزات بعد.</value>
+  </data>
+	<data name="Booking_BrowseMentors" xml:space="preserve">
+    <value>تصفح المرشدين</value>
+  </data>
+	<data name="Booking_ChangePrimaryMentor" xml:space="preserve">
+    <value>تغيير المرشد الأساسي؟</value>
+  </data>
+	<data name="Booking_ChangePrimaryMsg" xml:space="preserve">
+    <value>أنت على وشك حجز حصة مع {0}. سيصبح هذا مرشدك الأساسي.</value>
+  </data>
+	<data name="Booking_ChangePrimaryConsequences" xml:space="preserve">
+    <value>سيتم إلغاء جميع الحجوزات المستقبلية مع مرشدك الحالي. إذا تمت الموافقة، يصبح المرشد الجديد هو مرشدك الأساسي. ستستخدم الحجوزات المستقبلية المرشد الجديد تلقائياً.</value>
+  </data>
+	<data name="Booking_ConfirmSwitch" xml:space="preserve">
+    <value>نعم، متابعة</value>
+  </data>
+	<data name="Booking_CancelSwitch" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+	<data name="Booking_FilterByCity" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+	<data name="Booking_MinPrice" xml:space="preserve">
+    <value>أقل سعر (دينار)</value>
+  </data>
+	<data name="Booking_MaxPrice" xml:space="preserve">
+    <value>أعلى سعر (دينار)</value>
+  </data>
+	<data name="Booking_MinRating" xml:space="preserve">
+    <value>أقل تقييم</value>
+  </data>
+	<data name="Booking_FilterButton" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+	<data name="Booking_ClearFilter" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+	<data name="Booking_NoMentors" xml:space="preserve">
+    <value>لم يتم العثور على مرشدين حسب التصفية.</value>
+  </data>
+	<data name="Booking_MentorStats" xml:space="preserve">
+    <value>تقييمات</value>
+  </data>
+	<data name="Booking_Completion" xml:space="preserve">
+    <value>الإنجاز</value>
+  </data>
+	<data name="Booking_PerSession" xml:space="preserve">
+    <value>لكل حصة</value>
+  </data>
+	<data name="Booking_SelectSessionType" xml:space="preserve">
+    <value>اختر نوع الحصة</value>
+  </data>
+	<data name="Booking_TheoreticalDesc" xml:space="preserve">
+    <value>درس في القاعة / عبر الإنترنت</value>
+  </data>
+	<data name="Booking_PracticalDesc" xml:space="preserve">
+    <value>درس قيادة على الطريق</value>
+  </data>
+	<data name="Booking_PickTimeSlot" xml:space="preserve">
+    <value>اختر موعداً زمنياً</value>
+  </data>
+	<data name="Booking_NoSlots" xml:space="preserve">
+    <value>لا توجد مواعيد</value>
+  </data>
+	<data name="Booking_BookingSummary" xml:space="preserve">
+    <value>ملخص الحجز</value>
+  </data>
+	<data name="Booking_Duration" xml:space="preserve">
+    <value>المدة</value>
+  </data>
+	<data name="Booking_Total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+	<data name="Booking_RequestBooking" xml:space="preserve">
+    <value>طلب حجز</value>
+  </data>
+	<data name="Booking_ChangeSelection" xml:space="preserve">
+    <value>تغيير الاختيار</value>
+  </data>
+	<data name="Booking_PendingConfirmation" xml:space="preserve">
+    <value>سيكون الحجز معلقاً حتى يقوم المرشد بتأكيده.</value>
+  </data>
+	<data name="Booking_RescheduleConfirmMsg" xml:space="preserve">
+    <value>سيتم إلغاء حجزك الأصلي وإنشاء طلب جديد معلق. سيحتاج المرشد إلى تأكيد الموعد الجديد.</value>
+  </data>
+	<data name="Booking_ConfirmReschedule" xml:space="preserve">
+    <value>تأكيد إعادة الجدولة</value>
+  </data>
+	<data name="Booking_NoSlotSelected" xml:space="preserve">
+    <value>لم يتم اختيار موعد بعد</value>
+  </data>
+	<data name="Booking_RatingModal_Title" xml:space="preserve">
+    <value>قيم حصتك</value>
+  </data>
+	<data name="Booking_Rating_Label" xml:space="preserve">
+    <value>تقييمك</value>
+  </data>
+	<data name="Booking_ReviewOptional" xml:space="preserve">
+    <value>مراجعة (اختياري)</value>
+  </data>
+	<data name="Booking_SubmitRating" xml:space="preserve">
+    <value>إرسال التقييم</value>
+  </data>
+	<data name="Booking_FeedbackModal_Title" xml:space="preserve">
+    <value>ملاحظات المرشد</value>
+  </data>
+	<data name="Booking_FeedbackFrom" xml:space="preserve">
+    <value>من</value>
+  </data>
+	<data name="Booking_Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+
+	<!-- ========== الامتحانات (المتدرّب) ========== -->
+	<data name="Exam_Appointments" xml:space="preserve">
+    <value>مواعيد الامتحانات</value>
+  </data>
+	<data name="Exam_BookTheory" xml:space="preserve">
+    <value>حجز امتحان النظرية</value>
+  </data>
+	<data name="Exam_BookMedical" xml:space="preserve">
+    <value>حجز الفحص الطبي</value>
+  </data>
+	<data name="Exam_BookPractical" xml:space="preserve">
+    <value>حجز امتحان القيادة العملي</value>
+  </data>
+	<data name="Exam_NoAppointments" xml:space="preserve">
+    <value>لا توجد مواعيد امتحان بعد. احجز موعداً عندما تصبح مؤهلاً.</value>
+  </data>
+	<data name="Exam_Result" xml:space="preserve">
+    <value>النتيجة</value>
+  </data>
+	<data name="Exam_Pass" xml:space="preserve">
+    <value>ناجح</value>
+  </data>
+	<data name="Exam_Fail" xml:space="preserve">
+    <value>راسب</value>
+  </data>
+	<data name="Exam_Absent" xml:space="preserve">
+    <value>غائب</value>
+  </data>
+	<data name="Exam_Score" xml:space="preserve">
+    <value>الدرجة</value>
+  </data>
+	<data name="Exam_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+	<data name="Exam_NotEligible" xml:space="preserve">
+    <value>غير مؤهل بعد</value>
+  </data>
+	<data name="Exam_IneligibilityReason" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+	<data name="Exam_NoSlots" xml:space="preserve">
+    <value>لا توجد مواعيد امتحان متاحة حالياً في منطقتك. يرجى التحقق لاحقاً.</value>
+  </data>
+	<data name="Exam_SlotsLeft" xml:space="preserve">
+    <value>موعد(مواعيد) متبقي</value>
+  </data>
+	<data name="Exam_ConfirmBooking" xml:space="preserve">
+    <value>تأكيد الحجز</value>
+  </data>
+
+	<!-- ========== منطقة المرشد ========== -->
+	<data name="Mentor_Dashboard" xml:space="preserve">
+    <value>لوحة تحكم المرشد</value>
+  </data>
+	<data name="Mentor_Today" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+	<data name="Mentor_AllAppointments" xml:space="preserve">
+    <value>جميع المواعيد</value>
+  </data>
+	<data name="Mentor_TraineesSummary" xml:space="preserve">
+    <value>ملخص المتدرّبين</value>
+  </data>
+	<data name="Mentor_SetAvailability" xml:space="preserve">
+    <value>تعيين المواعيد المتاحة</value>
+  </data>
+	<data name="Mentor_PendingRequests" xml:space="preserve">
+    <value>الطلبات المعلقة</value>
+  </data>
+	<data name="Mentor_UpcomingConfirmed" xml:space="preserve">
+    <value>المؤكدة القادمة</value>
+  </data>
+	<data name="Mentor_TodaysSessions" xml:space="preserve">
+    <value>حصص اليوم</value>
+  </data>
+	<data name="Mentor_TodaysAvailability" xml:space="preserve">
+    <value>المواعيد المتاحة اليوم</value>
+  </data>
+	<data name="Mentor_AvailableSlots" xml:space="preserve">
+    <value>المواعيد المتاحة اليوم</value>
+  </data>
+	<data name="Mentor_Booked" xml:space="preserve">
+    <value>محجوز</value>
+  </data>
+	<data name="Mentor_Free" xml:space="preserve">
+    <value>متاح</value>
+  </data>
+	<data name="Mentor_Confirm" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+	<data name="Mentor_MarkDone" xml:space="preserve">
+    <value>وضع علامة منتهي</value>
+  </data>
+	<data name="Mentor_FeedbackGiven" xml:space="preserve">
+    <value>تم تقديم الملاحظات</value>
+  </data>
+	<data name="Mentor_NoSessionsToday" xml:space="preserve">
+    <value>لا توجد حصص مؤكدة اليوم.</value>
+  </data>
+	<data name="Mentor_NoAvailabilityToday" xml:space="preserve">
+    <value>لم يتم تعيين مواعيد متاحة لليوم.</value>
+  </data>
+	<data name="Mentor_NoPending" xml:space="preserve">
+    <value>لا توجد طلبات معلقة.</value>
+  </data>
+	<data name="Mentor_ViewAllPending" xml:space="preserve">
+    <value>عرض جميع {0} معلق →</value>
+  </data>
+	<data name="Mentor_MyAvailability" xml:space="preserve">
+    <value>مواعيدي المتاحة</value>
+  </data>
+	<data name="Mentor_AvailabilityDesc" xml:space="preserve">
+    <value>حدد الفترات الزمنية التي يمكن للطلاب حجز حصص معك خلالها.</value>
+  </data>
+	<data name="Mentor_AddSlot" xml:space="preserve">
+    <value>إضافة موعد جديد</value>
+  </data>
+	<data name="Mentor_Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+	<data name="Mentor_StartTime" xml:space="preserve">
+    <value>وقت البدء</value>
+  </data>
+	<data name="Mentor_EndTime" xml:space="preserve">
+    <value>وقت الانتهاء</value>
+  </data>
+	<data name="Mentor_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+	<data name="Mentor_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+	<data name="Mentor_Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+	<data name="Mentor_Deactivate" xml:space="preserve">
+    <value>إلغاء التنشيط</value>
+  </data>
+	<data name="Mentor_NoSlotsForDay" xml:space="preserve">
+    <value>لا توجد مواعيد متاحة لهذا اليوم.</value>
+  </data>
+	<data name="Mentor_EditSlot" xml:space="preserve">
+    <value>تعديل الموعد</value>
+  </data>
+	<data name="Mentor_SaveChanges" xml:space="preserve">
+    <value>حفظ التغييرات</value>
+  </data>
+	<data name="Mentor_DeleteSlotConfirm" xml:space="preserve">
+    <value>إلغاء تنشيط هذا الموعد؟</value>
+  </data>
+	<data name="Mentor_EndTimeAfterStart" xml:space="preserve">
+    <value>يجب أن يكون وقت الانتهاء بعد وقت البدء.</value>
+  </data>
+	<data name="Mentor_Feedback_Title" xml:space="preserve">
+    <value>ملاحظات الحصة</value>
+  </data>
+	<data name="Mentor_Feedback_Notes" xml:space="preserve">
+    <value>ملاحظات (مرئية للمتدرّب)</value>
+  </data>
+	<data name="Mentor_Feedback_Placeholder" xml:space="preserve">
+    <value>صف أداء المتدرّب، ومجالات التحسين، ونقاط القوة...</value>
+  </data>
+	<data name="Mentor_SubmitFeedback" xml:space="preserve">
+    <value>إرسال الملاحظات</value>
+  </data>
+	<data name="Mentor_TraineeDetail" xml:space="preserve">
+    <value>تفاصيل المتدرّب</value>
+  </data>
+	<data name="Mentor_SessionHistory" xml:space="preserve">
+    <value>سجل الحصص</value>
+  </data>
+	<data name="Mentor_FeedbackHistory" xml:space="preserve">
+    <value>ملاحظات سابقة</value>
+  </data>
+	<data name="Mentor_OverallProgress" xml:space="preserve">
+    <value>التقدم الكلي</value>
+  </data>
+	<data name="Mentor_BackToTrainees" xml:space="preserve">
+    <value>العودة إلى قائمة المتدرّبين</value>
+  </data>
+	<data name="Mentor_SearchTrainees" xml:space="preserve">
+    <value>البحث بالاسم</value>
+  </data>
+	<data name="Mentor_FilterByStatus" xml:space="preserve">
+    <value>تصفية حسب الحالة</value>
+  </data>
+	<data name="Mentor_AllStatuses" xml:space="preserve">
+    <value>— جميع الحالات —</value>
+  </data>
+	<data name="Mentor_ClearFilters" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+	<data name="Mentor_NoTraineesFound" xml:space="preserve">
+    <value>لم يتم العثور على متدرّبين مطابقين لبحثك.</value>
+  </data>
+	<data name="Mentor_TotalSessions" xml:space="preserve">
+    <value>إجمالي الحصص</value>
+  </data>
+	<data name="Mentor_LastSession" xml:space="preserve">
+    <value>آخر حصة</value>
+  </data>
+	<data name="Mentor_ViewDetails" xml:space="preserve">
+    <value>عرض التفاصيل ←</value>
+  </data>
+
+	<!-- ========== التقويم ========== -->
+	<data name="Calendar_MyCalendar" xml:space="preserve">
+    <value>تقويمي</value>
+  </data>
+	<data name="Calendar_Legend" xml:space="preserve">
+    <value>مفتاح التقويم</value>
+  </data>
+	<data name="Calendar_Confirmed" xml:space="preserve">
+    <value>مؤكد</value>
+  </data>
+	<data name="Calendar_Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+	<data name="Calendar_Exam" xml:space="preserve">
+    <value>امتحان</value>
+  </data>
+	<data name="Calendar_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+
+	<!-- ========== الأخطاء والتنبيهات ========== -->
+	<data name="Error_General" xml:space="preserve">
+    <value>حدث خطأ أثناء معالجة طلبك.</value>
+  </data>
+	<data name="Error_RequestId" xml:space="preserve">
+    <value>معرف الطلب</value>
+  </data>
+	<data name="Error_DevelopmentMode" xml:space="preserve">
+    <value>وضع التطوير</value>
+  </data>
+	<data name="Error_SensitiveInfo" xml:space="preserve">
+    <value>لا ينبغي تمكين بيئة التطوير للتطبيقات المنشورة، حيث قد يؤدي ذلك إلى عرض معلومات حساسة من الاستثناءات للمستخدمين النهائيين.</value>
+  </data>
+	<data name="Alert_Success" xml:space="preserve">
+    <value>تم بنجاح</value>
+  </data>
+	<data name="Alert_Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+	<data name="Alert_Close" xml:space="preserve">
+    <value>إغلاق</value>
+  </data>
+
+	<!-- ========== عام / مشترك ========== -->
+	<data name="Common_Back" xml:space="preserve">
+    <value>رجوع</value>
+  </data>
+	<data name="Common_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+	<data name="Common_Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+	<data name="Common_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+	<data name="Common_Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+	<data name="Common_View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+	<data name="Common_Loading" xml:space="preserve">
+    <value>جار التحميل...</value>
+  </data>
+	<data name="Common_Submit" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
+	<data name="Common_Confirm" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+	<data name="Common_Continue" xml:space="preserve">
+    <value>متابعة</value>
+  </data>
+	<data name="Common_NoData" xml:space="preserve">
+    <value>لا توجد بيانات.</value>
+  </data>
+	<data name="Common_Optional" xml:space="preserve">
+    <value>اختياري</value>
+  </data>
+	<data name="Common_Required" xml:space="preserve">
+    <value>مطلوب</value>
+  </data>
+	<data name="Common_Of" xml:space="preserve">
+    <value>من</value>
+  </data>
+	<data name="Common_Showing" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+	<data name="Common_Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+	<data name="Common_Filter" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+	<data name="Common_Clear" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+	<data name="Common_All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+	<data name="Common_Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+	<data name="Common_No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+	<data name="Common_Or" xml:space="preserve">
+    <value>أو</value>
+  </data>
+	<data name="Common_From" xml:space="preserve">
+    <value>من</value>
+  </data>
+	<data name="Common_To" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+	<data name="Common_ViewAll" xml:space="preserve">
+    <value>عرض الكل</value>
+  </data>
+</root>
