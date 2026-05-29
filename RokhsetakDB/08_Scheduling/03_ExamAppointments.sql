@@ -7,9 +7,9 @@ CREATE TABLE Scheduling.ExamAppointments (
     status               NVARCHAR(20) DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'completed', 'cancelled', 'rescheduled')),
     created_at           DATETIME2    DEFAULT GETDATE(),
     updated_at           DATETIME2    DEFAULT GETDATE(),
-    trainee_license_id   INT           NOT NULL UNIQUE,
+    trainee_license_id   INT           NOT NULL,
 
-    UNIQUE (trainee_id, official_exam_id),
+    UNIQUE (trainee_license_id, official_exam_id),
 
     FOREIGN KEY (trainee_id)       REFERENCES Roles.Trainees(trainee_id),
     FOREIGN KEY (official_exam_id) REFERENCES Gov.GovOfficialExams(official_exam_id),

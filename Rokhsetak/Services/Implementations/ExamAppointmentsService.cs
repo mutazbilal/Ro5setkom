@@ -387,6 +387,15 @@ public class ExamAppointmentService : IExamAppointmentService
                             return (false, "You must complete the mock exam before booking the theory/medical exam.");
                     }
 
+                    // exam must not be already passed
+                    var passedExam = await _context.GovExamResults
+                            .Where(e => e.OfficialExam.ExamType == examType && e.Result == "pass")
+                            .AnyAsync();
+                    if (passedExam)
+                    {
+                        return (false, "you already passed this exam");
+                    }
+
                     if (examType == "medical")
                     {
                         // Theory must be passed
