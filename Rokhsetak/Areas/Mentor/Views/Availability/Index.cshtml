@@ -21,9 +21,9 @@
 }
 
 @section Styles {
-    <link href="~/css/availability.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/availability.css" />
 }
-
+<div class="mentor-dashboard__inner">
 <div class="avail-wrap">
 
     <header class="page-header">
@@ -159,7 +159,7 @@
     </section>
 
 </div>
-
+</div>
 @* ── Edit dialog (native <dialog>, controlled by availability.js) ─────── *@
 <dialog id="editDialog" class="avail-dialog" aria-labelledby="editDialogTitle">
     <form asp-area="Mentor" asp-controller="Availability" asp-action="EditSlot" method="post" class="js-time-form">
