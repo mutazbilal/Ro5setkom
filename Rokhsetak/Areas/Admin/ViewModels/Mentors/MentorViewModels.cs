@@ -1,3 +1,5 @@
+using Rokhsetak.ViewModels.Registration;
+
 namespace Rokhsetak.Areas.Admin.ViewModels.Mentors;
 
 public class MentorListFilter
@@ -7,6 +9,7 @@ public class MentorListFilter
     public int? LicenseTypeId { get; set; }
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 20;
+    public int? CityId { get; set; }
 }
 
 public class MentorListItem
@@ -32,6 +35,7 @@ public class MentorListViewModel
     public int TotalPages => (int)Math.Ceiling(TotalCount / (double)Filter.PageSize);
 
     public List<(int Id, string Name)> LicenseTypeOptions { get; set; } = new();
+    public List<CityOption?>? Cities { get; set; }
 }
 
 public class MentorDetailViewModel

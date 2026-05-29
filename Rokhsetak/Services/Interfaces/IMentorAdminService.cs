@@ -17,5 +17,5 @@ public interface IMentorAdminService
     Task<ServiceResult> RejectApplicationAsync(int adminUserId, int applicationId, string reason);
 
     // Secure file resolution for certification download
-    Task<ServiceResult<(string PhysicalPath, string FileName)>> GetCertificationFileAsync(int applicationId);
+    Task<ServiceResult<(Stream Stream, string FileName)>> GetCertificationFileAsync(int applicationId);
 }

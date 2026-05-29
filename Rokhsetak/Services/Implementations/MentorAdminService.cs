@@ -16,6 +16,8 @@ public class MentorAdminService : IMentorAdminService
     private readonly INotificationService _notifications;
     private readonly IEmailService _email;
     private readonly IWebHostEnvironment _env;
+    private readonly IBlobService _blobService;
+    private readonly ILookupService _lookupService;
 
     private const string CertificationsRelative = "uploads/certifications";
 
@@ -24,13 +26,17 @@ public class MentorAdminService : IMentorAdminService
         IAuditService audit,
         INotificationService notifications,
         IEmailService email,
-        IWebHostEnvironment env)
+        IWebHostEnvironment env,
+        IBlobService blobservice,
+        ILookupService lookupService)
     {
         _context = context;
         _audit = audit;
         _notifications = notifications;
         _email = email;
         _env = env;
+        _blobService = blobservice;
+        _lookupService = lookupService;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -43,7 +49,8 @@ public class MentorAdminService : IMentorAdminService
 
         var query =
             from m in _context.Mentors.AsNoTracking()
-            join u in _context.Users on m.MentorId equals u.UserId
+            join u in _context.Users on m.MentorId equals u.UserId into uj
+            from u in uj.DefaultIfEmpty()
             join lt in _context.LicenseTypes on m.LicenseTypeId equals lt.LicenseTypeId into ltj
             from lt in ltj.DefaultIfEmpty()
             join app in _context.MentorApplications on m.ApplicationId equals app.ApplicationId into appj
@@ -64,6 +71,9 @@ public class MentorAdminService : IMentorAdminService
 
         if (filter.LicenseTypeId.HasValue)
             query = query.Where(x => x.m.LicenseTypeId == filter.LicenseTypeId.Value);
+
+        if (filter.CityId.HasValue)
+            query = query.Where(x => x.u.CityId == filter.CityId);
 
         if (!string.IsNullOrWhiteSpace(filter.Status))
         {
@@ -148,6 +158,8 @@ public class MentorAdminService : IMentorAdminService
             .Select(l => new { l.LicenseTypeId, l.LicenseName })
             .ToListAsync();
 
+        var cities = await _lookupService.GetCitiesAsync(culture);
+
         return ServiceResult<MentorListViewModel>.Success(new MentorListViewModel
         {
             Filter = filter,
@@ -155,7 +167,8 @@ public class MentorAdminService : IMentorAdminService
             TotalCount = total,
             LicenseTypeOptions = licenseTypeOptions
                 .Select(o => (o.LicenseTypeId, o.LicenseName))
-                .ToList()
+                .ToList(),
+            Cities = cities
         });
     }
 
@@ -448,39 +461,36 @@ public class MentorAdminService : IMentorAdminService
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    // SECURE CERTIFICATION FILE RESOLUTION
+    // SECURE CERTIFICATION FILE DOWNLOAD FROM BLOB STORAGE
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<(string PhysicalPath, string FileName)>> GetCertificationFileAsync(int applicationId)
+    public async Task<ServiceResult<(Stream Stream, string FileName)>> GetCertificationFileAsync(int applicationId)
     {
         var app = await _context.MentorApplications
             .AsNoTracking()
             .FirstOrDefaultAsync(a => a.ApplicationId == applicationId);
 
         if (app == null)
-            return ServiceResult<(string, string)>.Failure("Application not found.");
+            return ServiceResult<(Stream, string)>.Failure("Application not found.");
 
         if (string.IsNullOrWhiteSpace(app.CertificationFilePath))
-            return ServiceResult<(string, string)>.Failure("No certification file attached.");
+            return ServiceResult<(Stream, string)>.Failure("No certification file attached.");
 
-        // Resolve and validate path strictly within the certifications directory
-        var webRoot = _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-        var certRoot = Path.GetFullPath(Path.Combine(webRoot, CertificationsRelative));
-
-        // Stored path may be absolute, root-relative, or just a filename.
-        // We accept only the filename for traversal safety.
+        // CertificationFilePath now stores the blob file name
         var fileName = Path.GetFileName(app.CertificationFilePath);
+
         if (string.IsNullOrWhiteSpace(fileName))
-            return ServiceResult<(string, string)>.Failure("Invalid certification file path.");
+            return ServiceResult<(Stream, string)>.Failure("Invalid certification file.");
 
-        var fullPath = Path.GetFullPath(Path.Combine(certRoot, fileName));
+        var downloadResult = await _blobService.DownloadAsync(
+            "uploads",
+            fileName);
 
-        // Defence in depth: the resolved path MUST live under certRoot
-        if (!fullPath.StartsWith(certRoot, StringComparison.OrdinalIgnoreCase))
-            return ServiceResult<(string, string)>.Failure("Invalid file location.");
+        if (!downloadResult.Succeeded)
+            return ServiceResult<(Stream?, string?)>.Failure(downloadResult.Error);
 
-        if (!File.Exists(fullPath))
-            return ServiceResult<(string, string)>.Failure("File not found on server.");
-
-        return ServiceResult<(string, string)>.Success((fullPath, fileName));
+        return ServiceResult<(Stream, string)>.Success((
+            downloadResult.Data,
+            fileName
+        ));
     }
 }

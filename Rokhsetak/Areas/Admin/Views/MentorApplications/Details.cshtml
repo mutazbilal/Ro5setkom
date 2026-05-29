@@ -49,6 +49,7 @@
                 </p>
                 <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Download"
                    asp-route-id="@Model.ApplicationId"
+                   asp-route-fileName="@Model.CertificationFileName"
                    class="btn admin-btn-primary w-100">
                     <i class="fa-solid fa-download"></i>
                     Download @(Model.CertificationFileName ?? "certification")
