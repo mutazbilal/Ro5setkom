@@ -1,0 +1,1111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+	<!-- ========== NAVIGATION / LAYOUT ========== -->
+	<data name="Nav_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+	<data name="Nav_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+	<data name="Nav_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+	<data name="Nav_Register" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+	<data name="Nav_Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+	<data name="Nav_Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+	<data name="Nav_Language_EN" xml:space="preserve">
+    <value>EN</value>
+  </data>
+	<data name="Nav_Language_AR" xml:space="preserve">
+    <value>AR</value>
+  </data>
+	<data name="Nav_ToggleMenu" xml:space="preserve">
+    <value>Toggle navigation menu</value>
+  </data>
+	<data name="Nav_MyBookings" xml:space="preserve">
+    <value>My Bookings</value>
+  </data>
+	<data name="Nav_FindMentor" xml:space="preserve">
+    <value>Find Mentor</value>
+  </data>
+	<data name="Nav_Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+	<data name="Nav_Exams" xml:space="preserve">
+    <value>Exams</value>
+  </data>
+	<data name="Nav_Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+
+	<!-- ========== DASHBOARD ========== -->
+	<data name="Dashboard_Title" xml:space="preserve">
+    <value>My Dashboard</value>
+  </data>
+	<data name="Dashboard_Progress" xml:space="preserve">
+    <value>Overall Progress</value>
+  </data>
+	<data name="Dashboard_NextMilestone" xml:space="preserve">
+    <value>Next milestone</value>
+  </data>
+	<data name="Dashboard_MockExam" xml:space="preserve">
+    <value>Mock Exam</value>
+  </data>
+	<data name="Dashboard_StartMockExam" xml:space="preserve">
+    <value>Start Mock Exam</value>
+  </data>
+	<data name="Dashboard_RetakeMockExam" xml:space="preserve">
+    <value>Retake Mock Exam</value>
+  </data>
+	<data name="Dashboard_MyLicenseJourney" xml:space="preserve">
+    <value>My License Journey</value>
+  </data>
+	<data name="Dashboard_LicenseType" xml:space="preserve">
+    <value>License type</value>
+  </data>
+	<data name="Dashboard_CurrentStage" xml:space="preserve">
+    <value>Current stage</value>
+  </data>
+	<data name="Dashboard_ViewModules" xml:space="preserve">
+    <value>View Modules</value>
+  </data>
+	<data name="Dashboard_YourJourney" xml:space="preserve">
+    <value>Your full journey from theory to licensed driver</value>
+  </data>
+	<data name="Dashboard_TheoreticalPreparation" xml:space="preserve">
+    <value>Theoretical Preparation</value>
+  </data>
+	<data name="Dashboard_PracticalPreparation" xml:space="preserve">
+    <value>Practical Preparation</value>
+  </data>
+	<data name="Dashboard_Track01" xml:space="preserve">
+    <value>Track 01</value>
+  </data>
+	<data name="Dashboard_Track02" xml:space="preserve">
+    <value>Track 02</value>
+  </data>
+	<data name="Dashboard_ModulesComplete" xml:space="preserve">
+    <value>of {0} complete</value>
+  </data>
+	<data name="Dashboard_UpNext" xml:space="preserve">
+    <value>up next</value>
+  </data>
+	<data name="Dashboard_FinalCheckpoint" xml:space="preserve">
+    <value>Final Checkpoint</value>
+  </data>
+	<data name="Dashboard_MockExam_CompletedMsg" xml:space="preserve">
+    <value>Completed — you may now book the theory test.</value>
+  </data>
+	<data name="Dashboard_MockExam_ReadyMsg" xml:space="preserve">
+    <value>Ready! Complete this exam to unlock your theory test booking.</value>
+  </data>
+	<data name="Dashboard_MockExam_LockedMsg" xml:space="preserve">
+    <value>Unlocks once all theoretical modules are completed.</value>
+  </data>
+	<data name="Dashboard_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+
+	<!-- ========== MODULES ========== -->
+	<data name="Modules_Title" xml:space="preserve">
+    <value>Learning Modules</value>
+  </data>
+	<data name="Modules_Theoretical" xml:space="preserve">
+    <value>Theoretical Modules</value>
+  </data>
+	<data name="Modules_Practical" xml:space="preserve">
+    <value>Practical Modules</value>
+  </data>
+	<data name="Modules_NoneTheoretical" xml:space="preserve">
+    <value>No theoretical modules available.</value>
+  </data>
+	<data name="Modules_NonePractical" xml:space="preserve">
+    <value>No practical modules available yet.</value>
+  </data>
+	<data name="Modules_Start" xml:space="preserve">
+    <value>Start Module</value>
+  </data>
+	<data name="Modules_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+	<data name="Modules_Complete" xml:space="preserve">
+    <value>Mark as Complete</value>
+  </data>
+	<data name="Modules_Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="Modules_Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+	<data name="Module_Detail" xml:space="preserve">
+    <value>Module Details</value>
+  </data>
+	<data name="Module_VideoLesson" xml:space="preserve">
+    <value>Video Lesson</value>
+  </data>
+	<data name="Module_ReadingMaterial" xml:space="preserve">
+    <value>Reading Material</value>
+  </data>
+	<data name="Module_NoContent" xml:space="preserve">
+    <value>No content available for your language preference yet.</value>
+  </data>
+	<data name="Module_MarkComplete" xml:space="preserve">
+    <value>Mark as Complete</value>
+  </data>
+	<data name="Module_QuizLabel" xml:space="preserve">
+    <value>Quiz</value>
+  </data>
+	<data name="Module_QuizPassedShort" xml:space="preserve">
+    <value>Passed</value>
+  </data>
+	<data name="Module_QuizNotPassedShort" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+	<data name="Module_LockedTooltip" xml:space="preserve">
+    <value>Complete previous modules first</value>
+  </data>
+	<data name="Module_CompletedTooltip" xml:space="preserve">
+    <value>Module completed</value>
+  </data>
+
+	<!-- ========== QUIZ & MOCK EXAM ========== -->
+	<data name="Quiz_TakeQuiz" xml:space="preserve">
+    <value>Take Quiz</value>
+  </data>
+	<data name="Quiz_Submit" xml:space="preserve">
+    <value>Submit Quiz</value>
+  </data>
+	<data name="Quiz_RetakeQuiz" xml:space="preserve">
+    <value>Retake Quiz</value>
+  </data>
+	<data name="Quiz_Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+	<data name="Quiz_Passed" xml:space="preserve">
+    <value>Passed!</value>
+  </data>
+	<data name="Quiz_Failed" xml:space="preserve">
+    <value>Not Passed Yet</value>
+  </data>
+	<data name="Quiz_Correct" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+	<data name="Quiz_Incorrect" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+	<data name="MockExam_Title" xml:space="preserve">
+    <value>Mock Exam</value>
+  </data>
+	<data name="MockExam_Start" xml:space="preserve">
+    <value>Take Mock Exam</value>
+  </data>
+	<data name="MockExam_Retake" xml:space="preserve">
+    <value>Retake</value>
+  </data>
+	<data name="MockExam_Completed" xml:space="preserve">
+    <value>Completed ✓ — you can retake anytime.</value>
+  </data>
+	<data name="MockExam_UnlockMessage" xml:space="preserve">
+    <value>All theoretical modules complete! Take the mock exam to unlock theory booking.</value>
+  </data>
+	<data name="Quiz_PassingScore" xml:space="preserve">
+    <value>Passing score</value>
+  </data>
+	<data name="Quiz_CorrectCount" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+	<data name="Quiz_IncorrectCount" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+	<data name="Quiz_TotalQuestions" xml:space="preserve">
+    <value>Total</value>
+  </data>
+	<data name="Quiz_QuestionBreakdown" xml:space="preserve">
+    <value>Question breakdown</value>
+  </data>
+	<data name="Quiz_TimeRemaining" xml:space="preserve">
+    <value>Time remaining</value>
+  </data>
+	<data name="Quiz_MockExamRules" xml:space="preserve">
+    <value>Mock exam rules</value>
+  </data>
+	<data name="Quiz_MockExamDesc" xml:space="preserve">
+    <value>This is a timed simulation. You have {0} minutes. The exam will submit automatically when time runs out. Passing is not required to proceed.</value>
+  </data>
+	<data name="Quiz_SubmitMock" xml:space="preserve">
+    <value>Submit Mock Exam</value>
+  </data>
+	<data name="Quiz_Result_Passed" xml:space="preserve">
+    <value>Passed!</value>
+  </data>
+	<data name="Quiz_Result_PassedMessage" xml:space="preserve">
+    <value>Excellent work. You’ve cleared the passing threshold and can move on with confidence.</value>
+  </data>
+	<data name="Quiz_Result_MockCompleted" xml:space="preserve">
+    <value>Mock exam completed</value>
+  </data>
+	<data name="Quiz_Result_MockMessage" xml:space="preserve">
+    <value>Passing isn’t required for the mock — you’re cleared to book your theory test whenever you’re ready.</value>
+  </data>
+	<data name="Quiz_Result_NotPassed" xml:space="preserve">
+    <value>Not passed yet</value>
+  </data>
+	<data name="Quiz_Result_RetryMessage" xml:space="preserve">
+    <value>Review the material and try again — there’s no limit on attempts.</value>
+  </data>
+	<data name="Quiz_GoToDashboard" xml:space="preserve">
+    <value>Go to dashboard</value>
+  </data>
+	<data name="Quiz_YourAnswer" xml:space="preserve">
+    <value>Your answer</value>
+  </data>
+	<data name="Quiz_CorrectAnswer" xml:space="preserve">
+    <value>Correct answer</value>
+  </data>
+
+	<!-- ========== STATUS ========== -->
+	<data name="Status_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+	<data name="Status_InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+	<data name="Status_NotStarted" xml:space="preserve">
+    <value>Not Started</value>
+  </data>
+
+	<!-- ========== AUTHENTICATION / ACCESS ========== -->
+	<data name="Auth_AccessDenied_Title" xml:space="preserve">
+    <value>Access Denied</value>
+  </data>
+	<data name="Auth_AccessDenied_Message" xml:space="preserve">
+    <value>You are signed in but do not have permission to view that page. Return to your dashboard or log out and sign in with the correct account.</value>
+  </data>
+	<data name="Auth_GoToDashboard" xml:space="preserve">
+    <value>Go to Dashboard</value>
+  </data>
+	<data name="Auth_Logout" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+	<data name="Auth_BackToHome" xml:space="preserve">
+    <value>Back to Home</value>
+  </data>
+	<data name="Auth_ForgotPassword_Title" xml:space="preserve">
+    <value>Reset Your Password</value>
+  </data>
+	<data name="Auth_ForgotPassword_Subtitle" xml:space="preserve">
+    <value>Enter your registered email address and we'll send you a reset link.</value>
+  </data>
+	<data name="Auth_ForgotPassword_EmailLabel" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+	<data name="Auth_ForgotPassword_SendLink" xml:space="preserve">
+    <value>Send Reset Link</value>
+  </data>
+	<data name="Auth_BackToLogin" xml:space="preserve">
+    <value>Back to Login</value>
+  </data>
+	<data name="Auth_CheckEmail_Title" xml:space="preserve">
+    <value>Check Your Inbox</value>
+  </data>
+	<data name="Auth_CheckEmail_Message" xml:space="preserve">
+    <value>If an account with that email exists, a password reset link has been sent. The link will expire in 1 hour.</value>
+  </data>
+	<data name="Auth_ResetPassword_Title" xml:space="preserve">
+    <value>Set New Password</value>
+  </data>
+	<data name="Auth_ResetPassword_Subtitle" xml:space="preserve">
+    <value>Choose a strong new password for your account.</value>
+  </data>
+	<data name="Auth_NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+	<data name="Auth_ConfirmPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+	<data name="Auth_ResetPassword_Button" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+	<data name="Auth_Login_Title" xml:space="preserve">
+    <value>Login</value>
+  </data>
+	<data name="Auth_Login_Subtitle" xml:space="preserve">
+    <value>Access your account securely to continue your training journey.</value>
+  </data>
+	<data name="Auth_NationalId" xml:space="preserve">
+    <value>National ID</value>
+  </data>
+	<data name="Auth_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+	<data name="Auth_RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+	<data name="Auth_ForgotPassword_Link" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+	<data name="Auth_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+	<data name="Auth_NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+	<data name="Auth_RegisterTrainee" xml:space="preserve">
+    <value>Register as Trainee</value>
+  </data>
+	<data name="Auth_RegisterMentor" xml:space="preserve">
+    <value>Register as Mentor</value>
+  </data>
+	<data name="Auth_ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+
+	<!-- ========== REGISTRATION ========== -->
+	<data name="Reg_SelectRole_Title" xml:space="preserve">
+    <value>Choose Your Role</value>
+  </data>
+	<data name="Reg_SelectRole_Subtitle" xml:space="preserve">
+    <value>Step 1 of 3: Choose Role</value>
+  </data>
+	<data name="Reg_Role_Trainee" xml:space="preserve">
+    <value>Trainee</value>
+  </data>
+	<data name="Reg_Role_Trainee_Desc" xml:space="preserve">
+    <value>Learn to drive with certified mentors and earn your license through a guided, structured program.</value>
+  </data>
+	<data name="Reg_Role_Mentor" xml:space="preserve">
+    <value>Mentor</value>
+  </data>
+	<data name="Reg_Role_Mentor_Desc" xml:space="preserve">
+    <value>Share your expertise, train new drivers, and build your reputation on a trusted platform.</value>
+  </data>
+	<data name="Reg_ContinueAsTrainee" xml:space="preserve">
+    <value>Continue as Trainee</value>
+  </data>
+	<data name="Reg_ContinueAsMentor" xml:space="preserve">
+    <value>Continue as Mentor</value>
+  </data>
+	<data name="Reg_AdminApprovalNote" xml:space="preserve">
+    <value>Application requires admin approval</value>
+  </data>
+	<data name="Reg_NationalIdLookup_Title" xml:space="preserve">
+    <value>Verify Identity</value>
+  </data>
+	<data name="Reg_NationalIdLookup_Subtitle" xml:space="preserve">
+    <value>Step 2 of 3: Verify Identity</value>
+  </data>
+	<data name="Reg_Consent_DataRetrieval" xml:space="preserve">
+    <value>I consent to the retrieval of my national ID data for identity verification purposes only. I understand that this information will be used solely to confirm my eligibility for registration and will not be stored or shared beyond this process.</value>
+  </data>
+	<data name="Reg_LookupID" xml:space="preserve">
+    <value>Look Up My ID</value>
+  </data>
+	<data name="Reg_AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+	<data name="Reg_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+	<data name="Reg_CompleteProfile_Title" xml:space="preserve">
+    <value>Complete Your Profile</value>
+  </data>
+	<data name="Reg_CompleteProfile_Subtitle" xml:space="preserve">
+    <value>Step 3 of 3: Complete Your Profile</value>
+  </data>
+	<data name="Reg_LockedGovFields" xml:space="preserve">
+    <value>The following details are sourced from government records and cannot be modified.</value>
+  </data>
+	<data name="Reg_Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+	<data name="Reg_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Reg_AddressLine1" xml:space="preserve">
+    <value>Address Line 1</value>
+  </data>
+	<data name="Reg_AddressLine2" xml:space="preserve">
+    <value>Address Line 2</value>
+  </data>
+	<data name="Reg_PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+	<data name="Reg_Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+	<data name="Reg_PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+	<data name="Reg_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+	<data name="Reg_ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+	<data name="Reg_LicenseType" xml:space="preserve">
+    <value>License Type</value>
+  </data>
+	<data name="Reg_SelectLicenseType" xml:space="preserve">
+    <value>-- Select License Type --</value>
+  </data>
+	<data name="Reg_TrainingCenter" xml:space="preserve">
+    <value>Your official training center</value>
+  </data>
+	<data name="Reg_SelectTrainingCenter" xml:space="preserve">
+    <value>-- Select Training Center --</value>
+  </data>
+	<data name="Reg_VehicleType_Optional" xml:space="preserve">
+    <value>Vehicle Type (optional)</value>
+  </data>
+	<data name="Reg_PricePerSession_Optional" xml:space="preserve">
+    <value>Price Per Session — JOD (optional)</value>
+  </data>
+	<data name="Reg_CertificationDocument" xml:space="preserve">
+    <value>Certification Document</value>
+  </data>
+	<data name="Reg_UploadCert" xml:space="preserve">
+    <value>Drag &amp; drop or click to upload — PDF / JPG / PNG</value>
+  </data>
+	<data name="Reg_MaxFileSize" xml:space="preserve">
+    <value>Maximum file size: 5 MB</value>
+  </data>
+	<data name="Reg_AcceptTerms" xml:space="preserve">
+    <value>I accept the Terms &amp; Conditions and Privacy Policy</value>
+  </data>
+	<data name="Reg_SubmitApplication" xml:space="preserve">
+    <value>Submit Application</value>
+  </data>
+	<data name="Reg_CompleteRegistration" xml:space="preserve">
+    <value>Complete Registration</value>
+  </data>
+	<data name="Reg_MentorPending_Title" xml:space="preserve">
+    <value>Application Submitted</value>
+  </data>
+	<data name="Reg_MentorPending_Message" xml:space="preserve">
+    <value>Your mentor application has been submitted and is currently under review. You will receive an email notification once an administrator has reviewed your application.</value>
+  </data>
+	<data name="Reg_ReturnHome" xml:space="preserve">
+    <value>Return to Home</value>
+  </data>
+	<data name="Reg_Step1" xml:space="preserve">
+    <value>Step 1 of 3: Choose Role</value>
+  </data>
+	<data name="Reg_Step2" xml:space="preserve">
+    <value>Step 2 of 3: Verify Identity</value>
+  </data>
+	<data name="Reg_Step3" xml:space="preserve">
+    <value>Step 3 of 3: Complete Profile</value>
+  </data>
+
+	<!-- ========== PROFILE ========== -->
+	<data name="Profile_MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+	<data name="Profile_EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+	<data name="Profile_ChangeLicense" xml:space="preserve">
+    <value>Change License Type</value>
+  </data>
+	<data name="Profile_LanguagePreference" xml:space="preserve">
+    <value>Language Preference</value>
+  </data>
+	<data name="Profile_BackToProfile" xml:space="preserve">
+    <value>Back to Profile</value>
+  </data>
+	<data name="Profile_PersonalInfo" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+	<data name="Profile_ReadOnly" xml:space="preserve">
+    <value>Read-only</value>
+  </data>
+	<data name="Profile_SourcedFromGov" xml:space="preserve">
+    <value>The following details are sourced from government records and cannot be modified.</value>
+  </data>
+	<data name="Profile_FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+	<data name="Profile_LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+	<data name="Profile_DateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+	<data name="Profile_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+	<data name="Profile_NationalId" xml:space="preserve">
+    <value>National ID</value>
+  </data>
+	<data name="Profile_ContactInfo" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+	<data name="Profile_Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+	<data name="Profile_PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+	<data name="Profile_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+	<data name="Profile_AddressLine1" xml:space="preserve">
+    <value>Address Line 1</value>
+  </data>
+	<data name="Profile_AddressLine2" xml:space="preserve">
+    <value>Address Line 2</value>
+  </data>
+	<data name="Profile_PostalCode" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+	<data name="Profile_SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+	<data name="Profile_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Profile_ChangeLicense_Warning" xml:space="preserve">
+    <value>Heads up — this is a major change</value>
+  </data>
+	<data name="Profile_ChangeLicense_Desc" xml:space="preserve">
+    <value>Changing your license type will cancel any future bookings tied to your current license. Your eligible module progress will be saved and carried over to the new category where applicable.</value>
+  </data>
+	<data name="Profile_NewLicenseType" xml:space="preserve">
+    <value>New License Type</value>
+  </data>
+	<data name="Profile_ConfirmChange" xml:space="preserve">
+    <value>I understand that changing my license will cancel future bookings and reset incompatible module progress.</value>
+  </data>
+	<data name="Profile_SelectLanguage" xml:space="preserve">
+    <value>Select your language</value>
+  </data>
+	<data name="Profile_Language_Arabic" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+	<data name="Profile_Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+	<data name="Profile_SavePreference" xml:space="preserve">
+    <value>Save Preference</value>
+  </data>
+
+	<!-- ========== BOOKING (Trainee) ========== -->
+	<data name="Booking_MyBookings" xml:space="preserve">
+    <value>My Bookings</value>
+  </data>
+	<data name="Booking_FindMentor" xml:space="preserve">
+    <value>Find a Mentor</value>
+  </data>
+	<data name="Booking_BookSession" xml:space="preserve">
+    <value>Book Session</value>
+  </data>
+	<data name="Booking_Reschedule" xml:space="preserve">
+    <value>Reschedule</value>
+  </data>
+	<data name="Booking_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Booking_Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+	<data name="Booking_Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+	<data name="Booking_YourPrimaryMentor" xml:space="preserve">
+    <value>Your Primary Mentor</value>
+  </data>
+	<data name="Booking_BookAgain" xml:space="preserve">
+    <value>Book Again</value>
+  </data>
+	<data name="Booking_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="Booking_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+	<data name="Booking_Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+	<data name="Booking_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+	<data name="Booking_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+	<data name="Booking_SessionType" xml:space="preserve">
+    <value>Session Type</value>
+  </data>
+	<data name="Booking_Theoretical" xml:space="preserve">
+    <value>Theoretical</value>
+  </data>
+	<data name="Booking_Practical" xml:space="preserve">
+    <value>Practical</value>
+  </data>
+	<data name="Booking_DateAndTime" xml:space="preserve">
+    <value>Date &amp; Time</value>
+  </data>
+	<data name="Booking_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Booking_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="Booking_NoBookings" xml:space="preserve">
+    <value>You have no bookings yet.</value>
+  </data>
+	<data name="Booking_BrowseMentors" xml:space="preserve">
+    <value>Browse Mentors</value>
+  </data>
+	<data name="Booking_ChangePrimaryMentor" xml:space="preserve">
+    <value>Change Primary Mentor?</value>
+  </data>
+	<data name="Booking_ChangePrimaryMsg" xml:space="preserve">
+    <value>You are about to book a session with {0}. This will become your primary mentor.</value>
+  </data>
+	<data name="Booking_ChangePrimaryConsequences" xml:space="preserve">
+    <value>All future bookings with your current mentor will be cancelled. If approved, the new mentor becomes your primary mentor. Future bookings will use the new mentor automatically.</value>
+  </data>
+	<data name="Booking_ConfirmSwitch" xml:space="preserve">
+    <value>Yes, Continue</value>
+  </data>
+	<data name="Booking_CancelSwitch" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Booking_FilterByCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Booking_MinPrice" xml:space="preserve">
+    <value>Min Price (JD)</value>
+  </data>
+	<data name="Booking_MaxPrice" xml:space="preserve">
+    <value>Max Price (JD)</value>
+  </data>
+	<data name="Booking_MinRating" xml:space="preserve">
+    <value>Min Rating</value>
+  </data>
+	<data name="Booking_FilterButton" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+	<data name="Booking_ClearFilter" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+	<data name="Booking_NoMentors" xml:space="preserve">
+    <value>No mentors found for your filters.</value>
+  </data>
+	<data name="Booking_MentorStats" xml:space="preserve">
+    <value>ratings</value>
+  </data>
+	<data name="Booking_Completion" xml:space="preserve">
+    <value>Completion</value>
+  </data>
+	<data name="Booking_PerSession" xml:space="preserve">
+    <value>Per session</value>
+  </data>
+	<data name="Booking_SelectSessionType" xml:space="preserve">
+    <value>Choose Session Type</value>
+  </data>
+	<data name="Booking_TheoreticalDesc" xml:space="preserve">
+    <value>In-class / online lesson</value>
+  </data>
+	<data name="Booking_PracticalDesc" xml:space="preserve">
+    <value>On-road driving lesson</value>
+  </data>
+	<data name="Booking_PickTimeSlot" xml:space="preserve">
+    <value>Pick a Time Slot</value>
+  </data>
+	<data name="Booking_NoSlots" xml:space="preserve">
+    <value>No slots</value>
+  </data>
+	<data name="Booking_BookingSummary" xml:space="preserve">
+    <value>Booking Summary</value>
+  </data>
+	<data name="Booking_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+	<data name="Booking_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+	<data name="Booking_RequestBooking" xml:space="preserve">
+    <value>Request Booking</value>
+  </data>
+	<data name="Booking_ChangeSelection" xml:space="preserve">
+    <value>Change Selection</value>
+  </data>
+	<data name="Booking_PendingConfirmation" xml:space="preserve">
+    <value>Booking will be pending until the mentor confirms it.</value>
+  </data>
+	<data name="Booking_RescheduleConfirmMsg" xml:space="preserve">
+    <value>Your original booking will be cancelled and a new pending request created. The mentor will need to confirm the new time.</value>
+  </data>
+	<data name="Booking_ConfirmReschedule" xml:space="preserve">
+    <value>Confirm Reschedule</value>
+  </data>
+	<data name="Booking_NoSlotSelected" xml:space="preserve">
+    <value>No slot selected yet</value>
+  </data>
+	<data name="Booking_RatingModal_Title" xml:space="preserve">
+    <value>Rate Your Session</value>
+  </data>
+	<data name="Booking_Rating_Label" xml:space="preserve">
+    <value>Your Rating</value>
+  </data>
+	<data name="Booking_ReviewOptional" xml:space="preserve">
+    <value>Review (optional)</value>
+  </data>
+	<data name="Booking_SubmitRating" xml:space="preserve">
+    <value>Submit Rating</value>
+  </data>
+	<data name="Booking_FeedbackModal_Title" xml:space="preserve">
+    <value>Mentor Feedback</value>
+  </data>
+	<data name="Booking_FeedbackFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+	<data name="Booking_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+
+	<!-- ========== EXAM (Trainee) ========== -->
+	<data name="Exam_Appointments" xml:space="preserve">
+    <value>Exam Appointments</value>
+  </data>
+	<data name="Exam_BookTheory" xml:space="preserve">
+    <value>Book Theory Exam</value>
+  </data>
+	<data name="Exam_BookMedical" xml:space="preserve">
+    <value>Book Medical Exam</value>
+  </data>
+	<data name="Exam_BookPractical" xml:space="preserve">
+    <value>Book Practical Exam</value>
+  </data>
+	<data name="Exam_NoAppointments" xml:space="preserve">
+    <value>No exam appointments yet. Book one when you are eligible.</value>
+  </data>
+	<data name="Exam_Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+	<data name="Exam_Pass" xml:space="preserve">
+    <value>Pass</value>
+  </data>
+	<data name="Exam_Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+	<data name="Exam_Absent" xml:space="preserve">
+    <value>Absent</value>
+  </data>
+	<data name="Exam_Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+	<data name="Exam_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Exam_NotEligible" xml:space="preserve">
+    <value>Not eligible yet</value>
+  </data>
+	<data name="Exam_IneligibilityReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+	<data name="Exam_NoSlots" xml:space="preserve">
+    <value>No exam slots are currently available in your area. Please check back later.</value>
+  </data>
+	<data name="Exam_SlotsLeft" xml:space="preserve">
+    <value>slot(s) left</value>
+  </data>
+	<data name="Exam_ConfirmBooking" xml:space="preserve">
+    <value>Confirm Booking</value>
+  </data>
+
+	<!-- ========== MENTOR AREA ========== -->
+	<data name="Mentor_Dashboard" xml:space="preserve">
+    <value>Mentor Dashboard</value>
+  </data>
+	<data name="Mentor_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+	<data name="Mentor_AllAppointments" xml:space="preserve">
+    <value>All Appointments</value>
+  </data>
+	<data name="Mentor_TraineesSummary" xml:space="preserve">
+    <value>Trainees Summary</value>
+  </data>
+	<data name="Mentor_SetAvailability" xml:space="preserve">
+    <value>Set Availability</value>
+  </data>
+	<data name="Mentor_PendingRequests" xml:space="preserve">
+    <value>Pending Requests</value>
+  </data>
+	<data name="Mentor_UpcomingConfirmed" xml:space="preserve">
+    <value>Upcoming Confirmed</value>
+  </data>
+	<data name="Mentor_TodaysSessions" xml:space="preserve">
+    <value>Today's Sessions</value>
+  </data>
+	<data name="Mentor_TodaysAvailability" xml:space="preserve">
+    <value>Today's Availability Slots</value>
+  </data>
+	<data name="Mentor_AvailableSlots" xml:space="preserve">
+    <value>Available Slots Today</value>
+  </data>
+	<data name="Mentor_Booked" xml:space="preserve">
+    <value>Booked</value>
+  </data>
+	<data name="Mentor_Free" xml:space="preserve">
+    <value>Free</value>
+  </data>
+	<data name="Mentor_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+	<data name="Mentor_MarkDone" xml:space="preserve">
+    <value>Mark Done</value>
+  </data>
+	<data name="Mentor_FeedbackGiven" xml:space="preserve">
+    <value>Feedback Given</value>
+  </data>
+	<data name="Mentor_NoSessionsToday" xml:space="preserve">
+    <value>No confirmed sessions for today.</value>
+  </data>
+	<data name="Mentor_NoAvailabilityToday" xml:space="preserve">
+    <value>No availability slots set for today.</value>
+  </data>
+	<data name="Mentor_NoPending" xml:space="preserve">
+    <value>No pending requests.</value>
+  </data>
+	<data name="Mentor_ViewAllPending" xml:space="preserve">
+    <value>View all {0} pending →</value>
+  </data>
+	<data name="Mentor_MyAvailability" xml:space="preserve">
+    <value>My Availability</value>
+  </data>
+	<data name="Mentor_AvailabilityDesc" xml:space="preserve">
+    <value>Set the time slots when students can book sessions with you.</value>
+  </data>
+	<data name="Mentor_AddSlot" xml:space="preserve">
+    <value>Add New Slot</value>
+  </data>
+	<data name="Mentor_Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+	<data name="Mentor_StartTime" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+	<data name="Mentor_EndTime" xml:space="preserve">
+    <value>End time</value>
+  </data>
+	<data name="Mentor_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="Mentor_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+	<data name="Mentor_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+	<data name="Mentor_Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+	<data name="Mentor_NoSlotsForDay" xml:space="preserve">
+    <value>No availability set for this day.</value>
+  </data>
+	<data name="Mentor_EditSlot" xml:space="preserve">
+    <value>Edit Slot</value>
+  </data>
+	<data name="Mentor_SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+	<data name="Mentor_DeleteSlotConfirm" xml:space="preserve">
+    <value>Deactivate this slot?</value>
+  </data>
+	<data name="Mentor_EndTimeAfterStart" xml:space="preserve">
+    <value>End time must be after start time.</value>
+  </data>
+	<data name="Mentor_Feedback_Title" xml:space="preserve">
+    <value>Session Feedback</value>
+  </data>
+	<data name="Mentor_Feedback_Notes" xml:space="preserve">
+    <value>Feedback Notes (visible to trainee)</value>
+  </data>
+	<data name="Mentor_Feedback_Placeholder" xml:space="preserve">
+    <value>Describe the trainee's performance, areas of improvement, and strengths...</value>
+  </data>
+	<data name="Mentor_SubmitFeedback" xml:space="preserve">
+    <value>Submit Feedback</value>
+  </data>
+	<data name="Mentor_TraineeDetail" xml:space="preserve">
+    <value>Trainee Details</value>
+  </data>
+	<data name="Mentor_SessionHistory" xml:space="preserve">
+    <value>Session History</value>
+  </data>
+	<data name="Mentor_FeedbackHistory" xml:space="preserve">
+    <value>Feedback Notes</value>
+  </data>
+	<data name="Mentor_OverallProgress" xml:space="preserve">
+    <value>Overall Progress</value>
+  </data>
+	<data name="Mentor_BackToTrainees" xml:space="preserve">
+    <value>Back to Trainees</value>
+  </data>
+	<data name="Mentor_SearchTrainees" xml:space="preserve">
+    <value>Search by name</value>
+  </data>
+	<data name="Mentor_FilterByStatus" xml:space="preserve">
+    <value>Filter by status</value>
+  </data>
+	<data name="Mentor_AllStatuses" xml:space="preserve">
+    <value>— All statuses —</value>
+  </data>
+	<data name="Mentor_ClearFilters" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+	<data name="Mentor_NoTraineesFound" xml:space="preserve">
+    <value>No trainees found matching your search.</value>
+  </data>
+	<data name="Mentor_TotalSessions" xml:space="preserve">
+    <value>Total Sessions</value>
+  </data>
+	<data name="Mentor_LastSession" xml:space="preserve">
+    <value>Last Session</value>
+  </data>
+	<data name="Mentor_ViewDetails" xml:space="preserve">
+    <value>View Details →</value>
+  </data>
+
+	<!-- ========== CALENDAR ========== -->
+	<data name="Calendar_MyCalendar" xml:space="preserve">
+    <value>My Calendar</value>
+  </data>
+	<data name="Calendar_Legend" xml:space="preserve">
+    <value>Calendar legend</value>
+  </data>
+	<data name="Calendar_Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+	<data name="Calendar_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+	<data name="Calendar_Exam" xml:space="preserve">
+    <value>Exam</value>
+  </data>
+	<data name="Calendar_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+
+	<!-- ========== ERRORS & ALERTS ========== -->
+	<data name="Error_General" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+	<data name="Error_RequestId" xml:space="preserve">
+    <value>Request ID</value>
+  </data>
+	<data name="Error_DevelopmentMode" xml:space="preserve">
+    <value>Development Mode</value>
+  </data>
+	<data name="Error_SensitiveInfo" xml:space="preserve">
+    <value>The Development environment shouldn't be enabled for deployed applications. It can result in displaying sensitive information from exceptions to end users.</value>
+  </data>
+	<data name="Alert_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+	<data name="Alert_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="Alert_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+
+	<!-- ========== COMMON / GENERIC ========== -->
+	<data name="Common_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+	<data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+	<data name="Common_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+	<data name="Common_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+	<data name="Common_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+	<data name="Common_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+	<data name="Common_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+	<data name="Common_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+	<data name="Common_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+	<data name="Common_NoData" xml:space="preserve">
+    <value>No data available.</value>
+  </data>
+	<data name="Common_Optional" xml:space="preserve">
+    <value>optional</value>
+  </data>
+	<data name="Common_Required" xml:space="preserve">
+    <value>required</value>
+  </data>
+	<data name="Common_Of" xml:space="preserve">
+    <value>of</value>
+  </data>
+	<data name="Common_Showing" xml:space="preserve">
+    <value>Showing</value>
+  </data>
+	<data name="Common_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+	<data name="Common_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+	<data name="Common_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+	<data name="Common_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="Common_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+	<data name="Common_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+	<data name="Common_Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+	<data name="Common_From" xml:space="preserve">
+    <value>From</value>
+  </data>
+	<data name="Common_To" xml:space="preserve">
+    <value>To</value>
+  </data>
+	<data name="Common_ViewAll" xml:space="preserve">
+    <value>View all</value>
+  </data>
+</root>

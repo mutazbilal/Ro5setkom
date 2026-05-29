@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Welcome";
+    var isAuth = User.Identity != null && User.Identity.IsAuthenticated;
 }
 
 @section Styles {
@@ -20,15 +21,18 @@
                 identity verification, and exam-ready learning.
             </p>
 
-            <div class="landing-cta-row">
-                <a asp-controller="Auth" asp-action="Login" class="auth-btn landing-cta">
-                    Login to Continue
-                </a>
-                <a asp-controller="Registration" asp-action="SelectRole"
-                   class="auth-btn-ghost landing-cta-ghost">
-                    New User? Register
-                </a>
-            </div>
+            @if (!isAuth)
+            {
+                <div class="landing-cta-row">
+                    <a asp-controller="Auth" asp-action="Login" class="auth-btn landing-cta">
+                        Login to Continue
+                    </a>
+                    <a asp-controller="Registration" asp-action="SelectRole"
+                       class="auth-btn-ghost landing-cta-ghost">
+                        New User? Register
+                    </a>
+                </div>
+            }
 
             @* ─── Blue glass card moved here, under the left content ─── *@
             <div class="landing-glass-card landing-glass-card--inline">
