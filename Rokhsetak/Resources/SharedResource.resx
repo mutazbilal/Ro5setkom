@@ -1108,4 +1108,731 @@
 	<data name="Common_ViewAll" xml:space="preserve">
     <value>View all</value>
   </data>
+	<!-- ========== ADMIN AREA ========== -->
+
+	<!-- Layout & Navigation -->
+	<data name="Admin_Layout_Title" xml:space="preserve">
+    <value>Admin Portal</value>
+  </data>
+	<data name="Admin_Layout_Role" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+	<data name="Admin_Layout_Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+	<data name="Admin_Nav_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+	<data name="Admin_Nav_Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+	<data name="Admin_Nav_Mentors" xml:space="preserve">
+    <value>Mentors</value>
+  </data>
+	<data name="Admin_Nav_Applications" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+	<data name="Admin_Nav_Bookings" xml:space="preserve">
+    <value>Bookings &amp; Exams</value>
+  </data>
+	<data name="Admin_Nav_BlockedDates" xml:space="preserve">
+    <value>Blocked Dates</value>
+  </data>
+	<data name="Admin_Copyright" xml:space="preserve">
+    <value>© {0} Rokhsetak</value>
+  </data>
+
+	<!-- Blocked Dates -->
+	<data name="Admin_BlockedDates_Title" xml:space="preserve">
+    <value>Blocked Dates</value>
+  </data>
+	<data name="Admin_BlockedDates_Subtitle" xml:space="preserve">
+    <value>Days on which exam appointments cannot be booked</value>
+  </data>
+	<data name="Admin_BlockedDates_BlockNew" xml:space="preserve">
+    <value>Block a new date</value>
+  </data>
+	<data name="Admin_BlockedDates_DateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="Admin_BlockedDates_ReasonLabel" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+	<data name="Admin_BlockedDates_ReasonPlaceholder" xml:space="preserve">
+    <value>e.g. Public holiday, system maintenance</value>
+  </data>
+	<data name="Admin_BlockedDates_BlockButton" xml:space="preserve">
+    <value>Block date</value>
+  </data>
+	<data name="Admin_BlockedDates_WarningMessage" xml:space="preserve">
+    <value>Blocking a date prevents new exam appointments. Existing appointments on that day will be cancelled.</value>
+  </data>
+	<data name="Admin_BlockedDates_ActiveBlocks" xml:space="preserve">
+    <value>Active blocks</value>
+  </data>
+	<data name="Admin_BlockedDates_Table_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="Admin_BlockedDates_Table_Reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+	<data name="Admin_BlockedDates_Table_CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+	<data name="Admin_BlockedDates_Table_CreatedAt" xml:space="preserve">
+    <value>Created</value>
+  </data>
+	<data name="Admin_BlockedDates_Table_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="Admin_BlockedDates_RemoveButton" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+	<data name="Admin_BlockedDates_RemoveDialog_Title" xml:space="preserve">
+    <value>Remove blocked date?</value>
+  </data>
+	<data name="Admin_BlockedDates_RemoveDialog_Body" xml:space="preserve">
+    <value>You're about to remove the block on &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+	<data name="Admin_BlockedDates_RemoveDialog_Note" xml:space="preserve">
+    <value>Trainees will be able to schedule new exam appointments for this date.</value>
+  </data>
+	<data name="Admin_BlockedDates_NoData" xml:space="preserve">
+    <value>No blocked dates configured.</value>
+  </data>
+
+	<!-- Bookings & Exams (shared) -->
+	<data name="Admin_Bookings_Title" xml:space="preserve">
+    <value>Bookings &amp; Exams</value>
+  </data>
+	<data name="Admin_Bookings_Subtitle" xml:space="preserve">
+    <value>Sessions, exam appointments and their statuses</value>
+  </data>
+	<data name="Admin_Bookings_Tab_Bookings" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
+	<data name="Admin_Bookings_Tab_Exams" xml:space="preserve">
+    <value>Exam appointments</value>
+  </data>
+	<data name="Admin_Bookings_Filter_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+	<data name="Admin_Bookings_Filter_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Admin_Bookings_Filter_FromDate" xml:space="preserve">
+    <value>From</value>
+  </data>
+	<data name="Admin_Bookings_Filter_ToDate" xml:space="preserve">
+    <value>To</value>
+  </data>
+	<data name="Admin_Bookings_Filter_MentorId" xml:space="preserve">
+    <value>Mentor ID</value>
+  </data>
+	<data name="Admin_Bookings_Filter_TraineeId" xml:space="preserve">
+    <value>Trainee ID</value>
+  </data>
+	<data name="Admin_Bookings_Filter_Button" xml:space="preserve">
+    <value>Search</value>
+  </data>
+	<data name="Admin_Bookings_Table_BookingId" xml:space="preserve">
+    <value>#</value>
+  </data>
+	<data name="Admin_Bookings_Table_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="Admin_Bookings_Table_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+	<data name="Admin_Bookings_Table_Trainee" xml:space="preserve">
+    <value>Trainee</value>
+  </data>
+	<data name="Admin_Bookings_Table_Mentor" xml:space="preserve">
+    <value>Mentor</value>
+  </data>
+	<data name="Admin_Bookings_Table_License" xml:space="preserve">
+    <value>License</value>
+  </data>
+	<data name="Admin_Bookings_Table_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+	<data name="Admin_Bookings_Table_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Admin_Bookings_NoData" xml:space="preserve">
+    <value>No bookings match your filters.</value>
+  </data>
+	<data name="Admin_Exams_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>Trainee or center name</value>
+  </data>
+	<data name="Admin_Exams_Filter_StatusOptions_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="Admin_Exams_Filter_Status_Scheduled" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+	<data name="Admin_Exams_Filter_Status_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+	<data name="Admin_Exams_Filter_Status_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+	<data name="Admin_Exams_Table_Center" xml:space="preserve">
+    <value>Center</value>
+  </data>
+	<data name="Admin_Exams_NoData" xml:space="preserve">
+    <value>No exam appointments match your filters.</value>
+  </data>
+	<data name="Admin_Pagination_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+	<data name="Admin_Pagination_Of" xml:space="preserve">
+    <value>of</value>
+  </data>
+
+	<!-- Admin Dashboard -->
+	<data name="Admin_Dashboard_Title" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+	<data name="Admin_Dashboard_Subtitle" xml:space="preserve">
+    <value>Platform overview and analytics</value>
+  </data>
+	<data name="Admin_Dashboard_Filter_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+	<data name="Admin_Dashboard_Filter_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_TotalUsers" xml:space="preserve">
+    <value>Total Users</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_ActiveTrainees" xml:space="preserve">
+    <value>Active Trainees</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_ActiveMentors" xml:space="preserve">
+    <value>Active Mentors</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_TotalBookings" xml:space="preserve">
+    <value>Total Bookings</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_PendingApps" xml:space="preserve">
+    <value>Pending Apps</value>
+  </data>
+	<data name="Admin_Dashboard_Stat_CompletedLicenses" xml:space="preserve">
+    <value>Completed Licenses</value>
+  </data>
+	<data name="Admin_Dashboard_Metric_AvgRating" xml:space="preserve">
+    <value>Avg. Mentor Rating</value>
+  </data>
+	<data name="Admin_Dashboard_Metric_CompletionRate" xml:space="preserve">
+    <value>Completion Rate</value>
+  </data>
+	<data name="Admin_Dashboard_Metric_AvgTimeToCompletion" xml:space="preserve">
+    <value>Avg. Time to Completion</value>
+  </data>
+	<data name="Admin_Dashboard_Metric_Days" xml:space="preserve">
+    <value>days</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_UsersOverTime" xml:space="preserve">
+    <value>Users over time</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_UsersSubtitle" xml:space="preserve">
+    <value>New registrations by month</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_BookingsPerMonth" xml:space="preserve">
+    <value>Bookings per month</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_BookingsSubtitle" xml:space="preserve">
+    <value>Session bookings created by month</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_PerformanceTitle" xml:space="preserve">
+    <value>Mentor performance distribution</value>
+  </data>
+	<data name="Admin_Dashboard_Chart_PerformanceSubtitle" xml:space="preserve">
+    <value>Rating buckets across all mentors</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Title" xml:space="preserve">
+    <value>Top mentors</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Subtitle" xml:space="preserve">
+    <value>Sorted by rating then completed sessions</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Table_Mentor" xml:space="preserve">
+    <value>Mentor</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Table_Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Table_Sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Table_Completion" xml:space="preserve">
+    <value>Completion</value>
+  </data>
+	<data name="Admin_Dashboard_TopMentors_Table_AvgDays" xml:space="preserve">
+    <value>Avg. Days</value>
+  </data>
+	<data name="Admin_Dashboard_NoMentorData" xml:space="preserve">
+    <value>No mentor performance data yet.</value>
+  </data>
+
+	<!-- Mentor Applications (list) -->
+	<data name="Admin_Applications_Title" xml:space="preserve">
+    <value>Mentor Applications</value>
+  </data>
+	<data name="Admin_Applications_Subtitle" xml:space="preserve">
+    <value>Pending applications awaiting your review</value>
+  </data>
+	<data name="Admin_Applications_PendingHeader" xml:space="preserve">
+    <value>Pending applications</value>
+  </data>
+	<data name="Admin_Applications_Table_Applicant" xml:space="preserve">
+    <value>Applicant</value>
+  </data>
+	<data name="Admin_Applications_Table_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+	<data name="Admin_Applications_Table_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+	<data name="Admin_Applications_Table_License" xml:space="preserve">
+    <value>License</value>
+  </data>
+	<data name="Admin_Applications_Table_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_Applications_Table_Submitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+	<data name="Admin_Applications_Table_Cert" xml:space="preserve">
+    <value>Cert.</value>
+  </data>
+	<data name="Admin_Applications_Cert_Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
+	<data name="Admin_Applications_Cert_Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+	<data name="Admin_Applications_Action_Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="Admin_Applications_NoData" xml:space="preserve">
+    <value>No pending applications right now.</value>
+  </data>
+
+	<!-- Mentor Applications (details) -->
+	<data name="Admin_Application_Detail_Title" xml:space="preserve">
+    <value>Application · {0}</value>
+  </data>
+	<data name="Admin_Application_Detail_Submitted" xml:space="preserve">
+    <value>Submitted {0}</value>
+  </data>
+	<data name="Admin_Application_Section_Personal" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+	<data name="Admin_Application_Field_NationalId" xml:space="preserve">
+    <value>National ID</value>
+  </data>
+	<data name="Admin_Application_Field_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+	<data name="Admin_Application_Field_DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+	<data name="Admin_Application_Field_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+	<data name="Admin_Application_Field_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_Application_Field_Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+	<data name="Admin_Application_Section_MentorProfile" xml:space="preserve">
+    <value>Mentor profile</value>
+  </data>
+	<data name="Admin_Application_Field_LicenseType" xml:space="preserve">
+    <value>License type</value>
+  </data>
+	<data name="Admin_Application_Field_Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+  </data>
+	<data name="Admin_Application_Field_PricePerSession" xml:space="preserve">
+    <value>Price / session</value>
+  </data>
+	<data name="Admin_Application_Currency_JOD" xml:space="preserve">
+    <value>JOD</value>
+  </data>
+	<data name="Admin_Application_Certification_Title" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+	<data name="Admin_Application_Cert_UploadedAt" xml:space="preserve">
+    <value>Uploaded {0}</value>
+  </data>
+	<data name="Admin_Application_Cert_Download" xml:space="preserve">
+    <value>Download {0}</value>
+  </data>
+	<data name="Admin_Application_Cert_SecureNote" xml:space="preserve">
+    <value>Files are served from a secure admin-only endpoint.</value>
+  </data>
+	<data name="Admin_Application_Cert_None" xml:space="preserve">
+    <value>No certification file has been uploaded for this application.</value>
+  </data>
+	<data name="Admin_Application_Decision_Title" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+	<data name="Admin_Application_Button_Approve" xml:space="preserve">
+    <value>Approve application</value>
+  </data>
+	<data name="Admin_Application_Button_Reject" xml:space="preserve">
+    <value>Reject application</value>
+  </data>
+	<data name="Admin_Application_Button_Back" xml:space="preserve">
+    <value>Back to applications</value>
+  </data>
+	<data name="Admin_Application_AlreadyReviewed" xml:space="preserve">
+    <value>This application has already been reviewed.</value>
+  </data>
+	<data name="Admin_Application_ApproveDialog_Title" xml:space="preserve">
+    <value>Approve application?</value>
+  </data>
+	<data name="Admin_Application_ApproveDialog_Body" xml:space="preserve">
+    <value>You're about to approve &lt;strong&gt;{0}&lt;/strong&gt; as a mentor.</value>
+  </data>
+	<data name="Admin_Application_ApproveDialog_Note" xml:space="preserve">
+    <value>They'll be notified by email and will become visible to trainees immediately.</value>
+  </data>
+	<data name="Admin_Application_ApproveDialog_Confirm" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_Title" xml:space="preserve">
+    <value>Reject application?</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_Body" xml:space="preserve">
+    <value>You're about to reject &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_ReasonLabel" xml:space="preserve">
+    <value>Rejection reason</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_ReasonPlaceholder" xml:space="preserve">
+    <value>Explain why this application is being rejected (sent to applicant).</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_ReasonHint" xml:space="preserve">
+    <value>Required, 5–500 characters. This message is included in the email to the applicant.</value>
+  </data>
+	<data name="Admin_Application_RejectDialog_Confirm" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+
+	<!-- Mentors (list) -->
+	<data name="Admin_Mentors_Title" xml:space="preserve">
+    <value>Mentors</value>
+  </data>
+	<data name="Admin_Mentors_Subtitle" xml:space="preserve">
+    <value>All approved mentors on the platform</value>
+  </data>
+	<data name="Admin_Mentors_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>Name, email or city</value>
+  </data>
+	<data name="Admin_Mentors_Filter_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="Admin_Mentors_Filter_Status_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+	<data name="Admin_Mentors_Filter_LicenseType" xml:space="preserve">
+    <value>License type</value>
+  </data>
+	<data name="Admin_Mentors_Filter_AllLicenseTypes" xml:space="preserve">
+    <value>All license types</value>
+  </data>
+	<data name="Admin_Mentors_Filter_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_Mentors_Filter_AllCities" xml:space="preserve">
+    <value>All cities</value>
+  </data>
+	<data name="Admin_Mentors_Filter_Button" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+	<data name="Admin_Mentors_Table_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="Admin_Mentors_Table_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+	<data name="Admin_Mentors_Table_License" xml:space="preserve">
+    <value>License</value>
+  </data>
+	<data name="Admin_Mentors_Table_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_Mentors_Table_Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+	<data name="Admin_Mentors_Table_Sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+	<data name="Admin_Mentors_Table_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Admin_Mentors_Table_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="Admin_Mentors_Action_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+	<data name="Admin_Mentors_NoData" xml:space="preserve">
+    <value>No mentors match your filters.</value>
+  </data>
+
+	<!-- Mentors (details) -->
+	<data name="Admin_Mentor_Detail_Title" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Subtitle" xml:space="preserve">
+    <value>Mentor profile · {0}</value>
+  </data>
+	<data name="Admin_Mentor_Detail_RoleMentor" xml:space="preserve">
+    <value>mentor</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Status_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_LicenseType" xml:space="preserve">
+    <value>License type</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_Price" xml:space="preserve">
+    <value>Price / session</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Field_Joined" xml:space="preserve">
+    <value>Joined</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Button_Deactivate" xml:space="preserve">
+    <value>Deactivate mentor</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Button_Reactivate" xml:space="preserve">
+    <value>Reactivate mentor</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Button_Back" xml:space="preserve">
+    <value>Back to mentors</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_AvgRating" xml:space="preserve">
+    <value>Avg. Rating</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_Ratings" xml:space="preserve">
+    <value>rating(s)</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_TotalSessions" xml:space="preserve">
+    <value>Total Sessions</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_AllTimeBookings" xml:space="preserve">
+    <value>All-time bookings</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+	<data name="Admin_Mentor_Detail_Stat_Completion" xml:space="preserve">
+    <value>completion</value>
+  </data>
+	<data name="Admin_Mentor_Detail_ApplicationHistory_Title" xml:space="preserve">
+    <value>Application history</value>
+  </data>
+	<data name="Admin_Mentor_Detail_ApplicationHistory_Text" xml:space="preserve">
+    <value>This mentor's current application status is</value>
+  </data>
+	<data name="Admin_Mentor_Detail_ApplicationHistory_Note" xml:space="preserve">
+    <value>To review the original certification submission, find this mentor in the &lt;a href="{0}"&gt;Applications&lt;/a&gt; page (only pending applications are listed there).</value>
+  </data>
+	<data name="Admin_Mentor_DeactivateDialog_Title" xml:space="preserve">
+    <value>Deactivate mentor?</value>
+  </data>
+	<data name="Admin_Mentor_DeactivateDialog_Body" xml:space="preserve">
+    <value>You're about to deactivate &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+	<data name="Admin_Mentor_DeactivateDialog_Note" xml:space="preserve">
+    <value>They'll be blocked from signing in and won't appear in trainee searches. Existing bookings and ratings are preserved. You can reactivate them at any time.</value>
+  </data>
+	<data name="Admin_Mentor_DeactivateDialog_Confirm" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+
+	<!-- Users (list) -->
+	<data name="Admin_Users_Title" xml:space="preserve">
+    <value>Users</value>
+  </data>
+	<data name="Admin_Users_Subtitle" xml:space="preserve">
+    <value>Manage all platform users</value>
+  </data>
+	<data name="Admin_Users_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>Name or email</value>
+  </data>
+	<data name="Admin_Users_Filter_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+	<data name="Admin_Users_Filter_AllRoles" xml:space="preserve">
+    <value>All roles</value>
+  </data>
+	<data name="Admin_Users_Filter_Role_Trainee" xml:space="preserve">
+    <value>Trainee</value>
+  </data>
+	<data name="Admin_Users_Filter_Role_Mentor" xml:space="preserve">
+    <value>Mentor</value>
+  </data>
+	<data name="Admin_Users_Filter_Role_Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+	<data name="Admin_Users_Filter_Status_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="Admin_Users_Filter_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="Admin_Users_Filter_Status_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+	<data name="Admin_Users_Filter_Button" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+	<data name="Admin_Users_Table_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="Admin_Users_Table_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+	<data name="Admin_Users_Table_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+	<data name="Admin_Users_Table_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Admin_Users_Table_Joined" xml:space="preserve">
+    <value>Joined</value>
+  </data>
+	<data name="Admin_Users_Table_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="Admin_Users_Action_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+	<data name="Admin_Users_NoData" xml:space="preserve">
+    <value>No users match your filters.</value>
+  </data>
+
+	<!-- Users (details) -->
+	<data name="Admin_User_Detail_Title" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+	<data name="Admin_User_Detail_Subtitle" xml:space="preserve">
+    <value>User profile · {0}</value>
+  </data>
+	<data name="Admin_User_Detail_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+	<data name="Admin_User_Detail_Status_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+	<data name="Admin_User_Detail_Field_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+	<data name="Admin_User_Detail_Field_NationalId" xml:space="preserve">
+    <value>National ID</value>
+  </data>
+	<data name="Admin_User_Detail_Field_DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+	<data name="Admin_User_Detail_Field_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+	<data name="Admin_User_Detail_Field_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Admin_User_Detail_Field_Province" xml:space="preserve">
+    <value>Province</value>
+  </data>
+	<data name="Admin_User_Detail_Field_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+	<data name="Admin_User_Detail_Field_Joined" xml:space="preserve">
+    <value>Joined</value>
+  </data>
+	<data name="Admin_User_Detail_Button_Deactivate" xml:space="preserve">
+    <value>Deactivate user</value>
+  </data>
+	<data name="Admin_User_Detail_Button_Reactivate" xml:space="preserve">
+    <value>Reactivate user</value>
+  </data>
+	<data name="Admin_User_Detail_Button_Back" xml:space="preserve">
+    <value>Back to users</value>
+  </data>
+	<data name="Admin_User_Detail_BookingHistory_Title" xml:space="preserve">
+    <value>Booking history</value>
+  </data>
+	<data name="Admin_User_BookingHistory_Table_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="Admin_User_BookingHistory_Table_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+	<data name="Admin_User_BookingHistory_Table_Counterparty" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+	<data name="Admin_User_BookingHistory_Table_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+	<data name="Admin_User_BookingHistory_Table_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+	<data name="Admin_User_BookingHistory_NoData" xml:space="preserve">
+    <value>No bookings for this user yet.</value>
+  </data>
+	<data name="Admin_User_DeactivateDialog_Title" xml:space="preserve">
+    <value>Deactivate user?</value>
+  </data>
+	<data name="Admin_User_DeactivateDialog_Body" xml:space="preserve">
+    <value>You're about to deactivate &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+	<data name="Admin_User_DeactivateDialog_Note" xml:space="preserve">
+    <value>Their account will be blocked from signing in. Booking and feedback history is preserved. You can reactivate them at any time.</value>
+  </data>
+	<data name="Admin_User_DeactivateDialog_Confirm" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+	<!-- ========== ADDITIONAL AUTH KEYS ========== -->
+	<data name="Auth_WelcomeBack" xml:space="preserve">
+    <value>Welcome Back</value>
+  </data>
+	<data name="Auth_WelcomeTagline" xml:space="preserve">
+    <value>Your journey to the road starts here.</value>
+  </data>
+	<data name="Auth_RoadIllustration" xml:space="preserve">
+    <value>Road illustration</value>
+  </data>
+	<data name="Auth_NationalIdHelp" xml:space="preserve">
+    <value>Enter your 10-digit national identification number.</value>
+  </data>
+	<data name="Auth_PasswordHelp" xml:space="preserve">
+    <value>Enter your account password.</value>
+  </data>
+	<data name="Auth_Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+	<data name="Auth_ForgotPassword_EmailHelp" xml:space="preserve">
+    <value>Enter the email address tied to your account.</value>
+  </data>
+	<data name="Auth_ShowConfirmPassword" xml:space="preserve">
+    <value>Show confirm password</value>
+  </data>
 </root>
