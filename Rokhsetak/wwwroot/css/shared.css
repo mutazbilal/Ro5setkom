@@ -380,3 +380,46 @@
 div.validation-summary-valid {
     display: none !important;
 }
+
+.nav-notification {
+    margin-right: 12px;
+    position: relative;
+}
+
+.nav-notification__badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #dc3545;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.notification-item {
+    transition: 0.2s ease;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.notification-item.is-unread::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: orange;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.notification-item.is-unread {
+    background-color: #fff3cd; 
+    font-weight: 600;
+    border-left: 4px solid #ff9800;
+}
+
+.notification-item.is-read {
+    background-color: transparent;
+    opacity: 0.75;
+}
