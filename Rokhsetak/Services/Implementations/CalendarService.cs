@@ -55,7 +55,8 @@ public class CalendarService : ICalendarService
                 End = endDt.ToString("o"),
                 Color = color,
                 EventType = "booking",
-                Status = b.Status
+                Status = b.Status,
+                Url = "booking"
             });
         }
 
@@ -106,7 +107,8 @@ public class CalendarService : ICalendarService
                     Color = color,
                     EventType = "exam",
                     Location = $"{ea.CenterName}, {ea.City}",
-                    Status = ea.Status
+                    Status = ea.Status,
+                    Url = "Exam"
                 });
             }
         }
