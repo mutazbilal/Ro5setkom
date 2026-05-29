@@ -1,69 +1,118 @@
-﻿@model FeedbackViewModel
+@using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@model FeedbackViewModel
 @{
     ViewData["Title"] = "Session Feedback";
 }
 
-<div class="container py-4" style="max-width: 600px;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/appointments.css" />
+}
 
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index">Appointments</a>
-            </li>
-            <li class="breadcrumb-item active">Feedback</li>
-        </ol>
-    </nav>
+<div class="appointments-page">
+    <div class="appointments-page__inner">
 
-    <div class="card shadow-sm">
-        <div class="card-header bg-info text-white fw-semibold">
-            <i class="bi bi-chat-left-text"></i> Session Feedback
-        </div>
-        <div class="card-body">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
 
-            <div class="mb-4 p-3 bg-light rounded border">
-                <p class="mb-1 small text-muted">Trainee</p>
-                <p class="mb-1 fw-semibold">@Model.TraineeName</p>
-                <p class="mb-0 small text-muted">
-                    Session date: <strong>@Model.SessionDate.ToString("dd MMMM yyyy")</strong>
+        <!-- ============ Hero ============ -->
+        <section class="appointments-hero appointments-hero--compact" aria-labelledby="feedback-page-title">
+            <div class="appointments-hero__intro">
+                <span class="appointments-hero__eyebrow">Session Feedback</span>
+                <h1 id="feedback-page-title" class="appointments-hero__title">Share your notes</h1>
+                <p class="appointments-hero__description">
+                    Document what went well and where the trainee can improve. The trainee will see your notes.
                 </p>
             </div>
 
-            <form asp-area="Mentor" asp-controller="Appointments" asp-action="Feedback"
-                  method="post">
+            <div class="appointments-hero__cta">
+                <a asp-area="Mentor"
+                   asp-controller="Appointments"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Appointments</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ Form card ============ -->
+        <section class="form-card" aria-labelledby="feedback-form-title">
+            <h2 id="feedback-form-title" class="visually-hidden">Feedback form</h2>
+
+            <!-- Context strip: who & when -->
+            <div class="context-strip">
+                <span class="context-strip__icon" aria-hidden="true">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </span>
+                <div class="context-strip__body">
+                    <span class="context-strip__label">Trainee</span>
+                    <span class="context-strip__name">@Model.TraineeName</span>
+                </div>
+                <div class="context-strip__meta">
+                    <span class="chip chip--soft">
+                        <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
+                        @Model.SessionDate.ToString("dd MMM yyyy")
+                    </span>
+                </div>
+            </div>
+
+            <form asp-area="Mentor"
+                  asp-controller="Appointments"
+                  asp-action="Feedback"
+                  method="post"
+                  novalidate>
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="BookingId" />
                 <input type="hidden" asp-for="TraineeName" />
                 <input type="hidden" asp-for="SessionDate" />
 
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
 
-                <div class="mb-4">
-                    <label asp-for="MentorNotes" class="form-label fw-semibold">
-                        Feedback Notes
-                        <span class="text-muted fw-normal small">(visible to trainee)</span>
-                    </label>
+                <div class="field-floating field-floating--textarea">
                     <textarea asp-for="MentorNotes"
-                              class="form-control"
-                              rows="6"
-                                  placeholder="Describe the trainee's performance, areas of improvement, and strengths...">
-                    </textarea>
-                        <span asp-validation-for="MentorNotes" class="text-danger small"></span>
-                    </div>
+                              class="field-floating__input"
+                              rows="8"
+                              placeholder=" "
+                              aria-required="true"></textarea>
+                    <label asp-for="MentorNotes" class="field-floating__label">
+                        Feedback notes
+                    </label>
+                    <span asp-validation-for="MentorNotes" class="field-floating__error"></span>
+                    <p class="field-floating__hint">
+                        Between 5 and 2000 characters. Visible to the trainee.
+                    </p>
+                </div>
 
-                    <div class="d-flex justify-content-between">
-                        <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index"
-                               class="btn btn-outline-secondary">
-                            Cancel
-                        </a>
-                        <button type="submit" class="btn btn-info text-white fw-semibold">
-                            <i class="bi bi-send-check"></i> Submit Feedback
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                <div class="form-actions">
+                    <a asp-area="Mentor"
+                       asp-controller="Appointments"
+                       asp-action="Index"
+                       class="btn-action btn-action--ghost">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        <span>Cancel</span>
+                    </a>
+                    <button type="submit" class="btn-action btn-action--gradient">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        <span>Submit Feedback</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
     </div>
+</div>
 
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

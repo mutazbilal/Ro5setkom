@@ -1,143 +1,143 @@
-﻿@model TraineeDetailViewModel
+@model TraineeDetailViewModel
 @{
     ViewData["Title"] = Model.FullName;
+
+    string StageClass(string stage) =>
+        stage == "completed" ? "pill-stage--done"
+        : stage.Contains("pending") ? "pill-stage--pending"
+        : "pill-stage--default";
+
+    string StatusClass(string status) => status switch
+    {
+        "completed" => "pill-status--completed",
+        "confirmed" => "pill-status--confirmed",
+        "pending" => "pill-status--pending",
+        _ => "pill-status--default"
+    };
+
+    string StatusLabel(string status) => status switch
+    {
+        "completed" => "Completed",
+        "confirmed" => "Confirmed",
+        "pending" => "Pending",
+        _ => status
+    };
 }
 
-<div class="container py-4">
+@section Styles {
+    <link href="~/css/trainees.css" rel="stylesheet" asp-append-version="true" />
+}
 
-    <nav aria-label="breadcrumb" class="mb-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index">Trainees</a>
-            </li>
-            <li class="breadcrumb-item active">@Model.FullName</li>
-        </ol>
+<div class="tr-wrap">
+
+    <nav class="tr-breadcrumb" aria-label="Breadcrumb">
+        <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index">Trainees</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">@Model.FullName</span>
     </nav>
 
-    <!-- Trainee profile card -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body d-flex justify-content-between align-items-start flex-wrap gap-3">
-            <div>
-                <h3 class="fw-bold mb-1">@Model.FullName</h3>
-                <p class="text-muted mb-1"><i class="bi bi-envelope"></i> @Model.Email</p>
-                <div class="d-flex gap-2 flex-wrap">
-                    <span class="badge bg-light text-dark border">
-                        @Model.LicenseType.Replace("_", " ")
-                    </span>
-                    @{
-                        var sb = Model.LicenseStage == "completed" ? "bg-success"
-                               : Model.LicenseStage.Contains("pending") ? "bg-warning text-dark"
-                               : "bg-secondary";
-                    }
-                    <span class="badge @sb">@Model.LicenseStage.Replace("_", " ")</span>
-                </div>
-            </div>
-            <div class="text-center" style="min-width: 100px;">
-                <div class="fw-bold fs-4 text-primary">@Model.ProgressPct%</div>
-                <div class="text-muted small">Overall Progress</div>
-                <div class="progress mt-1" style="height: 6px; width: 100px;">
-                    <div class="progress-bar bg-primary" style="width: @Model.ProgressPct%"></div>
-                </div>
+    @* -- Profile hero -- *@
+    <section class="profile-card">
+        <div class="profile-identity">
+            <h1>@Model.FullName</h1>
+            <p class="profile-email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                @Model.Email
+            </p>
+            <div class="profile-pills">
+                <span class="pill pill-license">@Model.LicenseType.Replace("_", " ")</span>
+                <span class="pill @StageClass(Model.LicenseStage)">@Model.LicenseStage.Replace("_", " ")</span>
             </div>
         </div>
-    </div>
 
-    <div class="row g-4">
-        <!-- Session History -->
-        <div class="col-lg-7">
-            <div class="card shadow-sm h-100">
-                <div class="card-header fw-semibold">
-                    <i class="bi bi-calendar-event text-primary"></i>
-                    Session History (@Model.Sessions.Count)
-                </div>
-                @if (Model.Sessions.Any())
-                {
-                    <div class="table-responsive">
-                        <table class="table table-sm table-hover align-middle mb-0">
-                            <thead class="table-light">
+        <div class="profile-progress">
+            <div class="pct">@Model.ProgressPct%</div>
+            <div class="label">Overall Progress</div>
+            <div class="meter" role="progressbar" aria-valuenow="@Model.ProgressPct" aria-valuemin="0" aria-valuemax="100">
+                <div class="meter-fill" style="width:@Model.ProgressPct%"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="detail-grid">
+
+        @* -- Session history -- *@
+        <section class="panel">
+            <div class="panel-header">
+                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                Session History
+                <span class="count">@Model.Sessions.Count</span>
+            </div>
+            @if (Model.Sessions.Any())
+            {
+                <div class="tr-table-scroll">
+                    <table class="session-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in Model.Sessions)
+                            {
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
+                                    <td>@s.SessionDate.ToString("dd MMM yyyy")</td>
+                                    <td class="session-time">@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
+                                    <td>
+                                        <span class="pill @(s.SessionType == "practical" ? "pill-type--practical" : "pill-type--theory")">
+                                            @s.SessionType
+                                        </span>
+                                    </td>
+                                    <td><span class="pill @StatusClass(s.Status)">@StatusLabel(s.Status)</span></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var s in Model.Sessions)
-                                {
-                                    <tr>
-                                        <td>@s.SessionDate.ToString("dd MMM yyyy")</td>
-                                        <td class="text-muted small">
-                                            @s.StartTime.ToString("HH:mm") – @s.EndTime.ToString("HH:mm")
-                                        </td>
-                                        <td>
-                                            <span class="badge @(s.SessionType == "practical" ? "bg-warning text-dark" : "bg-info text-dark")">
-                                                @s.SessionType
-                                            </span>
-                                        </td>
-                                        <td>
-                                            @{
-                                                var (bc, bl) = s.Status switch
-                                                {
-                                                    "completed" => ("bg-success", "Completed"),
-                                                    "confirmed" => ("bg-primary", "Confirmed"),
-                                                    "pending" => ("bg-warning text-dark", "Pending"),
-                                                    _ => ("bg-secondary", s.Status)
-                                                };
-                                            }
-                                            <span class="badge @bc">@bl</span>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="card-body text-muted text-center">No sessions recorded.</div>
-                }
-            </div>
-        </div>
-
-        <!-- Feedback Given -->
-        <div class="col-lg-5">
-            <div class="card shadow-sm h-100">
-                <div class="card-header fw-semibold">
-                    <i class="bi bi-chat-left-text text-info"></i>
-                    Feedback Notes (@Model.Feedbacks.Count)
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                @if (Model.Feedbacks.Any())
-                {
-                    <ul class="list-group list-group-flush">
-                        @foreach (var f in Model.Feedbacks)
-                        {
-                            <li class="list-group-item">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span class="small fw-semibold">
-                                        @f.SessionDate.ToString("dd MMM yyyy")
-                                    </span>
-                                    <span class="text-muted small">
-                                        @f.CreatedAt.ToString("HH:mm")
-                                    </span>
-                                </div>
-                                <p class="mb-0 small">@f.MentorNotes</p>
-                            </li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <div class="card-body text-muted text-center">No feedback submitted yet.</div>
-                }
+            }
+            else
+            {
+                <p class="panel-empty">No sessions recorded.</p>
+            }
+        </section>
+
+        @* -- Feedback notes -- *@
+        <section class="panel">
+            <div class="panel-header">
+                <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+                Feedback Notes
+                <span class="count">@Model.Feedbacks.Count</span>
             </div>
-        </div>
+            @if (Model.Feedbacks.Any())
+            {
+                <ul class="feedback-list">
+                    @foreach (var f in Model.Feedbacks)
+                    {
+                        <li class="feedback-item">
+                            <div class="feedback-meta">
+                                <span class="feedback-date">@f.SessionDate.ToString("dd MMM yyyy")</span>
+                                <span class="feedback-time">@f.CreatedAt.ToString("HH:mm")</span>
+                            </div>
+                            <p class="feedback-note">@f.MentorNotes</p>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="panel-empty">No feedback submitted yet.</p>
+            }
+        </section>
+
     </div>
 
-    <div class="mt-3">
-        <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index"
-               class="btn btn-outline-secondary">
-            ← Back to Trainees
+    <div class="detail-footer">
+        <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index" class="btn-link-back">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Back to Trainees
         </a>
     </div>
 </div>

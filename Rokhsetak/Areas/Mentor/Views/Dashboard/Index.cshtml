@@ -45,6 +45,11 @@
     var pendingCount = Model.TotalPendingCount;
     // mock-exam state variants: --ready triggers the gold pulse on the gradient CTA, --completed mutes it
     var pendingState = pendingCount > 0 ? "ready" : "completed";
+
+    // ---- Dashboard shell: hide the global top navbar, drive nav from the sidebar instead ----
+    ViewData["HideNav"] = true;
+    var currentLang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
 }
 
 @functions {
@@ -75,8 +80,96 @@
     <link rel="stylesheet" href="~/css/dashboard.css" />
 }
 
-<div class="mentor-dashboard">
-    <div class="mentor-dashboard__inner">
+<div class="mentor-shell">
+
+    @* ============ Sidebar ============ *@
+    <aside class="mentor-sidebar" aria-label="Mentor navigation">
+        <a asp-area="" asp-controller="Home" asp-action="Index"
+           class="mentor-sidebar__brand" aria-label="Rokhsetak — Home">
+            <span class="mentor-sidebar__logo" aria-hidden="true">
+                <i class="fa-solid fa-shield-halved"></i>
+            </span>
+            <span class="mentor-sidebar__brand-name">Rokhsetak</span>
+        </a>
+
+        <nav class="mentor-sidebar__nav" aria-label="Mentor sections">
+            <span class="mentor-sidebar__heading">Manage</span>
+            <ul class="mentor-sidebar__list">
+                <li>
+                    <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
+                       class="mentor-sidebar__link is-active" aria-current="page">
+                        <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Mentor" asp-controller="Availability" asp-action="Index"
+                       class="mentor-sidebar__link">
+                        <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                        <span>Availability</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index"
+                       class="mentor-sidebar__link">
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                        <span>Appointments</span>
+                        @if (pendingCount > 0)
+                        {
+                            <span class="mentor-sidebar__badge" aria-label="@pendingCount pending">@pendingCount</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index"
+                       class="mentor-sidebar__link">
+                        <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                        <span>Trainees</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mentor-sidebar__footer">
+            <div class="mentor-sidebar__lang" role="group" aria-label="Language">
+                <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage"
+                      method="post" class="mentor-sidebar__lang-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="language" value="en" />
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                    <button type="submit"
+                            class="mentor-sidebar__lang-btn @(currentLang == "en" ? "is-active" : null)"
+                            aria-pressed="@(currentLang == "en" ? "true" : "false")">EN</button>
+                </form>
+                <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage"
+                      method="post" class="mentor-sidebar__lang-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="language" value="ar" />
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
+                    <button type="submit"
+                            class="mentor-sidebar__lang-btn @(currentLang == "ar" ? "is-active" : null)"
+                            aria-pressed="@(currentLang == "ar" ? "true" : "false")">AR</button>
+                </form>
+            </div>
+
+            <a asp-area="" asp-controller="Profile" asp-action="Index" class="mentor-sidebar__link">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <span>Profile</span>
+            </a>
+
+            <form asp-area="" asp-controller="Auth" asp-action="Logout" method="post" class="mentor-sidebar__logout-form">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="mentor-sidebar__link mentor-sidebar__link--logout">
+                    <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                    <span>Log out</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    @* ============ Main ============ *@
+    <div class="mentor-dashboard">
+        <div class="mentor-dashboard__inner">
 
         @if (TempData["Error"] != null)
         {
@@ -379,6 +472,7 @@
         </section>
 
     </div>
+</div>
 </div>
 
 @section Scripts {

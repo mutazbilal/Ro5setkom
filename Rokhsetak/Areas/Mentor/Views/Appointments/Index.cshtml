@@ -1,170 +1,246 @@
-﻿@model AppointmentListViewModel
+@using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@model AppointmentListViewModel
 @{
-    ViewData["Title"] = "All Appointments";
+    ViewData["Title"] = "Manage Appointments";
+
+    var totalCount     = Model.Items.Count;
+    var pendingCount   = Model.Items.Count(i => i.Status == "pending");
+    var confirmedCount = Model.Items.Count(i => i.Status == "confirmed");
 }
 
-<div class="container py-4">
+@functions {
+    /// <summary>Maps appointment status to (card-modifier, pill-modifier, label).</summary>
+    (string cardMod, string pillMod, string label) StatusPresentation(string status) =>
+        status switch
+        {
+            "pending"   => ("pending",   "up-next",     "Pending"),
+            "confirmed" => ("confirmed", "in-progress", "Confirmed"),
+            "completed" => ("completed", "completed",   "Completed"),
+            "cancelled" => ("cancelled", "pending",     "Cancelled"),
+            _           => ("pending",   "pending",     status)
+        };
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show">
-            @TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+    /// <summary>Session-type chip variant — practical leans gold, theoretical stays primary.</summary>
+    string SessionTypeChip(string type) =>
+        string.Equals(type, "practical", System.StringComparison.OrdinalIgnoreCase)
+            ? "chip--accent"
+            : "chip--primary";
+}
 
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <h2 class="fw-bold mb-0">Manage Appointments</h2>
-        <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
-               class="btn btn-outline-secondary btn-sm">
-            ← Dashboard
-        </a>
-    </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/appointments.css" />
+}
 
-    @if (!Model.Items.Any())
-    {
-        <div class="text-center py-5 text-muted">
-            <i class="bi bi-calendar-x fs-1 d-block mb-2"></i>
-            No appointments found.
-        </div>
-    }
-    else
-    {
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Trainee</th>
-                        <th>Date &amp; Time</th>
-                        <th>Type</th>
-                        <th>License</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Items)
+<div class="appointments-page">
+    <div class="appointments-page__inner">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Hero ============ -->
+        <section class="appointments-hero" aria-labelledby="appointments-page-title">
+            <div class="appointments-hero__intro">
+                <span class="appointments-hero__eyebrow">Mentor Workspace</span>
+                <h1 id="appointments-page-title" class="appointments-hero__title">Manage Appointments</h1>
+                <div class="appointments-hero__meta">
+                    <span class="chip chip--soft" aria-label="Total appointments">
+                        <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                        @totalCount total
+                    </span>
+                    @if (pendingCount > 0)
                     {
-                        var rowClass = item.Status switch
-                        {
-                            "pending" => "table-warning",
-                            "confirmed" => "table-light",
-                            "completed" => "table-success",
-                            "cancelled" => "table-secondary",
-                            _ => ""
-                        };
-                        <tr class="@rowClass">
-                            <td>
-                                <a asp-area="Mentor" asp-controller="Trainees"
-                                       asp-action="Detail" asp-route-id="@item.TraineeId"
-                                       class="text-decoration-none fw-semibold">
+                        <span class="chip chip--warning" aria-label="Pending appointments">
+                            <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                            @pendingCount pending
+                        </span>
+                    }
+                    @if (confirmedCount > 0)
+                    {
+                        <span class="chip chip--primary" aria-label="Confirmed appointments">
+                            <i class="fa-solid fa-check" aria-hidden="true"></i>
+                            @confirmedCount confirmed
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <div class="appointments-hero__cta">
+                <a asp-area="Mentor"
+                   asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="btn-action btn-action--ghost">
+                    <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+        </section>
+
+        @if (!Model.Items.Any())
+        {
+            <!-- ============ Empty state ============ -->
+            <section class="appointments-empty" aria-live="polite">
+                <span class="appointments-empty__icon" aria-hidden="true">
+                    <i class="fa-regular fa-calendar"></i>
+                </span>
+                <h2 class="appointments-empty__title">No appointments yet</h2>
+                <p class="appointments-empty__message">
+                    Once trainees start booking sessions with you, they'll appear here for confirmation,
+                    rescheduling, and feedback.
+                </p>
+            </section>
+        }
+        else
+        {
+            <!-- ============ Appointment list ============ -->
+            <ul class="appointment-list" aria-label="Appointments">
+                @foreach (var item in Model.Items)
+                {
+                    var (cardMod, pillMod, statusLabel) = StatusPresentation(item.Status);
+                    var hasActions = item.CanConfirm || item.CanReschedule || item.CanMarkDone
+                                     || item.CanCancel || item.CanFeedback || item.FeedbackGiven;
+
+                    <li class="appointment-card appointment-card--@cardMod">
+                        <div class="appointment-card__head">
+
+                            <div class="appointment-card__identity">
+                                <a asp-area="Mentor"
+                                   asp-controller="Trainees"
+                                   asp-action="Detail"
+                                   asp-route-id="@item.TraineeId"
+                                   class="appointment-card__trainee">
                                     @item.TraineeName
+                                    <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
                                 </a>
-                            </td>
-                            <td>
-                                <div class="fw-semibold">@item.BookingDate.ToString("dd MMM yyyy")</div>
-                                <div class="text-muted small">
+                                <span class="appointment-card__license">
+                                    <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                                    @item.LicenseType
+                                </span>
+                            </div>
+
+                            <div class="appointment-card__schedule">
+                                <span class="appointment-card__date">
+                                    @item.BookingDate.ToString("ddd, dd MMM yyyy")
+                                </span>
+                                <span class="appointment-card__time">
                                     @item.StartTime.ToString("HH:mm") – @item.EndTime.ToString("HH:mm")
-                                </div>
-                            </td>
-                            <td>
-                                <span class="badge @(item.SessionType == "practical" ? "bg-warning text-dark" : "bg-info text-dark")">
+                                </span>
+                            </div>
+
+                            <div class="appointment-card__tags">
+                                <span class="chip @SessionTypeChip(item.SessionType)">
+                                    <i class="fa-solid @(item.SessionType == "practical" ? "fa-car" : "fa-book")"
+                                       aria-hidden="true"></i>
                                     @item.SessionType
                                 </span>
-                            </td>
-                            <td><span class="small text-muted">@item.LicenseType</span></td>
-                            <td>
-                                @{
-                                    var (sc, sl) = item.Status switch
-                                    {
-                                        "pending" => ("bg-warning text-dark", "Pending"),
-                                        "confirmed" => ("bg-primary", "Confirmed"),
-                                        "completed" => ("bg-success", "Completed"),
-                                        "cancelled" => ("bg-secondary", "Cancelled"),
-                                        _ => ("bg-light text-dark", item.Status)
-                                    };
+                                <span class="status-pill status-pill--@pillMod">@statusLabel</span>
+                            </div>
+
+                        </div>
+
+                        @if (hasActions)
+                        {
+                            <div class="appointment-card__actions">
+                                @if (item.CanConfirm)
+                                {
+                                    <form asp-area="Mentor"
+                                          asp-controller="Appointments"
+                                          asp-action="Confirm"
+                                          method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="bookingId" value="@item.BookingId" />
+                                        <button type="submit" class="btn-action btn-action--gradient btn-action--sm">
+                                            <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                            <span>Confirm</span>
+                                        </button>
+                                    </form>
                                 }
-                                <span class="badge @sc">@sl</span>
-                            </td>
-                            <td>
-                                <div class="d-flex gap-1 flex-wrap">
-                                    @if (item.CanConfirm)
-                                    {
-                                        <form asp-area="Mentor" asp-controller="Appointments"
-                                              asp-action="Confirm" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <input type="hidden" name="bookingId" value="@item.BookingId" />
-                                            <button class="btn btn-success btn-sm">
-                                                <i class="bi bi-check-lg"></i> Confirm
-                                            </button>
-                                        </form>
-                                    }
-                                    @if (item.CanReschedule)
-                                    {
-                                        <a asp-area="Mentor" asp-controller="Appointments"
-                                               asp-action="Reschedule"
-                                               asp-route-bookingId="@item.BookingId"
-                                               class="btn btn-outline-secondary btn-sm">
-                                            <i class="bi bi-arrow-repeat"></i> Reschedule
-                                        </a>
-                                    }
-                                    @if (item.CanMarkDone)
-                                    {
-                                        <form asp-area="Mentor" asp-controller="Appointments"
-                                              asp-action="MarkDone" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <input type="hidden" name="bookingId" value="@item.BookingId" />
-                                            <button class="btn btn-primary btn-sm">
-                                                <i class="bi bi-check2-circle"></i> Mark Done
-                                            </button>
-                                        </form>
-                                    }
-                                    @if (item.CanCancel)
-                                    {
-                                        <form asp-area="Mentor" asp-controller="Appointments"
-                                              asp-action="Cancel" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <input type="hidden" name="bookingId" value="@item.BookingId" />
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="bi bi-check2-circle"></i> Cancel
-                                            </button>
-                                        </form>
-                                    }
-                                    @if (item.CanFeedback)
-                                    {
-                                        <a asp-area="Mentor" asp-controller="Appointments"
-                                               asp-action="Feedback"
-                                               asp-route-bookingId="@item.BookingId"
-                                               class="btn btn-outline-info btn-sm">
-                                            <i class="bi bi-chat-left-text"></i> Feedback
-                                        </a>
-                                    }
-                                    @if (item.FeedbackGiven)
-                                    {
-                                        <span class="badge bg-success align-self-center">
-                                            <i class="bi bi-chat-left-check"></i> Feedback ✓
-                                        </span>
-                                    }
-                                    @if (!item.CanConfirm && !item.CanReschedule
-                                         && !item.CanMarkDone && !item.CanFeedback
-                                         && !item.FeedbackGiven
-                                         && !item.CanCancel)
-                                    {
-                                        <span class="text-muted small">—</span>
-                                    }
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
+                                @if (item.CanMarkDone)
+                                {
+                                    <form asp-area="Mentor"
+                                          asp-controller="Appointments"
+                                          asp-action="MarkDone"
+                                          method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="bookingId" value="@item.BookingId" />
+                                        <button type="submit" class="btn-action btn-action--outline btn-action--sm">
+                                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                            <span>Mark Done</span>
+                                        </button>
+                                    </form>
+                                }
+                                @if (item.CanReschedule)
+                                {
+                                    <a asp-area="Mentor"
+                                       asp-controller="Appointments"
+                                       asp-action="Reschedule"
+                                       asp-route-bookingId="@item.BookingId"
+                                       class="btn-action btn-action--ghost btn-action--sm">
+                                        <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                                        <span>Reschedule</span>
+                                    </a>
+                                }
+                                @if (item.CanFeedback)
+                                {
+                                    <a asp-area="Mentor"
+                                       asp-controller="Appointments"
+                                       asp-action="Feedback"
+                                       asp-route-bookingId="@item.BookingId"
+                                       class="btn-action btn-action--ghost-success btn-action--sm">
+                                        <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+                                        <span>Feedback</span>
+                                    </a>
+                                }
+                                @if (item.FeedbackGiven)
+                                {
+                                    <span class="appointment-card__feedback-given">
+                                        <i class="fa-solid fa-comment-medical" aria-hidden="true"></i>
+                                        Feedback submitted
+                                    </span>
+                                }
+                                @if (item.CanCancel)
+                                {
+                                    <form asp-area="Mentor"
+                                          asp-controller="Appointments"
+                                          asp-action="Cancel"
+                                          method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="bookingId" value="@item.BookingId" />
+                                        <button type="submit" class="btn-action btn-action--ghost-danger btn-action--sm">
+                                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                                            <span>Cancel</span>
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+
+    </div>
 </div>
