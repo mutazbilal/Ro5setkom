@@ -12,11 +12,13 @@ public class AppointmentService : IAppointmentService
 {
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
+    private readonly IConversationService _conversations;
 
-    public AppointmentService(RokhsetakDbContext context, INotificationService notifications)
+    public AppointmentService(RokhsetakDbContext context, INotificationService notifications, IConversationService conversations)
     {
         _context = context;
         _notifications = notifications;
+        _conversations = conversations;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -102,9 +104,21 @@ public class AppointmentService : IAppointmentService
 
         booking.Status = "confirmed";
         booking.UpdatedAt = DateTime.UtcNow;
+
+        // Update trainee license mentor id
+        var tl = await _context.TraineeLicenses
+            .FirstOrDefaultAsync(tl => tl.TraineeId == booking.TraineeId);
+        if (tl != null && tl.MentorId != mentorId)
+        {
+            tl.MentorId = mentorId;
+            tl.UpdatedAt = DateTime.UtcNow;
+        }
+
         await _context.SaveChangesAsync();
-        //update trainee license mentor id
-        await ChangePrimaryMentorAsync(booking.TraineeId, mentorId);
+
+        // ── Auto-create conversation on first confirmed booking (US-024) ──────────
+        await _conversations.EnsureConversationExistsAsync(
+            booking.TraineeId, mentorId, bookingId);
 
         await _notifications.CreateAsync(
             booking.TraineeId,

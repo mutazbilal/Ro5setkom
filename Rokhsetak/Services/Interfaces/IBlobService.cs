@@ -1,5 +1,5 @@
 ﻿using Rokhsetak.Services.Common;
-
+using Rokhsetak.ViewModels.Messaging;
 namespace Rokhsetak.Services.Interfaces
 {
     public interface IBlobService
@@ -14,5 +14,6 @@ namespace Rokhsetak.Services.Interfaces
             string containerName,
             string fileName);
 
+        Task<ServiceResult<ChatUploadResult>> UploadChatAttachmentAsync(IFormFile file);
     }
 }
