@@ -4,5 +4,5 @@ namespace Rokhsetak.Services.Interfaces;
 
 public interface ICalendarService
 {
-    Task<ServiceResult<List<CalendarEventViewModel>>> GetCalendarEventsAsync(int traineeId);
+    Task<ServiceResult<List<CalendarEventViewModel>>> GetCalendarEventsAsync(int traineeId, string culture);
 }

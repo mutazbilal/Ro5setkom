@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Mentor.ViewModels.Appointments;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Mentor.Controllers;
 
@@ -20,8 +21,9 @@ public class AppointmentsController : Controller
     // GET /Mentor/Appointments
     public async Task<IActionResult> Index()
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var mentorId = User.GetUserId().Value;
-        var result = await _appointments.GetAllAppointmentsAsync(mentorId);
+        var result = await _appointments.GetAllAppointmentsAsync(mentorId, culture);
 
         if (!result.Succeeded)
         {
@@ -78,9 +80,10 @@ public class AppointmentsController : Controller
     public async Task<IActionResult> Reschedule(int bookingId)
     {
         var mentorId = User.GetUserId().Value;
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
         // Load appointment data to pre-fill form
-        var allResult = await _appointments.GetAllAppointmentsAsync(mentorId);
+        var allResult = await _appointments.GetAllAppointmentsAsync(mentorId, culture);
         var booking = allResult.Data?.Items.FirstOrDefault(i => i.BookingId == bookingId);
 
         if (booking == null)
@@ -133,7 +136,8 @@ public class AppointmentsController : Controller
     public async Task<IActionResult> Feedback(int bookingId)
     {
         var mentorId = User.GetUserId().Value;
-        var allResult = await _appointments.GetAllAppointmentsAsync(mentorId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var allResult = await _appointments.GetAllAppointmentsAsync(mentorId, culture);
         var booking = allResult.Data?.Items.FirstOrDefault(i => i.BookingId == bookingId);
 
         if (booking == null)

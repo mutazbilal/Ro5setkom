@@ -132,7 +132,8 @@ public class UserAdminService : IUserAdminService
             CityName = data.CityName,
             ProvinceName = data.ProvinceName,
             AddressLine1 = data.u.AddressLine1,
-            ProfilePicture = data.u.ProfilePicturePath
+            ProfilePicture = data.u.ProfilePicturePath,
+            DisplayNameEn = data.u.DisplayNameEn,
         };
 
         // Bookings either as trainee or as mentor

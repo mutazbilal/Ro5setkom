@@ -13,6 +13,7 @@ CREATE TABLE Gov.GovExamCenters (
     postal_code     NVARCHAR(20),
     phone_number    NVARCHAR(20),
 
+    display_name_en NVARCHAR(255) NULL,
     is_active       BIT DEFAULT 1,
 
     FOREIGN KEY (province_id)

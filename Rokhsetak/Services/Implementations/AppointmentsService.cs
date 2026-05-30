@@ -5,6 +5,7 @@ using Rokhsetak.Areas.Mentor.ViewModels.Trainees;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -22,7 +23,7 @@ public class AppointmentService : IAppointmentService
     // ─────────────────────────────────────────────────────────────────────────
     // GET ALL APPOINTMENTS
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<AppointmentListViewModel>> GetAllAppointmentsAsync(int mentorId)
+    public async Task<ServiceResult<AppointmentListViewModel>> GetAllAppointmentsAsync(int mentorId, string culture)
     {
         var now = DateTime.UtcNow;
         var feedbackIds = await _context.SessionFeedbacks
@@ -47,7 +48,10 @@ public class AppointmentService : IAppointmentService
                 b.Status,
                 b.CreatedAt,
                 TraineeName = u.FirstName + " " + u.LastName,
-                LicenseName = lt.LicenseName
+                lt.LicenseName,
+                u.DisplayNameEn,
+                LicenseNameAr = lt.DisplayNameAr,
+                LicenseNameEn = lt.DisplayNameEn
             }
         ).ToListAsync();
 
@@ -62,13 +66,13 @@ public class AppointmentService : IAppointmentService
             {
                 BookingId = i.BookingId,
                 TraineeId = i.TraineeId,
-                TraineeName = i.TraineeName,
+                TraineeName = culture == "ar"? i.TraineeName :i.DisplayNameEn,
                 BookingDate = i.BookingDate,
                 StartTime = i.StartTime,
                 EndTime = i.EndTime,
                 SessionType = i.SessionType ?? string.Empty,
                 Status = i.Status,
-                LicenseType = i.LicenseName,
+                LicenseType = culture == "ar"? i.LicenseNameAr :i.LicenseNameEn,
                 CreatedAt = i.CreatedAt ?? DateTime.UtcNow,
                 CanConfirm = i.Status == "pending",
                 CanReschedule = i.Status == "pending",
@@ -324,7 +328,7 @@ public class AppointmentService : IAppointmentService
     // TRAINEE SUMMARY LIST
     // ─────────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<TraineeSummaryListViewModel>> GetTraineeSummaryAsync(
-        int mentorId, string? search, string? statusFilter)
+        int mentorId, string? search, string? statusFilter, string culture)
     {
         // Get distinct trainees who have ≥1 booking with this mentor
         var traineeIds = await _context.Bookings
@@ -354,7 +358,7 @@ public class AppointmentService : IAppointmentService
         // User info for trainee IDs
         var users = await _context.Users
             .Where(u => traineeIds.Contains(u.UserId))
-            .Select(u => new { u.UserId, u.FirstName, u.LastName })
+            .Select(u => new { u.UserId, u.FirstName, u.LastName, u.DisplayNameEn})
             .ToDictionaryAsync(u => u.UserId);
 
         // Active license info
@@ -363,7 +367,7 @@ public class AppointmentService : IAppointmentService
             .Join(_context.LicenseTypes,
                   tl => tl.LicenseTypeId,
                   lt => lt.LicenseTypeId,
-                  (tl, lt) => new { tl.TraineeId, tl.Stage, lt.LicenseName })
+                  (tl, lt) => new { tl.TraineeId, tl.Stage, lt.DisplayNameAr, lt.DisplayNameEn })
             .ToDictionaryAsync(x => x.TraineeId);
 
         var items = traineeIds
@@ -372,15 +376,14 @@ public class AppointmentService : IAppointmentService
                 users.TryGetValue(tid, out var u);
                 sessionStats.TryGetValue(tid, out var stats);
                 licenses.TryGetValue(tid, out var lic);
-
                 return new TraineeSummaryItem
                 {
                     TraineeId = tid,
-                    FullName = u != null ? $"{u.FirstName} {u.LastName}" : "Unknown",
+                    FullName =  culture == "ar" ? $"{u.FirstName} {u.LastName}" : u.DisplayNameEn,
                     TotalSessions = stats?.TotalSessions ?? 0,
                     LastSessionDate = stats?.LastSessionDate,
                     LicenseStage = lic?.Stage ?? "—",
-                    LicenseType = lic?.LicenseName ?? "—"
+                    LicenseType = culture == "ar"? lic.DisplayNameAr :lic.DisplayNameEn
                 };
             })
             .AsQueryable();
@@ -412,7 +415,7 @@ public class AppointmentService : IAppointmentService
     // TRAINEE DETAIL
     // ─────────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<TraineeDetailViewModel>> GetTraineeDetailAsync(
-        int mentorId, int traineeId)
+        int mentorId, int traineeId, string culture)
     {
         // Verify this mentor has at least one booking with this trainee
         bool hasRelationship = await _context.Bookings
@@ -423,7 +426,7 @@ public class AppointmentService : IAppointmentService
 
         var user = await _context.Users
             .Where(u => u.UserId == traineeId)
-            .Select(u => new { u.FirstName, u.LastName, u.Email })
+            .Select(u => new { u.FirstName, u.LastName, u.Email, u.DisplayNameEn})
             .FirstOrDefaultAsync();
 
         if (user == null)
@@ -437,7 +440,8 @@ public class AppointmentService : IAppointmentService
                   (tl, lt) => new
                   {
                       tl.Stage,
-                      lt.LicenseName,
+                      lt.DisplayNameAr,
+                      lt.DisplayNameEn,
                       tl.ProgressPercentage
                   })
             .FirstOrDefaultAsync();
@@ -478,7 +482,7 @@ public class AppointmentService : IAppointmentService
             FullName = $"{user.FirstName} {user.LastName}",
             Email = user.Email,
             LicenseStage = license?.Stage ?? "—",
-            LicenseType = license?.LicenseName ?? "—",
+            LicenseType = culture == "ar"? license.DisplayNameAr :license.DisplayNameEn,
             ProgressPct = license?.ProgressPercentage ?? 0,
             Sessions = sessions,
             Feedbacks = feedbacks

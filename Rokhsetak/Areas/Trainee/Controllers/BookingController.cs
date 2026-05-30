@@ -23,8 +23,9 @@ public class BookingController : Controller
     // GET /Trainee/Booking — my bookings list
     public async Task<IActionResult> Index()
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var userId = User.GetUserId().Value;
-        var result = await _bookings.GetMyBookingsAsync(userId);
+        var result = await _bookings.GetMyBookingsAsync(userId, culture);
 
         if (!result.Succeeded)
         {
@@ -114,8 +115,9 @@ public class BookingController : Controller
     // GET /Trainee/Booking/Reschedule?bookingId=5
     public async Task<IActionResult> Reschedule(int bookingId)
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var userId = User.GetUserId().Value;
-        var result = await _bookings.GetReschedulePageAsync(userId, bookingId);
+        var result = await _bookings.GetReschedulePageAsync(userId, bookingId, culture);
 
         if (!result.Succeeded)
         {

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Admin.ViewModels.Bookings;
 using Rokhsetak.Areas.Admin.ViewModels.Exams;
 using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Admin.Controllers;
 
@@ -22,7 +23,8 @@ public class BookingsController : Controller
     // GET /Admin/Bookings
     public async Task<IActionResult> Index(BookingFilter filter)
     {
-        var result = await _bookings.GetBookingsAsync(filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _bookings.GetBookingsAsync(filter, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;
@@ -37,7 +39,8 @@ public class BookingsController : Controller
     // GET /Admin/Bookings/Exams
     public async Task<IActionResult> Exams(ExamFilter filter)
     {
-        var result = await _exams.GetExamAppointmentsAsync(filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _exams.GetExamAppointmentsAsync(filter, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;

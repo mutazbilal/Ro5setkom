@@ -13,6 +13,9 @@ namespace Rokhsetak.ViewModels.Profile
         [Display(Name = "Email Address")]
         public string Email { get; set; } = null!;
 
+        [Display(Name = "Name in English")]
+        public string? DisplayNameEn { get; set; }
+
         [Required(ErrorMessage = "Phone number is required.")]
         [Phone(ErrorMessage = "Please enter a valid phone number.")]
         [MaxLength(13, ErrorMessage = "Please enter a valid phone number.")]

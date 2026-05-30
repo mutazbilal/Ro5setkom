@@ -57,6 +57,7 @@ public class UserDetailViewModel
     public string? ProvinceName { get; set; }
     public string? AddressLine1 { get; set; }
     public string? ProfilePicture { get; set; }
+    public string? DisplayNameEn { get; set; }
 
     public List<UserBookingHistoryItem> BookingHistory { get; set; } = new();
 }

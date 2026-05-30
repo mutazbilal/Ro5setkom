@@ -9,8 +9,8 @@ public interface IBookingService
     Task<ServiceResult<MentorBookingViewModel>> GetMentorBookingPageAsync(int traineeId, int mentorId, string culture);
     Task<ServiceResult> BookSessionAsync(int traineeId, BookSessionViewModel model);
     Task<ServiceResult> CancelSessionAsync(int traineeId, int bookingId);
-    Task<ServiceResult<RescheduleTraineeViewModel>> GetReschedulePageAsync(int traineeId, int bookingId);
+    Task<ServiceResult<RescheduleTraineeViewModel>> GetReschedulePageAsync(int traineeId, int bookingId, string culture);
     Task<ServiceResult> RescheduleSessionAsync(int traineeId, RescheduleTraineeViewModel model);
-    Task<ServiceResult<TraineeBookingListViewModel>> GetMyBookingsAsync(int traineeId);
+    Task<ServiceResult<TraineeBookingListViewModel>> GetMyBookingsAsync(int traineeId, string culture);
     Task<ServiceResult> RateSessionAsync(int traineeId, int bookingId, decimal score, string? review);
 }

@@ -5,6 +5,7 @@ using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.ViewModels.Registration;
+using System.Globalization;
 
 
 namespace Rokhsetak.Services.Implementations
@@ -70,7 +71,8 @@ namespace Rokhsetak.Services.Implementations
                           m.CityId,
                           m.LicenseTypeId,
                           m.PricePerSession,
-                          FullName = u.FirstName + " " + u.LastName
+                          FullName = u.FirstName + " " + u.LastName,
+                          u.DisplayNameEn
                       })
                 .Join(_context.LicenseTypes,
                       m => m.LicenseTypeId,
@@ -82,6 +84,7 @@ namespace Rokhsetak.Services.Implementations
                           m.PricePerSession,
                           m.FullName,
                           LicenseName = culture == "ar"? lt.DisplayNameAr :lt.DisplayNameEn,
+                          m.DisplayNameEn
                       })
                 .Join(_context.CityTranslations
                         .Where(ct => ct.LanguageCode == culture),
@@ -95,6 +98,7 @@ namespace Rokhsetak.Services.Implementations
                         m.FullName,
                         m.LicenseName,
                         CityName = ct.DisplayName,
+                        m.DisplayNameEn
                     })
                 .ToListAsync();
 
@@ -118,7 +122,7 @@ namespace Rokhsetak.Services.Implementations
                 return new MentorBrowseCardViewModel
                 {
                     MentorId = m.MentorId,
-                    FullName = m.FullName,
+                    FullName = culture == "ar"? m.FullName : m.DisplayNameEn,
                     CityName = m.CityName,
                     CityId = m.CityId,
                     LicenseType = m.LicenseName,
@@ -177,7 +181,8 @@ namespace Rokhsetak.Services.Implementations
                           m.CityId,
                           m.PricePerSession,
                           m.LicenseTypeId,
-                          FullName = u.FirstName + " " + u.LastName
+                          FullName = u.FirstName + " " + u.LastName,
+                          u.DisplayNameEn
                       })
                 .Join(_context.CityTranslations
                         .Where(ct => ct.LanguageCode == culture),
@@ -190,7 +195,8 @@ namespace Rokhsetak.Services.Implementations
                         m.PricePerSession,
                         m.LicenseTypeId,
                         m.FullName,
-                        CityName = ct.DisplayName
+                        CityName = ct.DisplayName,
+                        m.DisplayNameEn
                     })
                 .FirstOrDefaultAsync();
 
@@ -260,10 +266,10 @@ namespace Rokhsetak.Services.Implementations
             var vm = new MentorBookingViewModel
             {
                 MentorId = mentorId,
-                MentorName = mentor.FullName,
+                MentorName = culture == "ar"? mentor.FullName :mentor.DisplayNameEn,
                 CityId = mentor.CityId,
                 CityName = mentor.CityName,
-                LicenseType = licenseType?.LicenseName ?? string.Empty,
+                LicenseType = culture == "ar"? licenseType.DisplayNameAr :licenseType.DisplayNameEn,
                 PricePerSession = mentor.PricePerSession ?? 0,
                 AverageRating = Math.Round(ratingData?.Avg ?? 0, 1),
                 TotalRatings = ratingData?.Count ?? 0,
@@ -418,7 +424,7 @@ namespace Rokhsetak.Services.Implementations
         // GET RESCHEDULE PAGE
         // ─────────────────────────────────────────────────────────────────────────
         public async Task<ServiceResult<RescheduleTraineeViewModel>> GetReschedulePageAsync(
-            int traineeId, int bookingId)
+            int traineeId, int bookingId, string culture)
         {
             var booking = await _context.Bookings
                 .FirstOrDefaultAsync(b => b.BookingId == bookingId && b.TraineeId == traineeId);
@@ -436,7 +442,7 @@ namespace Rokhsetak.Services.Implementations
             // Load mentor info and availability
             var mentorUser = await _context.Users
                 .Where(u => u.UserId == booking.MentorId)
-                .Select(u => new { u.FirstName, u.LastName })
+                .Select(u => new { u.FirstName, u.LastName, u.DisplayNameEn})
                 .FirstOrDefaultAsync();
 
             var slots = await _context.MentorAvailabilities
@@ -460,7 +466,7 @@ namespace Rokhsetak.Services.Implementations
             var vm = new RescheduleTraineeViewModel
             {
                 BookingId = bookingId,
-                MentorName = mentorUser != null ? $"{mentorUser.FirstName} {mentorUser.LastName}" : "Unknown",
+                MentorName = culture == "ar" ? $"{mentorUser.FirstName} {mentorUser.LastName}" : mentorUser.DisplayNameEn,
                 SessionType = booking.SessionType ?? string.Empty,
                 NewDate = booking.BookingDate.AddDays(1),
                 NewStartTime = booking.StartTime,
@@ -572,7 +578,7 @@ namespace Rokhsetak.Services.Implementations
         // ─────────────────────────────────────────────────────────────────────────
         // GET MY BOOKINGS
         // ─────────────────────────────────────────────────────────────────────────
-        public async Task<ServiceResult<TraineeBookingListViewModel>> GetMyBookingsAsync(int traineeId)
+        public async Task<ServiceResult<TraineeBookingListViewModel>> GetMyBookingsAsync(int traineeId, string culture)
         {
             var now = DateTime.UtcNow;
             var mentorUser = await _context.TraineeLicenses
@@ -584,7 +590,8 @@ namespace Rokhsetak.Services.Implementations
                     (tl, u) => new
                     {
                         u.UserId,
-                        FullName = u.FirstName + " " + u.LastName
+                        FullName = u.FirstName + " " + u.LastName,
+                        u.DisplayNameEn
                     }
                 )
                 .FirstOrDefaultAsync();
@@ -604,7 +611,7 @@ namespace Rokhsetak.Services.Implementations
                     b.SessionType,
                     b.Status,
 
-                    MentorName = mentorUser != null? mentorUser.FullName: null,
+                    MentorName = culture == "ar" ? mentorUser.FullName: mentorUser.DisplayNameEn,
 
                     MentorNotes = b.SessionFeedback != null
                         ? b.SessionFeedback.MentorNotes

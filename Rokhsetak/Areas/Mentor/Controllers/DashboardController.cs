@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Mentor.Controllers;
 
@@ -19,7 +20,8 @@ public class DashboardController : Controller
     public async Task<IActionResult> Index()
     {
         var mentorId = User.GetUserId().Value;
-        var result = await _dashboard.GetDashboardAsync(mentorId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _dashboard.GetDashboardAsync(mentorId, culture);
 
         if (!result.Succeeded)
         {

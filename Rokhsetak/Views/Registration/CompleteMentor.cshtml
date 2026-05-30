@@ -184,6 +184,13 @@
                 </div>
 
                 <div class="auth-field">
+                    <input asp-for="DisplayNameEn" class="auth-input" placeholder=" "
+                           autocomplete="Name in english" aria-required="false" />
+                    <label asp-for="DisplayNameEn" class="auth-label">Name in English</label>
+                    <span asp-validation-for="DisplayNameEn" class="text-danger"></span>
+                </div>
+
+                <div class="auth-field">
                     <input asp-for="PhoneNumber" class="auth-input" type="tel" placeholder=" "
                            autocomplete="tel" aria-required="true" />
                     <label asp-for="PhoneNumber" class="auth-label">Phone Number</label>
