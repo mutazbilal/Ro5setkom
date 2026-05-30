@@ -1,11 +1,14 @@
+@using System.Globalization
 @using Rokhsetak.Resources
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResourceMarker> L
 @{
     var pageTitle = ViewData["Title"] as string ?? L["Admin_Layout_Title"];
+    var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var dir = culture == "ar" ? "rtl" : "ltr";
 }
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir=@dir>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
