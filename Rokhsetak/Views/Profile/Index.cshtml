@@ -1,7 +1,10 @@
 ﻿@using Rokhsetak.ViewModels.Profile
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model ProfileViewModel
 @{
-    ViewData["Title"] = "My Profile";
+    ViewData["Title"] = L["Profile_MyProfile"];
 
     // Pull first letters from first/last name for the avatar
     string firstInitial = !string.IsNullOrWhiteSpace(Model.FirstName)
@@ -14,7 +17,7 @@
     if (string.IsNullOrEmpty(initials)) { initials = "?"; }
 
     string fullName = $"{Model.FirstName} {Model.LastName}".Trim();
-    if (string.IsNullOrEmpty(fullName)) { fullName = "Trainee"; }
+    if (string.IsNullOrEmpty(fullName)) { fullName = User.IsInRole("mentor") ? L["Profile_MentorDefault"].Value : L["Profile_TraineeDefault"].Value; }
 }
 
 @section Styles {
@@ -29,7 +32,7 @@
             <div class="alert dashboard-alert dashboard-alert--error" role="alert">
                 <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Error"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -39,7 +42,7 @@
             <div class="alert dashboard-alert dashboard-alert--success" role="alert">
                 <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Success"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -52,12 +55,12 @@
                     <span class="profile-avatar__initials">@initials</span>
                 </div>
                 <div class="profile-hero__intro">
-                    <span class="profile-hero__eyebrow">Account</span>
+                    <span class="profile-hero__eyebrow">@L["Profile_Account"]</span>
                     <h1 id="profile-page-title" class="profile-hero__title">@fullName</h1>
                     <div class="profile-hero__meta">
                         <span class="chip chip--soft">
                             <i class="fa-solid fa-id-card" aria-hidden="true"></i>
-                            <span>National ID · @Model.NationalId</span>
+                            <span>@L["Profile_NationalIdLabel"] · @Model.NationalId</span>
                         </span>
                     </div>
                 </div>
@@ -68,8 +71,17 @@
                    asp-action="Edit"
                    class="btn-action btn-action--gradient">
                     <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-                    <span>Edit Profile</span>
+                    <span>@L["Profile_EditProfile"]</span>
                 </a>
+                @if (!User.IsInRole("mentor"))
+                {
+                    <a asp-controller="Profile"
+                       asp-action="ChangeLicense"
+                       class="btn-action btn-action--ghost">
+                        <i class="fa-solid fa-id-card-clip" aria-hidden="true"></i>
+                        <span>@L["Profile_ChangeLicense"]</span>
+                    </a>
+                }
             </div>
         </section>
 
@@ -80,8 +92,8 @@
                     <i class="fa-solid fa-address-card"></i>
                 </span>
                 <div class="profile-card__headings">
-                    <p class="profile-card__eyebrow">Contact Details</p>
-                    <h2 id="profile-contact-title" class="profile-card__title">How we reach you</h2>
+                    <p class="profile-card__eyebrow">@L["Profile_ContactDetails"]</p>
+                    <h2 id="profile-contact-title" class="profile-card__title">@L["Profile_HowWeReachYou"]</h2>
                 </div>
             </header>
 
@@ -99,7 +111,7 @@
                     <div class="info-grid__item">
                         <dt class="info-grid__label">
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <span>Email Address</span>
+                            <span>@L["Profile_EmailAddress"]</span>
                         </dt>
                         <dd class="info-grid__value">@Model.Email</dd>
                     </div>
@@ -107,7 +119,7 @@
                     <div class="info-grid__item">
                         <dt class="info-grid__label">
                             <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                            <span>Phone Number</span>
+                            <span>@L["Profile_PhoneNumber"]</span>
                         </dt>
                         <dd class="info-grid__value">@Model.PhoneNumber</dd>
                     </div>
@@ -115,7 +127,7 @@
                     <div class="info-grid__item">
                         <dt class="info-grid__label">
                             <i class="fa-solid fa-user" aria-hidden="true"></i>
-                            <span>Full Name</span>
+                            <span>@L["Profile_FullName"]</span>
                         </dt>
                         <dd class="info-grid__value">@fullName</dd>
                     </div>
@@ -123,10 +135,10 @@
                     <div class="info-grid__item info-grid__item--locked">
                         <dt class="info-grid__label">
                             <i class="fa-solid fa-id-card" aria-hidden="true"></i>
-                            <span>National ID</span>
+                            <span>@L["Profile_NationalID"]</span>
                             <span class="info-grid__badge">
                                 <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                                Government record
+                                @L["Profile_GovernmentRecord"]
                             </span>
                         </dt>
                         <dd class="info-grid__value">@Model.NationalId</dd>

@@ -1,5 +1,9 @@
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<Rokhsetak.Resources.SharedResourceMarker> L
 @{
-    ViewData["Title"] = "Welcome";
+    ViewData["Title"] = L["Home_Welcome"];
+    var isAuth = User.Identity != null && User.Identity.IsAuthenticated;
 }
 
 @section Styles {
@@ -8,36 +12,38 @@
 
 <div class="landing-body">
 
-<main class="landing-page" aria-label="Landing page">
+<main class="landing-page" aria-label="@L["Home_LandingPageAria"]">
 
     @* ─────────────────  HERO  ───────────────── *@
     <section class="landing-hero">
         <div class="landing-hero__content">
-            <p class="landing-badge">Official Training &amp; Licensing Journey</p>
-            <h1>Your Road to a Driving License Starts Here</h1>
+            <p class="landing-badge">@L["Home_HeroBadge"]</p>
+            <h1>@L["Home_HeroTitle"]</h1>
             <p class="landing-subtitle">
-                A modern, secure gateway for trainees and mentors with guided onboarding,
-                identity verification, and exam-ready learning.
+                @L["Home_HeroSubtitle"]
             </p>
 
-            <div class="landing-cta-row">
-                <a asp-controller="Auth" asp-action="Login" class="auth-btn landing-cta">
-                    Login to Continue
-                </a>
-                <a asp-controller="Registration" asp-action="SelectRole"
-                   class="auth-btn-ghost landing-cta-ghost">
-                    New User? Register
-                </a>
-            </div>
+            @if (!isAuth)
+            {
+                <div class="landing-cta-row">
+                    <a asp-controller="Auth" asp-action="Login" class="auth-btn landing-cta">
+                        @L["Home_LoginButton"]
+                    </a>
+                    <a asp-controller="Registration" asp-action="SelectRole"
+                       class="auth-btn-ghost landing-cta-ghost">
+                        @L["Home_RegisterButton"]
+                    </a>
+                </div>
+            }
 
             @* ─── Blue glass card moved here, under the left content ─── *@
             <div class="landing-glass-card landing-glass-card--inline">
-                <h3><i class="fa-solid fa-road" aria-hidden="true"></i> Roadmap to License</h3>
+                <h3><i class="fa-solid fa-road" aria-hidden="true"></i> @L["Home_RoadmapTitle"]</h3>
                 <ul>
-                    <li><span>1</span> Verify your identity securely</li>
-                    <li><span>2</span> Complete profile and legal consents</li>
-                    <li><span>3</span> Choose training track and schedule</li>
-                    <li><span>4</span> Track progress to final exam</li>
+                    <li><span>1</span> @L["Home_RoadmapStep1"]</li>
+                    <li><span>2</span> @L["Home_RoadmapStep2"]</li>
+                    <li><span>3</span> @L["Home_RoadmapStep3"]</li>
+                    <li><span>4</span> @L["Home_RoadmapStep4"]</li>
                 </ul>
             </div>
         </div>
@@ -50,26 +56,25 @@
 
             <figure class="landing-hero__image-frame">
                 <img src="images/driving-lesson.png"
-                     alt="Driving mentor instructing a trainee next to a yellow training vehicle"
+                     alt="@L["Home_HeroImageAlt"]"
                      class="landing-hero__image"
                      loading="eager" />
                 <figcaption class="landing-hero__image-caption">
                     <i class="fa-solid fa-car-side" aria-hidden="true"></i>
-                    Real instructors. Real practice. Real progress.
+                    @L["Home_ImageCaption"]
                 </figcaption>
             </figure>
         </div>
     </section>
 
     @* ─────────────────  ORANGE HIGHLIGHTS CARD  ───────────────── *@
-    <section class="landing-highlights" aria-label="Why choose ro5setkom">
+    <section class="landing-highlights" aria-label="@L["Home_HighlightsAria"]">
         <div class="landing-highlights__card reveal-on-scroll">
             <header class="landing-highlights__header">
-                <p class="landing-highlights__eyebrow">Why ro5setkom</p>
-                <h2 class="landing-highlights__title">Built for trust, designed for the road</h2>
+                <p class="landing-highlights__eyebrow">@L["Home_WhyUsEyebrow"]</p>
+                <h2 class="landing-highlights__title">@L["Home_WhyUsTitle"]</h2>
                 <p class="landing-highlights__lead">
-                    Three pillars that make our platform the safest and smartest way
-                    to earn your license.
+                    @L["Home_WhyUsLead"]
                 </p>
             </header>
 
@@ -78,12 +83,9 @@
                     <span class="landing-highlight__icon" aria-hidden="true">
                         <i class="fa-solid fa-id-card"></i>
                     </span>
-                    <h3>Government Verification</h3>
+                    <h3>@L["Home_FeatureGovTitle"]</h3>
                     <p>
-                        Every National ID is checked in real time against the official
-                        civil registry. Your name, date of birth, and address are pulled
-                        directly from government records — so there is no paperwork to
-                        forge and no identity to fake.
+                        @L["Home_FeatureGovDesc"]
                     </p>
                 </article>
 
@@ -91,12 +93,9 @@
                     <span class="landing-highlight__icon" aria-hidden="true">
                         <i class="fa-solid fa-user-check"></i>
                     </span>
-                    <h3>Certified Mentors</h3>
+                    <h3>@L["Home_FeatureMentorsTitle"]</h3>
                     <p>
-                        Mentors only appear in our marketplace after their teaching
-                        license and certification documents are reviewed and approved
-                        by an administrator. You will never be matched with an
-                        unqualified instructor — every profile is vetted before it goes live.
+                        @L["Home_FeatureMentorsDesc"]
                     </p>
                 </article>
 
@@ -104,12 +103,9 @@
                     <span class="landing-highlight__icon" aria-hidden="true">
                         <i class="fa-solid fa-calendar-check"></i>
                     </span>
-                    <h3>Smart Scheduling</h3>
+                    <h3>@L["Home_FeatureScheduleTitle"]</h3>
                     <p>
-                        Browse mentor availability by day and time, book sessions in a
-                        single tap, and receive automatic reminders before each lesson.
-                        Need to reschedule? Cancel up to 12 hours in advance with no
-                        penalty — the calendar adapts to your life.
+                        @L["Home_FeatureScheduleDesc"]
                     </p>
                 </article>
             </div>
@@ -117,32 +113,31 @@
     </section>
 
     @* ─────────────────  EXISTING FEATURES  ───────────────── *@
-    <section class="landing-features" id="features" aria-label="Platform features">
+    <section class="landing-features" id="features" aria-label="@L["Home_FeaturesAria"]">
         <article class="landing-feature-card reveal-on-scroll">
             <i class="fa-solid fa-book-open" aria-hidden="true"></i>
-            <h3>Learning Modules</h3>
-            <p>Theory and practical preparation content, tailored by license type.</p>
+            <h3>@L["Home_FeatureModulesTitle"]</h3>
+            <p>@L["Home_FeatureModulesDesc"]</p>
         </article>
         <article class="landing-feature-card reveal-on-scroll">
             <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
-            <h3>Mentor Matching</h3>
-            <p>Find, compare, and book verified mentors that fit your schedule.</p>
+            <h3>@L["Home_FeatureMatchingTitle"]</h3>
+            <p>@L["Home_FeatureMatchingDesc"]</p>
         </article>
         <article class="landing-feature-card reveal-on-scroll">
             <i class="fa-solid fa-shield" aria-hidden="true"></i>
-            <h3>Secure Access</h3>
-            <p>Protected workflows with identity checks and trusted account controls.</p>
+            <h3>@L["Home_FeatureSecureTitle"]</h3>
+            <p>@L["Home_FeatureSecureDesc"]</p>
         </article>
     </section>
 
     @* ─────────────────  CONTACT  ───────────────── *@
-    <section class="landing-contact" id="contact" aria-label="Contact information">
+    <section class="landing-contact" id="contact" aria-label="@L["Home_ContactAria"]">
         <header class="landing-contact__header">
-            <p class="landing-contact__eyebrow">Contact</p>
-            <h2 class="landing-contact__title">We're here to help</h2>
+            <p class="landing-contact__eyebrow">@L["Home_ContactEyebrow"]</p>
+            <h2 class="landing-contact__title">@L["Home_ContactTitle"]</h2>
             <p class="landing-contact__lead">
-                Questions about registration, mentor approval, or your training plan?
-                Reach out — our support team responds within one business day.
+                @L["Home_ContactLead"]
             </p>
         </header>
 
@@ -151,9 +146,9 @@
                 <span class="landing-contact-card__icon" aria-hidden="true">
                     <i class="fa-solid fa-envelope"></i>
                 </span>
-                <h3>Email</h3>
+                <h3>@L["Home_ContactEmailTitle"]</h3>
                 <p class="landing-contact-card__lead">
-                    For account, registration, and general inquiries.
+                    @L["Home_ContactEmailLead"]
                 </p>
                 <ul class="landing-contact-card__list">
                     <li>
@@ -178,22 +173,22 @@
                 <span class="landing-contact-card__icon" aria-hidden="true">
                     <i class="fa-solid fa-phone"></i>
                 </span>
-                <h3>Phone</h3>
+                <h3>@L["Home_ContactPhoneTitle"]</h3>
                 <p class="landing-contact-card__lead">
-                    Speak directly with our support team.
+                    @L["Home_ContactPhoneLead"]
                 </p>
                 <ul class="landing-contact-card__list">
                     <li>
                         <a href="tel:+96265551234" class="landing-contact-card__link">
                             +962 6 555 1234
                         </a>
-                        <span class="landing-contact-card__meta">Office</span>
+                        <span class="landing-contact-card__meta">@L["Home_ContactOffice"]</span>
                     </li>
                     <li>
                         <a href="tel:+962791234567" class="landing-contact-card__link">
                             +962 79 123 4567
                         </a>
-                        <span class="landing-contact-card__meta">Mobile / WhatsApp</span>
+                        <span class="landing-contact-card__meta">@L["Home_ContactMobile"]</span>
                     </li>
                 </ul>
             </article>
@@ -202,25 +197,25 @@
                 <span class="landing-contact-card__icon" aria-hidden="true">
                     <i class="fa-solid fa-location-dot"></i>
                 </span>
-                <h3>Visit Us</h3>
+                <h3>@L["Home_ContactVisitTitle"]</h3>
                 <p class="landing-contact-card__lead">
-                    Drop by our headquarters during office hours.
+                    @L["Home_ContactVisitLead"]
                 </p>
                 <address class="landing-contact-card__address">
-                    Abdali Boulevard, 4th Floor<br />
-                    Amman, Jordan
+                    @L["Home_AddressLine1"]<br />
+                    @L["Home_AddressLine2"]
                 </address>
                 <p class="landing-contact-card__hours">
                     <i class="fa-regular fa-clock" aria-hidden="true"></i>
-                    Sunday – Thursday &middot; 9:00 AM – 6:00 PM
+                    @L["Home_OfficeHours"]
                 </p>
             </article>
         </div>
 
         <p class="landing-contact__note">
-            For urgent issues outside business hours, please email
+            @L["Home_ContactNotePrefix"]
             <a href="mailto:support@ro5setkom.jo" class="auth-link">support@ro5setkom.jo</a>
-            and we will get back to you on the next business day.
+            @L["Home_ContactNoteSuffix"]
         </p>
     </section>
 

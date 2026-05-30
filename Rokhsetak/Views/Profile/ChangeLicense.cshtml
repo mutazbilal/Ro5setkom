@@ -1,7 +1,10 @@
 ﻿@using Rokhsetak.ViewModels.Profile
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model ChangeLicenseViewModel
 @{
-    ViewData["Title"] = "Change License";
+    ViewData["Title"] = L["Profile_ChangeLicense"];
 }
 
 @section Styles {
@@ -16,7 +19,7 @@
             <div class="alert dashboard-alert dashboard-alert--error" role="alert">
                 <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Error"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -26,7 +29,7 @@
             <div class="alert dashboard-alert dashboard-alert--success" role="alert">
                 <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Success"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -39,10 +42,10 @@
                     <i class="fa-solid fa-id-card-clip"></i>
                 </span>
                 <div class="profile-hero__intro">
-                    <span class="profile-hero__eyebrow profile-hero__eyebrow--danger">Account Management</span>
-                    <h1 id="change-license-title" class="profile-hero__title">Change License Type</h1>
+                    <span class="profile-hero__eyebrow profile-hero__eyebrow--danger">@L["Profile_AccountManagement"]</span>
+                    <h1 id="change-license-title" class="profile-hero__title">@L["Profile_ChangeLicense"]</h1>
                     <p class="profile-hero__description">
-                        Switch the license category you're training for. This is a major change with consequences.
+                        @L["Profile_ChangeLicense_Desc"]
                     </p>
                 </div>
             </div>
@@ -52,7 +55,7 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Back to Profile</span>
+                    <span>@L["Profile_BackToProfile"]</span>
                 </a>
             </div>
         </section>
@@ -63,11 +66,9 @@
                 <i class="fa-solid fa-triangle-exclamation"></i>
             </span>
             <div class="callout__body">
-                <p class="callout__title">Heads up — this is a major change</p>
+                <p class="callout__title">@L["Profile_ChangeLicense_Warning"]</p>
                 <p class="callout__text">
-                    Changing your license type will <strong>cancel any future bookings</strong> tied to your current
-                    license and reset module progress that doesn't carry over to the new category. This action
-                    cannot be undone from this page.
+                    @L["Profile_ChangeLicense_WarningText"]
                 </p>
             </div>
         </aside>
@@ -84,21 +85,21 @@
                         <i class="fa-solid fa-id-card-clip"></i>
                     </span>
                     <div class="profile-card__headings">
-                        <p class="profile-card__eyebrow">License Selection</p>
-                        <h2 id="change-license-card-title" class="profile-card__title">Pick your new license</h2>
+                        <p class="profile-card__eyebrow">@L["Profile_LicenseSelection"]</p>
+                        <h2 id="change-license-card-title" class="profile-card__title">@L["Profile_PickNewLicense"]</h2>
                     </div>
                 </header>
 
                 <div class="profile-card__body">
                     <div class="form-field form-field--full">
                         <label asp-for="NewLicenseTypeId" class="form-field__label form-field__label--required">
-                            New License Type
+                            @L["Profile_NewLicenseType"]
                         </label>
                         <select asp-for="NewLicenseTypeId"
                                 asp-items="@(new SelectList(Model.AvailableLicenseTypes, "Id", "Name"))"
                                 class="form-select"
                                 aria-required="true">
-                            <option value="">-- Select License Type --</option>
+                            <option value="">@L["Profile_SelectLicenseType"]</option>
                         </select>
                         <span asp-validation-for="NewLicenseTypeId" class="text-danger form-field__error"></span>
                     </div>
@@ -111,8 +112,7 @@
                                aria-required="true" />
                         <span class="form-confirm__box" aria-hidden="true"></span>
                         <span class="form-confirm__label">
-                            <strong>I understand</strong> that changing my license will cancel future bookings
-                            and reset incompatible module progress.
+                            @L["Profile_ConfirmChange"]
                         </span>
                     </label>
                     <span asp-validation-for="ConfirmChange" class="text-danger form-field__error"></span>
@@ -123,11 +123,11 @@
                 <a asp-controller="Profile"
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
-                    <span>Cancel</span>
+                    <span>@L["Profile_Cancel"]</span>
                 </a>
                 <button type="submit" class="btn-action btn-action--danger">
                     <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                    <span>Change License</span>
+                    <span>@L["Profile_ChangeLicense"]</span>
                 </button>
             </div>
         </form>

@@ -1,187 +1,162 @@
+@using Rokhsetak.Areas.Admin.ViewModels.Dashboard
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model AnalyticsDashboardViewModel
 @{
-    ViewData["Title"] = "Dashboard";
-    ViewData["Subtitle"] = "Platform overview and analytics";
+    ViewData["Title"] = L["Admin_Dashboard_Title"];
+    ViewData["Subtitle"] = L["Admin_Dashboard_Subtitle"];
+    ViewData["ActiveNav"] = "dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-area="Admin" asp-controller="Dashboard" asp-action="Index" method="get" class="admin-card admin-card--padded mb-4">
-    <div class="row g-3 align-items-end">
-        <div class="col-md-3">
-            <label asp-for="Filter.FromDate" class="form-label"></label>
-            <input asp-for="Filter.FromDate" class="form-control" type="date" />
+@* ── Date filter ─────────────────────────────────────────── *@
+<form asp-area="Admin" asp-controller="Dashboard" asp-action="Index" method="get" class="admin-card admin-card--padded">
+    <div class="dash-filter">
+        <div class="dash-filter-group">
+            <label asp-for="Filter.FromDate">@L["Admin_Dashboard_Filter_FromDate"]</label>
+            <input asp-for="Filter.FromDate" type="date" class="admin-input" />
         </div>
-        <div class="col-md-3">
-            <label asp-for="Filter.ToDate" class="form-label"></label>
-            <input asp-for="Filter.ToDate" class="form-control" type="date" />
+        <div class="dash-filter-group">
+            <label asp-for="Filter.ToDate">@L["Admin_Dashboard_Filter_ToDate"]</label>
+            <input asp-for="Filter.ToDate" type="date" class="admin-input" />
         </div>
-        <div class="col-md-3">
-            <button type="submit" class="btn admin-btn-primary w-100">
-                <i class="fa-solid fa-filter"></i> Apply filter
-            </button>
-        </div>
-        <div class="col-md-3">
-            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-secondary w-100">
-                <i class="fa-solid fa-rotate-left"></i> Reset
-            </a>
-        </div>
+        <button type="submit" class="admin-btn-primary">
+            <i class="fa-solid fa-filter" aria-hidden="true"></i> @L["Admin_Dashboard_Filter_Apply"]
+        </button>
+        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="admin-back-link">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> @L["Admin_Dashboard_Filter_Reset"]
+        </a>
     </div>
 </form>
 
-<div class="row g-3 mb-4">
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Total Users</span>
-            <span class="admin-stat-card__value">@Model.TotalUsers.ToString("N0")</span>
-            <i class="fa-solid fa-users admin-stat-card__icon"></i>
+@* ── Stat cards ───────────────────────────────────────────── *@
+<div class="dash-metrics-grid">
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_TotalUsers"]</span>
+        <span class="admin-stat-card__value">@Model.TotalUsers.ToString("N0")</span>
+        <i class="fa-solid fa-users admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_ActiveTrainees"]</span>
+        <span class="admin-stat-card__value">@Model.ActiveTrainees.ToString("N0")</span>
+        <i class="fa-solid fa-user-graduate admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_ActiveMentors"]</span>
+        <span class="admin-stat-card__value">@Model.ActiveMentors.ToString("N0")</span>
+        <i class="fa-solid fa-user-tie admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_TotalBookings"]</span>
+        <span class="admin-stat-card__value">@Model.TotalBookings.ToString("N0")</span>
+        <i class="fa-solid fa-calendar-check admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_PendingApps"]</span>
+        <span class="admin-stat-card__value">@Model.PendingMentorApplications.ToString("N0")</span>
+        <i class="fa-solid fa-file-signature admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+    <div class="admin-stat-card">
+        <span class="admin-stat-card__label">@L["Admin_Dashboard_Stat_CompletedLicenses"]</span>
+        <span class="admin-stat-card__value">@Model.CompletedLicenses.ToString("N0")</span>
+        <i class="fa-solid fa-graduation-cap admin-stat-card__icon" aria-hidden="true"></i>
+    </div>
+</div>
+
+@* ── Platform metrics ─────────────────────────────────────── *@
+<div class="dash-charts-row">
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header"><h3>@L["Admin_Dashboard_Metric_AvgRating"]</h3></div>
+        <div class="admin-metric-large">
+            <span class="admin-metric-large__value">@Model.PlatformAvgRating.ToString("0.00")</span>
+            <span class="admin-metric-large__unit">@L["Admin_Dashboard_Metric_AvgRatingUnit"]</span>
         </div>
     </div>
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Active Trainees</span>
-            <span class="admin-stat-card__value">@Model.ActiveTrainees.ToString("N0")</span>
-            <i class="fa-solid fa-user-graduate admin-stat-card__icon"></i>
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header"><h3>@L["Admin_Dashboard_Metric_CompletionRate"]</h3></div>
+        <div class="admin-metric-large">
+            <span class="admin-metric-large__value">@Model.PlatformCompletionRate.ToString("0.0")</span>
+            <span class="admin-metric-large__unit">@L["Admin_Dashboard_Metric_CompletionRateUnit"]</span>
         </div>
     </div>
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Active Mentors</span>
-            <span class="admin-stat-card__value">@Model.ActiveMentors.ToString("N0")</span>
-            <i class="fa-solid fa-user-tie admin-stat-card__icon"></i>
-        </div>
-    </div>
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Total Bookings</span>
-            <span class="admin-stat-card__value">@Model.TotalBookings.ToString("N0")</span>
-            <i class="fa-solid fa-calendar-check admin-stat-card__icon"></i>
-        </div>
-    </div>
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Pending Apps</span>
-            <span class="admin-stat-card__value">@Model.PendingMentorApplications.ToString("N0")</span>
-            <i class="fa-solid fa-file-signature admin-stat-card__icon"></i>
-        </div>
-    </div>
-    <div class="col-md-4 col-lg-2">
-        <div class="admin-stat-card">
-            <span class="admin-stat-card__label">Completed Licenses</span>
-            <span class="admin-stat-card__value">@Model.CompletedLicenses.ToString("N0")</span>
-            <i class="fa-solid fa-graduation-cap admin-stat-card__icon"></i>
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header"><h3>@L["Admin_Dashboard_Metric_AvgTimeToCompletion"]</h3></div>
+        <div class="admin-metric-large">
+            <span class="admin-metric-large__value">@Model.PlatformAvgDaysToCompletion.ToString("0.0")</span>
+            <span class="admin-metric-large__unit">@L["Admin_Dashboard_Metric_Days"]</span>
         </div>
     </div>
 </div>
 
-<div class="row g-3 mb-4">
-    <div class="col-md-4">
-        <div class="admin-card admin-card--padded h-100">
-            <div class="admin-card__header">
-                <h3>Avg. Mentor Rating</h3>
-            </div>
-            <div class="admin-metric-large">
-                <span class="admin-metric-large__value">@Model.PlatformAvgRating.ToString("0.00")</span>
-                <span class="admin-metric-large__unit">/ 5.00</span>
-            </div>
+@* ── Charts ───────────────────────────────────────────────── *@
+<div class="dash-charts-row">
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header">
+            <h3>@L["Admin_Dashboard_Chart_UsersOverTime"]</h3>
+            <small>@L["Admin_Dashboard_Chart_UsersSubtitle"]</small>
         </div>
+        <div class="dash-chart-wrap"><canvas id="usersChart"></canvas></div>
     </div>
-    <div class="col-md-4">
-        <div class="admin-card admin-card--padded h-100">
-            <div class="admin-card__header">
-                <h3>Completion Rate</h3>
-            </div>
-            <div class="admin-metric-large">
-                <span class="admin-metric-large__value">@Model.PlatformCompletionRate.ToString("0.0")</span>
-                <span class="admin-metric-large__unit">%</span>
-            </div>
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header">
+            <h3>@L["Admin_Dashboard_Chart_BookingsPerMonth"]</h3>
+            <small>@L["Admin_Dashboard_Chart_BookingsSubtitle"]</small>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="admin-card admin-card--padded h-100">
-            <div class="admin-card__header">
-                <h3>Avg. Time to Completion</h3>
-            </div>
-            <div class="admin-metric-large">
-                <span class="admin-metric-large__value">@Model.PlatformAvgDaysToCompletion.ToString("0.0")</span>
-                <span class="admin-metric-large__unit">days</span>
-            </div>
-        </div>
+        <div class="dash-chart-wrap"><canvas id="bookingsChart"></canvas></div>
     </div>
 </div>
 
-<div class="row g-3 mb-4">
-    <div class="col-lg-6">
-        <div class="admin-card admin-card--padded">
-            <div class="admin-card__header">
-                <h3>Users over time</h3>
-                <small>New user registrations by month</small>
-            </div>
-            <div style="position: relative; height: 320px;">
-                <canvas id="usersChart"></canvas>
-            </div>
+@* ── Performance ──────────────────────────────────────────── *@
+<div class="dash-bottom-row">
+    <div class="admin-card admin-card--padded">
+        <div class="admin-card__header">
+            <h3>@L["Admin_Dashboard_Chart_PerformanceTitle"]</h3>
+            <small>@L["Admin_Dashboard_Chart_PerformanceSubtitle"]</small>
         </div>
+        <div class="dash-chart-wrap"><canvas id="performanceChart"></canvas></div>
     </div>
-    <div class="col-lg-6">
-        <div class="admin-card admin-card--padded">
-            <div class="admin-card__header">
-                <h3>Bookings per month</h3>
-                <small>Session bookings created by month</small>
-            </div>
-            <div style="position: relative; height: 320px;">
-                <canvas id="bookingsChart"></canvas>
-            </div>
+    <div class="admin-card">
+        <div class="admin-card__header admin-card__header--bordered">
+            <h3>@L["Admin_Dashboard_TopMentors_Title"] <span class="admin-count-badge">@Model.TopMentors.Count</span></h3>
+            <small>@L["Admin_Dashboard_TopMentors_Subtitle"]</small>
         </div>
-    </div>
-</div>
-
-<div class="row g-3 mb-4">
-    <div class="col-lg-5">
-        <div class="admin-card admin-card--padded">
-            <div class="admin-card__header">
-                <h3>Mentor performance distribution</h3>
-                <small>Rating buckets across all mentors</small>
-            </div>
-            <div style="position: relative; height: 320px;">
-                <canvas id="performanceChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div class="admin-card admin-card--padded">
-            <div class="admin-card__header">
-                <h3>Top mentors</h3>
-                <small>Sorted by average rating then completed sessions</small>
-            </div>
-            <div class="table-responsive">
-                <table class="table admin-table align-middle">
-                    <thead>
+        <div style="overflow-x:auto">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>@L["Admin_Dashboard_TopMentors_Table_Mentor"]</th>
+                        <th class="text-end">@L["Admin_Dashboard_TopMentors_Table_Rating"]</th>
+                        <th class="text-end">@L["Admin_Dashboard_TopMentors_Table_Sessions"]</th>
+                        <th class="text-end">@L["Admin_Dashboard_TopMentors_Table_Completion"]</th>
+                        <th class="text-end">@L["Admin_Dashboard_TopMentors_Table_AvgDays"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model.TopMentors)
+                    {
                         <tr>
-                            <th>Mentor</th>
-                            <th class="text-end">Rating</th>
-                            <th class="text-end">Sessions</th>
-                            <th class="text-end">Completion</th>
-                            <th class="text-end">Avg. Days</th>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Mentors" asp-action="Details"
+                                   asp-route-id="@m.MentorId" class="admin-row-action">
+                                    @m.FullName
+                                </a>
+                            </td>
+                            <td class="text-end">
+                                @m.AverageRating.ToString("0.00")
+                                <small style="color:var(--muted)">(@m.TotalRatings)</small>
+                            </td>
+                            <td class="text-end">@m.CompletedSessions / @m.TotalSessions</td>
+                            <td class="text-end">@m.CompletionRate.ToString("0.0")%</td>
+                            <td class="text-end">@m.AvgDaysToCompletion.ToString("0.0")</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var m in Model.TopMentors)
-                        {
-                            <tr>
-                                <td>
-                                    <a asp-area="Admin" asp-controller="Mentors" asp-action="Details" asp-route-id="@m.MentorId">@m.FullName</a>
-                                </td>
-                                <td class="text-end">@m.AverageRating.ToString("0.00") <small class="text-muted">(@m.TotalRatings)</small></td>
-                                <td class="text-end">@m.CompletedSessions / @m.TotalSessions</td>
-                                <td class="text-end">@m.CompletionRate.ToString("0.0")%</td>
-                                <td class="text-end">@m.AvgDaysToCompletion.ToString("0.0")</td>
-                            </tr>
-                        }
-                        @if (!Model.TopMentors.Any())
-                        {
-                            <tr><td colspan="5" class="text-center text-muted py-4">No mentor performance data yet.</td></tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                    @if (!Model.TopMentors.Any())
+                    {
+                        <tr class="empty-row"><td colspan="5">@L["Admin_Dashboard_NoMentorData"]</td></tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -189,77 +164,47 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
-        (function () {
-            const brand = {
-                navy: '#1A3A6B',
-                orange: '#F26522',
-                gold: '#C9A84C',
-                mist: '#F5F7FA',
-                gray: '#8A94A6'
-            };
+    (function () {
+        const brand = { navy:'#1A3A6B', orange:'#F26522', gold:'#C9A84C', muted:'#8A94A6' };
+        const usersData    = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.UsersOverTime.Select(p => new { p.Label, p.Count })));
+        const bookingsData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.BookingsPerMonth.Select(p => new { p.Label, p.Count })));
+        const perfData     = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MentorPerformanceDistribution.Select(p => new { p.Bucket, p.Count })));
 
-            const usersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.UsersOverTime.Select(p => new { p.Label, p.Count })));
-            const bookingsData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.BookingsPerMonth.Select(p => new { p.Label, p.Count })));
-            const perfData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MentorPerformanceDistribution.Select(p => new { p.Bucket, p.Count })));
+        const base = {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { x: { grid: { display: false } }, y: { beginAtZero: true, ticks: { precision: 0 } } }
+        };
 
-            const baseOpts = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { display: false } },
-                    y: { beginAtZero: true, ticks: { precision: 0 } }
-                }
-            };
+        new Chart(document.getElementById('usersChart'), {
+            type: 'line',
+            data: { labels: usersData.map(d=>d.Label), datasets: [{
+                data: usersData.map(d=>d.Count),
+                borderColor: brand.navy, backgroundColor: 'rgba(26,58,107,0.07)',
+                fill: true, tension: 0.35,
+                pointBackgroundColor: brand.orange, pointBorderColor: '#fff', pointRadius: 4
+            }] },
+            options: base
+        });
 
-            new Chart(document.getElementById('usersChart'), {
-                type: 'line',
-                data: {
-                    labels: usersData.map(d => d.Label),
-                    datasets: [{
-                        data: usersData.map(d => d.Count),
-                        borderColor: brand.navy,
-                        backgroundColor: 'rgba(26, 58, 107, 0.08)',
-                        fill: true,
-                        tension: 0.35,
-                        pointBackgroundColor: brand.orange,
-                        pointBorderColor: '#fff',
-                        pointRadius: 4
-                    }]
-                },
-                options: baseOpts
-            });
+        new Chart(document.getElementById('bookingsChart'), {
+            type: 'bar',
+            data: { labels: bookingsData.map(d=>d.Label), datasets: [{
+                data: bookingsData.map(d=>d.Count),
+                backgroundColor: brand.orange, borderRadius: 6
+            }] },
+            options: base
+        });
 
-            new Chart(document.getElementById('bookingsChart'), {
-                type: 'bar',
-                data: {
-                    labels: bookingsData.map(d => d.Label),
-                    datasets: [{
-                        data: bookingsData.map(d => d.Count),
-                        backgroundColor: brand.orange,
-                        borderRadius: 6
-                    }]
-                },
-                options: baseOpts
-            });
-
-            new Chart(document.getElementById('performanceChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: perfData.map(d => d.Bucket),
-                    datasets: [{
-                        data: perfData.map(d => d.Count),
-                        backgroundColor: [brand.gold, brand.orange, brand.navy, '#5b6b87', '#a9b1c0'],
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom' } }
-                }
-            });
-        })();
+        new Chart(document.getElementById('performanceChart'), {
+            type: 'doughnut',
+            data: { labels: perfData.map(d=>d.Bucket), datasets: [{
+                data: perfData.map(d=>d.Count),
+                backgroundColor: [brand.gold, brand.orange, brand.navy, '#5b6b87', '#a9b1c0'],
+                borderColor: '#fff', borderWidth: 2
+            }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
+    })();
     </script>
 }

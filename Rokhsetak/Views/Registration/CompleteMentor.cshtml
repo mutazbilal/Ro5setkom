@@ -1,7 +1,10 @@
 @using Rokhsetak.ViewModels.Registration
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorRegistrationViewModel
 @{
-    ViewData["Title"] = "Mentor Registration";
+    ViewData["Title"] = L["Reg_MentorRegistration_Title"];
 }
 
 @section Styles {
@@ -13,18 +16,18 @@
     <span>Rokhsetak</span>
 </div>
 
-<main class="auth-page" aria-label="Mentor registration — complete profile">
+<main class="auth-page" aria-label="@L["Reg_Mentor_AriaLabel"]">
     <section class="auth-brand" aria-hidden="true">
         <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-        <h1 class="auth-brand__title">Mentor Registration</h1>
-        <p class="auth-brand__tagline">Submit your application for administrator review.</p>
+        <h1 class="auth-brand__title">@L["Reg_MentorRegistration_Title"]</h1>
+        <p class="auth-brand__tagline">@L["Reg_Mentor_Tagline"]</p>
 
         <span class="auth-floating-shape auth-floating-shape--circle"></span>
         <span class="auth-floating-shape auth-floating-shape--hex"></span>
         <span class="auth-floating-shape auth-floating-shape--diamond"></span>
 
         <svg class="auth-brand__art" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg"
-             role="img" aria-label="Road illustration">
+             role="img" aria-label="@L["Reg_RoadIllustration"]">
             <path d="M0 90 C150 22, 275 168, 430 116 C578 67, 696 48, 800 90 L800 240 L0 240 Z"
                   fill="rgba(22,53,96,.95)"/>
             <path d="M100 172 C240 120, 380 158, 540 130 C625 116, 700 112, 760 122"
@@ -41,10 +44,10 @@
 
     <section class="auth-form-wrap">
         <article class="auth-card register-card" aria-live="polite">
-            <h2 class="auth-card__title">Mentor Registration</h2>
-            <p class="auth-card__subtitle">Step 3 of 3: Complete Your Profile</p>
+            <h2 class="auth-card__title">@L["Reg_MentorRegistration_Title"]</h2>
+            <p class="auth-card__subtitle">@L["Reg_Step3"]</p>
 
-            <div class="auth-stepper" aria-label="Registration progress — step 3 of 3">
+            <div class="auth-stepper" aria-label="@L["Reg_Step3Aria"]">
                 <div class="auth-step is-complete"></div>
                 <div class="auth-step is-complete"></div>
                 <div class="auth-step is-active" aria-current="step"></div>
@@ -52,10 +55,7 @@
 
             <div class="auth-info-banner is-visible" role="note" style="margin-bottom:14px;">
                 <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
-                <span>
-                    Your application will be reviewed by an administrator.
-                    You will not be able to log in until it is approved.
-                </span>
+                <span>@L["Reg_Mentor_ReviewNotice"]</span>
             </div>
 
             <div asp-validation-summary="All"
@@ -70,40 +70,40 @@
                 @* ── Section A: Locked government fields ── *@
                 <div class="auth-info-banner is-visible" role="note" style="margin-bottom:12px;">
                     <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                    <span>The following details are sourced from government records and cannot be modified.</span>
+                    <span>@L["Reg_LockedGovFields"]</span>
                 </div>
 
                 <div class="auth-field register-locked">
                     <input asp-for="NationalId" class="auth-input" type="text" placeholder=" " readonly />
-                    <label asp-for="NationalId" class="auth-label">National ID</label>
+                    <label asp-for="NationalId" class="auth-label">@L["Reg_NationalId"]</label>
                     <span class="register-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 </div>
                 <input asp-for="NationalId" type="hidden" />
 
                 <div class="auth-field register-locked">
                     <input asp-for="FirstName" class="auth-input" type="text" placeholder=" " readonly />
-                    <label asp-for="FirstName" class="auth-label">First Name</label>
+                    <label asp-for="FirstName" class="auth-label">@L["Reg_FirstName"]</label>
                     <span class="register-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 </div>
                 <input asp-for="FirstName" type="hidden" />
 
                 <div class="auth-field register-locked">
                     <input asp-for="LastName" class="auth-input" type="text" placeholder=" " readonly />
-                    <label asp-for="LastName" class="auth-label">Last Name</label>
+                    <label asp-for="LastName" class="auth-label">@L["Reg_LastName"]</label>
                     <span class="register-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 </div>
                 <input asp-for="LastName" type="hidden" />
 
                 <div class="auth-field register-locked">
                     <input asp-for="DateOfBirth" class="auth-input" type="text" placeholder=" " readonly />
-                    <label asp-for="DateOfBirth" class="auth-label">Date of Birth</label>
+                    <label asp-for="DateOfBirth" class="auth-label">@L["Reg_DateOfBirth"]</label>
                     <span class="register-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 </div>
                 <input asp-for="DateOfBirth" type="hidden" />
 
                 <div class="auth-field register-locked">
                     <input asp-for="Gender" class="auth-input" type="text" placeholder=" " readonly />
-                    <label asp-for="Gender" class="auth-label">Gender</label>
+                    <label asp-for="Gender" class="auth-label">@L["Reg_Gender"]</label>
                     <span class="register-lock" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
                 </div>
                 <input asp-for="Gender" type="hidden" />
@@ -112,7 +112,7 @@
                 <div class="auth-field">
                     <label asp-for="ProvinceId"
                            style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                        Province
+                        @L["Reg_Province"]
                     </label>
 
                     <select asp-for="ProvinceId"
@@ -121,7 +121,7 @@
                             id="provinceSelect"
                             aria-required="true">
 
-                        <option value="">-- Select Province --</option>
+                        <option value="">@L["Reg_SelectProvince"]</option>
                     </select>
 
                     <span asp-validation-for="ProvinceId" class="text-danger"></span>
@@ -130,7 +130,7 @@
                 <div class="auth-field">
                     <label asp-for="CityId"
                            style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                        City
+                        @L["Reg_City"]
                     </label>
 
                     <select asp-for="CityId"
@@ -138,7 +138,7 @@
                             id="citySelect"
                             aria-required="true">
 
-                        <option value="">-- Select City --</option>
+                        <option value="">@L["Reg_SelectCity"]</option>
 
                         @foreach (var city in Model.Cities)
                         {
@@ -154,7 +154,7 @@
 
                 <div class="auth-field">
                     <input asp-for="AddressLine1" class="auth-input" type="text" placeholder=" " />
-                    <label asp-for="AddressLine1" class="auth-label">Address Line 1</label>
+                    <label asp-for="AddressLine1" class="auth-label">@L["Reg_AddressLine1"]</label>
                     <span asp-validation-for="AddressLine1" class="text-danger"></span>
                 </div>
 
@@ -162,7 +162,7 @@
                 {
                     <div class="auth-field">
                         <input asp-for="AddressLine2" class="auth-input" type="text" placeholder=" " />
-                        <label asp-for="AddressLine2" class="auth-label">Address Line 2</label>
+                        <label asp-for="AddressLine2" class="auth-label">@L["Reg_AddressLine2"]</label>
                         <span asp-validation-for="AddressLine2" class="text-danger"></span>
                     </div>
                 }
@@ -171,7 +171,7 @@
                 {
                     <div class="auth-field">
                         <input asp-for="PostalCode" class="auth-input" type="text" placeholder=" " />
-                        <label asp-for="PostalCode" class="auth-label">Postal Code</label>
+                        <label asp-for="PostalCode" class="auth-label">@L["Reg_PostalCode"]</label>
                         <span asp-validation-for="PostalCode" class="text-danger"></span>
                     </div>
                 }
@@ -179,7 +179,7 @@
                 <div class="auth-field">
                     <input asp-for="Email" class="auth-input" type="email" placeholder=" "
                            autocomplete="email" aria-required="true" />
-                    <label asp-for="Email" class="auth-label">Email Address</label>
+                    <label asp-for="Email" class="auth-label">@L["Reg_Email"]</label>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
@@ -193,16 +193,16 @@
                 <div class="auth-field">
                     <input asp-for="PhoneNumber" class="auth-input" type="tel" placeholder=" "
                            autocomplete="tel" aria-required="true" />
-                    <label asp-for="PhoneNumber" class="auth-label">Phone Number</label>
+                    <label asp-for="PhoneNumber" class="auth-label">@L["Reg_PhoneNumber"]</label>
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
                     <input asp-for="Password" class="auth-input" type="password" placeholder=" "
                            autocomplete="new-password" aria-required="true" />
-                    <label asp-for="Password" class="auth-label">Password</label>
+                    <label asp-for="Password" class="auth-label">@L["Reg_Password"]</label>
                     <button type="button" class="auth-password-toggle"
-                            data-password-toggle data-target="Password" aria-label="Show password">
+                            data-password-toggle data-target="Password" aria-label="@L["Auth_ShowPassword"]">
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                     </button>
                     <span asp-validation-for="Password" class="text-danger"></span>
@@ -211,9 +211,9 @@
                 <div class="auth-field">
                     <input asp-for="ConfirmPassword" class="auth-input" type="password" placeholder=" "
                            autocomplete="new-password" aria-required="true" />
-                    <label asp-for="ConfirmPassword" class="auth-label">Confirm Password</label>
+                    <label asp-for="ConfirmPassword" class="auth-label">@L["Reg_ConfirmPassword"]</label>
                     <button type="button" class="auth-password-toggle"
-                            data-password-toggle data-target="ConfirmPassword" aria-label="Show confirm password">
+                            data-password-toggle data-target="ConfirmPassword" aria-label="@L["Auth_ShowConfirmPassword"]">
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                     </button>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
@@ -222,13 +222,13 @@
                 <div class="auth-field">
                     <label asp-for="LicenseTypeId"
                            style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                        License Type You Teach
+                        @L["Reg_LicenseTypeYouTeach"]
                     </label>
                     <select asp-for="LicenseTypeId"
                             asp-items="@(new SelectList(Model.AvailableLicenseTypes, "Id", "Name"))"
                             class="auth-input auth-select"
                             aria-required="true">
-                        <option value="">-- Select License Type --</option>
+                        <option value="">@L["Reg_SelectLicenseType"]</option>
                     </select>
                     <span asp-validation-for="LicenseTypeId" class="text-danger"></span>
                 </div>
@@ -236,34 +236,34 @@
                 <div class="auth-field">
                     <label asp-for="TrainingCenterId"
                            style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                        Your official training center
+                        @L["Reg_TrainingCenter"]
                     </label>
                     <select asp-for="TrainingCenterId"
                             asp-items="@(new SelectList(Model.AvailableTrainingCenters, "Id", "Name"))"
                             class="auth-input auth-select"
                             aria-required="true">
-                        <option value="">-- Select Training Center --</option>
+                        <option value="">@L["Reg_SelectTrainingCenter"]</option>
                     </select>
                     <span asp-validation-for="TrainingCenterId" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
                     <input asp-for="VehicleType" class="auth-input" type="text" placeholder=" " />
-                    <label asp-for="VehicleType" class="auth-label">Vehicle Type (optional)</label>
+                    <label asp-for="VehicleType" class="auth-label">@L["Reg_VehicleType_Optional"]</label>
                     <span asp-validation-for="VehicleType" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
                     <input asp-for="PricePerSession" class="auth-input" type="number"
                            placeholder=" " min="0" step="0.01" />
-                    <label asp-for="PricePerSession" class="auth-label">Price Per Session — JOD (optional)</label>
+                    <label asp-for="PricePerSession" class="auth-label">@L["Reg_PricePerSession_Optional"]</label>
                     <span asp-validation-for="PricePerSession" class="text-danger"></span>
                 </div>
 
                 <div class="auth-field">
                     <label asp-for="CertificationFile"
                            style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                        Certification Document <span style="color:var(--color-error);" aria-hidden="true">*</span>
+                        @L["Reg_CertificationDocument"] <span style="color:var(--color-error);" aria-hidden="true">*</span>
                     </label>
                     <div class="register-dropzone" id="certDropzone"
                          aria-describedby="certZoneDesc">
@@ -277,14 +277,14 @@
                             <div class="register-dropzone__icon">
                                 <i class="fa-solid fa-file-circle-check" aria-hidden="true"></i>
                             </div>
-                            <p><strong>Certification Document</strong></p>
-                            <p id="certZoneDesc">Drag &amp; drop or click to upload — PDF / JPG / PNG</p>
-                            <p style="font-size:.82rem;color:var(--color-muted);">Maximum file size: 5 MB</p>
+                            <p><strong>@L["Reg_CertificationDocument"]</strong></p>
+                            <p id="certZoneDesc">@L["Reg_UploadCert"]</p>
+                            <p style="font-size:.82rem;color:var(--color-muted);">@L["Reg_MaxFileSize"]</p>
                             <div data-file-error class="auth-error-banner" style="margin-top:8px;display:none;"></div>
                             <div class="register-dropzone__meta">
                                 <span><span data-file-name></span> • <span data-file-size></span></span>
                                 <button class="register-dropzone__remove" type="button"
-                                        aria-label="Remove uploaded file">&times;</button>
+                                        aria-label="@L["Reg_RemoveFile"]">&times;</button>
                             </div>
                         </div>
                     </div>
@@ -296,16 +296,13 @@
                     <input asp-for="AcceptedTerms" type="checkbox" aria-required="true" />
                     <span class="auth-custom-check__box" aria-hidden="true"></span>
                     <span>
-                        I accept the
-                        <a asp-controller="Home" asp-action="Terms" class="auth-link">Terms &amp; Conditions</a>
-                        and
-                        <a asp-controller="Home" asp-action="Privacy" class="auth-link">Privacy Policy</a>
+                        @Html.Raw(L["Reg_AcceptTermsFull"])
                     </span>
                 </label>
                 <span asp-validation-for="AcceptedTerms" class="text-danger"></span>
 
                 <button class="auth-btn" type="submit" style="margin-top:8px;">
-                    Submit Application
+                    @L["Reg_SubmitApplication"]
                 </button>
             </form>
         </article>

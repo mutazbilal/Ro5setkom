@@ -1,0 +1,691 @@
+/* ============================================================
+   Ro5setkom — Trainee / Exam
+   Premium styling for Areas/Trainee/Views/Exam/Index + Book
+   ============================================================ */
+
+:root {
+    --color-primary:      #1A3A6B;
+    --color-primary-deep: #142e54;
+    --color-accent:       #F26522;
+    --color-gold:         #C9A84C;
+    --color-mist:         #F5F7FA;
+    --color-border:       #E5E9F0;
+    --color-text-muted:   #8A94A6;
+    --color-ink:          #2A3142;
+
+    --glass-bg:     rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.6);
+
+    --shadow-sm: 0 4px 12px -6px  rgba(26, 58, 107, 0.18);
+    --shadow-md: 0 14px 30px -16px rgba(26, 58, 107, 0.26);
+    --shadow-lg: 0 24px 48px -24px rgba(26, 58, 107, 0.32);
+
+    --gradient-action: linear-gradient(135deg, #F26522 0%, #C9A84C 100%);
+
+    --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+    --radius:    16px;
+    --radius-sm: 10px;
+}
+
+/* ── Page surface ─────────────────────────────────────────── */
+.exam-wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--color-ink);
+    animation: exam-rise 480ms var(--ease) both;
+}
+
+@keyframes exam-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page header ──────────────────────────────────────────── */
+.exam-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 36px;
+}
+
+.exam-header__left { flex: 1; }
+
+.exam-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 10px;
+}
+
+.exam-eyebrow i { color: var(--color-gold); }
+
+.exam-header h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+/* ── Book buttons group ───────────────────────────────────── */
+.exam-book-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.exam-book-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: all 200ms var(--ease);
+    white-space: nowrap;
+}
+
+/* Theory — primary blue */
+.exam-book-btn--theory {
+    color: var(--color-primary);
+    background: rgba(26, 58, 107, 0.07);
+    border-color: rgba(26, 58, 107, 0.2);
+}
+.exam-book-btn--theory:hover {
+    background: rgba(26, 58, 107, 0.13);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Medical — gold */
+.exam-book-btn--medical {
+    color: #8a6f1f;
+    background: rgba(201, 168, 76, 0.1);
+    border-color: rgba(201, 168, 76, 0.35);
+}
+.exam-book-btn--medical:hover {
+    background: rgba(201, 168, 76, 0.18);
+    border-color: var(--color-gold);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Practical — orange */
+.exam-book-btn--practical {
+    color: #fff;
+    background: var(--gradient-action);
+    box-shadow: 0 6px 16px -8px rgba(242, 101, 34, 0.5);
+}
+.exam-book-btn--practical:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -10px rgba(242, 101, 34, 0.55);
+}
+
+/* ── Flash messages ───────────────────────────────────────── */
+.exam-flash {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border: 1px solid transparent;
+    animation: flash-in 300ms var(--ease);
+}
+
+@keyframes flash-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.exam-flash--error {
+    background: rgba(242, 101, 34, 0.08);
+    border-color: rgba(242, 101, 34, 0.25);
+    color: #b5451a;
+}
+
+.exam-flash--success {
+    background: rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 0.35);
+    color: #8a6f1f;
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.exam-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 72px 24px;
+    text-align: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text-muted);
+}
+
+.exam-empty i {
+    font-size: 40px;
+    color: var(--color-border);
+}
+
+.exam-empty p {
+    margin: 0;
+    font-size: 15px;
+    max-width: 42ch;
+    line-height: 1.6;
+}
+
+/* ── Appointment card grid ────────────────────────────────── */
+.exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.exam-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+    animation: card-reveal 420ms var(--ease) both;
+}
+
+.exam-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Stagger */
+.exam-card:nth-child(1) { animation-delay: 40ms; }
+.exam-card:nth-child(2) { animation-delay: 80ms; }
+.exam-card:nth-child(3) { animation-delay: 120ms; }
+.exam-card:nth-child(4) { animation-delay: 160ms; }
+.exam-card:nth-child(5) { animation-delay: 200ms; }
+.exam-card:nth-child(6) { animation-delay: 240ms; }
+
+@keyframes card-reveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Type stripe at top */
+.exam-card__stripe {
+    height: 4px;
+    width: 100%;
+}
+.exam-card__stripe--theory   { background: linear-gradient(90deg, var(--color-primary), #3a65b5); }
+.exam-card__stripe--medical  { background: linear-gradient(90deg, var(--color-gold), #e8c86a); }
+.exam-card__stripe--practical { background: var(--gradient-action); }
+.exam-card__stripe--default  { background: var(--color-border); }
+
+.exam-card__body {
+    flex: 1;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.exam-card__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.exam-card__type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: capitalize;
+}
+
+.exam-card__type-icon {
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    font-size: 14px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.exam-card__type-icon--theory   { background: linear-gradient(135deg, var(--color-primary), #3a65b5); }
+.exam-card__type-icon--medical  { background: linear-gradient(135deg, var(--color-gold), #e0b84a); }
+.exam-card__type-icon--practical { background: var(--gradient-action); }
+.exam-card__type-icon--default  { background: var(--color-text-muted); }
+
+.exam-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exam-card__detail {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    color: var(--color-ink);
+}
+
+.exam-card__detail i {
+    width: 16px;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.exam-card__detail strong { color: var(--color-primary); }
+
+.exam-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* ── Status + result pills ────────────────────────────────── */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+
+.pill--scheduled {
+    background: rgba(26, 58, 107, 0.08);
+    color: var(--color-primary);
+    border-color: rgba(26, 58, 107, 0.18);
+}
+
+.pill--completed {
+    background: rgba(201, 168, 76, 0.14);
+    color: #8a6f1f;
+    border-color: rgba(201, 168, 76, 0.4);
+}
+
+.pill--cancelled {
+    background: rgba(138, 148, 166, 0.12);
+    color: var(--color-text-muted);
+    border-color: var(--color-border);
+}
+
+.pill--default {
+    background: var(--color-mist);
+    color: var(--color-ink);
+    border-color: var(--color-border);
+}
+
+/* Result pills */
+.result-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--color-mist);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.result-row .label { font-weight: 600; }
+
+.pill--pass {
+    background: rgba(31, 157, 85, 0.12);
+    color: #115f37;
+    border-color: rgba(31, 157, 85, 0.3);
+}
+
+.pill--fail {
+    background: rgba(214, 48, 49, 0.1);
+    color: #8a1a1e;
+    border-color: rgba(214, 48, 49, 0.25);
+}
+
+.pill--absent {
+    background: rgba(242, 101, 34, 0.1);
+    color: #b5451a;
+    border-color: rgba(242, 101, 34, 0.28);
+}
+
+.result-score {
+    margin-inline-start: auto;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Card footer (cancel) ─────────────────────────────────── */
+.exam-card__footer {
+    padding: 14px 22px;
+    border-top: 1px solid var(--color-border);
+    background: rgba(245, 247, 250, 0.5);
+}
+
+.exam-card__footer form { margin: 0; }
+
+.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(214, 48, 49, 0.3);
+    background: rgba(214, 48, 49, 0.06);
+    color: #8a1a1e;
+    cursor: pointer;
+    transition: all 180ms var(--ease);
+}
+
+.btn-cancel:hover {
+    background: rgba(214, 48, 49, 0.12);
+    border-color: rgba(214, 48, 49, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   BOOK VIEW
+   ============================================================ */
+
+/* ── Breadcrumb ───────────────────────────────────────────── */
+.exam-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 24px;
+    color: var(--color-text-muted);
+}
+
+.exam-breadcrumb a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 160ms var(--ease);
+}
+
+.exam-breadcrumb a:hover { color: var(--color-accent); }
+.exam-breadcrumb .sep { color: var(--color-border); }
+.exam-breadcrumb .current { color: var(--color-ink); font-weight: 600; }
+
+/* ── Ineligible state ─────────────────────────────────────── */
+.exam-ineligible {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px 28px 28px 24px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: var(--radius);
+    border-inline-start: 4px solid var(--color-gold);
+    margin-bottom: 24px;
+}
+
+.exam-ineligible__icon {
+    display: grid;
+    place-items: center;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--color-gold);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.exam-ineligible__title {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 6px;
+}
+
+.exam-ineligible__reason {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+/* ── No slots info ────────────────────────────────────────── */
+.exam-info-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 22px;
+    background: rgba(26, 58, 107, 0.06);
+    border: 1px solid rgba(26, 58, 107, 0.15);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--color-primary);
+}
+
+.exam-info-banner i { font-size: 18px; color: var(--color-gold); flex-shrink: 0; }
+
+/* ── Slot cards ───────────────────────────────────────────── */
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.slot-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+    animation: card-reveal 380ms var(--ease) both;
+}
+
+.slot-card:nth-child(1) { animation-delay: 40ms; }
+.slot-card:nth-child(2) { animation-delay: 80ms; }
+.slot-card:nth-child(3) { animation-delay: 120ms; }
+.slot-card:nth-child(4) { animation-delay: 160ms; }
+.slot-card:nth-child(5) { animation-delay: 200ms; }
+.slot-card:nth-child(6) { animation-delay: 240ms; }
+
+.slot-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.slot-card__body {
+    flex: 1;
+    padding: 22px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.slot-card__center {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.slot-card__city {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.slot-card__city i { color: var(--color-accent); }
+
+.slot-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.slot-card__detail {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.slot-card__detail i {
+    width: 16px;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+/* Slots remaining chip */
+.slots-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+.slots-chip--low {
+    background: rgba(242, 101, 34, 0.1);
+    color: #b5451a;
+    border-color: rgba(242, 101, 34, 0.28);
+}
+
+.slots-chip--ok {
+    background: rgba(31, 157, 85, 0.1);
+    color: #115f37;
+    border-color: rgba(31, 157, 85, 0.28);
+}
+
+.slot-card__footer {
+    padding: 16px 22px;
+    border-top: 1px solid var(--color-border);
+    background: rgba(245, 247, 250, 0.5);
+}
+
+.slot-card__footer form { margin: 0; }
+
+/* Confirm booking button */
+.btn-confirm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    background: var(--gradient-action);
+    background-size: 150% 150%;
+    background-position: 0% 50%;
+    box-shadow: 0 8px 20px -8px rgba(242, 101, 34, 0.5);
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease),
+                background-position 350ms var(--ease);
+}
+
+.btn-confirm:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -10px rgba(242, 101, 34, 0.55);
+}
+
+.btn-confirm:active { transform: translateY(0); }
+
+/* Back link */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-primary);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    margin-top: 20px;
+    transition: all 180ms var(--ease);
+}
+
+.btn-back:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .exam-wrap       { padding: 32px 16px 64px; }
+    .exam-header h1  { font-size: 26px; }
+    .exam-header     { flex-direction: column; align-items: flex-start; }
+    .exam-book-group { width: 100%; }
+    .exam-book-btn   { flex: 1; justify-content: center; }
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .exam-wrap, .exam-card, .slot-card, .exam-flash { animation: none; }
+    * { transition-duration: 0.01ms !important; }
+}
