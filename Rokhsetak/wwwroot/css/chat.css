@@ -1,0 +1,116 @@
+﻿#chat-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2563eb;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 22px;
+    z-index: 9999;
+}
+
+#chat-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+#chat-panel {
+    position: fixed;
+    bottom: 85px;
+    right: 20px;
+    width: 320px;
+    height: 450px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.chat-header {
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#conversation-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.conversation-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+    .conversation-item:hover {
+        background: #f3f4f6;
+    }
+
+#chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9fafb;
+}
+
+.message {
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+    .message.me {
+        background: #2563eb;
+        color: white;
+        margin-left: auto;
+    }
+
+    .message.other {
+        background: #e5e7eb;
+    }
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+    .chat-input input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+
+    .chat-input button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+    }

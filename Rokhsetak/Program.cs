@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Rokhsetak.Models;
+using Rokhsetak.Services.Chat;
 using Rokhsetak.Services.Implementations;
 using Rokhsetak.Services.Interfaces;
 using System.Globalization;
@@ -75,6 +76,8 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IExamAdminService, ExamAdminService>();
 builder.Services.AddScoped<IUserAdminService, UserAdminService>();
 builder.Services.AddScoped<IMentorAdminService, MentorAdminService>();
+
+builder.Services.AddScoped<IChatService, ChatService>();
 
 builder.Services.AddSingleton<BlobService>();
 // IHttpContextAccessor required by PasswordResetService to build reset URLs

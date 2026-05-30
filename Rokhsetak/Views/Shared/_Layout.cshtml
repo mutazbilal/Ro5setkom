@@ -38,6 +38,17 @@
             <span>@TempData["SuccessMessage"]</span>
         </div>
     }
+    
+    @using System.Security.Claims
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <partial name="_ChatWidget" />
+
+        <link rel="stylesheet" href="~/css/chat.css" />
+        <script src="~/js/chat.js"></script>
+    }
+
     @if (TempData["ErrorMessage"] != null)
     {
         <div class="auth-error-banner is-visible"

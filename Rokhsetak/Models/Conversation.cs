@@ -11,9 +11,9 @@ public partial class Conversation
 
     public int MentorId { get; set; }
 
-    public int BookingId { get; set; }
+    public int? BookingId { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }  
 
     public virtual Booking Booking { get; set; } = null!;
 
