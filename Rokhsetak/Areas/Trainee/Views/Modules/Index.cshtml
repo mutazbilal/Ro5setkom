@@ -21,7 +21,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-bs-dismiss="alert"
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -33,7 +33,7 @@
                 <span class="modules-hero__eyebrow">@L["Modules_Title"]</span>
                 <h1 id="modules-page-title" class="modules-hero__title">@L["Modules_Title"]</h1>
                 <div class="modules-hero__meta">
-                    <span class="chip chip--primary" aria-label="License type">
+                    <span class="chip chip--primary" aria-label="@L["Dashboard_LicenseType"]">
                         <i class="fa-solid fa-id-card" aria-hidden="true"></i>
                         @Model.LicenseTypeName
                     </span>
@@ -58,12 +58,12 @@
                     <i class="fa-solid fa-book"></i>
                 </span>
                 <div class="modules-section__headings">
-                    <p class="modules-section__eyebrow">Track 01</p>
+                    <p class="modules-section__eyebrow">@L["Dashboard_Track01"]</p>
                     <h2 id="modules-section-theory-title" class="modules-section__title">
                         @L["Modules_Theoretical"]
                     </h2>
                 </div>
-                <span class="modules-section__count" aria-label="Total modules">
+                <span class="modules-section__count" aria-label="@L["Modules_TotalModulesAria"]">
                     @Model.TheoreticalModules.Count()
                 </span>
             </header>
@@ -126,12 +126,12 @@
                     <i class="fa-solid fa-car-side"></i>
                 </span>
                 <div class="modules-section__headings">
-                    <p class="modules-section__eyebrow">Track 02</p>
+                    <p class="modules-section__eyebrow">@L["Dashboard_Track02"]</p>
                     <h2 id="modules-section-practical-title" class="modules-section__title">
                         @L["Modules_Practical"]
                     </h2>
                 </div>
-                <span class="modules-section__count" aria-label="Total modules">
+                <span class="modules-section__count" aria-label="@L["Modules_TotalModulesAria"]">
                     @Model.PracticalModules.Count()
                 </span>
             </header>

@@ -1,275 +1,392 @@
-﻿@model MentorDashboardViewModel
+@using Rokhsetak.Areas.Mentor.ViewModels.Dashboard
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
+@model MentorDashboardViewModel
 @{
-    ViewData["Title"] = "Mentor Dashboard";
+    ViewData["Title"] = L["Mentor_Dashboard"];
+
+    var nowTime = TimeOnly.FromDateTime(DateTime.Now);
+
+    // ---- Sessions: sorted chronologically; "up next" = next non-completed session still ahead ----
+    var sessions      = Model.TodaysConfirmedSessions.OrderBy(s => s.StartTime).ToList();
+    var sessionsCount = sessions.Count;
+    var sessionsDone  = sessions.Count(s => s.FeedbackGiven);
+    var sessionsPct   = sessionsCount > 0
+                            ? (int)Math.Round(100.0 * sessionsDone / sessionsCount)
+                            : 0;
+    var upNextSessionIdx = sessions.FindIndex(s => !s.FeedbackGiven && s.StartTime > nowTime);
+
+    // ---- Availability: sorted chronologically; "up next" = next free slot still ahead ----
+    var slots       = Model.TodaysAvailabilitySlots.OrderBy(a => a.StartTime).ToList();
+    var slotsCount  = slots.Count;
+    var slotsBooked = slots.Count(a => a.IsBooked);
+    var slotsPct    = slotsCount > 0
+                            ? (int)Math.Round(100.0 * slotsBooked / slotsCount)
+                            : 0;
+    var upNextSlotIdx = slots.FindIndex(a => !a.IsBooked && a.StartTime > nowTime);
+
+    // ---- Headline utilization (mirrors the trainee dashboard's % progress metric) ----
+    var utilizationPct = slotsPct;
+
+    // ---- "Next session" footer text (mirrors the trainee dashboard's NextMilestone) ----
+    var nextSession = sessions.FirstOrDefault(s => s.StartTime > nowTime);
+    string nextSessionText;
+    if (nextSession != null)
+    {
+        nextSessionText = $"{nextSession.StartTime:HH\\:mm} — {nextSession.TraineeName}";
+    }
+    else if (sessions.Any())
+    {
+        nextSessionText = L["Mentor_NextSession_AllStarted"];
+    }
+    else
+    {
+        nextSessionText = L["Mentor_NextSession_NoSessions"];
+    }
+
+    var pendingCount = Model.TotalPendingCount;
+    // mock-exam state variants: --ready triggers the gold pulse on the gradient CTA, --completed mutes it
+    var pendingState = pendingCount > 0 ? "ready" : "completed";
+
+    // ---- Dashboard shell: hide the global top navbar, drive nav from the sidebar instead ----
+    ViewData["HideNav"] = true;
+    var currentLang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
 }
 
-<div class="container-fluid py-4">
-
-    @if (TempData["Error"] != null)
+@functions {
+    /// <summary>
+    /// Maps a session's action-availability flags to (icon, BEM modifier, label).
+    /// Modifiers align with the existing status-pill variants:
+    /// completed (green), up-next (orange/gold), in-progress (navy), pending (grey).
+    /// </summary>
+    (string iconClass, string modifier, string label) SessionStatus(SessionCardViewModel s)
     {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show">
-            @TempData["Success"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        if (s.FeedbackGiven) return ("fa-solid fa-circle-check",  "completed",   L["Mentor_Complete"]);
+        if (s.CanMarkDone)   return ("fa-solid fa-bolt",          "up-next",     L["Mentor_Ready"]);
+        if (s.CanFeedback)   return ("fa-solid fa-comment-dots",  "in-progress", L["Mentor_Feedback"]);
+        return ("fa-regular fa-clock", "pending", L["Mentor_Scheduled"]);
     }
 
-    <!-- Header row -->
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <div>
-            <h2 class="fw-bold mb-0">Mentor Dashboard</h2>
-            <p class="text-muted mb-0">
-                <i class="bi bi-calendar-date"></i>
-                @Model.Today.ToString("dddd, dd MMMM yyyy")
-            </p>
-        </div>
-        <div class="d-flex gap-2 flex-wrap">
-            <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index"
-                   class="btn btn-outline-primary position-relative">
-                <i class="bi bi-calendar-check"></i> All Appointments
-                @if (Model.TotalPendingCount > 0)
-                {
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        @Model.TotalPendingCount
+    /// <summary>
+    /// Maps an availability slot's booked flag to (icon, BEM modifier, label).
+    /// "free" reuses the --completed (green) treatment because availability is a positive state.
+    /// </summary>
+    (string iconClass, string modifier, string label) SlotStatus(AvailabilitySlotViewModel slot)
+        => slot.IsBooked
+            ? ("fa-solid fa-circle-check", "in-progress", L["Mentor_Booked"])
+            : ("fa-regular fa-circle",     "completed",   L["Mentor_Free"]);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
+    @* ============ Main ============ *@
+    <div class="mentor-dashboard">
+        <div class="mentor-dashboard__inner">
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--error" role="alert">
+                <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Error"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="@L["Alert_Close"]">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert dashboard-alert dashboard-alert--success" role="alert">
+                <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
+                <span class="dashboard-alert__message">@TempData["Success"]</span>
+                <button type="button"
+                        class="dashboard-alert__close"
+                        data-alert-dismiss
+                        aria-label="@L["Alert_Close"]">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+
+        <!-- ============ Hero ============ -->
+        <section class="dashboard-hero" aria-labelledby="dashboard-title">
+            <div class="dashboard-hero__intro">
+                <span class="dashboard-hero__eyebrow">@L["Mentor_Dashboard"]</span>
+                <h1 id="dashboard-title" class="dashboard-hero__title">@L["Mentor_YourDayAtAGlance"]</h1>
+                <div class="dashboard-hero__meta">
+                    <span class="chip chip--primary" aria-label="@L["Mentor_TodaysDate"]">
+                        <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
+                        @Model.Today.ToString("dddd, dd MMM")
                     </span>
-                }
-            </a>
-            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index"
-                   class="btn btn-outline-secondary">
-                <i class="bi bi-people"></i> Trainees Summary
-            </a>
-            <a asp-area="Mentor" asp-controller="Availability" asp-action="Index"
-                   class="btn btn-outline-secondary">
-                <i class="bi bi-people"></i> Set Availability
-            </a>
-        </div>
-    </div>
-
-    <!-- Stats row -->
-    <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3">
-            <div class="card text-center border-0 shadow-sm h-100">
-                <div class="card-body py-3">
-                    <div class="display-6 fw-bold text-warning">@Model.TotalPendingCount</div>
-                    <div class="text-muted small">Pending Requests</div>
+                    @if (pendingCount > 0)
+                    {
+                        <span class="chip chip--soft" aria-label="@L["Mentor_PendingRequests"]">
+                            <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+                            @pendingCount @L["Mentor_Pending"]
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="chip chip--soft" aria-label="@L["Mentor_InboxStatus"]">
+                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                            @L["Mentor_AllCaughtUp"]
+                        </span>
+                    }
                 </div>
             </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card text-center border-0 shadow-sm h-100">
-                <div class="card-body py-3">
-                    <div class="display-6 fw-bold text-success">@Model.TotalConfirmedUpcomingCount</div>
-                    <div class="text-muted small">Upcoming Confirmed</div>
-                </div>
+
+            <div class="dashboard-hero__cta">
+                <a asp-area="Mentor"
+                   asp-controller="Availability"
+                   asp-action="Index"
+                   class="btn-action btn-action--outline">
+                    <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                    <span>@L["Mentor_SetAvailability"]</span>
+                </a>
             </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card text-center border-0 shadow-sm h-100">
-                <div class="card-body py-3">
-                    <div class="display-6 fw-bold text-primary">@Model.TodaysConfirmedSessions.Count</div>
-                    <div class="text-muted small">Today's Sessions</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card text-center border-0 shadow-sm h-100">
-                <div class="card-body py-3">
-                    <div class="display-6 fw-bold text-info">@Model.TodaysAvailabilitySlots.Count</div>
-                    <div class="text-muted small">Available Slots Today</div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="row g-4">
-
-        <!-- Today's Schedule -->
-        <div class="col-lg-8">
-            <div class="card shadow-sm h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span class="fw-semibold">
-                        <i class="bi bi-clock-history text-primary"></i> Today's Schedule
-                    </span>
-                    <span class="badge bg-primary">@Model.TodaysConfirmedSessions.Count confirmed</span>
-                </div>
-
-                @if (Model.TodaysConfirmedSessions.Any())
-                {
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Trainee</th>
-                                    <th>Type</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var s in Model.TodaysConfirmedSessions)
-                                {
-                                    <tr>
-                                        <td>
-                                            <span class="fw-semibold">@s.StartTime.ToString("HH:mm")</span>
-                                            <span class="text-muted">– @s.EndTime.ToString("HH:mm")</span>
-                                        </td>
-                                        <td>
-                                            <a asp-area="Mentor" asp-controller="Trainees"
-                                                   asp-action="Detail" asp-route-id="@s.TraineeId"
-                                                   class="text-decoration-none fw-semibold">
-                                                @s.TraineeName
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span class="badge @(s.SessionType == "practical" ? "bg-warning text-dark" : "bg-info text-dark")">
-                                                @s.SessionType
-                                            </span>
-                                        </td>
-                                        <td>
-                                            @if (s.CanMarkDone)
-                                            {
-                                                <form asp-area="Mentor" asp-controller="Appointments"
-                                                      asp-action="MarkDone" method="post" class="d-inline">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="bookingId" value="@s.BookingId" />
-                                                    <button class="btn btn-success btn-sm">
-                                                        <i class="bi bi-check2-circle"></i> Mark Done
-                                                    </button>
-                                                </form>
-                                            }
-                                            @if (s.CanFeedback)
-                                            {
-                                                <a asp-area="Mentor" asp-controller="Appointments"
-                                                       asp-action="Feedback" asp-route-bookingId="@s.BookingId"
-                                                       class="btn btn-outline-secondary btn-sm ms-1">
-                                                    <i class="bi bi-chat-left-text"></i> Feedback
-                                                </a>
-                                            }
-                                            @if (s.FeedbackGiven)
-                                            {
-                                                <span class="badge bg-success ms-1">Feedback ✓</span>
-                                            }
-                                            @if (!s.CanMarkDone && !s.CanFeedback && !s.FeedbackGiven)
-                                            {
-                                                <span class="text-muted small">In session</span>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="card-body text-center text-muted py-5">
-                        <i class="bi bi-calendar-x fs-1 d-block mb-2"></i>
-                        No confirmed sessions for today.
-                    </div>
-                }
-            </div>
-        </div>
-
-        <!-- Availability + Pending -->
-        <div class="col-lg-4 d-flex flex-column gap-3">
-
-            <!-- Today's Availability -->
-            <div class="card shadow-sm">
-                <div class="card-header fw-semibold">
-                    <i class="bi bi-clock text-success"></i> Today's Availability Slots
-                </div>
-                @if (Model.TodaysAvailabilitySlots.Any())
-                {
-                    <ul class="list-group list-group-flush">
-                        @foreach (var slot in Model.TodaysAvailabilitySlots)
+        <!-- ============ Today's Snapshot (Progress Card analog) ============ -->
+        <section class="progress-card" aria-labelledby="snapshot-card-label">
+            <div class="progress-card__head">
+                <div>
+                    <span id="snapshot-card-label" class="progress-card__label">@L["Mentor_TodaysSnapshot"]</span>
+                    <p class="progress-card__sublabel">
+                        @if (slotsCount > 0)
                         {
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>
+                            @string.Format(L["Mentor_BookedOfSlots"], slotsBooked, slotsCount)
+                        }
+                        else
+                        {
+                            @L["Mentor_NoAvailabilitySetToday"]
+                        }
+                    </p>
+                </div>
+                <div class="progress-card__percent" aria-hidden="true">
+                    <span class="progress-card__percent-num">@utilizationPct</span><span class="progress-card__percent-sym">%</span>
+                </div>
+            </div>
+
+            <div class="progress-card__bar"
+                 role="progressbar"
+                 aria-valuenow="@utilizationPct"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="@L["Mentor_SlotUtilizationAria"]">
+                <div class="progress-card__bar-fill" style="--progress-value: @(utilizationPct)%"></div>
+            </div>
+
+            <div class="progress-card__next">
+                <span class="progress-card__next-icon" aria-hidden="true">
+                    <i class="fa-solid fa-forward"></i>
+                </span>
+                <span class="progress-card__next-text">
+                    <span class="progress-card__next-label">@L["Mentor_NextSession"]</span>
+                    <span class="progress-card__next-value">@nextSessionText</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- ============ Tracks (Sessions + Availability) ============ -->
+        <div class="tracks-grid">
+
+            <!-- Track 01: Today's Sessions -->
+            <section class="track-card track-card--theory" aria-labelledby="track-sessions-title">
+                <header class="track-card__header">
+                    <span class="track-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </span>
+                    <div class="track-card__headings">
+                        <p class="track-card__eyebrow">@L["Dashboard_Track01"]</p>
+                        <h2 id="track-sessions-title" class="track-card__title">@L["Mentor_TodaysSessions"]</h2>
+                    </div>
+                    <span class="track-card__count" aria-label="@L["Mentor_SessionsTodayAria"]">
+                        @sessionsCount
+                    </span>
+                </header>
+
+                <div class="track-card__progress">
+                    <div class="track-card__progress-row">
+                        <span class="track-card__progress-label">
+                            @string.Format(L["Mentor_CompletedOfSessions"], sessionsDone, sessionsCount)
+                        </span>
+                        <span class="track-card__progress-value">@sessionsPct%</span>
+                    </div>
+                    <div class="track-card__progress-bar"
+                         role="progressbar"
+                         aria-valuenow="@sessionsPct" aria-valuemin="0" aria-valuemax="100"
+                         aria-label="@L["Mentor_SessionsCompletionAria"]">
+                        <div class="track-card__progress-fill"
+                             style="--track-progress: @(sessionsPct)%"></div>
+                    </div>
+                </div>
+
+                <ul class="module-list">
+                    @for (var i = 0; i < sessions.Count; i++)
+                    {
+                        var s        = sessions[i];
+                        var p        = SessionStatus(s);
+                        var isUpNext = i == upNextSessionIdx;
+                        var itemCls  = $"module-item module-item--{p.modifier}"
+                                       + (isUpNext ? " module-item--up-next" : "");
+                        <li class="@itemCls">
+                            <div class="module-item__main">
+                                <span class="module-item__status-icon module-item__status-icon--@p.modifier" aria-hidden="true">
+                                    <i class="@p.iconClass"></i>
+                                </span>
+                                <span class="module-item__title">
+                                    @s.StartTime.ToString("HH:mm") — @s.TraineeName
+                                </span>
+                            </div>
+                            @if (isUpNext)
+                            {
+                                <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
+                            }
+                            else
+                            {
+                                <span class="status-pill status-pill--@p.modifier">@p.label</span>
+                            }
+                        </li>
+                    }
+                    @if (!sessions.Any())
+                    {
+                        <li class="module-list__empty">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <span>@L["Mentor_NoConfirmedSessionsToday"]</span>
+                        </li>
+                    }
+                </ul>
+            </section>
+
+            <!-- Track 02: Today's Availability -->
+            <section class="track-card track-card--practical" aria-labelledby="track-availability-title">
+                <header class="track-card__header">
+                    <span class="track-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-clock"></i>
+                    </span>
+                    <div class="track-card__headings">
+                        <p class="track-card__eyebrow">@L["Dashboard_Track02"]</p>
+                        <h2 id="track-availability-title" class="track-card__title">@L["Mentor_TodaysAvailability"]</h2>
+                    </div>
+                    <span class="track-card__count" aria-label="@L["Mentor_SlotsTodayAria"]">
+                        @slotsCount
+                    </span>
+                </header>
+
+                <div class="track-card__progress">
+                    <div class="track-card__progress-row">
+                        <span class="track-card__progress-label">
+                            @string.Format(L["Mentor_BookedOfSlots"], slotsBooked, slotsCount)
+                        </span>
+                        <span class="track-card__progress-value">@slotsPct%</span>
+                    </div>
+                    <div class="track-card__progress-bar"
+                         role="progressbar"
+                         aria-valuenow="@slotsPct" aria-valuemin="0" aria-valuemax="100"
+                         aria-label="@L["Mentor_SlotUtilizationAria"]">
+                        <div class="track-card__progress-fill"
+                             style="--track-progress: @(slotsPct)%"></div>
+                    </div>
+                </div>
+
+                <ul class="module-list">
+                    @for (var i = 0; i < slots.Count; i++)
+                    {
+                        var slot     = slots[i];
+                        var p        = SlotStatus(slot);
+                        var isUpNext = i == upNextSlotIdx;
+                        var itemCls  = $"module-item module-item--{p.modifier}"
+                                       + (isUpNext ? " module-item--up-next" : "");
+                        <li class="@itemCls">
+                            <div class="module-item__main">
+                                <span class="module-item__status-icon module-item__status-icon--@p.modifier" aria-hidden="true">
+                                    <i class="@p.iconClass"></i>
+                                </span>
+                                <span class="module-item__title">
                                     @slot.StartTime.ToString("HH:mm") – @slot.EndTime.ToString("HH:mm")
                                 </span>
-                                @if (slot.IsBooked)
-                                {
-                                    <span class="badge bg-secondary">Booked</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-success">Free</span>
-                                }
-                            </li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <div class="card-body text-center text-muted small py-3">
-                        No availability slots set for today.
-                    </div>
-                }
-            </div>
-
-            <!-- Pending Bookings -->
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span class="fw-semibold">
-                        <i class="bi bi-hourglass-split text-warning"></i> Pending Requests
-                    </span>
-                    @if (Model.PendingBookings.Any())
-                    {
-                        <span class="badge bg-warning text-dark">@Model.PendingBookings.Count</span>
+                            </div>
+                            @if (isUpNext)
+                            {
+                                <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
+                            }
+                            else
+                            {
+                                <span class="status-pill status-pill--@p.modifier">@p.label</span>
+                            }
+                        </li>
                     }
-                </div>
-
-                @if (Model.PendingBookings.Any())
-                {
-                    <ul class="list-group list-group-flush">
-                        @foreach (var p in Model.PendingBookings.Take(5))
-                        {
-                            <li class="list-group-item">
-                                <div class="fw-semibold small">@p.TraineeName</div>
-                                <div class="text-muted small">
-                                    @p.BookingDate.ToString("dd MMM")
-                                    @p.StartTime.ToString("HH:mm") – @p.EndTime.ToString("HH:mm")
-                                </div>
-                                <div class="d-flex gap-1 mt-1">
-                                    <form asp-area="Mentor" asp-controller="Appointments"
-                                          asp-action="Confirm" method="post">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="bookingId" value="@p.BookingId" />
-                                        <button class="btn btn-success btn-sm py-0">✓ Confirm</button>
-                                    </form>
-                                    <a asp-area="Mentor" asp-controller="Appointments"
-                                           asp-action="Reschedule" asp-route-bookingId="@p.BookingId"
-                                           class="btn btn-outline-secondary btn-sm py-0">
-                                        ↺ Reschedule
-                                    </a>
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                    @if (Model.PendingBookings.Count > 5)
+                    @if (!slots.Any())
                     {
-                        <div class="card-footer text-center">
-                            <a asp-area="Mentor" asp-controller="Appointments" asp-action="Index"
-                                   class="small text-decoration-none">
-                                View all @Model.PendingBookings.Count pending →
-                            </a>
-                        </div>
+                        <li class="module-list__empty">
+                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                            <span>@L["Mentor_NoAvailabilitySetToday"]</span>
+                        </li>
                     }
-                }
-                else
-                {
-                    <div class="card-body text-center text-muted small py-3">
-                        No pending requests.
-                    </div>
-                }
-            </div>
-
+                </ul>
+            </section>
         </div>
+
+        <!-- ============ Pending Requests (Mock-exam analog) ============ -->
+        <section class="mock-exam mock-exam--@pendingState" aria-labelledby="pending-card-title">
+            <div class="mock-exam__decor" aria-hidden="true"></div>
+
+            <div class="mock-exam__main">
+                <span class="mock-exam__icon" aria-hidden="true">
+                    <i class="fa-solid @(pendingCount > 0 ? "fa-hourglass-half" : "fa-inbox")"></i>
+                </span>
+                <div class="mock-exam__text">
+                    <p class="mock-exam__eyebrow">@L["Mentor_AwaitingResponse"]</p>
+                    <h2 id="pending-card-title" class="mock-exam__title">@L["Mentor_PendingRequests"]</h2>
+                    <p class="mock-exam__caption">
+                        @if (pendingCount > 0)
+                        {
+                            <i class="fa-solid fa-bolt mock-exam__caption-icon" aria-hidden="true"></i>
+                            <span>@string.Format(L["Mentor_PendingRequestsCount"], pendingCount)</span>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-circle-check mock-exam__caption-icon" aria-hidden="true"></i>
+                            <span>@L["Mentor_AllCaughtUpPending"]</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <div class="mock-exam__action">
+                @if (pendingCount > 0)
+                {
+                    <a asp-area="Mentor"
+                       asp-controller="Appointments"
+                       asp-action="Index"
+                       class="btn-action btn-action--gradient">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        <span>@L["Mentor_ReviewRequests"]</span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-area="Mentor"
+                       asp-controller="Appointments"
+                       asp-action="Index"
+                       class="btn-action btn-action--ghost-success">
+                        <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+                        <span>@L["Mentor_ViewAppointments"]</span>
+                    </a>
+                }
+            </div>
+        </section>
+
     </div>
 </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+}

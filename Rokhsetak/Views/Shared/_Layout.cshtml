@@ -1,6 +1,7 @@
 @using System.Globalization
-
-@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<Rokhsetak.Resources.SharedResourceMarker> L
 @{
     var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var dir = culture == "ar" ? "rtl" : "ltr";
@@ -29,7 +30,10 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-    <partial name="_NavBar" />
+    @if (ViewData["HideNav"] as bool? != true)
+    {
+        <partial name="_NavBar" />
+    }
 
     @* ── TempData global alerts ── *@
     @if (TempData["SuccessMessage"] != null)

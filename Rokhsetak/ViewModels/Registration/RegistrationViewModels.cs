@@ -75,6 +75,9 @@ public class TraineeRegistrationViewModel
     [Display(Name = "License Type")]
     public int LicenseTypeId { get; set; }
 
+    [Display(Name = "Display Name in English")]
+    public string? DisplayNameEn { get; set; }
+
     // ─── CONSENT ───────────────────────────────────────────────────────────
     //[Required(ErrorMessage = "You must accept the Terms & Conditions to register.")]
     //[Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the Terms & Conditions.")]
@@ -160,6 +163,9 @@ public class MentorRegistrationViewModel
     [Required(ErrorMessage = "Certification document is required.")]
     [Display(Name = "Certification Document (PDF/Image)")]
     public IFormFile CertificationFile { get; set; } = null!;
+
+    [Display(Name = "Display Name in English")]
+    public string? DisplayNameEn { get; set; }
 
     // ─── CONSENT ───────────────────────────────────────────────────────────
     [MustBeTrue(ErrorMessage = "you must accept the terms and conditions")]

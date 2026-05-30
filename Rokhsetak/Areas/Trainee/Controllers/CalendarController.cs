@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 using System.Text.Json;
 
 namespace Rokhsetak.Areas.Trainee.Controllers;
@@ -19,8 +20,9 @@ public class CalendarController : Controller
 
     public async Task<IActionResult> Index()
     {
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var userId = User.GetUserId().Value;
-        var result = await _calendar.GetCalendarEventsAsync(userId);
+        var result = await _calendar.GetCalendarEventsAsync(userId, culture);
 
         if (!result.Succeeded)
         {

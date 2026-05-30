@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model QuizResultViewModel
 @{
-    ViewData["Title"] = "Quiz Result";
+    ViewData["Title"] = L["Quiz_ResultTitle"];
 
     // Drive the hero state class + iconography off the ViewModel.
     string heroState;
@@ -12,22 +15,22 @@
     {
         heroState   = "passed";
         heroIcon    = "fa-solid fa-trophy";
-        heroHeading = "Passed!";
-        heroSubhead = "Excellent work. You’ve cleared the passing threshold and can move on with confidence.";
+        heroHeading = L["Quiz_Result_Passed"];
+        heroSubhead = L["Quiz_Result_PassedMessage"];
     }
     else if (Model.IsMockExam)
     {
         heroState   = "mock";
         heroIcon    = "fa-solid fa-clipboard-check";
-        heroHeading = "Mock exam completed";
-        heroSubhead = "Passing isn’t required for the mock — you’re cleared to book your theory test whenever you’re ready.";
+        heroHeading = L["Quiz_Result_MockCompleted"];
+        heroSubhead = L["Quiz_Result_MockMessage"];
     }
     else
     {
         heroState   = "retry";
         heroIcon    = "fa-solid fa-book-open-reader";
-        heroHeading = "Not passed yet";
-        heroSubhead = "Review the material and try again — there’s no limit on attempts.";
+        heroHeading = L["Quiz_Result_NotPassed"];
+        heroSubhead = L["Quiz_Result_RetryMessage"];
     }
 }
 
@@ -51,25 +54,25 @@
                 <div class="quiz-score"
                      data-quiz-score="@Model.Score"
                      role="img"
-                     aria-label="Score: @Model.Score percent. Passing score: @Model.PassingScore percent.">
+                     aria-label="@string.Format(L["Quiz_ScoreAria"], Model.Score, Model.PassingScore)">
                     <div class="quiz-score__inner">
                         <span class="quiz-score__value">@Model.Score%</span>
-                        <span class="quiz-score__label">Pass @Model.PassingScore%</span>
+                        <span class="quiz-score__label">@string.Format(L["Quiz_PassLabel"], Model.PassingScore)</span>
                     </div>
                 </div>
 
                 <div class="quiz-stats">
                     <div class="quiz-stat quiz-stat--correct">
                         <div class="quiz-stat__value">@Model.CorrectCount</div>
-                        <div class="quiz-stat__label">Correct</div>
+                        <div class="quiz-stat__label">@L["Quiz_Correct"]</div>
                     </div>
                     <div class="quiz-stat quiz-stat--incorrect">
                         <div class="quiz-stat__value">@Model.IncorrectCount</div>
-                        <div class="quiz-stat__label">Incorrect</div>
+                        <div class="quiz-stat__label">@L["Quiz_Incorrect"]</div>
                     </div>
                     <div class="quiz-stat">
                         <div class="quiz-stat__value">@Model.TotalQuestions</div>
-                        <div class="quiz-stat__label">Total</div>
+                        <div class="quiz-stat__label">@L["Quiz_TotalQuestions"]</div>
                     </div>
                 </div>
 
@@ -82,7 +85,7 @@
                            asp-route-moduleId="@Model.ModuleId"
                            class="quiz-btn quiz-btn--outline">
                             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
-                            Retake quiz
+                            @L["Quiz_RetakeQuiz"]
                         </a>
                         <a asp-area="Trainee"
                            asp-controller="Modules"
@@ -90,7 +93,7 @@
                            asp-route-id="@Model.ModuleId"
                            class="quiz-btn quiz-btn--ghost">
                             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                            Back to module
+                            @L["Quiz_BackToModule"]
                         </a>
                     }
                     else
@@ -100,7 +103,7 @@
                            asp-action="MockExam"
                            class="quiz-btn quiz-btn--gold">
                             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
-                            Retake mock exam
+                            @L["MockExam_Retake"]
                         </a>
                     }
                     <a asp-area="Trainee"
@@ -108,14 +111,14 @@
                        asp-action="Index"
                        class="quiz-btn quiz-btn--primary">
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        Go to dashboard
+                        @L["Quiz_GoToDashboard"]
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Question breakdown -->
-        <h2 class="quiz-section-title">Question breakdown</h2>
+        <h2 class="quiz-section-title">@L["Quiz_QuestionBreakdown"]</h2>
 
         @for (int i = 0; i < Model.Questions.Count; i++)
         {
@@ -129,7 +132,7 @@
                         <span class="quiz-breakdown__qtext">@Html.Raw(q.QuestionText)</span>
                     </div>
                     <span class="quiz-breakdown__status quiz-breakdown__status--@statusModifier"
-                          aria-label="@(q.IsCorrect ? "Answered correctly" : "Answered incorrectly")">
+                          aria-label="@(q.IsCorrect ? L["Quiz_AnsweredCorrectly"] : L["Quiz_AnsweredIncorrectly"])">
                         <i class="fa-solid @(q.IsCorrect ? "fa-check" : "fa-xmark")" aria-hidden="true"></i>
                     </span>
                 </header>
@@ -168,11 +171,11 @@
 
                             @if (opt.WasSelected && !opt.IsCorrect)
                             {
-                                <span class="quiz-tag quiz-tag--danger">Your answer</span>
+                                <span class="quiz-tag quiz-tag--danger">@L["Quiz_YourAnswer"]</span>
                             }
                             @if (opt.IsCorrect)
                             {
-                                <span class="quiz-tag quiz-tag--success">Correct</span>
+                                <span class="quiz-tag quiz-tag--success">@L["Quiz_CorrectAnswer"]</span>
                             }
                         </li>
                     }

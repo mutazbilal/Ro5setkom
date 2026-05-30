@@ -1,0 +1,202 @@
+﻿@using System.Globalization
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
+@{
+    ViewData["HideNav"] = true;
+
+    var currentLang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    var pageTitle = ViewData["Title"] as string ?? L["Mentor_Layout_Title"];
+    var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var dir = culture == "ar" ? "rtl" : "ltr";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir=@dir>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@pageTitle · Rokhsetak</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/mentor-shared.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+
+    <div class="mentor-shell">
+
+        <!-- Sidebar -->
+        <aside class="mentor-sidebar" aria-label="@L["Mentor_NavigationAria"]">
+
+            <a asp-area=""
+               asp-controller="Home"
+               asp-action="Index"
+               class="mentor-sidebar__brand"
+               aria-label="Rokhsetak — @L["Nav_Home"]">
+
+                <span class="mentor-sidebar__logo" aria-hidden="true">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </span>
+
+                <span class="mentor-sidebar__brand-name">
+                    Rokhsetak
+                </span>
+            </a>
+
+            <nav class="mentor-sidebar__nav" aria-label="@L["Mentor_SectionsAria"]">
+
+                <span class="mentor-sidebar__heading">
+                    @L["Mentor_ManageHeading"]
+                </span>
+
+                <ul class="mentor-sidebar__list">
+
+                    <li>
+                        <a asp-area="Mentor"
+                           asp-controller="Dashboard"
+                           asp-action="Index"
+                           class="mentor-sidebar__link">
+
+                            <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                            <span>@L["Nav_Dashboard"]</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-area="Mentor"
+                           asp-controller="Availability"
+                           asp-action="Index"
+                           class="mentor-sidebar__link">
+
+                            <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                            <span>@L["Mentor_Availability"]</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-area="Mentor"
+                           asp-controller="Appointments"
+                           asp-action="Index"
+                           class="mentor-sidebar__link">
+
+                            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                            <span>@L["Mentor_Appointments"]</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-area="Mentor"
+                           asp-controller="Trainees"
+                           asp-action="Index"
+                           class="mentor-sidebar__link">
+
+                            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                            <span>@L["Mentor_Trainees"]</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <div class="mentor-sidebar__footer">
+
+                <div class="mentor-sidebar__lang"
+                     role="group"
+                     aria-label="@L["Mentor_LanguageGroupAria"]">
+
+                    <form asp-area=""
+                          asp-controller="Profile"
+                          asp-action="ChangeLanguage"
+                          method="post"
+                          class="mentor-sidebar__lang-form">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="language" value="en" />
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                        <button type="submit"
+                                class="mentor-sidebar__lang-btn @(currentLang == "en" ? "is-active" : null)">
+                            EN
+                        </button>
+                    </form>
+
+                    <form asp-area=""
+                          asp-controller="Profile"
+                          asp-action="ChangeLanguage"
+                          method="post"
+                          class="mentor-sidebar__lang-form">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="language" value="ar" />
+                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                        <button type="submit"
+                                class="mentor-sidebar__lang-btn @(currentLang == "ar" ? "is-active" : null)">
+                            AR
+                        </button>
+                    </form>
+
+                </div>
+
+                <a asp-area=""
+                   asp-controller="Profile"
+                   asp-action="Index"
+                   class="mentor-sidebar__link">
+
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <span>@L["Nav_Profile"]</span>
+                </a>
+
+                <form asp-area=""
+                      asp-controller="Auth"
+                      asp-action="Logout"
+                      method="post"
+                      class="mentor-sidebar__logout-form">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="mentor-sidebar__link mentor-sidebar__link--logout">
+
+                        <i class="fa-solid fa-arrow-right-from-bracket"
+                           aria-hidden="true"></i>
+
+                        <span>@L["Nav_Logout"]</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </aside>
+
+        <!-- Main page content -->
+        <main class="mentor-dashboard">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
