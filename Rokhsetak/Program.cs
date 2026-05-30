@@ -6,6 +6,8 @@ using Rokhsetak.Services.Implementations;
 using Rokhsetak.Services.Interfaces;
 using System.Globalization;
 using Rokhsetak.Workers;
+using Rokhsetak.Services.Chat;
+using Rokhsetak.Services.Chat.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,6 +81,11 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IExamAdminService, ExamAdminService>();
 builder.Services.AddScoped<IUserAdminService, UserAdminService>();
 builder.Services.AddScoped<IMentorAdminService, MentorAdminService>();
+
+builder.Services.AddScoped<IChatProvider, HumanChatProvider>();
+builder.Services.AddScoped<IChatProvider, AiChatProvider>();
+builder.Services.AddScoped<IChatProviderRegistry, ChatProviderRegistry>();
+builder.Services.AddScoped<IAiResponder, EchoAiResponder>();
 
 builder.Services.AddScoped<IBlobService, BlobService>();
 

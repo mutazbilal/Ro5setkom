@@ -13,11 +13,12 @@ public class BookingController : Controller
 {
     private readonly IBookingService _bookings;
     private readonly ITraineeDashboardService _dashboard;
-
-    public BookingController(IBookingService bookings, ITraineeDashboardService dashboard)
+    private readonly IConversationService _conversations;
+    public BookingController(IBookingService bookings, ITraineeDashboardService dashboard, IConversationService conversations)
     {
         _bookings = bookings;
         _dashboard = dashboard;
+        _conversations = conversations;
     }
 
     // GET /Trainee/Booking — my bookings list
@@ -157,5 +158,16 @@ public class BookingController : Controller
         var userId = User.GetUserId().Value;
         var result = await _bookings.RateSessionAsync(userId, dto.BookingId, dto.Score, review: dto.Review != null ? dto.Review : null);
         return RedirectToAction("Index");
+    }
+
+    // POST /Trainee/Booking/Message  — start/reuse a conversation with any mentor
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Message(int mentorId)
+    {
+        var traineeId = User.GetUserId().Value;
+        var result = await _conversations.EnsureConversationExistsAsync(traineeId, mentorId);
+        if (!result.Succeeded) return BadRequest(new { error = result.Error });
+        return Json(new { conversationId = result.Data });
     }
 }

@@ -1,0 +1,55 @@
+﻿@using Rokhsetak.Services.Chat
+@model IReadOnlyList<ChatThreadSummary>
+@{
+    var provider = ViewData["Provider"] as string ?? "human";
+}
+
+@if (!Model.Any())
+{
+    <div class="conv-empty">
+        <p>No conversations yet.</p>
+        <small>Start one from “Find Mentor”.</small>
+    </div>
+}
+else
+{
+    <ul class="conv-list rkchat-threads">
+        @foreach (var t in Model)
+        {
+            <li class="conv-item rkchat-thread-item"
+                data-provider="@provider"
+                data-thread-id="@t.ThreadId"
+                data-name="@t.Title.ToLower()">
+                <div class="conv-link">
+                    <div class="conv-avatar">@t.AvatarText</div>
+                    <div class="conv-meta">
+                        <div class="conv-name-row">
+                            <span class="conv-name">@t.Title</span>
+                            @if (t.LastMessageAt.HasValue)
+                            {
+                                <span class="conv-time">@FormatTime(t.LastMessageAt.Value)</span>
+                            }
+                        </div>
+                        <div class="conv-preview-row">
+                            <span class="conv-preview @(t.IsFile ? "is-file" : "")">@(t.LastMessage ?? "No messages yet")</span>
+                            @if (t.UnreadCount > 0)
+                            {
+                                <span class="badge-unread">@t.UnreadCount</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+
+@functions {
+    static string FormatTime(DateTime dt)
+    {
+        var now = DateTime.UtcNow;
+        if (now.Date == dt.Date) return dt.ToString("HH:mm");
+        if ((now - dt).TotalDays < 7) return dt.ToString("ddd");
+        return dt.ToString("dd MMM");
+    }
+}

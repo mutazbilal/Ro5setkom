@@ -4,7 +4,6 @@ CREATE TABLE Messaging.Conversations (
     conversation_id INT       PRIMARY KEY IDENTITY(1,1),
     trainee_id      INT       NOT NULL,
     mentor_id       INT       NOT NULL,
-    booking_id      INT       NOT NULL UNIQUE,
     created_at      DATETIME2 DEFAULT GETDATE(),
 
     FOREIGN KEY (trainee_id) REFERENCES Roles.Trainees(trainee_id),

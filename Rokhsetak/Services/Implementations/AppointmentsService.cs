@@ -118,7 +118,7 @@ public class AppointmentService : IAppointmentService
 
         // ── Auto-create conversation on first confirmed booking (US-024) ──────────
         await _conversations.EnsureConversationExistsAsync(
-            booking.TraineeId, mentorId, bookingId);
+            booking.TraineeId, mentorId);
 
         await _notifications.CreateAsync(
             booking.TraineeId,
