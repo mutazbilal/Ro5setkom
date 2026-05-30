@@ -3,6 +3,9 @@
 *@
 
 @using System.Security.Claims
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<Rokhsetak.Resources.SharedResourceMarker> L
 @inject Rokhsetak.Services.Interfaces.INotificationService NotificationService
 
 @{
@@ -27,8 +30,19 @@
     string ActiveAria(string area, string controller, string action) =>
         IsActive(area, controller, action) ? "page" : null;
 
+    // Controller-scoped variant: true whenever the user is anywhere inside the given controller.
+    // Used for multi-page sections (e.g. Profile/Index, Profile/Edit, Profile/ChangeLicense).
+    bool IsActiveController(string area, string controller) =>
+        string.Equals(currentArea, area, System.StringComparison.OrdinalIgnoreCase) &&
+        string.Equals(currentController, controller, System.StringComparison.OrdinalIgnoreCase);
 
+    string ActiveControllerClass(string area, string controller) =>
+        IsActiveController(area, controller) ? "is-active" : null;
 
+    string ActiveControllerAria(string area, string controller) =>
+        IsActiveController(area, controller) ? "page" : null;
+
+    // Notifications
     var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
     int userId = 0;
 
@@ -51,7 +65,7 @@
        asp-controller="Home"
        asp-action="Index"
        class="landing-brand"
-       aria-label="Rokhsetak — Home">
+       aria-label="Rokhsetak — @L["Nav_Home"]">
         <span class="landing-brand__logo" aria-hidden="true">
             <i class="fa-solid fa-shield-halved"></i>
         </span>
@@ -63,7 +77,7 @@
         <input type="checkbox"
                id="rk-nav-toggle"
                class="landing-nav__check"
-               aria-label="Toggle navigation menu"
+               aria-label="@L["Nav_ToggleMenu"]"
                aria-controls="rk-nav-cluster" />
 
         <label for="rk-nav-toggle" class="landing-nav__toggle">
@@ -85,8 +99,8 @@
                             <a asp-area="Trainee" asp-controller="Dashboard" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Trainee", "Dashboard", "index")"
                                aria-current="@ActiveAria("Trainee", "Dashboard", "index")">
-                                <i class="fa-solid fa-gauge-high"></i>
-                                <span>Dashboard</span>
+                                <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                                <span>@L["Nav_Dashboard"]</span>
                             </a>
                         </li>
 
@@ -94,8 +108,8 @@
                             <a asp-area="Trainee" asp-controller="Modules" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Trainee", "Modules", "index")"
                                aria-current="@ActiveAria("Trainee", "Modules", "index")">
-                                <i class="fa-solid fa-book-open"></i>
-                                <span>Modules</span>
+                                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                                <span>@L["Nav_Modules"]</span>
                             </a>
                         </li>
 
@@ -103,8 +117,8 @@
                             <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
                                class="landing-nav__link @ActiveClass("Trainee", "Booking", "browse")"
                                aria-current="@ActiveAria("Trainee", "Booking", "browse")">
-                                <i class="fa-solid fa-user-group"></i>
-                                <span>Find Mentor</span>
+                                <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                                <span>@L["Nav_FindMentor"]</span>
                             </a>
                         </li>
 
@@ -112,8 +126,8 @@
                             <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Trainee", "Booking", "index")"
                                aria-current="@ActiveAria("Trainee", "Booking", "index")">
-                                <i class="fa-solid fa-calendar-check"></i>
-                                <span>My Bookings</span>
+                                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                                <span>@L["Nav_MyBookings"]</span>
                             </a>
                         </li>
 
@@ -121,8 +135,8 @@
                             <a asp-area="Trainee" asp-controller="Exam" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Trainee", "Exam", "index")"
                                aria-current="@ActiveAria("Trainee", "Exam", "index")">
-                                <i class="fa-solid fa-clipboard-check"></i>
-                                <span>Exams</span>
+                                <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+                                <span>@L["Nav_Exams"]</span>
                             </a>
                         </li>
 
@@ -130,8 +144,8 @@
                             <a asp-area="Trainee" asp-controller="Calendar" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Trainee", "Calendar", "index")"
                                aria-current="@ActiveAria("Trainee", "Calendar", "index")">
-                                <i class="fa-regular fa-calendar"></i>
-                                <span>Calendar</span>
+                                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                                <span>@L["Nav_Calendar"]</span>
                             </a>
                         </li>
                     }
@@ -142,8 +156,8 @@
                             <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Mentor", "Dashboard", "index")"
                                aria-current="@ActiveAria("Mentor", "Dashboard", "index")">
-                                <i class="fa-solid fa-user-tie"></i>
-                                <span>Mentor Dashboard</span>
+                                <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+                                <span>@L["Mentor_Dashboard"]</span>
                             </a>
                         </li>
                     }
@@ -154,8 +168,8 @@
                             <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"
                                class="landing-nav__link @ActiveClass("Admin", "Dashboard", "index")"
                                aria-current="@ActiveAria("Admin", "Dashboard", "index")">
-                                <i class="fa-solid fa-gauge-high"></i>
-                                <span>Admin Dashboard</span>
+                                <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                                <span>@L["Admin_Nav_Dashboard"]</span>
                             </a>
                         </li>
                     }
@@ -164,15 +178,16 @@
 
             <div class="landing-nav__actions">
 
+                @* ── Notifications dropdown ── *@
                 @if (User.IsInRole("mentor") || User.IsInRole("trainee"))
                 {
                     <div class="nav-notification dropdown">
-                        <a class="landing-nav__link position-relative" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-bell"></i>
+                        <a class="landing-nav__link position-relative" data-bs-toggle="dropdown" aria-label="@L["Nav_Notifications"]">
+                            <i class="fa-solid fa-bell" aria-hidden="true"></i>
 
                             @if (unreadCount > 0)
                             {
-                                <span class="nav-notification__badge">
+                                <span class="nav-notification__badge" aria-label="@unreadCount @L["Nav_UnreadNotifications"]">
                                     @unreadCount
                                 </span>
                             }
@@ -182,7 +197,7 @@
                             style="width: 360px; max-height: 400px; overflow-y: auto;">
 
                             <li class="dropdown-header fw-bold">
-                                Notifications
+                                @L["Nav_Notifications"]
                             </li>
 
                             @if (notifications.Any())
@@ -202,8 +217,9 @@
                                             {
                                                 <button type="button"
                                                         class="btn btn-sm btn-light border ms-2"
-                                                        title="Mark as read"
-                                                        onclick="markAsRead(@n.NotificationId)">
+                                                        title="@L["Nav_MarkAsRead"]"
+                                                        data-notification-id="@n.NotificationId"
+                                                        aria-label="@L["Nav_MarkAsReadAria"]">
                                                     ✓
                                                 </button>
                                             }
@@ -215,7 +231,7 @@
                             else
                             {
                                 <li class="dropdown-item text-center text-muted">
-                                    No notifications
+                                    @L["Nav_NoNotifications"]
                                 </li>
                             }
 
@@ -223,33 +239,47 @@
                     </div>
                 }
 
-                <div class="lang-switch">
-                    <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post">
+                @* ── Language switch ── *@
+                <div class="lang-switch" role="group" aria-label="Language">
+                    <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post" class="lang-switch__form">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="language" value="en" />
                         <input type="hidden" name="returnUrl" value="@returnUrl" />
                         <button type="submit"
-                                class="lang-switch__btn @(currentLang == "en" ? "is-active" : null)">
+                                class="lang-switch__btn @(currentLang == "en" ? "is-active" : null)"
+                                aria-pressed="@(currentLang == "en" ? "true" : "false")">
                             EN
                         </button>
                     </form>
 
-                    <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post">
+                    <form asp-area="" asp-controller="Profile" asp-action="ChangeLanguage" method="post" class="lang-switch__form">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="language" value="ar" />
                         <input type="hidden" name="returnUrl" value="@returnUrl" />
                         <button type="submit"
-                                class="lang-switch__btn @(currentLang == "ar" ? "is-active" : null)">
+                                class="lang-switch__btn @(currentLang == "ar" ? "is-active" : null)"
+                                aria-pressed="@(currentLang == "ar" ? "true" : "false")">
                             AR
                         </button>
                     </form>
                 </div>
 
-                <form asp-area="" asp-controller="Auth" asp-action="Logout" method="post">
+                @* ── Profile ── *@
+                <a asp-area=""
+                   asp-controller="Profile"
+                   asp-action="Index"
+                   class="landing-nav__cta landing-nav__cta--ghost @ActiveControllerClass("", "Profile")"
+                   aria-current="@ActiveControllerAria("", "Profile")">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <span>@L["Nav_Profile"]</span>
+                </a>
+
+                @* ── Logout ── *@
+                <form asp-area="" asp-controller="Auth" asp-action="Logout" method="post" class="landing-nav__form">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="landing-nav__cta landing-nav__cta--ghost">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                        <span>Log out</span>
+                        <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                        <span>@L["Nav_Logout"]</span>
                     </button>
                 </form>
 
@@ -260,10 +290,10 @@
         {
             <div class="landing-nav__actions">
                 <a asp-controller="Auth" asp-action="Login" class="landing-nav__link">
-                    Login
+                    @L["Nav_Login"]
                 </a>
                 <a asp-controller="Registration" asp-action="SelectRole" class="landing-nav__cta">
-                    Create Account
+                    @L["Nav_Register"]
                 </a>
             </div>
         }
@@ -271,21 +301,29 @@
     </div>
 </header>
 
+@* ── Notification mark-as-read handler (unchanged) ── *@
 <script>
-    function markAsRead(id) {
-        fetch('/Notification/MarkAsRead', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'id=' + id
-        })
-        .then(res => {
-            if (res.ok) {
-                location.reload();
-            } else {
-                console.log("Failed to mark as read");
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        const markButtons = document.querySelectorAll('[data-notification-id]');
+        markButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.notificationId;
+                fetch('/Notification/MarkAsRead', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id=' + id
+                })
+                .then(res => {
+                    if (res.ok) {
+                        location.reload();
+                    } else {
+                        console.error("Failed to mark notification as read");
+                    }
+                })
+                .catch(err => console.error(err));
+            });
         });
-    }
+    });
 </script>

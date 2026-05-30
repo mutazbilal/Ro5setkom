@@ -1,138 +1,131 @@
+@using Rokhsetak.Areas.Admin.ViewModels.Users
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model UserDetailViewModel
 @{
     ViewData["Title"] = Model.FullName;
-    ViewData["Subtitle"] = $"User profile · {Model.Role}";
+    ViewData["Subtitle"] = string.Format(L["Admin_User_Detail_Subtitle"], L[$"Admin_Users_Role_{Model.Role}"]);
+    ViewData["ActiveNav"] = "users";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var initials = string.Join("", Model.FullName.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(s => s[0])).ToUpper();
 }
-
-<div class="row g-3">
-    <div class="col-lg-4">
-        <div class="admin-card admin-card--padded">
-            <div class="admin-profile">
-                <div class="admin-profile__avatar">
-                    @{
-                        var initials = string.Join("", Model.FullName.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                                                                       .Take(2)
-                                                                       .Select(s => s[0]));
-                    }
-                    <span>@initials.ToUpper()</span>
-                </div>
-                <h2 class="admin-profile__name">@Model.FullName</h2>
-                <p class="admin-profile__email">@Model.Email</p>
-                <div class="admin-profile__badges">
-                    <span class="admin-pill admin-pill--role">@Model.Role</span>
-                    @if (Model.IsActive)
-                    {
-                        <span class="admin-pill admin-pill--success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="admin-pill admin-pill--danger">Inactive</span>
-                    }
-                </div>
-            </div>
-
-            <hr />
-
-            <dl class="admin-detail-list">
-                <dt>Phone</dt><dd>@(Model.PhoneNumber ?? "—")</dd>
-                <dt>National ID</dt><dd>@(Model.NationalId ?? "—")</dd>
-                <dt>Date of birth</dt><dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
-                <dt>Gender</dt><dd>@(Model.Gender ?? "—")</dd>
-                <dt>City</dt><dd>@(Model.CityName ?? "—")</dd>
-                <dt>Province</dt><dd>@(Model.ProvinceName ?? "—")</dd>
-                <dt>Address</dt><dd>@(Model.AddressLine1 ?? "—")</dd>
-                <dt>Joined</dt><dd>@(Model.CreatedAt?.ToString("dd MMM yyyy") ?? "—")</dd>
-            </dl>
-
-            <div class="d-grid gap-2 mt-3">
+<div class="detail-layout">
+    @* ── Profile sidebar ──────────────────────────────────── *@
+    <div class="admin-card admin-card--padded">
+        <div class="admin-profile">
+            <div class="admin-profile__avatar" aria-hidden="true">@initials</div>
+            <h2 class="admin-profile__name">@Model.FullName</h2>
+            <p class="admin-profile__email">@Model.Email</p>
+            <p class="admin-profile__email">@Model.DisplayNameEn</p>
+            <div class="admin-profile__badges">
+                <span class="admin-pill admin-pill--role">@L[$"Admin_Users_Role_{Model.Role}"]</span>
                 @if (Model.IsActive)
-                {
-                    <button type="button" class="btn admin-btn-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
-                        <i class="fa-solid fa-user-slash"></i> Deactivate user
-                    </button>
-                }
+                { <span class="admin-pill admin-pill--success">@L["Admin_Users_Status_Active"]</span> }
                 else
-                {
-                    <form asp-area="Admin" asp-controller="Users" asp-action="Reactivate" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" value="@Model.UserId" />
-                        <button type="submit" class="btn admin-btn-success w-100">
-                            <i class="fa-solid fa-user-check"></i> Reactivate user
-                        </button>
-                    </form>
-                }
-                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-outline-secondary">
-                    <i class="fa-solid fa-arrow-left"></i> Back to users
-                </a>
+                { <span class="admin-pill admin-pill--danger">@L["Admin_Users_Status_Inactive"]</span> }
             </div>
+        </div>
+
+        <hr class="admin-divider" />
+        <dl class="admin-detail-list">
+            <dt>@L["Admin_User_Detail_Field_Phone"]</dt>        <dd>@(Model.PhoneNumber ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_NationalId"]</dt>  <dd>@(Model.NationalId ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_DateOfBirth"]</dt><dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_Gender"]</dt>       <dd>@(Model.Gender ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_City"]</dt>         <dd>@(Model.CityName ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_Province"]</dt>     <dd>@(Model.ProvinceName ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_Address"]</dt>      <dd>@(Model.AddressLine1 ?? "—")</dd>
+            <dt>@L["Admin_User_Detail_Field_Joined"]</dt>       <dd>@(Model.CreatedAt?.ToString("dd MMM yyyy") ?? "—")</dd>
+        </dl>
+
+        <div class="decision-stack" style="margin-top:18px">
+            @if (Model.IsActive)
+            {
+                <button type="button" class="admin-btn-danger"
+                        onclick="document.getElementById('deactivateDialog').showModal()">
+                    <i class="fa-solid fa-user-slash" aria-hidden="true"></i> @L["Admin_User_Detail_Button_Deactivate"]
+                </button>
+            }
+            else
+            {
+                <form asp-area="Admin" asp-controller="Users" asp-action="Reactivate" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.UserId" />
+                    <button type="submit" class="admin-btn-success" style="width:100%;justify-content:center">
+                        <i class="fa-solid fa-user-check" aria-hidden="true"></i> @L["Admin_User_Detail_Button_Reactivate"]
+                    </button>
+                </form>
+            }
+            <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="admin-back-link">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> @L["Admin_User_Detail_Button_Back"]
+            </a>
         </div>
     </div>
 
-    <div class="col-lg-8">
-        <div class="admin-card">
-            <div class="admin-card__header admin-card__header--bordered">
-                <h3>Booking history <span class="admin-count-badge">@Model.BookingHistory.Count</span></h3>
-            </div>
-            <div class="table-responsive">
-                <table class="table admin-table align-middle mb-0">
-                    <thead>
+    @* ── Booking history ──────────────────────────────────── *@
+    <div class="admin-card">
+        <div class="admin-card__header admin-card__header--bordered">
+            <h3>@L["Admin_User_Detail_BookingHistory_Title"] <span class="admin-count-badge">@Model.BookingHistory.Count</span></h3>
+        </div>
+        <div style="overflow-x:auto">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>@L["Admin_User_BookingHistory_Table_Date"]</th>
+                        <th>@L["Admin_User_BookingHistory_Table_Time"]</th>
+                        <th>@L["Admin_User_BookingHistory_Table_Counterparty"]</th>
+                        <th>@L["Admin_User_BookingHistory_Table_Type"]</th>
+                        <th>@L["Admin_User_BookingHistory_Table_Status"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model.BookingHistory)
+                    {
                         <tr>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Counterparty</th>
-                            <th>Type</th>
-                            <th>Status</th>
+                            <td>@b.BookingDate.ToString("dd MMM yyyy")</td>
+                            <td style="font-variant-numeric:tabular-nums">@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")</td>
+                            <td>@b.Counterparty</td>
+                            <td style="text-transform:capitalize">@L[$"Booking_{char.ToUpper(b.SessionType[0]) + b.SessionType.Substring(1)}"]</td>
+                            <td>
+                                <span class="admin-pill admin-pill--@b.Status">@L[$"Booking_{char.ToUpper(b.Status[0]) + b.Status.Substring(1)}"]</span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var b in Model.BookingHistory)
-                        {
-                            <tr>
-                                <td>@b.BookingDate.ToString("dd MMM yyyy")</td>
-                                <td>@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")</td>
-                                <td>@b.Counterparty</td>
-                                <td>@b.SessionType</td>
-                                <td>
-                                    <span class="admin-pill admin-pill--status admin-pill--@b.Status">@b.Status</span>
-                                </td>
-                            </tr>
-                        }
-                        @if (!Model.BookingHistory.Any())
-                        {
-                            <tr><td colspan="5" class="text-center text-muted py-4">No bookings for this user yet.</td></tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                    @if (!Model.BookingHistory.Any())
+                    {
+                        <tr class="empty-row"><td colspan="5">@L["Admin_User_BookingHistory_NoData"]</td></tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
 @if (Model.IsActive)
 {
-    <div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form asp-area="Admin" asp-controller="Users" asp-action="Deactivate" method="post" class="modal-content">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="id" value="@Model.UserId" />
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deactivateModalLabel">Deactivate user?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>You're about to deactivate <strong>@Model.FullName</strong>.</p>
-                    <p class="text-muted small mb-0">
-                        Their account will be blocked from signing in. Their booking and feedback history will be preserved.
-                        You can reactivate them at any time.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn admin-btn-danger">
-                        <i class="fa-solid fa-user-slash"></i> Deactivate
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <dialog id="deactivateDialog" class="admin-dialog" aria-labelledby="deact-title">
+        <form asp-area="Admin" asp-controller="Users" asp-action="Deactivate" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.UserId" />
+            <div class="admin-dialog__header">
+                <span class="admin-dialog__title" id="deact-title">@L["Admin_User_DeactivateDialog_Title"]</span>
+                <button type="button" class="admin-dialog__close"
+                        onclick="document.getElementById('deactivateDialog').close()" aria-label="@L["Alert_Close"]">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="admin-dialog__body">
+                <p>@Html.Raw(string.Format(L["Admin_User_DeactivateDialog_Body"], $"<strong>{Model.FullName}</strong>"))</p>
+                <p style="color:var(--muted)">@L["Admin_User_DeactivateDialog_Note"]</p>
+            </div>
+            <div class="admin-dialog__footer">
+                <button type="button" class="admin-dialog__cancel"
+                        onclick="document.getElementById('deactivateDialog').close()">@L["Common_Cancel"]</button>
+                <button type="submit" class="admin-btn-danger">
+                    <i class="fa-solid fa-user-slash" aria-hidden="true"></i> @L["Admin_User_DeactivateDialog_Confirm"]
+                </button>
+            </div>
+        </form>
+    </dialog>
 }

@@ -15,7 +15,7 @@ public class MentorDashboardService : IMentorDashboardService
         _context = context;
     }
 
-    public async Task<ServiceResult<MentorDashboardViewModel>> GetDashboardAsync(int mentorId)
+    public async Task<ServiceResult<MentorDashboardViewModel>> GetDashboardAsync(int mentorId, string culture)
     {
         // Verify mentor exists
         var mentor = await _context.Mentors
@@ -28,7 +28,7 @@ public class MentorDashboardService : IMentorDashboardService
         var dayOfWeek = DateTime.UtcNow.DayOfWeek.ToString().ToLower();
 
         // ─── Load all data concurrently ───────────────────────────────────────
-        var bookingsTask = await LoadBookingsAsync(mentorId);
+        var bookingsTask = await LoadBookingsAsync(mentorId, culture);
         var feedbackTask = await LoadFeedbackBookingIdsAsync(mentorId);
         var slotsTask = await LoadAvailabilityAsync(mentorId, dayOfWeek);
         var pendingCountTask = await _context.Bookings.CountAsync(b => b.MentorId == mentorId && b.Status == "pending");
@@ -86,7 +86,7 @@ public class MentorDashboardService : IMentorDashboardService
 
     // ─── Private helpers ──────────────────────────────────────────────────────
 
-    private async Task<List<RawBookingRow>> LoadBookingsAsync(int mentorId)
+    private async Task<List<RawBookingRow>> LoadBookingsAsync(int mentorId, string culture)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
@@ -100,7 +100,7 @@ public class MentorDashboardService : IMentorDashboardService
             {
                 BookingId = b.BookingId,
                 TraineeId = b.TraineeId,
-                TraineeName = u.FirstName + " " + u.LastName,
+                TraineeName = culture == "ar" ? u.FirstName + " " + u.LastName : u.DisplayNameEn,
                 BookingDate = b.BookingDate,
                 StartTime = b.StartTime,
                 EndTime = b.EndTime,

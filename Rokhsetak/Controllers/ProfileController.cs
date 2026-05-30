@@ -72,7 +72,8 @@ namespace Rokhsetak.Controllers
                 Gender = profile.Data.Gender,
                 NationalId = profile.Data.NationalId,
                 Cities = cities,
-                Provinces = provinces
+                Provinces = provinces,
+                DisplayNameEn = profile.Data.DisplayNameEn
             });
         }
 

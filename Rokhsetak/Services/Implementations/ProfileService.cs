@@ -41,7 +41,8 @@
                     c.AddressLine2,
                     c.Email,
                     c.PostalCode,
-                    c.LanguagePreference
+                    c.LanguagePreference,
+                    c.DisplayNameEn
                 })
                 .FirstOrDefaultAsync();
             if (user == null)
@@ -66,6 +67,7 @@
                 AddressLine2 = user.AddressLine2,
                 PostalCode = user.PostalCode,
                 LanguagePreference = user.LanguagePreference,
+                DisplayNameEn = user.DisplayNameEn,
 
                 FirstName = citizen.FirstName,
                 LastName = citizen.LastName,
@@ -90,6 +92,7 @@
             user.AddressLine1 = model.AddressLine1;
             user.AddressLine2 = model.AddressLine2;
             user.PostalCode = model.PostalCode;
+            user.DisplayNameEn = model.DisplayNameEn;
 
             await _context.SaveChangesAsync();
             return ServiceResult.Success();

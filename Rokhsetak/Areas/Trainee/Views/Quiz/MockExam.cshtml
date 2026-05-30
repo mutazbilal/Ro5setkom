@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Quiz
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model QuizViewModel
 @{
-    ViewData["Title"] = "Mock Exam";
+    ViewData["Title"] = L["MockExam_Title"];
     int totalSeconds = Model.TimeLimitMinutes * 60;
 }
 
@@ -20,13 +23,13 @@
                           data-quiz-timer="@totalSeconds"
                           role="timer"
                           aria-live="polite"
-                          aria-label="Time remaining">
+                          aria-label="@L["Quiz_TimeRemaining"]">
                         <i class="fa-regular fa-clock quiz-timer__icon" aria-hidden="true"></i>
                         <span class="quiz-timer__value" data-quiz-timer-value>@Model.TimeLimitMinutes:00</span>
                     </span>
-                    <span class="quiz-chip" aria-label="@Model.Questions.Count questions in this exam">
+                    <span class="quiz-chip" aria-label="@string.Format(L["Quiz_QuestionsInExamAria"], Model.Questions.Count)">
                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
-                        @Model.Questions.Count
+                        @string.Format(L["Quiz_QuestionsCount"], Model.Questions.Count)
                     </span>
                 </div>
             </div>
@@ -40,9 +43,8 @@
                 <i class="fa-solid fa-triangle-exclamation"></i>
             </span>
             <span>
-                <span class="quiz-banner__title">Mock exam rules</span>
-                This is a timed simulation. You have <strong>@Model.TimeLimitMinutes minutes</strong>.
-                The exam will submit automatically when time runs out. Passing is not required to proceed.
+                <span class="quiz-banner__title">@L["Quiz_MockExamRules"]</span>
+                @string.Format(L["Quiz_MockExamDesc"], Model.TimeLimitMinutes)
             </span>
         </div>
 
@@ -60,7 +62,6 @@
             <input type="hidden" asp-for="TraineeLicenseId" />
             @* Mock exam isn't tied to a module — keep the 0 value the original posted. *@
             <input type="hidden" name="ModuleId" value="0" />
-
 
             @for (int i = 0; i < Model.Questions.Count; i++)
             {
@@ -81,12 +82,6 @@
                             var optId = $"opt-{q.QuestionId}-{opt.OptionId}";
 
                             <label class="quiz-option" for="@optId">
-                                @*
-                                    NOTE: The radio name must be "Answers[QuestionId]" so that
-                                    ASP.NET binds it to SubmitQuizViewModel.Answers (Dictionary<int,int>).
-                                    asp-for cannot express a dictionary key based on a dynamic loop
-                                    variable, so the literal name attribute is intentional here.
-                                *@
                                 <input class="quiz-option__input"
                                        type="radio"
                                        id="@optId"
@@ -107,7 +102,7 @@
                         class="quiz-btn quiz-btn--primary"
                         data-quiz-submit>
                     <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
-                    <span data-quiz-submit-label data-loading-text="Submitting…">Submit Mock Exam</span>
+                    <span data-quiz-submit-label data-loading-text="@L["Quiz_Submitting"]">@L["Quiz_SubmitMock"]</span>
                 </button>
             </div>
         </form>

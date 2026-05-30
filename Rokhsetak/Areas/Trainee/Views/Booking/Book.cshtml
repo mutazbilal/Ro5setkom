@@ -1,9 +1,12 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
 @using System.Text.Json
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorBookingViewModel
 
 @{
-    ViewData["Title"] = $"Book with {Model.MentorName}";
+    ViewData["Title"] = string.Format(L["Booking_BookWithTitle"], Model.MentorName);
 
     // Serialize availability for the client picker.
     // Keys: dayOfWeek (string), slots [{startTime, endTime}]
@@ -36,24 +39,24 @@
             <div class="alert alert--error" role="alert">
                 <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
                 <div class="alert__body">@TempData["Error"]</div>
-                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="@L["Booking_Dismiss"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
         }
 
-        <nav class="breadcrumb" aria-label="Breadcrumb">
+        <nav class="breadcrumb" aria-label="@L["Booking_Breadcrumb"]">
             <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
-               class="breadcrumb__item">My Bookings</a>
+               class="breadcrumb__item">@L["Booking_MyBookings"]</a>
             <span class="breadcrumb__sep" aria-hidden="true">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
             <a asp-area="Trainee" asp-controller="Booking" asp-action="Browse"
-               class="breadcrumb__item">Find a Mentor</a>
+               class="breadcrumb__item">@L["Booking_FindMentor"]</a>
             <span class="breadcrumb__sep" aria-hidden="true">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
-            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Book Session</span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">@L["Booking_BookSession"]</span>
         </nav>
 
         <!-- Mentor Hero -->
@@ -77,19 +80,19 @@
                         <div class="mentor-hero__stat-value mentor-hero__stat-value--price">
                             @Model.PricePerSession.ToString("0.##") JD
                         </div>
-                        <div class="mentor-hero__stat-label">Per Session</div>
+                        <div class="mentor-hero__stat-label">@L["Booking_PerSessionShort"]</div>
                     </div>
                     <div class="mentor-hero__stat">
                         <div class="mentor-hero__stat-value mentor-hero__stat-value--rating">
                             @Model.AverageRating.ToString("0.0") ★
                         </div>
-                        <div class="mentor-hero__stat-label">@Model.TotalRatings Reviews</div>
+                        <div class="mentor-hero__stat-label">@string.Format(L["Booking_ReviewsCount"], Model.TotalRatings)</div>
                     </div>
                     <div class="mentor-hero__stat">
                         <div class="mentor-hero__stat-value mentor-hero__stat-value--completion">
                             @Model.CompletionRate.ToString("0")%
                         </div>
-                        <div class="mentor-hero__stat-label">Completion</div>
+                        <div class="mentor-hero__stat-label">@L["Booking_Completion"]</div>
                     </div>
                 </div>
             </div>
@@ -106,10 +109,10 @@
                         <span class="booking-card__header-icon">
                             <i class="fa-solid fa-list-check" aria-hidden="true"></i>
                         </span>
-                        Choose Session Type
+                        @L["Booking_ChooseSessionType"]
                     </div>
                     <div class="booking-card__body">
-                        <div class="session-type-cards" role="radiogroup" aria-label="Session Type">
+                        <div class="session-type-cards" role="radiogroup" aria-label="@L["Booking_SessionTypeLabel"]">
 
                             <label class="session-type-card" data-session-type="theoretical">
                                 <input type="radio"
@@ -122,8 +125,8 @@
                                 <span class="session-type-card__icon">
                                     <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                                 </span>
-                                <span class="session-type-card__label">Theoretical</span>
-                                <span class="session-type-card__sub">In-class / online lesson</span>
+                                <span class="session-type-card__label">@L["Booking_Theoretical"]</span>
+                                <span class="session-type-card__sub">@L["Booking_TheoreticalDesc"]</span>
                             </label>
 
                             <label class="session-type-card" data-session-type="practical">
@@ -137,8 +140,8 @@
                                 <span class="session-type-card__icon">
                                     <i class="fa-solid fa-car" aria-hidden="true"></i>
                                 </span>
-                                <span class="session-type-card__label">Practical</span>
-                                <span class="session-type-card__sub">On-road driving lesson</span>
+                                <span class="session-type-card__label">@L["Booking_Practical"]</span>
+                                <span class="session-type-card__sub">@L["Booking_PracticalDesc"]</span>
                             </label>
 
                         </div>
@@ -151,7 +154,7 @@
                         <span class="booking-card__header-icon">
                             <i class="fa-solid fa-calendar-week" aria-hidden="true"></i>
                         </span>
-                        Pick a Time Slot
+                        @L["Booking_PickTimeSlot"]
                     </div>
                     <div class="booking-card__body" style="padding: 0;">
 
@@ -160,7 +163,7 @@
                             <div class="empty-state" style="border: none; border-radius: 0;">
                                 <i class="fa-solid fa-calendar-xmark empty-state__icon" aria-hidden="true"></i>
                                 <p class="empty-state__text">
-                                    This mentor hasn't set their availability yet.
+                                    @L["Booking_NoAvailability"]
                                 </p>
                             </div>
                         }
@@ -170,20 +173,20 @@
 
                                 <div class="week-schedule__nav">
                                     <button type="button" class="week-schedule__nav-btn"
-                                            id="weekPrevBtn" aria-label="Previous week">
+                                            id="weekPrevBtn" aria-label="@L["Booking_PreviousWeek"]">
                                         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                                     </button>
                                     <div class="week-schedule__nav-title" id="weekRangeLabel">
-                                        Loading…
+                                        @L["Common_Loading"]
                                     </div>
                                     <button type="button" class="week-schedule__nav-btn"
-                                            id="weekNextBtn" aria-label="Next week">
+                                            id="weekNextBtn" aria-label="@L["Booking_NextWeek"]">
                                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                                     </button>
                                 </div>
 
                                 <div class="week-schedule__grid" id="weekGrid"
-                                     role="list" aria-label="Available time slots by day">
+                                     role="list" aria-label="@L["Booking_AvailableSlotsByDay"]">
                                     <!-- JS-populated -->
                                 </div>
 
@@ -199,8 +202,8 @@
                 <div class="booking-card confirm-card">
 
                     <div class="confirm-card__title">
-                        <span>Booking Summary</span>
-                        <span class="confirm-card__step">Step 1</span>
+                        <span>@L["Booking_BookingSummary"]</span>
+                        <span class="confirm-card__step">@L["Booking_Step1"]</span>
                     </div>
 
                     <div class="confirm-card__body">
@@ -228,9 +231,9 @@
                                 <div class="selection-prompt__icon">
                                     <i class="fa-solid fa-hand-pointer" aria-hidden="true"></i>
                                 </div>
-                                <p class="selection-prompt__text">No slot selected yet</p>
+                                <p class="selection-prompt__text">@L["Booking_NoSlotSelected"]</p>
                                 <p class="selection-prompt__sub">
-                                    Pick a session type and a time to continue.
+                                    @L["Booking_SelectPromptSub"]
                                 </p>
                             </div>
 
@@ -238,32 +241,32 @@
                             <div id="confirmDetails" style="display: none;">
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Mentor</span>
+                                    <span class="confirm-row__label">@L["Booking_Mentor"]</span>
                                     <span class="confirm-row__value">@Model.MentorName</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Session Type</span>
+                                    <span class="confirm-row__label">@L["Booking_SessionType"]</span>
                                     <span class="confirm-row__value" id="confSessionType">—</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Date</span>
+                                    <span class="confirm-row__label">@L["Booking_Date"]</span>
                                     <span class="confirm-row__value" id="confDate">—</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Time</span>
+                                    <span class="confirm-row__label">@L["Booking_Time"]</span>
                                     <span class="confirm-row__value" id="confTime">—</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Duration</span>
+                                    <span class="confirm-row__label">@L["Booking_Duration"]</span>
                                     <span class="confirm-row__value" id="confDuration">—</span>
                                 </div>
 
                                 <div class="confirm-row">
-                                    <span class="confirm-row__label">Total</span>
+                                    <span class="confirm-row__label">@L["Booking_Total"]</span>
                                     <span class="confirm-row__value confirm-row__value--price">
                                         @Model.PricePerSession.ToString("0.##") JD
                                     </span>
@@ -272,17 +275,17 @@
                                 <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
                                     <button type="submit" class="btn btn--primary btn--block" id="submitBtn">
                                         <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                                        Request Booking
+                                        @L["Booking_RequestBooking"]
                                     </button>
                                     <button type="button" class="btn btn--ghost btn--block" id="clearSelectionBtn">
-                                        Change Selection
+                                        @L["Booking_ChangeSelection"]
                                     </button>
                                 </div>
 
                                 <div class="alert alert--soft" style="margin-top: 14px; margin-bottom: 0;">
                                     <i class="fa-solid fa-info-circle alert__icon" aria-hidden="true"></i>
                                     <div class="alert__body" style="font-size: 0.82rem;">
-                                        Booking will be <strong>pending</strong> until the mentor confirms it.
+                                        @Html.Raw(L["Booking_PendingConfirmation"])
                                     </div>
                                 </div>
 
@@ -409,7 +412,7 @@
                 if (isPast || daySlots.length === 0) {
                     const empty = document.createElement('div');
                     empty.className = 'week-schedule__empty';
-                    empty.textContent = isPast ? '—' : 'No slots';
+                    empty.textContent = isPast ? '—' : '@L["Booking_NoSlots"]';
                     slotsWrap.appendChild(empty);
                 } else {
                     daySlots.forEach(slot => {
@@ -418,8 +421,8 @@
                         btn.className = 'week-slot';
                         btn.setAttribute('role', 'listitem');
                         btn.setAttribute('aria-label',
-                            'Book slot on ' + DAY_NAMES_FULL[date.getDay()] +
-                            ' from ' + slot.startTime + ' to ' + slot.endTime);
+                            '@L["Booking_BookSlotAria"]' + ' ' + DAY_NAMES_FULL[date.getDay()] +
+                            ' ' + '@L["Booking_From"]' + ' ' + slot.startTime + ' ' + '@L["Booking_To"]' + ' ' + slot.endTime);
                         btn.innerHTML =
                             '<span class="week-slot__time">' + slot.startTime + '</span>' +
                             '<span class="week-slot__divider" aria-hidden="true"></span>' +
@@ -524,9 +527,9 @@
             if (durMin >= 60) {
                 const h = Math.floor(durMin / 60);
                 const m = durMin % 60;
-                durLabel = h + 'h' + (m > 0 ? ' ' + m + 'm' : '');
+                durLabel = h + '@L["Booking_HourAbbr"]' + (m > 0 ? ' ' + m + '@L["Booking_MinAbbr"]' : '');
             } else {
-                durLabel = durMin + ' min';
+                durLabel = durMin + ' @L["Booking_MinAbbrFull"]';
             }
             document.getElementById('confDuration').textContent = durLabel;
         }
@@ -566,7 +569,7 @@
                 form.addEventListener('submit', function (e) {
                     if (!selectedSlot || !selectedSessionType) {
                         e.preventDefault();
-                        alert('Please select a session type and an available time slot.');
+                        alert('@L["Booking_AlertSelectSlotAndType"]');
                     }
                 });
             }

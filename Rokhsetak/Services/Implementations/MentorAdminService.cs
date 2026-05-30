@@ -61,7 +61,7 @@ public class MentorAdminService : IMentorAdminService
             {
                 m,
                 u,
-                LicenseName = lt != null ? lt.LicenseName : "—",
+                LicenseName = culture == "ar"? lt.DisplayNameAr : lt.DisplayNameEn,
                 AppStatus = app != null ? app.Status : "—",
                 CityName = ct.CityTranslations
                     .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
@@ -191,7 +191,7 @@ public class MentorAdminService : IMentorAdminService
             {
                 m,
                 u,
-                LicenseName = lt != null ? lt.LicenseName : "—",
+                LicenseName = culture == "ar" ? lt.DisplayNameAr : lt.DisplayNameEn,
                 AppStatus = app != null ? app.Status : "—",
                 CityName = ct.CityTranslations
                     .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
@@ -252,10 +252,10 @@ public class MentorAdminService : IMentorAdminService
             {
                 ApplicationId = app.ApplicationId,
                 MentorId = m.MentorId,
-                FullName = u.FirstName + " " + u.LastName,
+                FullName = culture == "ar"? u.FirstName + " " + u.LastName :u.DisplayNameEn,
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
-                LicenseType = lt != null ? lt.LicenseName : "—",
+                LicenseType = culture == "ar" ? lt.DisplayNameAr : lt.DisplayNameEn,
                 CityName = ct.CityTranslations
                 .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)
                 .Select(c => c.DisplayName)
@@ -290,7 +290,7 @@ public class MentorAdminService : IMentorAdminService
                 app,
                 m,
                 u,
-                LicenseName = lt != null ? lt.LicenseName : "—",
+                LicenseName = lt != null ? (culture == "ar" ? lt.DisplayNameAr : lt.DisplayNameEn) : "—",
 
                 CityName = ct.CityTranslations
                 .Where(c => c.CityId == m.CityId && c.LanguageCode == culture)

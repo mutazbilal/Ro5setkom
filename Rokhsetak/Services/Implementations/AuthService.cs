@@ -5,6 +5,7 @@ using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.ViewModels.Auth;
 using BCrypt.Net;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -39,7 +40,7 @@ public class AuthService : IAuthService
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<LoginResultDto>> LoginAsync(LoginViewModel model, string ipAddress) 
+    public async Task<ServiceResult<LoginResultDto>> LoginAsync(LoginViewModel model, string ipAddress, string culture = "ar") 
     {
         // 1. Check lockout before hitting the DB
         if (IsLockedOut(model.NationalId))

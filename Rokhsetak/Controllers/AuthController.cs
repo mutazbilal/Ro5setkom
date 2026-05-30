@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.ViewModels.Auth;
+using System.Globalization;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -64,10 +65,10 @@ public class AuthController : Controller
             _logger.LogInformation(jsonString);
             return View(model);
         }
-            
 
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         var ipAddress = GetClientIp();
-        var result = await _authService.LoginAsync(model, ipAddress);
+        var result = await _authService.LoginAsync(model, ipAddress, culture);
         
         if (!result.Succeeded)
         {            
@@ -211,9 +212,9 @@ public class AuthController : Controller
     private IActionResult RedirectToRoleDashboard(string role) => role switch
     {
         //change to actual controllers
-        "admin" => RedirectToAction("Index", "Home"),
-        "mentor" => RedirectToAction("Index", "Home"),
-        "trainee" => RedirectToAction("Index", "Home"),
+        "admin" => RedirectToAction("Index", "admin"),
+        "mentor" => RedirectToAction("Index", "mentor"),
+        "trainee" => RedirectToAction("Index", "trainee"),
         _ => RedirectToAction(nameof(Login))
     };
 
