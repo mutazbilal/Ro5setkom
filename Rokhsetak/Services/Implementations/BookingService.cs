@@ -611,7 +611,7 @@ namespace Rokhsetak.Services.Implementations
                     b.SessionType,
                     b.Status,
 
-                    MentorName = culture == "ar" ? mentorUser.FullName: mentorUser.DisplayNameEn,
+                    MentorName = mentorUser != null ?(culture == "ar" ? mentorUser.FullName: mentorUser.DisplayNameEn) : null,
 
                     MentorNotes = b.SessionFeedback != null
                         ? b.SessionFeedback.MentorNotes
