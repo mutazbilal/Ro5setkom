@@ -174,6 +174,13 @@ public partial class RokhsetakDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnName("created_at");
             entity.Property(e => e.EndedAt).HasColumnName("ended_at");
+            entity.Property(e => e.PersonaKey)
+                .HasMaxLength(50)
+                .HasColumnName("persona_key");
+            entity.Property(e => e.SystemPrompt).HasColumnName("system_prompt");
+            entity.Property(e => e.Title)
+                .HasMaxLength(200)
+                .HasColumnName("title");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.AichatSessions)

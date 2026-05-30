@@ -16,7 +16,8 @@ public sealed class ChatProviderRegistry : IChatProviderRegistry
             Icon = p.Icon,
             SortOrder = p.SortOrder,
             SupportsThreadList = p.SupportsThreadList,
-            SupportsUnread = p.SupportsUnread
+            SupportsUnread = p.SupportsUnread,
+            SupportsThreadCreation = p is IThreadConfigurableProvider
         }).ToList();
     }
 

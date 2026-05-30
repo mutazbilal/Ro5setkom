@@ -30,6 +30,7 @@ public class ChatController : Controller
         if (!_registry.TryResolve(provider, out var p)) return NotFound();
         var threads = await p.GetThreadsAsync(Uid);
         ViewData["Provider"] = p.Key;
+        ViewData["CanCreate"] = p is IThreadConfigurableProvider;
         return PartialView("_ChatThreadList", threads);
     }
 
@@ -63,6 +64,39 @@ public class ChatController : Controller
         var res = await p.SendAsync(Uid, threadId, text, file);
         if (!res.Succeeded) return BadRequest(new { error = res.Error });
         var detail = await p.GetThreadAsync(Uid, res.ThreadId);
+        return PartialView("_ChatThread", detail);
+    }
+
+    // ── New endpoints ─────────────────────────────────────────────────────────────
+    [HttpGet]
+    public IActionResult NewThread(string provider)
+    {
+        if (!_registry.TryResolve(provider, out var p) || p is not IThreadConfigurableProvider cfg)
+            return NotFound();
+        return PartialView("_ChatNewThread", new ChatNewThreadViewModel { ProviderKey = p.Key, Options = cfg.Options });
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateThread(string provider, string? optionKey, string? customPrompt, string? title)
+    {
+        if (!_registry.TryResolve(provider, out var p) || p is not IThreadConfigurableProvider cfg)
+            return NotFound();
+        var res = await cfg.CreateThreadAsync(Uid, new ChatThreadConfig { OptionKey = optionKey, CustomPrompt = customPrompt, Title = title });
+        if (!res.Succeeded) return BadRequest(new { error = res.Error });
+        var detail = await p.GetThreadAsync(Uid, res.ThreadId);
+        return PartialView("_ChatThread", detail);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdatePersona(string provider, int threadId, string? optionKey, string? customPrompt)
+    {
+        if (!_registry.TryResolve(provider, out var p) || p is not IThreadConfigurableProvider cfg)
+            return NotFound();
+        var ok = await cfg.UpdateThreadConfigAsync(Uid, threadId, new ChatThreadConfig { OptionKey = optionKey, CustomPrompt = customPrompt });
+        if (!ok) return BadRequest(new { error = "Could not update personality." });
+        var detail = await p.GetThreadAsync(Uid, threadId);
         return PartialView("_ChatThread", detail);
     }
 }
