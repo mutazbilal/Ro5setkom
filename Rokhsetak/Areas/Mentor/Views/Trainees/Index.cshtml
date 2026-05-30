@@ -1,6 +1,9 @@
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model TraineeSummaryListViewModel
 @{
-    ViewData["Title"] = "Trainees Summary";
+    ViewData["Title"] = L["Trainees_Title"];
 
     string StageClass(string stage) =>
         stage == "completed" ? "pill-stage--done"
@@ -24,33 +27,33 @@
 
     <header class="tr-header">
         <div>
-            <p class="tr-eyebrow"><i class="fa-solid fa-users" aria-hidden="true"></i> Mentorship</p>
-            <h1>Trainees Summary</h1>
+            <p class="tr-eyebrow"><i class="fa-solid fa-users" aria-hidden="true"></i> @L["Trainees_Mentorship"]</p>
+            <h1>@L["Trainees_Title"]</h1>
         </div>
         <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index" class="btn-link-back">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Dashboard
+            @L["Trainees_DashboardLink"]
         </a>
     </header>
 
     @* -- Search + Filter -- *@
     <form method="get" class="tr-filters">
         <div class="filter-field filter-field--grow">
-            <label for="search">Search by name</label>
+            <label for="search">@L["Trainees_SearchByName"]</label>
             <div class="input-affix">
                 <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                 <input type="text" id="search" name="search" value="@Model.SearchTerm"
-                       placeholder="Trainee name..." aria-label="Search trainees by name" />
+                       placeholder="@L["Trainees_SearchPlaceholder"]" aria-label="@L["Trainees_SearchAria"]" />
             </div>
         </div>
 
         <div class="filter-field filter-field--status">
-            <label for="statusFilter">Filter by status</label>
-            <select id="statusFilter" name="statusFilter" class="tr-select" aria-label="Filter by license status">
-                <option value="">- All statuses -</option>
+            <label for="statusFilter">@L["Trainees_FilterByStatus"]</label>
+            <select id="statusFilter" name="statusFilter" class="tr-select" aria-label="@L["Trainees_FilterAria"]">
+                <option value="">@L["Trainees_AllStatuses"]</option>
                 @foreach (var s in TraineeSummaryListViewModel.AvailableStatuses)
                 {
-                    <option value="@s" selected="@(Model.StatusFilter == s)">@s.Replace("_", " ")</option>
+                    <option value="@s" selected="@(Model.StatusFilter == s)">@L[$"Trainees_Stage_{s.Replace(" ", "_")}"]</option>
                 }
             </select>
         </div>
@@ -58,9 +61,9 @@
         <div class="filter-actions">
             <button type="submit" class="btn-primary">
                 <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                Search
+                @L["Trainees_SearchButton"]
             </button>
-            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index" class="btn-ghost">Clear</a>
+            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index" class="btn-ghost">@L["Trainees_ClearButton"]</a>
         </div>
     </form>
 
@@ -68,7 +71,7 @@
     {
         <div class="tr-empty">
             <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-            <p>No trainees found matching your search.</p>
+            <p>@L["Trainees_EmptyMessage"]</p>
         </div>
     }
     else
@@ -78,11 +81,11 @@
                 <table class="tr-table">
                     <thead>
                         <tr>
-                            <th>Trainee</th>
-                            <th>License</th>
-                            <th>Stage</th>
-                            <th class="center">Total Sessions</th>
-                            <th>Last Session</th>
+                            <th>@L["Trainees_Table_Trainee"]</th>
+                            <th>@L["Trainees_Table_License"]</th>
+                            <th>@L["Trainees_Table_Stage"]</th>
+                            <th class="center">@L["Trainees_Table_TotalSessions"]</th>
+                            <th>@L["Trainees_Table_LastSession"]</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -92,7 +95,7 @@
                             <tr>
                                 <td class="cell-name">@t.FullName</td>
                                 <td><span class="pill pill-license">@t.LicenseType.Replace("_", " ")</span></td>
-                                <td><span class="pill @StageClass(t.LicenseStage)">@t.LicenseStage.Replace("_", " ")</span></td>
+                                <td><span class="pill @StageClass(t.LicenseStage)">@L[$"Trainees_Stage_{t.LicenseStage.Replace(" ", "_")}"]</span></td>
                                 <td class="cell-center cell-count">@t.TotalSessions</td>
                                 <td class="cell-muted">
                                     @(t.LastSessionDate.HasValue ? t.LastSessionDate.Value.ToString("dd MMM yyyy") : "-")
@@ -100,7 +103,7 @@
                                 <td>
                                     <a asp-area="Mentor" asp-controller="Trainees" asp-action="Detail"
                                        asp-route-id="@t.TraineeId" class="row-action">
-                                        View Details
+                                        @L["Trainees_ViewDetails"]
                                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -110,6 +113,6 @@
                 </table>
             </div>
         </div>
-        <p class="tr-count-note">Showing @Model.Trainees.Count trainee@(Model.Trainees.Count == 1 ? "" : "s").</p>
+        <p class="tr-count-note">@string.Format(L["Trainees_ShowingCount"], Model.Trainees.Count)</p>
     }
 </div>

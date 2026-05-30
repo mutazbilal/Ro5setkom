@@ -1,9 +1,12 @@
-﻿@{
+﻿@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
+@{
     ViewData["HideNav"] = true;
 
     var currentLang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var returnUrl = Context.Request.Path + Context.Request.QueryString;
-    var pageTitle = ViewData["Title"] as string ?? "Mentor";
+    var pageTitle = ViewData["Title"] as string ?? L["Mentor_Layout_Title"];
 }
 
 <!DOCTYPE html>
@@ -34,13 +37,13 @@
     <div class="mentor-shell">
 
         <!-- Sidebar -->
-        <aside class="mentor-sidebar" aria-label="Mentor navigation">
+        <aside class="mentor-sidebar" aria-label="@L["Mentor_NavigationAria"]">
 
             <a asp-area=""
                asp-controller="Home"
                asp-action="Index"
                class="mentor-sidebar__brand"
-               aria-label="Rokhsetak — Home">
+               aria-label="Rokhsetak — @L["Nav_Home"]">
 
                 <span class="mentor-sidebar__logo" aria-hidden="true">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -51,10 +54,10 @@
                 </span>
             </a>
 
-            <nav class="mentor-sidebar__nav" aria-label="Mentor sections">
+            <nav class="mentor-sidebar__nav" aria-label="@L["Mentor_SectionsAria"]">
 
                 <span class="mentor-sidebar__heading">
-                    Manage
+                    @L["Mentor_ManageHeading"]
                 </span>
 
                 <ul class="mentor-sidebar__list">
@@ -66,7 +69,7 @@
                            class="mentor-sidebar__link">
 
                             <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
-                            <span>Dashboard</span>
+                            <span>@L["Nav_Dashboard"]</span>
                         </a>
                     </li>
 
@@ -77,7 +80,7 @@
                            class="mentor-sidebar__link">
 
                             <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                            <span>Availability</span>
+                            <span>@L["Mentor_Availability"]</span>
                         </a>
                     </li>
 
@@ -88,7 +91,7 @@
                            class="mentor-sidebar__link">
 
                             <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                            <span>Appointments</span>
+                            <span>@L["Mentor_Appointments"]</span>
                         </a>
                     </li>
 
@@ -99,7 +102,7 @@
                            class="mentor-sidebar__link">
 
                             <i class="fa-solid fa-user-group" aria-hidden="true"></i>
-                            <span>Trainees</span>
+                            <span>@L["Mentor_Trainees"]</span>
                         </a>
                     </li>
 
@@ -110,7 +113,7 @@
 
                 <div class="mentor-sidebar__lang"
                      role="group"
-                     aria-label="Language">
+                     aria-label="@L["Mentor_LanguageGroupAria"]">
 
                     <form asp-area=""
                           asp-controller="Profile"
@@ -154,7 +157,7 @@
                    class="mentor-sidebar__link">
 
                     <i class="fa-solid fa-user" aria-hidden="true"></i>
-                    <span>Profile</span>
+                    <span>@L["Nav_Profile"]</span>
                 </a>
 
                 <form asp-area=""
@@ -171,7 +174,7 @@
                         <i class="fa-solid fa-arrow-right-from-bracket"
                            aria-hidden="true"></i>
 
-                        <span>Log out</span>
+                        <span>@L["Nav_Logout"]</span>
                     </button>
 
                 </form>

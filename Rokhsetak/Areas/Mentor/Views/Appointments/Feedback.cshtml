@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model FeedbackViewModel
 @{
-    ViewData["Title"] = "Session Feedback";
+    ViewData["Title"] = L["Mentor_Feedback_Title"];
 }
 
 @section Styles {
@@ -19,7 +22,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -28,10 +31,10 @@
         <!-- ============ Hero ============ -->
         <section class="appointments-hero appointments-hero--compact" aria-labelledby="feedback-page-title">
             <div class="appointments-hero__intro">
-                <span class="appointments-hero__eyebrow">Session Feedback</span>
-                <h1 id="feedback-page-title" class="appointments-hero__title">Share your notes</h1>
+                <span class="appointments-hero__eyebrow">@L["Mentor_Feedback_Title"]</span>
+                <h1 id="feedback-page-title" class="appointments-hero__title">@L["Mentor_Feedback_ShareNotes"]</h1>
                 <p class="appointments-hero__description">
-                    Document what went well and where the trainee can improve. The trainee will see your notes.
+                    @L["Mentor_Feedback_Description"]
                 </p>
             </div>
 
@@ -41,14 +44,14 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Appointments</span>
+                    <span>@L["Mentor_Appointments"]</span>
                 </a>
             </div>
         </section>
 
         <!-- ============ Form card ============ -->
         <section class="form-card" aria-labelledby="feedback-form-title">
-            <h2 id="feedback-form-title" class="visually-hidden">Feedback form</h2>
+            <h2 id="feedback-form-title" class="visually-hidden">@L["Mentor_Feedback_FormTitle"]</h2>
 
             <!-- Context strip: who & when -->
             <div class="context-strip">
@@ -56,7 +59,7 @@
                     <i class="fa-solid fa-user-graduate"></i>
                 </span>
                 <div class="context-strip__body">
-                    <span class="context-strip__label">Trainee</span>
+                    <span class="context-strip__label">@L["Mentor_Trainee"]</span>
                     <span class="context-strip__name">@Model.TraineeName</span>
                 </div>
                 <div class="context-strip__meta">
@@ -86,11 +89,11 @@
                               placeholder=" "
                               aria-required="true"></textarea>
                     <label asp-for="MentorNotes" class="field-floating__label">
-                        Feedback notes
+                        @L["Mentor_Feedback_NotesLabel"]
                     </label>
                     <span asp-validation-for="MentorNotes" class="field-floating__error"></span>
                     <p class="field-floating__hint">
-                        Between 5 and 2000 characters. Visible to the trainee.
+                        @L["Mentor_Feedback_NotesHint"]
                     </p>
                 </div>
 
@@ -100,11 +103,11 @@
                        asp-action="Index"
                        class="btn-action btn-action--ghost">
                         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                        <span>Cancel</span>
+                        <span>@L["Common_Cancel"]</span>
                     </a>
                     <button type="submit" class="btn-action btn-action--gradient">
                         <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                        <span>Submit Feedback</span>
+                        <span>@L["Mentor_SubmitFeedback"]</span>
                     </button>
                 </div>
             </form>

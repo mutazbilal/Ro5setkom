@@ -1,8 +1,11 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Availability
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model List<MentorAvailabilityViewModel>
 
 @{
-    ViewData["Title"] = "My Availability";
+    ViewData["Title"] = L["Mentor_MyAvailability"];
 
     var days = new[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
 
@@ -27,9 +30,9 @@
 <div class="avail-wrap">
 
     <header class="page-header">
-        <p class="page-eyebrow"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Schedule</p>
-        <h1>My Availability</h1>
-        <p class="page-lead">Set the time slots when trainees can book sessions with you. Active slots appear in their booking calendar instantly.</p>
+        <p class="page-eyebrow"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> @L["Mentor_Schedule"]</p>
+        <h1>@L["Mentor_MyAvailability"]</h1>
+        <p class="page-lead">@L["Mentor_AvailabilityLead"]</p>
     </header>
 
     @* ── Flash messages ──────────────────────────────────── *@
@@ -52,22 +55,22 @@
     <div class="week-grid">
         @foreach (var group in grouped)
         {
-            <section class="day-card" aria-label="@Title(group.Day) availability">
+            <section class="day-card" aria-label="@string.Format(L["Mentor_DayAvailabilityAria"], Title(group.Day))">
                 <div class="day-header">
                     <span class="day-name">@group.Day</span>
                     @if (group.Slots.Any())
                     {
-                        <span class="day-count">@group.Slots.Count slot@(group.Slots.Count > 1 ? "s" : "")</span>
+                        <span class="day-count">@group.Slots.Count @(group.Slots.Count > 1 ? L["Mentor_SlotsPlural"] : L["Mentor_SlotsSingular"])</span>
                     }
                     else
                     {
-                        <span class="day-count empty">No slots</span>
+                        <span class="day-count empty">@L["Mentor_NoSlots"]</span>
                     }
                 </div>
                 <div class="day-body">
                     @if (!group.Slots.Any())
                     {
-                        <p class="no-slots">No availability set for this day.</p>
+                        <p class="no-slots">@L["Mentor_NoAvailabilityForDay"]</p>
                     }
                     else
                     {
@@ -82,11 +85,11 @@
 
                                 @if (slot.IsActive)
                                 {
-                                    <span class="slot-badge badge-active">Active</span>
+                                    <span class="slot-badge badge-active">@L["Mentor_Active"]</span>
                                 }
                                 else
                                 {
-                                    <span class="slot-badge badge-inactive">Inactive</span>
+                                    <span class="slot-badge badge-inactive">@L["Mentor_Inactive"]</span>
                                 }
 
                                 <div class="slot-actions">
@@ -96,21 +99,21 @@
                                             data-day="@slot.DayOfWeek.ToLower()"
                                             data-start="@slot.StartTime.ToString(@"HH\:mm")"
                                             data-end="@slot.EndTime.ToString(@"HH\:mm")"
-                                            aria-label="Edit slot @slot.StartTime.ToString(@"hh\:mm tt") to @slot.EndTime.ToString(@"hh\:mm tt")">
+                                            aria-label="@string.Format(L["Mentor_EditSlotAria"], slot.StartTime.ToString(@"hh\:mm tt"), slot.EndTime.ToString(@"hh\:mm tt"))">
                                         <i class="fa-solid fa-pen" aria-hidden="true"></i>
-                                        Edit
+                                        @L["Mentor_Edit"]
                                     </button>
 
                                     @* Deactivate — inline POST *@
                                     @if (slot.IsActive)
                                     {
                                         <form asp-area="Mentor" asp-controller="Availability" asp-action="DeactivateSlot"
-                                              method="post" class="js-confirm" data-confirm="Deactivate this slot?">
+                                              method="post" class="js-confirm" data-confirm="@L["Mentor_DeactivateConfirm"]">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="slotId" value="@slot.Id" />
                                             <button type="submit" class="btn-slot btn-deactivate">
                                                 <i class="fa-solid fa-ban" aria-hidden="true"></i>
-                                                Deactivate
+                                                @L["Mentor_Deactivate"]
                                             </button>
                                         </form>
                                     }
@@ -124,15 +127,15 @@
     </div>
 
     @* ── Add slot form ───────────────────────────────────── *@
-    <section class="add-card" aria-label="Add new availability slot">
-        <h2><i class="fa-solid fa-plus" aria-hidden="true"></i> Add New Slot</h2>
+    <section class="add-card" aria-label="@L["Mentor_AddSlotSectionAria"]">
+        <h2><i class="fa-solid fa-plus" aria-hidden="true"></i> @L["Mentor_AddNewSlot"]</h2>
         <form asp-area="Mentor" asp-controller="Availability" asp-action="AddSlot" method="post" class="js-time-form">
             @Html.AntiForgeryToken()
             <div class="form-row">
                 <div class="form-group">
-                    <label for="add-day">Day</label>
+                    <label for="add-day">@L["Mentor_Day"]</label>
                     <select name="DayOfWeek" id="add-day" required aria-required="true">
-                        <option value="" disabled selected>Select day</option>
+                        <option value="" disabled selected>@L["Mentor_SelectDay"]</option>
                         @foreach (var d in days)
                         {
                             <option value="@d">@Title(d)</option>
@@ -141,18 +144,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="add-start">Start time</label>
+                    <label for="add-start">@L["Mentor_StartTime"]</label>
                     <input type="time" id="add-start" name="StartTime" required aria-required="true" />
                 </div>
 
                 <div class="form-group">
-                    <label for="add-end">End time</label>
+                    <label for="add-end">@L["Mentor_EndTime"]</label>
                     <input type="time" id="add-end" name="EndTime" required aria-required="true" />
                 </div>
 
                 <button type="submit" class="btn-primary">
                     <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
-                    Add Slot
+                    @L["Mentor_AddSlotButton"]
                 </button>
             </div>
         </form>
@@ -160,6 +163,7 @@
 
 </div>
 </div>
+
 @* ── Edit dialog (native <dialog>, controlled by availability.js) ─────── *@
 <dialog id="editDialog" class="avail-dialog" aria-labelledby="editDialogTitle">
     <form asp-area="Mentor" asp-controller="Availability" asp-action="EditSlot" method="post" class="js-time-form">
@@ -167,8 +171,8 @@
         <input type="hidden" name="slotId" id="edit-slot-id" />
 
         <div class="dialog-header">
-            <h2 id="editDialogTitle"><i class="fa-solid fa-pen" aria-hidden="true"></i> Edit Slot</h2>
-            <button type="button" class="dialog-close js-dialog-close" aria-label="Close dialog">
+            <h2 id="editDialogTitle"><i class="fa-solid fa-pen" aria-hidden="true"></i> @L["Mentor_EditSlot"]</h2>
+            <button type="button" class="dialog-close js-dialog-close" aria-label="@L["Common_Close"]">
                 <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
         </div>
@@ -176,7 +180,7 @@
         <div class="dialog-body">
             <div class="form-stack">
                 <div class="form-group">
-                    <label for="edit-day">Day</label>
+                    <label for="edit-day">@L["Mentor_Day"]</label>
                     <select name="DayOfWeek" id="edit-day" required aria-required="true">
                         @foreach (var d in days)
                         {
@@ -186,22 +190,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="edit-start">Start time</label>
+                    <label for="edit-start">@L["Mentor_StartTime"]</label>
                     <input type="time" id="edit-start" name="StartTime" required aria-required="true" />
                 </div>
 
                 <div class="form-group">
-                    <label for="edit-end">End time</label>
+                    <label for="edit-end">@L["Mentor_EndTime"]</label>
                     <input type="time" id="edit-end" name="EndTime" required aria-required="true" />
                 </div>
             </div>
         </div>
 
         <div class="dialog-footer">
-            <button type="button" class="btn-ghost js-dialog-close">Cancel</button>
+            <button type="button" class="btn-ghost js-dialog-close">@L["Common_Cancel"]</button>
             <button type="submit" class="btn-primary">
                 <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
-                Save Changes
+                @L["Mentor_SaveChanges"]
             </button>
         </div>
     </form>

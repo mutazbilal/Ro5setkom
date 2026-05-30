@@ -1,8 +1,11 @@
 @using Rokhsetak.Areas.Admin.ViewModels.Mentors
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorListViewModel
 @{
-    ViewData["Title"] = "Mentors";
-    ViewData["Subtitle"] = "All approved mentors on the platform";
+    ViewData["Title"] = L["Admin_Mentors_Title"];
+    ViewData["Subtitle"] = L["Admin_Mentors_Subtitle"];
     ViewData["ActiveNav"] = "mentors";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -10,21 +13,21 @@
 <form asp-area="Admin" asp-controller="Mentors" asp-action="Index" method="get" class="admin-card admin-card--padded">
     <div class="dash-filter">
         <div class="dash-filter-group" style="flex:2 1 220px">
-            <label asp-for="Filter.Search">Search</label>
-            <input asp-for="Filter.Search" class="admin-input" placeholder="Name, email or city" />
+            <label asp-for="Filter.Search">@L["Admin_Mentors_Filter_Search"]</label>
+            <input asp-for="Filter.Search" class="admin-input" placeholder="@L["Admin_Mentors_Filter_SearchPlaceholder"]" />
         </div>
         <div class="dash-filter-group">
-            <label asp-for="Filter.Status">Status</label>
+            <label asp-for="Filter.Status">@L["Admin_Mentors_Filter_Status"]</label>
             <select asp-for="Filter.Status" class="admin-select">
-                <option value="">All</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="">@L["Admin_Mentors_Filter_Status_All"]</option>
+                <option value="active">@L["Admin_Mentors_Filter_Status_Active"]</option>
+                <option value="inactive">@L["Admin_Mentors_Filter_Status_Inactive"]</option>
             </select>
         </div>
         <div class="dash-filter-group">
-            <label asp-for="Filter.LicenseTypeId">License type</label>
+            <label asp-for="Filter.LicenseTypeId">@L["Admin_Mentors_Filter_LicenseType"]</label>
             <select asp-for="Filter.LicenseTypeId" class="admin-select">
-                <option value="">All license types</option>
+                <option value="">@L["Admin_Mentors_Filter_AllLicenseTypes"]</option>
                 @foreach (var (id, name) in Model.LicenseTypeOptions)
                 {
                     <option value="@id">@name</option>
@@ -32,9 +35,9 @@
             </select>
         </div>
         <div class="dash-filter-group">
-            <label asp-for="Filter.CityId">City</label>
+            <label asp-for="Filter.CityId">@L["Admin_Mentors_Filter_City"]</label>
             <select asp-for="Filter.CityId" class="admin-select" id="citySelect">
-                <option value="">All cities</option>
+                <option value="">@L["Admin_Mentors_Filter_AllCities"]</option>
                 @foreach (var city in Model.Cities)
                 {
                     <option value="@city.CityId" data-province-id="@city.ProvinceId">@city.DisplayName</option>
@@ -42,21 +45,27 @@
             </select>
         </div>
         <button type="submit" class="admin-btn-primary" style="align-self:flex-end">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Filter
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> @L["Admin_Mentors_Filter_Button"]
         </button>
     </div>
 </form>
 
 <div class="admin-card">
     <div class="admin-card__header admin-card__header--bordered">
-        <h3>Mentors <span class="admin-count-badge">@Model.TotalCount</span></h3>
+        <h3>@L["Admin_Mentors_Title"] <span class="admin-count-badge">@Model.TotalCount</span></h3>
     </div>
     <div style="overflow-x:auto">
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>Name</th><th>Email</th><th>License</th><th>City</th>
-                    <th>Rating</th><th>Sessions</th><th>Status</th><th class="text-end">Actions</th>
+                    <th>@L["Admin_Mentors_Table_Name"]</th>
+                    <th>@L["Admin_Mentors_Table_Email"]</th>
+                    <th>@L["Admin_Mentors_Table_License"]</th>
+                    <th>@L["Admin_Mentors_Table_City"]</th>
+                    <th>@L["Admin_Mentors_Table_Rating"]</th>
+                    <th>@L["Admin_Mentors_Table_Sessions"]</th>
+                    <th>@L["Admin_Mentors_Table_Status"]</th>
+                    <th class="text-end">@L["Admin_Mentors_Table_Actions"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,21 +86,21 @@
                         <td style="font-variant-numeric:tabular-nums">@m.TotalSessions</td>
                         <td>
                             @if (m.IsActive)
-                            { <span class="admin-pill admin-pill--success">Active</span> }
+                            { <span class="admin-pill admin-pill--success">@L["Admin_Mentors_Table_Status_Active"]</span> }
                             else
-                            { <span class="admin-pill admin-pill--danger">Inactive</span> }
+                            { <span class="admin-pill admin-pill--danger">@L["Admin_Mentors_Table_Status_Inactive"]</span> }
                         </td>
                         <td class="text-end">
                             <a asp-area="Admin" asp-controller="Mentors" asp-action="Details"
                                asp-route-id="@m.MentorId" class="admin-row-action">
-                                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> @L["Admin_Mentors_Action_View"]
                             </a>
                         </td>
                     </tr>
                 }
                 @if (!Model.Items.Any())
                 {
-                    <tr class="empty-row"><td colspan="8">No mentors match your filters.</td></tr>
+                    <tr class="empty-row"><td colspan="8">@L["Admin_Mentors_NoData"]</td></tr>
                 }
             </tbody>
         </table>
@@ -101,13 +110,14 @@
         var cur = Model.Filter.Page; var tot = Model.TotalPages;
         int s = Math.Max(1, cur - 2); int e = Math.Min(tot, cur + 2);
         <div class="admin-card__footer">
-            <small>Page @cur of @tot</small>
-            <ul class="admin-pagination" aria-label="Page navigation">
+            <small>@string.Format(L["Admin_Pagination_PageOf"], cur, tot)</small>
+            <ul class="admin-pagination" aria-label="@L["Admin_Pagination_Aria"]">
                 <li class="@(cur <= 1 ? "disabled" : "")">
                     <a asp-area="Admin" asp-controller="Mentors" asp-action="Index"
                        asp-route-Search="@Model.Filter.Search" asp-route-Status="@Model.Filter.Status"
                        asp-route-LicenseTypeId="@Model.Filter.LicenseTypeId" asp-route-Page="@(cur-1)">
-                        <i class="fa-solid fa-chevron-left"></i></a>
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
                 </li>
                 @for (int i = s; i <= e; i++)
                 {
@@ -121,7 +131,8 @@
                     <a asp-area="Admin" asp-controller="Mentors" asp-action="Index"
                        asp-route-Search="@Model.Filter.Search" asp-route-Status="@Model.Filter.Status"
                        asp-route-LicenseTypeId="@Model.Filter.LicenseTypeId" asp-route-Page="@(cur+1)">
-                        <i class="fa-solid fa-chevron-right"></i></a>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
                 </li>
             </ul>
         </div>

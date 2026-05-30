@@ -1,24 +1,32 @@
 @using Rokhsetak.Areas.Admin.ViewModels.MentorApplications
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorApplicationListViewModel
 @{
-    ViewData["Title"] = "Mentor Applications";
-    ViewData["Subtitle"] = "Pending applications awaiting your review";
+    ViewData["Title"] = L["Admin_Applications_Title"];
+    ViewData["Subtitle"] = L["Admin_Applications_Subtitle"];
     ViewData["ActiveNav"] = "applications";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="admin-card">
     <div class="admin-card__header admin-card__header--bordered">
-        <h3>Pending applications <span class="admin-count-badge">@Model.Items.Count</span></h3>
-        <small>Approved and rejected applications are not shown here.</small>
+        <h3>@L["Admin_Applications_PendingHeader"] <span class="admin-count-badge">@Model.Items.Count</span></h3>
+        <small>@L["Admin_Applications_Note"]</small>
     </div>
     <div style="overflow-x:auto">
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>Applicant</th><th>Email</th><th>Phone</th>
-                    <th>License</th><th>City</th><th>Submitted</th>
-                    <th>Cert.</th><th class="text-end">Actions</th>
+                    <th>@L["Admin_Applications_Table_Applicant"]</th>
+                    <th>@L["Admin_Applications_Table_Email"]</th>
+                    <th>@L["Admin_Applications_Table_Phone"]</th>
+                    <th>@L["Admin_Applications_Table_License"]</th>
+                    <th>@L["Admin_Applications_Table_City"]</th>
+                    <th>@L["Admin_Applications_Table_Submitted"]</th>
+                    <th>@L["Admin_Applications_Table_Cert"]</th>
+                    <th class="text-end">@L["Admin_Applications_Table_Actions"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,25 +43,25 @@
                             @if (app.HasCertificationFile)
                             {
                                 <span class="admin-pill admin-pill--success">
-                                    <i class="fa-solid fa-paperclip" aria-hidden="true"></i> Uploaded
+                                    <i class="fa-solid fa-paperclip" aria-hidden="true"></i> @L["Admin_Applications_Cert_Uploaded"]
                                 </span>
                             }
                             else
                             {
-                                <span class="admin-pill admin-pill--danger">Missing</span>
+                                <span class="admin-pill admin-pill--danger">@L["Admin_Applications_Cert_Missing"]</span>
                             }
                         </td>
                         <td class="text-end">
                             <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Details"
                                asp-route-id="@app.ApplicationId" class="admin-row-action">
-                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Review
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> @L["Admin_Applications_Action_Review"]
                             </a>
                         </td>
                     </tr>
                 }
                 @if (!Model.Items.Any())
                 {
-                    <tr class="empty-row"><td colspan="8">No pending applications right now.</td></tr>
+                    <tr class="empty-row"><td colspan="8">@L["Admin_Applications_NoData"]</td></tr>
                 }
             </tbody>
         </table>

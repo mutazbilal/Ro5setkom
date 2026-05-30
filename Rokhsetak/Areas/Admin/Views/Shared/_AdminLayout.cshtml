@@ -1,12 +1,15 @@
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @{
-    var pageTitle = ViewData["Title"] as string ?? "Admin";
+    var pageTitle = ViewData["Title"] as string ?? L["Admin_Layout_Title"];
 }
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@pageTitle · Rokhsetak Admin</title>
+    <title>@pageTitle · @L["Admin_Layout_TitleSuffix"]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -27,11 +30,11 @@
                 }
             </div>
             <div class="admin-topbar__user">
-                <span class="admin-topbar__role">Administrator</span>
+                <span class="admin-topbar__role">@L["Admin_Layout_Role"]</span>
                 <span class="admin-topbar__name">@User.Identity?.Name</span>
                 <form asp-controller="Auth" asp-action="Logout" asp-area="" method="post" class="admin-topbar__logout">
                     @Html.AntiForgeryToken()
-                    <button type="submit" aria-label="Log out">
+                    <button type="submit" aria-label="@L["Admin_Layout_Logout"]">
                         <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
                     </button>
                 </form>

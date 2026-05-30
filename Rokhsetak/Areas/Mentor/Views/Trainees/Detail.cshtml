@@ -1,3 +1,6 @@
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model TraineeDetailViewModel
 @{
     ViewData["Title"] = Model.FullName;
@@ -17,9 +20,9 @@
 
     string StatusLabel(string status) => status switch
     {
-        "completed" => "Completed",
-        "confirmed" => "Confirmed",
-        "pending" => "Pending",
+        "completed" => L["Trainees_Status_Completed"],
+        "confirmed" => L["Trainees_Status_Confirmed"],
+        "pending" => L["Trainees_Status_Pending"],
         _ => status
     };
 }
@@ -30,8 +33,8 @@
 
 <div class="tr-wrap">
 
-    <nav class="tr-breadcrumb" aria-label="Breadcrumb">
-        <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index">Trainees</a>
+    <nav class="tr-breadcrumb" aria-label="@L["Trainees_BreadcrumbAria"]">
+        <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index">@L["Trainees_Breadcrumb_Trainees"]</a>
         <span class="sep" aria-hidden="true">/</span>
         <span class="current">@Model.FullName</span>
     </nav>
@@ -46,13 +49,13 @@
             </p>
             <div class="profile-pills">
                 <span class="pill pill-license">@Model.LicenseType.Replace("_", " ")</span>
-                <span class="pill @StageClass(Model.LicenseStage)">@Model.LicenseStage.Replace("_", " ")</span>
+                <span class="pill @StageClass(Model.LicenseStage)">@L[$"Trainees_Stage_{Model.LicenseStage.Replace(" ", "_")}"]</span>
             </div>
         </div>
 
         <div class="profile-progress">
             <div class="pct">@Model.ProgressPct%</div>
-            <div class="label">Overall Progress</div>
+            <div class="label">@L["Trainees_OverallProgress"]</div>
             <div class="meter" role="progressbar" aria-valuenow="@Model.ProgressPct" aria-valuemin="0" aria-valuemax="100">
                 <div class="meter-fill" style="width:@Model.ProgressPct%"></div>
             </div>
@@ -65,7 +68,7 @@
         <section class="panel">
             <div class="panel-header">
                 <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                Session History
+                @L["Trainees_SessionHistory"]
                 <span class="count">@Model.Sessions.Count</span>
             </div>
             @if (Model.Sessions.Any())
@@ -74,10 +77,10 @@
                     <table class="session-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Type</th>
-                                <th>Status</th>
+                                <th>@L["Trainees_SessionHistory_Date"]</th>
+                                <th>@L["Trainees_SessionHistory_Time"]</th>
+                                <th>@L["Trainees_SessionHistory_Type"]</th>
+                                <th>@L["Trainees_SessionHistory_Status"]</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +91,7 @@
                                     <td class="session-time">@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
                                     <td>
                                         <span class="pill @(s.SessionType == "practical" ? "pill-type--practical" : "pill-type--theory")">
-                                            @s.SessionType
+                                            @(s.SessionType == "practical" ? L["Booking_Practical"] : L["Booking_Theoretical"])
                                         </span>
                                     </td>
                                     <td><span class="pill @StatusClass(s.Status)">@StatusLabel(s.Status)</span></td>
@@ -100,7 +103,7 @@
             }
             else
             {
-                <p class="panel-empty">No sessions recorded.</p>
+                <p class="panel-empty">@L["Trainees_NoSessions"]</p>
             }
         </section>
 
@@ -108,7 +111,7 @@
         <section class="panel">
             <div class="panel-header">
                 <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
-                Feedback Notes
+                @L["Trainees_FeedbackNotes"]
                 <span class="count">@Model.Feedbacks.Count</span>
             </div>
             @if (Model.Feedbacks.Any())
@@ -128,7 +131,7 @@
             }
             else
             {
-                <p class="panel-empty">No feedback submitted yet.</p>
+                <p class="panel-empty">@L["Trainees_NoFeedback"]</p>
             }
         </section>
 
@@ -137,7 +140,7 @@
     <div class="detail-footer">
         <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index" class="btn-link-back">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            Back to Trainees
+            @L["Trainees_BackToTrainees"]
         </a>
     </div>
 </div>

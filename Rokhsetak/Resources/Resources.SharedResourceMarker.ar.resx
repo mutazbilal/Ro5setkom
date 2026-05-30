@@ -2747,4 +2747,915 @@
 	<data name="Quiz_RetakeUnlimitedMessage" xml:space="preserve">
     <value>خذ وقتك. إذا لم تنجح في هذه المحاولة، يمكنك إعادة الاختبار عدة مرات حسب حاجتك.</value>
   </data>
+  <!-- ========== مواعيد المرشد (مفاتيح إضافية) ========== -->
+  <data name="Mentor_Feedback_ShareNotes" xml:space="preserve">
+    <value>شارك ملاحظاتك</value>
+  </data>
+  <data name="Mentor_Feedback_Description" xml:space="preserve">
+    <value>وثّق ما سار على ما يرام وأين يمكن للمتدرب التحسّن. سيرى المتدرب ملاحظاتك.</value>
+  </data>
+  <data name="Mentor_Feedback_FormTitle" xml:space="preserve">
+    <value>نموذج الملاحظات</value>
+  </data>
+  <data name="Mentor_Trainee" xml:space="preserve">
+    <value>المتدرب</value>
+  </data>
+  <data name="Mentor_Feedback_NotesLabel" xml:space="preserve">
+    <value>ملاحظات الإفادة</value>
+  </data>
+  <data name="Mentor_Feedback_NotesHint" xml:space="preserve">
+    <value>بين 5 و 2000 حرف. مرئي للمتدرب.</value>
+  </data>
+  <data name="Mentor_ManageAppointments" xml:space="preserve">
+    <value>إدارة المواعيد</value>
+  </data>
+  <data name="Mentor_Workspace" xml:space="preserve">
+    <value>مساحة عمل المرشد</value>
+  </data>
+  <data name="Mentor_TotalAppointments" xml:space="preserve">
+    <value>إجمالي المواعيد</value>
+  </data>
+  <data name="Mentor_Total" xml:space="preserve">
+    <value>إجمالي</value>
+  </data>
+  <data name="Mentor_PendingAppointments" xml:space="preserve">
+    <value>المواعيد المعلقة</value>
+  </data>
+  <data name="Mentor_Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+  <data name="Mentor_ConfirmedAppointments" xml:space="preserve">
+    <value>المواعيد المؤكدة</value>
+  </data>
+  <data name="Mentor_Confirmed" xml:space="preserve">
+    <value>مؤكد</value>
+  </data>
+  <data name="Mentor_NoAppointmentsYet" xml:space="preserve">
+    <value>لا توجد مواعيد بعد</value>
+  </data>
+  <data name="Mentor_NoAppointmentsMessage" xml:space="preserve">
+    <value>بمجرد أن يبدأ المتدربون في حجز الحصص معك، ستظهر هنا للتأكيد وإعادة الجدولة والملاحظات.</value>
+  </data>
+  <data name="Mentor_AppointmentsListAria" xml:space="preserve">
+    <value>المواعيد</value>
+  </data>
+  <data name="Mentor_Confirm" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="Mentor_MarkDone" xml:space="preserve">
+    <value>تحديد منتهي</value>
+  </data>
+  <data name="Mentor_Reschedule" xml:space="preserve">
+    <value>إعادة جدولة</value>
+  </data>
+  <data name="Mentor_Feedback" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="Mentor_FeedbackSubmitted" xml:space="preserve">
+    <value>تم تقديم الملاحظات</value>
+  </data>
+  <data name="Mentor_Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Mentor_RescheduleSession" xml:space="preserve">
+    <value>إعادة جدولة الحصة</value>
+  </data>
+  <data name="Mentor_PickNewTime" xml:space="preserve">
+    <value>اختر وقتاً جديداً</value>
+  </data>
+  <data name="Mentor_RescheduleDescription" xml:space="preserve">
+    <value>اختر تاريخاً ووقتاً جديدين. سيتم إلغاء الحجز الأصلي واستبداله.</value>
+  </data>
+  <data name="Mentor_RescheduleFormTitle" xml:space="preserve">
+    <value>نموذج إعادة الجدولة</value>
+  </data>
+  <data name="Mentor_NewDate" xml:space="preserve">
+    <value>التاريخ الجديد</value>
+  </data>
+  <data name="Mentor_StartTime" xml:space="preserve">
+    <value>وقت البدء</value>
+  </data>
+  <data name="Mentor_EndTime" xml:space="preserve">
+    <value>وقت الانتهاء</value>
+  </data>
+  <data name="Mentor_RescheduleCallout" xml:space="preserve">
+    <value>سيتم إلغاء الحجز الأصلي وإنشاء حصة جديدة مؤكدة مكانه. سيتم إخطار المتدرب تلقائياً.</value>
+  </data>
+  <data name="Mentor_ConfirmReschedule" xml:space="preserve">
+    <value>تأكيد إعادة الجدولة</value>
+  </data>
+  <!-- ========== مواعيد المرشد المتاحة (مفاتيح إضافية) ========== -->
+  <data name="Mentor_MyAvailability" xml:space="preserve">
+    <value>مواعيدي المتاحة</value>
+  </data>
+  <data name="Mentor_Schedule" xml:space="preserve">
+    <value>الجدول</value>
+  </data>
+  <data name="Mentor_AvailabilityLead" xml:space="preserve">
+    <value>حدد الفترات الزمنية التي يمكن للمتدربين حجز حصص معك خلالها. تظهر المواعيد النشطة في تقويم الحجوزات الخاص بهم فوراً.</value>
+  </data>
+  <data name="Mentor_DayAvailabilityAria" xml:space="preserve">
+    <value>مواعيد {0} المتاحة</value>
+  </data>
+  <data name="Mentor_SlotsSingular" xml:space="preserve">
+    <value>موعد</value>
+  </data>
+  <data name="Mentor_SlotsPlural" xml:space="preserve">
+    <value>مواعيد</value>
+  </data>
+  <data name="Mentor_NoSlots" xml:space="preserve">
+    <value>لا توجد مواعيد</value>
+  </data>
+  <data name="Mentor_NoAvailabilityForDay" xml:space="preserve">
+    <value>لا توجد مواعيد متاحة لهذا اليوم.</value>
+  </data>
+  <data name="Mentor_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Mentor_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Mentor_EditSlotAria" xml:space="preserve">
+    <value>تعديل الموعد من {0} إلى {1}</value>
+  </data>
+  <data name="Mentor_Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Mentor_DeactivateConfirm" xml:space="preserve">
+    <value>إلغاء تنشيط هذا الموعد؟</value>
+  </data>
+  <data name="Mentor_Deactivate" xml:space="preserve">
+    <value>إلغاء التنشيط</value>
+  </data>
+  <data name="Mentor_AddSlotSectionAria" xml:space="preserve">
+    <value>إضافة موعد متاح جديد</value>
+  </data>
+  <data name="Mentor_AddNewSlot" xml:space="preserve">
+    <value>إضافة موعد جديد</value>
+  </data>
+  <data name="Mentor_Day" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="Mentor_SelectDay" xml:space="preserve">
+    <value>اختر اليوم</value>
+  </data>
+  <data name="Mentor_StartTime" xml:space="preserve">
+    <value>وقت البدء</value>
+  </data>
+  <data name="Mentor_EndTime" xml:space="preserve">
+    <value>وقت الانتهاء</value>
+  </data>
+  <data name="Mentor_AddSlotButton" xml:space="preserve">
+    <value>إضافة موعد</value>
+  </data>
+  <data name="Mentor_EditSlot" xml:space="preserve">
+    <value>تعديل الموعد</value>
+  </data>
+  <data name="Mentor_SaveChanges" xml:space="preserve">
+    <value>حفظ التغييرات</value>
+  </data>
+  <!-- ========== لوحة تحكم المرشد (مفاتيح إضافية) ========== -->
+  <data name="Mentor_YourDayAtAGlance" xml:space="preserve">
+    <value>يومك في لمحة</value>
+  </data>
+  <data name="Mentor_TodaysDate" xml:space="preserve">
+    <value>تاريخ اليوم</value>
+  </data>
+  <data name="Mentor_PendingRequests" xml:space="preserve">
+    <value>الطلبات المعلقة</value>
+  </data>
+  <data name="Mentor_InboxStatus" xml:space="preserve">
+    <value>حالة صندوق الوارد</value>
+  </data>
+  <data name="Mentor_AllCaughtUp" xml:space="preserve">
+    <value>كل شيء محدّث</value>
+  </data>
+  <data name="Mentor_SetAvailability" xml:space="preserve">
+    <value>تعيين المواعيد المتاحة</value>
+  </data>
+  <data name="Mentor_TodaysSnapshot" xml:space="preserve">
+    <value>لمحة عن اليوم</value>
+  </data>
+  <data name="Mentor_BookedOfSlots" xml:space="preserve">
+    <value>تم حجز {0} من {1} موعد اليوم</value>
+  </data>
+  <data name="Mentor_NoAvailabilitySetToday" xml:space="preserve">
+    <value>لا توجد مواعيد متاحة لليوم</value>
+  </data>
+  <data name="Mentor_SlotUtilizationAria" xml:space="preserve">
+    <value>استخدام المواعيد اليوم</value>
+  </data>
+  <data name="Mentor_NextSession" xml:space="preserve">
+    <value>الحصة التالية</value>
+  </data>
+  <data name="Mentor_NextSession_AllStarted" xml:space="preserve">
+    <value>جميع حصص اليوم قد بدأت</value>
+  </data>
+  <data name="Mentor_NextSession_NoSessions" xml:space="preserve">
+    <value>لا توجد حصص مجدولة لليوم</value>
+  </data>
+  <data name="Mentor_TodaysSessions" xml:space="preserve">
+    <value>حصص اليوم</value>
+  </data>
+  <data name="Mentor_SessionsTodayAria" xml:space="preserve">
+    <value>الحصص اليوم</value>
+  </data>
+  <data name="Mentor_CompletedOfSessions" xml:space="preserve">
+    <value>{0} من {1} مكتمل</value>
+  </data>
+  <data name="Mentor_SessionsCompletionAria" xml:space="preserve">
+    <value>إكمال الحصص</value>
+  </data>
+  <data name="Mentor_NoConfirmedSessionsToday" xml:space="preserve">
+    <value>لا توجد حصص مؤكدة لليوم.</value>
+  </data>
+  <data name="Mentor_TodaysAvailability" xml:space="preserve">
+    <value>المواعيد المتاحة اليوم</value>
+  </data>
+  <data name="Mentor_SlotsTodayAria" xml:space="preserve">
+    <value>المواعيد اليوم</value>
+  </data>
+  <data name="Mentor_Complete" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+  <data name="Mentor_Ready" xml:space="preserve">
+    <value>جاهز</value>
+  </data>
+  <data name="Mentor_Feedback" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="Mentor_Scheduled" xml:space="preserve">
+    <value>مجدول</value>
+  </data>
+  <data name="Mentor_Booked" xml:space="preserve">
+    <value>محجوز</value>
+  </data>
+  <data name="Mentor_Free" xml:space="preserve">
+    <value>متاح</value>
+  </data>
+  <data name="Mentor_AwaitingResponse" xml:space="preserve">
+    <value>بانتظار الرد</value>
+  </data>
+  <data name="Mentor_PendingRequestsCount" xml:space="preserve">
+    <value>{0} طلب(ات) تنتظر ردك.</value>
+  </data>
+  <data name="Mentor_AllCaughtUpPending" xml:space="preserve">
+    <value>كل شيء محدّث — لا توجد طلبات معلقة حالياً.</value>
+  </data>
+  <data name="Mentor_ReviewRequests" xml:space="preserve">
+    <value>مراجعة الطلبات</value>
+  </data>
+  <data name="Mentor_ViewAppointments" xml:space="preserve">
+    <value>عرض المواعيد</value>
+  </data>
+  <!-- ========== تخطيط منطقة المرشد ========== -->
+  <data name="Mentor_Layout_Title" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+  <data name="Mentor_NavigationAria" xml:space="preserve">
+    <value>قائمة تنقل المرشد</value>
+  </data>
+  <data name="Mentor_SectionsAria" xml:space="preserve">
+    <value>أقسام المرشد</value>
+  </data>
+  <data name="Mentor_ManageHeading" xml:space="preserve">
+    <value>إدارة</value>
+  </data>
+  <data name="Mentor_Availability" xml:space="preserve">
+    <value>المواعيد المتاحة</value>
+  </data>
+  <data name="Mentor_Appointments" xml:space="preserve">
+    <value>المواعيد</value>
+  </data>
+  <data name="Mentor_Trainees" xml:space="preserve">
+    <value>المتدربون</value>
+  </data>
+  <data name="Mentor_LanguageGroupAria" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <!-- ========== المتدربون (منطقة المرشد) ========== -->
+  <data name="Trainees_BreadcrumbAria" xml:space="preserve">
+    <value>مسار التنقل</value>
+  </data>
+  <data name="Trainees_Breadcrumb_Trainees" xml:space="preserve">
+    <value>المتدربون</value>
+  </data>
+  <data name="Trainees_Status_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+  <data name="Trainees_Status_Confirmed" xml:space="preserve">
+    <value>مؤكد</value>
+  </data>
+  <data name="Trainees_Status_Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+  <data name="Trainees_Stage_completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+  <data name="Trainees_Stage_pending_approval" xml:space="preserve">
+    <value>قيد الموافقة</value>
+  </data>
+  <data name="Trainees_Stage_in_progress" xml:space="preserve">
+    <value>قيد التقدم</value>
+  </data>
+  <data name="Trainees_Stage_pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+  <data name="Trainees_OverallProgress" xml:space="preserve">
+    <value>التقدم الكلي</value>
+  </data>
+  <data name="Trainees_SessionHistory" xml:space="preserve">
+    <value>سجل الحصص</value>
+  </data>
+  <data name="Trainees_SessionHistory_Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Trainees_SessionHistory_Time" xml:space="preserve">
+    <value>الوقت</value>
+  </data>
+  <data name="Trainees_SessionHistory_Type" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Trainees_SessionHistory_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Trainees_NoSessions" xml:space="preserve">
+    <value>لا توجد حصص مسجلة.</value>
+  </data>
+  <data name="Trainees_FeedbackNotes" xml:space="preserve">
+    <value>ملاحظات سابقة</value>
+  </data>
+  <data name="Trainees_NoFeedback" xml:space="preserve">
+    <value>لم يتم تقديم ملاحظات بعد.</value>
+  </data>
+  <data name="Trainees_BackToTrainees" xml:space="preserve">
+    <value>العودة إلى المتدربين</value>
+  </data>
+  <data name="Trainees_Title" xml:space="preserve">
+    <value>ملخص المتدربين</value>
+  </data>
+  <data name="Trainees_Mentorship" xml:space="preserve">
+    <value>الإرشاد</value>
+  </data>
+  <data name="Trainees_DashboardLink" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
+  <data name="Trainees_SearchByName" xml:space="preserve">
+    <value>البحث بالاسم</value>
+  </data>
+  <data name="Trainees_SearchPlaceholder" xml:space="preserve">
+    <value>اسم المتدرب...</value>
+  </data>
+  <data name="Trainees_SearchAria" xml:space="preserve">
+    <value>البحث عن متدربين بالاسم</value>
+  </data>
+  <data name="Trainees_FilterByStatus" xml:space="preserve">
+    <value>تصفية حسب الحالة</value>
+  </data>
+  <data name="Trainees_FilterAria" xml:space="preserve">
+    <value>تصفية حسب حالة الرخصة</value>
+  </data>
+  <data name="Trainees_AllStatuses" xml:space="preserve">
+    <value>- جميع الحالات -</value>
+  </data>
+  <data name="Trainees_SearchButton" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="Trainees_ClearButton" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="Trainees_EmptyMessage" xml:space="preserve">
+    <value>لم يتم العثور على متدربين يطابقون بحثك.</value>
+  </data>
+  <data name="Trainees_Table_Trainee" xml:space="preserve">
+    <value>المتدرب</value>
+  </data>
+  <data name="Trainees_Table_License" xml:space="preserve">
+    <value>الرخصة</value>
+  </data>
+  <data name="Trainees_Table_Stage" xml:space="preserve">
+    <value>المرحلة</value>
+  </data>
+  <data name="Trainees_Table_TotalSessions" xml:space="preserve">
+    <value>إجمالي الحصص</value>
+  </data>
+  <data name="Trainees_Table_LastSession" xml:space="preserve">
+    <value>آخر حصة</value>
+  </data>
+  <data name="Trainees_ViewDetails" xml:space="preserve">
+    <value>عرض التفاصيل</value>
+  </data>
+  <data name="Trainees_ShowingCount" xml:space="preserve">
+    <value>عرض {0} متدرب(ين).</value>
+  </data>
+  <!-- ========== التواريخ المحظورة (لوحة المشرف) ========== -->
+  <data name="Admin_BlockedDates_Title" xml:space="preserve">
+    <value>التواريخ المحظورة</value>
+  </data>
+  <data name="Admin_BlockedDates_Subtitle" xml:space="preserve">
+    <value>الأيام التي لا يمكن فيها حجز مواعيد الامتحان</value>
+  </data>
+  <data name="Admin_BlockedDates_BlockNew" xml:space="preserve">
+    <value>حظر تاريخ جديد</value>
+  </data>
+  <data name="Admin_BlockedDates_DateLabel" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Admin_BlockedDates_ReasonLabel" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+  <data name="Admin_BlockedDates_ReasonPlaceholder" xml:space="preserve">
+    <value>مثال: عطلة رسمية، صيانة النظام</value>
+  </data>
+  <data name="Admin_BlockedDates_BlockButton" xml:space="preserve">
+    <value>حظر التاريخ</value>
+  </data>
+  <data name="Admin_BlockedDates_WarningMessage" xml:space="preserve">
+    <value>حظر التاريخ يمنع حجوزات امتحانات جديدة. سيتم إلغاء المواعيد الموجودة في ذلك اليوم.</value>
+  </data>
+  <data name="Admin_BlockedDates_ActiveBlocks" xml:space="preserve">
+    <value>الحجوزات النشطة</value>
+  </data>
+  <data name="Admin_BlockedDates_Table_Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Admin_BlockedDates_Table_Reason" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+  <data name="Admin_BlockedDates_Table_CreatedBy" xml:space="preserve">
+    <value>تم الإنشاء بواسطة</value>
+  </data>
+  <data name="Admin_BlockedDates_Table_CreatedAt" xml:space="preserve">
+    <value>تاريخ الإنشاء</value>
+  </data>
+  <data name="Admin_BlockedDates_Table_Actions" xml:space="preserve">
+    <value>إجراءات</value>
+  </data>
+  <data name="Admin_BlockedDates_RemoveButton" xml:space="preserve">
+    <value>إزالة</value>
+  </data>
+  <data name="Admin_BlockedDates_RemoveAria" xml:space="preserve">
+    <value>إزالة الحظر عن {0}</value>
+  </data>
+  <data name="Admin_BlockedDates_RemoveDialog_Title" xml:space="preserve">
+    <value>إزالة التاريخ المحظور؟</value>
+  </data>
+  <data name="Admin_BlockedDates_RemoveDialog_Body" xml:space="preserve">
+    <value>أنت على وشك إزالة الحظر عن {0}.</value>
+  </data>
+  <data name="Admin_BlockedDates_RemoveDialog_Note" xml:space="preserve">
+    <value>سيتمكن المتدربون من جدولة مواعيد امتحان جديدة لهذا التاريخ.</value>
+  </data>
+  <data name="Admin_BlockedDates_NoData" xml:space="preserve">
+    <value>لا توجد تواريخ محظورة.</value>
+  </data>
+  <!-- ========== الحجوزات والامتحانات في لوحة المشرف (مفاتيح إضافية) ========== -->
+  <data name="Admin_Bookings_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>اسم المتدرب أو المرشد</value>
+  </data>
+  <data name="Admin_Filter_IdPlaceholder" xml:space="preserve">
+    <value>المعرف</value>
+  </data>
+  <data name="Admin_Pagination_PageOf" xml:space="preserve">
+    <value>صفحة {0} من {1}</value>
+  </data>
+  <data name="Admin_Pagination_Aria" xml:space="preserve">
+    <value>التنقل بين الصفحات</value>
+  </data>
+  <data name="Admin_Pagination_Previous" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Admin_Pagination_Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <!-- ========== لوحة تحكم المشرف (مفاتيح مفقودة) ========== -->
+  <data name="Admin_Dashboard_Title" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
+  <data name="Admin_Dashboard_Subtitle" xml:space="preserve">
+    <value>نظرة عامة وتحليلات المنصة</value>
+  </data>
+  <data name="Admin_Dashboard_Filter_FromDate" xml:space="preserve">
+    <value>من تاريخ</value>
+  </data>
+  <data name="Admin_Dashboard_Filter_ToDate" xml:space="preserve">
+    <value>إلى تاريخ</value>
+  </data>
+  <data name="Admin_Dashboard_Filter_Apply" xml:space="preserve">
+    <value>تطبيق</value>
+  </data>
+  <data name="Admin_Dashboard_Filter_Reset" xml:space="preserve">
+    <value>إعادة تعيين</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_TotalUsers" xml:space="preserve">
+    <value>إجمالي المستخدمين</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_ActiveTrainees" xml:space="preserve">
+    <value>المتدربون النشطون</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_ActiveMentors" xml:space="preserve">
+    <value>المرشدون النشطون</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_TotalBookings" xml:space="preserve">
+    <value>إجمالي الحجوزات</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_PendingApps" xml:space="preserve">
+    <value>الطلبات المعلقة</value>
+  </data>
+  <data name="Admin_Dashboard_Stat_CompletedLicenses" xml:space="preserve">
+    <value>الرخص المكتملة</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_AvgRating" xml:space="preserve">
+    <value>متوسط تقييم المرشدين</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_AvgRatingUnit" xml:space="preserve">
+    <value>/ 5.00</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_CompletionRate" xml:space="preserve">
+    <value>نسبة الإكمال</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_CompletionRateUnit" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_AvgTimeToCompletion" xml:space="preserve">
+    <value>متوسط الوقت حتى الإكمال</value>
+  </data>
+  <data name="Admin_Dashboard_Metric_Days" xml:space="preserve">
+    <value>يوم</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_UsersOverTime" xml:space="preserve">
+    <value>المستخدمين بمرور الوقت</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_UsersSubtitle" xml:space="preserve">
+    <value>التسجيلات الجديدة حسب الشهر</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_BookingsPerMonth" xml:space="preserve">
+    <value>الحجوزات لكل شهر</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_BookingsSubtitle" xml:space="preserve">
+    <value>حجوزات الحصص المنشأة حسب الشهر</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_PerformanceTitle" xml:space="preserve">
+    <value>توزيع أداء المرشدين</value>
+  </data>
+  <data name="Admin_Dashboard_Chart_PerformanceSubtitle" xml:space="preserve">
+    <value>فئات التقييم عبر جميع المرشدين</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Title" xml:space="preserve">
+    <value>أفضل المرشدين</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Subtitle" xml:space="preserve">
+    <value>مرتب حسب التقييم ثم الحصص المكتملة</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Table_Mentor" xml:space="preserve">
+    <value>المرشد</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Table_Rating" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Table_Sessions" xml:space="preserve">
+    <value>الحصص</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Table_Completion" xml:space="preserve">
+    <value>الإكمال</value>
+  </data>
+  <data name="Admin_Dashboard_TopMentors_Table_AvgDays" xml:space="preserve">
+    <value>متوسط الأيام</value>
+  </data>
+  <data name="Admin_Dashboard_NoMentorData" xml:space="preserve">
+    <value>لا توجد بيانات أداء للمرشدين بعد.</value>
+  </data>
+  <!-- ========== طلبات المرشدين (لوحة المشرف) مفاتيح مفقودة ========== -->
+  <data name="Admin_Applications_Note" xml:space="preserve">
+    <value>الطلبات المقبولة والمرفوضة لا تظهر هنا.</value>
+  </data>
+  <data name="Admin_Application_Status_pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+  <data name="Admin_Application_Status_approved" xml:space="preserve">
+    <value>مقبول</value>
+  </data>
+  <data name="Admin_Application_Status_rejected" xml:space="preserve">
+    <value>مرفوض</value>
+  </data>
+  <!-- ========== المرشدون (لوحة المشرف) ========== -->
+  <data name="Admin_Mentors_Title" xml:space="preserve">
+    <value>المرشدون</value>
+  </data>
+  <data name="Admin_Mentors_Subtitle" xml:space="preserve">
+    <value>جميع المرشدين المعتمدين على المنصة</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="Admin_Mentors_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>الاسم، البريد الإلكتروني أو المدينة</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Status_All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Status_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Status_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Admin_Mentors_Filter_LicenseType" xml:space="preserve">
+    <value>نوع الرخصة</value>
+  </data>
+  <data name="Admin_Mentors_Filter_AllLicenseTypes" xml:space="preserve">
+    <value>جميع أنواع الرخص</value>
+  </data>
+  <data name="Admin_Mentors_Filter_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="Admin_Mentors_Filter_AllCities" xml:space="preserve">
+    <value>جميع المدن</value>
+  </data>
+  <data name="Admin_Mentors_Filter_Button" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+  <data name="Admin_Mentors_Table_Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Admin_Mentors_Table_Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Admin_Mentors_Table_License" xml:space="preserve">
+    <value>الرخصة</value>
+  </data>
+  <data name="Admin_Mentors_Table_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="Admin_Mentors_Table_Rating" xml:space="preserve">
+    <value>التقييم</value>
+  </data>
+  <data name="Admin_Mentors_Table_Sessions" xml:space="preserve">
+    <value>الحصص</value>
+  </data>
+  <data name="Admin_Mentors_Table_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Admin_Mentors_Table_Status_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Admin_Mentors_Table_Status_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Admin_Mentors_Table_Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="Admin_Mentors_Action_View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Admin_Mentors_NoData" xml:space="preserve">
+    <value>لا يوجد مرشدون يطابقون معايير التصفية.</value>
+  </data>
+
+  <!-- تفاصيل المرشد -->
+  <data name="Admin_Mentor_Detail_Subtitle" xml:space="preserve">
+    <value>ملف المرشد · {0}</value>
+  </data>
+  <data name="Admin_Mentor_Detail_RoleMentor" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Status_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Status_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_Phone" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_LicenseType" xml:space="preserve">
+    <value>نوع الرخصة</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_Vehicle" xml:space="preserve">
+    <value>المركبة</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_Price" xml:space="preserve">
+    <value>السعر / الحصة</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Field_Joined" xml:space="preserve">
+    <value>تاريخ الانضمام</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Button_Deactivate" xml:space="preserve">
+    <value>إلغاء تنشيط المرشد</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Button_Reactivate" xml:space="preserve">
+    <value>إعادة تنشيط المرشد</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Button_Back" xml:space="preserve">
+    <value>العودة إلى المرشدين</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_AvgRating" xml:space="preserve">
+    <value>متوسط التقييم</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_Ratings" xml:space="preserve">
+    <value>{0} تقييم(ات)</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_TotalSessions" xml:space="preserve">
+    <value>إجمالي الحصص</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_AllTimeBookings" xml:space="preserve">
+    <value>إجمالي الحجوزات</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_Completed" xml:space="preserve">
+    <value>مكتمل</value>
+  </data>
+  <data name="Admin_Mentor_Detail_Stat_Completion" xml:space="preserve">
+    <value>إكمال</value>
+  </data>
+  <data name="Admin_Mentor_Detail_ApplicationHistory_Title" xml:space="preserve">
+    <value>سجل الطلب</value>
+  </data>
+  <data name="Admin_Mentor_Detail_ApplicationHistory_Text" xml:space="preserve">
+    <value>الحالة الحالية لطلب هذا المرشد هي</value>
+  </data>
+  <data name="Admin_Mentor_Detail_ApplicationHistory_Note" xml:space="preserve">
+    <value>لمراجعة ملف الشهادة الأصلي، ابحث عن هذا المرشد في صفحة &lt;a href="{0}"&gt;الطلبات&lt;/a&gt; (تُعرض هناك الطلبات المعلقة فقط).</value>
+  </data>
+  <data name="Admin_Mentor_DeactivateDialog_Title" xml:space="preserve">
+    <value>إلغاء تنشيط المرشد؟</value>
+  </data>
+  <data name="Admin_Mentor_DeactivateDialog_Body" xml:space="preserve">
+    <value>أنت على وشك إلغاء تنشيط &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+  <data name="Admin_Mentor_DeactivateDialog_Note" xml:space="preserve">
+    <value>سيتم منعه من تسجيل الدخول ولن يظهر في بحث المتدربين. يتم الاحتفاظ بالحجوزات والتقييمات الحالية. يمكنك إعادة تنشيطه في أي وقت.</value>
+  </data>
+  <data name="Admin_Mentor_DeactivateDialog_Confirm" xml:space="preserve">
+    <value>إلغاء التنشيط</value>
+  </data>
+
+  <!-- التصفح -->
+  <data name="Admin_Pagination_PageOf" xml:space="preserve">
+    <value>صفحة {0} من {1}</value>
+  </data>
+  <data name="Admin_Pagination_Aria" xml:space="preserve">
+    <value>التنقل بين الصفحات</value>
+  </data>
+  <!-- ========== تخطيط المشرف (مفاتيح مفقودة) ========== -->
+  <data name="Admin_Layout_TitleSuffix" xml:space="preserve">
+    <value>مشرف رخصة طرق</value>
+  </data>
+
+  <!-- ========== المستخدمون (لوحة المشرف) ========== -->
+  <data name="Admin_Users_Title" xml:space="preserve">
+    <value>المستخدمون</value>
+  </data>
+  <data name="Admin_Users_Subtitle" xml:space="preserve">
+    <value>إدارة جميع مستخدمي المنصة</value>
+  </data>
+  <data name="Admin_Users_Filter_Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="Admin_Users_Filter_SearchPlaceholder" xml:space="preserve">
+    <value>الاسم أو البريد الإلكتروني</value>
+  </data>
+  <data name="Admin_Users_Filter_Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="Admin_Users_Filter_AllRoles" xml:space="preserve">
+    <value>جميع الأدوار</value>
+  </data>
+  <data name="Admin_Users_Filter_Role_Trainee" xml:space="preserve">
+    <value>متدرب</value>
+  </data>
+  <data name="Admin_Users_Filter_Role_Mentor" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+  <data name="Admin_Users_Filter_Role_Admin" xml:space="preserve">
+    <value>مشرف</value>
+  </data>
+  <data name="Admin_Users_Filter_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Admin_Users_Filter_Status_All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="Admin_Users_Filter_Button" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+  <data name="Admin_Users_Table_Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Admin_Users_Table_Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Admin_Users_Table_Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="Admin_Users_Table_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Admin_Users_Table_Joined" xml:space="preserve">
+    <value>تاريخ الانضمام</value>
+  </data>
+  <data name="Admin_Users_Table_Actions" xml:space="preserve">
+    <value>الإجراءات</value>
+  </data>
+  <data name="Admin_Users_Action_View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Admin_Users_NoData" xml:space="preserve">
+    <value>لا يوجد مستخدمون يطابقون معايير التصفية.</value>
+  </data>
+  <data name="Admin_Users_Status_Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="Admin_Users_Status_Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="Admin_Users_Role_trainee" xml:space="preserve">
+    <value>متدرب</value>
+  </data>
+  <data name="Admin_Users_Role_mentor" xml:space="preserve">
+    <value>مرشد</value>
+  </data>
+  <data name="Admin_Users_Role_admin" xml:space="preserve">
+    <value>مشرف</value>
+  </data>
+
+  <!-- تفاصيل المستخدم -->
+  <data name="Admin_User_Detail_Subtitle" xml:space="preserve">
+    <value>ملف المستخدم · {0}</value>
+  </data>
+  <data name="Admin_User_Detail_Field_Phone" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="Admin_User_Detail_Field_NationalId" xml:space="preserve">
+    <value>الرقم الوطني</value>
+  </data>
+  <data name="Admin_User_Detail_Field_DateOfBirth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="Admin_User_Detail_Field_Gender" xml:space="preserve">
+    <value>الجنس</value>
+  </data>
+  <data name="Admin_User_Detail_Field_City" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="Admin_User_Detail_Field_Province" xml:space="preserve">
+    <value>المحافظة</value>
+  </data>
+  <data name="Admin_User_Detail_Field_Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="Admin_User_Detail_Field_Joined" xml:space="preserve">
+    <value>تاريخ الانضمام</value>
+  </data>
+  <data name="Admin_User_Detail_Button_Deactivate" xml:space="preserve">
+    <value>إلغاء تنشيط المستخدم</value>
+  </data>
+  <data name="Admin_User_Detail_Button_Reactivate" xml:space="preserve">
+    <value>إعادة تنشيط المستخدم</value>
+  </data>
+  <data name="Admin_User_Detail_Button_Back" xml:space="preserve">
+    <value>العودة إلى المستخدمين</value>
+  </data>
+  <data name="Admin_User_Detail_BookingHistory_Title" xml:space="preserve">
+    <value>سجل الحجوزات</value>
+  </data>
+
+  <!-- جدول سجل الحجوزات -->
+  <data name="Admin_User_BookingHistory_Table_Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Admin_User_BookingHistory_Table_Time" xml:space="preserve">
+    <value>الوقت</value>
+  </data>
+  <data name="Admin_User_BookingHistory_Table_Counterparty" xml:space="preserve">
+    <value>الطرف الآخر</value>
+  </data>
+  <data name="Admin_User_BookingHistory_Table_Type" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Admin_User_BookingHistory_Table_Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Admin_User_BookingHistory_NoData" xml:space="preserve">
+    <value>لا توجد حجوزات لهذا المستخدم بعد.</value>
+  </data>
+
+  <!-- حوار إلغاء التنشيط -->
+  <data name="Admin_User_DeactivateDialog_Title" xml:space="preserve">
+    <value>إلغاء تنشيط المستخدم؟</value>
+  </data>
+  <data name="Admin_User_DeactivateDialog_Body" xml:space="preserve">
+    <value>أنت على وشك إلغاء تنشيط &lt;strong&gt;{0}&lt;/strong&gt;.</value>
+  </data>
+  <data name="Admin_User_DeactivateDialog_Note" xml:space="preserve">
+    <value>سيتم حظر حسابه من تسجيل الدخول. يتم الاحتفاظ بسجل الحجوزات والتقييمات. يمكنك إعادة تنشيطه في أي وقت.</value>
+  </data>
+  <data name="Admin_User_DeactivateDialog_Confirm" xml:space="preserve">
+    <value>إلغاء التنشيط</value>
+  </data>
 </root>

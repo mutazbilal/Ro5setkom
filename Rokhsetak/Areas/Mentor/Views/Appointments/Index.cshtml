@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model AppointmentListViewModel
 @{
-    ViewData["Title"] = "Manage Appointments";
+    ViewData["Title"] = L["Mentor_ManageAppointments"];
 
     var totalCount     = Model.Items.Count;
     var pendingCount   = Model.Items.Count(i => i.Status == "pending");
@@ -13,10 +16,10 @@
     (string cardMod, string pillMod, string label) StatusPresentation(string status) =>
         status switch
         {
-            "pending"   => ("pending",   "up-next",     "Pending"),
-            "confirmed" => ("confirmed", "in-progress", "Confirmed"),
-            "completed" => ("completed", "completed",   "Completed"),
-            "cancelled" => ("cancelled", "pending",     "Cancelled"),
+            "pending"   => ("pending",   "up-next",     L["Booking_Pending"]),
+            "confirmed" => ("confirmed", "in-progress", L["Booking_Confirmed"]),
+            "completed" => ("completed", "completed",   L["Booking_Completed"]),
+            "cancelled" => ("cancelled", "pending",     L["Booking_Cancelled"]),
             _           => ("pending",   "pending",     status)
         };
 
@@ -42,7 +45,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -55,7 +58,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -64,25 +67,25 @@
         <!-- ============ Hero ============ -->
         <section class="appointments-hero" aria-labelledby="appointments-page-title">
             <div class="appointments-hero__intro">
-                <span class="appointments-hero__eyebrow">Mentor Workspace</span>
-                <h1 id="appointments-page-title" class="appointments-hero__title">Manage Appointments</h1>
+                <span class="appointments-hero__eyebrow">@L["Mentor_Workspace"]</span>
+                <h1 id="appointments-page-title" class="appointments-hero__title">@L["Mentor_ManageAppointments"]</h1>
                 <div class="appointments-hero__meta">
-                    <span class="chip chip--soft" aria-label="Total appointments">
+                    <span class="chip chip--soft" aria-label="@L["Mentor_TotalAppointments"]">
                         <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
-                        @totalCount total
+                        @totalCount @L["Mentor_Total"]
                     </span>
                     @if (pendingCount > 0)
                     {
-                        <span class="chip chip--warning" aria-label="Pending appointments">
+                        <span class="chip chip--warning" aria-label="@L["Mentor_PendingAppointments"]">
                             <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
-                            @pendingCount pending
+                            @pendingCount @L["Mentor_Pending"]
                         </span>
                     }
                     @if (confirmedCount > 0)
                     {
-                        <span class="chip chip--primary" aria-label="Confirmed appointments">
+                        <span class="chip chip--primary" aria-label="@L["Mentor_ConfirmedAppointments"]">
                             <i class="fa-solid fa-check" aria-hidden="true"></i>
-                            @confirmedCount confirmed
+                            @confirmedCount @L["Mentor_Confirmed"]
                         </span>
                     }
                 </div>
@@ -94,7 +97,7 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Dashboard</span>
+                    <span>@L["Mentor_Dashboard"]</span>
                 </a>
             </div>
         </section>
@@ -106,17 +109,16 @@
                 <span class="appointments-empty__icon" aria-hidden="true">
                     <i class="fa-regular fa-calendar"></i>
                 </span>
-                <h2 class="appointments-empty__title">No appointments yet</h2>
+                <h2 class="appointments-empty__title">@L["Mentor_NoAppointmentsYet"]</h2>
                 <p class="appointments-empty__message">
-                    Once trainees start booking sessions with you, they'll appear here for confirmation,
-                    rescheduling, and feedback.
+                    @L["Mentor_NoAppointmentsMessage"]
                 </p>
             </section>
         }
         else
         {
             <!-- ============ Appointment list ============ -->
-            <ul class="appointment-list" aria-label="Appointments">
+            <ul class="appointment-list" aria-label="@L["Mentor_AppointmentsListAria"]">
                 @foreach (var item in Model.Items)
                 {
                     var (cardMod, pillMod, statusLabel) = StatusPresentation(item.Status);
@@ -154,7 +156,7 @@
                                 <span class="chip @SessionTypeChip(item.SessionType)">
                                     <i class="fa-solid @(item.SessionType == "practical" ? "fa-car" : "fa-book")"
                                        aria-hidden="true"></i>
-                                    @item.SessionType
+                                    @(item.SessionType == "practical" ? L["Booking_Practical"] : L["Booking_Theoretical"])
                                 </span>
                                 <span class="status-pill status-pill--@pillMod">@statusLabel</span>
                             </div>
@@ -174,7 +176,7 @@
                                         <input type="hidden" name="bookingId" value="@item.BookingId" />
                                         <button type="submit" class="btn-action btn-action--gradient btn-action--sm">
                                             <i class="fa-solid fa-check" aria-hidden="true"></i>
-                                            <span>Confirm</span>
+                                            <span>@L["Mentor_Confirm"]</span>
                                         </button>
                                     </form>
                                 }
@@ -188,7 +190,7 @@
                                         <input type="hidden" name="bookingId" value="@item.BookingId" />
                                         <button type="submit" class="btn-action btn-action--outline btn-action--sm">
                                             <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                                            <span>Mark Done</span>
+                                            <span>@L["Mentor_MarkDone"]</span>
                                         </button>
                                     </form>
                                 }
@@ -200,7 +202,7 @@
                                        asp-route-bookingId="@item.BookingId"
                                        class="btn-action btn-action--ghost btn-action--sm">
                                         <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                                        <span>Reschedule</span>
+                                        <span>@L["Mentor_Reschedule"]</span>
                                     </a>
                                 }
                                 @if (item.CanFeedback)
@@ -211,14 +213,14 @@
                                        asp-route-bookingId="@item.BookingId"
                                        class="btn-action btn-action--ghost-success btn-action--sm">
                                         <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
-                                        <span>Feedback</span>
+                                        <span>@L["Mentor_Feedback"]</span>
                                     </a>
                                 }
                                 @if (item.FeedbackGiven)
                                 {
                                     <span class="appointment-card__feedback-given">
                                         <i class="fa-solid fa-comment-medical" aria-hidden="true"></i>
-                                        Feedback submitted
+                                        @L["Mentor_FeedbackSubmitted"]
                                     </span>
                                 }
                                 @if (item.CanCancel)
@@ -231,7 +233,7 @@
                                         <input type="hidden" name="bookingId" value="@item.BookingId" />
                                         <button type="submit" class="btn-action btn-action--ghost-danger btn-action--sm">
                                             <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                                            <span>Cancel</span>
+                                            <span>@L["Mentor_Cancel"]</span>
                                         </button>
                                     </form>
                                 }
