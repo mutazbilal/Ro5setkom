@@ -66,10 +66,8 @@
        asp-action="Index"
        class="landing-brand"
        aria-label="Rokhsetak — @L["Nav_Home"]">
-        <span class="landing-brand__logo" aria-hidden="true">
-            <i class="fa-solid fa-shield-halved"></i>
-        </span>
-        <span class="landing-brand__name">Rokhsetak</span>
+        <img src="~/images/logo.png" asp-append-version="true"
+             alt="" class="landing-brand__logo-img" />
     </a>
 
     @if (isAuth)
