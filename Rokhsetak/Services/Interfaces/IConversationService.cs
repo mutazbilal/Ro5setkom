@@ -1,6 +1,7 @@
 using Rokhsetak.Areas.Mentor;
 using Rokhsetak.Areas.Trainee;
 using Rokhsetak.Services.Common;
+using Rokhsetak.Services.Chat;
 
 namespace Rokhsetak.Services.Interfaces;
 
@@ -13,7 +14,8 @@ public interface IConversationService
     /// linked to the triggering booking.
     /// Returns the ConversationId.
     /// </summary>
-    Task<ServiceResult<int>> EnsureConversationExistsAsync(int traineeId, int mentorId, int bookingId);
+    Task<ServiceResult<int>> EnsureConversationExistsAsync(int traineeId, int mentorId);
+
 
     // ── Mentor surface ────────────────────────────────────────────────────────
     Task<ServiceResult<Areas.Mentor.ViewModels.Messaging.ConversationListViewModel>> GetMentorConversationsAsync(int mentorId);
@@ -28,4 +30,10 @@ public interface IConversationService
     // ── Shared ────────────────────────────────────────────────────────────────
     /// <summary>Marks all unread messages sent by others in the conversation as read.</summary>
     Task MarkMessagesReadAsync(int conversationId, int currentUserId);
+
+    Task<IReadOnlyList<ChatThreadSummary>> GetConversationsForUserAsync(int userId);
+    Task<ChatThreadDetail?> GetConversationForUserAsync(int userId, int conversationId);
+    Task<ServiceResult> SendMessageForUserAsync(int conversationId, int userId, string? text, IFormFile? file);
+    Task<int> GetUnreadCountForUserAsync(int userId);
+
 }

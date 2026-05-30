@@ -1,0 +1,93 @@
+﻿@using Rokhsetak.Services.Chat
+@model ChatThreadDetail
+
+<div class="rkchat-thread__head">
+    <button type="button" class="rkchat-back" data-action="back" aria-label="Back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <div class="thread-avatar">@Model.AvatarText</div>
+    <div class="thread-identity">
+        <span class="thread-name">@Model.Title</span>
+        <span class="thread-status">Active</span>
+    </div>
+</div>
+
+<div class="thread-messages" id="rkThreadMessages"
+     data-provider="@Model.ProviderKey" data-thread-id="@Model.ThreadId">
+    @foreach (var msg in Model.Messages)
+    {
+        <div class="msg @(msg.IsMine ? "msg-mine" : "msg-theirs")" data-id="@msg.MessageId">
+            @if (!msg.IsMine)
+            {
+                <div class="msg-avatar">@Model.AvatarText</div>
+            }
+            <div class="msg-body">
+                @if (msg.IsFile)
+                {
+                    @if (msg.FileType == "pdf")
+                    {
+                        <a class="msg-file msg-file-pdf" href="@msg.FileUrl" target="_blank" rel="noopener noreferrer">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">@msg.FileName</span>
+                            <span class="file-action">Download PDF</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="msg-file msg-file-image">
+                            <img src="@msg.FileUrl" alt="@msg.FileName" loading="lazy" onclick="rkOpenImage(this.src)" />
+                            <span class="file-name">@msg.FileName</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="msg-text">@msg.Text</p>
+                }
+                <div class="msg-meta">
+                    <span class="msg-time">@msg.SentAt.ToString("HH:mm")</span>
+                    @if (msg.IsMine)
+                    {
+                        <span class="msg-read-tick @(msg.IsRead == true ? "read" : "")">✓✓</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Model.Messages.Any())
+    {
+        <div class="thread-no-msgs"><p>No messages yet. Say hello! 👋</p></div>
+    }
+</div>
+
+<form class="compose-bar" id="rkComposeForm"
+      enctype="multipart/form-data"
+      data-provider="@Model.ProviderKey" data-thread-id="@Model.ThreadId">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="provider" value="@Model.ProviderKey" />
+    <input type="hidden" name="threadId" value="@Model.ThreadId" />
+
+    @if (Model.CanSendFiles)
+    {
+        <label class="compose-file-btn" for="rkFileInput" title="Attach (PDF/image, max 10 MB)">📎
+            <input type="file" id="rkFileInput" name="file"
+                   accept=".pdf,.png,.jpg,.jpeg,.webp" style="display:none" />
+        </label>
+    }
+
+    <div class="compose-input-wrap">
+        <textarea id="rkComposeText" name="text" placeholder="Type a message…"
+                  rows="1" maxlength="4000" autocomplete="off"></textarea>
+        <div class="file-preview" id="rkFilePreview" style="display:none">
+            <span id="rkFilePreviewName"></span>
+            <button type="button" id="rkClearFile" title="Remove">✕</button>
+        </div>
+    </div>
+
+    <button class="compose-send-btn" type="submit" title="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+    </button>
+</form>

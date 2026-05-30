@@ -227,6 +227,14 @@
                                 </a>
                             }
 
+                            <button type="button"
+                                    class="btn btn--secondary btn--sm btn--block rk-message-mentor"
+                                    data-mentor-id="@m.MentorId"
+                                    data-message-url="@Url.Action("Message", "Booking", new { area = "Trainee" })">
+                                <i class="fa-solid fa-comment" aria-hidden="true"></i>
+                                Message
+                            </button>
+
                         </div>
 
                     </article>
@@ -320,6 +328,14 @@
         });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeModal();
+        });
+
+        document.querySelectorAll('.rk-message-mentor').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.RkChat) {
+                    window.RkChat.startWithMentor(parseInt(btn.dataset.mentorId, 10), btn.dataset.messageUrl);
+                }
+            });
         });
     })();
     </script>

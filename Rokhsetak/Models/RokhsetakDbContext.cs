@@ -370,16 +370,11 @@ public partial class RokhsetakDbContext : DbContext
             entity.ToTable("Conversations", "Messaging");
 
             entity.Property(e => e.ConversationId).HasColumnName("conversation_id");
-            entity.Property(e => e.BookingId).HasColumnName("booking_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnName("created_at");
             entity.Property(e => e.MentorId).HasColumnName("mentor_id");
             entity.Property(e => e.TraineeId).HasColumnName("trainee_id");
-
-            entity.HasOne(d => d.Booking).WithMany(p => p.Conversations)
-                .HasForeignKey(d => d.BookingId)
-                .HasConstraintName("FK__Conversat__booki__0D125037");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.Conversations)
                 .HasForeignKey(d => d.MentorId)

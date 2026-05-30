@@ -4,6 +4,7 @@ using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.ViewModels.Messaging;
+using Rokhsetak.Services.Chat;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -26,12 +27,8 @@ public sealed class ConversationService : IConversationService
         _logger = logger;
     }
 
-    // ═════════════════════════════════════════════════════════════════════════
-    // AUTO-CREATION
-    // ═════════════════════════════════════════════════════════════════════════
-
-    public async Task<ServiceResult<int>> EnsureConversationExistsAsync(
-        int traineeId, int mentorId, int bookingId)
+    // ── REPLACES the old EnsureConversationExistsAsync ────────────────────────────
+    public async Task<ServiceResult<int>> EnsureConversationExistsAsync(int traineeId, int mentorId)
     {
         var existing = await _db.Conversations
             .FirstOrDefaultAsync(c => c.TraineeId == traineeId && c.MentorId == mentorId);
@@ -43,18 +40,133 @@ public sealed class ConversationService : IConversationService
         {
             TraineeId = traineeId,
             MentorId = mentorId,
-            BookingId = bookingId,
             CreatedAt = DateTime.UtcNow
         };
 
         _db.Conversations.Add(conversation);
         await _db.SaveChangesAsync();
 
-        _logger.LogInformation(
-            "Conversation {Id} created for Trainee {T} ↔ Mentor {M} (Booking {B})",
-            conversation.ConversationId, traineeId, mentorId, bookingId);
+        _logger.LogInformation("Conversation {Id} created for Trainee {T} ↔ Mentor {M}",
+            conversation.ConversationId, traineeId, mentorId);
 
         return ServiceResult<int>.Success(conversation.ConversationId);
+    }
+
+    // ── Neutral, role-agnostic reads/writes ───────────────────────────────────────
+    public async Task<IReadOnlyList<ChatThreadSummary>> GetConversationsForUserAsync(int userId)
+    {
+        var rows = await _db.Conversations
+            .Where(c => c.MentorId == userId || c.TraineeId == userId)
+            .Select(c => new
+            {
+                c.ConversationId,
+                OtherName = c.MentorId == userId
+                    ? c.Trainee.TraineeNavigation.FirstName + " " + c.Trainee.TraineeNavigation.LastName
+                    : c.Mentor.MentorNavigation.FirstName + " " + c.Mentor.MentorNavigation.LastName,
+                LastMsg = c.Messages.OrderByDescending(m => m.SentAt)
+                    .Select(m => new { m.MessageText, m.SentAt }).FirstOrDefault(),
+                LastMsgId = c.Messages.OrderByDescending(m => m.SentAt)
+                    .Select(m => (int?)m.MessageId).FirstOrDefault(),
+                UnreadCount = c.Messages.Count(m => m.IsRead == false && m.SenderId != userId)
+            })
+            .ToListAsync();
+
+        var lastMsgIds = rows.Where(r => r.LastMsgId.HasValue).Select(r => r.LastMsgId!.Value).ToHashSet();
+        var fileMessageIds = await _db.ConversationAttachments
+            .Where(a => a.MessageId != null && lastMsgIds.Contains(a.MessageId.Value))
+            .Select(a => a.MessageId!.Value).ToHashSetAsync();
+
+        return rows
+            .OrderByDescending(r => r.LastMsg?.SentAt)
+            .Select(r =>
+            {
+                bool isFile = r.LastMsgId.HasValue && fileMessageIds.Contains(r.LastMsgId.Value);
+                return new ChatThreadSummary
+                {
+                    ThreadId = r.ConversationId,
+                    Title = r.OtherName,
+                    AvatarText = string.IsNullOrWhiteSpace(r.OtherName) ? "?" : r.OtherName[..1].ToUpperInvariant(),
+                    LastMessage = isFile ? "📎 Attachment" : Truncate(r.LastMsg?.MessageText, 60),
+                    LastMessageAt = r.LastMsg?.SentAt,
+                    UnreadCount = r.UnreadCount,
+                    IsFile = isFile
+                };
+            })
+            .ToList();
+    }
+
+    public async Task<ChatThreadDetail?> GetConversationForUserAsync(int userId, int conversationId)
+    {
+        var conv = await _db.Conversations
+            .Where(c => c.ConversationId == conversationId && (c.MentorId == userId || c.TraineeId == userId))
+            .Select(c => new
+            {
+                c.ConversationId,
+                OtherName = c.MentorId == userId
+                    ? c.Trainee.TraineeNavigation.FirstName + " " + c.Trainee.TraineeNavigation.LastName
+                    : c.Mentor.MentorNavigation.FirstName + " " + c.Mentor.MentorNavigation.LastName
+            })
+            .FirstOrDefaultAsync();
+
+        if (conv is null) return null;
+
+        await MarkMessagesReadAsync(conversationId, userId);
+        var messages = await BuildNeutralMessageListAsync(conversationId, userId);
+
+        return new ChatThreadDetail
+        {
+            ThreadId = conv.ConversationId,
+            ProviderKey = ChatProviderKeys.Human,
+            Title = conv.OtherName,
+            AvatarText = string.IsNullOrWhiteSpace(conv.OtherName) ? "?" : conv.OtherName[..1].ToUpperInvariant(),
+            CanSendFiles = true,
+            Messages = messages
+        };
+    }
+
+    public async Task<ServiceResult> SendMessageForUserAsync(int conversationId, int userId, string? text, IFormFile? file)
+    {
+        bool owns = await _db.Conversations.AnyAsync(c =>
+            c.ConversationId == conversationId && (c.MentorId == userId || c.TraineeId == userId));
+        if (!owns) return ServiceResult.Failure("Conversation not found.");
+        return await SendInternalAsync(conversationId, userId, text, file); // reuses existing private method
+    }
+
+    public Task<int> GetUnreadCountForUserAsync(int userId)
+        => _db.Messages.CountAsync(m => m.IsRead == false && m.SenderId != userId
+            && (m.Conversation.MentorId == userId || m.Conversation.TraineeId == userId));
+
+    // ── helper: same shape as BuildMessageListAsync but neutral DTO ───────────────
+    private async Task<IReadOnlyList<ChatMessageDto>> BuildNeutralMessageListAsync(int conversationId, int currentUserId)
+    {
+        var attachments = await _db.ConversationAttachments
+            .Where(a => a.ConversationId == conversationId && a.MessageId != null)
+            .ToDictionaryAsync(a => a.MessageId!.Value);
+
+        var rows = await _db.Messages
+            .Where(m => m.ConversationId == conversationId)
+            .OrderBy(m => m.SentAt)
+            .Select(m => new { m.MessageId, m.SenderId, m.MessageText, m.IsRead, m.SentAt })
+            .ToListAsync();
+
+        return rows.Select(m =>
+        {
+            attachments.TryGetValue(m.MessageId, out var att);
+            bool isFile = att is not null;
+            return new ChatMessageDto
+            {
+                MessageId = m.MessageId,
+                IsMine = m.SenderId == currentUserId,
+                Text = isFile ? null : m.MessageText,
+                IsFile = isFile,
+                FileUrl = isFile ? att!.FilePath : null,
+                FileName = isFile ? att!.FileName : null,
+                FileType = isFile ? att!.FileType : null,
+                IsRead = m.IsRead,
+                SentAt = m.SentAt ?? DateTime.UtcNow,
+                Role = m.SenderId == currentUserId ? "user" : "other"
+            };
+        }).ToList();
     }
 
     // ═════════════════════════════════════════════════════════════════════════
