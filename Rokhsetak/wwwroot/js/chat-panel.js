@@ -118,9 +118,9 @@
             textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
         });
         textarea?.addEventListener('keydown', e => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                form.requestSubmit();
+                form.requestSubmit(); // triggers your existing submit handler
             }
         });
         fileInput?.addEventListener('change', () => {
