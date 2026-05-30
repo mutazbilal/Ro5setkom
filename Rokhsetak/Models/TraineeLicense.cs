@@ -27,7 +27,7 @@ public partial class TraineeLicense
 
     public virtual CompletionCertificate? CompletionCertificate { get; set; }
 
-    public virtual ExamAppointment? ExamAppointment { get; set; }
+    public virtual ICollection<ExamAppointment> ExamAppointments { get; set; } = new List<ExamAppointment>();
 
     public virtual LicenseType LicenseType { get; set; } = null!;
 

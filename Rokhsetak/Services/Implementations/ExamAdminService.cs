@@ -3,6 +3,7 @@ using Rokhsetak.Areas.Admin.ViewModels.Exams;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -15,7 +16,7 @@ public class ExamAdminService : IExamAdminService
         _context = context;
     }
 
-    public async Task<ServiceResult<AdminExamAppointmentListViewModel>> GetExamAppointmentsAsync(ExamFilter filter)
+    public async Task<ServiceResult<AdminExamAppointmentListViewModel>> GetExamAppointmentsAsync(ExamFilter filter, string culture)
     {
         if (filter.Page < 1) filter.Page = 1;
         if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
@@ -34,8 +35,9 @@ public class ExamAdminService : IExamAdminService
                 exam,
                 TraineeFirst = trainee.FirstName,
                 TraineeLast = trainee.LastName,
-                CenterName = center != null ? center.Name : "—",
-                LicenseName = lt != null ? lt.LicenseName : "—"
+                TraineeDisplayEn = trainee.DisplayNameEn,
+                CenterName = culture == "ar" ? center.Name : center.DisplayNameEn,
+                LicenseName = culture == "ar" ? lt.DisplayNameAr : lt.DisplayNameEn
             };
 
         if (!string.IsNullOrWhiteSpace(filter.Status))
@@ -69,7 +71,7 @@ public class ExamAdminService : IExamAdminService
                 ExamAppointmentId = x.ea.ExamAppointmentId,
                 OfficialExamId = x.exam.OfficialExamId,
                 TraineeId = x.ea.TraineeId,
-                TraineeName = x.TraineeFirst + " " + x.TraineeLast,
+                TraineeName = culture == "ar"? x.TraineeFirst + " " + x.TraineeLast :x.TraineeDisplayEn,
                 ExamDate = x.exam.ExamDate,
                 ExamTime = x.exam.ExamTime,
                 ExamType = x.exam.ExamType,

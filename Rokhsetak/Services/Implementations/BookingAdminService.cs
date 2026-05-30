@@ -3,6 +3,7 @@ using Rokhsetak.Areas.Admin.ViewModels.Bookings;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -15,7 +16,7 @@ public class BookingAdminService : IBookingAdminService
         _context = context;
     }
 
-    public async Task<ServiceResult<AdminBookingListViewModel>> GetBookingsAsync(BookingFilter filter)
+    public async Task<ServiceResult<AdminBookingListViewModel>> GetBookingsAsync(BookingFilter filter, string culture = "ar")
     {
         if (filter.Page < 1) filter.Page = 1;
         if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
@@ -31,9 +32,11 @@ public class BookingAdminService : IBookingAdminService
                 b,
                 TraineeFirst = trainee.FirstName,
                 TraineeLast = trainee.LastName,
+                TraineeDisplayEn = trainee.DisplayNameEn,
                 MentorFirst = mentor.FirstName,
                 MentorLast = mentor.LastName,
-                LicenseName = lt != null ? lt.LicenseName : "—"
+                MentorDisplayEn = mentor.DisplayNameEn,
+                LicenseName = culture == "ar"? lt.DisplayNameAr :lt.DisplayNameEn,
             };
 
         if (!string.IsNullOrWhiteSpace(filter.Status))
@@ -70,9 +73,9 @@ public class BookingAdminService : IBookingAdminService
             {
                 BookingId = x.b.BookingId,
                 TraineeId = x.b.TraineeId,
-                TraineeName = x.TraineeFirst + " " + x.TraineeLast,
+                TraineeName = culture == "ar"? x.TraineeFirst + " " + x.TraineeLast :x.TraineeDisplayEn,
                 MentorId = x.b.MentorId,
-                MentorName = x.MentorFirst + " " + x.MentorLast,
+                MentorName = culture == "ar" ? x.MentorFirst + " " + x.MentorLast :x.TraineeDisplayEn,
                 BookingDate = x.b.BookingDate,
                 StartTime = x.b.StartTime,
                 EndTime = x.b.EndTime,

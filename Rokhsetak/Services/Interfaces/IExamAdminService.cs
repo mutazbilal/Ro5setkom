@@ -5,5 +5,5 @@ namespace Rokhsetak.Services.Interfaces;
 
 public interface IExamAdminService
 {
-    Task<ServiceResult<AdminExamAppointmentListViewModel>> GetExamAppointmentsAsync(ExamFilter filter);
+    Task<ServiceResult<AdminExamAppointmentListViewModel>> GetExamAppointmentsAsync(ExamFilter filter, string culture);
 }

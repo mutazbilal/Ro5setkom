@@ -8,7 +8,7 @@ namespace Rokhsetak.Services.Interfaces
         /// <summary>
         /// Validates credentials, enforces lockout, returns a LoginResultDto on success.
         /// </summary>
-        Task<ServiceResult<LoginResultDto>> LoginAsync(LoginViewModel model, string ipAddress);
+        Task<ServiceResult<LoginResultDto>> LoginAsync(LoginViewModel model, string ipAddress, string culture);
 
         /// <summary>
         /// Clears any server-side session state for the user (cookie is handled by controller).

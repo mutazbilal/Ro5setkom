@@ -29,5 +29,6 @@ namespace Rokhsetak.ViewModels.Profile
         public string Gender { get; set; }
         [ReadOnly(true)]
         public string NationalId { get; set; }
+        public string? DisplayNameEn { get; set; }
     }
 }

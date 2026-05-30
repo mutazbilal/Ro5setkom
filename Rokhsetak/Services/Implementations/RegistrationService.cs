@@ -178,7 +178,8 @@ public class RegistrationService : IRegistrationService
                 PhoneNumber      = model.PhoneNumber,
                 PasswordHash     = BCrypt.Net.BCrypt.HashPassword(model.Password),
                 IsActive         = true,
-                LanguagePreference = "ar"
+                LanguagePreference = "ar",
+                DisplayNameEn = model.DisplayNameEn,
             };
             _db.Users.Add(user);
             await _db.SaveChangesAsync(); // flush to get UserId
@@ -302,7 +303,8 @@ public class RegistrationService : IRegistrationService
                 PhoneNumber      = model.PhoneNumber,
                 PasswordHash     = BCrypt.Net.BCrypt.HashPassword(model.Password),
                 IsActive         = true, // active user record; login blocked by app status
-                LanguagePreference = "ar"
+                LanguagePreference = "ar",
+                DisplayNameEn = model.DisplayNameEn,
             };
             _db.Users.Add(user);
             await _db.SaveChangesAsync();

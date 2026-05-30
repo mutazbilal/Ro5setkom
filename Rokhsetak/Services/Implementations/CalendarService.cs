@@ -15,7 +15,7 @@ public class CalendarService : ICalendarService
         _context = context;
     }
 
-    public async Task<ServiceResult<List<CalendarEventViewModel>>> GetCalendarEventsAsync(int traineeId)
+    public async Task<ServiceResult<List<CalendarEventViewModel>>> GetCalendarEventsAsync(int traineeId, string culture)
     {
         var events = new List<CalendarEventViewModel>();
 
@@ -31,7 +31,8 @@ public class CalendarService : ICalendarService
                 b.EndTime,
                 b.Status,
                 b.SessionType,
-                MentorName = u.FirstName + " " + u.LastName
+                MentorName = u.FirstName + " " + u.LastName,
+                u.DisplayNameEn
             }
         ).ToListAsync();
 
@@ -47,10 +48,10 @@ public class CalendarService : ICalendarService
 
             var startDt = b.BookingDate.ToDateTime(b.StartTime);
             var endDt = b.BookingDate.ToDateTime(b.EndTime);
-
+            var mentorName = culture == "ar"? b.MentorName :b.DisplayNameEn;
             events.Add(new CalendarEventViewModel
             {
-                Title = $"{b.SessionType.Capitalize()} session — {b.MentorName}",
+                Title = $"{b.SessionType.Capitalize()} session — {mentorName}",
                 Start = startDt.ToString("o"),
                 End = endDt.ToString("o"),
                 Color = color,
@@ -83,7 +84,7 @@ public class CalendarService : ICalendarService
                           x.ExamType,
                           x.ExamDate,
                           x.ExamTime,
-                          CenterName = c.Name,
+                          CenterName = culture == "ar" ? c.Name : c.DisplayNameEn,
                           City = c.City
                       })
                 .ToListAsync();

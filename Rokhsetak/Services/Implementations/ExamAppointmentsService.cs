@@ -79,7 +79,7 @@ public class ExamAppointmentService : IExamAppointmentService
             .Select(e => new ExamSlotViewModel
             {
                 OfficialExamId = e.OfficialExamId,
-                CenterName = e.Center.Name,
+                CenterName = culture == "ar"? e.Center.Name :e.Center.DisplayNameEn,
                 CityId = e.Center.CityId,
                 ExamDate = e.ExamDate,
                 ExamTime = e.ExamTime,
@@ -222,7 +222,7 @@ public class ExamAppointmentService : IExamAppointmentService
                 x.e.ExamType,
                 x.e.ExamDate,
                 x.e.ExamTime,
-                CenterName = x.c.Name,
+                CenterName = culture == "ar" ? x.c.Name : x.c.DisplayNameEn,
                 City = x.c.City.CityTranslations
                     .Where(ct => ct.CityId == x.c.CityId
                            && ct.LanguageCode == culture)

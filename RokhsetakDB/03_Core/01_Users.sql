@@ -19,6 +19,7 @@ CREATE TABLE Core.Users (
     is_active           BIT           DEFAULT 1,
     created_at          DATETIME2     DEFAULT GETDATE(),
     updated_at          DATETIME2     DEFAULT GETDATE(),
+    display_name_en NVARCHAR(255) NULL,
 
     FOREIGN KEY (role_id)     REFERENCES Lookup.Roles(role_id),
     FOREIGN KEY (national_id) REFERENCES Gov.GovCitizens(national_id),  -- identity must exist in gov registry
