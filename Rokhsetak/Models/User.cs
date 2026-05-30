@@ -45,6 +45,8 @@ public partial class User
 
     public DateTime? UpdatedAt { get; set; }
 
+    public string? DisplayNameEn { get; set; }
+
     public virtual Admin? Admin { get; set; }
 
     public virtual ICollection<AichatSession> AichatSessions { get; set; } = new List<AichatSession>();

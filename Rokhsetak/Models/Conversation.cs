@@ -11,11 +11,11 @@ public partial class Conversation
 
     public int MentorId { get; set; }
 
-    public int BookingId { get; set; }
+    public int? BookingId { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual Booking Booking { get; set; } = null!;
+    public virtual Booking? Booking { get; set; }
 
     public virtual ICollection<ConversationAttachment> ConversationAttachments { get; set; } = new List<ConversationAttachment>();
 
