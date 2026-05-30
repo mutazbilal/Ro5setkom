@@ -1,8 +1,11 @@
 @using Rokhsetak.Areas.Admin.ViewModels.MentorApplications
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorApplicationDetailViewModel
 @{
-    ViewData["Title"] = $"Application · {Model.FullName}";
-    ViewData["Subtitle"] = $"Submitted {Model.SubmittedAt?.ToString("dd MMM yyyy") ?? "—"}";
+    ViewData["Title"] = string.Format(L["Admin_Application_Detail_Title"], Model.FullName);
+    ViewData["Subtitle"] = string.Format(L["Admin_Application_Detail_Submitted"], Model.SubmittedAt?.ToString("dd MMM yyyy") ?? "—");
     ViewData["ActiveNav"] = "applications";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     bool isPending = Model.Status.Equals("pending", StringComparison.OrdinalIgnoreCase);
@@ -16,26 +19,26 @@
                 <h3>@Model.FullName</h3>
                 <p>@Model.Email</p>
             </div>
-            <span class="admin-pill admin-pill--@Model.Status.ToLower()">@Model.Status</span>
+            <span class="admin-pill admin-pill--@Model.Status.ToLower()">@L[$"Admin_Application_Status_{Model.Status}"]</span>
         </div>
 
         <hr class="admin-divider" />
-        <p class="admin-section-title">Personal information</p>
+        <p class="admin-section-title">@L["Admin_Application_Section_Personal"]</p>
         <dl class="admin-detail-list">
-            <dt>National ID</dt>    <dd>@(Model.NationalId ?? "—")</dd>
-            <dt>Phone</dt>          <dd>@(Model.PhoneNumber ?? "—")</dd>
-            <dt>Date of birth</dt>  <dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
-            <dt>Gender</dt>         <dd>@(Model.Gender ?? "—")</dd>
-            <dt>City</dt>           <dd>@(Model.CityName ?? "—")</dd>
-            <dt>Province</dt>       <dd>@(Model.ProvinceName ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_NationalId"]</dt>    <dd>@(Model.NationalId ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_Phone"]</dt>          <dd>@(Model.PhoneNumber ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_DateOfBirth"]</dt>  <dd>@(Model.DateOfBirth?.ToString("dd MMM yyyy") ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_Gender"]</dt>         <dd>@(Model.Gender ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_City"]</dt>           <dd>@(Model.CityName ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_Province"]</dt>       <dd>@(Model.ProvinceName ?? "—")</dd>
         </dl>
 
         <hr class="admin-divider" />
-        <p class="admin-section-title">Mentor profile</p>
+        <p class="admin-section-title">@L["Admin_Application_Section_MentorProfile"]</p>
         <dl class="admin-detail-list">
-            <dt>License type</dt>   <dd>@Model.LicenseType</dd>
-            <dt>Vehicle</dt>        <dd>@(Model.VehicleType ?? "—")</dd>
-            <dt>Price / session</dt><dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} JOD" : "—")</dd>
+            <dt>@L["Admin_Application_Field_LicenseType"]</dt>   <dd>@Model.LicenseType</dd>
+            <dt>@L["Admin_Application_Field_Vehicle"]</dt>        <dd>@(Model.VehicleType ?? "—")</dd>
+            <dt>@L["Admin_Application_Field_PricePerSession"]</dt><dd>@(Model.PricePerSession.HasValue ? $"{Model.PricePerSession:0.00} {L["Admin_Application_Currency_JOD"]}" : "—")</dd>
         </dl>
     </div>
 
@@ -43,25 +46,25 @@
     <div class="app-layout__sidebar">
         <div class="admin-card admin-card--padded">
             <p class="admin-section-title">
-                <i class="fa-solid fa-file-shield" aria-hidden="true"></i> Certification
+                <i class="fa-solid fa-file-shield" aria-hidden="true"></i> @L["Admin_Application_Certification_Title"]
             </p>
             @if (Model.HasCertificationFile)
             {
-                <p class="cert-upload-info">Uploaded @(Model.CertificationUploadedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")</p>
+                <p class="cert-upload-info">@string.Format(L["Admin_Application_Cert_UploadedAt"], Model.CertificationUploadedAt?.ToString("dd MMM yyyy HH:mm") ?? "—")</p>
                 <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Download"
                    asp-route-id="@Model.ApplicationId"
                    asp-route-fileName="@Model.CertificationFileName"
                    class="admin-btn-primary" style="width:100%;justify-content:center;text-decoration:none">
                     <i class="fa-solid fa-download" aria-hidden="true"></i>
-                    Download @(Model.CertificationFileName ?? "certification")
+                    @string.Format(L["Admin_Application_Cert_Download"], Model.CertificationFileName ?? "certification")
                 </a>
-                <p class="cert-secure-note">Files are served from a secure admin-only endpoint.</p>
+                <p class="cert-secure-note">@L["Admin_Application_Cert_SecureNote"]</p>
             }
             else
             {
                 <div class="no-cert-banner">
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                    No certification file has been uploaded for this application.
+                    @L["Admin_Application_Cert_None"]
                 </div>
             }
         </div>
@@ -69,18 +72,18 @@
         @if (isPending)
         {
             <div class="admin-card admin-card--padded">
-                <p class="admin-section-title">Decision</p>
+                <p class="admin-section-title">@L["Admin_Application_Decision_Title"]</p>
                 <div class="decision-stack">
                     <button type="button" class="admin-btn-success"
                             onclick="document.getElementById('approveDialog').showModal()">
-                        <i class="fa-solid fa-check" aria-hidden="true"></i> Approve application
+                        <i class="fa-solid fa-check" aria-hidden="true"></i> @L["Admin_Application_Button_Approve"]
                     </button>
                     <button type="button" class="admin-btn-danger"
                             onclick="document.getElementById('rejectDialog').showModal()">
-                        <i class="fa-solid fa-xmark" aria-hidden="true"></i> Reject application
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i> @L["Admin_Application_Button_Reject"]
                     </button>
                     <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index" class="admin-back-link">
-                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to applications
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> @L["Admin_Application_Button_Back"]
                     </a>
                 </div>
             </div>
@@ -88,10 +91,10 @@
         else
         {
             <div class="admin-card admin-card--padded">
-                <p class="already-reviewed">This application has already been reviewed.</p>
+                <p class="already-reviewed">@L["Admin_Application_AlreadyReviewed"]</p>
                 <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index"
                    class="admin-back-link" style="width:100%;justify-content:center">
-                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to applications
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> @L["Admin_Application_Button_Back"]
                 </a>
             </div>
         }
@@ -105,21 +108,21 @@
             @Html.AntiForgeryToken()
             <input type="hidden" name="id" value="@Model.ApplicationId" />
             <div class="admin-dialog__header">
-                <span class="admin-dialog__title" id="approve-title">Approve application?</span>
+                <span class="admin-dialog__title" id="approve-title">@L["Admin_Application_ApproveDialog_Title"]</span>
                 <button type="button" class="admin-dialog__close"
-                        onclick="document.getElementById('approveDialog').close()" aria-label="Close">
+                        onclick="document.getElementById('approveDialog').close()" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="admin-dialog__body">
-                <p>You're about to approve <strong>@Model.FullName</strong> as a mentor.</p>
-                <p style="color:var(--muted)">They'll be notified by email and will become visible to trainees immediately.</p>
+                <p>@Html.Raw(string.Format(L["Admin_Application_ApproveDialog_Body"], $"<strong>{Model.FullName}</strong>"))</p>
+                <p style="color:var(--muted)">@L["Admin_Application_ApproveDialog_Note"]</p>
             </div>
             <div class="admin-dialog__footer">
                 <button type="button" class="admin-dialog__cancel"
-                        onclick="document.getElementById('approveDialog').close()">Cancel</button>
+                        onclick="document.getElementById('approveDialog').close()">@L["Common_Cancel"]</button>
                 <button type="submit" class="admin-btn-success">
-                    <i class="fa-solid fa-check" aria-hidden="true"></i> Approve
+                    <i class="fa-solid fa-check" aria-hidden="true"></i> @L["Admin_Application_ApproveDialog_Confirm"]
                 </button>
             </div>
         </form>
@@ -130,29 +133,29 @@
             @Html.AntiForgeryToken()
             <input type="hidden" name="ApplicationId" value="@Model.ApplicationId" />
             <div class="admin-dialog__header">
-                <span class="admin-dialog__title" id="reject-title">Reject application?</span>
+                <span class="admin-dialog__title" id="reject-title">@L["Admin_Application_RejectDialog_Title"]</span>
                 <button type="button" class="admin-dialog__close"
-                        onclick="document.getElementById('rejectDialog').close()" aria-label="Close">
+                        onclick="document.getElementById('rejectDialog').close()" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="admin-dialog__body">
-                <p>You're about to reject <strong>@Model.FullName</strong>.</p>
+                <p>@Html.Raw(string.Format(L["Admin_Application_RejectDialog_Body"], $"<strong>{Model.FullName}</strong>"))</p>
                 <div class="reject-field">
                     <label for="rejectReason">
-                        Rejection reason <span style="color:var(--danger)" aria-hidden="true">*</span>
+                        @L["Admin_Application_RejectDialog_ReasonLabel"] <span style="color:var(--danger)" aria-hidden="true">*</span>
                     </label>
                     <textarea id="rejectReason" name="Reason" rows="4" maxlength="500"
                               required aria-required="true"
-                              placeholder="Explain why this application is being rejected (sent to applicant)."></textarea>
-                    <small>Required, 5–500 characters. This message is included in the email to the applicant.</small>
+                              placeholder="@L["Admin_Application_RejectDialog_ReasonPlaceholder"]"></textarea>
+                    <small>@L["Admin_Application_RejectDialog_ReasonHint"]</small>
                 </div>
             </div>
             <div class="admin-dialog__footer">
                 <button type="button" class="admin-dialog__cancel"
-                        onclick="document.getElementById('rejectDialog').close()">Cancel</button>
+                        onclick="document.getElementById('rejectDialog').close()">@L["Common_Cancel"]</button>
                 <button type="submit" class="admin-btn-danger">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i> Reject
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i> @L["Admin_Application_RejectDialog_Confirm"]
                 </button>
             </div>
         </form>

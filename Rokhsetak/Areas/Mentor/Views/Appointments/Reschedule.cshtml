@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Appointments
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model RescheduleViewModel
 @{
-    ViewData["Title"] = "Reschedule Session";
+    ViewData["Title"] = L["Mentor_RescheduleSession"];
 
     var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd");
 }
@@ -21,7 +24,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -30,10 +33,10 @@
         <!-- ============ Hero ============ -->
         <section class="appointments-hero appointments-hero--compact" aria-labelledby="reschedule-page-title">
             <div class="appointments-hero__intro">
-                <span class="appointments-hero__eyebrow">Reschedule Session</span>
-                <h1 id="reschedule-page-title" class="appointments-hero__title">Pick a new time</h1>
+                <span class="appointments-hero__eyebrow">@L["Mentor_RescheduleSession"]</span>
+                <h1 id="reschedule-page-title" class="appointments-hero__title">@L["Mentor_PickNewTime"]</h1>
                 <p class="appointments-hero__description">
-                    Choose a new date and time. The original booking will be cancelled and replaced.
+                    @L["Mentor_RescheduleDescription"]
                 </p>
             </div>
 
@@ -43,14 +46,14 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Appointments</span>
+                    <span>@L["Mentor_Appointments"]</span>
                 </a>
             </div>
         </section>
 
         <!-- ============ Form card ============ -->
         <section class="form-card" aria-labelledby="reschedule-form-title">
-            <h2 id="reschedule-form-title" class="visually-hidden">Reschedule form</h2>
+            <h2 id="reschedule-form-title" class="visually-hidden">@L["Mentor_RescheduleFormTitle"]</h2>
 
             <!-- Context strip: who + what -->
             <div class="context-strip">
@@ -58,14 +61,14 @@
                     <i class="fa-solid fa-user-graduate"></i>
                 </span>
                 <div class="context-strip__body">
-                    <span class="context-strip__label">Trainee</span>
+                    <span class="context-strip__label">@L["Mentor_Trainee"]</span>
                     <span class="context-strip__name">@Model.TraineeName</span>
                 </div>
                 <div class="context-strip__meta">
                     <span class="chip @(string.Equals(Model.SessionType, "practical", System.StringComparison.OrdinalIgnoreCase) ? "chip--accent" : "chip--primary")">
                         <i class="fa-solid @(string.Equals(Model.SessionType, "practical", System.StringComparison.OrdinalIgnoreCase) ? "fa-car" : "fa-book")"
                            aria-hidden="true"></i>
-                        @Model.SessionType
+                        @(Model.SessionType == "practical" ? L["Booking_Practical"] : L["Booking_Theoretical"])
                     </span>
                 </div>
             </div>
@@ -90,7 +93,7 @@
                            min="@minDate"
                            placeholder=" "
                            aria-required="true" />
-                    <label asp-for="NewDate" class="field-floating__label">New date</label>
+                    <label asp-for="NewDate" class="field-floating__label">@L["Mentor_NewDate"]</label>
                     <span asp-validation-for="NewDate" class="field-floating__error"></span>
                 </div>
 
@@ -102,7 +105,7 @@
                                class="field-floating__input"
                                placeholder=" "
                                aria-required="true" />
-                        <label asp-for="NewStartTime" class="field-floating__label">Start time</label>
+                        <label asp-for="NewStartTime" class="field-floating__label">@L["Mentor_StartTime"]</label>
                         <span asp-validation-for="NewStartTime" class="field-floating__error"></span>
                     </div>
                     <div class="field-floating field-floating--filled">
@@ -111,7 +114,7 @@
                                class="field-floating__input"
                                placeholder=" "
                                aria-required="true" />
-                        <label asp-for="NewEndTime" class="field-floating__label">End time</label>
+                        <label asp-for="NewEndTime" class="field-floating__label">@L["Mentor_EndTime"]</label>
                         <span asp-validation-for="NewEndTime" class="field-floating__error"></span>
                     </div>
                 </div>
@@ -121,8 +124,7 @@
                         <i class="fa-solid fa-circle-info"></i>
                     </span>
                     <div class="callout__body">
-                        The original booking will be cancelled and a new confirmed session created in its place.
-                        The trainee will be notified automatically.
+                        @L["Mentor_RescheduleCallout"]
                     </div>
                 </div>
 
@@ -132,11 +134,11 @@
                        asp-action="Index"
                        class="btn-action btn-action--ghost">
                         <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                        <span>Cancel</span>
+                        <span>@L["Common_Cancel"]</span>
                     </a>
                     <button type="submit" class="btn-action btn-action--gradient">
                         <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
-                        <span>Confirm Reschedule</span>
+                        <span>@L["Mentor_ConfirmReschedule"]</span>
                     </button>
                 </div>
             </form>

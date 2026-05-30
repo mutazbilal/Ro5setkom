@@ -1,3 +1,6 @@
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @{
     var active = ViewData["ActiveNav"] as string ?? "";
 }
@@ -6,7 +9,7 @@
         <span class="admin-sidebar__brand-mark">R</span>
         <div class="admin-sidebar__brand-text">
             <strong>Rokhsetak</strong>
-            <small>Admin Portal</small>
+            <small>@L["Admin_Layout_Title"]</small>
         </div>
     </div>
 
@@ -15,37 +18,37 @@
            class="admin-sidebar__link @(active == "dashboard" ? "is-active" : "")"
            aria-current="@(active == "dashboard" ? "page" : null)">
             <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-            <span>Dashboard</span>
+            <span>@L["Admin_Nav_Dashboard"]</span>
         </a>
         <a asp-area="Admin" asp-controller="Users" asp-action="Index"
            class="admin-sidebar__link @(active == "users" ? "is-active" : "")"
            aria-current="@(active == "users" ? "page" : null)">
             <i class="fa-solid fa-users" aria-hidden="true"></i>
-            <span>Users</span>
+            <span>@L["Admin_Nav_Users"]</span>
         </a>
         <a asp-area="Admin" asp-controller="Mentors" asp-action="Index"
            class="admin-sidebar__link @(active == "mentors" ? "is-active" : "")"
            aria-current="@(active == "mentors" ? "page" : null)">
             <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
-            <span>Mentors</span>
+            <span>@L["Admin_Nav_Mentors"]</span>
         </a>
         <a asp-area="Admin" asp-controller="MentorApplications" asp-action="Index"
            class="admin-sidebar__link @(active == "applications" ? "is-active" : "")"
            aria-current="@(active == "applications" ? "page" : null)">
             <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
-            <span>Applications</span>
+            <span>@L["Admin_Nav_Applications"]</span>
         </a>
         <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
            class="admin-sidebar__link @(active == "bookings" ? "is-active" : "")"
            aria-current="@(active == "bookings" ? "page" : null)">
             <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-            <span>Bookings &amp; Exams</span>
+            <span>@L["Admin_Nav_Bookings"]</span>
         </a>
         <a asp-area="Admin" asp-controller="BlockedDates" asp-action="Index"
            class="admin-sidebar__link @(active == "blocked-dates" ? "is-active" : "")"
            aria-current="@(active == "blocked-dates" ? "page" : null)">
             <i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i>
-            <span>Blocked Dates</span>
+            <span>@L["Admin_Nav_BlockedDates"]</span>
         </a>
     </nav>
 

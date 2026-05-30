@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Dashboard
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorDashboardViewModel
 @{
-    ViewData["Title"] = "Mentor Dashboard";
+    ViewData["Title"] = L["Mentor_Dashboard"];
 
     var nowTime = TimeOnly.FromDateTime(DateTime.Now);
 
@@ -35,11 +38,11 @@
     }
     else if (sessions.Any())
     {
-        nextSessionText = "All sessions for today have started";
+        nextSessionText = L["Mentor_NextSession_AllStarted"];
     }
     else
     {
-        nextSessionText = "No sessions scheduled for today";
+        nextSessionText = L["Mentor_NextSession_NoSessions"];
     }
 
     var pendingCount = Model.TotalPendingCount;
@@ -60,10 +63,10 @@
     /// </summary>
     (string iconClass, string modifier, string label) SessionStatus(SessionCardViewModel s)
     {
-        if (s.FeedbackGiven) return ("fa-solid fa-circle-check",  "completed",   "complete");
-        if (s.CanMarkDone)   return ("fa-solid fa-bolt",          "up-next",     "ready");
-        if (s.CanFeedback)   return ("fa-solid fa-comment-dots",  "in-progress", "feedback");
-        return ("fa-regular fa-clock", "pending", "scheduled");
+        if (s.FeedbackGiven) return ("fa-solid fa-circle-check",  "completed",   L["Mentor_Complete"]);
+        if (s.CanMarkDone)   return ("fa-solid fa-bolt",          "up-next",     L["Mentor_Ready"]);
+        if (s.CanFeedback)   return ("fa-solid fa-comment-dots",  "in-progress", L["Mentor_Feedback"]);
+        return ("fa-regular fa-clock", "pending", L["Mentor_Scheduled"]);
     }
 
     /// <summary>
@@ -72,8 +75,8 @@
     /// </summary>
     (string iconClass, string modifier, string label) SlotStatus(AvailabilitySlotViewModel slot)
         => slot.IsBooked
-            ? ("fa-solid fa-circle-check", "in-progress", "booked")
-            : ("fa-regular fa-circle",     "completed",   "free");
+            ? ("fa-solid fa-circle-check", "in-progress", L["Mentor_Booked"])
+            : ("fa-regular fa-circle",     "completed",   L["Mentor_Free"]);
 }
 
 @section Styles {
@@ -92,7 +95,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -105,7 +108,7 @@
                 <button type="button"
                         class="dashboard-alert__close"
                         data-alert-dismiss
-                        aria-label="Close">
+                        aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -114,25 +117,25 @@
         <!-- ============ Hero ============ -->
         <section class="dashboard-hero" aria-labelledby="dashboard-title">
             <div class="dashboard-hero__intro">
-                <span class="dashboard-hero__eyebrow">Mentor Dashboard</span>
-                <h1 id="dashboard-title" class="dashboard-hero__title">Your Day at a Glance</h1>
+                <span class="dashboard-hero__eyebrow">@L["Mentor_Dashboard"]</span>
+                <h1 id="dashboard-title" class="dashboard-hero__title">@L["Mentor_YourDayAtAGlance"]</h1>
                 <div class="dashboard-hero__meta">
-                    <span class="chip chip--primary" aria-label="Today's date">
+                    <span class="chip chip--primary" aria-label="@L["Mentor_TodaysDate"]">
                         <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
                         @Model.Today.ToString("dddd, dd MMM")
                     </span>
                     @if (pendingCount > 0)
                     {
-                        <span class="chip chip--soft" aria-label="Pending requests">
+                        <span class="chip chip--soft" aria-label="@L["Mentor_PendingRequests"]">
                             <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
-                            @pendingCount Pending
+                            @pendingCount @L["Mentor_Pending"]
                         </span>
                     }
                     else
                     {
-                        <span class="chip chip--soft" aria-label="Inbox status">
+                        <span class="chip chip--soft" aria-label="@L["Mentor_InboxStatus"]">
                             <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                            All caught up
+                            @L["Mentor_AllCaughtUp"]
                         </span>
                     }
                 </div>
@@ -144,7 +147,7 @@
                    asp-action="Index"
                    class="btn-action btn-action--outline">
                     <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                    <span>Set Availability</span>
+                    <span>@L["Mentor_SetAvailability"]</span>
                 </a>
             </div>
         </section>
@@ -153,15 +156,15 @@
         <section class="progress-card" aria-labelledby="snapshot-card-label">
             <div class="progress-card__head">
                 <div>
-                    <span id="snapshot-card-label" class="progress-card__label">Today's Snapshot</span>
+                    <span id="snapshot-card-label" class="progress-card__label">@L["Mentor_TodaysSnapshot"]</span>
                     <p class="progress-card__sublabel">
                         @if (slotsCount > 0)
                         {
-                            <text>@slotsBooked of @slotsCount slots booked today</text>
+                            @string.Format(L["Mentor_BookedOfSlots"], slotsBooked, slotsCount)
                         }
                         else
                         {
-                            <text>No availability set for today</text>
+                            @L["Mentor_NoAvailabilitySetToday"]
                         }
                     </p>
                 </div>
@@ -175,7 +178,7 @@
                  aria-valuenow="@utilizationPct"
                  aria-valuemin="0"
                  aria-valuemax="100"
-                 aria-label="Slot utilization today">
+                 aria-label="@L["Mentor_SlotUtilizationAria"]">
                 <div class="progress-card__bar-fill" style="--progress-value: @(utilizationPct)%"></div>
             </div>
 
@@ -184,17 +187,13 @@
                     <i class="fa-solid fa-forward"></i>
                 </span>
                 <span class="progress-card__next-text">
-                    <span class="progress-card__next-label">Next session</span>
+                    <span class="progress-card__next-label">@L["Mentor_NextSession"]</span>
                     <span class="progress-card__next-value">@nextSessionText</span>
                 </span>
             </div>
         </section>
 
-        <!-- ============ Tracks (Sessions + Availability) ============
-             Reuses the existing track-card colour variants for visual parity:
-             --theory    → navy gradient header   → used here for "Today's Sessions"
-             --practical → orange/gold gradient   → used here for "Today's Availability"
-        -->
+        <!-- ============ Tracks (Sessions + Availability) ============ -->
         <div class="tracks-grid">
 
             <!-- Track 01: Today's Sessions -->
@@ -204,10 +203,10 @@
                         <i class="fa-solid fa-calendar-check"></i>
                     </span>
                     <div class="track-card__headings">
-                        <p class="track-card__eyebrow">Track 01</p>
-                        <h2 id="track-sessions-title" class="track-card__title">Today's Sessions</h2>
+                        <p class="track-card__eyebrow">@L["Dashboard_Track01"]</p>
+                        <h2 id="track-sessions-title" class="track-card__title">@L["Mentor_TodaysSessions"]</h2>
                     </div>
-                    <span class="track-card__count" aria-label="Sessions today">
+                    <span class="track-card__count" aria-label="@L["Mentor_SessionsTodayAria"]">
                         @sessionsCount
                     </span>
                 </header>
@@ -215,14 +214,14 @@
                 <div class="track-card__progress">
                     <div class="track-card__progress-row">
                         <span class="track-card__progress-label">
-                            @sessionsDone of @sessionsCount complete
+                            @string.Format(L["Mentor_CompletedOfSessions"], sessionsDone, sessionsCount)
                         </span>
                         <span class="track-card__progress-value">@sessionsPct%</span>
                     </div>
                     <div class="track-card__progress-bar"
                          role="progressbar"
                          aria-valuenow="@sessionsPct" aria-valuemin="0" aria-valuemax="100"
-                         aria-label="Sessions completion">
+                         aria-label="@L["Mentor_SessionsCompletionAria"]">
                         <div class="track-card__progress-fill"
                              style="--track-progress: @(sessionsPct)%"></div>
                     </div>
@@ -247,7 +246,7 @@
                             </div>
                             @if (isUpNext)
                             {
-                                <span class="status-pill status-pill--up-next">up next</span>
+                                <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
                             }
                             else
                             {
@@ -259,7 +258,7 @@
                     {
                         <li class="module-list__empty">
                             <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                            <span>No confirmed sessions for today.</span>
+                            <span>@L["Mentor_NoConfirmedSessionsToday"]</span>
                         </li>
                     }
                 </ul>
@@ -272,10 +271,10 @@
                         <i class="fa-solid fa-clock"></i>
                     </span>
                     <div class="track-card__headings">
-                        <p class="track-card__eyebrow">Track 02</p>
-                        <h2 id="track-availability-title" class="track-card__title">Today's Availability</h2>
+                        <p class="track-card__eyebrow">@L["Dashboard_Track02"]</p>
+                        <h2 id="track-availability-title" class="track-card__title">@L["Mentor_TodaysAvailability"]</h2>
                     </div>
-                    <span class="track-card__count" aria-label="Slots today">
+                    <span class="track-card__count" aria-label="@L["Mentor_SlotsTodayAria"]">
                         @slotsCount
                     </span>
                 </header>
@@ -283,14 +282,14 @@
                 <div class="track-card__progress">
                     <div class="track-card__progress-row">
                         <span class="track-card__progress-label">
-                            @slotsBooked of @slotsCount booked
+                            @string.Format(L["Mentor_BookedOfSlots"], slotsBooked, slotsCount)
                         </span>
                         <span class="track-card__progress-value">@slotsPct%</span>
                     </div>
                     <div class="track-card__progress-bar"
                          role="progressbar"
                          aria-valuenow="@slotsPct" aria-valuemin="0" aria-valuemax="100"
-                         aria-label="Slot utilization">
+                         aria-label="@L["Mentor_SlotUtilizationAria"]">
                         <div class="track-card__progress-fill"
                              style="--track-progress: @(slotsPct)%"></div>
                     </div>
@@ -315,7 +314,7 @@
                             </div>
                             @if (isUpNext)
                             {
-                                <span class="status-pill status-pill--up-next">up next</span>
+                                <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
                             }
                             else
                             {
@@ -327,7 +326,7 @@
                     {
                         <li class="module-list__empty">
                             <i class="fa-regular fa-clock" aria-hidden="true"></i>
-                            <span>No availability set for today.</span>
+                            <span>@L["Mentor_NoAvailabilitySetToday"]</span>
                         </li>
                     }
                 </ul>
@@ -343,18 +342,18 @@
                     <i class="fa-solid @(pendingCount > 0 ? "fa-hourglass-half" : "fa-inbox")"></i>
                 </span>
                 <div class="mock-exam__text">
-                    <p class="mock-exam__eyebrow">Awaiting Response</p>
-                    <h2 id="pending-card-title" class="mock-exam__title">Pending Requests</h2>
+                    <p class="mock-exam__eyebrow">@L["Mentor_AwaitingResponse"]</p>
+                    <h2 id="pending-card-title" class="mock-exam__title">@L["Mentor_PendingRequests"]</h2>
                     <p class="mock-exam__caption">
                         @if (pendingCount > 0)
                         {
                             <i class="fa-solid fa-bolt mock-exam__caption-icon" aria-hidden="true"></i>
-                            <span>@pendingCount @(pendingCount == 1 ? "request" : "requests") awaiting your response.</span>
+                            <span>@string.Format(L["Mentor_PendingRequestsCount"], pendingCount)</span>
                         }
                         else
                         {
                             <i class="fa-solid fa-circle-check mock-exam__caption-icon" aria-hidden="true"></i>
-                            <span>All caught up — no pending requests right now.</span>
+                            <span>@L["Mentor_AllCaughtUpPending"]</span>
                         }
                     </p>
                 </div>
@@ -368,7 +367,7 @@
                        asp-action="Index"
                        class="btn-action btn-action--gradient">
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        <span>Review Requests</span>
+                        <span>@L["Mentor_ReviewRequests"]</span>
                     </a>
                 }
                 else
@@ -378,7 +377,7 @@
                        asp-action="Index"
                        class="btn-action btn-action--ghost-success">
                         <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-                        <span>View Appointments</span>
+                        <span>@L["Mentor_ViewAppointments"]</span>
                     </a>
                 }
             </div>
