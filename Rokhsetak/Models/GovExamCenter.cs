@@ -23,6 +23,8 @@ public partial class GovExamCenter
 
     public bool? IsActive { get; set; }
 
+    public string? DisplayNameEn { get; set; }
+
     public virtual City City { get; set; } = null!;
 
     public virtual ICollection<GovOfficialExam> GovOfficialExams { get; set; } = new List<GovOfficialExam>();

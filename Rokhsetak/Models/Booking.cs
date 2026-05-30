@@ -29,7 +29,7 @@ public partial class Booking
 
     public int TraineeLicenseId { get; set; }
 
-    public virtual Conversation? Conversation { get; set; }
+    public virtual ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
 
     public virtual LicenseType LicenseType { get; set; } = null!;
 

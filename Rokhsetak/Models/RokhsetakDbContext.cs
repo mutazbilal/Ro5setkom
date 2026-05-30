@@ -369,8 +369,6 @@ public partial class RokhsetakDbContext : DbContext
 
             entity.ToTable("Conversations", "Messaging");
 
-            entity.HasIndex(e => e.BookingId, "UQ__Conversa__5DE3A5B08D422013").IsUnique();
-
             entity.Property(e => e.ConversationId).HasColumnName("conversation_id");
             entity.Property(e => e.BookingId).HasColumnName("booking_id");
             entity.Property(e => e.CreatedAt)
@@ -379,9 +377,8 @@ public partial class RokhsetakDbContext : DbContext
             entity.Property(e => e.MentorId).HasColumnName("mentor_id");
             entity.Property(e => e.TraineeId).HasColumnName("trainee_id");
 
-            entity.HasOne(d => d.Booking).WithOne(p => p.Conversation)
-                .HasForeignKey<Conversation>(d => d.BookingId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.Booking).WithMany(p => p.Conversations)
+                .HasForeignKey(d => d.BookingId)
                 .HasConstraintName("FK__Conversat__booki__0D125037");
 
             entity.HasOne(d => d.Mentor).WithMany(p => p.Conversations)
@@ -430,15 +427,11 @@ public partial class RokhsetakDbContext : DbContext
 
         modelBuilder.Entity<ExamAppointment>(entity =>
         {
-            entity.HasKey(e => e.ExamAppointmentId).HasName("PK__ExamAppo__3AFEDC7444D52672");
+            entity.HasKey(e => e.ExamAppointmentId).HasName("PK__ExamAppo__3AFEDC74FE7D06C6");
 
             entity.ToTable("ExamAppointments", "Scheduling");
 
-            entity.HasIndex(e => new { e.TraineeId, e.OfficialExamId }, "UQ__ExamAppo__5D00D9F03D389D91").IsUnique();
-
-            entity.HasIndex(e => e.TraineeLicenseId, "UQ__ExamAppo__5F54669996753ACE").IsUnique();
-
-            entity.HasIndex(e => e.TraineeId, "idx_examappointments_trainee_id");
+            entity.HasIndex(e => new { e.TraineeLicenseId, e.OfficialExamId }, "UQ__ExamAppo__75E661D07242099D").IsUnique();
 
             entity.Property(e => e.ExamAppointmentId).HasColumnName("exam_appointment_id");
             entity.Property(e => e.CreatedAt)
@@ -458,17 +451,17 @@ public partial class RokhsetakDbContext : DbContext
             entity.HasOne(d => d.OfficialExam).WithMany(p => p.ExamAppointments)
                 .HasForeignKey(d => d.OfficialExamId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__offic__28EF74D6");
+                .HasConstraintName("FK__ExamAppoi__offic__4C03A6E9");
 
             entity.HasOne(d => d.Trainee).WithMany(p => p.ExamAppointments)
                 .HasForeignKey(d => d.TraineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__train__27FB509D");
+                .HasConstraintName("FK__ExamAppoi__train__4B0F82B0");
 
-            entity.HasOne(d => d.TraineeLicense).WithOne(p => p.ExamAppointment)
-                .HasForeignKey<ExamAppointment>(d => d.TraineeLicenseId)
+            entity.HasOne(d => d.TraineeLicense).WithMany(p => p.ExamAppointments)
+                .HasForeignKey(d => d.TraineeLicenseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExamAppoi__train__29E3990F");
+                .HasConstraintName("FK__ExamAppoi__train__4CF7CB22");
         });
 
         modelBuilder.Entity<GovCitizen>(entity =>
@@ -536,6 +529,9 @@ public partial class RokhsetakDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("address_line2");
             entity.Property(e => e.CityId).HasColumnName("city_id");
+            entity.Property(e => e.DisplayNameEn)
+                .HasMaxLength(255)
+                .HasColumnName("display_name_en");
             entity.Property(e => e.IsActive)
                 .HasDefaultValue(true)
                 .HasColumnName("is_active");
@@ -1519,6 +1515,9 @@ public partial class RokhsetakDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnName("created_at");
             entity.Property(e => e.DateOfBirth).HasColumnName("date_of_birth");
+            entity.Property(e => e.DisplayNameEn)
+                .HasMaxLength(255)
+                .HasColumnName("display_name_en");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
