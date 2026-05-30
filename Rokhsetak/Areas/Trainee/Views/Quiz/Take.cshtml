@@ -1,5 +1,8 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Quiz
 @using System.Text.RegularExpressions;
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model QuizViewModel
 @{
     ViewData["Title"] = Regex.Replace(Model.Title, "<.*?>", string.Empty);
@@ -16,9 +19,9 @@
             <div class="quiz-header__row">
                 <h1 class="quiz-header__title">@Html.Raw(Model.Title)</h1>
                 <div class="quiz-header__meta">
-                    <span class="quiz-chip" aria-label="@Model.Questions.Count questions in this quiz">
+                    <span class="quiz-chip" aria-label="@string.Format(L["Quiz_QuestionsInQuizAria"], Model.Questions.Count)">
                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
-                        @Model.Questions.Count Questions
+                        @string.Format(L["Quiz_QuestionsCount"], Model.Questions.Count)
                     </span>
                 </div>
             </div>
@@ -29,8 +32,8 @@
                 <i class="fa-solid fa-circle-info"></i>
             </span>
             <span>
-                <span class="quiz-banner__title">Passing score: @Model.PassingScore%</span>
-                Take your time. If you don’t pass on this attempt, you can retake the quiz as many times as you need.
+                <span class="quiz-banner__title">@string.Format(L["Quiz_PassingScoreLabel"], Model.PassingScore)</span>
+                @L["Quiz_RetakeUnlimitedMessage"]
             </span>
         </div>
 
@@ -68,12 +71,6 @@
                             var optId = $"opt-{q.QuestionId}-{opt.OptionId}";
 
                             <label class="quiz-option" for="@optId">
-                                @*
-                                    NOTE: The radio name must be "Answers[QuestionId]" so that
-                                    ASP.NET binds it to SubmitQuizViewModel.Answers (Dictionary<int,int>).
-                                    asp-for cannot express a dictionary key based on a dynamic loop
-                                    variable, so the literal name attribute is intentional here.
-                                *@
                                 <input class="quiz-option__input"
                                        type="radio"
                                        id="@optId"
@@ -96,14 +93,14 @@
                    asp-route-id="@Model.ModuleId"
                    class="quiz-btn quiz-btn--ghost">
                     <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                    Cancel
+                    @L["Common_Cancel"]
                 </a>
 
                 <button type="submit"
                         class="quiz-btn quiz-btn--primary"
                         data-quiz-submit>
                     <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                    <span data-quiz-submit-label data-loading-text="Submitting…">Submit Quiz</span>
+                    <span data-quiz-submit-label data-loading-text="@L["Quiz_Submitting"]">@L["Quiz_Submit"]</span>
                 </button>
             </div>
         </form>

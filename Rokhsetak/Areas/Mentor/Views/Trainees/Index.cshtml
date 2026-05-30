@@ -1,112 +1,118 @@
-﻿@model TraineeSummaryListViewModel
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
+@model TraineeSummaryListViewModel
 @{
-    ViewData["Title"] = "Trainees Summary";
+    ViewData["Title"] = L["Trainees_Title"];
+
+    string StageClass(string stage) =>
+        stage == "completed" ? "pill-stage--done"
+        : stage.Contains("pending") ? "pill-stage--pending"
+        : "pill-stage--default";
 }
 
-<div class="container py-4">
+@section Styles {
+    <link href="~/css/trainees.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="tr-wrap">
 
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger alert-dismissible fade show">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="flash flash-error" role="alert">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span>@TempData["Error"]</span>
         </div>
     }
 
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <h2 class="fw-bold mb-0">Trainees Summary</h2>
-        <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index"
-               class="btn btn-outline-secondary btn-sm">
-            ← Dashboard
+    <header class="tr-header">
+        <div>
+            <p class="tr-eyebrow"><i class="fa-solid fa-users" aria-hidden="true"></i> @L["Trainees_Mentorship"]</p>
+            <h1>@L["Trainees_Title"]</h1>
+        </div>
+        <a asp-area="Mentor" asp-controller="Dashboard" asp-action="Index" class="btn-link-back">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            @L["Trainees_DashboardLink"]
         </a>
-    </div>
+    </header>
 
-    <!-- Search + Filter -->
-    <form method="get" class="row g-2 mb-4 align-items-end">
-        <div class="col-md-5">
-            <label class="form-label small fw-semibold">Search by name</label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input type="text" name="search" value="@Model.SearchTerm"
-                       class="form-control" placeholder="Trainee name..." />
+    @* -- Search + Filter -- *@
+    <form method="get" class="tr-filters">
+        <div class="filter-field filter-field--grow">
+            <label for="search">@L["Trainees_SearchByName"]</label>
+            <div class="input-affix">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="text" id="search" name="search" value="@Model.SearchTerm"
+                       placeholder="@L["Trainees_SearchPlaceholder"]" aria-label="@L["Trainees_SearchAria"]" />
             </div>
         </div>
-        <div class="col-md-4">
-            <label class="form-label small fw-semibold">Filter by status</label>
-            <select name="statusFilter" class="form-select">
-                <option value="">— All statuses —</option>
+
+        <div class="filter-field filter-field--status">
+            <label for="statusFilter">@L["Trainees_FilterByStatus"]</label>
+            <select id="statusFilter" name="statusFilter" class="tr-select" aria-label="@L["Trainees_FilterAria"]">
+                <option value="">@L["Trainees_AllStatuses"]</option>
                 @foreach (var s in TraineeSummaryListViewModel.AvailableStatuses)
                 {
-                    <option value="@s" selected="@(Model.StatusFilter == s)">
-                        @s.Replace("_", " ")
-                    </option>
+                    <option value="@s" selected="@(Model.StatusFilter == s)">@L[$"Trainees_Stage_{s.Replace(" ", "_")}"]</option>
                 }
             </select>
         </div>
-        <div class="col-md-3 d-flex gap-2">
-            <button type="submit" class="btn btn-primary flex-grow-1">Search</button>
-            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index"
-               class="btn btn-outline-secondary">Clear</a>
+
+        <div class="filter-actions">
+            <button type="submit" class="btn-primary">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                @L["Trainees_SearchButton"]
+            </button>
+            <a asp-area="Mentor" asp-controller="Trainees" asp-action="Index" class="btn-ghost">@L["Trainees_ClearButton"]</a>
         </div>
     </form>
 
     @if (!Model.Trainees.Any())
     {
-        <div class="text-center py-5 text-muted">
-            <i class="bi bi-people fs-1 d-block mb-2"></i>
-            No trainees found matching your search.
+        <div class="tr-empty">
+            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+            <p>@L["Trainees_EmptyMessage"]</p>
         </div>
     }
     else
     {
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Trainee</th>
-                        <th>License</th>
-                        <th>Stage</th>
-                        <th class="text-center">Total Sessions</th>
-                        <th>Last Session</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var t in Model.Trainees)
-                    {
+        <div class="tr-table-card">
+            <div class="tr-table-scroll">
+                <table class="tr-table">
+                    <thead>
                         <tr>
-                            <td class="fw-semibold">@t.FullName</td>
-                            <td>
-                                <span class="badge bg-light text-dark border">@t.LicenseType.Replace("_", " ")</span>
-                            </td>
-                            <td>
-                                @{
-                                    var stageBadge = t.LicenseStage == "completed" ? "bg-success"
-                                        : t.LicenseStage.Contains("pending") ? "bg-warning text-dark"
-                                        : "bg-secondary";
-                                }
-                                <span class="badge @stageBadge">
-                                    @t.LicenseStage.Replace("_", " ")
-                                </span>
-                            </td>
-                            <td class="text-center fw-bold">@t.TotalSessions</td>
-                            <td class="text-muted small">
-                                @(t.LastSessionDate.HasValue
-                                    ? t.LastSessionDate.Value.ToString("dd MMM yyyy")
-                                    : "—")
-                            </td>
-                            <td>
-                                <a asp-area="Mentor" asp-controller="Trainees"
-                                       asp-action="Detail" asp-route-id="@t.TraineeId"
-                                       class="btn btn-outline-primary btn-sm">
-                                    View Details →
-                                </a>
-                            </td>
+                            <th>@L["Trainees_Table_Trainee"]</th>
+                            <th>@L["Trainees_Table_License"]</th>
+                            <th>@L["Trainees_Table_Stage"]</th>
+                            <th class="center">@L["Trainees_Table_TotalSessions"]</th>
+                            <th>@L["Trainees_Table_LastSession"]</th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in Model.Trainees)
+                        {
+                            <tr>
+                                <td class="cell-name">@t.FullName</td>
+                                <td><span class="pill pill-license">@t.LicenseType.Replace("_", " ")</span></td>
+                                <td><span class="pill @StageClass(t.LicenseStage)">@L[$"Trainees_Stage_{t.LicenseStage.Replace(" ", "_")}"]</span></td>
+                                <td class="cell-center cell-count">@t.TotalSessions</td>
+                                <td class="cell-muted">
+                                    @(t.LastSessionDate.HasValue ? t.LastSessionDate.Value.ToString("dd MMM yyyy") : "-")
+                                </td>
+                                <td>
+                                    <a asp-area="Mentor" asp-controller="Trainees" asp-action="Detail"
+                                       asp-route-id="@t.TraineeId" class="row-action">
+                                        @L["Trainees_ViewDetails"]
+                                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <p class="text-muted small">Showing @Model.Trainees.Count trainee(s).</p>
+        <p class="tr-count-note">@string.Format(L["Trainees_ShowingCount"], Model.Trainees.Count)</p>
     }
 </div>

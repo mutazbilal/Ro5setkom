@@ -1,7 +1,10 @@
 @using Rokhsetak.Areas.Trainee.ViewModels.Booking
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model MentorBrowseListViewModel
 @{
-    ViewData["Title"] = "Find a Mentor";
+    ViewData["Title"] = L["Booking_FindMentor"];
 }
 
 @section Styles {
@@ -16,7 +19,7 @@
             <div class="alert alert--error" role="alert">
                 <i class="fa-solid fa-circle-exclamation alert__icon" aria-hidden="true"></i>
                 <div class="alert__body">@TempData["Error"]</div>
-                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="@L["Booking_Dismiss"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -26,27 +29,27 @@
             <div class="alert alert--success" role="status">
                 <i class="fa-solid fa-circle-check alert__icon" aria-hidden="true"></i>
                 <div class="alert__body">@TempData["Success"]</div>
-                <button type="button" class="alert__close" data-alert-dismiss aria-label="Dismiss">
+                <button type="button" class="alert__close" data-alert-dismiss aria-label="@L["Booking_Dismiss"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
         }
 
-        <nav class="breadcrumb" aria-label="Breadcrumb">
+        <nav class="breadcrumb" aria-label="@L["Booking_Breadcrumb"]">
             <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
-               class="breadcrumb__item">My Bookings</a>
+               class="breadcrumb__item">@L["Booking_MyBookings"]</a>
             <span class="breadcrumb__sep" aria-hidden="true">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
-            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">Find a Mentor</span>
+            <span class="breadcrumb__item breadcrumb__item--active" aria-current="page">@L["Booking_FindMentor"]</span>
         </nav>
 
         <div class="booking-header">
-            <h2 class="booking-header__title">Find Your Mentor</h2>
+            <h2 class="booking-header__title">@L["Booking_FindYourMentor"]</h2>
             <a asp-area="Trainee" asp-controller="Booking" asp-action="Index"
                class="btn btn--secondary btn--sm">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                My Bookings
+                @L["Booking_MyBookings"]
             </a>
         </div>
 
@@ -60,10 +63,10 @@
             <div class="filter-bar__grid">
 
                 <div class="form-field">
-                    <label asp-for="@Model.Filter.CityId" class="form-field__label form-field__label--small">City</label>
+                    <label asp-for="@Model.Filter.CityId" class="form-field__label form-field__label--small">@L["Booking_City"]</label>
                     <select asp-for="@Model.Filter.CityId"
                             class="form-field__select form-field__select--sm">
-                        <option value="">All cities</option>
+                        <option value="">@L["Booking_AllCities"]</option>
                         @foreach (var c in Model.Cities)
                         {
                             <option value="@c.CityId">@c.DisplayName</option>
@@ -72,7 +75,7 @@
                 </div>
 
                 <div class="form-field">
-                    <label asp-for="Filter.MinPrice" class="form-field__label form-field__label--small">Min Price (JD)</label>
+                    <label asp-for="Filter.MinPrice" class="form-field__label form-field__label--small">@L["Booking_MinPrice"]</label>
                     <input asp-for="Filter.MinPrice"
                            type="number"
                            min="0"
@@ -82,7 +85,7 @@
                 </div>
 
                 <div class="form-field">
-                    <label asp-for="Filter.MaxPrice" class="form-field__label form-field__label--small">Max Price (JD)</label>
+                    <label asp-for="Filter.MaxPrice" class="form-field__label form-field__label--small">@L["Booking_MaxPrice"]</label>
                     <input asp-for="Filter.MaxPrice"
                            type="number"
                            min="0"
@@ -92,13 +95,13 @@
                 </div>
 
                 <div class="form-field">
-                    <label asp-for="Filter.MinRating" class="form-field__label form-field__label--small">Min Rating</label>
+                    <label asp-for="Filter.MinRating" class="form-field__label form-field__label--small">@L["Booking_MinRating"]</label>
                     <select asp-for="Filter.MinRating"
                             class="form-field__select form-field__select--sm">
-                        <option value="">Any</option>
+                        <option value="">@L["Booking_AnyRating"]</option>
                         @foreach (var r in new[] { 3.0, 3.5, 4.0, 4.5 })
                         {
-                            <option value="@r">@r ★ and up</option>
+                            <option value="@r">@r ★ @L["Booking_AndUp"]</option>
                         }
                     </select>
                 </div>
@@ -106,14 +109,14 @@
                 <div class="filter-bar__actions">
                     <button type="submit" class="btn btn--primary btn--sm btn--block">
                         <i class="fa-solid fa-filter" aria-hidden="true"></i>
-                        Filter
+                        @L["Booking_FilterButton"]
                     </button>
 
                     <a asp-area="Trainee"
                        asp-controller="Booking"
                        asp-action="Browse"
                        class="btn btn--secondary btn--sm">
-                        Clear
+                        @L["Booking_ClearFilter"]
                     </a>
                 </div>
 
@@ -125,12 +128,12 @@
         {
             <div class="empty-state">
                 <i class="fa-solid fa-user-slash empty-state__icon" aria-hidden="true"></i>
-                <p class="empty-state__text">No mentors found for your filters.</p>
+                <p class="empty-state__text">@L["Booking_NoMentors"]</p>
                 <a asp-area="Trainee"
                    asp-controller="Booking"
                    asp-action="Browse"
                    class="btn btn--secondary btn--sm">
-                    Clear filters
+                    @L["Booking_ClearFilters"]
                 </a>
             </div>
         }
@@ -138,7 +141,7 @@
         {
             <p class="result-count" style="margin-bottom: 16px;">
                 <strong style="color: var(--color-primary);">@Model.Mentors.Count</strong>
-                mentor@(Model.Mentors.Count == 1 ? "" : "s") available
+                @L["Booking_MentorsAvailable"]
             </p>
 
             <div class="mentor-grid">
@@ -176,7 +179,7 @@
                                         @m.AverageRating.ToString("0.0") ★
                                     </div>
                                     <div class="mentor-card__stat-label">
-                                        @m.TotalRatings ratings
+                                        @string.Format(L["Booking_RatingsCount"], m.TotalRatings)
                                     </div>
                                 </div>
 
@@ -185,7 +188,7 @@
                                         @m.CompletionRate%
                                     </div>
                                     <div class="mentor-card__stat-label">
-                                        Completion
+                                        @L["Booking_Completion"]
                                     </div>
                                 </div>
 
@@ -194,7 +197,7 @@
                                         @m.PricePerSession JD
                                     </div>
                                     <div class="mentor-card__stat-label">
-                                        Per session
+                                        @L["Booking_PerSession"]
                                     </div>
                                 </div>
 
@@ -212,7 +215,7 @@
                                         data-book-url="@Url.Action("Book", "Booking", new { area = "Trainee", mentorId = m.MentorId })"
                                         data-mentor-name="@m.FullName">
                                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                                    Book a Session
+                                    @L["Booking_BookSession"]
                                 </button>
                             }
                             else
@@ -223,7 +226,7 @@
                                    asp-route-mentorId="@m.MentorId"
                                    class="btn btn--primary btn--sm btn--block">
                                     <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
-                                    Book a Session
+                                    @L["Booking_BookSession"]
                                 </a>
                             }
 
@@ -238,9 +241,7 @@
     </div>
 </div>
 
-<!-- =========================================================
-     Mentor Switch Modal — confirm changing primary mentor
-     ========================================================= -->
+<!-- Mentor Switch Modal -->
 <div id="mentorSwitchModal"
      style="display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
@@ -252,32 +253,30 @@
             <span class="booking-card__header-icon">
                 <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
             </span>
-            Change Primary Mentor?
+            @L["Booking_ChangePrimaryMentor"]
         </div>
 
         <div class="booking-card__body">
 
             <p style="margin: 0 0 12px;">
-                You are about to book a session with
-                <strong id="newMentorName" style="color: var(--color-primary);"></strong>.
-                This will become your primary mentor.
+                @string.Format(L["Booking_ChangePrimaryMsg"], "<strong id=\"newMentorName\" style=\"color: var(--color-primary);\"></strong>")
             </p>
 
             <ul style="padding-inline-start: 22px; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0 0 14px;">
-                <li>All future bookings with your current mentor will be cancelled.</li>
-                <li>If approved, the new mentor becomes your primary mentor.</li>
-                <li>Future bookings will use the new mentor automatically.</li>
+                <li>@L["Booking_ChangePrimaryConsequences_1"]</li>
+                <li>@L["Booking_ChangePrimaryConsequences_2"]</li>
+                <li>@L["Booking_ChangePrimaryConsequences_3"]</li>
             </ul>
 
             <p style="font-weight: 600; margin: 0 0 18px;">
-                Are you sure you want to continue?
+                @L["Booking_ConfirmSwitchQuestion"]
             </p>
 
             <div class="form-actions">
-                <button type="button" class="btn btn--secondary" id="cancelSwitchBtn">Cancel</button>
+                <button type="button" class="btn btn--secondary" id="cancelSwitchBtn">@L["Booking_CancelSwitch"]</button>
                 <a id="confirmMentorSwitchBtn" href="#" class="btn btn--warning">
                     <i class="fa-solid fa-check" aria-hidden="true"></i>
-                    Yes, Continue
+                    @L["Booking_ConfirmSwitch"]
                 </a>
             </div>
 
@@ -309,7 +308,7 @@
         document.querySelectorAll('.mentor-switch-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 confirmBtn.href = this.dataset.bookUrl;
-                newMentorName.textContent = this.dataset.mentorName || 'this mentor';
+                newMentorName.textContent = this.dataset.mentorName || '@L["Booking_ThisMentor"]';
                 openModal();
             });
         });

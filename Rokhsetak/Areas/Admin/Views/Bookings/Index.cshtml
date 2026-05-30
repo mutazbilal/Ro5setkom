@@ -1,102 +1,108 @@
+@using Rokhsetak.Areas.Admin.ViewModels.Bookings
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model AdminBookingListViewModel
 @{
-    ViewData["Title"] = "Bookings &amp; Exams";
-    ViewData["Subtitle"] = "Sessions, exam appointments and their statuses";
+    ViewData["Title"] = L["Admin_Bookings_Title"];
+    ViewData["Subtitle"] = L["Admin_Bookings_Subtitle"];
+    ViewData["ActiveNav"] = "bookings";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     var activeTab = ViewData["ActiveTab"] as string ?? "bookings";
+
+    string StatusPill(string s) => s switch {
+        "pending"   => "admin-pill--pending",
+        "confirmed" => "admin-pill--confirmed",
+        "completed" => "admin-pill--completed",
+        "cancelled" => "admin-pill--cancelled",
+        _           => ""
+    };
 }
 
-<ul class="nav nav-tabs admin-tabs mb-3">
-    <li class="nav-item">
+<ul class="admin-tabs" role="tablist">
+    <li>
         <a class="nav-link @(activeTab == "bookings" ? "active" : "")"
-           asp-area="Admin" asp-controller="Bookings" asp-action="Index">
-            <i class="fa-solid fa-calendar-check"></i> Bookings
+           asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+           role="tab" aria-selected="@(activeTab == "bookings" ? "true" : "false")">
+            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> @L["Admin_Bookings_Tab_Bookings"]
         </a>
     </li>
-    <li class="nav-item">
+    <li>
         <a class="nav-link @(activeTab == "exams" ? "active" : "")"
-           asp-area="Admin" asp-controller="Bookings" asp-action="Exams">
-            <i class="fa-solid fa-graduation-cap"></i> Exam appointments
+           asp-area="Admin" asp-controller="Bookings" asp-action="Exams"
+           role="tab" aria-selected="@(activeTab == "exams" ? "true" : "false")">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> @L["Admin_Bookings_Tab_Exams"]
         </a>
     </li>
 </ul>
 
-<form asp-area="Admin" asp-controller="Bookings" asp-action="Index" method="get" class="admin-card admin-card--padded mb-4">
-    <div class="row g-3 align-items-end">
-        <div class="col-md-3">
-            <label asp-for="Filter.Search" class="form-label">Search</label>
-            <input asp-for="Filter.Search" class="form-control" placeholder="Trainee or mentor name" />
+<form asp-area="Admin" asp-controller="Bookings" asp-action="Index" method="get" class="admin-card admin-card--padded">
+    <div class="dash-filter">
+        <div class="dash-filter-group" style="flex:2 1 220px">
+            <label asp-for="Filter.Search">@L["Admin_Bookings_Filter_Search"]</label>
+            <input asp-for="Filter.Search" class="admin-input" placeholder="@L["Admin_Bookings_Filter_SearchPlaceholder"]" />
         </div>
-        <div class="col-md-2">
-            <label asp-for="Filter.Status" class="form-label">Status</label>
-            <select asp-for="Filter.Status" class="form-select">
-                <option value="">All</option>
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
+        <div class="dash-filter-group">
+            <label asp-for="Filter.Status">@L["Admin_Bookings_Filter_Status"]</label>
+            <select asp-for="Filter.Status" class="admin-select">
+                <option value="">@L["Common_All"]</option>
+                <option value="pending">@L["Booking_Pending"]</option>
+                <option value="confirmed">@L["Booking_Confirmed"]</option>
+                <option value="completed">@L["Booking_Completed"]</option>
+                <option value="cancelled">@L["Booking_Cancelled"]</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <label asp-for="Filter.FromDate" class="form-label">From</label>
-            <input asp-for="Filter.FromDate" type="date" class="form-control" />
+        <div class="dash-filter-group">
+            <label asp-for="Filter.FromDate">@L["Admin_Bookings_Filter_FromDate"]</label>
+            <input asp-for="Filter.FromDate" type="date" class="admin-input" />
         </div>
-        <div class="col-md-2">
-            <label asp-for="Filter.ToDate" class="form-label">To</label>
-            <input asp-for="Filter.ToDate" type="date" class="form-control" />
+        <div class="dash-filter-group">
+            <label asp-for="Filter.ToDate">@L["Admin_Bookings_Filter_ToDate"]</label>
+            <input asp-for="Filter.ToDate" type="date" class="admin-input" />
         </div>
-        <div class="col-md-1">
-            <label asp-for="Filter.MentorId" class="form-label">Mentor</label>
-            <input asp-for="Filter.MentorId" type="number" class="form-control" placeholder="ID" />
+        <div class="dash-filter-group" style="flex:0 1 120px">
+            <label asp-for="Filter.MentorId">@L["Admin_Bookings_Filter_MentorId"]</label>
+            <input asp-for="Filter.MentorId" type="number" class="admin-input" placeholder="@L["Admin_Filter_IdPlaceholder"]" />
         </div>
-        <div class="col-md-1">
-            <label asp-for="Filter.TraineeId" class="form-label">Trainee</label>
-            <input asp-for="Filter.TraineeId" type="number" class="form-control" placeholder="ID" />
+        <div class="dash-filter-group" style="flex:0 1 120px">
+            <label asp-for="Filter.TraineeId">@L["Admin_Bookings_Filter_TraineeId"]</label>
+            <input asp-for="Filter.TraineeId" type="number" class="admin-input" placeholder="@L["Admin_Filter_IdPlaceholder"]" />
         </div>
-        <div class="col-md-1">
-            <button type="submit" class="btn admin-btn-primary w-100">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
+        <button type="submit" class="admin-btn-primary" style="align-self:flex-end">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> @L["Admin_Bookings_Filter_Button"]
+        </button>
     </div>
 </form>
 
 <div class="admin-card">
     <div class="admin-card__header admin-card__header--bordered">
-        <h3>Bookings <span class="admin-count-badge">@Model.TotalCount</span></h3>
+        <h3>@L["Admin_Bookings_Tab_Bookings"] <span class="admin-count-badge">@Model.TotalCount</span></h3>
     </div>
-    <div class="table-responsive">
-        <table class="table admin-table align-middle mb-0">
+    <div style="overflow-x:auto">
+        <table class="admin-table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Trainee</th>
-                    <th>Mentor</th>
-                    <th>License</th>
-                    <th>Type</th>
-                    <th>Status</th>
+                    <th>#</th><th>@L["Admin_Bookings_Table_Date"]</th><th>@L["Admin_Bookings_Table_Time"]</th><th>@L["Admin_Bookings_Table_Trainee"]</th>
+                    <th>@L["Admin_Bookings_Table_Mentor"]</th><th>@L["Admin_Bookings_Table_License"]</th><th>@L["Admin_Bookings_Table_Type"]</th><th>@L["Admin_Bookings_Table_Status"]</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var b in Model.Items)
                 {
                     <tr>
-                        <td><small class="text-muted">#@b.BookingId</small></td>
+                        <td style="color:var(--muted);font-size:.8rem">#@b.BookingId</td>
                         <td>@b.BookingDate.ToString("dd MMM yyyy")</td>
-                        <td>@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")</td>
-                        <td>@b.TraineeName</td>
+                        <td style="font-variant-numeric:tabular-nums">@b.StartTime.ToString("HH:mm") – @b.EndTime.ToString("HH:mm")</td>
+                        <td><strong>@b.TraineeName</strong></td>
                         <td>@b.MentorName</td>
                         <td>@b.LicenseType</td>
-                        <td>@b.SessionType</td>
-                        <td>
-                            <span class="admin-pill admin-pill--status admin-pill--@b.Status">@b.Status</span>
-                        </td>
+                        <td style="text-transform:capitalize">@(b.SessionType == "practical" ? L["Booking_Practical"] : L["Booking_Theoretical"])</td>
+                        <td><span class="admin-pill @StatusPill(b.Status)">@L[$"Booking_{char.ToUpper(b.Status[0]) + b.Status.Substring(1)}"]</span></td>
                     </tr>
                 }
                 @if (!Model.Items.Any())
                 {
-                    <tr><td colspan="8" class="text-center text-muted py-5">No bookings match your filters.</td></tr>
+                    <tr class="empty-row"><td colspan="8">@L["Admin_Bookings_NoData"]</td></tr>
                 }
             </tbody>
         </table>
@@ -104,60 +110,40 @@
 
     @if (Model.TotalPages > 1)
     {
+        var cur = Model.Filter.Page; var tot = Model.TotalPages;
+        int s = Math.Max(1, cur - 2); int e = Math.Min(tot, cur + 2);
         <div class="admin-card__footer">
-            <small class="text-muted">
-                Page @Model.Filter.Page of @Model.TotalPages
-            </small>
-            <nav aria-label="Page navigation">
-                <ul class="pagination mb-0">
-                    @{
-                        var current = Model.Filter.Page;
-                        var total = Model.TotalPages;
-                        int start = Math.Max(1, current - 2);
-                        int end = Math.Min(total, current + 2);
-                    }
-                    <li class="page-item @(current <= 1 ? "disabled" : "")">
-                        <a class="page-link"
-                           asp-area="Admin" asp-controller="Bookings" asp-action="Index"
-                           asp-route-Search="@Model.Filter.Search"
-                           asp-route-Status="@Model.Filter.Status"
-                           asp-route-FromDate="@Model.Filter.FromDate"
-                           asp-route-ToDate="@Model.Filter.ToDate"
-                           asp-route-MentorId="@Model.Filter.MentorId"
-                           asp-route-TraineeId="@Model.Filter.TraineeId"
-                           asp-route-Page="@(current - 1)">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </a>
+            <small>@string.Format(L["Admin_Pagination_PageOf"], cur, tot)</small>
+            <ul class="admin-pagination" aria-label="@L["Admin_Pagination_Aria"]">
+                <li class="@(cur <= 1 ? "disabled" : "")">
+                    <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                       asp-route-Search="@Model.Filter.Search" asp-route-Status="@Model.Filter.Status"
+                       asp-route-FromDate="@Model.Filter.FromDate" asp-route-ToDate="@Model.Filter.ToDate"
+                       asp-route-MentorId="@Model.Filter.MentorId" asp-route-TraineeId="@Model.Filter.TraineeId"
+                       asp-route-Page="@(cur - 1)" aria-label="@L["Admin_Pagination_Previous"]">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                </li>
+                @for (int i = s; i <= e; i++)
+                {
+                    <li class="@(i == cur ? "active" : "")">
+                        <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                           asp-route-Search="@Model.Filter.Search" asp-route-Status="@Model.Filter.Status"
+                           asp-route-FromDate="@Model.Filter.FromDate" asp-route-ToDate="@Model.Filter.ToDate"
+                           asp-route-MentorId="@Model.Filter.MentorId" asp-route-TraineeId="@Model.Filter.TraineeId"
+                           asp-route-Page="@i">@i</a>
                     </li>
-                    @for (int i = start; i <= end; i++)
-                    {
-                        <li class="page-item @(i == current ? "active" : "")">
-                            <a class="page-link"
-                               asp-area="Admin" asp-controller="Bookings" asp-action="Index"
-                               asp-route-Search="@Model.Filter.Search"
-                               asp-route-Status="@Model.Filter.Status"
-                               asp-route-FromDate="@Model.Filter.FromDate"
-                               asp-route-ToDate="@Model.Filter.ToDate"
-                               asp-route-MentorId="@Model.Filter.MentorId"
-                               asp-route-TraineeId="@Model.Filter.TraineeId"
-                               asp-route-Page="@i">@i</a>
-                        </li>
-                    }
-                    <li class="page-item @(current >= total ? "disabled" : "")">
-                        <a class="page-link"
-                           asp-area="Admin" asp-controller="Bookings" asp-action="Index"
-                           asp-route-Search="@Model.Filter.Search"
-                           asp-route-Status="@Model.Filter.Status"
-                           asp-route-FromDate="@Model.Filter.FromDate"
-                           asp-route-ToDate="@Model.Filter.ToDate"
-                           asp-route-MentorId="@Model.Filter.MentorId"
-                           asp-route-TraineeId="@Model.Filter.TraineeId"
-                           asp-route-Page="@(current + 1)">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                }
+                <li class="@(cur >= tot ? "disabled" : "")">
+                    <a asp-area="Admin" asp-controller="Bookings" asp-action="Index"
+                       asp-route-Search="@Model.Filter.Search" asp-route-Status="@Model.Filter.Status"
+                       asp-route-FromDate="@Model.Filter.FromDate" asp-route-ToDate="@Model.Filter.ToDate"
+                       asp-route-MentorId="@Model.Filter.MentorId" asp-route-TraineeId="@Model.Filter.TraineeId"
+                       asp-route-Page="@(cur + 1)" aria-label="@L["Admin_Pagination_Next"]">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     }
 </div>

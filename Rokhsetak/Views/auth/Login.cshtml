@@ -1,7 +1,10 @@
 @using Rokhsetak.ViewModels.Auth
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<SharedResourceMarker> L
 @model LoginViewModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = L["Auth_Login_Title"];
 }
 
 @section Styles {
@@ -13,18 +16,18 @@
     <span>Rokhsetak</span>
 </div>
 
-<main class="auth-page" aria-label="Login page">
+<main class="auth-page" aria-label="@L["Auth_Login_Title"]">
     <section class="auth-brand" aria-hidden="true">
         <div class="auth-brand__logo"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-        <h1 class="auth-brand__title">Welcome Back</h1>
-        <p class="auth-brand__tagline">Your journey to the road starts here.</p>
+        <h1 class="auth-brand__title">@L["Auth_WelcomeBack"]</h1>
+        <p class="auth-brand__tagline">@L["Auth_WelcomeTagline"]</p>
 
         <span class="auth-floating-shape auth-floating-shape--circle"></span>
         <span class="auth-floating-shape auth-floating-shape--hex"></span>
         <span class="auth-floating-shape auth-floating-shape--diamond"></span>
 
         <svg class="auth-brand__art login-brand__road" viewBox="0 0 800 240"
-             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Road illustration">
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="@L["Auth_RoadIllustration"]">
             <defs>
                 <linearGradient id="roadGrad" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stop-color="#18335f"/>
@@ -53,11 +56,11 @@
                class="auth-link"
                style="display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-                Back to Home
+                @L["Auth_BackToHome"]
             </a>
 
-            <h2 class="auth-card__title">Login</h2>
-            <p class="auth-card__subtitle">Access your account securely to continue your training journey.</p>
+            <h2 class="auth-card__title">@L["Auth_Login_Title"]</h2>
+            <p class="auth-card__subtitle">@L["Auth_Login_Subtitle"]</p>
 
             <div asp-validation-summary="ModelOnly"
                  class="auth-error-banner"
@@ -83,8 +86,8 @@
                            autocomplete="username"
                            aria-required="true"
                            aria-describedby="nationalIdHelp" />
-                    <label asp-for="NationalId" class="auth-label">National ID</label>
-                    <span id="nationalIdHelp" class="sr-only">Enter your 10-digit national identification number.</span>
+                    <label asp-for="NationalId" class="auth-label">@L["Auth_NationalId"]</label>
+                    <span id="nationalIdHelp" class="sr-only">@L["Auth_NationalIdHelp"]</span>
                     <span asp-validation-for="NationalId" class="text-danger"></span>
                 </div>
 
@@ -96,13 +99,13 @@
                            autocomplete="current-password"
                            aria-required="true"
                            aria-describedby="passwordHelp" />
-                    <label asp-for="Password" class="auth-label">Password</label>
+                    <label asp-for="Password" class="auth-label">@L["Auth_Password"]</label>
                     <button type="button" class="auth-password-toggle"
                             data-password-toggle data-target="Password"
-                            aria-label="Show password">
+                            aria-label="@L["Auth_ShowPassword"]">
                         <i class="fa-solid fa-eye" aria-hidden="true"></i>
                     </button>
-                    <span id="passwordHelp" class="sr-only">Enter your account password.</span>
+                    <span id="passwordHelp" class="sr-only">@L["Auth_PasswordHelp"]</span>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
@@ -110,24 +113,24 @@
                     <label class="auth-custom-check" for="RememberMe">
                         <input asp-for="RememberMe" type="checkbox" />
                         <span class="auth-custom-check__box" aria-hidden="true"></span>
-                        <span>Remember Me</span>
+                        <span>@L["Auth_RememberMe"]</span>
                     </label>
 
                     <a asp-controller="Auth" asp-action="ForgotPassword"
-                       class="auth-link auth-link--gold">Forgot Password?</a>
+                       class="auth-link auth-link--gold">@L["Auth_ForgotPassword_Link"]</a>
                 </div>
 
                 <div class="login-form__actions">
-                    <button id="loginSubmitBtn" class="auth-btn" type="submit">Sign In</button>
+                    <button id="loginSubmitBtn" class="auth-btn" type="submit">@L["Auth_SignIn"]</button>
                 </div>
 
-                <div class="auth-divider">or</div>
+                <div class="auth-divider">@L["Auth_Or"]</div>
 
                 <p class="login-register-link">
-                    Don't have an account?
-                    <a asp-controller="Registration" asp-action="Trainee">Register as Trainee</a>
+                    @L["Auth_NoAccount"]
+                    <a asp-controller="Registration" asp-action="Trainee">@L["Auth_RegisterTrainee"]</a>
                     &nbsp;/&nbsp;
-                    <a asp-controller="Registration" asp-action="Mentor">Register as Mentor</a>
+                    <a asp-controller="Registration" asp-action="Mentor">@L["Auth_RegisterMentor"]</a>
                 </p>
             </form>
         </article>

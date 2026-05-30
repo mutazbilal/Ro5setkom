@@ -1,7 +1,10 @@
 ﻿@using Rokhsetak.ViewModels.Profile
+@using Rokhsetak.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResourceMarker> L
 @model EditProfileViewModel
 @{
-    ViewData["Title"] = "Edit Profile";
+    ViewData["Title"] = L["Profile_EditProfile"];
 }
 
 @section Styles {
@@ -15,7 +18,7 @@
             <div class="alert dashboard-alert dashboard-alert--error" role="alert">
                 <i class="fa-solid fa-triangle-exclamation dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Error"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -25,7 +28,7 @@
             <div class="alert dashboard-alert dashboard-alert--success" role="alert">
                 <i class="fa-solid fa-circle-check dashboard-alert__icon" aria-hidden="true"></i>
                 <span class="dashboard-alert__message">@TempData["Success"]</span>
-                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="Close">
+                <button type="button" class="dashboard-alert__close" data-bs-dismiss="alert" aria-label="@L["Alert_Close"]">
                     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
             </div>
@@ -38,10 +41,10 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                 </span>
                 <div class="profile-hero__intro">
-                    <span class="profile-hero__eyebrow">Account</span>
-                    <h1 id="edit-page-title" class="profile-hero__title">Edit Profile</h1>
+                    <span class="profile-hero__eyebrow">@L["Profile_Account"]</span>
+                    <h1 id="edit-page-title" class="profile-hero__title">@L["Profile_EditProfile"]</h1>
                     <p class="profile-hero__description">
-                        Update your contact information and address. Government-issued details are read-only.
+                        @L["Profile_EditProfile_Desc"]
                     </p>
                 </div>
             </div>
@@ -51,7 +54,7 @@
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
                     <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
-                    <span>Back to Profile</span>
+                    <span>@L["Profile_BackToProfile"]</span>
                 </a>
             </div>
         </section>
@@ -67,44 +70,44 @@
                         <i class="fa-solid fa-shield-halved"></i>
                     </span>
                     <div class="profile-card__headings">
-                        <p class="profile-card__eyebrow">Section 01</p>
-                        <h2 id="edit-personal-title" class="profile-card__title">Personal Information</h2>
+                        <p class="profile-card__eyebrow">@L["Profile_Section01"]</p>
+                        <h2 id="edit-personal-title" class="profile-card__title">@L["Profile_PersonalInfo"]</h2>
                     </div>
                     <span class="profile-card__lock-badge" aria-hidden="true">
                         <i class="fa-solid fa-lock"></i>
-                        <span>Read-only</span>
+                        <span>@L["Profile_ReadOnly"]</span>
                     </span>
                 </header>
 
                 <div class="profile-card__body">
                     <div class="profile-card__notice">
                         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-                        <span>The following details are sourced from government records and cannot be modified.</span>
+                        <span>@L["Profile_SourcedFromGov"]</span>
                     </div>
 
                     <div class="form-grid">
                         <div class="form-field">
-                            <label asp-for="FirstName" class="form-field__label">First Name</label>
+                            <label asp-for="FirstName" class="form-field__label">@L["Profile_FirstName"]</label>
                             <input asp-for="FirstName" class="form-input form-input--readonly" readonly />
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="LastName" class="form-field__label">Last Name</label>
+                            <label asp-for="LastName" class="form-field__label">@L["Profile_LastName"]</label>
                             <input asp-for="LastName" class="form-input form-input--readonly" readonly />
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="DateOfBirth" class="form-field__label">Date of Birth</label>
+                            <label asp-for="DateOfBirth" class="form-field__label">@L["Profile_DateOfBirth"]</label>
                             <input asp-for="DateOfBirth" class="form-input form-input--readonly" readonly />
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="Gender" class="form-field__label">Gender</label>
+                            <label asp-for="Gender" class="form-field__label">@L["Profile_Gender"]</label>
                             <input asp-for="Gender" class="form-input form-input--readonly" readonly />
                         </div>
 
                         <div class="form-field form-field--full">
-                            <label asp-for="NationalId" class="form-field__label">National ID</label>
+                            <label asp-for="NationalId" class="form-field__label">@L["Profile_NationalId"]</label>
                             <input asp-for="NationalId" class="form-input form-input--readonly" readonly />
                         </div>
                     </div>
@@ -118,27 +121,27 @@
                         <i class="fa-solid fa-address-card"></i>
                     </span>
                     <div class="profile-card__headings">
-                        <p class="profile-card__eyebrow">Section 02</p>
-                        <h2 id="edit-contact-title" class="profile-card__title">Contact Information</h2>
+                        <p class="profile-card__eyebrow">@L["Profile_Section02"]</p>
+                        <h2 id="edit-contact-title" class="profile-card__title">@L["Profile_ContactInfo"]</h2>
                     </div>
                 </header>
 
                 <div class="profile-card__body">
                     <div class="form-grid">
                         <div class="form-field">
-                            <label asp-for="Email" class="form-field__label"></label>
+                            <label asp-for="Email" class="form-field__label">@L["Profile_Email"]</label>
                             <input asp-for="Email" class="form-input" autocomplete="email" />
                             <span asp-validation-for="Email" class="text-danger form-field__error"></span>
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="DisplayNameEn" class="form-field__label"></label>
-                            <input asp-for="DisplayNameEn" class="form-input" autocomplete="Name in English" />
+                            <label asp-for="DisplayNameEn" class="form-field__label">@L["Profile_DisplayNameEn"]</label>
+                            <input asp-for="DisplayNameEn" class="form-input"/>
                             <span asp-validation-for="DisplayNameEn" class="text-danger form-field__error"></span>
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="PhoneNumber" class="form-field__label"></label>
+                            <label asp-for="PhoneNumber" class="form-field__label">@L["Profile_PhoneNumber"]</label>
                             <input asp-for="PhoneNumber" class="form-input" autocomplete="tel" />
                             <span asp-validation-for="PhoneNumber" class="text-danger form-field__error"></span>
                         </div>
@@ -153,8 +156,8 @@
                         <i class="fa-solid fa-location-dot"></i>
                     </span>
                     <div class="profile-card__headings">
-                        <p class="profile-card__eyebrow">Section 03</p>
-                        <h2 id="edit-address-title" class="profile-card__title">Address</h2>
+                        <p class="profile-card__eyebrow">@L["Profile_Section03"]</p>
+                        <h2 id="edit-address-title" class="profile-card__title">@L["Profile_Address"]</h2>
                     </div>
                 </header>
 
@@ -163,7 +166,7 @@
                         <div class="form-field">
                             <label asp-for="ProvinceId"
                                    style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                                Province
+                                @L["Reg_Province"]
                             </label>
 
                             <select asp-for="ProvinceId"
@@ -172,7 +175,7 @@
                                     id="provinceSelect"
                                     aria-required="true">
 
-                                <option value="">-- Select Province --</option>
+                                <option value="">@L["Profile_SelectProvince"]</option>
                             </select>
 
                             <span asp-validation-for="ProvinceId" class="text-danger"></span>
@@ -181,7 +184,7 @@
                         <div class="auth-field">
                             <label asp-for="CityId"
                                    style="position:static;font-size:.92rem;font-weight:600;color:var(--color-text);margin-bottom:4px;display:block;">
-                                City
+                                @L["Reg_City"]
                             </label>
 
                             <select asp-for="CityId"
@@ -189,7 +192,7 @@
                                     id="citySelect"
                                     aria-required="true">
 
-                                <option value="">-- Select City --</option>
+                                <option value="">@L["Profile_SelectCity"]</option>
 
                                 @foreach (var city in Model.Cities)
                                 {
@@ -204,19 +207,19 @@
                         </div>
 
                         <div class="form-field form-field--full">
-                            <label asp-for="AddressLine1" class="form-field__label"></label>
+                            <label asp-for="AddressLine1" class="form-field__label">@L["Reg_AddressLine1"]</label>
                             <input asp-for="AddressLine1" class="form-input" autocomplete="address-line1" />
                             <span asp-validation-for="AddressLine1" class="text-danger form-field__error"></span>
                         </div>
 
                         <div class="form-field form-field--full">
-                            <label asp-for="AddressLine2" class="form-field__label"></label>
+                            <label asp-for="AddressLine2" class="form-field__label">@L["Reg_AddressLine2"]</label>
                             <input asp-for="AddressLine2" class="form-input" autocomplete="address-line2" />
                             <span asp-validation-for="AddressLine2" class="text-danger form-field__error"></span>
                         </div>
 
                         <div class="form-field">
-                            <label asp-for="PostalCode" class="form-field__label"></label>
+                            <label asp-for="PostalCode" class="form-field__label">@L["Reg_PostalCode"]</label>
                             <input asp-for="PostalCode" class="form-input" autocomplete="postal-code" />
                             <span asp-validation-for="PostalCode" class="text-danger form-field__error"></span>
                         </div>
@@ -229,11 +232,11 @@
                 <a asp-controller="Profile"
                    asp-action="Index"
                    class="btn-action btn-action--ghost">
-                    <span>Cancel</span>
+                    <span>@L["Profile_Cancel"]</span>
                 </a>
                 <button type="submit" class="btn-action btn-action--success">
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                    <span>Save Changes</span>
+                    <span>@L["Profile_SaveChanges"]</span>
                 </button>
             </div>
         </form>
