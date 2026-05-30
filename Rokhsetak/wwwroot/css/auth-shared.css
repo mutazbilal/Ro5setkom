@@ -266,6 +266,8 @@ a {
     padding: 1.15rem .95rem .55rem;
     outline: none;
     transition: var(--transition);
+    direction: ltr;
+    text-align: left;
 }
 
 .auth-textarea {
@@ -586,4 +588,12 @@ a {
         border-radius: 18px;
         padding: 20px;
     }
+}
+
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="password"] {
+    direction: ltr;
+    text-align: left;
 }

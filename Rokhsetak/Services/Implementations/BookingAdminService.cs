@@ -75,7 +75,7 @@ public class BookingAdminService : IBookingAdminService
                 TraineeId = x.b.TraineeId,
                 TraineeName = culture == "ar"? x.TraineeFirst + " " + x.TraineeLast :x.TraineeDisplayEn,
                 MentorId = x.b.MentorId,
-                MentorName = culture == "ar" ? x.MentorFirst + " " + x.MentorLast :x.TraineeDisplayEn,
+                MentorName = culture == "ar" ? x.MentorFirst + " " + x.MentorLast :x.MentorDisplayEn,
                 BookingDate = x.b.BookingDate,
                 StartTime = x.b.StartTime,
                 EndTime = x.b.EndTime,
