@@ -81,6 +81,16 @@ builder.Services.AddScoped<IUserAdminService, UserAdminService>();
 builder.Services.AddScoped<IMentorAdminService, MentorAdminService>();
 
 builder.Services.AddScoped<IBlobService, BlobService>();
+
+// ── Messaging (US-024 + US-025) ───────────────────────────────────────────────
+builder.Services.AddScoped<IConversationService, ConversationService>();
+
+// ── File upload size limit (must be set before app.Build()) ───────────────────
+builder.Services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(opts =>
+{
+    opts.MultipartBodyLengthLimit = 11 * 1024 * 1024; // 11 MB ceiling
+});
+
 // IHttpContextAccessor required by PasswordResetService to build reset URLs
 builder.Services.AddHttpContextAccessor();
 

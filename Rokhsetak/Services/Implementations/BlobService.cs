@@ -4,11 +4,25 @@ using Azure.Storage.Sas;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
 using System.ComponentModel;
+using Rokhsetak.ViewModels.Messaging;
 
 namespace Rokhsetak.Services.Implementations
 {
     public class BlobService : IBlobService
     {
+        private static readonly HashSet<string> _allowedChatExtensions =
+        new(StringComparer.OrdinalIgnoreCase) { ".pdf", ".png", ".jpg", ".jpeg", ".webp" };
+
+            private static readonly HashSet<string> _allowedChatContentTypes =
+                new(StringComparer.OrdinalIgnoreCase)
+                {
+            "application/pdf",
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+                };
+
+        private const long ChatMaxBytes = 10 * 1024 * 1024; // 10 MB
         private readonly BlobServiceClient _client;
 
         private readonly Dictionary<string, string> _imageMap = new()
@@ -116,5 +130,42 @@ namespace Rokhsetak.Services.Implementations
                 return ServiceResult<Stream>.Failure(ex.Message);
             }
         }
+        public async Task<ServiceResult<ChatUploadResult>> UploadChatAttachmentAsync(IFormFile file)
+        {
+            // ── Validate ──────────────────────────────────────────────────────────────
+            if (file is null || file.Length == 0)
+                return ServiceResult<ChatUploadResult>.Failure("No file provided.");
+
+            if (file.Length > ChatMaxBytes)
+                return ServiceResult<ChatUploadResult>.Failure("File exceeds the 10 MB limit.");
+
+            var ext = Path.GetExtension(file.FileName);
+            if (!_allowedChatExtensions.Contains(ext))
+                return ServiceResult<ChatUploadResult>.Failure(
+                    "Unsupported file type. Allowed: PDF, PNG, JPG, JPEG, WEBP.");
+
+            if (!_allowedChatContentTypes.Contains(file.ContentType))
+                return ServiceResult<ChatUploadResult>.Failure(
+                    "Unsupported content type.");
+
+            // ── Upload ────────────────────────────────────────────────────────────────
+            // Unique blob name prevents collisions and path traversal
+            var blobName = $"{Guid.NewGuid():N}{ext.ToLowerInvariant()}";
+
+            await using var stream = file.OpenReadStream();
+            var result = await UploadAsync("chat-attachments", blobName, stream, file.ContentType);
+
+            if (!result.Succeeded)
+                return ServiceResult<ChatUploadResult>.Failure(result.Error!);
+
+            return ServiceResult<ChatUploadResult>.Success(
+                new ChatUploadResult(
+                    Url: result.Data!,
+                    OriginalFileName: Path.GetFileName(file.FileName),
+                    Extension: ext.TrimStart('.').ToLowerInvariant()
+                ));
+        }
+
     }
+
 }

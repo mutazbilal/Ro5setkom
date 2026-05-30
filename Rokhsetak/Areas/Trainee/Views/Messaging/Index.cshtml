@@ -1,0 +1,96 @@
+@using Rokhsetak.Areas.Trainee.ViewModels.Messaging
+@model ConversationListViewModel
+@{
+    ViewData["Title"] = "Messages";
+    var detail = ViewBag.Detail as ConversationDetailViewModel;
+}
+
+<link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+
+<div class="chat-shell">
+
+    <aside class="chat-sidebar" id="chatSidebar">
+        <div class="chat-sidebar-header">
+            <h2 class="chat-sidebar-title">Messages</h2>
+            @if (Model.TotalUnread > 0)
+            {
+                <span class="badge-total">@Model.TotalUnread</span>
+            }
+        </div>
+
+        <div class="chat-sidebar-search">
+            <input type="text" id="convSearch" placeholder="Search mentors…" autocomplete="off" />
+        </div>
+
+        <ul class="conv-list" id="convList">
+            @foreach (var conv in Model.Conversations)
+            {
+                <li class="conv-item @(detail?.ConversationId == conv.ConversationId ? "active" : "")"
+                    data-name="@conv.MentorName.ToLower()"
+                    data-id="@conv.ConversationId">
+                    <a class="conv-link" href="#"
+                       data-conv-id="@conv.ConversationId"
+                       data-url="@Url.Action("Open", "Messaging", new { Area = "Trainee", id = conv.ConversationId })">
+                        <div class="conv-avatar">@conv.MentorName[0]</div>
+                        <div class="conv-meta">
+                            <div class="conv-name-row">
+                                <span class="conv-name">@conv.MentorName</span>
+                                @if (conv.LastMessageAt.HasValue)
+                                {
+                                    <span class="conv-time">@FormatTime(conv.LastMessageAt.Value)</span>
+                                }
+                            </div>
+                            <div class="conv-preview-row">
+                                <span class="conv-preview @(conv.IsFile ? "is-file" : "")">
+                                    @(conv.LastMessage ?? "No messages yet")
+                                </span>
+                                @if (conv.UnreadCount > 0)
+                                {
+                                    <span class="badge-unread">@conv.UnreadCount</span>
+                                }
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            }
+
+            @if (!Model.Conversations.Any())
+            {
+                <li class="conv-empty">
+                    <p>No conversations yet.</p>
+                    <small>A chat opens automatically once your mentor confirms a booking.</small>
+                </li>
+            }
+        </ul>
+    </aside>
+
+    <section class="chat-main" id="chatMain">
+        @if (detail is not null)
+        {
+            @await Html.PartialAsync("_ConversationThread", detail)
+        }
+        else
+        {
+            <div class="chat-empty-state">
+                <div class="chat-empty-icon">💬</div>
+                <h3>Select a conversation</h3>
+                <p>Choose a mentor from the list to view your messages.</p>
+            </div>
+        }
+    </section>
+
+</div>
+
+@functions {
+    static string FormatTime(DateTime dt)
+    {
+        var now = DateTime.UtcNow;
+        if ((now - dt).TotalDays < 1 && now.Date == dt.Date) return dt.ToString("HH:mm");
+        if ((now - dt).TotalDays < 7) return dt.ToString("ddd");
+        return dt.ToString("dd MMM");
+    }
+}
+
+@section Scripts {
+    <script src="~/js/chat.js" asp-append-version="true"></script>
+}
