@@ -37,21 +37,10 @@
 
 .landing-brand:hover { color: var(--color-primary, #1A3A6B); }
 
-.landing-brand__logo {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    background: radial-gradient(circle at 35% 25%, #ffe4a4, var(--color-accent-gold, #C9A84C) 42%, #1a3a6b 92%);
-    font-size: 15px;
-    box-shadow: 0 4px 12px -4px rgba(26, 58, 107, 0.3);
-}
-
-.landing-brand__name {
-    font-size: 17px;
-    letter-spacing: -0.01em;
+.landing-brand__logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 /* ---------- Right-side cluster wrapper ---------- */
