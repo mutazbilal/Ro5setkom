@@ -8,5 +8,6 @@ public readonly record struct ChatTurn(string Role, string Content);
 /// </summary>
 public interface IAiResponder
 {
-    Task<string> GenerateReplyAsync(IReadOnlyList<ChatTurn> history, CancellationToken ct = default);
+    Task<string> GenerateReplyAsync(string systemPrompt, IReadOnlyList<ChatTurn> history, CancellationToken ct = default);
+
 }

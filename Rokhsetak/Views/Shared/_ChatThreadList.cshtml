@@ -2,7 +2,17 @@
 @model IReadOnlyList<ChatThreadSummary>
 @{
     var provider = ViewData["Provider"] as string ?? "human";
+    var canCreate = ViewData["CanCreate"] as bool? ?? false;
 }
+
+@if (canCreate)
+{
+    <button type="button" class="rkchat-newchat-btn">
+        <i class="fa-solid fa-plus"></i> New chat
+    </button>
+}
+
+@* …existing @if(!Model.Any()) / conv-list block unchanged… *@
 
 @if (!Model.Any())
 {

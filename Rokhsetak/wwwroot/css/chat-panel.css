@@ -203,3 +203,95 @@
         width: 100vw;
     }
 }
+
+
+/* New chat button */
+.rkchat-newchat-btn {
+    width: calc(100% - 24px);
+    margin: 12px;
+    padding: 10px;
+    border: 1px dashed var(--accent, #1d6be5);
+    background: var(--accent-light, #e8f0fd);
+    color: var(--accent-dark, #1558c0);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+    .rkchat-newchat-btn:hover {
+        background: #dceafe;
+    }
+
+/* New-thread form */
+.rkchat-newthread {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+}
+
+.rkchat-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+    .rkchat-field input, .rkchat-field textarea, .rkchat-persona-select {
+        border: 1px solid var(--sidebar-border, #e5e7eb);
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: .88rem;
+        font-family: inherit;
+        outline: none;
+        background: #fff;
+    }
+
+        .rkchat-field input:focus, .rkchat-field textarea:focus, .rkchat-persona-select:focus {
+            border-color: var(--accent, #1d6be5);
+        }
+
+.rkchat-persona-desc {
+    font-size: .78rem;
+    color: #6b7280;
+    margin: -6px 0 0;
+}
+
+/* Persona control in thread header */
+.rkchat-persona {
+    margin-inline-start: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+}
+
+    .rkchat-persona .rkchat-persona-select {
+        padding: 4px 8px;
+        font-size: .78rem;
+        font-weight: 600;
+    }
+
+.rkchat-persona-custom {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+    .rkchat-persona-custom textarea {
+        border: 1px solid var(--sidebar-border, #e5e7eb);
+        border-radius: 8px;
+        padding: 6px 8px;
+        font-size: .8rem;
+        font-family: inherit;
+        width: 220px;
+        max-width: 60vw;
+    }
+
+.rkchat-thread__head {
+    flex-wrap: wrap;
+}

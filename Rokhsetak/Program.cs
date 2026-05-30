@@ -8,6 +8,8 @@ using System.Globalization;
 using Rokhsetak.Workers;
 using Rokhsetak.Services.Chat;
 using Rokhsetak.Services.Chat.Implementations;
+using Rokhsetak.Services.Chat.Implementations.Providers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,7 +87,18 @@ builder.Services.AddScoped<IMentorAdminService, MentorAdminService>();
 builder.Services.AddScoped<IChatProvider, HumanChatProvider>();
 builder.Services.AddScoped<IChatProvider, AiChatProvider>();
 builder.Services.AddScoped<IChatProviderRegistry, ChatProviderRegistry>();
-builder.Services.AddScoped<IAiResponder, EchoAiResponder>();
+builder.Services.Configure<DeepSeekOptions>(builder.Configuration.GetSection("DeepSeek"));
+builder.Services.AddHttpClient<IAiResponder, DeepSeekAiResponder>();
+
+// Program.cs or a dedicated extension method
+
+builder.Services.AddScoped<IUserContextProvider, UserContextProvider>();
+builder.Services.AddScoped<ILicenseContextProvider, LicenseContextProvider>();
+builder.Services.AddScoped<ILearningContextProvider, LearningContextProvider>();
+builder.Services.AddScoped<IBookingContextProvider, BookingContextProvider>();
+builder.Services.AddSingleton<IPageContextProvider, PageContextProvider>(); // pure in-memory
+builder.Services.AddScoped<IAiContextAssembler, AiContextAssembler>();
+builder.Services.AddSingleton<IAiPromptBuilder, AiPromptBuilder>();     // stateless
 
 builder.Services.AddScoped<IBlobService, BlobService>();
 

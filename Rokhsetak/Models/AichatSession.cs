@@ -13,6 +13,12 @@ public partial class AichatSession
 
     public DateTime? EndedAt { get; set; }
 
+    public string? Title { get; set; }
+
+    public string? PersonaKey { get; set; }
+
+    public string? SystemPrompt { get; set; }
+
     public virtual ICollection<AichatMessage> AichatMessages { get; set; } = new List<AichatMessage>();
 
     public virtual User User { get; set; } = null!;
