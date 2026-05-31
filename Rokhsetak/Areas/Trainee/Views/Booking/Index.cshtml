@@ -17,6 +17,26 @@
     };
 }
 
+@functions {
+    // Localize session type (practical → عملي, theoretical → نظري)
+    string LocalizedSessionType(string type) => type switch
+    {
+        "practical"  => L["Booking_Practical"],
+        "theoretical"=> L["Booking_Theoretical"],
+        _            => type
+    };
+
+    // Localize booking status (pending → معلق, confirmed → مؤكد, completed → مكتمل, cancelled → ملغي)
+    string LocalizedStatus(string status) => status switch
+    {
+        "pending"   => L["Booking_Pending"],
+        "confirmed" => L["Booking_Confirmed"],
+        "completed" => L["Booking_Completed"],
+        "cancelled" => L["Booking_Cancelled"],
+        _           => status
+    };
+}
+
 @section Styles {
     <link rel="stylesheet" href="~/css/booking-shared.css" asp-append-version="true" />
 }
@@ -123,9 +143,6 @@
                                 ? "type-pill--practical"
                                 : "type-pill--theoretical";
                             var statusClass = "status-pill--" + b.Status;
-                            var statusLabel = b.Status.Length > 0
-                                ? char.ToUpper(b.Status[0]) + b.Status.Substring(1)
-                                : b.Status;
 
                             <tr class="@rowClass" data-status="@b.Status">
 
@@ -144,11 +161,11 @@
                                 </td>
 
                                 <td data-label="@L["Booking_SessionType"]">
-                                    <span class="type-pill @typeClass">@b.SessionType</span>
+                                    <span class="type-pill @typeClass">@LocalizedSessionType(b.SessionType)</span>
                                 </td>
 
                                 <td data-label="@L["Booking_Status"]">
-                                    <span class="status-pill @statusClass">@statusLabel</span>
+                                    <span class="status-pill @statusClass">@LocalizedStatus(b.Status)</span>
                                 </td>
 
                                 <td data-label="@L["Booking_Actions"]">
@@ -213,10 +230,10 @@
 
                                     </div>
                                 </td>
-                             </tr>
+                            </tr>
                         }
                     </tbody>
-                 </table>
+                </table>
             </div>
 
             <p class="result-count" id="resultCount">
@@ -227,31 +244,26 @@
     </div>
 </div>
 
-<!-- Feedback Modal -->
+<!-- Feedback Modal (unchanged) -->
 <div id="feedbackModal"
      style="display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
             align-items: center; justify-content: center; padding: 20px;">
-
     <div class="booking-card" style="max-width: 460px; width: 100%; animation: card-in 0.25s ease-out;">
-
         <div class="booking-card__header">
             <span class="booking-card__header-icon">
                 <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
             </span>
             @L["Booking_FeedbackModalTitle"]
         </div>
-
         <div class="booking-card__body">
             <div class="form-field__label form-field__label--small">@L["Booking_From"]</div>
             <h6 id="feedbackMentorName" style="font-family: var(--font-head); color: var(--color-primary); margin: 4px 0 14px;"></h6>
-
             <div id="feedbackText"
                  style="background: var(--color-background); border: 1px solid var(--color-border);
                         border-radius: var(--radius-md); padding: 14px 16px; color: var(--color-text);
                         line-height: 1.5; font-size: 0.92rem; white-space: pre-wrap;">
             </div>
-
             <div class="form-actions" style="margin-top: 18px; justify-content: flex-end;">
                 <button type="button" class="btn btn--secondary" id="closeFeedbackBtn">@L["Booking_Close"]</button>
             </div>
@@ -259,33 +271,26 @@
     </div>
 </div>
 
-<!-- Rating Modal -->
+<!-- Rating Modal (unchanged) -->
 <div id="ratingModal"
      style="display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(17, 40, 73, 0.55); backdrop-filter: blur(4px);
             align-items: center; justify-content: center; padding: 20px;">
-
     <div class="booking-card" style="max-width: 460px; width: 100%; animation: card-in 0.25s ease-out;">
-
         <form asp-area="Trainee" asp-controller="Booking" asp-action="Rate" method="post">
             @Html.AntiForgeryToken()
-
             <div class="booking-card__header">
                 <span class="booking-card__header-icon">
                     <i class="fa-solid fa-star" aria-hidden="true"></i>
                 </span>
                 @L["Booking_RatingModalTitle"]
             </div>
-
             <div class="booking-card__body">
-
                 <input type="hidden" id="ratingBookingId" name="BookingId" />
-
                 <div class="form-field__label form-field__label--small">@L["Booking_Mentor"]</div>
                 <h6 id="ratingMentorName"
                     style="font-family: var(--font-head); color: var(--color-primary); margin: 4px 0 18px;">
                 </h6>
-
                 <div class="form-field">
                     <label class="form-field__label">@L["Booking_RatingLabel"]</label>
                     <div class="star-rating" id="starRating" role="radiogroup" aria-label="@L["Booking_RatingAria"]">
@@ -297,14 +302,12 @@
                     </div>
                     <input type="hidden" name="Score" id="ratingScore" required />
                 </div>
-
                 <div class="form-field">
                     <label class="form-field__label" for="ratingReview">@L["Booking_ReviewOptional"]</label>
                     <textarea id="ratingReview" name="Review" class="form-field__input"
                               rows="4" placeholder="@L["Booking_ReviewPlaceholder"]"
                               style="resize: vertical; min-height: 90px;"></textarea>
                 </div>
-
                 <div class="form-actions">
                     <button type="button" class="btn btn--secondary" id="closeRatingBtn">@L["Booking_Cancel"]</button>
                     <button type="submit" class="btn btn--primary">
@@ -312,7 +315,6 @@
                         @L["Booking_SubmitRating"]
                     </button>
                 </div>
-
             </div>
         </form>
     </div>

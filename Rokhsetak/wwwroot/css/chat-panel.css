@@ -1,53 +1,126 @@
-﻿/* chat-panel.css — embedded launcher + sliding drawer. Reuses chat.css for messages. */
+﻿/* ============================================================
+   Ro5setkom — Chat Panel
+   Launcher + sliding drawer + thread list + messages + compose
+   Design system: Midnight Blue / Sunset Orange / Champagne Gold
+   Glassmorphism surface, BEM-style, RTL-aware, no JS deps.
+   ============================================================ */
+
+/* ---- Scoped design tokens ---- */
 .rkchat {
-    --rk-drawer-w: 400px;
+    --rk-drawer-w:       390px;
+
+    --rk-primary:        #1A3A6B;
+    --rk-primary-dark:   #122a4f;
+    --rk-primary-soft:   rgba(26, 58, 107, 0.08);
+    --rk-primary-line:   rgba(26, 58, 107, 0.12);
+
+    --rk-orange:         #F26522;
+    --rk-orange-soft:    rgba(242, 101, 34, 0.10);
+    --rk-orange-glow:    rgba(242, 101, 34, 0.45);
+    --rk-gold:           #C9A84C;
+    --rk-gold-soft:      rgba(201, 168, 76, 0.14);
+
+    --rk-bg:             #F5F7FA;
+    --rk-surface:        #FFFFFF;
+    --rk-text:           #1B2433;
+    --rk-muted:          #6B7488;
+    --rk-faint:          #99A1B3;
+    --rk-border:         rgba(26, 58, 107, 0.10);
+    --rk-border-strong:  rgba(26, 58, 107, 0.18);
+
+    --rk-success:        #1F9D55;
+    --rk-success-soft:   rgba(31, 157, 85, 0.12);
+
+    --rk-radius-sm:      10px;
+    --rk-radius-md:      14px;
+    --rk-radius-lg:      20px;
+    --rk-radius-pill:    999px;
+
+    --rk-shadow-sm:      0 2px 8px -4px rgba(26, 58, 107, 0.18);
+    --rk-shadow-md:      0 14px 32px -16px rgba(26, 58, 107, 0.28);
+    --rk-shadow-lg:      0 28px 56px -24px rgba(26, 58, 107, 0.38);
+
+    --rk-ease:           cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Launcher */
+/* ============================================================
+   LAUNCHER — floating action button
+   ============================================================ */
+
 .rkchat-launcher {
     position: fixed;
     inset-inline-end: 24px;
     bottom: 24px;
     z-index: 1200;
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    background: var(--accent, #1d6be5);
+    background: linear-gradient(135deg, var(--rk-orange) 0%, var(--rk-gold) 100%);
     color: #fff;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(29,107,229,.4);
-    transition: transform .15s, background .15s;
+    box-shadow:
+        0 12px 28px -10px var(--rk-orange-glow),
+        0 0 0 0 var(--rk-orange-glow);
+    transition:
+        transform 220ms var(--rk-ease),
+        box-shadow 220ms var(--rk-ease),
+        filter 220ms var(--rk-ease);
+    /* Subtle idle pulse */
+    animation: rk-launcher-idle 3.6s ease-in-out infinite;
 }
 
-    .rkchat-launcher:hover {
-        background: var(--accent-dark, #1558c0);
-        transform: translateY(-2px);
-    }
+@keyframes rk-launcher-idle {
+    0%, 100% { box-shadow: 0 12px 28px -10px var(--rk-orange-glow), 0 0 0 0   var(--rk-orange-glow); }
+    50%       { box-shadow: 0 12px 28px -10px var(--rk-orange-glow), 0 0 0 10px rgba(242,101,34,0); }
+}
+
+.rkchat-launcher:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.06);
+    box-shadow: 0 18px 36px -12px var(--rk-orange-glow);
+    animation: none;
+}
+
+.rkchat-launcher:active {
+    transform: translateY(-1px);
+}
+
+.rkchat-launcher:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.55), 0 12px 28px -10px var(--rk-orange-glow);
+}
 
 .rkchat-launcher__badge {
     position: absolute;
-    top: -4px;
-    inset-inline-end: -4px;
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
-    border-radius: 11px;
-    background: #ef4444;
+    top: -3px;
+    inset-inline-end: -3px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: var(--rk-radius-pill);
+    background: #D63031;
     color: #fff;
-    font-size: .72rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #fff;
+    border: 2.5px solid var(--rk-surface);
+    line-height: 1;
 }
 
-/* Drawer — side panel, does NOT block the page */
+/* ============================================================
+   DRAWER — sliding side panel
+   ============================================================ */
+
 .rkchat-drawer {
     position: fixed;
     top: 0;
@@ -56,54 +129,107 @@
     z-index: 1210;
     width: var(--rk-drawer-w);
     max-width: 100vw;
-    background: var(--sidebar-bg, #fff);
-    box-shadow: -4px 0 24px rgba(0,0,0,.18);
     display: flex;
     flex-direction: column;
-    transform: translateX(100%);
-    transition: transform .26s ease;
-    font-family: var(--font-sans, system-ui);
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-inline-start: 1px solid var(--rk-border);
+    box-shadow:
+        -20px 0 60px -30px rgba(26, 58, 107, 0.28),
+        -4px 0 12px -4px rgba(26, 58, 107, 0.08);
+
+    transform: translateX(110%);
+    transition: transform 300ms var(--rk-ease);
 }
 
 [dir="rtl"] .rkchat-drawer {
-    transform: translateX(-100%);
-    box-shadow: 4px 0 24px rgba(0,0,0,.18);
+    transform: translateX(-110%);
+    border-inline-start: none;
+    border-inline-end: 1px solid var(--rk-border);
+    box-shadow:
+        20px 0 60px -30px rgba(26, 58, 107, 0.28),
+        4px 0 12px -4px rgba(26, 58, 107, 0.08);
 }
 
 .rkchat-drawer.is-open {
     transform: translateX(0);
 }
 
+/* ---- Drawer header ---- */
 .rkchat-drawer__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--sidebar-border, #e5e7eb);
+    padding: 18px 20px 16px;
+    background: linear-gradient(135deg, var(--rk-primary) 0%, var(--rk-primary-dark) 100%);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative glow in corner of header */
+.rkchat-drawer__head::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    inset-inline-end: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.28), transparent 70%);
+    pointer-events: none;
 }
 
 .rkchat-drawer__title {
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 1.05rem;
-    color: #111827;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
 }
 
 .rkchat-drawer__close {
-    border: none;
-    background: transparent;
-    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
     cursor: pointer;
-    color: #6b7280;
+    transition: background 180ms var(--rk-ease), color 180ms var(--rk-ease);
 }
 
-    .rkchat-drawer__close:hover {
-        color: #111827;
-    }
+.rkchat-drawer__close:hover {
+    background: rgba(255, 255, 255, 0.20);
+    color: #fff;
+}
 
-/* Tabs */
+.rkchat-drawer__close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.55);
+}
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
 .rkchat-tabs {
     display: flex;
-    border-bottom: 1px solid var(--sidebar-border, #e5e7eb);
+    background: var(--rk-surface);
+    border-bottom: 1px solid var(--rk-border);
+    flex-shrink: 0;
+    gap: 0;
 }
 
 .rkchat-tab {
@@ -111,53 +237,81 @@
     border: none;
     background: transparent;
     cursor: pointer;
-    padding: 12px 8px;
-    font-size: .85rem;
+    padding: 11px 8px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: #6b7280;
+    color: var(--rk-muted);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     border-bottom: 2px solid transparent;
+    transition: color 180ms var(--rk-ease), border-color 180ms var(--rk-ease), background 180ms var(--rk-ease);
+    letter-spacing: 0.02em;
 }
 
-    .rkchat-tab i {
-        font-size: 1rem;
-    }
+.rkchat-tab i {
+    font-size: 0.9rem;
+    transition: color 180ms var(--rk-ease);
+}
 
-    .rkchat-tab.is-active {
-        color: var(--accent, #1d6be5);
-        border-bottom-color: var(--accent, #1d6be5);
-    }
+.rkchat-tab:hover {
+    color: var(--rk-primary);
+    background: var(--rk-primary-soft);
+}
 
-/* Body: two stacked panes, one visible at a time */
+.rkchat-tab.is-active {
+    color: var(--rk-primary);
+    border-bottom-color: var(--rk-orange);
+    font-weight: 700;
+}
+
+.rkchat-tab.is-active i {
+    color: var(--rk-orange);
+}
+
+/* ============================================================
+   BODY — stacked panes
+   ============================================================ */
+
 .rkchat-body {
     position: relative;
     flex: 1;
     overflow: hidden;
+    background: var(--rk-bg);
 }
 
-.rkchat-list, .rkchat-thread {
+.rkchat-list,
+.rkchat-thread {
     position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background: var(--chat-bg, #f0f2f5);
 }
 
 .rkchat-list {
     overflow-y: auto;
+    background: var(--rk-bg);
+}
+
+/* Custom scrollbar */
+.rkchat-list::-webkit-scrollbar { width: 4px; }
+.rkchat-list::-webkit-scrollbar-track { background: transparent; }
+.rkchat-list::-webkit-scrollbar-thumb {
+    background: rgba(26, 58, 107, 0.16);
+    border-radius: var(--rk-radius-pill);
 }
 
 .rkchat-thread {
-    transform: translateX(100%);
-    transition: transform .22s ease;
+    transform: translateX(105%);
+    transition: transform 260ms var(--rk-ease);
+    background: var(--rk-bg);
 }
 
 [dir="rtl"] .rkchat-thread {
-    transform: translateX(-100%);
+    transform: translateX(-105%);
 }
 
 .rkchat--thread-open .rkchat-thread {
@@ -168,97 +322,719 @@
     visibility: hidden;
 }
 
-/* Thread header (inside drawer) */
+/* ============================================================
+   THREAD LIST — conv items
+   ============================================================ */
+
+/* New chat button */
+.rkchat-newchat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 24px);
+    margin: 14px 12px 8px;
+    padding: 11px 16px;
+    border: 1.5px dashed rgba(242, 101, 34, 0.4);
+    background: linear-gradient(135deg, rgba(242, 101, 34, 0.05), rgba(201, 168, 76, 0.06));
+    color: var(--rk-orange);
+    border-radius: var(--rk-radius-md);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.84rem;
+    letter-spacing: 0.02em;
+    transition: background 200ms var(--rk-ease), border-color 200ms var(--rk-ease), transform 200ms var(--rk-ease);
+}
+
+.rkchat-newchat-btn i {
+    font-size: 0.8rem;
+}
+
+.rkchat-newchat-btn:hover {
+    background: linear-gradient(135deg, rgba(242, 101, 34, 0.10), rgba(201, 168, 76, 0.10));
+    border-color: var(--rk-orange);
+    transform: translateY(-1px);
+}
+
+/* Empty state */
+.conv-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--rk-muted);
+}
+
+.conv-empty p {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--rk-text);
+    margin: 0;
+}
+
+.conv-empty small {
+    font-size: 0.82rem;
+    color: var(--rk-faint);
+}
+
+/* Thread list */
+.conv-list {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0 16px;
+}
+
+.conv-item {
+    cursor: pointer;
+    transition: background 160ms var(--rk-ease);
+}
+
+.conv-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(26, 58, 107, 0.05);
+}
+
+.conv-item:hover .conv-link {
+    background: rgba(26, 58, 107, 0.04);
+}
+
+.conv-item:last-child .conv-link {
+    border-bottom: none;
+}
+
+.conv-avatar {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rk-primary) 0%, #2C5191 100%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px -4px rgba(26, 58, 107, 0.4);
+    letter-spacing: 0.02em;
+}
+
+.conv-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.conv-name-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.conv-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--rk-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.conv-time {
+    font-size: 0.72rem;
+    color: var(--rk-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.conv-preview-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.conv-preview {
+    font-size: 0.8rem;
+    color: var(--rk-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.4;
+}
+
+.conv-preview.is-file {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.conv-preview.is-file::before {
+    content: '\f0c6';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.7rem;
+    color: var(--rk-gold);
+}
+
+.badge-unread {
+    flex-shrink: 0;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: var(--rk-radius-pill);
+    background: linear-gradient(135deg, var(--rk-orange) 0%, var(--rk-gold) 100%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px -4px var(--rk-orange-glow);
+}
+
+/* ============================================================
+   THREAD HEAD — back + avatar + identity
+   ============================================================ */
+
 .rkchat-thread__head {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 16px;
-    background: #fff;
-    border-bottom: 1px solid var(--sidebar-border, #e5e7eb);
+    padding: 14px 16px;
+    background: var(--rk-surface);
+    border-bottom: 1px solid var(--rk-border);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Subtle bottom accent line */
+.rkchat-thread__head::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rk-orange), var(--rk-gold), transparent);
+    opacity: 0.6;
 }
 
 .rkchat-back {
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    border: 1px solid var(--rk-border-strong);
     background: transparent;
+    color: var(--rk-muted);
+    font-size: 0.9rem;
     cursor: pointer;
-    font-size: 1rem;
-    color: #6b7280;
+    flex-shrink: 0;
+    transition: background 180ms var(--rk-ease), color 180ms var(--rk-ease), border-color 180ms var(--rk-ease);
 }
 
-    .rkchat-back:hover {
-        color: #111827;
-    }
-
-.rkchat-loading {
-    padding: 32px;
-    text-align: center;
-    color: #9ca3af;
-    font-size: .875rem;
+.rkchat-back:hover {
+    background: var(--rk-primary-soft);
+    color: var(--rk-primary);
+    border-color: var(--rk-primary);
 }
 
-/* Mobile-future: full-screen takeover. Already degrades; expand later as needed. */
-@media (max-width: 768px) {
-    .rkchat-drawer {
-        width: 100vw;
-    }
+.thread-avatar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rk-primary) 0%, #2C5191 100%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px -4px rgba(26, 58, 107, 0.4);
 }
 
-
-/* New chat button */
-.rkchat-newchat-btn {
-    width: calc(100% - 24px);
-    margin: 12px;
-    padding: 10px;
-    border: 1px dashed var(--accent, #1d6be5);
-    background: var(--accent-light, #e8f0fd);
-    color: var(--accent-dark, #1558c0);
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: .85rem;
-}
-
-    .rkchat-newchat-btn:hover {
-        background: #dceafe;
-    }
-
-/* New-thread form */
-.rkchat-newthread {
-    padding: 16px;
+.thread-identity {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 1px;
+}
+
+.thread-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--rk-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.thread-status {
+    font-size: 0.72rem;
+    color: var(--rk-success);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.thread-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rk-success);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
+
+.thread-messages {
+    flex: 1;
     overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+
+.thread-messages::-webkit-scrollbar { width: 4px; }
+.thread-messages::-webkit-scrollbar-track { background: transparent; }
+.thread-messages::-webkit-scrollbar-thumb {
+    background: rgba(26, 58, 107, 0.14);
+    border-radius: var(--rk-radius-pill);
+}
+
+/* Individual message row */
+.msg {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    max-width: 88%;
+    animation: rk-msg-in 220ms var(--rk-ease) both;
+}
+
+@keyframes rk-msg-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg-mine {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.msg-theirs {
+    align-self: flex-start;
+}
+
+.msg-avatar {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rk-primary) 0%, #2C5191 100%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px -2px rgba(26, 58, 107, 0.35);
+}
+
+.msg-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+/* Text bubble */
+.msg-text {
+    margin: 0;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+.msg-mine .msg-text {
+    background: linear-gradient(135deg, var(--rk-primary) 0%, #2C5191 100%);
+    color: #fff;
+    border-end-inline-end-radius: 4px;
+    box-shadow: 0 4px 14px -6px rgba(26, 58, 107, 0.45);
+}
+
+.msg-theirs .msg-text {
+    background: var(--rk-surface);
+    color: var(--rk-text);
+    border-end-inline-start-radius: 4px;
+    box-shadow: var(--rk-shadow-sm);
+    border: 1px solid var(--rk-border);
+}
+
+/* File attachments */
+.msg-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    max-width: 240px;
+}
+
+.msg-file-pdf {
+    background: rgba(242, 101, 34, 0.08);
+    border: 1px solid rgba(242, 101, 34, 0.22);
+    color: var(--rk-text);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.msg-file-pdf:hover {
+    background: rgba(242, 101, 34, 0.14);
+}
+
+.file-icon {
+    font-size: 1.2rem;
+}
+
+.file-name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+}
+
+.file-action {
+    font-size: 0.72rem;
+    color: var(--rk-orange);
+    font-weight: 600;
+}
+
+.msg-file-image {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    background: var(--rk-surface);
+    border: 1px solid var(--rk-border);
+    border-radius: 14px;
+    padding: 8px;
+}
+
+.msg-file-image img {
+    width: 200px;
+    max-width: 100%;
+    border-radius: 10px;
+    display: block;
+    cursor: pointer;
+    transition: opacity 160ms var(--rk-ease);
+}
+
+.msg-file-image img:hover {
+    opacity: 0.9;
+}
+
+/* Message meta (time + read tick) */
+.msg-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-inline: 4px;
+}
+
+.msg-mine .msg-meta {
+    justify-content: flex-end;
+}
+
+.msg-time {
+    font-size: 0.68rem;
+    color: var(--rk-faint);
+    font-variant-numeric: tabular-nums;
+}
+
+.msg-read-tick {
+    font-size: 0.72rem;
+    color: var(--rk-faint);
+    line-height: 1;
+}
+
+.msg-read-tick.read {
+    color: var(--rk-orange);
+}
+
+/* Empty thread */
+.thread-no-msgs {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.thread-no-msgs p {
+    font-size: 0.9rem;
+    color: var(--rk-muted);
+    text-align: center;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Loading state */
+.rkchat-loading {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--rk-faint);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.rkchat-loading::before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2.5px solid var(--rk-primary-line);
+    border-top-color: var(--rk-orange);
+    animation: rk-spin 0.75s linear infinite;
+}
+
+@keyframes rk-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   COMPOSE BAR
+   ============================================================ */
+
+.compose-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--rk-surface);
+    border-top: 1px solid var(--rk-border);
+    flex-shrink: 0;
+}
+
+.compose-file-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--rk-border-strong);
+    background: transparent;
+    color: var(--rk-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 160ms var(--rk-ease), color 160ms var(--rk-ease), border-color 160ms var(--rk-ease);
+    text-decoration: none;
+    margin-bottom: 1px;
+}
+
+.compose-file-btn:hover {
+    background: var(--rk-primary-soft);
+    color: var(--rk-primary);
+    border-color: var(--rk-primary);
+}
+
+.compose-input-wrap {
+    flex: 1;
+    min-width: 0;
+    background: var(--rk-bg);
+    border: 1.5px solid var(--rk-border-strong);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 180ms var(--rk-ease), box-shadow 180ms var(--rk-ease);
+}
+
+.compose-input-wrap:focus-within {
+    border-color: var(--rk-orange);
+    box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.12);
+}
+
+.compose-input-wrap textarea {
+    width: 100%;
+    padding: 9px 14px;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: var(--rk-text);
+    line-height: 1.5;
+    display: block;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.compose-input-wrap textarea::placeholder {
+    color: var(--rk-faint);
+}
+
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px 7px;
+    font-size: 0.78rem;
+    color: var(--rk-orange);
+    font-weight: 500;
+    border-top: 1px solid var(--rk-border);
+}
+
+.file-preview button {
+    border: none;
+    background: transparent;
+    color: var(--rk-faint);
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0 2px;
+    transition: color 160ms var(--rk-ease);
+}
+
+.file-preview button:hover {
+    color: #D63031;
+}
+
+.compose-send-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--rk-orange) 0%, var(--rk-gold) 100%);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 16px -6px var(--rk-orange-glow);
+    transition: transform 180ms var(--rk-ease), box-shadow 180ms var(--rk-ease), filter 180ms var(--rk-ease);
+    margin-bottom: 1px;
+}
+
+.compose-send-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    fill: none;
+}
+
+.compose-send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px -8px var(--rk-orange-glow);
+    filter: brightness(1.06);
+}
+
+.compose-send-btn:active {
+    transform: translateY(0);
+}
+
+.compose-send-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.55), 0 6px 16px -6px var(--rk-orange-glow);
+}
+
+/* ============================================================
+   NEW THREAD FORM
+   ============================================================ */
+
+.rkchat-newthread {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .rkchat-field {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    font-size: .82rem;
-    font-weight: 600;
-    color: #374151;
 }
 
-    .rkchat-field input, .rkchat-field textarea, .rkchat-persona-select {
-        border: 1px solid var(--sidebar-border, #e5e7eb);
-        border-radius: 8px;
-        padding: 8px 10px;
-        font-size: .88rem;
-        font-family: inherit;
-        outline: none;
-        background: #fff;
-    }
+.rkchat-field > span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rk-primary);
+}
 
-        .rkchat-field input:focus, .rkchat-field textarea:focus, .rkchat-persona-select:focus {
-            border-color: var(--accent, #1d6be5);
-        }
+.rkchat-field input,
+.rkchat-field textarea,
+.rkchat-persona-select {
+    border: 1.5px solid var(--rk-border-strong);
+    border-radius: var(--rk-radius-sm);
+    padding: 9px 12px;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    background: var(--rk-surface);
+    color: var(--rk-text);
+    transition: border-color 180ms var(--rk-ease), box-shadow 180ms var(--rk-ease);
+    width: 100%;
+}
+
+.rkchat-field input:focus,
+.rkchat-field textarea:focus,
+.rkchat-persona-select:focus {
+    border-color: var(--rk-orange);
+    box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.12);
+}
+
+.rkchat-field input::placeholder,
+.rkchat-field textarea::placeholder {
+    color: var(--rk-faint);
+}
 
 .rkchat-persona-desc {
-    font-size: .78rem;
-    color: #6b7280;
-    margin: -6px 0 0;
+    font-size: 0.78rem;
+    color: var(--rk-muted);
+    margin: -4px 0 0;
+    line-height: 1.5;
 }
 
 /* Persona control in thread header */
@@ -270,11 +1046,12 @@
     align-items: flex-end;
 }
 
-    .rkchat-persona .rkchat-persona-select {
-        padding: 4px 8px;
-        font-size: .78rem;
-        font-weight: 600;
-    }
+.rkchat-persona .rkchat-persona-select {
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    width: auto;
+}
 
 .rkchat-persona-custom {
     display: flex;
@@ -282,16 +1059,107 @@
     align-items: flex-start;
 }
 
-    .rkchat-persona-custom textarea {
-        border: 1px solid var(--sidebar-border, #e5e7eb);
-        border-radius: 8px;
-        padding: 6px 8px;
-        font-size: .8rem;
-        font-family: inherit;
-        width: 220px;
-        max-width: 60vw;
-    }
+.rkchat-persona-custom textarea {
+    border: 1.5px solid var(--rk-border-strong);
+    border-radius: var(--rk-radius-sm);
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    width: 210px;
+    max-width: 60vw;
+    transition: border-color 180ms var(--rk-ease);
+    outline: none;
+}
 
-.rkchat-thread__head {
-    flex-wrap: wrap;
+.rkchat-persona-custom textarea:focus {
+    border-color: var(--rk-orange);
+}
+
+/* Primary button (used in new-thread form) */
+.btn--primary.btn--block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 20px;
+    border-radius: var(--rk-radius-sm);
+    border: none;
+    background: linear-gradient(135deg, var(--rk-orange) 0%, var(--rk-gold) 100%);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    box-shadow: 0 8px 20px -8px var(--rk-orange-glow);
+    transition: transform 180ms var(--rk-ease), box-shadow 180ms var(--rk-ease), filter 180ms var(--rk-ease);
+    margin-top: 4px;
+}
+
+.btn--primary.btn--block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -10px var(--rk-orange-glow);
+    filter: brightness(1.05);
+}
+
+.btn--primary.btn--block:active {
+    transform: translateY(0);
+}
+
+.btn--primary.btn--block:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.55), 0 8px 20px -8px var(--rk-orange-glow);
+}
+
+/* ============================================================
+   IMAGE MODAL
+   ============================================================ */
+
+.img-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1400;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    padding: 24px;
+}
+
+.img-modal img {
+    max-width: min(90vw, 800px);
+    max-height: 85vh;
+    border-radius: var(--rk-radius-md);
+    box-shadow: 0 32px 80px -20px rgba(15, 23, 42, 0.6);
+    object-fit: contain;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .rkchat-drawer {
+        width: 100vw;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .rkchat-launcher { animation: none; }
+    .rkchat-launcher:hover { transform: none; }
+    .rkchat-drawer,
+    .rkchat-thread,
+    .compose-send-btn,
+    .rkchat-newchat-btn,
+    .btn--primary.btn--block { transition: none; }
+    .msg { animation: none; }
+    .rkchat-loading::before { animation: none; }
 }
