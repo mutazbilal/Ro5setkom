@@ -1,5 +1,4 @@
-﻿
-/* ============================================================
+﻿/* ============================================================
    Mentor Dashboard — App Shell + Sidebar
    Scoped to the Mentor dashboard only (top navbar is hidden here).
    Reuses the --td-* design tokens declared on .mentor-dashboard.
@@ -56,23 +55,13 @@
     color: #fff;
 }
 
-.mentor-sidebar__logo {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
-    font-size: 1.05rem;
-    color: #fff;
-    background: linear-gradient(135deg, var(--ms-accent-orange) 0%, var(--ms-accent-gold) 100%);
-    box-shadow: 0 8px 18px -8px rgba(242, 101, 34, 0.7);
-}
-
-.mentor-sidebar__brand-name {
-    font-family: 'Poppins', 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: -0.01em;
+.mentor-sidebar__logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    /* Slight brightness boost so the logo reads well against the dark sidebar */
+    filter: brightness(1.08);
 }
 
 /* ---- Nav ---- */

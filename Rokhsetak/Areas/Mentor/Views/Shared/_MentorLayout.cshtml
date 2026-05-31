@@ -1,4 +1,4 @@
-﻿@using System.Globalization
+@using System.Globalization
 @using Rokhsetak.Resources
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResourceMarker> L
@@ -48,13 +48,10 @@
                class="mentor-sidebar__brand"
                aria-label="Rokhsetak — @L["Nav_Home"]">
 
-                <span class="mentor-sidebar__logo" aria-hidden="true">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </span>
-
-                <span class="mentor-sidebar__brand-name">
-                    Rokhsetak
-                </span>
+                <img src="~/images/logo.png"
+                     asp-append-version="true"
+                     alt="Rokhsetak"
+                     class="mentor-sidebar__logo-img" />
             </a>
 
             <nav class="mentor-sidebar__nav" aria-label="@L["Mentor_SectionsAria"]">

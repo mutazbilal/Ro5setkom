@@ -176,64 +176,74 @@
 
             <div class="landing-nav__actions">
 
-                @* ── Notifications dropdown ── *@
+                @* ── Notifications ── *@
                 @if (User.IsInRole("mentor") || User.IsInRole("trainee"))
                 {
-                    <div class="nav-notification dropdown">
-                        <a class="landing-nav__link position-relative" data-bs-toggle="dropdown" aria-label="@L["Nav_Notifications"]">
+                    <div class="notif" id="rk-notif">
+                        <button type="button"
+                                class="notif__trigger landing-nav__link"
+                                id="rk-notif-btn"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-controls="rk-notif-panel"
+                                aria-label="@L["Nav_Notifications"]">
                             <i class="fa-solid fa-bell" aria-hidden="true"></i>
-
                             @if (unreadCount > 0)
                             {
-                                <span class="nav-notification__badge" aria-label="@unreadCount @L["Nav_UnreadNotifications"]">
-                                    @unreadCount
+                                <span class="notif__badge" aria-label="@unreadCount @L["Nav_UnreadNotifications"]">
+                                    @(unreadCount > 9 ? "9+" : unreadCount.ToString())
                                 </span>
                             }
-                        </a>
+                        </button>
 
-                        <ul class="dropdown-menu dropdown-menu-end shadow"
-                            style="width: 360px; max-height: 400px; overflow-y: auto;">
-
-                            <li class="dropdown-header fw-bold">
-                                @L["Nav_Notifications"]
-                            </li>
-
-                            @if (notifications.Any())
-                            {
-                                foreach (var n in notifications)
+                        <div class="notif__panel" id="rk-notif-panel" role="dialog" aria-labelledby="rk-notif-btn" hidden>
+                            <div class="notif__head">
+                                <span class="notif__head-title">@L["Nav_Notifications"]</span>
+                                @if (unreadCount > 0)
                                 {
-                                    <li>
-                                        <div class="dropdown-item notification-item @(n.IsRead ? "is-read" : "is-unread") d-flex justify-content-between align-items-start">
+                                    <span class="notif__head-count">@unreadCount</span>
+                                }
+                            </div>
 
-                                            <div>
-                                                <div class="fw-bold">@n.Title</div>
-                                                <small>@n.Message</small><br />
-                                                <small class="text-muted">@n.CreatedAt?.ToString("g")</small>
+                            <ul class="notif__list" role="list">
+                                @if (notifications.Any())
+                                {
+                                    foreach (var n in notifications)
+                                    {
+                                        <li class="notif__item @(n.IsRead ? "notif__item--read" : "notif__item--unread")">
+                                            <div class="notif__item-body">
+                                                @if (!n.IsRead)
+                                                {
+                                                    <span class="notif__dot" aria-hidden="true"></span>
+                                                }
+                                                <div class="notif__item-text">
+                                                    <span class="notif__item-title">@n.Title</span>
+                                                    <span class="notif__item-msg">@n.Message</span>
+                                                    <span class="notif__item-time">@n.CreatedAt?.ToString("g")</span>
+                                                </div>
                                             </div>
-
                                             @if (!n.IsRead)
                                             {
                                                 <button type="button"
-                                                        class="btn btn-sm btn-light border ms-2"
-                                                        title="@L["Nav_MarkAsRead"]"
+                                                        class="notif__mark-btn"
                                                         data-notification-id="@n.NotificationId"
-                                                        aria-label="@L["Nav_MarkAsReadAria"]">
-                                                    ✓
+                                                        aria-label="@L["Nav_MarkAsReadAria"]"
+                                                        title="@L["Nav_MarkAsRead"]">
+                                                    <i class="fa-solid fa-check" aria-hidden="true"></i>
                                                 </button>
                                             }
-                                        </div>
-                                    </li>
-                                    <li><hr class="dropdown-divider" /></li>
+                                        </li>
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                <li class="dropdown-item text-center text-muted">
-                                    @L["Nav_NoNotifications"]
-                                </li>
-                            }
-
-                        </ul>
+                                else
+                                {
+                                    <li class="notif__empty">
+                                        <i class="fa-regular fa-bell-slash" aria-hidden="true"></i>
+                                        <span>@L["Nav_NoNotifications"]</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
                     </div>
                 }
 
@@ -299,29 +309,5 @@
     </div>
 </header>
 
-@* ── Notification mark-as-read handler (unchanged) ── *@
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const markButtons = document.querySelectorAll('[data-notification-id]');
-        markButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.dataset.notificationId;
-                fetch('/Notification/MarkAsRead', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'id=' + id
-                })
-                .then(res => {
-                    if (res.ok) {
-                        location.reload();
-                    } else {
-                        console.error("Failed to mark notification as read");
-                    }
-                })
-                .catch(err => console.error(err));
-            });
-        });
-    });
-</script>
+@* ── Notification interactions ── *@
+<script src="~/js/notifications.js" asp-append-version="true"></script>

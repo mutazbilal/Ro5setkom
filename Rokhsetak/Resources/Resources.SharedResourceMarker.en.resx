@@ -3662,4 +3662,7 @@
 	<data name="Admin_User_DeactivateDialog_Confirm" xml:space="preserve">
     <value>Deactivate</value>
   </data>
+	<data name="Dashboard_OverallProgress" xml:space="preserve">
+  <value>Overall Progress</value>
+</data>
 </root> 
