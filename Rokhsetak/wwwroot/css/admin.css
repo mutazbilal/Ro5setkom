@@ -79,35 +79,12 @@
     border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
-.admin-sidebar__brand-mark {
-    display: grid;
-    place-items: center;
-    width: 38px; height: 38px;
-    border-radius: 11px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    background: linear-gradient(135deg, var(--ao), var(--ag));
-    box-shadow: 0 6px 16px -6px var(--ao-glow);
-    flex-shrink: 0;
-}
-
-.admin-sidebar__brand-text strong {
+.admin-sidebar__logo-img {
+    height: 44px;
+    width: auto;
     display: block;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.01em;
-}
-
-.admin-sidebar__brand-text small {
-    display: block;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    object-fit: contain;
+    filter: brightness(1.08);
 }
 
 .admin-sidebar__nav {
@@ -169,10 +146,55 @@
 }
 
 .admin-sidebar__footer {
-    padding: 16px 20px;
+    padding: 16px 12px;
     border-top: 1px solid rgba(255,255,255,0.08);
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-sidebar__copy {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.28);
+    padding-inline: 8px;
+}
+
+/* ---- Language toggle ---- */
+.admin-sidebar__lang {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.admin-sidebar__lang-form {
+    margin: 0;
+    flex: 1;
+}
+
+.admin-sidebar__lang-btn {
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 180ms var(--ease);
+}
+
+.admin-sidebar__lang-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+}
+
+.admin-sidebar__lang-btn.is-active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--ao), var(--ag));
+    border-color: transparent;
+    box-shadow: 0 4px 12px -4px var(--ao-glow);
 }
 
 /* ============================================================
