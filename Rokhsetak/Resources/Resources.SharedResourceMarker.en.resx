@@ -3665,4 +3665,45 @@
 	<data name="Dashboard_OverallProgress" xml:space="preserve">
   <value>Overall Progress</value>
 </data>
+
+
+	<data name="Stage_registered" xml:space="preserve">
+  <value>Registered</value>
+</data>
+
+	<data name="Stage_theoretical_prep" xml:space="preserve">
+  <value>Theoretical Preparation</value>
+</data>
+
+	<data name="Stage_mock_exam_completed" xml:space="preserve">
+  <value>Mock Exam Completed</value>
+</data>
+
+	<data name="Stage_theory_test_pending" xml:space="preserve">
+  <value>Theory Test Pending</value>
+</data>
+
+	<data name="Stage_theory_passed" xml:space="preserve">
+  <value>Theory Test Passed</value>
+</data>
+
+	<data name="Stage_medical_exam_pending" xml:space="preserve">
+  <value>Medical Exam Pending</value>
+</data>
+
+	<data name="Stage_medical_passed" xml:space="preserve">
+  <value>Medical Exam Passed</value>
+</data>
+
+	<data name="Stage_practical_prep" xml:space="preserve">
+  <value>Practical Preparation</value>
+</data>
+
+	<data name="Stage_practical_test_pending" xml:space="preserve">
+  <value>Practical Test Pending</value>
+</data>
+
+	<data name="Stage_completed" xml:space="preserve">
+  <value>Completed</value>
+</data>
 </root> 

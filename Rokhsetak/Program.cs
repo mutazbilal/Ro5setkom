@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Rokhsetak.Models;
-using Rokhsetak.Services.Implementations;
-using Rokhsetak.Services.Interfaces;
-using System.Globalization;
-using Rokhsetak.Workers;
 using Rokhsetak.Services.Chat;
 using Rokhsetak.Services.Chat.Implementations;
 using Rokhsetak.Services.Chat.Implementations.Providers;
+using Rokhsetak.Services.Implementations;
+using Rokhsetak.Services.Interfaces;
+using Rokhsetak.Utils;
+using Rokhsetak.Workers;
+using System.Globalization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -99,6 +100,7 @@ builder.Services.AddScoped<IBookingContextProvider, BookingContextProvider>();
 builder.Services.AddSingleton<IPageContextProvider, PageContextProvider>(); // pure in-memory
 builder.Services.AddScoped<IAiContextAssembler, AiContextAssembler>();
 builder.Services.AddSingleton<IAiPromptBuilder, AiPromptBuilder>();     // stateless
+builder.Services.AddScoped<StageLocalizer>();
 
 builder.Services.AddScoped<IBlobService, BlobService>();
 

@@ -95,7 +95,7 @@
                             <tr>
                                 <td class="cell-name">@t.FullName</td>
                                 <td><span class="pill pill-license">@t.LicenseType.Replace("_", " ")</span></td>
-                                <td><span class="pill @StageClass(t.LicenseStage)">@L[$"Trainees_Stage_{t.LicenseStage.Replace(" ", "_")}"]</span></td>
+                                <td><span class="pill">@t.LicenseStage</span></td>
                                 <td class="cell-center cell-count">@t.TotalSessions</td>
                                 <td class="cell-muted">
                                     @(t.LastSessionDate.HasValue ? t.LastSessionDate.Value.ToString("dd MMM yyyy") : "-")

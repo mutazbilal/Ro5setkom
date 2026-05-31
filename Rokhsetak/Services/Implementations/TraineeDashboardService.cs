@@ -1,18 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Rokhsetak.Areas.Trainee.ViewModels.Dashboard;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using Rokhsetak.Utils;
 
 namespace Rokhsetak.Services.Implementations;
 
 public class TraineeDashboardService : ITraineeDashboardService
 {
     private readonly RokhsetakDbContext _context;
-
-    public TraineeDashboardService(RokhsetakDbContext context)
+    private readonly StageLocalizer _stageLocalizer;
+    public TraineeDashboardService(RokhsetakDbContext context, StageLocalizer stageLocalizer)
     {
         _context = context;
+        _stageLocalizer = stageLocalizer;
     }
 
     public async Task<ServiceResult<TraineeDashboardViewModel>> GetDashboardAsync(
@@ -143,11 +146,12 @@ public class TraineeDashboardService : ITraineeDashboardService
         string nextMilestone = DetermineNextMilestone(
             items, isMockExamAvailable, mockExamCompleted, license.Stage, culture);
 
+        var stage = _stageLocalizer.Localize(license.Stage);
         var vm = new TraineeDashboardViewModel
         {
             TraineeLicenseId = license.TraineeLicenseId,
-            LicenseTypeName = license.LicenseType.LicenseName,
-            Stage = license.Stage,
+            LicenseTypeName = culture == "ar" ? license.LicenseType.DisplayNameAr : license.LicenseType.DisplayNameEn,
+            Stage = stage,
             OverallProgressPercentage = overallPct,
             NextMilestone = nextMilestone,
             IsMockExamAvailable = isMockExamAvailable,
