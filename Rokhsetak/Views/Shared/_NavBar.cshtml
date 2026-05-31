@@ -137,15 +137,6 @@
                                 <span>@L["Nav_Exams"]</span>
                             </a>
                         </li>
-
-                        <li>
-                            <a asp-area="Trainee" asp-controller="Calendar" asp-action="Index"
-                               class="landing-nav__link @ActiveClass("Trainee", "Calendar", "index")"
-                               aria-current="@ActiveAria("Trainee", "Calendar", "index")">
-                                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
-                                <span>@L["Nav_Calendar"]</span>
-                            </a>
-                        </li>
                     }
 
                     else if (User.IsInRole("mentor"))

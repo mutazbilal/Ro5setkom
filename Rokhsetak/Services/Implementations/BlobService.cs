@@ -67,15 +67,9 @@ namespace Rokhsetak.Services.Implementations
                 return "";
 
             var container = GetContainer(containerName);
-
             var blobClient = container.GetBlobClient(fileName);
 
-            var sasUri = blobClient.GenerateSasUri(
-                BlobSasPermissions.Read,
-                DateTimeOffset.UtcNow.AddHours(1)
-            );
-
-            return sasUri.ToString();
+            return blobClient.Uri.ToString();
         }
         public async Task<ServiceResult<string>> UploadAsync(
             string containerName,

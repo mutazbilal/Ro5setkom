@@ -184,15 +184,6 @@
                                 </div>
 
                                 <div class="mentor-card__stat">
-                                    <div class="mentor-card__stat-value mentor-card__stat-value--completion">
-                                        @m.CompletionRate%
-                                    </div>
-                                    <div class="mentor-card__stat-label">
-                                        @L["Booking_Completion"]
-                                    </div>
-                                </div>
-
-                                <div class="mentor-card__stat">
                                     <div class="mentor-card__stat-value mentor-card__stat-value--price">
                                         @m.PricePerSession JD
                                     </div>
@@ -267,7 +258,8 @@
         <div class="booking-card__body">
 
             <p style="margin: 0 0 12px;">
-                @string.Format(L["Booking_ChangePrimaryMsg"], "<strong id=\"newMentorName\" style=\"color: var(--color-primary);\"></strong>")
+                @L["Booking_ChangePrimaryMsg"]
+                <strong id="newMentorName" style="color: var(--color-primary);"></strong>
             </p>
 
             <ul style="padding-inline-start: 22px; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.6; margin: 0 0 14px;">
