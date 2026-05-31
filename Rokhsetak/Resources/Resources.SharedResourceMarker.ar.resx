@@ -3704,7 +3704,9 @@
 	<data name="Stage_completed" xml:space="preserve">
   <value>مكتمل</value>
 </data>
-	
-	
+
+	<data name="Auth_AlreadyHaveAccount" xml:space="preserve">
+  <value>هل لديك حساب بالفعل؟</value>
+</data>
 	
 </root>

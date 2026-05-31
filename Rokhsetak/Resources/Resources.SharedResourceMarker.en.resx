@@ -3706,4 +3706,9 @@
 	<data name="Stage_completed" xml:space="preserve">
   <value>Completed</value>
 </data>
+	
+	<data name="Auth_AlreadyHaveAccount " xml:space="preserve">
+  <value>Already Have an Account?</value>
+</data>
+	
 </root> 
