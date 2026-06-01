@@ -17,7 +17,7 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
 	</resheader>
-
+    
 	<data name="Dashboard_Title" xml:space="preserve"><value>لوحة التحكم</value></data>
 	<data name="Dashboard_Progress" xml:space="preserve"><value>التقدم الإجمالي</value></data>
 	<data name="Dashboard_NextMilestone" xml:space="preserve"><value>الخطوة التالية</value></data>
@@ -3698,5 +3698,48 @@
   </data>
 <data name="Auth_AlreadyHaveAccount" xml:space="preserve">
   <value>لديك حساب بالفعل؟</value>
+</data>
+	<data name="Stage_registered" xml:space="preserve">
+  <value>مسجل</value>
+</data>
+
+	<data name="Stage_theoretical_prep" xml:space="preserve">
+  <value>التحضير النظري</value>
+</data>
+
+	<data name="Stage_mock_exam_completed" xml:space="preserve">
+  <value>تم إكمال الاختبار التجريبي</value>
+</data>
+
+	<data name="Stage_theory_test_pending" xml:space="preserve">
+  <value>بانتظار اختبار النظري</value>
+</data>
+
+	<data name="Stage_theory_passed" xml:space="preserve">
+  <value>تم اجتياز اختبار النظري</value>
+</data>
+
+	<data name="Stage_medical_exam_pending" xml:space="preserve">
+  <value>بانتظار الفحص الطبي</value>
+</data>
+
+	<data name="Stage_medical_passed" xml:space="preserve">
+  <value>تم اجتياز الفحص الطبي</value>
+</data>
+
+	<data name="Stage_practical_prep" xml:space="preserve">
+  <value>التحضير العملي</value>
+</data>
+
+	<data name="Stage_practical_test_pending" xml:space="preserve">
+  <value>بانتظار الاختبار العملي</value>
+</data>
+
+	<data name="Stage_completed" xml:space="preserve">
+  <value>مكتمل</value>
+</data>
+
+	<data name="Auth_AlreadyHaveAccount" xml:space="preserve">
+  <value>هل لديك حساب بالفعل؟</value>
 </data>
 </root>

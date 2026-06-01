@@ -5,6 +5,7 @@ using Rokhsetak.Areas.Mentor.ViewModels.Trainees;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using Rokhsetak.Utils;
 using System.Globalization;
 
 namespace Rokhsetak.Services.Implementations;
@@ -14,12 +15,17 @@ public class AppointmentService : IAppointmentService
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
     private readonly IConversationService _conversations;
+    private readonly StageLocalizer _stageLocalizer;
 
-    public AppointmentService(RokhsetakDbContext context, INotificationService notifications, IConversationService conversations)
+    public AppointmentService(RokhsetakDbContext context,
+        INotificationService notifications,
+        IConversationService conversations,
+        StageLocalizer stageLocalizer)
     {
         _context = context;
         _notifications = notifications;
         _conversations = conversations;
+        _stageLocalizer = stageLocalizer;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -396,7 +402,7 @@ public class AppointmentService : IAppointmentService
                     FullName =  culture == "ar" ? $"{u.FirstName} {u.LastName}" : u.DisplayNameEn,
                     TotalSessions = stats?.TotalSessions ?? 0,
                     LastSessionDate = stats?.LastSessionDate,
-                    LicenseStage = lic?.Stage ?? "—",
+                    LicenseStage =  _stageLocalizer.Localize(lic.Stage),
                     LicenseType = culture == "ar"? lic.DisplayNameAr :lic.DisplayNameEn
                 };
             })
