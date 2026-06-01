@@ -3665,4 +3665,39 @@
 	<data name="Dashboard_OverallProgress" xml:space="preserve">
   <value>Overall Progress</value>
 </data>
+	<!-- ========== ADMIN APPLICATIONS (UPPERCASE KEYS) ========== -->
+	<data name="ADMIN_APPLICATIONS_TABLE_ACTIONS" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="ADMIN_APPLICATIONS_CERT_UPLOADED" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
+	<data name="ADMIN_APPLICATIONS_CERT_MISSING" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+	<data name="ADMIN_APPLICATIONS_ACTION_REVIEW" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="ADMIN_APPLICATIONS_NO_DATA" xml:space="preserve">
+    <value>No pending applications right now.</value>
+  </data>
+	<!-- ========== ADMIN APPLICATIONS ========== -->
+	<data name="Admin_Applications_Table_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+	<data name="Admin_Applications_Cert_Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
+  </data>
+	<data name="Admin_Applications_Cert_Missing" xml:space="preserve">
+    <value>Missing</value>
+  </data>
+	<data name="Admin_Applications_Action_Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+	<data name="Admin_Applications_NoData" xml:space="preserve">
+    <value>No pending applications right now.</value>
+  </data>
+	<data name="Auth_AlreadyHaveAccount" xml:space="preserve">
+  <value>Already have an account?</value>
+</data>
 </root> 

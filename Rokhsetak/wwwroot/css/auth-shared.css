@@ -61,13 +61,18 @@ a {
 }
 
 .auth-mobile-header__logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(circle at 30% 30%, #ffe09a, var(--color-accent-gold) 45%, var(--color-primary) 95%);
-    color: #fff;
+    height: 40px;
+    border-radius: 9px;
+    overflow: hidden;
+    display: inline-flex;
+    background: #000;
+    border: 1px solid rgba(201, 168, 76, 0.45);
+}
+
+.auth-mobile-header__logo img {
+    display: block;
+    height: 40px;
+    width: auto;
 }
 
 .auth-brand {
@@ -95,18 +100,22 @@ a {
 }
 
 .auth-brand__logo {
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 2rem;
-    color: #fff;
-    background: radial-gradient(circle at 35% 25%, #fde7b0, var(--color-accent-gold) 42%, #1a3a6b 90%);
-    box-shadow: 0 12px 30px rgba(0,0,0,.2);
-    animation: pulseLogo 3.2s infinite ease-in-out;
+    display: inline-block;
+    max-width: 260px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(201, 168, 76, 0.45);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+    animation: floatY 7s infinite ease-in-out;
     position: relative;
     z-index: 2;
+}
+
+.auth-brand__logo img {
+    display: block;
+    width: 240px;
+    height: auto;
 }
 
 .auth-brand__title {
