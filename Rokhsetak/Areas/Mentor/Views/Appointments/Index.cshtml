@@ -5,6 +5,7 @@
 @model AppointmentListViewModel
 @{
     ViewData["Title"] = L["Mentor_ManageAppointments"];
+    ViewData["ActiveNav"] = "appointments";
 
     var totalCount     = Model.Items.Count;
     var pendingCount   = Model.Items.Count(i => i.Status == "pending");

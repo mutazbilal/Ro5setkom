@@ -49,7 +49,7 @@
             var slot = new MentorAvailability
             {
                 MentorId = mentorId,
-                DayOfWeek = model.DayOfWeek.ToString(),
+                DayOfWeek = model.DayOfWeek,
                 StartTime = model.StartTime,
                 EndTime = model.EndTime,
                 IsActive = true
@@ -80,7 +80,7 @@
                 .AnyAsync(a =>
                     a.MentorId == mentorId &&
                     a.AvailabilityId != slotId &&
-                    a.DayOfWeek == model.DayOfWeek.ToString() &&
+                    a.DayOfWeek == model.DayOfWeek &&
                     a.IsActive == true &&
                     (model.StartTime < a.EndTime && model.EndTime > a.StartTime)
                 );
@@ -88,7 +88,7 @@
             if (hasOverlap)
                 return ServiceResult.Failure("Slot overlaps with existing slot.");
 
-            slot.DayOfWeek = model.DayOfWeek.ToString();
+            slot.DayOfWeek = model.DayOfWeek;
             slot.StartTime = model.StartTime;
             slot.EndTime = model.EndTime;
 

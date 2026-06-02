@@ -8,12 +8,16 @@
     var returnUrl = Context.Request.Path + Context.Request.QueryString;
 }
 <aside class="admin-sidebar" aria-label="Admin navigation">
-    <div class="admin-sidebar__brand">
+    <a asp-area=""
+       asp-controller="Home"
+       asp-action="Index"
+       aria-label="Rokhsetak — @L["Nav_Home"]">
+
         <img src="~/images/logo.png"
              asp-append-version="true"
              alt="Rokhsetak"
              class="admin-sidebar__logo-img" />
-    </div>
+    </a>
 
     <nav class="admin-sidebar__nav" aria-label="Admin sections">
         <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index"

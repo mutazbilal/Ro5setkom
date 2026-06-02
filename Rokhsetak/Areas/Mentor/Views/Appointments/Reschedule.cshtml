@@ -5,6 +5,7 @@
 @model RescheduleViewModel
 @{
     ViewData["Title"] = L["Mentor_RescheduleSession"];
+    ViewData["ActiveNav"] = "appointments";
 
     var minDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1)).ToString("yyyy-MM-dd");
 }

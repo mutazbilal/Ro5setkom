@@ -4,7 +4,7 @@
 @model TraineeDetailViewModel
 @{
     ViewData["Title"] = Model.FullName;
-
+    ViewData["ActiveNav"] = "trainees";
     string StageClass(string stage) =>
         stage == "completed" ? "pill-stage--done"
         : stage.Contains("pending") ? "pill-stage--pending"
@@ -23,6 +23,7 @@
         "completed" => L["Trainees_Status_Completed"],
         "confirmed" => L["Trainees_Status_Confirmed"],
         "pending" => L["Trainees_Status_Pending"],
+        "cancelled" => L["Trainees_Status_Cancelled"],
         _ => status
     };
 }
@@ -49,7 +50,7 @@
             </p>
             <div class="profile-pills">
                 <span class="pill pill-license">@Model.LicenseType.Replace("_", " ")</span>
-                <span class="pill @StageClass(Model.LicenseStage)">@L[$"Trainees_Stage_{Model.LicenseStage.Replace(" ", "_")}"]</span>
+                <span class="pill pill-license">@Model.LicenseStage</span>
             </div>
         </div>
 

@@ -15,7 +15,7 @@ public class AnalyticsService : IAnalyticsService
         _context = context;
     }
 
-    public async Task<ServiceResult<AnalyticsDashboardViewModel>> GetDashboardAsync(AnalyticsFilter filter)
+    public async Task<ServiceResult<AnalyticsDashboardViewModel>> GetDashboardAsync(AnalyticsFilter filter, string culture)
     {
         // Default range: last 12 months
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -140,7 +140,7 @@ public class AnalyticsService : IAnalyticsService
         var mentorNames = await (
             from m in _context.Mentors
             join u in _context.Users on m.MentorId equals u.UserId
-            select new { m.MentorId, FullName = u.FirstName + " " + u.LastName }
+            select new { m.MentorId, FullName = culture == "ar"? u.FirstName + " " + u.LastName :u.DisplayNameEn}
         ).ToListAsync();
 
         var nameLookup = mentorNames.ToDictionary(x => x.MentorId, x => x.FullName);

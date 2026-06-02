@@ -222,33 +222,47 @@ namespace Rokhsetak.Services.Implementations
                 .ToListAsync();
 
 
-            var availableSlots = slots
-                .Where(slot =>
-                    !bookings.Any(b =>
+            // Define the date range you want to check availability for
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            var rangeEnd = today.AddDays(30); // or however far ahead you want
+
+            // Expand each availability slot into concrete dates within the range
+            var availableSlots = new List<(MentorAvailability Slot, DateOnly Date)>();
+
+            for (var date = today; date <= rangeEnd; date = date.AddDays(1))
+            {
+                var dayName = date.DayOfWeek.ToString().ToLower();
+
+                foreach (var slot in slots.Where(s => s.DayOfWeek.ToLower() == dayName))
+                {
+                    bool isBooked = bookings.Any(b =>
                         b.Status != "cancelled" &&
-                        b.BookingDate.DayOfWeek.ToString().ToLower() == slot.DayOfWeek.ToLower() &&
+                        DateOnly.FromDateTime(b.BookingDate.ToDateTime(TimeOnly.MinValue)) == date &&
                         b.StartTime < slot.EndTime &&
                         b.EndTime > slot.StartTime
-                    )
-                )
-                .ToList();
+                    );
+
+                    if (!isBooked)
+                        availableSlots.Add((slot, date));
+                }
+            }
 
 
             var availableDays = availableSlots
-                .GroupBy(s => s.DayOfWeek)
-                .Select(g => new AvailableDayViewModel
-                {
-                    DayOfWeek = g.Key,
-                    Slots = g
-                        .OrderBy(s => s.StartTime)
-                        .Select(s => new SlotViewModel
-                        {
-                            StartTime = s.StartTime,
-                            EndTime = s.EndTime
-                        })
-                        .ToList()
-                })
-                .ToList();
+               .GroupBy(s => s.Date)
+               .Select(g => new AvailableDayViewModel
+               {
+                   DayOfWeek = g.Key.DayOfWeek.ToString(),
+                   Slots = g
+                       .OrderBy(s => s.Slot.StartTime)
+                       .Select(s => new SlotViewModel
+                       {
+                           StartTime = s.Slot.StartTime,
+                           EndTime = s.Slot.EndTime
+                       })
+                       .ToList()
+               })
+               .ToList();
 
             // Ratings
             var ratingData = await _context.Ratings

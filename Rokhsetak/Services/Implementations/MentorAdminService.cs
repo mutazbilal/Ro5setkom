@@ -119,7 +119,8 @@ public class MentorAdminService : IMentorAdminService
                 x.m.PricePerSession,
                 x.CityName,
                 x.LicenseName,
-                x.AppStatus
+                x.AppStatus,
+                x.u.DisplayNameEn
             })
             .ToListAsync();
 
@@ -140,7 +141,7 @@ public class MentorAdminService : IMentorAdminService
         var items = page.Select(p => new MentorListItem
         {
             MentorId = p.MentorId,
-            FullName = $"{p.FirstName} {p.LastName}",
+            FullName = culture == "ar"? $"{p.FirstName} {p.LastName}" :p.DisplayNameEn,
             Email = p.Email,
             PhoneNumber = p.PhoneNumber,
             LicenseType = p.LicenseName,
@@ -214,7 +215,7 @@ public class MentorAdminService : IMentorAdminService
         var vm = new MentorDetailViewModel
         {
             MentorId = data.m.MentorId,
-            FullName = $"{data.u.FirstName} {data.u.LastName}",
+            FullName = culture == "ar"? $"{data.u.FirstName} {data.u.LastName}" :data.u.DisplayNameEn,
             Email = data.u.Email,
             PhoneNumber = data.u.PhoneNumber,
             LicenseType = data.LicenseName,

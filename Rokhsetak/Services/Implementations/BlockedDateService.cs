@@ -17,7 +17,7 @@ public class BlockedDateService : IBlockedDateService
         _audit = audit;
     }
 
-    public async Task<ServiceResult<BlockedDateListViewModel>> GetBlockedDatesAsync()
+    public async Task<ServiceResult<BlockedDateListViewModel>> GetBlockedDatesAsync(string culture)
     {
         var items = await (
             from bd in _context.BlockedDates.AsNoTracking()
@@ -30,7 +30,7 @@ public class BlockedDateService : IBlockedDateService
                 Date = bd.BlockedDate1,
                 Reason = bd.Reason,
                 CreatedAt = bd.CreatedAt,
-                CreatedByName = u != null ? (u.FirstName + " " + u.LastName) : "—"
+                CreatedByName = u != null ? ( culture == "ar"? (u.FirstName + " " + u.LastName) :u.DisplayNameEn): "—"
             }
         ).ToListAsync();
 

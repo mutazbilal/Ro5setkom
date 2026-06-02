@@ -2259,7 +2259,7 @@
     <value>أدخل رقمك الوطني المكون من 10 أرقام.</value>
   </data>
 	<data name="Reg_SelectRole_HeroTitle" xml:space="preserve">
-    <value>انضم إلى رخصة طرق</value>
+    <value>انضم إلى رخصتك</value>
   </data>
 	<data name="Reg_SelectRole_Tagline" xml:space="preserve">
     <value>اختر كيف تريد أن تكون جزءاً من الرحلة.</value>
@@ -3052,6 +3052,9 @@
   <data name="Trainees_Status_Pending" xml:space="preserve">
     <value>معلق</value>
   </data>
+	<data name="Trainees_Status_Cancelled" xml:space="preserve">
+    <value>ملغى</value>
+  </data>
   <data name="Trainees_Stage_completed" xml:space="preserve">
     <value>مكتمل</value>
   </data>
@@ -3665,9 +3668,6 @@
   <value>التقدم الكلي</value>
 </data>
 	  <!-- ========== طلبات المرشدين (مفاتيح بحروف كبيرة) ========== -->
-  <data name="ADMIN_APPLICATIONS_TABLE_ACTIONS" xml:space="preserve">
-    <value>إجراءات</value>
-  </data>
   <data name="ADMIN_APPLICATIONS_CERT_UPLOADED" xml:space="preserve">
     <value>مرفوع</value>
   </data>

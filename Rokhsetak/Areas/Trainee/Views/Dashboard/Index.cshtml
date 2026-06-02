@@ -186,20 +186,24 @@
                         var itemClass = $"module-item module-item--{presentation.modifier}"
                                       + (isUpNext ? " module-item--up-next" : "");
                         <li class="@itemClass">
-                            <div class="module-item__main">
-                                <span class="module-item__status-icon module-item__status-icon--@presentation.modifier" aria-hidden="true">
-                                    <i class="@presentation.iconClass"></i>
-                                </span>
-                                <span class="module-item__title">@m.Title</span>
-                            </div>
-                            @if (isUpNext)
-                            {
-                                <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
-                            }
-                            else
-                            {
-                                <span class="status-pill status-pill--@presentation.modifier">@presentation.label</span>
-                            }
+                                <div class="module-item__main">
+                                <a href="/Trainee/Modules/Detail/@m.ModuleId" class="module-item__link">
+                                    <span class="module-item__status-icon module-item__status-icon--@presentation.modifier" aria-hidden="true">
+                                        <i class="@presentation.iconClass"></i>
+                                    </span>
+                                </a>
+                                    <span class="module-item__title">@m.Title</span>
+                                </div>
+                            <a href="/Trainee/Modules/Detail/@m.ModuleId" class="module-item__link">
+                                @if (isUpNext)
+                                {
+                                    <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
+                                }
+                                else
+                                {
+                                    <span class="status-pill status-pill--@presentation.modifier">@presentation.label</span>
+                                }
+                                </a>
                         </li>
                     }
                     @if (!theoryShown.Any())
@@ -253,11 +257,14 @@
                                       + (isUpNext ? " module-item--up-next" : "");
                         <li class="@itemClass">
                             <div class="module-item__main">
+                                <a href="/Trainee/Modules/Detail/@m.ModuleId" class="module-item__link">
                                 <span class="module-item__status-icon module-item__status-icon--@presentation.modifier" aria-hidden="true">
                                     <i class="@presentation.iconClass"></i>
                                 </span>
+                                </a>
                                 <span class="module-item__title">@m.Title</span>
                             </div>
+                            <a href="/Trainee/Modules/Detail/@m.ModuleId" class="module-item__link">
                             @if (isUpNext)
                             {
                                 <span class="status-pill status-pill--up-next">@L["Dashboard_UpNext"]</span>
@@ -266,6 +273,7 @@
                             {
                                 <span class="status-pill status-pill--@presentation.modifier">@presentation.label</span>
                             }
+                            </a>
                         </li>
                     }
                     @if (!practicalShown.Any())

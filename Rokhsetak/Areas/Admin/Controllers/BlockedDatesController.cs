@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Admin.ViewModels.BlockedDates;
 using Rokhsetak.Services.Interfaces;
 using Rokhsetak.Utils;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Admin.Controllers;
 
@@ -20,7 +21,8 @@ public class BlockedDatesController : Controller
     // GET /Admin/BlockedDates
     public async Task<IActionResult> Index()
     {
-        var result = await _blockedDates.GetBlockedDatesAsync();
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _blockedDates.GetBlockedDatesAsync(culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;

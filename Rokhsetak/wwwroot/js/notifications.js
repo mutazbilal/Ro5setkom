@@ -18,11 +18,45 @@
 
         /* ---- Toggle open / close ---- */
         function openPanel() {
+            // Position before un-hiding so getBoundingClientRect is accurate
+            positionPanel();
             panel.hidden = false;
             btn.setAttribute('aria-expanded', 'true');
-            panel.focus && panel.focus();
         }
+        function positionPanel() {
+            var btnRect = btn.getBoundingClientRect();
+            var panelWidth = 340;
+            var gap = 12; // px gap between trigger and panel edge
 
+            // Align panel top with the trigger's top
+            var top = btnRect.top;
+
+            // Place panel to the right of the sidebar trigger by default,
+            // fall back to left if it would overflow the viewport
+            var leftOfBtn = btnRect.left - panelWidth - gap;
+            var rightOfBtn = btnRect.right + gap;
+
+            var left;
+            if (rightOfBtn + panelWidth <= window.innerWidth - 8) {
+                left = rightOfBtn;               // open to the right
+            } else if (leftOfBtn >= 8) {
+                left = leftOfBtn;                // open to the left
+            } else {
+                // Last resort: centre under the button
+                left = Math.max(8, btnRect.left + btnRect.width / 2 - panelWidth / 2);
+            }
+
+            // Clamp vertically so it never goes below the viewport
+            var maxTop = window.innerHeight - 420 - 8;
+            if (top > maxTop) top = maxTop;
+            if (top < 8) top = 8;
+
+            panel.style.top = top + 'px';
+            panel.style.left = left + 'px';
+            // Clear any inline inset-* that CSS might have set
+            panel.style.insetInlineEnd = 'auto';
+            panel.style.insetInlineStart = 'auto';
+        }
         function closePanel() {
             panel.hidden = true;
             btn.setAttribute('aria-expanded', 'false');

@@ -44,6 +44,9 @@
     box-shadow: 22px 0 48px -34px rgba(15, 23, 42, 0.55);
     z-index: 20;
 }
+    .mentor-sidebar .notif__trigger {
+        color: #fff;
+    }
 
 /* ---- Brand ---- */
 .mentor-sidebar__brand {
@@ -53,6 +56,14 @@
     padding: 0.25rem 0.5rem;
     text-decoration: none;
     color: #fff;
+}
+
+.mentor-sidebar__brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 12px;
+    gap: 8px;
 }
 
 .mentor-sidebar__logo-img {

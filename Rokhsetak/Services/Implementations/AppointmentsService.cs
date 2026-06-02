@@ -501,7 +501,7 @@ public class AppointmentService : IAppointmentService
             TraineeId = traineeId,
             FullName = $"{user.FirstName} {user.LastName}",
             Email = user.Email,
-            LicenseStage = license?.Stage ?? "—",
+            LicenseStage =  _stageLocalizer.Localize(license.Stage),
             LicenseType = culture == "ar"? license.DisplayNameAr :license.DisplayNameEn,
             ProgressPct = license?.ProgressPercentage ?? 0,
             Sessions = sessions,

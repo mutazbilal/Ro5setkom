@@ -4,7 +4,7 @@
 @model TraineeSummaryListViewModel
 @{
     ViewData["Title"] = L["Trainees_Title"];
-
+    ViewData["ActiveNav"] = "trainees";
     string StageClass(string stage) =>
         stage == "completed" ? "pill-stage--done"
         : stage.Contains("pending") ? "pill-stage--pending"

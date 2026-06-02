@@ -114,9 +114,13 @@
                             <div class="content-block__body content-block__body--media">
                                 <div class="content-block__video">
                                     <iframe src="@content.VideoUrl"
+                                            referrerpolicy="strict-origin-when-cross-origin"
                                             allowfullscreen
                                             loading="lazy"
-                                            title="@L["Module_VideoTitle"]"></iframe>
+                                            title="@L["Module_VideoTitle"]"
+                                            allow="accelerometer; autoplay; clipboard-write;
+                                    encrypted-media; gyroscope; picture-in-picture;
+                                    web-share"></iframe>
                                 </div>
                             </div>
                         </article>
@@ -210,3 +214,20 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        (function () {
+            console.log('Permissions patch running...');
+            if (navigator.permissions && navigator.permissions.query) {
+                const originalQuery = navigator.permissions.query.bind(navigator.permissions);
+                navigator.permissions.query = function (params) {
+                    console.log('Permissions query intercepted:', params);
+                    return originalQuery(params).catch(function () {
+                        return { state: 'prompt', onchange: null };
+                    });
+                };
+            }
+        })();
+    </script>
+}

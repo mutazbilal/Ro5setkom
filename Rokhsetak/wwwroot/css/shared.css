@@ -394,7 +394,6 @@ div.validation-summary-valid {
 /* ---- Wrapper: positions the trigger + panel together ---- */
 .notif {
     position: relative;
-    display: inline-flex;
 }
 
 /* ---- Bell trigger button ---- */
@@ -403,13 +402,21 @@ div.validation-summary-valid {
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 8px 10px;
-    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 50%;
     color: var(--color-primary, #1A3A6B);
     font-size: 15px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.notif__trigger.landing-nav__link {
+    width: 38px;
+    height: 38px;
+    padding: 0;
 }
 
 .notif__trigger:hover {
@@ -443,28 +450,21 @@ div.validation-summary-valid {
 
 /* ---- Panel: the dropdown card ---- */
 .notif__panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    inset-inline-end: 0;
-    z-index: 200;
-
+    position: fixed; /* escape sidebar overflow/clip */
+    z-index: 400;
     width: 340px;
-    max-width: calc(100vw - 32px);   /* never overflow viewport */
+    max-width: calc(100vw - 32px);
     max-height: 420px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
     border: 1px solid rgba(26, 58, 107, 0.10);
     border-radius: 16px;
-    box-shadow:
-        0 20px 40px -16px rgba(26, 58, 107, 0.22),
-        0 2px 8px -2px rgba(26, 58, 107, 0.08);
-
-    transform-origin: top right;
+    box-shadow: 0 20px 40px -16px rgba(26, 58, 107, 0.22), 0 2px 8px -2px rgba(26, 58, 107, 0.08);
+    /* position is set by JS — no transform-origin needed here */
     animation: notif-reveal 0.22s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
@@ -666,9 +666,6 @@ div.validation-summary-valid {
 /* ---- Mobile: panel is full-width and anchors to left ---- */
 @media (max-width: 480px) {
     .notif__panel {
-        inset-inline-end: auto;
-        inset-inline-start: 50%;
-        transform: translateX(-50%);
         width: calc(100vw - 32px);
         max-width: 360px;
     }

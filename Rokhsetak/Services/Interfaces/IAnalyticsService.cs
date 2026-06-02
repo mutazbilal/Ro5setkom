@@ -5,5 +5,5 @@ namespace Rokhsetak.Services.Interfaces;
 
 public interface IAnalyticsService
 {
-    Task<ServiceResult<AnalyticsDashboardViewModel>> GetDashboardAsync(AnalyticsFilter filter);
+    Task<ServiceResult<AnalyticsDashboardViewModel>> GetDashboardAsync(AnalyticsFilter filter, string culture);
 }

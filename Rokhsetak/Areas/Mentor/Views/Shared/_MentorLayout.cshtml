@@ -1,15 +1,34 @@
 @using System.Globalization
+@using System.Security.Claims
 @using Rokhsetak.Resources
 @using Microsoft.Extensions.Localization
+@inject Rokhsetak.Services.Interfaces.INotificationService NotificationService
 @inject IStringLocalizer<SharedResourceMarker> L
 @{
     ViewData["HideNav"] = true;
+    var active = ViewData["ActiveNav"] as string ?? "";
 
     var currentLang = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var returnUrl = Context.Request.Path + Context.Request.QueryString;
     var pageTitle = ViewData["Title"] as string ?? L["Mentor_Layout_Title"];
     var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var dir = culture == "ar" ? "rtl" : "ltr";
+
+    // Notifications
+    var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    int userId = 0;
+
+    if (!string.IsNullOrEmpty(userIdClaim))
+        int.TryParse(userIdClaim, out userId);
+
+    var notifications = new List<Rokhsetak.Models.Notification>();
+    var unreadCount = 0;
+
+    if (userId > 0)
+    {
+        notifications = await NotificationService.GetUserNotificationsAsync(userId);
+        unreadCount = await NotificationService.GetUnreadCountAsync(userId);
+    }
 }
 
 <!DOCTYPE html>
@@ -31,6 +50,8 @@
           rel="stylesheet" />
 
     <link rel="stylesheet" href="~/css/mentor-shared.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth-shared.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/shared.css" asp-append-version="true" />
 
     @RenderSection("Styles", required: false)
 </head>
@@ -41,18 +62,85 @@
 
         <!-- Sidebar -->
         <aside class="mentor-sidebar" aria-label="@L["Mentor_NavigationAria"]">
+                <a asp-area=""
+                   asp-controller="Home"
+                   asp-action="Index"
+                   class="mentor-sidebar__brand"
+                   aria-label="Rokhsetak — @L["Nav_Home"]">
 
-            <a asp-area=""
-               asp-controller="Home"
-               asp-action="Index"
-               class="mentor-sidebar__brand"
-               aria-label="Rokhsetak — @L["Nav_Home"]">
+                    <img src="~/images/logo.png"
+                         asp-append-version="true"
+                         alt="Rokhsetak"
+                         class="mentor-sidebar__logo-img" />
+                </a>
+            @* ── Notifications ── *@
+                <div class="notif" id="rk-notif">
+                    <button type="button"
+                            class="notif__trigger landing-nav__link"
+                            color="white"
+                            id="rk-notif-btn"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-controls="rk-notif-panel"
+                            aria-label="@L["Nav_Notifications"]">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                        @if (unreadCount > 0)
+                        {
+                            <span class="notif__badge" aria-label="@unreadCount @L["Nav_UnreadNotifications"]">
+                                @(unreadCount > 9 ? "9+" : unreadCount.ToString())
+                            </span>
+                        }
+                    </button>
 
-                <img src="~/images/logo.png"
-                     asp-append-version="true"
-                     alt="Rokhsetak"
-                     class="mentor-sidebar__logo-img" />
-            </a>
+                    <div class="notif__panel" id="rk-notif-panel" role="dialog" aria-labelledby="rk-notif-btn" hidden>
+                        <div class="notif__head">
+                            <span class="notif__head-title">@L["Nav_Notifications"]</span>
+                            @if (unreadCount > 0)
+                            {
+                                <span class="notif__head-count">@unreadCount</span>
+                            }
+                        </div>
+
+                        <ul class="notif__list" role="list">
+                            @if (notifications.Any())
+                            {
+                                foreach (var n in notifications)
+                                {
+                                    <li class="notif__item @(n.IsRead ? "notif__item--read" : "notif__item--unread")">
+                                        <div class="notif__item-body">
+                                            @if (!n.IsRead)
+                                            {
+                                                <span class="notif__dot" aria-hidden="true"></span>
+                                            }
+                                            <div class="notif__item-text">
+                                                <span class="notif__item-title">@n.Title</span>
+                                                <span class="notif__item-msg">@n.Message</span>
+                                                <span class="notif__item-time">@n.CreatedAt?.ToString("g")</span>
+                                            </div>
+                                        </div>
+                                        @if (!n.IsRead)
+                                        {
+                                            <button type="button"
+                                                    class="notif__mark-btn"
+                                                    data-notification-id="@n.NotificationId"
+                                                    aria-label="@L["Nav_MarkAsReadAria"]"
+                                                    title="@L["Nav_MarkAsRead"]">
+                                                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                            </button>
+                                        }
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="notif__empty">
+                                    <i class="fa-regular fa-bell-slash" aria-hidden="true"></i>
+                                    <span>@L["Nav_NoNotifications"]</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
 
             <nav class="mentor-sidebar__nav" aria-label="@L["Mentor_SectionsAria"]">
 
@@ -66,7 +154,7 @@
                         <a asp-area="Mentor"
                            asp-controller="Dashboard"
                            asp-action="Index"
-                           class="mentor-sidebar__link">
+                           class="mentor-sidebar__link @(active == "dashboard" ? "is-active" : "")">
 
                             <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
                             <span>@L["Nav_Dashboard"]</span>
@@ -77,7 +165,7 @@
                         <a asp-area="Mentor"
                            asp-controller="Availability"
                            asp-action="Index"
-                           class="mentor-sidebar__link">
+                           class="mentor-sidebar__link @(active == "availability" ? "is-active" : "")">
 
                             <i class="fa-solid fa-clock" aria-hidden="true"></i>
                             <span>@L["Mentor_Availability"]</span>
@@ -88,7 +176,7 @@
                         <a asp-area="Mentor"
                            asp-controller="Appointments"
                            asp-action="Index"
-                           class="mentor-sidebar__link">
+                           class="mentor-sidebar__link @(active == "appointments" ? "is-active" : "")">
 
                             <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
                             <span>@L["Mentor_Appointments"]</span>
@@ -99,7 +187,7 @@
                         <a asp-area="Mentor"
                            asp-controller="Trainees"
                            asp-action="Index"
-                           class="mentor-sidebar__link">
+                           class="mentor-sidebar__link @(active == "trainees" ? "is-active" : "")">
 
                             <i class="fa-solid fa-user-group" aria-hidden="true"></i>
                             <span>@L["Mentor_Trainees"]</span>
@@ -192,6 +280,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/notifications.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 

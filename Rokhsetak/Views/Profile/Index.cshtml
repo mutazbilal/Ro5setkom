@@ -73,7 +73,7 @@
                     <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
                     <span>@L["Profile_EditProfile"]</span>
                 </a>
-                @if (!User.IsInRole("mentor"))
+                @if (User.IsInRole("trainee"))
                 {
                     <a asp-controller="Profile"
                        asp-action="ChangeLicense"

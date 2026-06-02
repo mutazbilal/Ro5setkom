@@ -5,7 +5,7 @@
 @model MentorDashboardViewModel
 @{
     ViewData["Title"] = L["Mentor_Dashboard"];
-
+    ViewData["ActiveNav"] = "dashboard";
     var nowTime = TimeOnly.FromDateTime(DateTime.Now);
 
     // ---- Sessions: sorted chronologically; "up next" = next non-completed session still ahead ----
@@ -168,19 +168,9 @@
                         }
                     </p>
                 </div>
-                <div class="progress-card__percent" aria-hidden="true">
-                    <span class="progress-card__percent-num">@utilizationPct</span><span class="progress-card__percent-sym">%</span>
-                </div>
             </div>
 
-            <div class="progress-card__bar"
-                 role="progressbar"
-                 aria-valuenow="@utilizationPct"
-                 aria-valuemin="0"
-                 aria-valuemax="100"
-                 aria-label="@L["Mentor_SlotUtilizationAria"]">
-                <div class="progress-card__bar-fill" style="--progress-value: @(utilizationPct)%"></div>
-            </div>
+            
 
             <div class="progress-card__next">
                 <span class="progress-card__next-icon" aria-hidden="true">

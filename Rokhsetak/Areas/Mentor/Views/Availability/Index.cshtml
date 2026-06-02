@@ -1,26 +1,47 @@
 @using Rokhsetak.Areas.Mentor.ViewModels.Availability
 @using Rokhsetak.Resources
+@using System.Globalization
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResourceMarker> L
 @model List<MentorAvailabilityViewModel>
 
 @{
     ViewData["Title"] = L["Mentor_MyAvailability"];
+    ViewData["ActiveNav"] = "availability";
 
-    var days = new[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
+    var dtf = CultureInfo.CurrentCulture.DateTimeFormat;
+
+    var days = Enum.GetValues(typeof(DayOfWeek))
+        .Cast<DayOfWeek>()
+        .ToList();
+
+    // Always compare against the invariant English enum name (storage format)
+    // but display using the culture-aware localized name
+    string GetLocalizedDayName(DayOfWeek day) =>
+        dtf.GetDayName(day); // e.g. "الأحد" in Arabic, "dimanche" in French
+
+    string GetAbbreviatedDayName(DayOfWeek day) =>
+        dtf.GetAbbreviatedDayName(day); // optional: short form
 
     var grouped = days
-        .Select(d => new
+        .Select(day => new
         {
-            Day = d,
+            Day = day,
+            DayName = GetLocalizedDayName(day),           // localized for display
+            AbbreviatedDayName = GetAbbreviatedDayName(day),
             Slots = Model
-                .Where(s => s.DayOfWeek.ToLower() == d)
+                // Compare against invariant English name — matches how it's stored in DB
+                .Where(s => string.Equals(
+                    s.DayOfWeek,
+                    day.ToString(),                        // always "Monday", "Tuesday", etc.
+                    StringComparison.OrdinalIgnoreCase))
                 .OrderBy(s => s.StartTime)
                 .ToList()
         })
         .ToList();
 
-    string Title(string s) => System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+    string Title(string s) =>
+        CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
 }
 
 @section Styles {
@@ -55,9 +76,9 @@
     <div class="week-grid">
         @foreach (var group in grouped)
         {
-            <section class="day-card" aria-label="@string.Format(L["Mentor_DayAvailabilityAria"], Title(group.Day))">
+            <section class="day-card" aria-label="@string.Format(L["Mentor_DayAvailabilityAria"], Title(group.Day.ToString()))">
                 <div class="day-header">
-                    <span class="day-name">@group.Day</span>
+                    <span class="day-name">@group.DayName</span>
                     @if (group.Slots.Any())
                     {
                         <span class="day-count">@group.Slots.Count @(group.Slots.Count > 1 ? L["Mentor_SlotsPlural"] : L["Mentor_SlotsSingular"])</span>
@@ -96,7 +117,7 @@
                                     @* Edit — opens dialog, pre-filled via data-* read by availability.js *@
                                     <button type="button" class="btn-slot btn-edit js-edit-slot"
                                             data-slot-id="@slot.Id"
-                                            data-day="@slot.DayOfWeek.ToLower()"
+                                            data-day="@slot.DayOfWeek"
                                             data-start="@slot.StartTime.ToString(@"HH\:mm")"
                                             data-end="@slot.EndTime.ToString(@"HH\:mm")"
                                             aria-label="@string.Format(L["Mentor_EditSlotAria"], slot.StartTime.ToString(@"hh\:mm tt"), slot.EndTime.ToString(@"hh\:mm tt"))">
@@ -138,7 +159,7 @@
                         <option value="" disabled selected>@L["Mentor_SelectDay"]</option>
                         @foreach (var d in days)
                         {
-                            <option value="@d">@Title(d)</option>
+                            <option value="@d">@Title(d.ToString())</option>
                         }
                     </select>
                 </div>
@@ -184,7 +205,7 @@
                     <select name="DayOfWeek" id="edit-day" required aria-required="true">
                         @foreach (var d in days)
                         {
-                            <option value="@d">@Title(d)</option>
+                            <option value="@d">@Title(d.ToString())</option>
                         }
                     </select>
                 </div>

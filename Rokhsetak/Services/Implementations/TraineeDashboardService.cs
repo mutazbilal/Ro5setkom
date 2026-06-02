@@ -141,7 +141,8 @@ public class TraineeDashboardService : ITraineeDashboardService
         int overallPct = totalModules == 0
             ? 0
             : (int)Math.Round((double)completedModules / totalModules * 100);
-
+        license.ProgressPercentage = overallPct;
+        await _context.SaveChangesAsync();
         // 9. Next milestone
         string nextMilestone = DetermineNextMilestone(
             items, isMockExamAvailable, mockExamCompleted, license.Stage, culture);

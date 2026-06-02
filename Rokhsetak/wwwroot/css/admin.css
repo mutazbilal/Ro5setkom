@@ -80,12 +80,15 @@
 }
 
 .admin-sidebar__logo-img {
-    height: 44px;
+    margin-left: 20px;
+    height: 65px;
     width: auto;
     display: block;
     object-fit: contain;
     filter: brightness(1.08);
+    padding: 8px 8px;
 }
+
 
 .admin-sidebar__nav {
     flex: 1;

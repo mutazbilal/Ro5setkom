@@ -22,7 +22,7 @@ public class UserAdminService : IUserAdminService
     // ─────────────────────────────────────────────────────────────────────────
     // LIST USERS (filter + paginate)
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult<UserListViewModel>> GetUsersAsync(UserListFilter filter)
+    public async Task<ServiceResult<UserListViewModel>> GetUsersAsync(UserListFilter filter, string culture)
     {
         if (filter.Page < 1) filter.Page = 1;
         if (filter.PageSize < 1 || filter.PageSize > 100) filter.PageSize = 20;
@@ -65,7 +65,7 @@ public class UserAdminService : IUserAdminService
             .Select(x => new UserListItem
             {
                 UserId = x.u.UserId,
-                FullName = x.u.FirstName + " " + x.u.LastName,
+                FullName = culture == "ar"? x.u.FirstName + " " + x.u.LastName: x.u.DisplayNameEn,
                 Email = x.u.Email,
                 Role = x.RoleName,
                 IsActive = x.u.IsActive ?? true,
@@ -109,7 +109,7 @@ public class UserAdminService : IUserAdminService
                     .Where(p => p.ProvinceId == u.ProvinceId && p.LanguageCode == culture)
                     .Select(p => p.DisplayName)
                     .FirstOrDefault(),
-
+                u.DisplayNameEn,
                 u.ProfilePicturePath
             }
         ).FirstOrDefaultAsync();
@@ -120,7 +120,7 @@ public class UserAdminService : IUserAdminService
         var vm = new UserDetailViewModel
         {
             UserId = data.u.UserId,
-            FullName = $"{data.u.FirstName} {data.u.LastName}",
+            FullName = culture == "ar"? $"{data.u.FirstName} {data.u.LastName}" :data.u.DisplayNameEn,
             Email = data.u.Email,
             PhoneNumber = data.u.PhoneNumber,
             NationalId = data.u.NationalId,
@@ -149,9 +149,12 @@ public class UserAdminService : IUserAdminService
                 BookingDate = b.BookingDate,
                 StartTime = b.StartTime,
                 EndTime = b.EndTime,
-                Counterparty = b.TraineeId == userId
+                Counterparty = culture == "ar"? (b.TraineeId == userId
                     ? (mentor.FirstName + " " + mentor.LastName)
-                    : (trainee.FirstName + " " + trainee.LastName),
+                    : (trainee.FirstName + " " + trainee.LastName))
+                    : (b.TraineeId == userId
+                    ? (mentor.DisplayNameEn)
+                    : (trainee.DisplayNameEn)),
                 SessionType = b.SessionType ?? string.Empty,
                 Status = b.Status
             }

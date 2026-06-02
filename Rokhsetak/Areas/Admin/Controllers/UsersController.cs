@@ -21,7 +21,8 @@ public class UsersController : Controller
     // GET /Admin/Users
     public async Task<IActionResult> Index(UserListFilter filter)
     {
-        var result = await _users.GetUsersAsync(filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _users.GetUsersAsync(filter, culture);
         if (!result.Succeeded)
         {
             TempData["Error"] = result.Error;

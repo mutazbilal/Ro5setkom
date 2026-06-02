@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rokhsetak.Areas.Admin.ViewModels.Dashboard;
 using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Areas.Admin.Controllers;
 
@@ -19,7 +20,8 @@ public class DashboardController : Controller
     // GET /Admin/Dashboard
     public async Task<IActionResult> Index(AnalyticsFilter filter)
     {
-        var result = await _analytics.GetDashboardAsync(filter);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _analytics.GetDashboardAsync(filter, culture);
 
         if (!result.Succeeded)
         {
