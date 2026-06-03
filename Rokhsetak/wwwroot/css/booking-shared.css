@@ -1970,3 +1970,20 @@ div[asp-validation-summary] {
 .star-rating__star:hover {
     transform: scale(1.15);
 }
+
+.booking-page .btn--primary {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(242, 101, 34, 0.3);
+    
+}
+
++ .booking-page .btn--primary:hover {
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(242, 101, 34, 0.4);
+        
+}
+
+.btn--blue {
+    background: var(--gradient-blue);
+}

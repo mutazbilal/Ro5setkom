@@ -1,0 +1,39 @@
+﻿@using Rokhsetak.Services.Chat
+@model ChatNewThreadViewModel
+
+<div class="rkchat-thread__head">
+    <button type="button" class="rkchat-back" data-action="back" aria-label="Back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <div class="thread-identity"><span class="thread-name">New AI chat</span></div>
+</div>
+
+<form class="rkchat-newthread" id="rkNewThreadForm" data-provider="@Model.ProviderKey">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="provider" value="@Model.ProviderKey" />
+
+    <label class="rkchat-field">
+        <span>Title (optional)</span>
+        <input type="text" name="title" maxlength="200" placeholder="e.g. Theory questions" />
+    </label>
+
+    <label class="rkchat-field">
+        <span>Personality</span>
+        <select name="optionKey" class="rkchat-persona-select">
+            @foreach (var o in Model.Options)
+            {
+                <option value="@o.Key" data-desc="@o.Description">@o.Label</option>
+            }
+        </select>
+    </label>
+
+    <p class="rkchat-persona-desc" data-desc></p>
+
+    <label class="rkchat-field rkchat-custom" style="display:none">
+        <span>Custom personality</span>
+        <textarea name="customPrompt" rows="3" maxlength="1000"
+                  placeholder="Describe how the assistant should behave…"></textarea>
+    </label>
+
+    <button type="submit" class="btn btn--primary btn--block">Start chat</button>
+</form>

@@ -889,7 +889,7 @@
     <value>لا توجد مواعيد امتحان متاحة حالياً في منطقتك. يرجى التحقق لاحقاً.</value>
   </data>
 	<data name="Exam_SlotsLeft" xml:space="preserve">
-    <value>موعد(مواعيد) متبقي</value>
+    <value>موعد متبقي</value>
   </data>
 	<data name="Exam_ConfirmBooking" xml:space="preserve">
     <value>تأكيد الحجز</value>
@@ -2608,7 +2608,7 @@
     <value>{0} موعد متبقي</value>
   </data>
 	<data name="Exam_SlotsLeft" xml:space="preserve">
-    <value>{0} موعد متبقي</value>
+    <value>موعد متبقي</value>
   </data>
 	<data name="Exam_ConfirmBookingMessage" xml:space="preserve">
     <value>تأكيد حجز الامتحان في {0} الساعة {1}؟</value>

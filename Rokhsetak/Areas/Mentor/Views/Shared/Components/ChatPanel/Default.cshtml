@@ -1,0 +1,53 @@
+﻿@using Rokhsetak.Services.Chat
+@model ChatPanelViewModel
+
+<div id="rkChatPanel" class="rkchat"
+     data-current-user="@Model.CurrentUserId"
+     data-url-unread="/Chat/UnreadCount"
+     data-url-threads="/Chat/Threads"
+     data-url-open="/Chat/Open"
+     data-url-send="/Chat/Send"
+     data-url-poll="/Chat/Poll"
+     data-url-newthread="/Chat/NewThread"
+     data-url-create="/Chat/CreateThread"
+     data-url-updatepersona="/Chat/UpdatePersona">
+
+    @Html.AntiForgeryToken()
+
+    <button type="button" class="rkchat-launcher" id="rkChatLauncher" aria-label="Open messages">
+        <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+        <span class="rkchat-launcher__badge" id="rkChatBadge"
+              style="@(Model.InitialUnread > 0 ? "" : "display:none")">@Model.InitialUnread</span>
+    </button>
+
+    <aside class="rkchat-drawer" id="rkChatDrawer" aria-hidden="true">
+        <header class="rkchat-drawer__head">
+            <span class="rkchat-drawer__title">Messages</span>
+            <button type="button" class="rkchat-drawer__close" id="rkChatClose" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </header>
+
+        <nav class="rkchat-tabs" id="rkChatTabs">
+            @foreach (var p in Model.Providers)
+            {
+                <button type="button"
+                        class="rkchat-tab @(p.SortOrder == 0 ? "is-active" : "")"
+                        data-provider="@p.Key"
+                        data-thread-list="@p.SupportsThreadList.ToString().ToLower()">
+                    <i class="@p.Icon" aria-hidden="true"></i>
+                    <span>@p.Label</span>
+                </button>
+            }
+        </nav>
+
+        <div class="rkchat-body" id="rkChatBody">
+            <div class="rkchat-list" id="rkChatList"></div>
+            <div class="rkchat-thread" id="rkChatThread"></div>
+        </div>
+    </aside>
+
+    <div class="img-modal" id="rkImgModal" style="display:none">
+        <img id="rkImgModalSrc" src="" alt="Preview" />
+    </div>
+</div>

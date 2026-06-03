@@ -13,14 +13,18 @@ namespace Rokhsetak.Services.Chat.Implementations.Providers
         {
             var user = await _db.Users
                 .Where(u => u.UserId == userId)
-                .Select(u => new { u.FirstName, u.LastName, u.DisplayNameEn, u.LanguagePreference, u.CreatedAt })
+                .Select(u => new { u.FirstName, u.LastName, u.DisplayNameEn, u.LanguagePreference, u.CreatedAt , u.RoleId})
                 .FirstOrDefaultAsync();
-
+            var role = "";
+            if (user.RoleId == 1)
+                role = "trainee";
+            else if (user.RoleId == 2)
+                role = "mentor";
             var fullName = user.LanguagePreference == "ar" ? user.FirstName + " " + user.LastName : user.DisplayNameEn;
             if (user is null) return null;
             return new UserAiContext(
                 Name: fullName,
-                Role: "trainee",
+                Role: role,
                 Language: user.LanguagePreference ?? "ar",
                 RegisteredAt: DateOnly.FromDateTime(user.CreatedAt ?? DateTime.UtcNow)
             );

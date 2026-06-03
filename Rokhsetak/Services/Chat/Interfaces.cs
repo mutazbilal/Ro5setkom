@@ -18,7 +18,7 @@
 
     public interface IBookingContextProvider
     {
-        Task<BookingAiContext?> GetAsync(int userId, CancellationToken ct = default);
+        Task<BookingAiContext?> GetAsync(int userId, string role, CancellationToken ct = default);
     }
 
     public interface IPageContextProvider

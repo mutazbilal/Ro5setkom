@@ -9,21 +9,19 @@ namespace Rokhsetak.Services.Chat.Implementations.Providers
         private readonly RokhsetakDbContext _db;
         public BookingContextProvider(RokhsetakDbContext db) => _db = db;
 
-        public async Task<BookingAiContext?> GetAsync(int userId, CancellationToken ct = default)
+        public async Task<BookingAiContext?> GetAsync(int userId, string role, CancellationToken ct = default)
         {
-            var traineeId = await _db.Trainees
-                .Where(t => t.TraineeId == userId)
-                .Select(t => (int?)t.TraineeId)
-                .FirstOrDefaultAsync(ct);
-
-            if (traineeId is null) return null;
-
             var today = DateOnly.FromDateTime(DateTime.UtcNow);
 
+            bool isMentor = role == UserRole.Mentor;
+            bool isTrainee = role == UserRole.Trainee;
+
+            if (!isMentor && !isTrainee) return null;
+
             var upcoming = await _db.Bookings
-                .Include(b => b.Mentor)
-                    .ThenInclude(b => b.MentorNavigation)
-                .Where(b => b.TraineeId == traineeId
+                .Include(b => b.Mentor).ThenInclude(m => m.MentorNavigation)
+                .Include(b => b.Trainee).ThenInclude(t => t.TraineeNavigation)
+                .Where(b => (isMentor ? b.MentorId : b.TraineeId) == userId
                          && b.BookingDate >= today
                          && b.Status != "cancelled")
                 .OrderBy(b => b.BookingDate).ThenBy(b => b.StartTime)
@@ -32,12 +30,14 @@ namespace Rokhsetak.Services.Chat.Implementations.Providers
                     b.BookingDate,
                     b.StartTime,
                     b.SessionType ?? "lesson",
-                    b.Mentor.MentorNavigation.DisplayNameEn
+                    isMentor
+                        ? b.Trainee.TraineeNavigation.DisplayNameEn   // mentor sees trainee name
+                        : b.Mentor.MentorNavigation.DisplayNameEn     // trainee sees mentor name
                 ))
                 .ToListAsync(ct);
 
             var completedCount = await _db.Bookings
-                .CountAsync(b => b.TraineeId == traineeId
+                .CountAsync(b => (isMentor ? b.MentorId : b.TraineeId) == userId
                               && b.BookingDate < today
                               && b.Status == "completed", ct);
 

@@ -33,10 +33,15 @@
             var userCtx = await _user.GetAsync(userId, ct);
             var culture = userCtx?.Language ?? "en";
 
+            var licCtx = default(LicenseAiContext?);
+            var learnCtx = default(LearningAiContext?);
             // Sequential — all providers share the same scoped DbContext instance
-            var licCtx = await _license.GetAsync(userId, ct);
-            var learnCtx = await _learning.GetAsync(userId, culture, ct);
-            var bookCtx = await _bookings.GetAsync(userId, ct);
+            if (userCtx.Role == "traine")
+            {
+                licCtx = await _license.GetAsync(userId, ct);
+                learnCtx = await _learning.GetAsync(userId, culture, ct);
+            }
+            var bookCtx = await _bookings.GetAsync(userId, userCtx.Role, ct);
 
             return new AiAssistantContext(
                 User: userCtx ?? new UserAiContext("Trainee", "trainee", culture, DateOnly.FromDateTime(DateTime.UtcNow)),

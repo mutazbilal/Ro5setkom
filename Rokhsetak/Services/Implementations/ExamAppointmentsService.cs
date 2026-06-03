@@ -3,6 +3,7 @@ using Rokhsetak.Areas.Trainee.ViewModels.Exam;
 using Rokhsetak.Models;
 using Rokhsetak.Services.Common;
 using Rokhsetak.Services.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Rokhsetak.Services.Implementations;
 
@@ -24,16 +25,32 @@ public class ExamAppointmentService : IExamAppointmentService
         int traineeId, string examType, string culture = "ar")
     {
         if (examType is not ("theory" or "medical" or "practical"))
-            return ServiceResult<ExamBookingViewModel>.Failure("Invalid exam type.");
+        {
+            var message = culture == "en"
+                ? "Invalid exam type."
+                : "نوع الامتحان غير صالح.";
+
+            return ServiceResult<ExamBookingViewModel>.Failure(message);
+        }
+
 
         var license = await _context.TraineeLicenses
             .FirstOrDefaultAsync(tl => tl.TraineeId == traineeId && tl.IsActive);
 
         if (license == null)
-            return ServiceResult<ExamBookingViewModel>.Failure("No active license found.");
+        {
+            var message = culture == "en"
+                ? "No active license found."
+                : "لم يتم العثور على رخصة فعالة.";
 
+            return ServiceResult<ExamBookingViewModel>.Failure(message);
+        }
+        var traineeNationalId = await _context.Users
+            .Where(u => u.UserId == traineeId)
+            .Select(u => u.NationalId)
+            .FirstOrDefaultAsync();
         // ── Eligibility checks ────────────────────────────────────────────────
-        var (isEligible, reason) = await CheckEligibilityAsync(traineeId, license, examType);
+        var (isEligible, reason) = await CheckEligibilityAsync(traineeId, license, examType, traineeNationalId, culture);
 
         var vm = new ExamBookingViewModel
         {
@@ -98,9 +115,11 @@ public class ExamAppointmentService : IExamAppointmentService
     // ─────────────────────────────────────────────────────────────────────────
     // BOOK EXAM
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult> BookExamAsync(int traineeId, BookExamViewModel model)
+    public async Task<ServiceResult> BookExamAsync(int traineeId, BookExamViewModel model, string culture)
     {
         var license = await _context.TraineeLicenses
+                .Include(t => t.Trainee)
+                    .ThenInclude(u => u.TraineeNavigation)
             .FirstOrDefaultAsync(tl => tl.TraineeLicenseId == model.TraineeLicenseId
                                     && tl.TraineeId == traineeId
                                     && tl.IsActive);
@@ -109,7 +128,7 @@ public class ExamAppointmentService : IExamAppointmentService
             return ServiceResult.Failure("Invalid license.");
 
         // Re-check eligibility
-        var (isEligible, reason) = await CheckEligibilityAsync(traineeId, license, model.ExamType);
+        var (isEligible, reason) = await CheckEligibilityAsync(traineeId, license, model.ExamType, license.Trainee.TraineeNavigation.NationalId, culture);
         if (!isEligible)
             return ServiceResult.Failure(reason);
 
@@ -122,10 +141,22 @@ public class ExamAppointmentService : IExamAppointmentService
                                        && e.Status == "scheduled");
 
             if (exam == null)
-                return ServiceResult.Failure("Exam slot not found.");
+            {
+                var message = culture == "en"
+                    ? "Exam slot not found."
+                    : "لم يتم العثور على موعد الامتحان.";
+
+                return ServiceResult.Failure(message);
+            }
 
             if (exam.BookedSlots >= exam.TotalSlots)
-                return ServiceResult.Failure("This exam slot is fully booked. Please choose another.");
+            {
+                var message = culture == "en"
+                    ? "This exam slot is fully booked. Please choose another."
+                    : "هذا الموعد ممتلئ بالكامل. الرجاء اختيار موعد آخر.";
+
+                return ServiceResult.Failure(message);
+            }
 
             // No duplicate booking
             bool duplicate = await _context.ExamAppointments
@@ -134,7 +165,13 @@ public class ExamAppointmentService : IExamAppointmentService
                              && ea.Status != "cancelled");
 
             if (duplicate)
-                return ServiceResult.Failure("You have already booked this exam.");
+            {
+                var message = culture == "en"
+                    ? "You have already booked this exam."
+                    : "لقد قمت بحجز هذا الامتحان مسبقًا.";
+
+                return ServiceResult.Failure(message);
+            }
 
             // Also check trainee has no other active appointment for same exam type + license
             bool alreadyActiveForType = await _context.ExamAppointments
@@ -148,7 +185,13 @@ public class ExamAppointmentService : IExamAppointmentService
                             && x.ea.Status == "scheduled");
 
             if (alreadyActiveForType)
-                return ServiceResult.Failure($"You already have an active {model.ExamType} exam appointment.");
+            {
+                var message = culture == "en"
+                    ? "You already have an active exam appointment."
+                    : "لديك بالفعل موعد امتحان نشط.";
+
+                return ServiceResult.Failure(message);
+            }
 
             exam.BookedSlots++;
 
@@ -171,6 +214,8 @@ public class ExamAppointmentService : IExamAppointmentService
                 _ => license.Stage
             };
             license.UpdatedAt = DateTime.UtcNow;
+
+
 
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
@@ -200,7 +245,13 @@ public class ExamAppointmentService : IExamAppointmentService
             .FirstOrDefaultAsync(tl => tl.TraineeId == traineeId && tl.IsActive);
 
         if (license == null)
-            return ServiceResult<ExamAppointmentListViewModel>.Failure("No active license found.");
+        {
+            var message = culture == "en"
+                ? "No active license found."
+                : "لم يتم العثور على رخصة فعالة.";
+
+            return ServiceResult<ExamAppointmentListViewModel>.Failure(message);
+        }
 
         var appointments = await _context.ExamAppointments
             .Where(ea => ea.TraineeId == traineeId
@@ -285,27 +336,51 @@ public class ExamAppointmentService : IExamAppointmentService
     // ─────────────────────────────────────────────────────────────────────────
     // CANCEL EXAM APPOINTMENT
     // ─────────────────────────────────────────────────────────────────────────
-    public async Task<ServiceResult> CancelExamAppointmentAsync(int traineeId, int appointmentId)
+    public async Task<ServiceResult> CancelExamAppointmentAsync(int traineeId, int appointmentId, string culture)
     {
         var appointment = await _context.ExamAppointments
             .FirstOrDefaultAsync(ea => ea.ExamAppointmentId == appointmentId
                                     && ea.TraineeId == traineeId);
 
         if (appointment == null)
-            return ServiceResult.Failure("Appointment not found.");
+        {
+            var message = culture == "en"
+                ? "Appointment not found."
+                : "لم يتم العثور على الموعد.";
+
+            return ServiceResult.Failure(message);
+        }
 
         if (appointment.Status != "scheduled")
-            return ServiceResult.Failure("Only scheduled appointments can be cancelled.");
+        {
+            var message = culture == "en"
+                ? "Only scheduled appointments can be cancelled."
+                : "يمكن إلغاء المواعيد المجدولة فقط.";
+
+            return ServiceResult.Failure(message);
+        }
 
         var exam = await _context.GovOfficialExams
             .FirstOrDefaultAsync(e => e.OfficialExamId == appointment.OfficialExamId);
 
         if (exam == null)
-            return ServiceResult.Failure("Exam not found.");
+        {
+            var message = culture == "en"
+                ? "Exam not found."
+                : "لم يتم العثور على الامتحان.";
+
+            return ServiceResult.Failure(message);
+        }
 
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
         if (exam.ExamDate <= today.AddDays(1))
-            return ServiceResult.Failure("Exam appointment cannot be cancelled within 24 hours.");
+        {
+            var message = culture == "en"
+                ? "Exam appointment cannot be cancelled within 24 hours."
+                : "لا يمكن إلغاء موعد الامتحان خلال 24 ساعة.";
+
+            return ServiceResult.Failure(message);
+        }
 
         appointment.Status = "cancelled";
         appointment.UpdatedAt = DateTime.UtcNow;
@@ -347,8 +422,9 @@ public class ExamAppointmentService : IExamAppointmentService
     // ─────────────────────────────────────────────────────────────────────────
 
     private async Task<(bool isEligible, string reason)> CheckEligibilityAsync(
-        int traineeId, TraineeLicense license, string examType)
+        int traineeId, TraineeLicense license, string examType, string nationalId, string culture)
     {
+        string T(string en, string ar) => culture == "en" ? en : ar;
         switch (examType)
         {
             case "theory":
@@ -370,7 +446,9 @@ public class ExamAppointmentService : IExamAppointmentService
                                       && p.Status == "completed");
 
                     if (completedCount < theoreticalIds.Count)
-                        return (false, "You must complete all theoretical modules before booking this exam.");
+                        return (false, T(
+                            "You must complete all theoretical modules before booking this exam.",
+                            "يجب إكمال جميع الوحدات النظرية قبل حجز هذا الامتحان."));
 
                     // Mock exam completed
                     var mockQuiz = await _context.Quizzes
@@ -384,24 +462,27 @@ public class ExamAppointmentService : IExamAppointmentService
                                         && a.TraineeLicenseId == license.TraineeLicenseId);
 
                         if (!mockDone)
-                            return (false, "You must complete the mock exam before booking the theory/medical exam.");
+                            return (false, T(
+                                "You must complete the mock exam before booking the theory/medical exam.",
+                                "يجب إكمال الامتحان التجريبي قبل حجز الامتحان النظري أو الطبي."));
                     }
 
                     // exam must not be already passed
                     var passedExam = await _context.GovExamResults
-                            .Where(e => e.OfficialExam.ExamType == examType && e.Result == "pass")
+                            .Where(e => e.OfficialExam.ExamType == examType
+                                    && e.Result == "pass"
+                                    && e.NationalId == nationalId
+                                    && e.OfficialExam.LicenseTypeId == license.LicenseTypeId)
                             .AnyAsync();
                     if (passedExam)
-                    {
-                        return (false, "you already passed this exam");
-                    }
+                        return (false, T(
+                            "You already passed this exam.",
+                            "لقد اجتزت هذا الامتحان بالفعل."));
 
-                    if (examType == "medical")
-                    {
-                        // Theory must be passed
-                        if (license.Stage != "theory_passed" && license.Stage != "medical_exam_pending")
-                            return (false, "You must pass the theory exam before booking the medical exam.");
-                    }
+                    if (license.Stage != "theory_passed" && license.Stage != "medical_exam_pending" && examType == "medical")
+                        return (false, T(
+                            "You must pass the theory exam before booking the medical exam.",
+                            "يجب اجتياز الامتحان النظري قبل حجز الامتحان الطبي."));
 
                     return (true, string.Empty);
                 }
@@ -411,13 +492,17 @@ public class ExamAppointmentService : IExamAppointmentService
                     // Theory + medical must be passed
                     if (license.Stage is not (
                         "medical_passed" or "practical_prep" or "practical_test_pending"))
-                        return (false, "You must pass both the theory and medical exams before booking the practical exam.");
+                        return (false, T(
+                            "You must pass both the theory and medical exams before booking the practical exam.",
+                            "يجب اجتياز الامتحانين النظري والطبي قبل حجز الامتحان العملي."));
 
                     return (true, string.Empty);
                 }
 
             default:
-                return (false, "Unknown exam type.");
+                return (false, T(
+                    "Unknown exam type.",
+                    "نوع الامتحان غير معروف."));
         }
     }
 

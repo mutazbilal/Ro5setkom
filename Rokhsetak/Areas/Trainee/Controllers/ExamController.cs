@@ -63,8 +63,8 @@ public class ExamController : Controller
     public async Task<IActionResult> Book(BookExamViewModel model)
     {
         var traineeId = User.GetUserId().Value;
-
-        var result = await _examService.BookExamAsync(traineeId, model);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _examService.BookExamAsync(traineeId, model, culture);
 
         if (!result.Succeeded)
         {
@@ -84,8 +84,8 @@ public class ExamController : Controller
     public async Task<IActionResult> Cancel(int appointmentId)
     {
         var traineeId = User.GetUserId().Value;
-
-        var result = await _examService.CancelExamAppointmentAsync(traineeId, appointmentId);
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var result = await _examService.CancelExamAppointmentAsync(traineeId, appointmentId, culture);
 
         if (!result.Succeeded)
             TempData["Error"] = result.Error;

@@ -52,6 +52,8 @@
     <link rel="stylesheet" href="~/css/mentor-shared.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/auth-shared.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/shared.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/chat-panel.css" asp-append-version="true" />
 
     @RenderSection("Styles", required: false)
 </head>
@@ -282,6 +284,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/notifications.js" asp-append-version="true"></script>
 
+    @await Component.InvokeAsync("ChatPanel")
+    <script src="~/js/chat-panel.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
 </body>

@@ -64,7 +64,7 @@ public class QuizService : IQuizService
         if (progress == null || progress.Status == "not_started")
             return ServiceResult<QuizResultViewModel>.Failure("Module must be started before taking the quiz.");
 
-        var (score, passed, resultQuestions) = GradeQuiz(quiz, model.Answers, culture);
+        var (score, passed, resultQuestions) = GradeQuiz(quiz, quiz.QuizQuestions.ToList(), model.Answers, culture);
 
         await using var transaction = await _context.Database.BeginTransactionAsync();
         try
@@ -173,7 +173,7 @@ public class QuizService : IQuizService
     // SUBMIT MOCK EXAM
     // ─────────────────────────────────────────────────────────────────────
     public async Task<ServiceResult<QuizResultViewModel>> SubmitMockExamAsync(
-        int traineeId, int traineeLicenseId, SubmitQuizViewModel model, string culture)
+    int traineeId, int traineeLicenseId, SubmitQuizViewModel model, string culture)
     {
         var quiz = await LoadQuizWithTranslationsAsync(
             q => q.QuizId == model.QuizId && q.IsMockExam == true);
@@ -181,18 +181,18 @@ public class QuizService : IQuizService
         if (quiz == null)
             return ServiceResult<QuizResultViewModel>.Failure("Mock exam not found.");
 
-        // Reconstruct only the questions that were actually served to the trainee.
-        // We key off the submitted answer IDs — no server-side session needed.
+        // ✅ FIXED: load into a separate variable, never touch quiz.QuizQuestions
         var submittedQuestionIds = model.Answers.Keys.ToList();
 
-        quiz.QuizQuestions = await _context.QuizQuestions
+        var questionsForGrading = await _context.QuizQuestions
             .Include(q => q.QuestionTranslations)
             .Include(q => q.QuestionOptions)
                 .ThenInclude(o => o.OptionTranslations)
             .Where(q => submittedQuestionIds.Contains(q.QuestionId))
+            .AsNoTracking()  // ✅ FIXED: read-only, EF won't track deletions
             .ToListAsync();
 
-        var (score, passed, resultQuestions) = GradeQuiz(quiz, model.Answers, culture);
+        var (score, passed, resultQuestions) = GradeQuiz(quiz, questionsForGrading, model.Answers, culture);
 
         await using var transaction = await _context.Database.BeginTransactionAsync();
         try
@@ -240,7 +240,7 @@ public class QuizService : IQuizService
             Title = GetTranslated(quiz.QuizTranslations, culture, t => t.Title),
             IsMockExam = true,
             Score = score,
-            TotalQuestions = quiz.QuizQuestions.Count,
+            TotalQuestions = questionsForGrading.Count,
             PassingScore = quiz.PassingScore,
             Passed = passed,
             CorrectCount = resultQuestions.Count(q => q.IsCorrect),
@@ -339,12 +339,12 @@ public class QuizService : IQuizService
     }
 
     private (int score, bool passed, List<QuizResultQuestionViewModel> questions) GradeQuiz(
-        Quiz quiz, Dictionary<int, int> answers, string culture)
+        Quiz quiz, List<QuizQuestion> questions, Dictionary<int, int> answers, string culture)
     {
         var resultQuestions = new List<QuizResultQuestionViewModel>();
         int correctCount = 0;
 
-        foreach (var q in quiz.QuizQuestions)
+        foreach (var q in questions)
         {
             var correctOption = q.QuestionOptions.FirstOrDefault(o => o.IsCorrect);
             answers.TryGetValue(q.QuestionId, out int selectedOptionId);
@@ -373,7 +373,7 @@ public class QuizService : IQuizService
             });
         }
 
-        int total = quiz.QuizQuestions.Count;
+        int total = questions.Count;
         int score = total == 0 ? 0 : (int)Math.Round((double)correctCount / total * 100);
         bool passed = score >= quiz.PassingScore;
 

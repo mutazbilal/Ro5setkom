@@ -108,10 +108,9 @@
                             </div>
                         </div>
 
-                        <span class="slots-chip @(isLow ? "slots-chip--low" : "slots-chip--ok")"
-                              aria-label="@string.Format(L["Exam_SlotsRemainingAria"], slot.SlotsRemaining)">
+                        <span class="slots-chip @(isLow ? "slots-chip--low" : "slots-chip--ok")">
                             <i class="fa-solid @(isLow ? "fa-fire" : "fa-circle-check")" aria-hidden="true"></i>
-                            @string.Format(L["Exam_SlotsLeft"], slot.SlotsRemaining)
+                            @slot.SlotsRemaining @L["Exam_SlotsLeft"]
                         </span>
                     </div>
 

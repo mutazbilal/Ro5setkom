@@ -5,6 +5,9 @@
 @model MentorBrowseListViewModel
 @{
     ViewData["Title"] = L["Booking_FindMentor"];
+    <script>
+        const bookingMsgTemplate = '@Html.Raw(L["Booking_ChangePrimaryMsg"].Value)';
+    </script>
 }
 
 @section Styles {
@@ -107,7 +110,7 @@
                 </div>
 
                 <div class="filter-bar__actions">
-                    <button type="submit" class="btn btn--sm btn--block">
+                    <button type="submit" class="btn btn--warning btn--sm btn--block">
                         <i class="fa-solid fa-filter" aria-hidden="true"></i>
                         @L["Booking_FilterButton"]
                     </button>
@@ -215,7 +218,7 @@
                                    asp-controller="Booking"
                                    asp-action="Book"
                                    asp-route-mentorId="@m.MentorId"
-                                   class="btn btn--primary">
+                                   class="btn btn--warning btn--sm btn--block">
                                     <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
                                     @L["Booking_BookSession"]
                                 </a>
@@ -258,7 +261,6 @@
         <div class="booking-card__body">
 
             <p style="margin: 0 0 12px;">
-                @L["Booking_ChangePrimaryMsg"]
                 <strong id="newMentorName" style="color: var(--color-primary);"></strong>
             </p>
 
@@ -307,8 +309,14 @@
 
         document.querySelectorAll('.mentor-switch-btn').forEach(btn => {
             btn.addEventListener('click', function () {
+
+                const mentorName = this.dataset.mentorName;
+
                 confirmBtn.href = this.dataset.bookUrl;
-                newMentorName.textContent = this.dataset.mentorName || '@L["Booking_ThisMentor"]';
+
+                newMentorName.textContent =
+                    bookingMsgTemplate.replace('{0}', mentorName);
+
                 openModal();
             });
         });

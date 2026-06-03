@@ -2094,7 +2094,7 @@
     <value>Enter your valid 10-digit national ID number.</value>
   </data>
 	<data name="Reg_SelectRole_HeroTitle" xml:space="preserve">
-    <value>Join ro5setkom</value>
+    <value>Join rokhsetak</value>
   </data>
 	<data name="Reg_SelectRole_Tagline" xml:space="preserve">
     <value>Choose how you'd like to be part of the journey.</value>
@@ -2719,6 +2719,9 @@
 	<data name="Trainees_Status_Pending" xml:space="preserve">
     <value>Pending</value>
   </data>
+	<data name="Trainees_Status_Cancelled" xml:space="preserve">
+  <value>Cacelled</value>
+</data>
 	<data name="Trainees_Stage_completed" xml:space="preserve">
     <value>Completed</value>
   </data>
