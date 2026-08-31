@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rokhsetak.Models;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Chat.Implementations;
 
@@ -26,7 +27,8 @@ public sealed class AiChatProvider : IChatProvider, IThreadConfigurableProvider
     }
 
     public string Key => ChatProviderKeys.Ai;
-    public string DisplayName => "AI Assistant";
+    public string culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    public string DisplayName => culture == "en" ? "AI Assistant" : "المساعد الذكي";
     public string Icon => "fa-solid fa-robot";
     public int SortOrder => 1;
     public bool SupportsThreadList => true;   // now multiple threads

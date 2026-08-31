@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Core.UserConsents (
     consent_id    INT PRIMARY KEY IDENTITY(1,1),
     user_id       INT           NOT NULL,

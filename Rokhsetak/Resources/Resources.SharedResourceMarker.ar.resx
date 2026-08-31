@@ -3742,4 +3742,19 @@
 	<data name="Auth_AlreadyHaveAccount" xml:space="preserve">
   <value>هل لديك حساب بالفعل؟</value>
 </data>
+	<data name="Messages" xml:space="preserve">
+  <value>الرسائل</value>
+</data>
+	<data name="Download_PDF" xml:space="preserve">
+  <value>تحميل الملف</value>
+</data>
+	<data name="No_Messages" xml:space="preserve">
+  <value>لا توجد رسائل بعد</value>
+</data>
+	<data name="Type_Message" xml:space="preserve">
+  <value>اكتب رسالة</value>
+</data>
+	<data name="New_Chat" xml:space="preserve">
+  <value>محادثة جديدة</value>
+</data>
 </root>

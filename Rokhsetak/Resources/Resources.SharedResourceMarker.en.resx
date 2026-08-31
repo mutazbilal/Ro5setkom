@@ -3743,4 +3743,21 @@
 	<data name="Auth_AlreadyHaveAccount " xml:space="preserve">
   <value>Already Have an Account?</value>
 </data>
+
+	<data name="Messages" xml:space="preserve">
+  <value>Messages</value>
+</data>
+
+	<data name="Download_PDF" xml:space="preserve">
+  <value>Download PDF</value>
+</data>
+	<data name="No_Messages" xml:space="preserve">
+  <value>No messages yet. Say hello! 👋</value>
+</data>
+	<data name="Type_Message" xml:space="preserve">
+  <value>Type a message…</value>
+</data>
+	<data name="New_Chat" xml:space="preserve">
+  <value>New Chat</value>
+</data>
 </root> 

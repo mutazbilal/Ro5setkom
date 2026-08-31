@@ -1,4 +1,5 @@
 ﻿using Rokhsetak.Services.Interfaces;
+using System.Globalization;
 
 namespace Rokhsetak.Services.Chat.Implementations;
 
@@ -8,7 +9,8 @@ public sealed class HumanChatProvider : IChatProvider
     public HumanChatProvider(IConversationService conv) => _conv = conv;
 
     public string Key => ChatProviderKeys.Human;
-    public string DisplayName => "Mentor Chats";
+    public string culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    public string DisplayName => culture == "en"? "Mentor Chats" :"محادثات المدربين";
     public string Icon => "fa-solid fa-comments";
     public int SortOrder => 0;
     public bool SupportsThreadList => true;

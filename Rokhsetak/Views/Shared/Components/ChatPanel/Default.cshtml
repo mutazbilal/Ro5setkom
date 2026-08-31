@@ -1,5 +1,9 @@
 ﻿@using Rokhsetak.Services.Chat
 @model ChatPanelViewModel
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<SharedResourceMarker> L
+
 
 <div id="rkChatPanel" class="rkchat"
      data-current-user="@Model.CurrentUserId"
@@ -22,7 +26,7 @@
 
     <aside class="rkchat-drawer" id="rkChatDrawer" aria-hidden="true">
         <header class="rkchat-drawer__head">
-            <span class="rkchat-drawer__title">Messages</span>
+            <span class="rkchat-drawer__title">@L["Messages"]</span>
             <button type="button" class="rkchat-drawer__close" id="rkChatClose" aria-label="Close">
                 <i class="fa-solid fa-xmark"></i>
             </button>

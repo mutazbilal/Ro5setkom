@@ -1,4 +1,8 @@
 ﻿@using Rokhsetak.Services.Chat
+@using Microsoft.Extensions.Localization
+@using Rokhsetak.Resources
+@inject IStringLocalizer<SharedResourceMarker> L
+
 @model IReadOnlyList<ChatThreadSummary>
 @{
     var provider = ViewData["Provider"] as string ?? "human";
@@ -8,7 +12,7 @@
 @if (canCreate)
 {
     <button type="button" class="rkchat-newchat-btn">
-        <i class="fa-solid fa-plus"></i> New chat
+        <i class="fa-solid fa-plus"></i> @L["New_Chat"]
     </button>
 }
 
@@ -41,7 +45,7 @@ else
                             }
                         </div>
                         <div class="conv-preview-row">
-                            <span class="conv-preview @(t.IsFile ? "is-file" : "")">@(t.LastMessage ?? "No messages yet")</span>
+                            <span class="conv-preview @(t.IsFile ? "is-file" : "")">@(t.LastMessage ?? L["No_Messages"])</span>
                             @if (t.UnreadCount > 0)
                             {
                                 <span class="badge-unread">@t.UnreadCount</span>
