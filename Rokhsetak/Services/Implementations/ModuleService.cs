@@ -11,13 +11,16 @@ public class ModuleService : IModuleService
 {
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
-    private BlobService _blobService;
+    private IBlobService _blobService;
 
-    public ModuleService(RokhsetakDbContext context, INotificationService notifications)
+    public ModuleService(
+    RokhsetakDbContext context,
+    INotificationService notifications,
+    IBlobService blobService)
     {
         _context = context;
         _notifications = notifications;
-        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
+        _blobService = blobService;
     }
 
     // ─────────────────────────────────────────────────────────────────────

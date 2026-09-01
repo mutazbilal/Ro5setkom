@@ -51,6 +51,13 @@ namespace Rokhsetak.Services.Implementations
         public BlobService(IConfiguration config)
         {
             var connectionString = config["AzureBlob:ConnectionString"];
+
+            Console.WriteLine($"Blob connection string: '{connectionString}'");
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new InvalidOperationException(
+                    "AzureBlob:ConnectionString is empty or missing.");
+
             _client = new BlobServiceClient(connectionString);
         }
 

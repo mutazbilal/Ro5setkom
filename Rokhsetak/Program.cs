@@ -14,9 +14,7 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var conn = "Server=tcp:rokhsetak.database.windows.net,1433;Initial Catalog=RokhsetakDB;Persist Security Info=False;User ID=CloudSAd6acbb36;Password=8GUaFmwkn9U4KmS;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-//var conn = "Server=.;Database=ro5setkomDB;Trusted_Connection=True;TrustServerCertificate=True;";
-Console.WriteLine("CONNECTION STRING = " + conn);
+var conn = builder.Configuration.GetConnectionString("RokhsetakDB");
 builder.Services.AddDbContext<RokhsetakDbContext>(options =>
     options.UseSqlServer(conn));
 

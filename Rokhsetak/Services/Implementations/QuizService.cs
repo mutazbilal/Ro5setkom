@@ -13,13 +13,13 @@ public class QuizService : IQuizService
 
     private readonly RokhsetakDbContext _context;
     private readonly INotificationService _notifications;
-    private readonly BlobService _blobService;
+    private readonly IBlobService _blobService;
 
-    public QuizService(RokhsetakDbContext context, INotificationService notifications)
+    public QuizService(RokhsetakDbContext context, INotificationService notifications, IBlobService blobService)
     {
         _context = context;
         _notifications = notifications;
-        _blobService = new BlobService(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build());
+        _blobService = blobService;
     }
 
     // ─────────────────────────────────────────────────────────────────────
